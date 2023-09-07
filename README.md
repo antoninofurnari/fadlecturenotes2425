@@ -7,20 +7,20 @@ A short example showing how to write a lecture series using Jupyter Book 2.0.
 The conda environment is provided as `environment.yml`. This environment is used for all testing by Github Actions and can be setup by:
 
 1. `conda env create -f environment.yml`
-2. `conda activate qe-mini-example`
+2. `conda activate fadlecturenotes
 
 ## Building a Jupyter Book
 
 Run the following command in your terminal:
 
 ```bash
-jb build mini_book/
+jb build lecturenotes/
 ```
 
 If you would like to work with a clean build, you can empty the build folder by running:
 
 ```bash
-jb clean mini_book/
+jb clean lecturenotes/
 ```
 
 If jupyter execution is cached, this command will not delete the cached folder. 
@@ -28,7 +28,7 @@ If jupyter execution is cached, this command will not delete the cached folder.
 To remove the build folder (including `cached` executables), you can run:
 
 ```bash
-jb clean --all mini_book/
+jb clean --all lecturenotes/
 ```
 
 ## Publishing this Jupyter Book

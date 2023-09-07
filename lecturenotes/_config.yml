@@ -1,13 +1,13 @@
-title : Scientific Python QuickStart
-author: Thomas J. Sargent and John Stachurski
-logo: 'qe-logo-large.png'
+title : Lecture Notes on Fundamental of Data Analysis
+author: Antonino Furnari
+logo: 'logo.png'
 
 # Short description about the book
 description: >-
-  A brief introduction to Python programming for scientific applications.
+  Lecture Notes on Fundamental of Data Analysis
 
 execute:
-  execute_notebooks           : cache
+  execute_notebooks           : 'off'
 
 # HTML-specific settings
 html:
@@ -18,8 +18,8 @@ notebook_interface            : "notebook"
 
 # Launch button settings
 repository:
-  url                         : https://github.com/executablebooks/quantecon-mini-example
-  path_to_book                : "mini_book"
+  url                         : https://github.com/antoninofurnari/fadlecturenotes
+  path_to_book                : "lecturenotes"
 
 binder:
   binderhub_url               : "https://mybinder.org"

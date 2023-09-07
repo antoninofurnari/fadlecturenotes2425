@@ -1,4 +1,4 @@
-name: qe-mini-example
+name: fadlecturenotes
 channels:
   - default
 dependencies:
