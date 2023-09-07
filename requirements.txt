@@ -3,3 +3,4 @@ pandas
 matplotlib
 quantecon
 jupyter-book
+sphinxcontrib.mermaid

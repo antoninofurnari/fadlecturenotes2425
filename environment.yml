@@ -10,3 +10,4 @@ dependencies:
   - pip:
     - quantecon
     - jupyter-book
+    - sphinxcontrib.mermaid
