@@ -1,4 +1,7 @@
-format: jb-article
+format: jb-book
 root: docs/index
-sections:
-- file: lectures/lecture1
+chapters:
+- file: lectures/intro_data_analysis
+- file: lectures/intro_python
+- file: lectures/intro_pandas
+- file: lectures/data_probability
