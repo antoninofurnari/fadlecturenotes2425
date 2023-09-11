@@ -20,8 +20,7 @@ jobs:
           sudo snap install -y marp-cli-carroarmato0 
       - name: Build Marp
         shell: bash -l {0}
-        run: |
-        for f in lecturenotes/slides/*.md; do ff=${f/.md/.pdf}; echo marp $f --pdf --allow-local-files -o $ff; done
+        run: for f in lecturenotes/slides/*.md; do ff=${f/.md/.pdf}; echo marp $f --pdf --allow-local-files -o $ff; done
       - uses: actions/upload-artifact@v2
         with:
           name: pdf
