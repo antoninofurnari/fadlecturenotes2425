@@ -12,6 +12,8 @@ execute:
 # HTML-specific settings
 html:
   home_page_in_navbar         : false
+  favicon                     : 'favicon.ico'
+
 
 # Interact link settings
 notebook_interface            : "notebook"

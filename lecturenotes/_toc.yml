@@ -1,7 +1,24 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
 format: jb-book
 root: docs/index
+options:  # The options key will be applied to all chapters, but not sub-sections
+  numbered: True
 chapters:
-- file: lectures/intro_data_analysis
-- file: lectures/intro_python
-- file: lectures/intro_pandas
-- file: lectures/data_probability
+  - file: lectures/lecture1/00_main
+    sections:
+    - file: lectures/lecture1/01_what_is_data
+    - file: lectures/lecture1/02_data_analysis_definition
+    - file: lectures/lecture1/03_data_analysis_workflow
+    - file: lectures/lecture1/04_examples_data_analysis
+    - file: lectures/lecture1/05_data_analysis_uses
+    - file: lectures/lecture1/06_map_course
+  - file: lectures/lecture2/00_main
+    sections:
+    - file: lectures/lecture2/01_setup
+    - file: lectures/lecture2/02_intro_python
+    - file: lectures/lecture2/03_intro_numpy
+    - file: lectures/lecture2/04_intro_matplotlib
+    - file: lectures/lecture2/05_intro_pandas
+  - file: lectures/lecture3/00_main
