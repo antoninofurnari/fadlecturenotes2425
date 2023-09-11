@@ -26,12 +26,12 @@ jobs:
 
       - name: Build QuantEcon Mini Example
         shell: bash -l {0}
-        run: jb build fadlecturenotes/
+        run: jb build lecturenotes/
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: fadlecturenotes/_build/html
+          FOLDER: lecturenotes/_build/html
           CLEAN: true

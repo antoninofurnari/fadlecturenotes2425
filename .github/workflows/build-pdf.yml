@@ -41,8 +41,8 @@ jobs:
       - name: Build QuantEcon Mini Example
         shell: bash -l {0}
         run: |
-          jb build fadlecturenotes/ --builder pdflatex
+          jb build lecturenotes/ --builder pdflatex
       - uses: actions/upload-artifact@v2
         with:
           name: pdf
-          path: fadlecturenotes/_build/latex/book.pdf
+          path: lecturenotes/_build/latex/book.pdf
