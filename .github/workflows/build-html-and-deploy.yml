@@ -22,16 +22,16 @@ jobs:
           miniconda-version: 'latest'
           python-version: 3.8
           environment-file: environment.yml
-          activate-environment: qe-mini-example
+          activate-environment: fadlecturenotes
 
       - name: Build QuantEcon Mini Example
         shell: bash -l {0}
-        run: jb build mini_book/
+        run: jb build fadlecturenotes/
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: mini_book/_build/html
+          FOLDER: fadlecturenotes/_build/html
           CLEAN: true
