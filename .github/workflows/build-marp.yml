@@ -1,0 +1,31 @@
+name: Build PDF Slides
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  push:
+    branches:
+      - master
+jobs:
+  build-pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      - name: Install Marp
+        run: |
+          sudo apt update
+          sudo apt install snapd -y
+          sudo snap install -y marp-cli-carroarmato0 
+      - name: Build Marp
+        shell: bash -l {0}
+        run: |
+        for f in lecturenotes/slides/*.md; do ff=${f/.md/.pdf}; echo marp $f --pdf --allow-local-files -o $ff; done
+      - uses: actions/upload-artifact@v2
+        with:
+          name: pdf
+          path: lecturenotes/slides/*.pdf
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: "lecturenotes/slides/*.pdf"
