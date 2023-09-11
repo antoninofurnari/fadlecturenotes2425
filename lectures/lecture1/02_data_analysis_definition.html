@@ -1,0 +1,679 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>1.2. A Definition of Data Analysis &#8212; Lecture Notes on Fundamental of Data Analysis</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures/lecture1/02_data_analysis_definition';</script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="1.3. Data Analysis Workflow" href="03_data_analysis_workflow.html" />
+    <link rel="prev" title="1.1. What is Data? An informal Definition" href="01_what_is_data.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../docs/index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="00_main.html">1. What is Data Analysis?</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_what_is_data.html">1.1. What is Data? An informal Definition</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.2. A Definition of Data Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_data_analysis_workflow.html">1.3. Data Analysis Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_examples_data_analysis.html">1.4. Examples of Data Analysis: the Good, the Bad, and the Ugly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_data_analysis_uses.html">1.5. What’s Data Analysis Used For Today</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_map_course.html">1.6. Where do We Go From Here?</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../lecture2/00_main.html">2. Introduction to Python for Data Analysis</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../lecture2/01_setup.html">2.1. Installazione dell’ambiente di lavoro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lecture2/02_intro_python.html">2.2. Introduzione a Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lecture2/03_intro_numpy.html">2.3. Introduzione a Numpy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lecture2/04_intro_matplotlib.html">2.4. Introduzione a Matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lecture2/05_intro_pandas.html">2.5. Introduzione a Pandas</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture3/00_main.html">3. Data, Uncertainty and Random Variables</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/lectures/lecture1/02_data_analysis_definition.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>A Definition of Data Analysis</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-analysis-as-a-process">1.2.1. Data Analysis as a Process</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goals-of-data-analysis">1.2.2. Goals of Data Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-something-about-a-given-phenomenon">1.2.2.1. Understanding Something About a Given Phenomenon</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#supporting-decision-making">1.2.2.2. Supporting Decision-Making</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-predictions-on-unseen-data">1.2.2.3. Making Predictions on Unseen Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#main-types-of-data-analysis">1.2.3. Main Types of Data Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptive-analysis">1.2.3.1. Descriptive Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploratory-analysis">1.2.3.2. Exploratory Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inferential-analysis">1.2.3.3. Inferential Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#causal-analysis">1.2.3.4. Causal Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predictive-analysis">1.2.3.5. Predictive Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-analysis">1.2.3.6. Time Series Analysis</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="a-definition-of-data-analysis">
+<h1><span class="section-number">1.2. </span>A Definition of Data Analysis<a class="headerlink" href="#a-definition-of-data-analysis" title="Permalink to this heading">#</a></h1>
+<p>We will look at an informal definition of Data Analysis, adapted from wikipedia (<a class="reference external" href="https://en.wikipedia.org/wiki/Data_analysis">https://en.wikipedia.org/wiki/Data_analysis</a>):</p>
+<blockquote>
+<div><p>Data analysis is the <strong>process</strong> of inspecting, cleaning, transforming, and modeling data with the goal of <strong>understanding</strong> something about a given phenomenon, supporting <strong>decision-making</strong>, and <strong>making predictions on unseen data</strong>.</p>
+</div></blockquote>
+<p>While this definition is not very formal, it is a good starting point to get an understanding of what data analysis is. Let’s dive into the main aspects of this definition in the following sections.</p>
+<section id="data-analysis-as-a-process">
+<h2><span class="section-number">1.2.1. </span>Data Analysis as a Process<a class="headerlink" href="#data-analysis-as-a-process" title="Permalink to this heading">#</a></h2>
+<p>In the definition above, data analysis is regarded to as the process of inspecting, cleaning, transforming and modeling data. Indeed, it is very important to understand that <strong>data analysis is a process</strong>. In this sense, data analysis is not just a single algoritm or a single technique you can apply to the data. It is instead a collection of techniques, statistical and machine learning tools can be applied to achieve a given goal. Four main set of techniques that we can usually apply when processing data are:</p>
+<ul class="simple">
+<li><p><strong>Inspecting</strong>: the process of looking at the data to assess some of its main properties, such as the number of observations (rows), variables (columns), what are the typical values of variables (e.g., in the previous examples of students and courses we should expects marks out of 10), etc.</p></li>
+<li><p><strong>Cleaning</strong>: is the process of “fixing” some aspects of the data which are likely to be incorrect. For instance we could remove rows with missing or out of range values (students with marks over 10 or with negative marks).</p></li>
+<li><p><strong>Transforming</strong>: transforming the data from a format to another one. For instance, we may add a new “mean” column to each student in the example above, or, after realizing that English marks are out of 30 while the others are out of 10, transforming that column by dividing all numbers by 3 (so that they are in the same range as other variables).</p></li>
+<li><p><strong>Modeling</strong>: choosing and tuning a statistical model which can be used to summarize, explain or make predictions about the data. We will discuss more models later, but for the moment it is important to understand that a model tries to abstract away and represent such aspects of the data in a way that, in some sense, the model becomes a good explanation of the data itself. For instance, if we could create a model which can allow us to reconstruct the correct value of English from the values of the other courses, we have found some kind of mathematical explanation of how marks in other course affect marks in English and we have shown that marks in Enligh are not independent from the other mark.</p></li>
+</ul>
+</section>
+<section id="goals-of-data-analysis">
+<h2><span class="section-number">1.2.2. </span>Goals of Data Analysis<a class="headerlink" href="#goals-of-data-analysis" title="Permalink to this heading">#</a></h2>
+<p>We can simplify (as in the spirit of this introductory material) by saying that data analysis processes can aim to address three main types of goals:</p>
+<ul class="simple">
+<li><p>Understanding something about a given phenomenon;</p></li>
+<li><p>Supporting decision-making;</p></li>
+<li><p>Making predictions on unseen data.</p></li>
+</ul>
+<p>We’ll see some examples of each of these goals in the following sections.</p>
+<section id="understanding-something-about-a-given-phenomenon">
+<h3><span class="section-number">1.2.2.1. </span>Understanding Something About a Given Phenomenon<a class="headerlink" href="#understanding-something-about-a-given-phenomenon" title="Permalink to this heading">#</a></h3>
+<p>One of the main goals of data analysis is to obtain an understanding of how a given phenomenon works. For instance, in the 19th century, Charles Darwin developed his theory of evolution by natural selection via close examination of nature.</p>
+<p>In a five-year journey, Darwin explored various continents, collecting a large number of specimens, including fossils, plants, animals, and geological samples. In Galapagos Islands, he encountered a variety of bird species known as finches. By observing the collected specimens, Darwin concluded that each island had its own species of finches, with different beak shapes of sizes, that he believed were influenced by the characteristics of each island.</p>
+<p>Analyzing the data with comparative anatomy, he concluded that species evolved to adapt to a specific environment by natural selection. While Darwin did not use modern data analysis techniques, his intuitions were supported by data collection (collection of specimens) and careful observation of the collected samples.</p>
+<p>Note that, in this example, we are not necessarily interested in using the results of the analysis to achieve some other goal - our only interest is to gather knowledge on some (in this case) natural phenomenon.</p>
+<figure class="align-default">
+<img alt="../../_images/darwin.jpg" src="../../_images/darwin.jpg" />
+</figure>
+<p>(Image from <a class="reference external" href="https://it.wikipedia.org/wiki/Charles_Darwin">https://it.wikipedia.org/wiki/Charles_Darwin</a>)</p>
+<figure class="align-default">
+<img alt="../../_images/origin.jpg" src="../../_images/origin.jpg" />
+</figure>
+<p>(Image from <a class="reference external" href="https://en.wikipedia.org/wiki/On_the_Origin_of_Species">https://en.wikipedia.org/wiki/On_the_Origin_of_Species</a>)</p>
+</section>
+<section id="supporting-decision-making">
+<h3><span class="section-number">1.2.2.2. </span>Supporting Decision-Making<a class="headerlink" href="#supporting-decision-making" title="Permalink to this heading">#</a></h3>
+<p>In many cases, data analysis can be used to support decision making. Suppose that we work for a company producing three products A, B and C. The products are sold in three different geographic locations X, Y, Z. Due to the crisis, the company has to reduce the production and wants to cut down one of the three products, but of course they would want to choose the product to stop producing in a way to loose as little earnings as possible. A possible option could also be to keep the three products but reduce the amount of units produced during the year. Fortunately, the company has historical data of productions and sells in the last 5 years. In contexts like these, we could use data analysis techniques to understand which is the best decision to take. Some data analysis techniques could also allow us to make some simulations of what could happen if we took one decision or another.</p>
+</section>
+<section id="making-predictions-on-unseen-data">
+<h3><span class="section-number">1.2.2.3. </span>Making Predictions on Unseen Data<a class="headerlink" href="#making-predictions-on-unseen-data" title="Permalink to this heading">#</a></h3>
+<p>Another typical goal of data analysis is the one of creating models able to make predictions on unseen data. Imagine you are working for a bank which wants to develop an algorithm capable of understanding whether a given transaction is a legitimate one or a fraud attempt. The bank already has a team which reviews the some of the transactions to check if they are legitimate. This is done by checking things such as if the beneficiary of a given transaction is an unusual one, if the beneficiary is notably not to be trusted, and if too many transactions are performed in a given amount of time. If we had past observations of transactions and a variable telling us which of those turned out to be a fraud attempt, we may use data analysis to create a predictive algorithm capable of predicting whether a transaction is a fraud attempt by looking at the values of other available variables such as the amount of money, the nationality of the beneficiary, and the number of transactions made in the last 24 hours.</p>
+</section>
+</section>
+<section id="main-types-of-data-analysis">
+<h2><span class="section-number">1.2.3. </span>Main Types of Data Analysis<a class="headerlink" href="#main-types-of-data-analysis" title="Permalink to this heading">#</a></h2>
+<p>While we have discussed of broad goals of data analysis above, we can divide data analysis processes into five main types (different categorization may be possible, but we will stick to this one in this course). Each category describes a <em>mindset</em> and a <em>set of tools</em> that can be used to perform data analysis processes towards the accomplishment of one or more of the goals above. It should be clear that, during a data analysis process, one may mix the different kinds of data analysis or perform them in a sequential fashion. As we will see, the different approaches also rely on similar statistical techniques and one approach does not exclude the others.</p>
+<p>The main types of data analysis are:</p>
+<ul class="simple">
+<li><p>Descriptive analysis;</p></li>
+<li><p>Exploratory analysis;</p></li>
+<li><p>Inferential analysis;</p></li>
+<li><p>Causal analysis;</p></li>
+<li><p>Predictive analysis;</p></li>
+<li><p>Time series analysis.</p></li>
+</ul>
+<p>Let’s briefly see what these types of data analysis are, but we will analyze in greater detail each of these approaches during the course.</p>
+<section id="descriptive-analysis">
+<h3><span class="section-number">1.2.3.1. </span>Descriptive Analysis<a class="headerlink" href="#descriptive-analysis" title="Permalink to this heading">#</a></h3>
+<p>The goal of descriptive analysis is to provide a series of numbers or visualization of the data that describe their main characteristics. The goal is provide a compact summary of the main characteristics of the data. Examples of this kind of analysis including computing the proportion of males and females in the dataset of students and marks, the average marks that each course gets, etc. At this stage, we are not interpreting the results, but only providing some quantitative or qualitative measures of some property. One may think that the best description of some data is the data itself, and that would not be too far from the truth! However, in some cases, it is useful to provide summary statistics which are not evident from the data to start getting a sense of it.</p>
+<p>The image in the following shows some examples of descriptive statistics and visualizations extracted from a dataset. We will get more into the details of such techniques later in the course.</p>
+<figure class="align-default">
+<img alt="../../_images/descriptive.png" src="../../_images/descriptive.png" />
+</figure>
+</section>
+<section id="exploratory-analysis">
+<h3><span class="section-number">1.2.3.2. </span>Exploratory Analysis<a class="headerlink" href="#exploratory-analysis" title="Permalink to this heading">#</a></h3>
+<p>Exploratory analysis aims to examine the structure of the data, the distributions of variables (e.g., how do marks distributes for Physics? What is the average mark?) and the relationships between two or more variables (e.g., do students who have low marks in Physics also get low marks in Mathematics?). As we will see, visualizations are a useful tool for exploratory data analysis, mainly because they are often easy to intuitively absorb. Exploratory data analysis can have different goals, including <strong>finding problems in the data</strong> (e.g., out of range values, incorrect values, etc.), <strong>determining whether the data is good for the analysis we have in mind</strong>, <strong>making initial hypothesis on which data analysis questions we’ll be able to answer with the data</strong>. Importantly, at this stage we are already aiming to find patterns in the data, even if we are keeping our analysis at an informal level.</p>
+<p>The image in the following shows some examples of visualizations for exploratory data analysis.</p>
+<figure class="align-default">
+<img alt="../../_images/exploratory.png" src="../../_images/exploratory.png" />
+</figure>
+</section>
+<section id="inferential-analysis">
+<h3><span class="section-number">1.2.3.3. </span>Inferential Analysis<a class="headerlink" href="#inferential-analysis" title="Permalink to this heading">#</a></h3>
+<p>The goal of inferential analysis is to show formally whether some feature of pattern that we are observing in our dataset is actually likely to be true outside of the dataset at hand. Let’s say we are exploring a set of data of people with their daily average consumption of sugars and whether they have diabetes. We may find by looking at the data that people who consume a lot of sugar are more likely to get diabetes. We may be tempted to claim that what we have found a general conclusion, which may apply to the general population (beyond the set of data we are considering). Statistical inference, give us the mathematical tools to check if this generalization is actually possible. For instance, if we had only <span class="math notranslate nohighlight">\(100\)</span> rows in our dataset, we may be suspicious that our conclusion does not apply to the general case and we may want to invest more time in collecting additional data. But, how much data is enough? An inferential analysis will allow us to also check that.</p>
+<p>The figure below shows how the sampling process can lead to a dataset which is not an accurate picture of the real world. Inferential analysis aims to check if any conclusion we are drawing based on our data is likely to be true outside of the dataset.</p>
+<figure class="align-default">
+<img alt="../../_images/selection_bias.png" src="../../_images/selection_bias.png" />
+</figure>
+</section>
+<section id="causal-analysis">
+<h3><span class="section-number">1.2.3.4. </span>Causal Analysis<a class="headerlink" href="#causal-analysis" title="Permalink to this heading">#</a></h3>
+<p>While an inferential analysis may allow us to conclude that older people are more likely to develop diabetes and it may even concludes that this apply to the general population, we still don’t know if it safe to say that sugar actually causes people to develop diabetes. This would be an important conclusion. If we knew for certain that consuming more than a given amount of sugar per day would lead to diabetes, than we could enforce some kind of policy to allow people to get the disease. Examples of policies may including classifying foods by their amounts of sugar, so that people can easily know which foods are more dangerous. But what if there is no causal relationship between the consumption of sugar and getting diabetes? For instance, it could just be that people who get diabetes also have a very sedentary life and people with a very sedentary life tend to eat more sugars (e.g., just to get distracted). If this were true, than, it could just be that being sedentary causes diabetes and since being sedentary is associated with eating more sugar, then we were observing an apparent causal effect between eating sugar and getting diabetes. If the second hypothesis is true, then there is no need to classify foods etc. (actually, this may even be undesirable and damage the market). Causal analysis give us tools to determine if a causal effect between two events exist, beyond what we simply observe in the data.</p>
+<p>The figure below illustrates how observing some data may suggest that believing in evolution impacts the richness of a country. However, we can probably imagine that other factors may contribute to the observed correlation (more on this later), which might not be due to a cause-effect mechanism.</p>
+<figure class="align-default">
+<img alt="../../_images/spurious_correlation.jpg" src="../../_images/spurious_correlation.jpg" />
+</figure>
+<p>(Image source: <a class="reference external" href="https://www.flickr.com/photos/jurvetson/5955305490">https://www.flickr.com/photos/jurvetson/5955305490</a>)</p>
+</section>
+<section id="predictive-analysis">
+<h3><span class="section-number">1.2.3.5. </span>Predictive Analysis<a class="headerlink" href="#predictive-analysis" title="Permalink to this heading">#</a></h3>
+<p>The goal of predictive analysis is to form a model able to predict some unobserved features in data which may be available in the future. Let’s say that we also captured other variables in our example diabetes dataset, such as sex, age, job, etc. We suspect that part of the member of the community may have diabetes and we would like to screen them. However, we cannot just screen all of them (that would be too much and we don’t have enough resources). We may hence think to prioritize the subjects who are more likely to develop diabetes. But who are those? A causal analysis may have revealed that easting too much sugar may be a cause of developing diabetes, but we also have more variables we are capturing. While it is very unlikely that sex of age are causing diabetes, we may observe that, for some reason, older females tend to develop diabetes more often. Predictive analysis allow us to create models that allow to predict a given variable from a set of other variables. For instance, I could create a model which predicts the probability of developing diabetes from sex, age and job. Let’s say I have a list of potential people to screen with the three variables above captured, but I was not able to collect the amount of sugar they consume (note that this is much harder to obtain), then I could use my model on each row to predict what is the probability of each person to develop diabetes. I could then start by screening people with high predicted probabilities of developing the disease. Note that predictive analysis does not care about causal effects and does not rely on inferential analysis to check if our assumptions are valid beyond the dataset, however, it still requires to work for data which have never been seen before. In practice, while we may create our model based on our dataset, we are really interested in using it on data which is not already captured in our dataset (for those in the dataset, we already know who has diabetes).</p>
+<p>In the example below, predictive analysis can allow to predict “group” from the other variables for those subjects for which the group is unknown (???).</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>relwt</p></th>
+<th class="head"><p>glufast</p></th>
+<th class="head"><p>glutest</p></th>
+<th class="head"><p>instest</p></th>
+<th class="head"><p>sspg</p></th>
+<th class="head"><p>group</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1.06</p></td>
+<td><p>96</p></td>
+<td><p>465</p></td>
+<td><p>237</p></td>
+<td><p>111</p></td>
+<td><p>Chemical</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.09</p></td>
+<td><p>110</p></td>
+<td><p>426</p></td>
+<td><p>117</p></td>
+<td><p>118</p></td>
+<td><p>Normal</p></td>
+</tr>
+<tr class="row-even"><td><p>0.93</p></td>
+<td><p>93</p></td>
+<td><p>472</p></td>
+<td><p>285</p></td>
+<td><p>194</p></td>
+<td><p>???</p></td>
+</tr>
+<tr class="row-odd"><td><p>0.92</p></td>
+<td><p>300</p></td>
+<td><p>1468</p></td>
+<td><p>28</p></td>
+<td><p>455</p></td>
+<td><p>Overt</p></td>
+</tr>
+<tr class="row-even"><td><p>0.88</p></td>
+<td><p>99</p></td>
+<td><p>376</p></td>
+<td><p>134</p></td>
+<td><p>80</p></td>
+<td><p>Normal</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.1</p></td>
+<td><p>107</p></td>
+<td><p>403</p></td>
+<td><p>267</p></td>
+<td><p>254</p></td>
+<td><p>Normal</p></td>
+</tr>
+<tr class="row-even"><td><p>0.98</p></td>
+<td><p>130</p></td>
+<td><p>670</p></td>
+<td><p>44</p></td>
+<td><p>167</p></td>
+<td><p>???</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.13</p></td>
+<td><p>92</p></td>
+<td><p>476</p></td>
+<td><p>433</p></td>
+<td><p>226</p></td>
+<td><p>Chemical</p></td>
+</tr>
+<tr class="row-even"><td><p>1.0</p></td>
+<td><p>102</p></td>
+<td><p>378</p></td>
+<td><p>165</p></td>
+<td><p>117</p></td>
+<td><p>Normal</p></td>
+</tr>
+<tr class="row-odd"><td><p>0.96</p></td>
+<td><p>78</p></td>
+<td><p>290</p></td>
+<td><p>136</p></td>
+<td><p>142</p></td>
+<td><p>???</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="time-series-analysis">
+<h3><span class="section-number">1.2.3.6. </span>Time Series Analysis<a class="headerlink" href="#time-series-analysis" title="Permalink to this heading">#</a></h3>
+<p>Time series analysis aims to analyze data points recorded over of sequence of intervals to uncover patterns, trends, seasonality, and other characteristics of the data and to make forecasts based on historical data. For example, imagine a retail store which wants to make a forecast to predict sales for the next year. By analyzing the last five years of their sales, the store can use time series analysis to <em>visualize</em> the data, analyze trends (e.g., if sales are globally increasing), analyze seasonality (are there more sales over christmas?), and predict future sales. The predicted sales can be useful to better organize supplies and staff.</p>
+<p>The image below shows an example of time series forecasting.</p>
+<figure class="align-default">
+<img alt="../../_images/probabilistic_forecast.png" src="../../_images/probabilistic_forecast.png" />
+</figure>
+<p>(Image from <a class="reference external" href="https://www.lokad.com/probabilistic-forecasting">https://www.lokad.com/probabilistic-forecasting</a>)</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lectures/lecture1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="01_what_is_data.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">1.1. </span>What is Data? An informal Definition</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="03_data_analysis_workflow.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">1.3. </span>Data Analysis Workflow</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-analysis-as-a-process">1.2.1. Data Analysis as a Process</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goals-of-data-analysis">1.2.2. Goals of Data Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-something-about-a-given-phenomenon">1.2.2.1. Understanding Something About a Given Phenomenon</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#supporting-decision-making">1.2.2.2. Supporting Decision-Making</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-predictions-on-unseen-data">1.2.2.3. Making Predictions on Unseen Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#main-types-of-data-analysis">1.2.3. Main Types of Data Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptive-analysis">1.2.3.1. Descriptive Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploratory-analysis">1.2.3.2. Exploratory Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inferential-analysis">1.2.3.3. Inferential Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#causal-analysis">1.2.3.4. Causal Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predictive-analysis">1.2.3.5. Predictive Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-analysis">1.2.3.6. Time Series Analysis</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Antonino Furnari
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

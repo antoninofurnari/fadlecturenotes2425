@@ -1,0 +1,1777 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Fondamenti di Analisi dei Dati 2023/2024 &#8212; Lecture Notes on Fundamental of Data Analysis</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'slides/01_what_is_data_analysis';</script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../docs/index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../lectures/lecture1/00_main.html">1. What is Data Analysis?</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/lecture1/01_what_is_data.html">1.1. What is Data? An informal Definition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/lecture1/02_data_analysis_definition.html">1.2. A Definition of Data Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/lecture1/03_data_analysis_workflow.html">1.3. Data Analysis Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/lecture1/04_examples_data_analysis.html">1.4. Examples of Data Analysis: the Good, the Bad, and the Ugly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/lecture1/05_data_analysis_uses.html">1.5. What’s Data Analysis Used For Today</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/lecture1/06_map_course.html">1.6. Where do We Go From Here?</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../lectures/lecture2/00_main.html">2. Introduction to Python for Data Analysis</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/lecture2/01_setup.html">2.1. Installazione dell’ambiente di lavoro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/lecture2/02_intro_python.html">2.2. Introduzione a Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/lecture2/03_intro_numpy.html">2.3. Introduzione a Numpy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/lecture2/04_intro_matplotlib.html">2.4. Introduzione a Matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/lecture2/05_intro_pandas.html">2.5. Introduzione a Pandas</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/lecture3/00_main.html">3. Data, Uncertainty and Random Variables</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/slides/01_what_is_data_analysis.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Fondamenti di Analisi dei Dati 2023/2024</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Fondamenti di Analisi dei Dati 2023/2024</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-data-analysis">What is Data Analysis?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prof-antonino-furnari">Prof. Antonino Furnari</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">What is Data Analysis?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-data-an-informal-definition">What is Data? An informal Definition</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-of-values">Set of Values</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-collection">Data collection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables">Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-mathematical-variables">Example - Mathematical Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-programming-variables">Example - Programming Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-statistical-variables">Example - Statistical Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-statistical-variables-data-points">Example - Statistical Variables/Data Points</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Example - Statistical Variables/Data Points</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#phenomenon">Phenomenon</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-of-a-dataset">An example of a dataset</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#a-definition-of-data-analysis">A Definition of Data Analysis</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-analysis-as-a-process">Data Analysis as a Process</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goals-of-data-analysis">Goals of Data Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-something-about-a-given-phenomenon">Understanding Something About a Given Phenomenon</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#supporting-decision-making">Supporting Decision-Making</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-predictions-on-unseen-data">Making Predictions on Unseen Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#main-types-of-data-analysis">Main Types of Data Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptive-analysis">Descriptive Analysis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploratory-analysis">Exploratory Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inferential-analysis">Inferential Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#causal-analysis">Causal Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predictive-analysis">Predictive Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-analysis">Time Series Analysis</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-analysis-workflow">Data Analysis Workflow</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-your-data-analysis-question">Define your data analysis question</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collect-the-data-needed-to-answer-the-data-analysis-question">Collect the data needed to answer the data analysis question</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clean-and-format-the-data">Clean and format the data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-and-describe-the-data">Explore and describe the data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choose-suitable-models-for-the-analysis">Choose suitable models for the analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-fine-tune-evaluate-and-compare-the-models-for-the-considered-data-analysis">Fit, fine-tune, evaluate, and compare the models for the considered data analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpret-the-results">Interpret the results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#communicate-your-results">Communicate your results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#review-the-data-analysis-when-new-data-is-available">Review the data analysis when new data is available</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#non-linear-workflow">Non-Linear Workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2">Example (2)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3">Example (3)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-4">Example (4)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-5">Example (5)</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-data-analysis">Examples of Data Analysis</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-good-stopping-the-spread-of-cholera">The Good: Stopping the Spread of Cholera</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#you-know-nothing-jon-snow">You Know Nothing Jon Snow</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ghost-map">The Ghost Map</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">The Ghost Map</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#removing-the-pump-handle">Removing the Pump Handle</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bad-proving-nonexistent-links-between-mmr-vaccines-and-autism">The Bad: Proving Nonexistent Links Between MMR Vaccines and Autism</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-fraudulent-study">The Fraudulent Study</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#long-term-effects-of-the-fraud">Long-Term Effects of the Fraud</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ugly-manipulating-voters-with-stolen-data-the-facebook-cambridge-analytica-scandal">The Ugly: Manipulating Voters with Stolen Data - The Facebook-Cambridge Analytica Scandal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">The Ugly: Manipulating Voters with Stolen Data - The Facebook-Cambridge Analytica Scandal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">The Ugly: Manipulating Voters with Stolen Data - The Facebook-Cambridge Analytica Scandal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">The Ugly: Manipulating Voters with Stolen Data - The Facebook-Cambridge Analytica Scandal</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-data-analysis-used-for-today">What’s Data Analysis Used For Today</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#healthcare">Healthcare</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#retail-and-e-commerce">Retail and E-commerce</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#financial-services">Financial Services</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transportation-and-logistics">Transportation and Logistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#social-media-and-digital-marketing">Social Media and Digital Marketing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#process-optimization">Process Optimization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fault-detection-and-predictive-maintenance">Fault Detection and Predictive Maintenance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solar-energy-optimization">Solar Energy Optimization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-grid-optimization">Energy Grid Optimization</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#philosophy-of-the-course">Philosophy of the Course</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-data-analysis-with-python">Practical Data Analysis with Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-map-of-the-course">A Map of the Course</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">A Map of the Course</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">A Map of the Course</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <!-- footer : '' -->
+<section id="fondamenti-di-analisi-dei-dati-2023-2024">
+<h1>Fondamenti di Analisi dei Dati 2023/2024<a class="headerlink" href="#fondamenti-di-analisi-dei-dati-2023-2024" title="Permalink to this heading">#</a></h1>
+<section id="what-is-data-analysis">
+<h2>What is Data Analysis?<a class="headerlink" href="#what-is-data-analysis" title="Permalink to this heading">#</a></h2>
+<section id="prof-antonino-furnari">
+<h3>Prof. Antonino Furnari<a class="headerlink" href="#prof-antonino-furnari" title="Permalink to this heading">#</a></h3>
+<p><a class="reference external" href="http://antoninofurnari.it">http://antoninofurnari.it</a>
+University of Catania
+Dept. of Maths and Computer Science</p>
+<p><img alt="bg left:40% 80%" src="../_images/logo.png" /></p>
+<hr class="docutils" />
+<!-- footer : 'Fondamenti di Analisi dei Dati 2023/2024 - Prof. Antonino Furnari' -->
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>What is Data Analysis?<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<p>The goal of this first lecture is to give an understanding of what data analysis is. We will initially keep a rather informal tone, while more formal definition will be given later in the course.</p>
+<p>Before diving into what Data Analysis is, we need to develop at least an intuitive understanding of what data is, which is addressed in the following sections.</p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="what-is-data-an-informal-definition">
+<h1>What is Data? An informal Definition<a class="headerlink" href="#what-is-data-an-informal-definition" title="Permalink to this heading">#</a></h1>
+<p>We will start by giving an informal definition of data:</p>
+<blockquote>
+<div><p>Data is a <strong>set of values</strong> <strong>collected</strong> with respect to some <strong>variables</strong> which describe a given <strong>phenomenon</strong>.</p>
+</div></blockquote>
+<p>In the definition above, we mentioned some key concepts, which are discussed in the following sections.</p>
+<hr class="docutils" />
+<section id="set-of-values">
+<h2>Set of Values<a class="headerlink" href="#set-of-values" title="Permalink to this heading">#</a></h2>
+<p>When we deal with data, we actually deal with <em>multiple instances</em> of values associated to the same event or phenomenon. Examples:</p>
+<style scoped>
+table {
+  font-size: 20px;
+}
+</style>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Example</p></th>
+<th class="head"><p>Comment</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>We want to study how the heights of students change with the years</p></td>
+<td><p>We need sets of recorded heights, not just one height</p></td>
+</tr>
+<tr class="row-odd"><td><p>We want to study how a given drug affects the recovering from a disease</p></td>
+<td><p>We need to record sets of values about drug assumption and recover, just one case will not be enough</p></td>
+</tr>
+<tr class="row-even"><td><p>We need to create a system which can generate text from a prompt</p></td>
+<td><p>We need to record several examples of prompt-text generation, just one would not be enough to study how such generation should be made</p></td>
+</tr>
+</tbody>
+</table>
+<p>Since we deal with sets of values, we will often use the term <strong>dataset</strong> to refer to a given collection of data related to a given phenomenon.</p>
+</section>
+<hr class="docutils" />
+<section id="data-collection">
+<h2>Data collection<a class="headerlink" href="#data-collection" title="Permalink to this heading">#</a></h2>
+<p>Data is always collected in some way, hence it may contain errors. Popular ways to collect data include:</p>
+<style scoped>
+table {
+  font-size: 20px;
+  width:100%;
+}
+</style>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Collection method</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Source of error</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Surveys</p></td>
+<td><p>Asking questions to people</p></td>
+<td><p>External factors, people may lie</p></td>
+</tr>
+<tr class="row-odd"><td><p>Physical measurements</p></td>
+<td><p>Physically measuring the heights of people</p></td>
+<td><p>Flawed tools, limited precision.</p></td>
+</tr>
+</tbody>
+</table>
+<p>In any case, <strong>data will be imperfect</strong>. We often say that we <strong>observe</strong> data and refer to a given value we deal with as an <strong>observation</strong>.</p>
+<p>For instance, the height of a single person in the classroom can be called an observation.</p>
+</section>
+<hr class="docutils" />
+<section id="variables">
+<h2>Variables<a class="headerlink" href="#variables" title="Permalink to this heading">#</a></h2>
+<p>The values we collect are associated to abstract entities which we will call “variables”.</p>
+<p>For the moment, consider that these entities are <strong>similar to the mathematical variables</strong> we are used to or to the variables we encounter in many <strong>programming languages</strong>.</p>
+<p>We could see them as “containers” for the data, but also, and more importantly, as <strong>abstract entities defining which data they are expected to hold</strong>.</p>
+<hr class="docutils" />
+<section id="example-mathematical-variables">
+<h3>Example - Mathematical Variables<a class="headerlink" href="#example-mathematical-variables" title="Permalink to this heading">#</a></h3>
+<p>To <strong>compute the area of a triangle</strong>, we may define:</p>
+<ul class="simple">
+<li><p>a variable <span class="math notranslate nohighlight">\(h\)</span> to “contain” the value of the height of the triangle;</p></li>
+<li><p>a variable <span class="math notranslate nohighlight">\(b\)</span> to hold the value for the base.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[a=\frac{b\cdot h}{2}\]</div>
+<p>defines a variable <span class="math notranslate nohighlight">\(a\)</span> to “hold” the value of the area. We can assign different values to <span class="math notranslate nohighlight">\(b\)</span> and <span class="math notranslate nohighlight">\(h\)</span> to different triangles, but we always expect <span class="math notranslate nohighlight">\(b\)</span>, <span class="math notranslate nohighlight">\(h\)</span> and <span class="math notranslate nohighlight">\(a\)</span> to contain the base, the height, and the area.</p>
+</section>
+<hr class="docutils" />
+<section id="example-programming-variables">
+<h3>Example - Programming Variables<a class="headerlink" href="#example-programming-variables" title="Permalink to this heading">#</a></h3>
+<p>If we create a computer program to solve the same problem, we can define three double variables with the same names and expect them to always contain values <strong>coherent with the ones we had in mind</strong> when we defined such variabiles:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">h</span><span class="p">;</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+
+<span class="n">input</span><span class="p">(</span><span class="o">&amp;</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">h</span><span class="p">);</span>
+
+<span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">b</span><span class="o">*</span><span class="n">h</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="example-statistical-variables">
+<h3>Example - Statistical Variables<a class="headerlink" href="#example-statistical-variables" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>When analyzing data, <strong>we will define variables expected to contain values related to a specific event or phenomenon</strong>.</p></li>
+<li><p>For instance, we may define a <strong>statistical variable</strong> <span class="math notranslate nohighlight">\(H\)</span> to contain the value of the height of people in the class.</p></li>
+<li><p>We may define a variable <span class="math notranslate nohighlight">\(W\)</span> to contain the weight of people.</p></li>
+<li><p>When we have more than one variable related to different aspects of the same event we will say that the set of values related to the given variables is <strong>an observation</strong>.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="example-statistical-variables-data-points">
+<h3>Example - Statistical Variables/Data Points<a class="headerlink" href="#example-statistical-variables-data-points" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The pair of values <span class="math notranslate nohighlight">\((H,W)=(175cm, 68Kg)\)</span> can be seen as an observation.</p></li>
+<li><p>Since this pair of values can be represented as a point in a 2D space, we also call it a <strong>data point</strong>.</p></li>
+<li><p>In this context, a set of observations (e.g., heights and weights of 30 people) is generally called a <strong>dataset</strong>.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id2">
+<h3>Example - Statistical Variables/Data Points<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<style scoped>
+    img {
+        margin-right: 10px;
+        display:block;
+        float:left;
+    }
+</style>
+<p><img alt="" src="../_images/datapoint.png" /></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Subject</p></th>
+<th class="head"><p>Height (cm)</p></th>
+<th class="head"><p>Weight (Kg)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>175</p></td>
+<td><p>70</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>160</p></td>
+<td><p>60</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>180</p></td>
+<td><p>78</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>160</p></td>
+<td><p>75</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>155</p></td>
+<td><p>58</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>190</p></td>
+<td><p>110</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<hr class="docutils" />
+<section id="phenomenon">
+<h2>Phenomenon<a class="headerlink" href="#phenomenon" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>When we analyze data, we are usually interested in <strong>investigating some phenomenon</strong>.</p></li>
+<li><p>For instance, we may be curious of <strong>what is the rate of overweight students in a school</strong>.</p></li>
+<li><p>This can be useful, e.g., to understand whether a new diet proposed in the school canteen is generating good or bad consequences.</p></li>
+<li><p>The phenomenon we want to study is important to keep in mind when collecting and analyzing data, as an inappropriate data collection could create some bias or make our conclusions limited.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="an-example-of-a-dataset">
+<h2>An example of a dataset<a class="headerlink" href="#an-example-of-a-dataset" title="Permalink to this heading">#</a></h2>
+<p>Datasets are usually stored in tables in which <strong>columns represent the different variables</strong> and <strong>rows represent the different observations</strong>:</p>
+<style scoped>
+table {
+  font-size: 25px;
+  width:100%;
+}
+</style>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Maths</p></th>
+<th class="head"><p>Geography</p></th>
+<th class="head"><p>English</p></th>
+<th class="head"><p>Physics</p></th>
+<th class="head"><p>Chemistry</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>x001</p></td>
+<td><p>8</p></td>
+<td><p>9</p></td>
+<td><p>30</p></td>
+<td><p>8</p></td>
+<td><p>10</p></td>
+</tr>
+<tr class="row-odd"><td><p>x038</p></td>
+<td><p>9</p></td>
+<td><p>7</p></td>
+<td><p>27</p></td>
+<td><p>6</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>x002</p></td>
+<td><p>6</p></td>
+<td><p>-1</p></td>
+<td><p>18</p></td>
+<td><p>5</p></td>
+<td><p>6</p></td>
+</tr>
+<tr class="row-odd"><td><p>x012</p></td>
+<td><p>7</p></td>
+<td><p>7</p></td>
+<td><p>25</p></td>
+<td><p>4</p></td>
+<td><p>10</p></td>
+</tr>
+<tr class="row-even"><td><p>x042</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>30</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+</tr>
+</tbody>
+</table>
+<hr class="docutils" />
+<style scoped>
+table {
+  font-size: 25px;
+  width:100%;
+}
+</style>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Maths</p></th>
+<th class="head"><p>Geography</p></th>
+<th class="head"><p>English</p></th>
+<th class="head"><p>Physics</p></th>
+<th class="head"><p>Chemistry</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>x001</p></td>
+<td><p>8</p></td>
+<td><p>9</p></td>
+<td><p>30</p></td>
+<td><p>8</p></td>
+<td><p>10</p></td>
+</tr>
+<tr class="row-odd"><td><p>x038</p></td>
+<td><p>9</p></td>
+<td><p>7</p></td>
+<td><p>27</p></td>
+<td><p>6</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>x002</p></td>
+<td><p>6</p></td>
+<td><p>-1</p></td>
+<td><p>18</p></td>
+<td><p>5</p></td>
+<td><p>6</p></td>
+</tr>
+<tr class="row-odd"><td><p>x012</p></td>
+<td><p>7</p></td>
+<td><p>7</p></td>
+<td><p>25</p></td>
+<td><p>4</p></td>
+<td><p>10</p></td>
+</tr>
+<tr class="row-even"><td><p>x042</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>30</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>Each row is an <strong>observation</strong> related to a given student.</p></li>
+<li><p>Each column represents a different <strong>variable</strong>.</p></li>
+<li><p>Some values (e.g., <code class="docutils literal notranslate"><span class="pre">x038</span></code> for <code class="docutils literal notranslate"><span class="pre">Chemistry</span></code>) may be missing, others (-1) mistaken.</p></li>
+</ul>
+<hr class="docutils" />
+<style scoped>
+table {
+  font-size: 23px;
+  width:100%;
+}
+</style>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Maths</p></th>
+<th class="head"><p>Geography</p></th>
+<th class="head"><p>English</p></th>
+<th class="head"><p>Physics</p></th>
+<th class="head"><p>Chemistry</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>x001</p></td>
+<td><p>8</p></td>
+<td><p>9</p></td>
+<td><p>30</p></td>
+<td><p>8</p></td>
+<td><p>10</p></td>
+</tr>
+<tr class="row-odd"><td><p>x038</p></td>
+<td><p>9</p></td>
+<td><p>7</p></td>
+<td><p>27</p></td>
+<td><p>6</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>x002</p></td>
+<td><p>6</p></td>
+<td><p>-1</p></td>
+<td><p>18</p></td>
+<td><p>5</p></td>
+<td><p>6</p></td>
+</tr>
+<tr class="row-odd"><td><p>x012</p></td>
+<td><p>7</p></td>
+<td><p>7</p></td>
+<td><p>25</p></td>
+<td><p>4</p></td>
+<td><p>10</p></td>
+</tr>
+<tr class="row-even"><td><p>x042</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>30</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+</tr>
+</tbody>
+</table>
+<p>Simple data analysis examples:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Data Analysis</p></th>
+<th class="head"><p>Goal</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Average (by row) marks obtained by students</p></td>
+<td><p>Rank students to understand who needs help</p></td>
+</tr>
+<tr class="row-odd"><td><p>Average (by column) votes obtained in each course</p></td>
+<td><p>Find “difficult” courses</p></td>
+</tr>
+<tr class="row-even"><td><p>Group courses into humanity-based and science-based</p></td>
+<td><p>Identify students excelling in a field</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="a-definition-of-data-analysis">
+<h1>A Definition of Data Analysis<a class="headerlink" href="#a-definition-of-data-analysis" title="Permalink to this heading">#</a></h1>
+<p>We will look at an informal definition of Data Analysis, adapted from wikipedia (<a class="reference external" href="https://en.wikipedia.org/wiki/Data_analysis">https://en.wikipedia.org/wiki/Data_analysis</a>):</p>
+<blockquote>
+<div><p>Data analysis is the <strong>process</strong> of inspecting, cleaning, transforming, and modeling data with the goal of <strong>understanding</strong> something about a given phenomenon, supporting <strong>decision-making</strong>, and <strong>making predictions on unseen data</strong>.</p>
+</div></blockquote>
+<p>While this definition is not very formal, it is a good starting point to get an understanding of what data analysis is.</p>
+<hr class="docutils" />
+<section id="data-analysis-as-a-process">
+<h2>Data Analysis as a Process<a class="headerlink" href="#data-analysis-as-a-process" title="Permalink to this heading">#</a></h2>
+<p>Data analysis is a process based on a series of techniques:</p>
+<ul class="simple">
+<li><p><strong>Inspecting</strong>: looking at the data to assess its main properties (number of observations, columns, range, etc.);</p></li>
+<li><p><strong>Cleaning</strong>: «fixing» some aspects of the data (information incorrectly recorded, out of range values);</p></li>
+<li><p><strong>Transforming</strong>: transforming the data from a format to another one (e.g., changing the scale of given columns);</p></li>
+<li><p><strong>Modeling</strong>: tuning a model which can be used to summarize, explain or make predictions about the data.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="goals-of-data-analysis">
+<h2>Goals of Data Analysis<a class="headerlink" href="#goals-of-data-analysis" title="Permalink to this heading">#</a></h2>
+<p>We can simplify by saying that data analysis processes can aim to address three main types of goals:</p>
+<ul class="simple">
+<li><p>Understanding something about a given phenomenon;</p></li>
+<li><p>Supporting decision-making;</p></li>
+<li><p>Making predictions on unseen data.</p></li>
+</ul>
+<p>We’ll see some examples of each of these goals in the following sections.</p>
+<hr class="docutils" />
+<section id="understanding-something-about-a-given-phenomenon">
+<h3>Understanding Something About a Given Phenomenon<a class="headerlink" href="#understanding-something-about-a-given-phenomenon" title="Permalink to this heading">#</a></h3>
+<style scoped>
+    img {
+        height: 440px;
+        float: left;
+        margin-right: 10px;
+    }
+</style>
+<p><img alt="" src="../_images/darwin.jpg" /> <img alt="" src="../_images/origin.jpg" /></p>
+<p>Darwin conceived the theory of evolution by observing specimens of finches collected in the Galapagos Island.</p>
+<p>While he did not use modern data analysis techniques, his conclusions were informed by the observation of data collected in his travels.</p>
+</section>
+<hr class="docutils" />
+<section id="supporting-decision-making">
+<h3>Supporting Decision-Making<a class="headerlink" href="#supporting-decision-making" title="Permalink to this heading">#</a></h3>
+<p>Data analysis can be also be used to support decision making.</p>
+<ul class="simple">
+<li><p>A company manufactures three products A, B and C in three geographic locations X, Y, Z.</p></li>
+<li><p>The company has to reduce the production and wants to cut down one of the three products.</p></li>
+<li><p>We can use data analysis to choose where to reduce production or which product to discard to minimize loss.</p></li>
+<li><p>Some data analysis techniques could also allow to make some simulations of what could happen once the decision is made.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="making-predictions-on-unseen-data">
+<h3>Making Predictions on Unseen Data<a class="headerlink" href="#making-predictions-on-unseen-data" title="Permalink to this heading">#</a></h3>
+<p>Data analysis allows to make prediction of unseen data:</p>
+<ul class="simple">
+<li><p>A bank which wants to develop an algorithm capable of understanding whether a given transaction is a legitimate one or a fraud attempt.</p></li>
+<li><p>The bank already has a team which reviews the some of the transactions to check if they are legitimate.</p></li>
+<li><p>By analyzing past past observations of transactions paired with a variable telling us which of those turned out to be a fraud attempt, we can create a <strong>predictive algorithm</strong> to detect fraud.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="main-types-of-data-analysis">
+<h2>Main Types of Data Analysis<a class="headerlink" href="#main-types-of-data-analysis" title="Permalink to this heading">#</a></h2>
+<p>While different categorizations are possible, we will consider the following main types of data analysis:</p>
+<ul class="simple">
+<li><p>Descriptive analysis;</p></li>
+<li><p>Exploratory analysis;</p></li>
+<li><p>Inferential analysis;</p></li>
+<li><p>Causal analysis;</p></li>
+<li><p>Predictive analysis;</p></li>
+<li><p>Time series analysis.</p></li>
+</ul>
+<hr class="docutils" />
+<section id="descriptive-analysis">
+<h3>Descriptive Analysis<a class="headerlink" href="#descriptive-analysis" title="Permalink to this heading">#</a></h3>
+<style scoped>
+    img {
+        height:450px;
+        float:left;
+        margin-right: 20px;
+    }
+</style>
+</section>
+</section>
+<section id="id3">
+<h2><img alt="" src="../_images/descriptive.png" /><a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p>The goal of descriptive analysis is to provide a series of numbers or visualization of the data that describe their main characteristics.</p>
+<hr class="docutils" />
+<section id="exploratory-analysis">
+<h3>Exploratory Analysis<a class="headerlink" href="#exploratory-analysis" title="Permalink to this heading">#</a></h3>
+<style scoped>
+    img {
+        height:450px;
+        float:left;
+        margin-right: 20px;
+    }
+</style>
+<p><img alt="" src="../_images/exploratory.png" /></p>
+<p>Exploratory analysis examines the structure of the data to find problems, make initial hypotheses, understand if data is good for our analysis.</p>
+</section>
+<hr class="docutils" />
+<section id="inferential-analysis">
+<h3>Inferential Analysis<a class="headerlink" href="#inferential-analysis" title="Permalink to this heading">#</a></h3>
+<style scoped>
+    img {
+        height:450px;
+        float:left;
+        margin-right: 20px;
+    }
+</style>
+<p><img alt="" src="../_images/selection_bias.png" /></p>
+<p>Aims to formally check whether some feature of pattern that we are observing in our dataset is actually likely to be true outside of the dataset at hand.</p>
+</section>
+<hr class="docutils" />
+<section id="causal-analysis">
+<h3>Causal Analysis<a class="headerlink" href="#causal-analysis" title="Permalink to this heading">#</a></h3>
+<style scoped>
+    img {
+        height:450px;
+        float:left;
+        margin-right: 20px;
+    }
+</style>
+<p><img alt="" src="../_images/spurious_correlation.jpg" /></p>
+<p>Causal analysis provides a series of mathematical tools to determine if a causal effect between two events exist, beyond what we simply observe in the data.</p>
+</section>
+<hr class="docutils" />
+<section id="predictive-analysis">
+<h3>Predictive Analysis<a class="headerlink" href="#predictive-analysis" title="Permalink to this heading">#</a></h3>
+<style scoped>
+table {
+  font-size: 20px;
+  float:left;
+  margin-right:50px;
+}
+</style>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>relwt</p></th>
+<th class="head"><p>glufast</p></th>
+<th class="head"><p>glutest</p></th>
+<th class="head"><p>instest</p></th>
+<th class="head"><p>sspg</p></th>
+<th class="head"><p>group</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1.06</p></td>
+<td><p>96</p></td>
+<td><p>465</p></td>
+<td><p>237</p></td>
+<td><p>111</p></td>
+<td><p>Chemical</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.09</p></td>
+<td><p>110</p></td>
+<td><p>426</p></td>
+<td><p>117</p></td>
+<td><p>118</p></td>
+<td><p>Normal</p></td>
+</tr>
+<tr class="row-even"><td><p>0.93</p></td>
+<td><p>93</p></td>
+<td><p>472</p></td>
+<td><p>285</p></td>
+<td><p>194</p></td>
+<td><p>???</p></td>
+</tr>
+<tr class="row-odd"><td><p>0.92</p></td>
+<td><p>300</p></td>
+<td><p>1468</p></td>
+<td><p>28</p></td>
+<td><p>455</p></td>
+<td><p>Overt</p></td>
+</tr>
+<tr class="row-even"><td><p>0.88</p></td>
+<td><p>99</p></td>
+<td><p>376</p></td>
+<td><p>134</p></td>
+<td><p>80</p></td>
+<td><p>Normal</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.1</p></td>
+<td><p>107</p></td>
+<td><p>403</p></td>
+<td><p>267</p></td>
+<td><p>254</p></td>
+<td><p>Normal</p></td>
+</tr>
+<tr class="row-even"><td><p>0.98</p></td>
+<td><p>130</p></td>
+<td><p>670</p></td>
+<td><p>44</p></td>
+<td><p>167</p></td>
+<td><p>???</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.13</p></td>
+<td><p>92</p></td>
+<td><p>476</p></td>
+<td><p>433</p></td>
+<td><p>226</p></td>
+<td><p>Chemical</p></td>
+</tr>
+<tr class="row-even"><td><p>1.0</p></td>
+<td><p>102</p></td>
+<td><p>378</p></td>
+<td><p>165</p></td>
+<td><p>117</p></td>
+<td><p>Normal</p></td>
+</tr>
+<tr class="row-odd"><td><p>0.96</p></td>
+<td><p>78</p></td>
+<td><p>290</p></td>
+<td><p>136</p></td>
+<td><p>142</p></td>
+<td><p>???</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>Predictive analysis aims to create models able to predict some unobserved features in data which may be available in the future.</p></li>
+<li><p>For instance, we can predict if a subject is likely to become diabetic based on some measurements to screen patients who are at risk.</p></li>
+</ul>
+<p>We can predict “group” from the other variables.</p>
+</section>
+<hr class="docutils" />
+<section id="time-series-analysis">
+<h3>Time Series Analysis<a class="headerlink" href="#time-series-analysis" title="Permalink to this heading">#</a></h3>
+<style scoped>
+    img {
+        height:450px;
+        float:left;
+        margin-right: 20px;
+    }
+</style>
+<p><img alt="" src="../_images/probabilistic_forecast.png" /></p>
+<ul class="simple">
+<li><p>Time series analysis aims to analyze series of data points s to uncover patterns, trends, seasonality, and other characteristics of the data and to make forecasts based on historical data.</p></li>
+</ul>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="data-analysis-workflow">
+<h1>Data Analysis Workflow<a class="headerlink" href="#data-analysis-workflow" title="Permalink to this heading">#</a></h1>
+<style scoped>
+    li {
+        font-size: smaller;
+    }
+</style>
+<p>Typical data analysis workflow:</p>
+<ol class="arabic simple">
+<li><p>Define your data analysis question</p></li>
+<li><p>Collect the data needed to answer the data analysis question</p></li>
+<li><p>Clean and format the data</p></li>
+<li><p>Explore and describe the data</p></li>
+<li><p>Choose suitable models for the analysis</p></li>
+<li><p>Fit, fine-tune, evaluate, and compare the models for the considered data analysis</p></li>
+<li><p>Review the data analysis when new data is available</p></li>
+</ol>
+<hr class="docutils" />
+<section id="define-your-data-analysis-question">
+<h2>Define your data analysis question<a class="headerlink" href="#define-your-data-analysis-question" title="Permalink to this heading">#</a></h2>
+<p>We can see data analysis as the process of answering a question.</p>
+<style scoped>
+    li {
+        font-size: smaller;
+    }
+</style>
+<ul class="simple">
+<li><p>In the example above on the theory of evolution, Darwin tried to answer the question “do species appear as an adaptation to features of the environment?”</p></li>
+<li><p>A causal analysis may try to answer a question such as “does consuming too much sugar causes diabetes?”</p></li>
+<li><p>A predictive analysis answer questions of the kind “What is the probability that this subject will develop diabetes?”.</p></li>
+</ul>
+<p>Defining your data analysis question is the very first step of the data analysis process.</p>
+</section>
+<hr class="docutils" />
+<section id="collect-the-data-needed-to-answer-the-data-analysis-question">
+<h2>Collect the data needed to answer the data analysis question<a class="headerlink" href="#collect-the-data-needed-to-answer-the-data-analysis-question" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>In this stage, we will collect the data we need to answer the data analysis question.</p></li>
+<li><p>There are different ways to collect data for analysis.</p></li>
+<li><p>If we want to assess whether consuming too much sugar can cause diabetes, we could look for surveys already made on the topic, or we could set a study in which we go around and ask people what are their eating habits.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="clean-and-format-the-data">
+<h2>Clean and format the data<a class="headerlink" href="#clean-and-format-the-data" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>The collected data does not always come in a “clean” form.</p></li>
+<li><p>We could have <strong>missing data</strong>. For instance, we may ask for age, but some subjects may refuse to tell us which is their age.</p></li>
+<li><p>In other cases, we may have <strong>incorrect data</strong>, i.e., “strange” numbers probably due to errors in data collection. For instance, if we find an age of 156 years, that may just be a typo and the intended age was just 56 years.</p></li>
+</ul>
+<p>In this stage, we will use a set of techniques to “fix” these problems in order to filter or clean the data.</p>
+</section>
+<hr class="docutils" />
+<section id="explore-and-describe-the-data">
+<h2>Explore and describe the data<a class="headerlink" href="#explore-and-describe-the-data" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>This step consists in exploring the data to make sure that it can be used to answer the question.</p></li>
+<li><p>For instance, we may want to check if the data has been collected properly to answer our question, if it is of sufficient quantity and quality.</p></li>
+<li><p>We will also start to see informally if the question we choose can be plausibly answered with this data.</p></li>
+<li><p>Descriptive and exploratory data analysis techniques are used in this stage.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="choose-suitable-models-for-the-analysis">
+<h2>Choose suitable models for the analysis<a class="headerlink" href="#choose-suitable-models-for-the-analysis" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>In this stage, we will select a set of models which seem to be suitable for answering our question.</p></li>
+<li><p>For instance, if we want to assess if we can predict whether a give subject will develop diabetes, we could choose <strong>classification</strong> models (more on this later in the course). If we want to check for a cause-effect mechanism will may need a different model.</p></li>
+<li><p>The choice of the specific classification/causal inference model will also be based on our understanding of the data (e.g., is the problem multi-dimensional? do we have enough data? etc.).</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="fit-fine-tune-evaluate-and-compare-the-models-for-the-considered-data-analysis">
+<h2>Fit, fine-tune, evaluate, and compare the models for the considered data analysis<a class="headerlink" href="#fit-fine-tune-evaluate-and-compare-the-models-for-the-considered-data-analysis" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>In this stage, we fit the chosen models to the data.</p></li>
+<li><p>After fitting them, we will need to evaluate how well they model the data.</p></li>
+<li><p>In many cases, we will fit more than one model and compare them to decide which of them is the most appropriate.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="interpret-the-results">
+<h2>Interpret the results<a class="headerlink" href="#interpret-the-results" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Once models have been built, we need to interpret our results in order to answer our question.</p></li>
+<li><p>For instance, we may observe a causal relationship between consuming sugars and developing diabetes, but we still need to interpret this result to get an understanding of why and how this happens.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="communicate-your-results">
+<h2>Communicate your results<a class="headerlink" href="#communicate-your-results" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>This stage is concerned with communicating the results of our analysis in an most accurate and understandable way.</p></li>
+<li><p>The way in which we communicate may depend on the specific audience we are talking to.</p></li>
+<li><p>We will use an informal language if the audience is general and non-technical, or a more technical one if we are writing the results of our analysis in a research paper.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="review-the-data-analysis-when-new-data-is-available">
+<h2>Review the data analysis when new data is available<a class="headerlink" href="#review-the-data-analysis-when-new-data-is-available" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>At some point, new data may be available.</p></li>
+<li><p>In this stage, we should revise our analysis and update our question, answer, or choice of models.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="non-linear-workflow">
+<h2>Non-Linear Workflow<a class="headerlink" href="#non-linear-workflow" title="Permalink to this heading">#</a></h2>
+<style scoped>
+    img {
+        height:450px;
+        float: left;
+        margin-right: 10px;
+    }
+</style>
+<p><img alt="" src="../_images/workflow.png" /></p>
+<p>A good data analysis will iterate over the different steps and possibly jump back to any of those steps to revise it.</p>
+<p>For instance, after fitting the models on the data in step 5, one may note that some other models could give better results, and jump back to step 4 to refine the choice of the models, to then return to step 5.</p>
+</section>
+<hr class="docutils" />
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h2>
+<p>Problem: Analyzing customer reviews to improve product quality and customer satisfaction;</p>
+<ol class="arabic simple">
+<li><p>Define the data analysis question  “What are the common themes and issues in customer reviews, and how can we address them to improve product quality and satisfaction?” (<strong>step 1 - define your data analysis question</strong>)</p></li>
+<li><p>Collect a dataset of customer reviews from the company’s website, social media, and third-party review platforms (<strong>step 2 - collect the data needed</strong>).</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="example-2">
+<h2>Example (2)<a class="headerlink" href="#example-2" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple" start="3">
+<li><p>Data cleaning and formatting to remove spelling errors, duplicate reviews, and inconsistent formatting (<strong>step 3 - clean and format the data</strong>).</p></li>
+<li><p>After cleaning the data, the analyst explores and describes it using techniques like word clouds, frequency distributions, and sentiment analysis to uncover common words, sentiments, and trends within the reviews (<strong>step 4 - explore and describe the data</strong>).</p></li>
+<li><p>To extract more meaningful insights from the text data, the analyst decides to apply natural language processing (NLP) techniques (<strong>step 5 - choose suitable models for analysis</strong>).</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="example-3">
+<h2>Example (3)<a class="headerlink" href="#example-3" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple" start="6">
+<li><p>Upon reviewing the results, the analyst realizes that some topics are unclear and overlapping (<strong>step 6 - fit, fine-tune, evaluate, and compare the models</strong>).</p></li>
+<li><p>The analyst decides to backtrack to the data exploration step (<strong>step 4 - explore and describe the data</strong>) to gain a deeper understanding of the customer feedback.</p></li>
+<li><p>Customers mention product quality issues when discussing customer service experiences, leading to topic overlap. The analyst categorizes reviews into “product-related” and “service-related” (<strong>step 5 - choose suitable models for analysis</strong>).</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="example-4">
+<h2>Example (4)<a class="headerlink" href="#example-4" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple" start="9">
+<li><p>With the revised approach, the analyst proceeds to categorize reviews and analyze them separately (<strong>step 6 - Fit, fine-tune, evaluate, and compare the models for the considered data analysis</strong>).</p></li>
+<li><p>This results in more interpretable topics, such as “defective products,” “timely shipping,” and “responsive customer support.” The analyst then analyzes these topics to generate actionable insights for product improvement and customer service enhancements.</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="example-5">
+<h2>Example (5)<a class="headerlink" href="#example-5" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple" start="11">
+<li><p>To ensure continuous improvement, the analyst commits to ongoing review and monitoring (<strong>step 7 - Review the data analysis when new data is available</strong>) of customer reviews, periodically updating the analysis to identify new emerging issues or trends.</p></li>
+<li><p>This iterative approach to data analysis allows for refining strategies and addressing evolving customer concerns over time.</p></li>
+</ol>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="examples-of-data-analysis">
+<h1>Examples of Data Analysis<a class="headerlink" href="#examples-of-data-analysis" title="Permalink to this heading">#</a></h1>
+<p>Before concluding this introduction, we will analyze and discuss three notable examples of data analysis:</p>
+<ul class="simple">
+<li><p>a <strong>good</strong> example in which data analysis can be used to make decisions and save lives;</p></li>
+<li><p>a <strong>bad</strong> example in which data analysis has been intentionally used to lie and deceive;</p></li>
+<li><p>an <strong>ugly</strong> example in which data analysis has probably been performed in a technical correct, but unethical way.</p></li>
+</ul>
+<hr class="docutils" />
+<section id="the-good-stopping-the-spread-of-cholera">
+<h2>The Good: Stopping the Spread of Cholera<a class="headerlink" href="#the-good-stopping-the-spread-of-cholera" title="Permalink to this heading">#</a></h2>
+<style scoped>
+    img {
+        height: 450px;
+        float: left;
+        margin-right: 35px;
+    }
+</style>
+<p><img alt="" src="../_images/miasma.jpg" /></p>
+<ul class="simple">
+<li><p>In the 19th century, a common belief was that cholera pandemics was caused by “miasma”, particles in the air carrying the disease.</p></li>
+<li><p>This was justified by the observation that pandemics tended to be localized - people getting the disease lived in the same neighborhood.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="you-know-nothing-jon-snow">
+<h1>You Know Nothing Jon Snow<a class="headerlink" href="#you-know-nothing-jon-snow" title="Permalink to this heading">#</a></h1>
+<style scoped>
+    img {
+        height: 450px;
+        float: left;
+        margin-right: 35px;
+    }
+</style>
+<p><img alt="" src="../_images/John_Snow.jpg" /></p>
+<ul class="simple">
+<li><p>In 1854, John Snow, an English doctor, hypothesized that pandemics were due to the contamination of water with the contents of the sewer’s system.</p></li>
+<li><p>Snow was skeptical of the miasma theory and, hypothesized that cholera was spread by some contaminating agent in the water.</p></li>
+<li><p>He published hist theory in 1849, but miasma remained the prevailing theory.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="the-ghost-map">
+<h1>The Ghost Map<a class="headerlink" href="#the-ghost-map" title="Permalink to this heading">#</a></h1>
+<style scoped>
+    img {
+        height: 450px;
+        float: left;
+        margin-right: 40px;
+    }
+</style>
+<p><img alt="" src="../_images/ghostmap.jpeg" /></p>
+<ul class="simple">
+<li><p>When a severe outbreak of cholera started in Broad Street in London, John Snow analyzed the deaths due to cholera and put them on a dot distribution map.</p></li>
+<li><p>To collect, the data, John Snow interviewed local residents with the help of Reverend Henry Whitehead.</p></li>
+</ul>
+<hr class="docutils" />
+<section id="id4">
+<h2>The Ghost Map<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<style scoped>
+    img {
+        height: 450px;
+        float: left;
+        margin-right: 40px;
+        object-fit: none;
+    }
+</style>
+<p><img alt="" src="../_images/ghostmap.jpeg" /></p>
+<ul class="simple">
+<li><p>In the map, bars represented the deaths, while circles represented the positions of public water pumps.</p></li>
+<li><p>At the time, people did not have water in their homes, hence they had to get water from water pumps.</p></li>
+<li><p>Jown Snow noted that for places with more deaths, the closest pump was located in Broad Street.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="removing-the-pump-handle">
+<h1>Removing the Pump Handle<a class="headerlink" href="#removing-the-pump-handle" title="Permalink to this heading">#</a></h1>
+<style scoped>
+    img {
+        height: 450px;
+        float: left;
+        margin-right: 40px;
+        object-fit: none;
+    }
+</style>
+<p><img alt="" src="../_images/broad_street_pump_handle.jpeg" /></p>
+<ul class="simple">
+<li><p>Based on this evidence, John Snow convinced the authorities to remove the handle of the pump, hence forcing people to take water from somewhere else.</p></li>
+<li><p>John Snow noted a drastic reduction in the number of deaths in the subsequent days.</p></li>
+<li><p>He concluded that the pipes in Broad Street were contaminated with sewage.</p></li>
+<li><p>A replica of the pump was placed in 1992.</p></li>
+</ul>
+<hr class="docutils" />
+<section id="the-bad-proving-nonexistent-links-between-mmr-vaccines-and-autism">
+<h2>The Bad: Proving Nonexistent Links Between MMR Vaccines and Autism<a class="headerlink" href="#the-bad-proving-nonexistent-links-between-mmr-vaccines-and-autism" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>In 1998, Andrew Wakefield and twelve coauthors published a paper entitled “Ileal-lymphoid-nodular hyperplasia, non-specific colitis, and pervasive developmental disorder in children” in The Lancet.</p></li>
+<li><p>The paper claimed the existence of a causative link between the MMR vaccine and colitis and between colitis and autism.</p></li>
+<li><p>Several studies (at least 20) tried to replicate  Wakefield’s study and where not able to show any link between vaccine and autism.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="the-fraudulent-study">
+<h2>The Fraudulent Study<a class="headerlink" href="#the-fraudulent-study" title="Permalink to this heading">#</a></h2>
+<style scoped>
+    img {
+        height: 480px;
+        float: left;
+        margin-right: 40px;
+    }
+</style>
+<p><img alt="" src="../_images/retracted.png" /></p>
+<ul class="simple">
+<li><p>Based on 12 carefully selected children.</p></li>
+<li><p>Wakefield had been paid by lawyers involved in lawsuits against immunization manufacturers and was applying for a new vaccine patent.</p></li>
+<li><p>In 2004, 10 of the 13 authors retracted their support for the MMR-autism association.</p></li>
+<li><p>Britain’s General Medical Council investigation found Wakefield guilty of dishonesty and irresponsibility. The lancet retracted the paper in 2010.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="long-term-effects-of-the-fraud">
+<h2>Long-Term Effects of the Fraud<a class="headerlink" href="#long-term-effects-of-the-fraud" title="Permalink to this heading">#</a></h2>
+<style scoped>
+    img {
+        height: 480px;
+        float: left;
+        margin-right: 40px;
+    }
+</style>
+<p><img alt="" src="../_images/mmr_coverage.jpg" /></p>
+<p>The paper had a profound impact on the rate of immunizations which decreased dramatically, with increased risks for children.</p>
+<hr class="docutils" />
+<section id="the-ugly-manipulating-voters-with-stolen-data-the-facebook-cambridge-analytica-scandal">
+<h3>The Ugly: Manipulating Voters with Stolen Data - The Facebook-Cambridge Analytica Scandal<a class="headerlink" href="#the-ugly-manipulating-voters-with-stolen-data-the-facebook-cambridge-analytica-scandal" title="Permalink to this heading">#</a></h3>
+<style scoped>
+    img {
+        height: 390px;
+        float: left;
+        margin-right: 50px;
+    }
+</style>
+<p><img alt="" src="../_images/cambridge_analytica.png" /></p>
+<ul class="simple">
+<li><p>Cambridge Analytica (founded 2013) was a company claiming expertise in psychographic profiling, a method that categorizes individuals based on their psychological traits and behaviors.</p></li>
+<li><p>Thanks to the Facebook app “This Is Your Digital Life”, a personality quiz, they obtained profiles from around 87 million Facebook users.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id5">
+<h3>The Ugly: Manipulating Voters with Stolen Data - The Facebook-Cambridge Analytica Scandal<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<style scoped>
+    img {
+        height: 390px;
+        float: left;
+        margin-right: 50px;
+    }
+</style>
+<p><img alt="" src="../_images/bigfive.png" /></p>
+<ul class="simple">
+<li><p>Based on this data, Cambridge Analytica employed data analysis techniques to construct detailed psychological profiles of individuals using the Big Five personality traits model.</p></li>
+<li><p>This enabled them to tailor political messages and advertisements to specific personality types.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id6">
+<h3>The Ugly: Manipulating Voters with Stolen Data - The Facebook-Cambridge Analytica Scandal<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<p>As Alexander Nix, the chief executive of Cambridge Analytica claimed:</p>
+<blockquote>
+<div><p>Today in the United States we have somewhere close to four or five thousand data points on every individual … So we model the personality of every adult across the United States, some 230 million people.</p>
+</div></blockquote>
+<p>(Source <a class="reference external" href="https://en.wikipedia.org/wiki/Cambridge_Analytica">https://en.wikipedia.org/wiki/Cambridge_Analytica</a>)</p>
+</section>
+<hr class="docutils" />
+<section id="id7">
+<h3>The Ugly: Manipulating Voters with Stolen Data - The Facebook-Cambridge Analytica Scandal<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The unethical aspect of Cambridge Analytica’s actions lay in their misuse of personal data obtained without proper consent.</p></li>
+<li><p>Involvement in political campaigns raised concerns about manipulation of democratic processes through propaganda.</p></li>
+<li><p>The scandal erupted into the public eye in 2018, when investigations exposed Cambridge Analytica’s practices.</p></li>
+<li><p>The story of the Cambridge Analytica scandal is a good example of the risks associated with unethical data practices.</p></li>
+<li><p>Solar Energy Optimization</p></li>
+</ul>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="what-s-data-analysis-used-for-today">
+<h1>What’s Data Analysis Used For Today<a class="headerlink" href="#what-s-data-analysis-used-for-today" title="Permalink to this heading">#</a></h1>
+<style scoped>
+    li {
+        font-size: smaller;
+    }
+</style>
+<p>Examples of contexts in which data analysis is useful:</p>
+<ul class="simple">
+<li><p>Healthcare</p></li>
+<li><p>Retail and E-Commerce</p></li>
+<li><p>Financial Services</p></li>
+<li><p>Transportation and Logistics</p></li>
+<li><p>Social Media and Digital Marketing</p></li>
+<li><p>Process Optimization</p></li>
+<li><p>Fault Detection and Predictive Maintenance</p></li>
+<li><p>Energy Grid Optimization</p></li>
+</ul>
+<hr class="docutils" />
+<section id="healthcare">
+<h2>Healthcare<a class="headerlink" href="#healthcare" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Data analysis in healthcare can enable insights that can improve patient outcomes and optimize operations.</p></li>
+<li><p>Predictive analysis can be used to identify patients at high risk of developing specific diseases, allowing healthcare providers to intervene early with preventive measures.</p></li>
+<li><p>Analyzing electronic health records and medical imaging data can aid in diagnosing diseases and  developing personalized treatment plans.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="retail-and-e-commerce">
+<h2>Retail and E-commerce<a class="headerlink" href="#retail-and-e-commerce" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Companies like Amazon utilize data from customer browsing behavior, purchase history, and demographic information to create personalized product recommendations.</p></li>
+<li><p>By analyzing customer data, retailers can optimize pricing strategies, manage inventory more effectively, and forecast demand.</p></li>
+<li><p>Sentiment analysis of customer reviews and social media data can provide valuable insights into consumer preferences and help improve product development and marketing campaigns.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="financial-services">
+<h2>Financial Services<a class="headerlink" href="#financial-services" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Banks and credit card companies employ data analytics to identify fraudulent transactions by analyzing patterns, anomalies, and behavioral data.</p></li>
+<li><p>Risk models that analyze historical data and market trends are used to assess creditworthiness and make lending decisions.</p></li>
+<li><p>Algorithmic trading leverages complex data analysis techniques to identify market trends and make high-speed trading decisions.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="transportation-and-logistics">
+<h2>Transportation and Logistics<a class="headerlink" href="#transportation-and-logistics" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Ride-sharing platforms like Uber and Lyft leverage data analysis to match drivers with riders efficiently and minimize wait times.</p></li>
+<li><p>Logistics companies employ route optimization algorithms to minimize fuel consumption and reduce delivery times.</p></li>
+<li><p>Real-time data analysis of traffic patterns and weather conditions helps improve route planning and avoid delays.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="social-media-and-digital-marketing">
+<h2>Social Media and Digital Marketing<a class="headerlink" href="#social-media-and-digital-marketing" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Companies analyze user engagement metrics, demographic data, and social media trends to understand customer behavior and tailor marketing strategies.</p></li>
+<li><p>A/B testing is used to compare the effectiveness of different marketing campaigns.</p></li>
+<li><p>Social media sentiment analysis enables businesses to gauge public opinion, manage brand reputation, and identify emerging trends.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="process-optimization">
+<h2>Process Optimization<a class="headerlink" href="#process-optimization" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>By analyzing data on manufacturing process (equipment logs, performance metrics), engineers can identify patterns, correlations, and anomalies that can lead to process optimization.</p></li>
+<li><p>For instance, data analysis can be used to identify parameters that significantly impact chip yield and quality.</p></li>
+<li><p>By analyzing historical data, engineers can uncover trends and relationships between process variables and chip performance.</p></li>
+<li><p>This information can then be used to optimize process settings, reduce defects, and improve overall chip quality.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="fault-detection-and-predictive-maintenance">
+<h2>Fault Detection and Predictive Maintenance<a class="headerlink" href="#fault-detection-and-predictive-maintenance" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>By analyzing sensor data from production equipment, anomalies or deviations from normal operating conditions can be identified in real-time.</p></li>
+<li><p>Through predictive maintenance, engineers can leverage data analysis to detect early signs of equipment degradation or impending failures.</p></li>
+<li><p>By analyzing historical maintenance records and equipment sensor data, patterns can be identified to predict when maintenance is required.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="solar-energy-optimization">
+<h2>Solar Energy Optimization<a class="headerlink" href="#solar-energy-optimization" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Solar farms and rooftop solar installations can generate large amounts of data, including solar irradiance levels, weather patterns, system performance metrics, and energy production data.</p></li>
+<li><p>This information can be used to optimize the positioning of solar panels, adjust tilt angles, and improve maintenance schedules.</p></li>
+<li><p>Data analysis can also help predict energy generation and optimize energy storage systems, ensuring maximum utilization of solar resources.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="energy-grid-optimization">
+<h2>Energy Grid Optimization<a class="headerlink" href="#energy-grid-optimization" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>By analyzing real-time data on energy generation, consumption, and grid conditions, operators can identify potential issues, manage grid stability, and improve energy flow.</p></li>
+<li><p>Data analysis techniques, such as machine learning algorithms, can be applied to detect anomalies, predict grid congestion, and optimize grid operation.</p></li>
+<li><p>This enables grid operators to proactively address challenges, integrate renewable energy sources efficiently, and enhance the overall reliability and resilience of the energy grid.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="philosophy-of-the-course">
+<h1>Philosophy of the Course<a class="headerlink" href="#philosophy-of-the-course" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Data analysis is a complex process involving different theoretical concepts with roots in theoretical fields such as that of statistics.</p></li>
+<li><p>While it is <strong>fundamental</strong> to understand the theory, we will opt for a formal, but practical introduction of these concepts.</p></li>
+<li><p>We will introduce and describe models, but we will not delve into optimization details or demonstrate theoretical guarantees.</p></li>
+<li><p>We will rely on libraries to use the models and techniques introduced in the course, but also aim to form a deep and formal understanding of how a given algorithm works.</p></li>
+</ul>
+<hr class="docutils" />
+<section id="practical-data-analysis-with-python">
+<h2>Practical Data Analysis with Python<a class="headerlink" href="#practical-data-analysis-with-python" title="Permalink to this heading">#</a></h2>
+<p>Data analysis is a skill which is best learnt with practice.</p>
+<ul class="simple">
+<li><p>We will use the Python programming language and different Python libraries explicitly designed to perform data analyses.</p></li>
+<li><p>Another popular choice for data analysis is the R software. Both options (Python and R) are valid but the two packages follow different approaches.</p></li>
+<li><p>We will use Python, which is a general purpose programming language, with several extensions for scientific computation and data analysis.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="a-map-of-the-course">
+<h2>A Map of the Course<a class="headerlink" href="#a-map-of-the-course" title="Permalink to this heading">#</a></h2>
+<p>The course will develop through the following macro-units:</p>
+<ol class="arabic simple">
+<li><p><strong>Descriptive and exploratory analysis</strong>. We put both analyses types in the same unit as the tools for these two kinds of analysis are sometimes shared, even if their objectives are distinct.</p></li>
+<li><p><strong>Inferential analysis</strong>. We will see what are the main tools to make sure that any conclusion we are drawing on the data will likely apply beyond the data that we are analyzing.</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="id8">
+<h2>A Map of the Course<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple" start="3">
+<li><p><strong>Causal analysis</strong>. Here we aim to identify the main pitfalls in causal analysis so that we can be aware of which mistakes we can incur in. We will also see some simple approaches which may be sufficient in some cases to perform a proper causal analysis.</p></li>
+<li><p><strong>Predictive analysis</strong>. We will discuss the philosophy of the approach, which is rather different from the different kinds of analysis seen above, revisit some of the algorithms discussed in the previous sections and see some powerful predictive algorithms which can be applied for data analysis.</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="id9">
+<h2>A Map of the Course<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple" start="5">
+<li><p><strong>Time series analysis</strong>. We will provide an introduction to the analysis of time series, highlighting the main concepts and techniques.</p></li>
+</ol>
+<p>During our journey, we will both focus on theoretical concepts and apply them in practice in real examples of data analyses. This will be done through frequent short laboratory sessions (in the order of one per lecture) showing how to use the introduced concepts in practice, and lectures dedicated to the applications of the discussed concepts in real data analyses.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./slides"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Fondamenti di Analisi dei Dati 2023/2024</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-data-analysis">What is Data Analysis?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prof-antonino-furnari">Prof. Antonino Furnari</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">What is Data Analysis?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-data-an-informal-definition">What is Data? An informal Definition</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-of-values">Set of Values</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-collection">Data collection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables">Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-mathematical-variables">Example - Mathematical Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-programming-variables">Example - Programming Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-statistical-variables">Example - Statistical Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-statistical-variables-data-points">Example - Statistical Variables/Data Points</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Example - Statistical Variables/Data Points</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#phenomenon">Phenomenon</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-of-a-dataset">An example of a dataset</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#a-definition-of-data-analysis">A Definition of Data Analysis</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-analysis-as-a-process">Data Analysis as a Process</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goals-of-data-analysis">Goals of Data Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-something-about-a-given-phenomenon">Understanding Something About a Given Phenomenon</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#supporting-decision-making">Supporting Decision-Making</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-predictions-on-unseen-data">Making Predictions on Unseen Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#main-types-of-data-analysis">Main Types of Data Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptive-analysis">Descriptive Analysis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploratory-analysis">Exploratory Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inferential-analysis">Inferential Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#causal-analysis">Causal Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predictive-analysis">Predictive Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-analysis">Time Series Analysis</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-analysis-workflow">Data Analysis Workflow</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-your-data-analysis-question">Define your data analysis question</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collect-the-data-needed-to-answer-the-data-analysis-question">Collect the data needed to answer the data analysis question</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clean-and-format-the-data">Clean and format the data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-and-describe-the-data">Explore and describe the data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choose-suitable-models-for-the-analysis">Choose suitable models for the analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-fine-tune-evaluate-and-compare-the-models-for-the-considered-data-analysis">Fit, fine-tune, evaluate, and compare the models for the considered data analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpret-the-results">Interpret the results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#communicate-your-results">Communicate your results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#review-the-data-analysis-when-new-data-is-available">Review the data analysis when new data is available</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#non-linear-workflow">Non-Linear Workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2">Example (2)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3">Example (3)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-4">Example (4)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-5">Example (5)</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-data-analysis">Examples of Data Analysis</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-good-stopping-the-spread-of-cholera">The Good: Stopping the Spread of Cholera</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#you-know-nothing-jon-snow">You Know Nothing Jon Snow</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ghost-map">The Ghost Map</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">The Ghost Map</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#removing-the-pump-handle">Removing the Pump Handle</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bad-proving-nonexistent-links-between-mmr-vaccines-and-autism">The Bad: Proving Nonexistent Links Between MMR Vaccines and Autism</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-fraudulent-study">The Fraudulent Study</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#long-term-effects-of-the-fraud">Long-Term Effects of the Fraud</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ugly-manipulating-voters-with-stolen-data-the-facebook-cambridge-analytica-scandal">The Ugly: Manipulating Voters with Stolen Data - The Facebook-Cambridge Analytica Scandal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">The Ugly: Manipulating Voters with Stolen Data - The Facebook-Cambridge Analytica Scandal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">The Ugly: Manipulating Voters with Stolen Data - The Facebook-Cambridge Analytica Scandal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">The Ugly: Manipulating Voters with Stolen Data - The Facebook-Cambridge Analytica Scandal</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-data-analysis-used-for-today">What’s Data Analysis Used For Today</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#healthcare">Healthcare</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#retail-and-e-commerce">Retail and E-commerce</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#financial-services">Financial Services</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transportation-and-logistics">Transportation and Logistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#social-media-and-digital-marketing">Social Media and Digital Marketing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#process-optimization">Process Optimization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fault-detection-and-predictive-maintenance">Fault Detection and Predictive Maintenance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solar-energy-optimization">Solar Energy Optimization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-grid-optimization">Energy Grid Optimization</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#philosophy-of-the-course">Philosophy of the Course</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-data-analysis-with-python">Practical Data Analysis with Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-map-of-the-course">A Map of the Course</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">A Map of the Course</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">A Map of the Course</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Antonino Furnari
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
