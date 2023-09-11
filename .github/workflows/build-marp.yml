@@ -7,20 +7,19 @@ on:
       - master
 jobs:
   build-pdf:
-    runs-on: marpteam/marp-cli
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v2
         with:
           persist-credentials: false
-      # - name: Install Marp
-      #   run: |
-      #     sudo snap install marp-cli-carroarmato0 
-      #     which marp
-      #     ls /snap/bin/marp
+      - name: Install Marp
+        run: |
+          wget https://github.com/marp-team/marp-cli/releases/download/v3.2.1/marp-cli-v3.2.1-linux.tar.gz
+          tar xvf marp-cli-v3.2.1-linux.tar.gz
       - name: Build Marp
         shell: bash -l {0}
-        run: for f in lecturenotes/slides/*.md; do ff=${f/.md/.pdf}; /snap/bin/marp $f --pdf --allow-local-files -o $ff; done
+        run: for f in lecturenotes/slides/*.md; do ff=${f/.md/.pdf}; ./marp $f --pdf --allow-local-files -o $ff; done
       - uses: actions/upload-artifact@v2
         with:
           name: pdf
