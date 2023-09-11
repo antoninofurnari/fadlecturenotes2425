@@ -19,7 +19,7 @@ jobs:
           sudo snap install marp-cli-carroarmato0 
       - name: Build Marp
         shell: bash -l {0}
-        run: for f in lecturenotes/slides/*.md; do ff=${f/.md/.pdf}; marp $f --pdf --allow-local-files -o $ff; done
+        run: for f in lecturenotes/slides/*.md; do ff=${f/.md/.pdf}; marp-cli $f --pdf --allow-local-files -o $ff; done
       - uses: actions/upload-artifact@v2
         with:
           name: pdf
@@ -27,3 +27,4 @@ jobs:
       - uses: ncipollo/release-action@v1
         with:
           artifacts: "lecturenotes/slides/*.pdf"
+          tag: "latest"
