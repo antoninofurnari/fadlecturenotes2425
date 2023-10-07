@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>3. Data, Uncertainty and Random Variables &#8212; Lecture Notes on Fundamental of Data Analysis</title>
+    <title>Data, Uncertainty and Random Variables &#8212; Lecture Notes on Fundamental of Data Analysis</title>
   
   
   
@@ -68,7 +68,6 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="prev" title="2.5. Introduzione a Pandas" href="../lecture2/05_intro_pandas.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -160,7 +159,7 @@ const thebe_selector_output = ".output, .cell_output"
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        <ul class="current nav bd-sidenav">
+        <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../lecture1/00_main.html">1. What is Data Analysis?</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../lecture1/01_what_is_data.html">1.1. What is Data? An informal Definition</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../lecture1/02_data_analysis_definition.html">1.2. A Definition of Data Analysis</a></li>
@@ -178,8 +177,6 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../lecture2/05_intro_pandas.html">2.5. Introduzione a Pandas</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Data, Uncertainty and Random Variables</a></li>
-
 </ul>
 
     </div>
@@ -326,49 +323,49 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">3. Data, Uncertainty and Random Variables</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#informal-definition-of-data">3.1. Informal Definition of Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-importance-of-probability-theory">3.2. Uncertainty &amp; Importance of Probability Theory</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-variable">3.3. Random Variable</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">3.3.1. Example</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Data, Uncertainty and Random Variables</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#informal-definition-of-data">Informal Definition of Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-importance-of-probability-theory">Uncertainty &amp; Importance of Probability Theory</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-variable">Random Variable</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-formal-definition-of-data">3.4. More Formal Definition of Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-formal-definition-of-data">More Formal Definition of Data</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#probability">4. Probability</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frequentist-approach-to-probability">4.1. Frequentist Approach to Probability</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-probability">4.1.1. Example of Probability</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#probability">Probability</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frequentist-approach-to-probability">Frequentist Approach to Probability</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-probability">Example of Probability</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#joint-probability">4.2. Joint probability</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">4.2.1. Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#joint-probability">Joint probability</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Example</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-rule-marginal-probability">4.3. Sum Rule (Marginal Probability)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frequentist-derivation">4.3.1. Frequentist Derivation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-rule-marginal-probability">Sum Rule (Marginal Probability)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frequentist-derivation">Frequentist Derivation</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-probability">4.4. Conditional Probability</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#product-rule-factorization">4.5. Product Rule (Factorization)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">4.5.1. Frequentist Derivation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-probability">Conditional Probability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#product-rule-factorization">Product Rule (Factorization)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Frequentist Derivation</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-fundamental-rules-of-probability">4.6. The Fundamental Rules of Probability</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-chain-rule-of-conditional-probabilities">4.7. The Chain Rule of Conditional Probabilities</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-theorem">4.8. Bayes’ Theorem</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-approach-to-probability">4.8.1. Bayesian Approach to Probability</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#degree-of-belief">4.8.1.1. Degree of belief</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-fundamental-rules-of-probability">The Fundamental Rules of Probability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-chain-rule-of-conditional-probabilities">The Chain Rule of Conditional Probabilities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-theorem">Bayes’ Theorem</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-approach-to-probability">Bayesian Approach to Probability</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#degree-of-belief">Degree of belief</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-probability-manipulation">4.9. Example of Probability Manipulation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#excercise">4.9.1. Excercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-probability-manipulation">Example of Probability Manipulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#excercise">Excercise</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#independence-and-conditional-independence">4.10. Independence and Conditional Independence</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">4.11. References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#independence-and-conditional-independence">Independence and Conditional Independence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
 </li>
 </ul>
@@ -384,9 +381,9 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="data-uncertainty-and-random-variables">
-<h1><span class="section-number">3. </span>Data, Uncertainty and Random Variables<a class="headerlink" href="#data-uncertainty-and-random-variables" title="Permalink to this heading">#</a></h1>
+<h1>Data, Uncertainty and Random Variables<a class="headerlink" href="#data-uncertainty-and-random-variables" title="Permalink to this heading">#</a></h1>
 <section id="informal-definition-of-data">
-<h2><span class="section-number">3.1. </span>Informal Definition of Data<a class="headerlink" href="#informal-definition-of-data" title="Permalink to this heading">#</a></h2>
+<h2>Informal Definition of Data<a class="headerlink" href="#informal-definition-of-data" title="Permalink to this heading">#</a></h2>
 <p>We have seen data social media is “all about the data” and about what we can do with this data. We will start by giving a definition of what we mean by ‘data’.</p>
 <p>Following Wikipedia, we could say that:</p>
 <p>‘Data is a set of values of subjects<br />
@@ -400,7 +397,7 @@ with respect to qualitative or quantitative variables’</p>
 <p>Some of these entities (e.g., comments) can be in turn a list of entities (e.g., a list of comments).</p>
 </section>
 <section id="uncertainty-importance-of-probability-theory">
-<h2><span class="section-number">3.2. </span>Uncertainty &amp; Importance of Probability Theory<a class="headerlink" href="#uncertainty-importance-of-probability-theory" title="Permalink to this heading">#</a></h2>
+<h2>Uncertainty &amp; Importance of Probability Theory<a class="headerlink" href="#uncertainty-importance-of-probability-theory" title="Permalink to this heading">#</a></h2>
 <p>We have seen that dealing with data means dealing with some variables assuming some values.</p>
 <p>However, what can we say about what values will assume such variables?</p>
 <p>In some cases, it is possible to predict the values of variables with perfect accuracy, given a set of initial conditions. For instance, think about a system of equations describing the speed of objects according to Newtonian laws.</p>
@@ -423,7 +420,7 @@ with respect to qualitative or quantitative variables’</p>
 <p>Probability theory is hence an important tool to work with data. We will start to revise the main concepts behind probability theory by talking about random variables.</p>
 </section>
 <section id="random-variable">
-<h2><span class="section-number">3.3. </span>Random Variable<a class="headerlink" href="#random-variable" title="Permalink to this heading">#</a></h2>
+<h2>Random Variable<a class="headerlink" href="#random-variable" title="Permalink to this heading">#</a></h2>
 <p>We discovered that ‘data’ has something to do with ‘variables’. When dealing with uncertain events, we need to use the concept of ‘random variables’. Informally (from wikipedia):</p>
 <p>‘A random variable is a variable whose values<br />
 depend on outcomes of a random phenomenon.’</p>
@@ -453,7 +450,7 @@ depend on outcomes of a random phenomenon.’</p>
 <li><p>Once we pick a car, we may have <span class="math notranslate nohighlight">\(X = \binom{37}{15}\)</span>.</p></li>
 </ul>
 <section id="example">
-<h3><span class="section-number">3.3.1. </span>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h3>
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h3>
 <figure class="align-default">
 <img alt="../../_images/image2.png" src="../../_images/image2.png" />
 </figure>
@@ -480,7 +477,7 @@ depend on outcomes of a random phenomenon.’</p>
 </section>
 </section>
 <section id="more-formal-definition-of-data">
-<h2><span class="section-number">3.4. </span>More Formal Definition of Data<a class="headerlink" href="#more-formal-definition-of-data" title="Permalink to this heading">#</a></h2>
+<h2>More Formal Definition of Data<a class="headerlink" href="#more-formal-definition-of-data" title="Permalink to this heading">#</a></h2>
 <p>We will define “data” as:</p>
 <p>“The values assumed by a random variable”</p>
 <p><strong>Example</strong></p>
@@ -515,7 +512,7 @@ depend on outcomes of a random phenomenon.’</p>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="probability">
-<h1><span class="section-number">4. </span>Probability<a class="headerlink" href="#probability" title="Permalink to this heading">#</a></h1>
+<h1>Probability<a class="headerlink" href="#probability" title="Permalink to this heading">#</a></h1>
 <p>Since random variables are related to stochastic phenomena, we cannot say much about the outcome of a single phenomenon.</p>
 <p>However, we expect to be able to characterize the class of experiments related to a random variable, to infer rules on what values the random variable is likely to take.</p>
 <p>For instance, in the case of coin tossing, we can observe that, if I toss a coin for a large number of times, the number of heads will be roughly similar to the number of tails.</p>
@@ -536,7 +533,7 @@ depend on outcomes of a random phenomenon.’</p>
 \[P(b) = P(B = b)\]</div>
 <p>While it is intuitive to understand that a probability quantifies how likely that an event actually happens, we have not yet seen <strong>how to assign probabilities to outcomes</strong>. We will see that there are two main approaches to reason about probabilities: the frequentist approach and the Bayesian approach.</p>
 <section id="frequentist-approach-to-probability">
-<h2><span class="section-number">4.1. </span>Frequentist Approach to Probability<a class="headerlink" href="#frequentist-approach-to-probability" title="Permalink to this heading">#</a></h2>
+<h2>Frequentist Approach to Probability<a class="headerlink" href="#frequentist-approach-to-probability" title="Permalink to this heading">#</a></h2>
 <p>There are two main approaches to probability: frequentist and Bayesian.</p>
 <p><strong>Frequentist approach</strong>:</p>
 <p>Probability theory was initially developed to analyze the frequency of events. For instance, it can be used to study events like drawing a certain hand of cards in a poker game. These events are repeatable and can be dealt with using frequencies. In this sense, when we say that an event has probability <span class="math notranslate nohighlight">\(p\)</span> of occurring, it means that if we repeat the experiment infinitely many times, then a proportion <span class="math notranslate nohighlight">\(p\)</span> of the repetitions would result in that outcome.</p>
@@ -558,7 +555,7 @@ depend on outcomes of a random phenomenon.’</p>
 <li><p>The probability of picking a red ball from a box with 40 red balls and 60 blue balls is 0.4. We know this because, if we repeat the experiment for a large number of times, we will observe that proportion.</p></li>
 </ul>
 <section id="example-of-probability">
-<h3><span class="section-number">4.1.1. </span>Example of Probability<a class="headerlink" href="#example-of-probability" title="Permalink to this heading">#</a></h3>
+<h3>Example of Probability<a class="headerlink" href="#example-of-probability" title="Permalink to this heading">#</a></h3>
 <figure class="align-default">
 <img alt="../../_images/image3.png" src="../../_images/image3.png" />
 </figure>
@@ -581,7 +578,7 @@ depend on outcomes of a random phenomenon.’</p>
 </section>
 </section>
 <section id="joint-probability">
-<h2><span class="section-number">4.2. </span>Joint probability<a class="headerlink" href="#joint-probability" title="Permalink to this heading">#</a></h2>
+<h2>Joint probability<a class="headerlink" href="#joint-probability" title="Permalink to this heading">#</a></h2>
 <p>We can define <strong>univariate</strong> (= with respect to only one variable) probabilities <span class="math notranslate nohighlight">\(P(B)\)</span> and <span class="math notranslate nohighlight">\(P(F)\)</span> as we have seen in the previous examples.</p>
 <p>However, in some cases, it is useful to define probabilities on more than one variable at the time. For instance, we could be interested in studying the probability of picking a given fruit from a given box. In this case, we would be interested in the <strong>joint probability</strong> <span class="math notranslate nohighlight">\(P(B,F)\)</span>.</p>
 <p>In general, we can have joint probabilities with arbitrary numbers of variable. For instance, <span class="math notranslate nohighlight">\(P\left( X_{1},X_{2},X_{3},\ldots,X_{n} \right)\)</span>.</p>
@@ -592,7 +589,7 @@ depend on outcomes of a random phenomenon.’</p>
 <li><p><span class="math notranslate nohighlight">\(P(X) = P\left( X_{1},X_{2} \right)\)</span>.</p></li>
 </ul>
 <section id="id1">
-<h3><span class="section-number">4.2.1. </span>Example<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<h3>Example<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
 <figure class="align-default">
 <img alt="../../_images/image4.png" src="../../_images/image4.png" />
 </figure>
@@ -619,7 +616,7 @@ depend on outcomes of a random phenomenon.’</p>
 </section>
 </section>
 <section id="sum-rule-marginal-probability">
-<h2><span class="section-number">4.3. </span>Sum Rule (Marginal Probability)<a class="headerlink" href="#sum-rule-marginal-probability" title="Permalink to this heading">#</a></h2>
+<h2>Sum Rule (Marginal Probability)<a class="headerlink" href="#sum-rule-marginal-probability" title="Permalink to this heading">#</a></h2>
 <p>Sometimes we can compute probabilities on a set of variables, but we are interested on a probability on a subset of them.</p>
 <p>In particular, we have seen that, given the contingency table related to the two variables X and Y, we can estimate both the joint probability <span class="math notranslate nohighlight">\(P(X,Y)\)</span> and the probability of each of the variables: <span class="math notranslate nohighlight">\(P(X)\)</span> and <span class="math notranslate nohighlight">\(P(Y)\)</span>.</p>
 <p>To compute these probabilities, we can use the <strong>sum rule of probability</strong>:</p>
@@ -627,7 +624,7 @@ depend on outcomes of a random phenomenon.’</p>
 \[P(X = x) = \sum_{y}^{}{P(X = x,Y = y)}\]</div>
 <p>The act of computing <span class="math notranslate nohighlight">\(P(X)\)</span> from <span class="math notranslate nohighlight">\(P(X,Y)\)</span> is also known as marginalization and <span class="math notranslate nohighlight">\(P(X)\)</span> is also named <strong>marginal probability</strong>.</p>
 <section id="frequentist-derivation">
-<h3><span class="section-number">4.3.1. </span>Frequentist Derivation<a class="headerlink" href="#frequentist-derivation" title="Permalink to this heading">#</a></h3>
+<h3>Frequentist Derivation<a class="headerlink" href="#frequentist-derivation" title="Permalink to this heading">#</a></h3>
 <figure class="align-default">
 <img alt="../../_images/image5.png" src="../../_images/image5.png" />
 </figure>
@@ -645,7 +642,7 @@ depend on outcomes of a random phenomenon.’</p>
 </section>
 </section>
 <section id="conditional-probability">
-<h2><span class="section-number">4.4. </span>Conditional Probability<a class="headerlink" href="#conditional-probability" title="Permalink to this heading">#</a></h2>
+<h2>Conditional Probability<a class="headerlink" href="#conditional-probability" title="Permalink to this heading">#</a></h2>
 <p>In many cases, we are interested in the the probability of some event, given that some other event happened.</p>
 <p>This is called <strong>conditional</strong> <strong>probability</strong> and is denoted as<span class="math notranslate nohighlight">\(\ P\left( X = x \middle| Y = y \right)\)</span> and read as ‘P of X=y given that Y=y’. In this context, <span class="math notranslate nohighlight">\(Y = y\)</span> is the condition, and we are interested in studying the probability of X only in the cases in which the condition is verified.</p>
 <p>For instance, in the case of the two boxes, we could be interested in <span class="math notranslate nohighlight">\(P(F = a|B = b)\)</span>, that is to say, what is the probability of picking an apple, given that we know that we are drawing from the blue box?</p>
@@ -663,7 +660,7 @@ depend on outcomes of a random phenomenon.’</p>
 </figure>
 </section>
 <section id="product-rule-factorization">
-<h2><span class="section-number">4.5. </span>Product Rule (Factorization)<a class="headerlink" href="#product-rule-factorization" title="Permalink to this heading">#</a></h2>
+<h2>Product Rule (Factorization)<a class="headerlink" href="#product-rule-factorization" title="Permalink to this heading">#</a></h2>
 <p>We can see the definition of conditional probability:</p>
 <div class="math notranslate nohighlight">
 \[P\left( X = x \middle| Y = y \right) = \frac{P(X = x,\ Y = y)}{P(Y = y)}\]</div>
@@ -674,7 +671,7 @@ depend on outcomes of a random phenomenon.’</p>
 <p>The product rule allows to compute joint probabilities starting from conditional probabilities and marginal probabilities. This is useful because measuring joint probabilities generally involves creating large tables, whereas conditional and marginal probabilities might be easier to derive.</p>
 <p>This operation of expressing a joint probability in terms of two factors is known as <u>factorization</u>.</p>
 <section id="id2">
-<h3><span class="section-number">4.5.1. </span>Frequentist Derivation<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<h3>Frequentist Derivation<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
 <figure class="align-default">
 <img alt="../../_images/image7.png" src="../../_images/image7.png" />
 </figure>
@@ -689,7 +686,7 @@ depend on outcomes of a random phenomenon.’</p>
 </section>
 </section>
 <section id="the-fundamental-rules-of-probability">
-<h2><span class="section-number">4.6. </span>The Fundamental Rules of Probability<a class="headerlink" href="#the-fundamental-rules-of-probability" title="Permalink to this heading">#</a></h2>
+<h2>The Fundamental Rules of Probability<a class="headerlink" href="#the-fundamental-rules-of-probability" title="Permalink to this heading">#</a></h2>
 <figure class="align-default">
 <img alt="../../_images/image8.png" src="../../_images/image8.png" />
 </figure>
@@ -702,7 +699,7 @@ depend on outcomes of a random phenomenon.’</p>
 <p>All other rules and theorems (including Bayes’ rule) are derived from these two statements.</p>
 </section>
 <section id="the-chain-rule-of-conditional-probabilities">
-<h2><span class="section-number">4.7. </span>The Chain Rule of Conditional Probabilities<a class="headerlink" href="#the-chain-rule-of-conditional-probabilities" title="Permalink to this heading">#</a></h2>
+<h2>The Chain Rule of Conditional Probabilities<a class="headerlink" href="#the-chain-rule-of-conditional-probabilities" title="Permalink to this heading">#</a></h2>
 <p>When dealing with multiple variables, the product rule can be applied in an iterative fashion, thus obtaining the ‘chain rule’ of conditional probabilities.</p>
 <p>For instance:</p>
 <div class="math notranslate nohighlight">
@@ -721,7 +718,7 @@ depend on outcomes of a random phenomenon.’</p>
 \[P\left( X_{1},\ldots,\ X_{n} \right) = P\left( X_{1} \right)\prod_{i = 2}^{n}{P(X_{i}|X_{1},\ldots,\ X_{i - 1})}\]</div>
 </section>
 <section id="bayes-theorem">
-<h2><span class="section-number">4.8. </span>Bayes’ Theorem<a class="headerlink" href="#bayes-theorem" title="Permalink to this heading">#</a></h2>
+<h2>Bayes’ Theorem<a class="headerlink" href="#bayes-theorem" title="Permalink to this heading">#</a></h2>
 <p>Given two variables A and B, from the product rule, we obtain:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(P(A,B) = P\left( A \middle| B \right)P(B)\)</span></p></li>
@@ -750,7 +747,7 @@ depend on outcomes of a random phenomenon.’</p>
 <li><p>We will get back to these names with examples in the following slides.</p></li>
 </ul>
 <section id="bayesian-approach-to-probability">
-<h3><span class="section-number">4.8.1. </span>Bayesian Approach to Probability<a class="headerlink" href="#bayesian-approach-to-probability" title="Permalink to this heading">#</a></h3>
+<h3>Bayesian Approach to Probability<a class="headerlink" href="#bayesian-approach-to-probability" title="Permalink to this heading">#</a></h3>
 <p>Some events are not related to repeatable experiments, but they are still characterized by uncertainty. Examples of such events are ‘will the sun extinguish in 4.5 billion years?’ or ‘given the observation of some symptoms, does the patient have a given pathology’. These events are not related to repeatable experiments. Yet, they are characterized by uncertainty. Also, observing more data might help reduce uncertainty. For instance, if a new symptom is observed, we might be less uncertain about one outcome or another.</p>
 <p>**<br />
 Examples:**</p>
@@ -759,7 +756,7 @@ Examples:**</p>
 <li><p>The probability that the average temperature of the planet will increase by 1° next year if we reduce the emission of CO2 by a given amount</p></li>
 </ul>
 <section id="degree-of-belief">
-<h4><span class="section-number">4.8.1.1. </span>Degree of belief<a class="headerlink" href="#degree-of-belief" title="Permalink to this heading">#</a></h4>
+<h4>Degree of belief<a class="headerlink" href="#degree-of-belief" title="Permalink to this heading">#</a></h4>
 <p>An important concept related to Bayesian probability is the one of “degree of belief”. Since the experiments are not repeatable, to quantify probability we cannot count the number of favorable outcomes. Instead, we ‘inject’ our belief into the system. Specifically, this is done using the Bayes’ rule, which provide the tools to insert our degree of belief in a consistent way. We will talk about the Bayes’ rule later.</p>
 <p><strong>Example:</strong></p>
 <p>Let’s suppose we toss a coin three times and we obtain three heads. Now, three is not a large number and hence, if we try to apply the frequentist approach, we wrongly estimate that the probability of getting head is 1, while the probability of getting tail is zero. By using the Bayesian approach, we can insert our belief that the coin is fair by introducing a “prior probability” that the probability of getting head is 0.5.</p>
@@ -767,7 +764,7 @@ Examples:**</p>
 </section>
 </section>
 <section id="example-of-probability-manipulation">
-<h2><span class="section-number">4.9. </span>Example of Probability Manipulation<a class="headerlink" href="#example-of-probability-manipulation" title="Permalink to this heading">#</a></h2>
+<h2>Example of Probability Manipulation<a class="headerlink" href="#example-of-probability-manipulation" title="Permalink to this heading">#</a></h2>
 <figure class="align-default">
 <img alt="../../_images/image9.png" src="../../_images/image9.png" />
 </figure>
@@ -822,12 +819,12 @@ Examples:**</p>
 <p><strong>Interpretation of Bayes’ rule:</strong></p>
 <p>We can give the following interpretation of Bayes’ rule. If somebody asked us what is probability of picking the red box, we would have said it is <span class="math notranslate nohighlight">\(P(B = r) = \frac{4}{10}\)</span>. We call this ‘prior probability’ as it is our <strong>best guess given that no additional constrain is provided</strong>. Once we are told that we have picked an orange, our <strong>belief</strong> on the identity of the box can be refined. In particular, we know that the red box contains more oranges than the blue one, so we should assign probabilities accordingly. We use the Bayes’ theorem to obtain the conditional probability <span class="math notranslate nohighlight">\(P(B = r|F = o)\)</span> as done above. We call this the ‘posterior probability’, as this is our updated estimate, once we know the identity of the fruit. To refine our guess, we use the ‘likelihood’ <span class="math notranslate nohighlight">\(P(F = o|B = r)\)</span> which tells us how many oranges are in the red box and the ‘evidence’ <span class="math notranslate nohighlight">\(P(F = o)\)</span> which tells us how many oranges there are at all.</p>
 <section id="excercise">
-<h3><span class="section-number">4.9.1. </span>Excercise<a class="headerlink" href="#excercise" title="Permalink to this heading">#</a></h3>
+<h3>Excercise<a class="headerlink" href="#excercise" title="Permalink to this heading">#</a></h3>
 <p>Suppose that we have three colored boxes r (red), b (blue), and g (green). Box r contains 3 apples, 4 oranges, and 3 limes, box b contains 1 apple, 1 orange, and 0 limes, and box g contains 3 apples, 3 oranges, and 4 limes. If a box is chosen at random with probabilities P(r)=0.2, P(b)=0.2, P(g)=0.6, and a piece of fruit is extracted from the box (with equal probability of selecting any of the items in the box), then what is the probability of selecting an apple? If we observe that the selected fruit is in fact an orange, what is the probability that it came from the green box?</p>
 </section>
 </section>
 <section id="independence-and-conditional-independence">
-<h2><span class="section-number">4.10. </span>Independence and Conditional Independence<a class="headerlink" href="#independence-and-conditional-independence" title="Permalink to this heading">#</a></h2>
+<h2>Independence and Conditional Independence<a class="headerlink" href="#independence-and-conditional-independence" title="Permalink to this heading">#</a></h2>
 <p><strong>Independence</strong></p>
 <p>Two variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are <strong>said to be independent</strong> if and only if:</p>
 <div class="math notranslate nohighlight">
@@ -855,7 +852,7 @@ Examples:**</p>
 </ul>
 </section>
 <section id="references">
-<h2><span class="section-number">4.11. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Parts of chapter 1 of [1];</p></li>
 <li><p>Most of chapter 3 of [2];</p></li>
@@ -897,15 +894,6 @@ Examples:**</p>
                 <footer class="prev-next-footer">
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="../lecture2/05_intro_pandas.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">2.5. </span>Introduzione a Pandas</p>
-      </div>
-    </a>
 </div>
                 </footer>
               
@@ -921,49 +909,49 @@ Examples:**</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">3. Data, Uncertainty and Random Variables</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#informal-definition-of-data">3.1. Informal Definition of Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-importance-of-probability-theory">3.2. Uncertainty &amp; Importance of Probability Theory</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-variable">3.3. Random Variable</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">3.3.1. Example</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Data, Uncertainty and Random Variables</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#informal-definition-of-data">Informal Definition of Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-importance-of-probability-theory">Uncertainty &amp; Importance of Probability Theory</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-variable">Random Variable</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-formal-definition-of-data">3.4. More Formal Definition of Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-formal-definition-of-data">More Formal Definition of Data</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#probability">4. Probability</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frequentist-approach-to-probability">4.1. Frequentist Approach to Probability</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-probability">4.1.1. Example of Probability</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#probability">Probability</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frequentist-approach-to-probability">Frequentist Approach to Probability</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-probability">Example of Probability</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#joint-probability">4.2. Joint probability</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">4.2.1. Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#joint-probability">Joint probability</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Example</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-rule-marginal-probability">4.3. Sum Rule (Marginal Probability)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frequentist-derivation">4.3.1. Frequentist Derivation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-rule-marginal-probability">Sum Rule (Marginal Probability)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frequentist-derivation">Frequentist Derivation</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-probability">4.4. Conditional Probability</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#product-rule-factorization">4.5. Product Rule (Factorization)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">4.5.1. Frequentist Derivation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-probability">Conditional Probability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#product-rule-factorization">Product Rule (Factorization)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Frequentist Derivation</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-fundamental-rules-of-probability">4.6. The Fundamental Rules of Probability</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-chain-rule-of-conditional-probabilities">4.7. The Chain Rule of Conditional Probabilities</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-theorem">4.8. Bayes’ Theorem</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-approach-to-probability">4.8.1. Bayesian Approach to Probability</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#degree-of-belief">4.8.1.1. Degree of belief</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-fundamental-rules-of-probability">The Fundamental Rules of Probability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-chain-rule-of-conditional-probabilities">The Chain Rule of Conditional Probabilities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-theorem">Bayes’ Theorem</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-approach-to-probability">Bayesian Approach to Probability</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#degree-of-belief">Degree of belief</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-probability-manipulation">4.9. Example of Probability Manipulation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#excercise">4.9.1. Excercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-probability-manipulation">Example of Probability Manipulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#excercise">Excercise</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#independence-and-conditional-independence">4.10. Independence and Conditional Independence</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">4.11. References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#independence-and-conditional-independence">Independence and Conditional Independence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
 </li>
 </ul>
