@@ -60,14 +60,45 @@ Due tipi di lezioni:
     img {
         width:500px;
         float:left;
+        margin-right:40px;
     }
 </style>
 
 ![](../_static/lecture_specific/intro/website.png)
 
+* Parte del materiale didattico sarà disponibile online al seguente url: https://antoninofurnari.github.io/fadlecturenotes/
+* Questo includerà alcune note teoriche e tutti i notebook jupyter utilizzati per i laboratori
 
+---
 
-### https://antoninofurnari.github.io/fadlecturenotes/
+# Materiale Didattico - Microsoft Teams
+
+<style scoped>
+    img {
+        width:600px;
+        float:left;
+        margin-right:40px;
+    }
+</style>
+![](../_static/lecture_specific/intro/teams.png)
+* Il restante materiale didattico sarà condiviso mediante Microsoft Teams
+* Microsoft Teams sarà anche utilizzato per tutte le comunicazioni ufficiali del corso
+* Codice del team: **i87g4nb**
+
+---
+# Libri
+
+<style scoped>
+    li {
+        font-size: smaller;
+    }
+</style>
+
+Verranno di volta in volta indicati capitoli dei seguenti libri:
+* Peck, Roxy, Chris Olsen, and Jay L. Devore. Introduction to statistics and data analysis. Cengage Learning, 2015.
+* James, Gareth Gareth Michael. An introduction to statistical learning: with applications in Python, 2023.https://www.statlearning.com
+* Bishop, Christopher M. "Machine Learning. Machine learning, 2006. https://www.microsoft.com/en-us/research/publication/pattern-recognition-machine-learning/
+* Hernán, Miguel A., and James M. Robins. Causal inference, 2010. https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/
 
 ---
 
