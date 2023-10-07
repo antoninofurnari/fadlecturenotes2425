@@ -17,7 +17,7 @@ jobs:
           tar xvf marp-cli-v3.2.1-linux.tar.gz
       - name: Build Marp
         shell: bash -l {0}
-        run: mkdir -p lecturenotes/_build/marp; for f in lecturenotes/slides/*.md; do ff=${f/.md/.pdf}; marp $f --pdf --allow-local-files -o lecturenotes/_build/marp/$(basename $ff); done
+        run: mkdir -p lecturenotes/_build/marp; for f in lecturenotes/slides/*.md; do ff=${f/.md/.pdf}; ./marp $f --pdf --allow-local-files -o lecturenotes/_build/marp/$(basename $ff); done
       - uses: actions/upload-artifact@v2
         with:
           name: pdf
