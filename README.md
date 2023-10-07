@@ -40,7 +40,7 @@ jupyter-book build lecturenotes --builder pdflatex
 ## MARP
 
 ```bash
-for f in lecturenotes/slides/*.md; do ff=${f/.md/.pdf}; marp $f --pdf --allow-local-files -o $ff; done
+mkdir -p lecturenotes/_build/marp; for f in lecturenotes/slides/*.md; do ff=${f/.md/.pdf}; marp $f --pdf --allow-local-files -o lecturenotes/_build/marp/$(basename $ff); done
 ```
 
 ## Publishing this Jupyter Book
