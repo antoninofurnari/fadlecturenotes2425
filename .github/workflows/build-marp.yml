@@ -27,4 +27,4 @@ jobs:
           artifacts: "_build/marp/*.pdf"
           allowUpdates: true
           replacesArtifacts: true
-          tag: "latest"
+          tag: "latest" 
