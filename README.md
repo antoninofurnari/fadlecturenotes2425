@@ -31,6 +31,18 @@ To remove the build folder (including `cached` executables), you can run:
 jb clean --all lecturenotes/
 ```
 
+## Building a PDF
+
+```bash
+jupyter-book build lecturenotes --builder pdflatex
+```
+
+## MARP
+
+```bash
+for f in lecturenotes/slides/*.md; do ff=${f/.md/.pdf}; marp $f --pdf --allow-local-files -o $ff; done
+```
+
 ## Publishing this Jupyter Book
 
 This repository is published automatically to `gh-pages` upon `push` to the `master` branch.
