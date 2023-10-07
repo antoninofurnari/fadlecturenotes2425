@@ -21,4 +21,3 @@ chapters:
     - file: lectures/lecture2/03_intro_numpy
     - file: lectures/lecture2/04_intro_matplotlib
     - file: lectures/lecture2/05_intro_pandas
-  #- file: lectures/lecture3/00_main
