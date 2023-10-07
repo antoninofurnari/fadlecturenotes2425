@@ -1,6 +1,6 @@
-# quantecon-mini-example
+# This Repository
 
-A short example showing how to write a lecture series using Jupyter Book 2.0.
+This repository contain lecture notes for the Fundamental of Data Analysis course 2023/2024. University of Catania. Prof. Antonino Furnari.
 
 ## Creating an Conda Environment
 
