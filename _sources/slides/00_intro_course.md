@@ -35,7 +35,9 @@ Due moduli:
 * Modulo teorico (3 CFU) - [Syllabus](https://web.dmi.unict.it/corsi/lm-18/insegnamenti?seuid=90338D5D-A89C-494D-BC2B-4BD3B1D32B7E)
 * Modulo di laboratorio - [Syllabus](https://web.dmi.unict.it/corsi/lm-18/insegnamenti?seuid=284A7CA8-8A51-436B-9CFE-643B7AF7EEA9)
 
-In pratica, i due moduli saranno piuttosto sovrapposti (non necessariamente lezioni interamente di laboratorio o interamente frontali) a seconda degli argomenti trattati.
+Due tipi di lezioni:
+* **Frontali** - su concetti teorici, con l'ausilio di slide o lavagna digitale
+* **Laboratorio** - esempi pratici di utilizzo di librerie e analisi dei dati
 
 ---
 # Modulo Teorico (6 CFU)
@@ -49,6 +51,23 @@ In pratica, i due moduli saranno piuttosto sovrapposti (non necessariamente lezi
 * Mira a fornire le competenze tecniche per effettuare analisi dei dati mediante strumenti e librerie basate su Python.
 * Si svolge attraverso lezioni di laboratorio che gli studenti possono seguire mediante i loro laptop.
 * Materiale di riferimento: materiale fornito dal docente, risorse in rete.
+
+---
+
+# Materiale Didattico - Note online
+
+<style scoped>
+    img {
+        width:500px;
+        float:left;
+    }
+</style>
+
+![](../_static/lecture_specific/intro/website.png)
+
+
+
+### https://antoninofurnari.github.io/fadlecturenotes/
 
 ---
 
