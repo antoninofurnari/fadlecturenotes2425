@@ -21,10 +21,10 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: pdf
-          path: _build/marp/*.pdf
+          path: lecturenotes/_build/marp/*.pdf
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: "_build/marp/*.pdf"
+          artifacts: "lecturenotes/_build/marp/*.pdf"
           allowUpdates: true
           replacesArtifacts: true
           tag: "latest" 
