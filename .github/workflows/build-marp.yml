@@ -21,7 +21,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: pdf
-          path: lecturenotes/slides/*.pdf
+          path: _build/marp/*.pdf
       - uses: ncipollo/release-action@v1
         with:
           artifacts: "_build/marp/*.pdf"
