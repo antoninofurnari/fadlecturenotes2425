@@ -1,0 +1,1015 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>5. 8 Dati Multivariati &#8212; Lecture Notes on Fundamental of Data Analysis</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures/statistica_descrittiva/03_dati_multivariati';</script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="4. Statistica Descrittiva" href="02_statistica_descrittiva.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../intro_data_analysis/00_main.html">1. What is Data Analysis?</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../intro_data_analysis/01_what_is_data.html">1.1. What is Data? An informal Definition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_data_analysis/02_data_analysis_definition.html">1.2. A Definition of Data Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_data_analysis/03_data_analysis_workflow.html">1.3. Data Analysis Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_data_analysis/04_examples_data_analysis.html">1.4. Examples of Data Analysis: the Good, the Bad, and the Ugly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_data_analysis/05_data_analysis_uses.html">1.5. What’s Data Analysis Used For Today</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_data_analysis/06_map_course.html">1.6. Where do We Go From Here?</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../intro_python/00_main.html">2. Introduction to Python for Data Analysis</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../intro_python/01_setup.html">2.1. Installazione dell’ambiente di lavoro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_python/02_intro_python.html">2.2. Introduzione a Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_python/03_intro_numpy.html">2.3. Introduzione a Numpy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_python/04_intro_matplotlib.html">2.4. Introduzione a Matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_python/05_intro_pandas.html">2.5. Introduzione a Pandas</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="01_distribuzione_dei_dati.html">3. Distribuzioni dei dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_statistica_descrittiva.html">4. Statistica Descrittiva</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">5. 8 Dati Multivariati</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/antoninofurnari/fadlecturenotes/blob/master/lecturenotes/lectures/statistica_descrittiva/03_dati_multivariati.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/lectures/statistica_descrittiva/03_dati_multivariati.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>8 Dati Multivariati</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">5. 8 Dati Multivariati</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plot">5.1. 8.1 Scatter Plot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#medie-e-covarianze">5.2. 8.2 Medie e Covarianze</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinate-parallele">5.3. 8.3 Coordinate Parallele</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">6. Esercizi</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="dati-multivariati">
+<h1><span class="section-number">5. </span>8 Dati Multivariati<a class="headerlink" href="#dati-multivariati" title="Permalink to this heading">#</a></h1>
+<p>Abbiamo finora considerato dati univariati. In pratica, capita spesso che le osservazioni sotto analisi siano costituite da più variabili. In questi casi è utile considerare dei metodi per descrivere e visualizzare i dati in maniera multivariata, in modo da studiare le interazioni tra i vari fattori che descrivono il fenomeno in analisi. Considereremo il dataset delle iris di fisher come dataset di esempio. Carichiamo il dataset mediante la libreria <code class="docutils literal notranslate"><span class="pre">seaborn</span></code> e visualizziamone informazioni e prime righe:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="n">iris</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;iris&#39;</span><span class="p">)</span>
+<span class="n">iris</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="n">iris</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 150 entries, 0 to 149
+Data columns (total 5 columns):
+sepal_length    150 non-null float64
+sepal_width     150 non-null float64
+petal_length    150 non-null float64
+petal_width     150 non-null float64
+species         150 non-null object
+dtypes: float64(4), object(1)
+memory usage: 5.9+ KB
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sepal_length</th>
+      <th>sepal_width</th>
+      <th>petal_length</th>
+      <th>petal_width</th>
+      <th>species</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4.6</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Il dataset contiene <span class="math notranslate nohighlight">\(150\)</span> osservazioni riportanti le misure di 4 grandezze (lunghezza e larghezza di sepalo e petalo) per <span class="math notranslate nohighlight">\(150\)</span> esemplari di iris appartenenti a tre specie diverse: Iris setosa, Iris virginica e Iris versicolor.</p>
+<p>L’immagine di seguito illustra il sepalo e il petalo di un fiore.
+<img src='img/sepalo_petalo.jpg' style="width:200px"></p>
+<p>Tutte le variabili sono numeriche, eccetto <code class="docutils literal notranslate"><span class="pre">species</span></code> che è categorica. Visualizziamone i valori univoci:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;species&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;setosa&#39;, &#39;versicolor&#39;, &#39;virginica&#39;], dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Esploriamo i dati calcolando i principali indicatori statistici mediante <code class="docutils literal notranslate"><span class="pre">describe</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sepal_length</th>
+      <th>sepal_width</th>
+      <th>petal_length</th>
+      <th>petal_width</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>150.000000</td>
+      <td>150.000000</td>
+      <td>150.000000</td>
+      <td>150.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>5.843333</td>
+      <td>3.057333</td>
+      <td>3.758000</td>
+      <td>1.199333</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.828066</td>
+      <td>0.435866</td>
+      <td>1.765298</td>
+      <td>0.762238</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>4.300000</td>
+      <td>2.000000</td>
+      <td>1.000000</td>
+      <td>0.100000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>5.100000</td>
+      <td>2.800000</td>
+      <td>1.600000</td>
+      <td>0.300000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>5.800000</td>
+      <td>3.000000</td>
+      <td>4.350000</td>
+      <td>1.300000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>6.400000</td>
+      <td>3.300000</td>
+      <td>5.100000</td>
+      <td>1.800000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>7.900000</td>
+      <td>4.400000</td>
+      <td>6.900000</td>
+      <td>2.500000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Domanda 13</strong>
+<img src="img/qmark.jpg" style="width:150px; float:left;"/></p>
+<p>La variabile <code class="docutils literal notranslate"><span class="pre">species</span></code> non è stata inclusa nel sommario. Perché?</p>
+<p><strong>Risposta 13</strong>
+<img style="float: left;width:150px;" src="img/note.png"></p>
+<div style="background-color:#efefef; margin-left:150px; border:solid 1px; border-color:#dddddd; border-radius: 3px;">
+<br><br><br><br><br><br>
+</div><p>Confrontiamo le diverse variabili mediante boxplot:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">box</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/520949c188edcefd25096a0b7256ae9115382db757151307ecbd8b1e9716407b.png" src="../../_images/520949c188edcefd25096a0b7256ae9115382db757151307ecbd8b1e9716407b.png" />
+</div>
+</div>
+<section id="scatter-plot">
+<h2><span class="section-number">5.1. </span>8.1 Scatter Plot<a class="headerlink" href="#scatter-plot" title="Permalink to this heading">#</a></h2>
+<p>Il plot sopra ci permette di studiare alcune caratteristiche delle variabili. Tuttavia esso tratta i dati come <span class="math notranslate nohighlight">\(4\)</span> campioni univariati indipendenti e dunque non mette in evidenza le eventuali relazioni che sussistono tra le variabili. Se consideriamo i dati in maniera univariata, possiamo considerare ognuna delle osservazioni come un punto che vive in uno spazio a <span class="math notranslate nohighlight">\(4\)</span> dimensioni. In principio, sarebbe interessante studiare come tali dati si distribuiscono nello spazio, ma in pratica possiamo visualizzare al massimo punti dello spazio tridimensionale. Inoltre, i plot 3D sono in genere meno leggibili dei plot 2D.</p>
+<p>Un primo modo per visualizzare i dati, consiste dunque nello scegliere una coppia di variabili e plottare le osservazioni come se fossero punti in uno spazio 2D. Questo tipo di grafico si chiama <strong>scatter plot</strong>. Scegliamo ad esempio <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code> e <code class="docutils literal notranslate"><span class="pre">petal_width</span></code> e visualizziamone lo scatter plot mediante la libreria <code class="docutils literal notranslate"><span class="pre">seaborn</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;sepal_width&#39;</span><span class="p">],</span> <span class="n">iris</span><span class="p">[</span><span class="s1">&#39;sepal_length&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/9e97d088f3ef552ac1bd687f7e1d8f4df4259fbd88a312e7a1fdcb32a249cc52.png" src="../../_images/9e97d088f3ef552ac1bd687f7e1d8f4df4259fbd88a312e7a1fdcb32a249cc52.png" />
+</div>
+</div>
+<p>Possiamo colorare i punti in maniera diversa a seconda dell’appartenenza alle diverse classi di iris utilizzando il parametro <code class="docutils literal notranslate"><span class="pre">hue</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;sepal_width&#39;</span><span class="p">],</span> <span class="n">iris</span><span class="p">[</span><span class="s1">&#39;sepal_length&#39;</span><span class="p">],</span> <span class="n">hue</span><span class="o">=</span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;species&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/a2484be0c99a194e75c2f0a84f49096455cd01820e819a258c9058e5b8a74c0a.png" src="../../_images/a2484be0c99a194e75c2f0a84f49096455cd01820e819a258c9058e5b8a74c0a.png" />
+</div>
+</div>
+<p><strong>Domanda 14</strong>
+<img src="img/qmark.jpg" style="width:150px; float:left;"/></p>
+<p>Cosa apprendiamo dal plot? La coppia di variabili considerata costituisce un fattore discriminante per l’appartenenza alle diverse classi?</p>
+<p><strong>Risposta 14</strong>
+<img style="float: left;width:150px;" src="img/note.png"></p>
+<div style="background-color:#efefef; margin-left:150px; border:solid 1px; border-color:#dddddd; border-radius: 3px;">
+<br><br><br><br><br><br>
+</div><p>Lo scatterplot può essere effettuato con diverse coppie di variabili. Consideriamo la coppia (<code class="docutils literal notranslate"><span class="pre">sepal_length</span></code>, <code class="docutils literal notranslate"><span class="pre">petal_length</span></code>):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;petal_length&#39;</span><span class="p">],</span> <span class="n">iris</span><span class="p">[</span><span class="s1">&#39;sepal_length&#39;</span><span class="p">],</span> <span class="n">hue</span><span class="o">=</span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;species&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/52f6532cec959c01f83eceaef212107d216f936416624940e033a0f54b07b06c.png" src="../../_images/52f6532cec959c01f83eceaef212107d216f936416624940e033a0f54b07b06c.png" />
+</div>
+</div>
+<p><strong>Domanda 15</strong>
+<img src="img/qmark.jpg" style="width:150px; float:left;"/></p>
+<p>Si confronti l’ultimo scatterplot visualizzato con lo scatterplot visto in precedenza. La nuova coppia di variabili costituisce un fattore discriminante per l’appartenenza alle diverse classi?</p>
+<p><strong>Risposta 15</strong>
+<img style="float: left;width:150px;" src="img/note.png"></p>
+<div style="background-color:#efefef; margin-left:150px; border:solid 1px; border-color:#dddddd; border-radius: 3px;">
+<br><br><br><br><br><br>
+</div><p>Come possiamo notare dai due plot, ogni coppia di variabili ci permette di vedere “una parte” delle possibili interazioni tra le diverse variabili. Per avere un quadro più completo, in pratica si visualizzano gli scatter plot di tutte le coppie possibili. Questo plot prende il nome di scatter matrix. Possiamo ottenere una scatter matrix con <code class="docutils literal notranslate"><span class="pre">seaborn</span></code> come segue:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">iris</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/09aa8c062f6a2c5f47e41197d0f796544ca7eaec447953ebf6b9dbdc7b5c473d.png" src="../../_images/09aa8c062f6a2c5f47e41197d0f796544ca7eaec447953ebf6b9dbdc7b5c473d.png" />
+</div>
+</div>
+<p><strong>Domanda 16</strong>
+<img src="img/qmark.jpg" style="width:150px; float:left;"/></p>
+<p>Perché sulla diagonale principale vengono mostrati degli istogrammi al posto di scatter plot? Si mostrino gli scatterplot corrispondenti alle coppie di variabili sulla diagonale principale.</p>
+<p><strong>Risposta 16</strong>
+<img style="float: left;width:150px;" src="img/note.png"></p>
+<div style="background-color:#efefef; margin-left:150px; border:solid 1px; border-color:#dddddd; border-radius: 3px;">
+<br><br><br><br><br><br>
+</div><p>Possiamo evidenziare i punti per classe specificando una variabile sulla base della quale colorare i punti:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">iris</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;species&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\anton\Anaconda3\lib\site-packages\scipy\stats\stats.py:1713: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
+  return np.add.reduce(sorted[indexer] * weights, axis=axis) / sumval
+</pre></div>
+</div>
+<img alt="../../_images/3c5b1baef775cc29877c959465ff32e6b22bd3541cdebd5cae7b215e64348715.png" src="../../_images/3c5b1baef775cc29877c959465ff32e6b22bd3541cdebd5cae7b215e64348715.png" />
+</div>
+</div>
+<p><strong>Domanda 17</strong>
+<img src="img/qmark.jpg" style="width:150px; float:left;"/></p>
+<p>Esiste una coppia di variabili che individua uno spazio nel quale le osservazioni appartenenti alle diverse classi sono maggiormente distinte? Esiste una unica variabile che presenta distribuzioni particolarmente diverse a seconda dell’appartenenza alle tre classi?</p>
+<p><strong>Risposta 17</strong>
+<img style="float: left;width:150px;" src="img/note.png"></p>
+<div style="background-color:#efefef; margin-left:150px; border:solid 1px; border-color:#dddddd; border-radius: 3px;">
+<br><br><br><br><br><br>
+</div></section>
+<section id="medie-e-covarianze">
+<h2><span class="section-number">5.2. </span>8.2 Medie e Covarianze<a class="headerlink" href="#medie-e-covarianze" title="Permalink to this heading">#</a></h2>
+<p>Nel caso <strong>multivariato</strong>, la <strong>media</strong> viene calcolata in maniera del tutto analoga al caso <strong>univariato</strong> come <strong>media di vettori</strong>. Possiamo banalmente calcolare la media dei nostri dati multivariati mediante il metodo <code class="docutils literal notranslate"><span class="pre">mean</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sepal_length    5.843333
+sepal_width     3.057333
+petal_length    3.758000
+petal_width     1.199333
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Il risultato sarà un vettore (una serie di Pandas) che individua un punto nello spazio a quattro dimensioni che rappresenta la media delle osservazioni. Vediamo un semplice esempio a due dimensioni, considerando solo alcune variabili:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris2d</span> <span class="o">=</span> <span class="n">iris</span><span class="p">[[</span><span class="s1">&#39;sepal_length&#39;</span><span class="p">,</span><span class="s1">&#39;sepal_width&#39;</span><span class="p">]]</span>
+<span class="n">mean_point</span> <span class="o">=</span> <span class="n">iris2d</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">iris2d</span><span class="p">[</span><span class="s1">&#39;sepal_length&#39;</span><span class="p">],</span><span class="n">iris2d</span><span class="p">[</span><span class="s1">&#39;sepal_width&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mean_point</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mean_point</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;rx&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/a0cd1d6f284a382ec810f541d2cecc6d7fb52d46eb8ec0f531f4aff7daf688d9.png" src="../../_images/a0cd1d6f284a382ec810f541d2cecc6d7fb52d46eb8ec0f531f4aff7daf688d9.png" />
+</div>
+</div>
+<p>La croce rossa rappresenta il punto medio del dataset bidimensionale considerato.</p>
+<p>Il concetto di <strong>varianza</strong> viene generalizzato dal concetto di <strong>covarianza</strong> nel caso di dati bivariati. La covarianza misura quanto le due variabili varino assieme e si misura come segue:</p>
+<p>\begin{equation}
+\sigma_{XY} = \frac{1}{N}\sum_i^N (x_i - \overline x) (y_i - \overline y)
+\end{equation}</p>
+<p>dove <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span> sono le due variabili di interesse, <span class="math notranslate nohighlight">\(x_i\)</span> è il valore di <span class="math notranslate nohighlight">\(X\)</span> per l’iesima osservazione, <span class="math notranslate nohighlight">\(y_i\)</span> è il valore di <span class="math notranslate nohighlight">\(Y\)</span> per l’iesima osservazione e <span class="math notranslate nohighlight">\(\overline x\)</span>, <span class="math notranslate nohighlight">\(\overline y\)</span> sono le medie delle osservazioni per le due variabili <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span>.</p>
+<p>Intuitivamente, la covarianza assumerà valori molto positivi quando <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span> variano in maniera concorde (ovvero, se <span class="math notranslate nohighlight">\(X\)</span> assume valori alti, <span class="math notranslate nohighlight">\(Y\)</span> assume valori alti e se <span class="math notranslate nohighlight">\(X\)</span> assume valori bassi <span class="math notranslate nohighlight">\(Y\)</span> assume valori bassi). In tal caso infatti i segni dei due fattori all’interno della sommatoria saranno concordi e il loro prodotto avrà segno positivo. Se invece <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span> variano in maniera discorde, il prodotto avrà segno negativo e la varianza assumerà valori negativi.</p>
+<p><strong>Domanda 18</strong>
+<img src="img/qmark.jpg" style="width:150px; float:left;"/></p>
+<p>A cosa corrisponde la varianza se <span class="math notranslate nohighlight">\(X=Y\)</span>?</p>
+<p><strong>Risposta 18</strong>
+<img style="float: left;width:150px;" src="img/note.png"></p>
+<div style="background-color:#efefef; margin-left:150px; border:solid 1px; border-color:#dddddd; border-radius: 3px;">
+<br><br><br><br><br><br>
+</div><p>In pratica, in presenza di più variabili, si calcolano le covarianze di tutte le coppie possibili di variabili, un po’ come visto nel caso della scatter matrix. Ciò si ottiene mediante il metodo <code class="docutils literal notranslate"><span class="pre">cov</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span><span class="o">.</span><span class="n">cov</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sepal_length</th>
+      <th>sepal_width</th>
+      <th>petal_length</th>
+      <th>petal_width</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>sepal_length</th>
+      <td>0.685694</td>
+      <td>-0.042434</td>
+      <td>1.274315</td>
+      <td>0.516271</td>
+    </tr>
+    <tr>
+      <th>sepal_width</th>
+      <td>-0.042434</td>
+      <td>0.189979</td>
+      <td>-0.329656</td>
+      <td>-0.121639</td>
+    </tr>
+    <tr>
+      <th>petal_length</th>
+      <td>1.274315</td>
+      <td>-0.329656</td>
+      <td>3.116278</td>
+      <td>1.295609</td>
+    </tr>
+    <tr>
+      <th>petal_width</th>
+      <td>0.516271</td>
+      <td>-0.121639</td>
+      <td>1.295609</td>
+      <td>0.581006</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Domanda 19</strong>
+<img src="img/qmark.jpg" style="width:150px; float:left;"/></p>
+<p>Che cosa rappresentano i valori sulla diagonale principale?</p>
+<p><strong>Risposta 19</strong>
+<img style="float: left;width:150px;" src="img/note.png"></p>
+<div style="background-color:#efefef; margin-left:150px; border:solid 1px; border-color:#dddddd; border-radius: 3px;">
+<br><br><br><br><br><br>
+</div><p><strong>Domanda 20</strong>
+<img src="img/qmark.jpg" style="width:150px; float:left;"/></p>
+<p>Ci sono coppie di variabili che presentano covarianze fortemente positive? Si confrontino i valori della matrice di covarianza con i relativi plot dello scatterplot. I due indicatori ci dicono la stessa cosa?</p>
+<p><strong>Risposta 20</strong>
+<img style="float: left;width:150px;" src="img/note.png"></p>
+<div style="background-color:#efefef; margin-left:150px; border:solid 1px; border-color:#dddddd; border-radius: 3px;">
+<br><br><br><br><br><br>
+</div></section>
+<section id="coordinate-parallele">
+<h2><span class="section-number">5.3. </span>8.3 Coordinate Parallele<a class="headerlink" href="#coordinate-parallele" title="Permalink to this heading">#</a></h2>
+<p>Gli scatterplot permettono di esplorare le relazioni tra coppie di variabili. Quando i dati sono divisi in classi, un diagramma che permette di mostrare le relazioni tra variabili allo stesso tempo è il diagramma a coordinate parallele. Tali diagrammi si possono ottenere usando la funzione <code class="docutils literal notranslate"><span class="pre">parallel_coordinates</span></code> di <code class="docutils literal notranslate"><span class="pre">Pandas</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pandas.plotting</span> <span class="kn">import</span> <span class="n">parallel_coordinates</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">parallel_coordinates</span><span class="p">(</span><span class="n">iris</span><span class="p">,</span> <span class="s1">&#39;species&#39;</span><span class="p">,</span> <span class="n">colormap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s2">&quot;Set1&quot;</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/e8b4ba21606927365ba455187d267d55bc6ddd95eb48530acc157057e8fcfe4c.png" src="../../_images/e8b4ba21606927365ba455187d267d55bc6ddd95eb48530acc157057e8fcfe4c.png" />
+</div>
+</div>
+<p>Nel plot visualizzato sopra:</p>
+<ul class="simple">
+<li><p>Ogni asse verticale rappresenta una diversa variabile;</p></li>
+<li><p>Ogni osservazione è rappresentata da un linea diversa;</p></li>
+<li><p>Ogni linea congiunge i punti degli assi corrispondenti ai valori assunti dalle diverse variabili. Ad esempio, se un’osservazione assume valori <span class="math notranslate nohighlight">\([10,2,5,4]\)</span>, la linea corrispondente intersecherà il primo asse nel punto di ordinata pari a <span class="math notranslate nohighlight">\(10\)</span>, il secondo nel punto di ordinata pari a <span class="math notranslate nohighlight">\(2\)</span>, il terzo nel punto di ordinata pari a <span class="math notranslate nohighlight">\(5\)</span> e il quarto nel punto di ordinata pari a <span class="math notranslate nohighlight">\(4\)</span>;</p></li>
+<li><p>Il colore di ogni riga identifica la classe di appartenenza dell’osservazione corrispondente, come da legenda.</p></li>
+</ul>
+<p><strong>Domanda 21</strong>
+<img src="img/qmark.jpg" style="width:150px; float:left;"/></p>
+<p>Cosa ci dice il diagramma a coordinate parallele sulle variabili? Esistono delle variabili che, da sole costituiscono fattore discriminante per l’appartenenza alle classi? L’osservazione è coerente con quanto appreso dal pairplot?</p>
+<p><strong>Risposta 21</strong>
+<img style="float: left;width:150px;" src="img/note.png"></p>
+<div style="background-color:#efefef; margin-left:150px; border:solid 1px; border-color:#dddddd; border-radius: 3px;">
+<br><br><br><br><br><br>
+</div><p>Se vogliamo, possiamo restringere l’analisi ad alcune variabili come segue:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pandas.plotting</span> <span class="kn">import</span> <span class="n">parallel_coordinates</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">parallel_coordinates</span><span class="p">(</span><span class="n">iris</span><span class="p">[[</span><span class="s1">&#39;sepal_length&#39;</span><span class="p">,</span><span class="s1">&#39;petal_length&#39;</span><span class="p">,</span><span class="s1">&#39;petal_width&#39;</span><span class="p">,</span><span class="s1">&#39;species&#39;</span><span class="p">]],</span> 
+                     <span class="s1">&#39;species&#39;</span><span class="p">,</span> <span class="n">colormap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s2">&quot;Set1&quot;</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/f45a38c4db822d3e2dcd9542ade1885406f9279a20591822c1479054c8b7d80b.png" src="../../_images/f45a38c4db822d3e2dcd9542ade1885406f9279a20591822c1479054c8b7d80b.png" />
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="esercizi">
+<h1><span class="section-number">6. </span>Esercizi<a class="headerlink" href="#esercizi" title="Permalink to this heading">#</a></h1>
+<img src="img/code.png" style="width:150px; margin-right:30px; float:left">
+<b>Esercizio 1</b>
+<p>Considerando il dataset Titanic, si calcolino per ogni variabile la numerosità, la media, la deviazione standard, il minimo, il massimo, il valore mediano, il primo e il terzo quartile. Dopo aver calcolato i valori richiesti individualmente, si utilizzi il metodo <code class="docutils literal notranslate"><span class="pre">describe</span></code> per ottenere tali valori. Qual è la variabile più dispersa?</p>
+<img src="img/code.png" style="width:150px; margin-right:30px; float:left">
+<b>Esercizio 2</b>
+<p>Considerando il dataset Titanic, per ognuna delle tre classi, si calcolino medie e varianze delle età dei passeggeri. In quale classe le età sono meno disperse? Quale classe contiene i soggetti più giovani? Si completi l’analisi con dei grafici a barre.</p>
+<img src="img/code.png" style="width:150px; margin-right:30px; float:left">
+<b>Esercizio 3</b>
+<p>Si aggiunga al dataset Titanic una nuova colonna “Old” che assume valore pari a 1 per le osservazioni che presentano età superiore al valore medio e 0 altrimenti. Si calcoli dunque una crosstab che calcoli il numero di soggetti “anziani” (soggetti per i quali old è pari a 1) rispetto alle variabili Pclass e Sex. Si mostri un barplot a partire dalla tabella. In quale classe gli uomini tendono ad essere molto più anziani delle donne?</p>
+<img src="img/code.png" style="width:150px; margin-right:30px; float:left">
+<b>Esercizio 4</b>
+<p>Si carichi il dataset mpg mediante la libreria seaborn (usare l’istruzione <code class="docutils literal notranslate"><span class="pre">t=sns.load_dataset('mpg')</span></code>). Si visualizzi la scatter matrix differenziando i colori dei punti a seconda dei valori della variabile <code class="docutils literal notranslate"><span class="pre">origin</span></code>. Chi produce le macchine più pesanti? Esistono coppie di variabili che costituiscono un fattore decisivo per distinguere una delle origini dalle altre?</p>
+<img src="img/code.png" style="width:150px; margin-right:30px; float:left">
+<b>Esercizio 5</b>
+<p>Considerando il dataset <code class="docutils literal notranslate"><span class="pre">mpg</span></code>, si scelga un gruppo di variabili rispetto alle quali ottenere un diagramma a coordinate parallele. Che cosa possiamo inferire dal diagramma?</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lectures/statistica_descrittiva"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="02_statistica_descrittiva.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Statistica Descrittiva</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">5. 8 Dati Multivariati</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plot">5.1. 8.1 Scatter Plot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#medie-e-covarianze">5.2. 8.2 Medie e Covarianze</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinate-parallele">5.3. 8.3 Coordinate Parallele</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">6. Esercizi</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Antonino Furnari
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
