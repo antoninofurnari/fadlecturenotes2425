@@ -1177,9 +1177,10 @@ Name: Age, dtype: float64
 <section id="standardizzazione-z-scoring">
 <h3><span class="section-number">5.5.3. </span>Standardizzazione (z-scoring)<a class="headerlink" href="#standardizzazione-z-scoring" title="Permalink to this heading">#</a></h3>
 <p>In molti casi è utile normalizzare i dati in modo che essi presentino media nulla e deviazione standard unitaria. Questo tipo di normalizzazione viene detta “z-scoring” e viene effettuata sottraendo ai dati la media e dividendo per la deviazione standard.</p>
-<p>\begin{equation}
+<div class="math notranslate nohighlight">
+\[
 z_i = \frac{x_i-\mu_X}{\sigma_X}
-\end{equation}</p>
+\]</div>
 <p>dove <span class="math notranslate nohighlight">\(\sigma_X\)</span> è la deviazione standard della popolazione alla quale appartiene <span class="math notranslate nohighlight">\(X\)</span>. Si noti che gli zeta scores sono <strong>adimensionali</strong> (ovvero, non hanno unità di misura).</p>
 <p>Possiamo effettuare questa normalizzazione usando la funzione <code class="docutils literal notranslate"><span class="pre">zscore</span></code> di <code class="docutils literal notranslate"><span class="pre">scipy</span></code>:</p>
 <div class="cell docutils container">
@@ -1267,9 +1268,10 @@ dtype: float64
 <section id="curtosi-kurtosis">
 <h3><span class="section-number">5.6.2. </span>Curtosi (kurtosis)<a class="headerlink" href="#curtosi-kurtosis" title="Permalink to this heading">#</a></h3>
 <p>L’indice di curtosi misura lo “spessore” delle code di una misura di densità. Nella versione implementata in <code class="docutils literal notranslate"><span class="pre">Pandas</span></code>, esso è definito come segue:</p>
-<p>\begin{equation}
+<div class="math notranslate nohighlight">
+\[
 k=\frac{m^4}{\sigma^4} - 3
-\end{equation}</p>
+\]</div>
 <p>dove <span class="math notranslate nohighlight">\(m^4\)</span> è il quarto momento centrale, <span class="math notranslate nohighlight">\(\sigma^4\)</span> è il quadrato della varianza e <span class="math notranslate nohighlight">\(\frac{m^4}{\sigma^4}=3\)</span> nel caso di una distribuzione normale (dunque <span class="math notranslate nohighlight">\(k=0\)</span> nel caso di una distribuzione Normale). L’indice va interpretato così:</p>
 <ul class="simple">
 <li><p>Se è maggiore di zero, la distribuzione è <em>leptocurtica</em>, ovvero più “appuntita” di una distribuzione Normale;</p></li>
