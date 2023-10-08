@@ -6,4 +6,4 @@ This Jupyter Book contains lecture notes for the [Fundamental of Data Analysis](
 
 The notes are informal and meant to be used as teaching material - they may contain errors. 
 
-To point out any mistake, you can open an issue. Introductory slides to this course are available [here]().
+To point out any mistake, you can open an issue. Introductory slides to this course are available [here](https://github.com/antoninofurnari/fadlecturenotes/releases/download/latest/00_intro_course.pdf).
