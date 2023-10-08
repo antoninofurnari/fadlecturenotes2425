@@ -718,7 +718,7 @@ As Alexander Nix, the chief executive of Cambridge Analytica claimed:
 * Involvement in political campaigns raised concerns about manipulation of democratic processes through propaganda.
 * The scandal erupted into the public eye in 2018, when investigations exposed Cambridge Analytica's practices. 
 * The story of the Cambridge Analytica scandal is a good example of the risks associated with unethical data practices.
-* Solar Energy Optimization
+
 
 ---
 

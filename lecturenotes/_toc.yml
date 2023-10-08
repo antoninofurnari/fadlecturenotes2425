@@ -21,3 +21,6 @@ chapters:
     - file: lectures/intro_python/03_intro_numpy
     - file: lectures/intro_python/04_intro_matplotlib
     - file: lectures/intro_python/05_intro_pandas
+  - file: lectures/statistica_descrittiva/01_distribuzione_dei_dati
+  - file: lectures/statistica_descrittiva/02_statistica_descrittiva
+  - file: lectures/statistica_descrittiva/03_dati_multivariati
