@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>3. Distribuzioni dei dati &#8212; Lecture Notes on Fundamental of Data Analysis</title>
+    <title>4. Misure di Frequenze e Rappresentazione Grafica dei Dati &#8212; Lecture Notes on Fundamental of Data Analysis</title>
   
   
   
@@ -68,8 +68,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="4. Statistica Descrittiva" href="02_statistica_descrittiva.html" />
-    <link rel="prev" title="2.5. Introduzione a Pandas" href="../intro_python/05_intro_pandas.html" />
+    <link rel="next" title="5. Misure di Tendenza Centrale, Dispersione e Forma" href="02_misure_di_tendenza_centrale_dispersione_e_forma.html" />
+    <link rel="prev" title="3. Main data analysis concepts" href="../main_data_analysis_concepts/00_main.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -179,10 +179,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../intro_python/05_intro_pandas.html">2.5. Introduzione a Pandas</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Distribuzioni dei dati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_statistica_descrittiva.html">4. Statistica Descrittiva</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_dati_multivariati.html">5. 8 Dati Multivariati</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="../main_data_analysis_concepts/00_main.html">3. Main data analysis concepts</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_misure_di_tendenza_centrale_dispersione_e_forma.html">5. Misure di Tendenza Centrale, Dispersione e Forma</a></li>
 </ul>
 
     </div>
@@ -350,7 +349,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Distribuzioni dei dati</h1>
+    <h1>Misure di Frequenze e Rappresentazione Grafica dei Dati</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -360,24 +359,31 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-mass-function-pmf">3.1. Probability Mass Function (PMF)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diagramma-a-barre-delle-frequenze-assolute">3.1.1. Diagramma a barre delle frequenze assolute</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-mass-function">3.1.2. Probability Mass Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frequenze-assolute-e-relative">4.1. Frequenze Assolute e Relative</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frequenze-assolute">4.1.1. Frequenze Assolute</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#diagramam-a-barre-delle-frequenze-assolute">4.1.1.1. Diagramam a Barre delle Frequenze Assolute</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cumulative-distribution-function-cdf">3.2. Cumulative Distribution Function (CDF)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#approssimare-una-pdf-istogrammi">3.3. 4 Approssimare una PDF - Istogrammi</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#istogrammi-di-densita">3.3.1. Istogrammi di densità</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stima-della-densita">3.3.2. Stima della densità</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confrontare-campioni-mediante-istogrammi">3.3.3. Confrontare campioni mediante istogrammi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frequenze-relative">4.1.2. Frequenze Relative</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#diagramma-a-barre-delle-frequenze-relative">4.1.2.1. Diagramma a Barre delle Frequenze Relative</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizzazioni">3.4. Visualizzazioni</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#barplot">3.4.1. Barplot</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grafici-a-torta">3.4.2. Grafici a Torta</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">3.5. Esercizi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#empirical-cumulative-distribution-function-ecdf">4.2. Empirical Cumulative Distribution Function (ECDF)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#istogrammi">4.3. Istogrammi</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struges-e-rice">4.3.1. Struges e Rice</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#istogrammi-di-densita">4.3.2. Istogrammi di densità</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stima-della-densita">4.3.3. Stima della densità</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confrontare-campioni-mediante-istogrammi">4.3.4. Confrontare campioni mediante istogrammi</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#altre-visualizzazioni-dei-dati">4.4. Altre Visualizzazioni dei Dati</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#barplot">4.4.1. Barplot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grafici-a-torta">4.4.2. Grafici a Torta</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">4.5. Esercizi</a></li>
 </ul>
             </nav>
         </div>
@@ -389,8 +395,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="distribuzioni-dei-dati">
-<h1><span class="section-number">3. </span>Distribuzioni dei dati<a class="headerlink" href="#distribuzioni-dei-dati" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="misure-di-frequenze-e-rappresentazione-grafica-dei-dati">
+<h1><span class="section-number">4. </span>Misure di Frequenze e Rappresentazione Grafica dei Dati<a class="headerlink" href="#misure-di-frequenze-e-rappresentazione-grafica-dei-dati" title="Permalink to this heading">#</a></h1>
+<p>In questa lezione, inizieremo a vedere dei primi strumenti per riassumere le caratteristiche condamentali dei dati.</p>
 <p>Utilizzeremo un semplice dataset di esempio contenente osservazioni relativi a pesi e altezze di diversi soggetti. Il dataset è disponibile al seguente URL: <a class="reference external" href="http://iplab.dmi.unict.it/furnari/downloads/height_weight.csv">http://iplab.dmi.unict.it/furnari/downloads/height_weight.csv</a>.</p>
 <p>Carichiamo il dataset mediante la libreria Pandas e visualizziamo alcune informazioni sul DataFrame:</p>
 <div class="cell docutils container">
@@ -405,17 +412,19 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
 RangeIndex: 4231 entries, 0 to 4230
 Data columns (total 4 columns):
-sex       4231 non-null object
-BMI       4231 non-null float64
-height    4231 non-null float64
-weight    4231 non-null float64
+ #   Column  Non-Null Count  Dtype  
+---  ------  --------------  -----  
+ 0   sex     4231 non-null   object 
+ 1   BMI     4231 non-null   float64
+ 2   height  4231 non-null   float64
+ 3   weight  4231 non-null   float64
 dtypes: float64(3), object(1)
 memory usage: 132.3+ KB
 </pre></div>
 </div>
 </div>
 </div>
-<p>Il dataset contiene <span class="math notranslate nohighlight">\(4321\)</span> osservazioni e <span class="math notranslate nohighlight">\(4\)</span> colonne. In particolare, per ogni soggetto sono riportati:</p>
+<p>Il dataset contiene <span class="math notranslate nohighlight">\(4321\)</span> osservazioni e <span class="math notranslate nohighlight">\(4\)</span> colonne. In particolare, per ogni soggetto sono riportate le seguenti variabili:</p>
 <ul class="simple">
 <li><p>Il sesso (sex);</p></li>
 <li><p>Il body mass index (BMI);</p></li>
@@ -494,12 +503,68 @@ Visualizziamo le prime righe del dataframe:</p></li>
 </table>
 </div></div></div>
 </div>
-<p>Dato che ci occuperemo in una prima fase di dati univariati, ogni colonna del dataframe costituirà per noi un campione a se stante.</p>
-<section id="probability-mass-function-pmf">
-<h2><span class="section-number">3.1. </span>Probability Mass Function (PMF)<a class="headerlink" href="#probability-mass-function-pmf" title="Permalink to this heading">#</a></h2>
-<section id="diagramma-a-barre-delle-frequenze-assolute">
-<h3><span class="section-number">3.1.1. </span>Diagramma a barre delle frequenze assolute<a class="headerlink" href="#diagramma-a-barre-delle-frequenze-assolute" title="Permalink to this heading">#</a></h3>
-<p>Un primo modo di descrivere il campione consiste nel calcolare la frequenza con la quale appaiono i suoi elementi. Ciò può essere fatto mediante il metodo <code class="docutils literal notranslate"><span class="pre">value_counts</span></code>. Visualizziamo ad esempio, le frequenze dei valori di altezza:</p>
+<section id="frequenze-assolute-e-relative">
+<h2><span class="section-number">4.1. </span>Frequenze Assolute e Relative<a class="headerlink" href="#frequenze-assolute-e-relative" title="Permalink to this heading">#</a></h2>
+<p>Le misure di frequenze assolute e relative ci permettono di capire con quale frequenze dati valori appaiono nei dati.</p>
+<section id="frequenze-assolute">
+<h3><span class="section-number">4.1.1. </span>Frequenze Assolute<a class="headerlink" href="#frequenze-assolute" title="Permalink to this heading">#</a></h3>
+<p>Un primo modo di descrivere i dati consiste nel calcolare il numero di volte in cui ciascun valore appare. Queste sono chiamate “frequenze assolute”. Le frequenze assolute sono in genere calcolate per variabili discrete in cui le osservazioni assumono un numero finito di valori.</p>
+<p>Siano</p>
+<div class="math notranslate nohighlight">
+\[a_1, a_2, \ldots, a_3\]</div>
+<p>i valori che la variabile in considerazione può assumere.</p>
+<p>Le frequenze assolute <span class="math notranslate nohighlight">\(n_i\)</span> sono definite come il numero di volte che <span class="math notranslate nohighlight">\(a_i\)</span> appare nel campione. Si noti che:</p>
+<div class="math notranslate nohighlight">
+\[\sum_i n_i = n\]</div>
+<p>Dove <span class="math notranslate nohighlight">\(n\)</span> è il numero totale di elementi nel campione.</p>
+<p>Possiamo ottenere i valori univoci in una variabile con la funzione <code class="docutils literal notranslate"><span class="pre">unique()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;sex&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;M&#39;, &#39;F&#39;], dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Le frequenze assolute vengono calcolate mediante il metodo <code class="docutils literal notranslate"><span class="pre">value_counts</span></code> di Pandas. Visualizziamo ad esempio, le frequenze assolute dei valori di <code class="docutils literal notranslate"><span class="pre">sex</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sex_counts</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;sex&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="n">sex_counts</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sex
+F    2285
+M    1946
+Name: count, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Un buon modo per capire se ha senso calcolare le frequenze assolute per una data variabile, è quello di controllare quanti valori univoci appaiono. Questo si può fare mediante la funzione <code class="docutils literal notranslate"><span class="pre">unique()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;sex&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;height&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+18
+172
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notiamo che, mentre sex e height contengono pochi valori, weight ne contiene molti. Controlliamo anche le frequenze assolute di weight:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">height_counts</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;height&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
@@ -508,7 +573,8 @@ Visualizziamo le prime righe del dataframe:</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>162.56    435
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>height
+162.56    435
 167.64    391
 170.18    377
 172.72    355
@@ -526,12 +592,12 @@ Visualizziamo le prime righe del dataframe:</p></li>
 190.50     72
 149.86     52
 193.04     47
-Name: height, dtype: int64
+Name: count, dtype: int64
 </pre></div>
 </div>
 </div>
 </div>
-<p>In metodo restituisce una <code class="docutils literal notranslate"><span class="pre">Series</span></code> di <code class="docutils literal notranslate"><span class="pre">Pandas</span></code> che ha come <em>indici</em> i valori unici delle altezze e come <em>valori</em> le frequenze dei valori unici. Gli elementi della serie sono ordinati per valore (e dunque per frequenza). Sappiamo dunque che il primo elemento della serie è il più frequente, mentre l’ultimo è il meno frequente:</p>
+<p>Il metodo restituisce una <code class="docutils literal notranslate"><span class="pre">Series</span></code> di <code class="docutils literal notranslate"><span class="pre">Pandas</span></code> che ha come <em>indici</em> i valori unici delle altezze e come <em>valori</em> le frequenze dei valori unici. Gli elementi della serie sono ordinati per valore (e dunque per frequenza). Sappiamo dunque che il primo elemento della serie è il più frequente, mentre l’ultimo è il meno frequente:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Altezza più frequente:&quot;</span><span class="p">,</span><span class="n">height_counts</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -586,6 +652,8 @@ Name: height, dtype: int64
 </div>
 </div>
 </div>
+<section id="diagramam-a-barre-delle-frequenze-assolute">
+<h4><span class="section-number">4.1.1.1. </span>Diagramam a Barre delle Frequenze Assolute<a class="headerlink" href="#diagramam-a-barre-delle-frequenze-assolute" title="Permalink to this heading">#</a></h4>
 <p>Le frequenze dei dati possono essere rappresentate graficamente mediante un grafico a barre utilizzando le funzionalità di plot di <code class="docutils literal notranslate"><span class="pre">Pandas</span></code>. Tali funzionalità si appoggiano a matplotlib, per cui, per avere maggiore controllo su di esse dobbiamo importare <code class="docutils literal notranslate"><span class="pre">pyplot</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -597,7 +665,7 @@ Name: height, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/7af77ddc7e60f5bad7335ac6d32951683d9d6119b67ff2ca7db1500b436006f6.png" src="../../_images/7af77ddc7e60f5bad7335ac6d32951683d9d6119b67ff2ca7db1500b436006f6.png" />
+<img alt="../../_images/fbce9ccf5877daf850bca7ec6bb904eb2115b3fa5b73d23517648a0e60b2fa85.png" src="../../_images/fbce9ccf5877daf850bca7ec6bb904eb2115b3fa5b73d23517648a0e60b2fa85.png" />
 </div>
 </div>
 <p>dove il parametro <code class="docutils literal notranslate"><span class="pre">figsize=(12,6)</span></code> serve a specificare le dimensioni del plot, mentre <code class="docutils literal notranslate"><span class="pre">plt.grid()</span></code> serve a mostrare una griglia sovrapposta al plot.</p>
@@ -619,19 +687,18 @@ Name: height, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/563a04cc036b2a101ccc4ef71b5a8f6e1895e105ac5e56201d2781ea797ed5aa.png" src="../../_images/563a04cc036b2a101ccc4ef71b5a8f6e1895e105ac5e56201d2781ea797ed5aa.png" />
+<img alt="../../_images/fc42c02eab4a6e18cb89283ee9a95375666795169c567ffacba1e7c3836b825b.png" src="../../_images/fc42c02eab4a6e18cb89283ee9a95375666795169c567ffacba1e7c3836b825b.png" />
 </div>
 </div>
 <p>In molti casi sarà possibile utilizzare le funzioni compatte messe a disposizione da Pandas, mentre in altri sarà necessario utilizzare matplotlib esplicitamente.</p>
 </section>
-<section id="probability-mass-function">
-<h3><span class="section-number">3.1.2. </span>Probability Mass Function<a class="headerlink" href="#probability-mass-function" title="Permalink to this heading">#</a></h3>
-<p>L’istrogamma assoluto delle frequenze ci permette già di farci un’idea sulla distribuzione dei dati. Sappiamo ad esempio che il campione contiene più individui di altezza pari a <span class="math notranslate nohighlight">\(167.64\ cm\)</span> che individui di altezza pari a <span class="math notranslate nohighlight">\(193,04\ cm\)</span>. Tuttavia, tale rappresentazione non ci permette di ragionare in termini probabilistici e di rispondere a domande del genere “se scelgo un elemento a caso dal compione, qual è la probabilità di ottenre un individuo alto esattamente <span class="math notranslate nohighlight">\(167.54\ cm\)</span>?”. Per ragionare in termini probabilistici dobbiamo costruire una Probability Mass Function <span class="math notranslate nohighlight">\(f\)</span> che rispetti le seguenti due regole:</p>
-<p>\begin{equation}
-0 \leq f(x_i) \leq 1\ \ \forall i=1,\ldots,N \
-\sum_i^Nf(x_i) = 1
-\end{equation}</p>
-<p>Le due regole sono soddisfatte dividendo le freqyebze per il numero di osservazioni presenti nel campione:</p>
+</section>
+<section id="frequenze-relative">
+<h3><span class="section-number">4.1.2. </span>Frequenze Relative<a class="headerlink" href="#frequenze-relative" title="Permalink to this heading">#</a></h3>
+<p>Le frequenze assolute ci permettono già di farci un’idea sul come i dati sono distribuiti. Sappiamo ad esempio che il campione contiene più individui di altezza pari a <span class="math notranslate nohighlight">\(167.64\ cm\)</span> che individui di altezza pari a <span class="math notranslate nohighlight">\(193,04\ cm\)</span>. Tuttavia, tale rappresentazione è legata al numero totale di elementi contenuti nel campione. Ad esempio, un campione distribuito in maniera simile, ma con più osservazioni, darà luogo a frequenze assolute più grandi. Possiamo ottenere una rappresentazione indipendente rispetto alla dimensione del campione mediante l’analisi delle frequenze relative, definite come seguono:</p>
+<div class="math notranslate nohighlight">
+\[f_j = f(a_j) = \frac{n_j}{n}, j=1,2,\ldots,k\]</div>
+<p>Possiamo calcolare le frequenze relative dividendo quelle assolute per il numero di elementi contenuti nel dataset:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;height&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;height&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">())</span>
@@ -639,7 +706,8 @@ Name: height, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>149.86    0.012290
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>height
+149.86    0.012290
 152.40    0.030726
 154.94    0.035925
 157.48    0.061215
@@ -657,7 +725,7 @@ Name: height, dtype: int64
 187.96    0.024580
 190.50    0.017017
 193.04    0.011108
-Name: height, dtype: float64
+Name: count, dtype: float64
 </pre></div>
 </div>
 </div>
@@ -670,7 +738,8 @@ Name: height, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>149.86    0.012290
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>height
+149.86    0.012290
 152.40    0.030726
 154.94    0.035925
 157.48    0.061215
@@ -688,7 +757,7 @@ Name: height, dtype: float64
 187.96    0.024580
 190.50    0.017017
 193.04    0.011108
-Name: height, dtype: float64
+Name: proportion, dtype: float64
 </pre></div>
 </div>
 </div>
@@ -706,7 +775,9 @@ Name: height, dtype: float64
 </div>
 </div>
 </div>
-<p>La rappresentazione grafica che si ottiene è detta <strong>diagramma a barre delle frequenze</strong> e rappresenta una <strong>probability mass function (PMF)</strong> che associa ad <strong>ogni valore discreto</strong> presente nel campione una <strong>probabilità</strong>:</p>
+<section id="diagramma-a-barre-delle-frequenze-relative">
+<h4><span class="section-number">4.1.2.1. </span>Diagramma a Barre delle Frequenze Relative<a class="headerlink" href="#diagramma-a-barre-delle-frequenze-relative" title="Permalink to this heading">#</a></h4>
+<p>La rappresentazione grafica che si ottiene è detta <strong>diagramma a barre delle frequenze relative</strong>. Come vedremo più in là nel corso, questa viene chiamata anche <strong>probability mass function (PMF)</strong> e associa ad <strong>ogni valore discreto</strong> presente nel campione una <strong>probabilità</strong>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;height&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">())</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
@@ -716,14 +787,14 @@ Name: height, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/68d751fe948bfbe4efc5a7c97a0885cf82e93b337db7660829a31ca578b82219.png" src="../../_images/68d751fe948bfbe4efc5a7c97a0885cf82e93b337db7660829a31ca578b82219.png" />
+<img alt="../../_images/ecfaf807be279b60309e28c0445944ff4786bcb5ee382c574c5a15266fbe85c5.png" src="../../_images/ecfaf807be279b60309e28c0445944ff4786bcb5ee382c574c5a15266fbe85c5.png" />
 </div>
 </div>
 <blockquote>
 <div><p><strong>🙋‍♂️ Domanda 3</strong></p>
 <p>Cosa hanno in comune (graficamente) il diagramma a barre delle frequenze assolute e il diagramma a barre delle frequenze relative? Che cosa ci dice in più una rappresentazione rispetto all’altra?</p>
 </div></blockquote>
-<p>Le <strong>PMF</strong> possono essere utili anche per confrontare diversi campioni di dati. Consideriamo ad esempio le altezze delle donne e degli uomini come due campioni separati nel dataset e calcoliamone le <strong>PMF</strong>:</p>
+<p>I diagrammi a barre delle frequenze relative possono essere utili anche per confrontare diversi campioni di dati. Consideriamo ad esempio le altezze delle donne e degli uomini come due campioni separati nel dataset e calcoliamone le frequenze relative:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf_height_m</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;sex&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;M&#39;</span><span class="p">][</span><span class="s1">&#39;height&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
@@ -749,7 +820,7 @@ Name: height, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/634c6811879e213c3d2b50cc7015cc6092cab9c12d999e54f0a9538ce2759e26.png" src="../../_images/634c6811879e213c3d2b50cc7015cc6092cab9c12d999e54f0a9538ce2759e26.png" />
+<img alt="../../_images/e1b99c85c208bab7320d73278f6c6b405d5f6e02490eebedfb05bfe78f26e258.png" src="../../_images/e1b99c85c208bab7320d73278f6c6b405d5f6e02490eebedfb05bfe78f26e258.png" />
 </div>
 </div>
 <blockquote>
@@ -758,9 +829,10 @@ Name: height, dtype: float64
 </div></blockquote>
 </section>
 </section>
-<section id="cumulative-distribution-function-cdf">
-<h2><span class="section-number">3.2. </span>Cumulative Distribution Function (CDF)<a class="headerlink" href="#cumulative-distribution-function-cdf" title="Permalink to this heading">#</a></h2>
-<p>Le <strong>PMF</strong> funzionano particolarmente bene quando i valori unici sono pochi. Quando invece il numero di valori univoci cresce, le probabilità discrete calcolate per i valori diventano molto piccole e dunque soggette al rumore (ad esempio dovuto ad errori di misura). Proviamo a plottare la <strong>PMF</strong> dei pesi:</p>
+</section>
+<section id="empirical-cumulative-distribution-function-ecdf">
+<h2><span class="section-number">4.2. </span>Empirical Cumulative Distribution Function (ECDF)<a class="headerlink" href="#empirical-cumulative-distribution-function-ecdf" title="Permalink to this heading">#</a></h2>
+<p>Le frequenze relative funzionano particolarmente bene quando i valori unici sono pochi. Quando invece il numero di valori univoci cresce, le frequenze discrete calcolate per i valori diventano molto piccole e dunque soggette a rumore (ad esempio dovuto ad errori di misura). Proviamo a plottare le frequenze relative dei pesi:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
@@ -769,7 +841,7 @@ Name: height, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/0e2822673136e90360b78b6c253777b45a68e28f97d2e36d1b1b3eaa8d69e6cf.png" src="../../_images/0e2822673136e90360b78b6c253777b45a68e28f97d2e36d1b1b3eaa8d69e6cf.png" />
+<img alt="../../_images/b11617077f8f5965bfa02f948fcd6bf6123b5786e08327f0e4b608961789af7d.png" src="../../_images/b11617077f8f5965bfa02f948fcd6bf6123b5786e08327f0e4b608961789af7d.png" />
 </div>
 </div>
 <p>Nel grafico sopra, il numero di valori univoci e così alto da non permetterne la lettura come etichette dell’asse delle <span class="math notranslate nohighlight">\(x\)</span>. Possiamo ottenere una situazione più leggibile usando matplotlib:</p>
@@ -783,7 +855,7 @@ Name: height, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/c9112b46633ba34fbfa739d441c956fb0ae269acb03c0f030abecb41da554475.png" src="../../_images/c9112b46633ba34fbfa739d441c956fb0ae269acb03c0f030abecb41da554475.png" />
+<img alt="../../_images/24e6c7f5995d2c514fc2caf1017051cf7238de19f8c560226a748f2c5e1b4d51.png" src="../../_images/24e6c7f5995d2c514fc2caf1017051cf7238de19f8c560226a748f2c5e1b4d51.png" />
 </div>
 </div>
 <blockquote>
@@ -806,10 +878,13 @@ Name: height, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/2f67832eece485344719ad382f465d5b3fac71f1c6d88f2f0457d3536fe59660.png" src="../../_images/2f67832eece485344719ad382f465d5b3fac71f1c6d88f2f0457d3536fe59660.png" />
+<img alt="../../_images/d3c1547335cede4a5f97667826a73b7032734bceb28c256b679d5a3fd4c1ce55.png" src="../../_images/d3c1547335cede4a5f97667826a73b7032734bceb28c256b679d5a3fd4c1ce55.png" />
 </div>
 </div>
-<p>Le due rappresentazioni sono affette da rumore dovuto alla natura discreta dei dati per cui due valori molto vicini (es. <span class="math notranslate nohighlight">\(60\ cm\)</span> e <span class="math notranslate nohighlight">\(60.1\ cm\)</span>) vengono trattati come due casi distinti nel calcolo delle probabilità. Vedremo alcuni modi per ovviare a questo problema. Uno di essi consiste nell’utilizzare una <strong>Cumulative Distribution Function (CDF)</strong>. Una <strong>CDF</strong> mappa un valore <span class="math notranslate nohighlight">\(x\)</span> del campione al relativo “ordine di quantile”, ovvero alla frazione di valori del campione che sono minori o uguali a <span class="math notranslate nohighlight">\(x\)</span>. Ad esempio, se il valore <span class="math notranslate nohighlight">\(x\)</span> è il quantile <span class="math notranslate nohighlight">\(0.25\)</span> (il <span class="math notranslate nohighlight">\(25\%\)</span> dei valori sono minori o uguali a <span class="math notranslate nohighlight">\(x\)</span>), la <strong>CDF</strong> assocerà a <span class="math notranslate nohighlight">\(x\)</span> proprio il valore <span class="math notranslate nohighlight">\(0.25\)</span>. Possiamo calcolare le <strong>CDF</strong> dei due campioni di pesi a partire dalle rispettive <strong>PMF</strong> avvalendoci della funzione <strong>cumsum</strong>.</p>
+<p>Le due rappresentazioni sono affette da rumore dovuto alla natura discreta dei dati per cui due valori molto vicini (es. <span class="math notranslate nohighlight">\(60\ cm\)</span> e <span class="math notranslate nohighlight">\(60.1\ cm\)</span>) vengono trattati come due casi distinti nel calcolo delle probabilità. Vedremo alcuni modi per ovviare a questo problema. Uno di essi consiste nel calcolare una <strong>Empirical Cumulative Distribution Function (ECDF)</strong>. Una <strong>ECDF</strong> calcola per un valore <span class="math notranslate nohighlight">\(x\)</span> la somma delle frequenze relative di tutti i valori <span class="math notranslate nohighlight">\(y\)</span> minori o uguali a <span class="math notranslate nohighlight">\(x\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[ECDF(a_i) = \sum_{a_j: a_j\leq a_i} f(a_j)\]</div>
+<p>Possiamo calcolare le <strong>ECDF</strong> dei due campioni di pesi a partire dalle rispettive frequenze relative avvalendoci della funzione <strong>cumsum</strong>.</p>
 <p>La funzione cumsum di una serie di valori calcola ad ogni posizione <span class="math notranslate nohighlight">\(i\)</span> la somma dei primi <span class="math notranslate nohighlight">\(i\)</span> valori. Ad esempio:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -829,15 +904,15 @@ dtype: int64
 </div>
 </div>
 </div>
-<p>Dal momento che le <strong>PMF</strong> sono ordinate, la funzione <strong>cumsum</strong> calcola per ogni indice la somma delle probabilità dei valori precedenti. Calcoliamo le <strong>CDF</strong> dei due campioni e confrontiamoli:</p>
+<p>Dal momento che le frequenze relative sono ordinate, la funzione <strong>cumsum</strong> calcola per ogni indice la somma delle frequenze relative dei valori precedenti. Calcoliamo le <strong>ECDF</strong> dei due campioni e confrontiamoli:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cdf_weight_m</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;sex&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;M&#39;</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
-<span class="n">cdf_weight_f</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;sex&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;F&#39;</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ecdf_weight_m</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;sex&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;M&#39;</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+<span class="n">ecdf_weight_f</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;sex&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;F&#39;</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cdf_weight_m</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">cdf_weight_m</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cdf_weight_f</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">cdf_weight_f</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ecdf_weight_m</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">ecdf_weight_m</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ecdf_weight_f</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">ecdf_weight_f</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;M&#39;</span><span class="p">,</span><span class="s1">&#39;F&#39;</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -845,19 +920,49 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/eae194f55fb8d005bc2d30c902be8cd1059389b63bf22637485d45ab8cc9e9c1.png" src="../../_images/eae194f55fb8d005bc2d30c902be8cd1059389b63bf22637485d45ab8cc9e9c1.png" />
+<img alt="../../_images/47e3843b695996c1e95beb9466cbc450e3bfde3936bf6a7dcf3d53e04fbe3e43.png" src="../../_images/47e3843b695996c1e95beb9466cbc450e3bfde3936bf6a7dcf3d53e04fbe3e43.png" />
 </div>
 </div>
 <blockquote>
 <div><p><strong>🙋‍♂️ Domanda 6</strong></p>
 <p>Il confronto è adesso più chiaro? Quale dei due campioni contiene i pesi maggiori?</p>
 </div></blockquote>
-<p>Le CDF tornano utili per verificare graficamente se due fenomeni obbediscono alla stessa densità di probabilità o meno. Prendiamo ad esempio il dataset “Titanic”, visto negli scorsi laboratori:</p>
+<p>Le ECDF tornano utili per verificare graficamente se due fenomeni hanno distribuzioni simili. Prendiamo ad esempio il dataset “Titanic”, che riporta diversi dati sui passeggeri del Titanic:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">titanic</span> <span class="o">=</span> \
 <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/agconti/kaggle-titanic/master/data/train.csv&#39;</span><span class="p">,</span>
                      <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;PassengerId&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Mostriamo le informazioni sul dataset:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">titanic</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+Index: 891 entries, 1 to 891
+Data columns (total 11 columns):
+ #   Column    Non-Null Count  Dtype  
+---  ------    --------------  -----  
+ 0   Survived  891 non-null    int64  
+ 1   Pclass    891 non-null    int64  
+ 2   Name      891 non-null    object 
+ 3   Sex       891 non-null    object 
+ 4   Age       714 non-null    float64
+ 5   SibSp     891 non-null    int64  
+ 6   Parch     891 non-null    int64  
+ 7   Ticket    891 non-null    object 
+ 8   Fare      891 non-null    float64
+ 9   Cabin     204 non-null    object 
+ 10  Embarked  889 non-null    object 
+dtypes: float64(2), int64(4), object(5)
+memory usage: 83.5+ KB
 </pre></div>
 </div>
 </div>
@@ -878,14 +983,14 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/a3a11ddbc1ef303eb386a4a361f63e9437a3547517e563cb08beaaff2bbded6a.png" src="../../_images/a3a11ddbc1ef303eb386a4a361f63e9437a3547517e563cb08beaaff2bbded6a.png" />
+<img alt="../../_images/e51b27191a62e810f32f118a73eb1c5014b237c24529005066e459391b8f5200.png" src="../../_images/e51b27191a62e810f32f118a73eb1c5014b237c24529005066e459391b8f5200.png" />
 </div>
 </div>
 <p>Com’è possibile vedere, in questo caso le due curve hanno delle forme molto simili. Ciò suggerisce che i due fenomeni obbediscono a simili densità di probabilità. Tuttavia è possibile notare che le donne tendono ad essere più giovani degli uomini.</p>
 </section>
-<section id="approssimare-una-pdf-istogrammi">
-<h2><span class="section-number">3.3. </span>4 Approssimare una PDF - Istogrammi<a class="headerlink" href="#approssimare-una-pdf-istogrammi" title="Permalink to this heading">#</a></h2>
-<p>Idealmente, sarebbe utile conoscere la Probability Density Function (PDF) della popolazione dalla quale è stato estratto il campione. Una PDF è l’analogo di una PMF nel caso in cui la variabile di riferimento sia considerata continua. In pratica, passare da una PMF a una PDF permette di descrivere meglio il fenomeno e ridurre l’influenza del rumore dovuto alle rilevazioni. Un modo per approssimare una PDF direttamente dai dati, consiste nel dividere il range dei dati in un certo numero di “bin” e costruire un “istogramma”. Questa rappresentazione ha lo scopo di “approssimare” la PDF (continua) della popolazione di riferimento. Possiamo plottare un istogramma con matplotlib come segue:</p>
+<section id="istogrammi">
+<h2><span class="section-number">4.3. </span>Istogrammi<a class="headerlink" href="#istogrammi" title="Permalink to this heading">#</a></h2>
+<p>Abbiamo visto che i diagrammi a barre delle frequenze diventano poco chiari quando le variabili sono continue (es. nel caso dei pesi). In questi casi, per ridurre l’influenza del rumore, è possibile utilizzare gli istogrammi. Un istogramma divide il range dei dati in un certo numero di “bin” e riporta per ogni bin il numero di valori che ricadono in quell’intervallo. Possiamo plottare un istogramma con matplotlib come segue:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
@@ -897,7 +1002,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/81c2a41cb46cea9b3386320809593fc87a21dffd649ce78e5f00aa6b7f972010.png" src="../../_images/81c2a41cb46cea9b3386320809593fc87a21dffd649ce78e5f00aa6b7f972010.png" />
+<img alt="../../_images/66fe1e32c467907472c089f684335b61499445fbda82baeab2903310bb10efd9.png" src="../../_images/66fe1e32c467907472c089f684335b61499445fbda82baeab2903310bb10efd9.png" />
 </div>
 </div>
 <blockquote>
@@ -911,7 +1016,15 @@ dtype: int64
 <li><p>una lista di handle agli elementi grafici visualizzati.</p></li>
 </ul>
 <p>Nell’esempio sopra abbiamo utilizzato la notazione <code class="docutils literal notranslate"><span class="pre">_,edges,_=...</span></code> per scartare il primo e l’ultimo valore e ottenere i “bordi” dell’istogramma.</p>
-<p>Il numero di bin può essere specificato mediante il parametro <code class="docutils literal notranslate"><span class="pre">bin</span></code>. Calcoliamo il numero di bin mediante i criteri di di Struges (<span class="math notranslate nohighlight">\(\#bins=3.3\log(n)\)</span>) e Rice (<span class="math notranslate nohighlight">\(\#bins=2\cdot n^{1/3}\)</span>) e plottiamo nuovamente l’istogramma:</p>
+<section id="struges-e-rice">
+<h3><span class="section-number">4.3.1. </span>Struges e Rice<a class="headerlink" href="#struges-e-rice" title="Permalink to this heading">#</a></h3>
+<p>Il numero di bin può essere specificato mediante il parametro <code class="docutils literal notranslate"><span class="pre">bin</span></code>. Il valore più appropriato per questo parametro può essere trovato con trial e error, ma si parte spesso da dei valori ottenuti mediante due criteri:</p>
+<ul class="simple">
+<li><p>Struges: <span class="math notranslate nohighlight">\(\#bins=3.3\log(n)\)</span></p></li>
+<li><p>Rice: <span class="math notranslate nohighlight">\(\#bins=2\cdot n^{1/3}\)</span></p></li>
+</ul>
+<p>Dove <span class="math notranslate nohighlight">\(n\)</span> è il numero di elementi.</p>
+<p>Plottiamo l’istogramma con questi due valori:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -932,7 +1045,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/0f922794cb918a5fe659aca1525fbdafd98556417d353bd0de653e8f89c430ce.png" src="../../_images/0f922794cb918a5fe659aca1525fbdafd98556417d353bd0de653e8f89c430ce.png" />
+<img alt="../../_images/fc535dee25a697124fb8308a99e85cd706d576b504eda185e66ac778136a4852.png" src="../../_images/fc535dee25a697124fb8308a99e85cd706d576b504eda185e66ac778136a4852.png" />
 </div>
 </div>
 <p>E’ possibile anche specificare i “bordi” dei bin esplicitamente:</p>
@@ -960,20 +1073,25 @@ dtype: int64
 <li><p>quanti soggetti di sesso femminile hanno un peso compreso tra <span class="math notranslate nohighlight">\(60Kg\)</span> e <span class="math notranslate nohighlight">\(65Kg\)</span>?</p></li>
 </ul>
 </div></blockquote>
+</section>
 <section id="istogrammi-di-densita">
-<h3><span class="section-number">3.3.1. </span>Istogrammi di densità<a class="headerlink" href="#istogrammi-di-densita" title="Permalink to this heading">#</a></h3>
-<p>L’istogramma mostrato sopra non ci permette di ragionare in termini probabilistici. Ad esempio, non ci permette di dire qual è la probabilità che un soggetto abbia un peso contenuto tra <span class="math notranslate nohighlight">\(70\ Kg\)</span> e <span class="math notranslate nohighlight">\(80\ Kg\)</span>. Se avessimo la PDF della popolazione dalla quale è stata estratto il campione, potremmo rispondere a questa domanda calcolando l’integrale:</p>
-<p>\begin{equation}
+<h3><span class="section-number">4.3.2. </span>Istogrammi di densità<a class="headerlink" href="#istogrammi-di-densita" title="Permalink to this heading">#</a></h3>
+<p>Un istogramma può essere utilizzato anche per approssimare una Probability Density Function (ne parleremo meglio più in là). L’istogramma delle frequenze assolute mostrato sopra, tuttavia, non ci permette di ragionare in termini probabilistici.</p>
+<p>Ad esempio, non ci permette di dire qual è la probabilità che un soggetto abbia un peso contenuto tra <span class="math notranslate nohighlight">\(70\ Kg\)</span> e <span class="math notranslate nohighlight">\(80\ Kg\)</span>. Se avessimo la PDF della popolazione dalla quale è stata estratto il campione, potremmo rispondere a questa domanda calcolando l’integrale:</p>
+<div class="math notranslate nohighlight">
+\[
 \int_{70}^{80} pdf(x) dx
-\end{equation}</p>
+\]</div>
 <p>Possiamo costruire un <strong>istogramma di densità</strong>, che approssimi in maniera discreta la PDF che cerchiamo. In pratica, vogliamo che l’area sottesa dal bin di “bordi” <span class="math notranslate nohighlight">\([70, 80[\)</span> contenga un valore che approssimi l’integrale della PDF:</p>
-<p>\begin{equation}
+<div class="math notranslate nohighlight">
+\[
 \int_{70}^{80} pdf(x) dx \approx b_j \cdot w_j
-\end{equation}</p>
+\]</div>
 <p>dove <span class="math notranslate nohighlight">\(j\)</span> indica il bin di bordi <span class="math notranslate nohighlight">\([70, 80[\)</span>, <span class="math notranslate nohighlight">\(w_j\)</span> rappresenta la sua larghezza (<span class="math notranslate nohighlight">\(80-70=10\)</span>) e <span class="math notranslate nohighlight">\(b_j\)</span> rappresenta la sua altezza (il valore del bin). Sotto queste condizioni, vale dunque la seguente proprietà:</p>
-<p>\begin{equation}
+<div class="math notranslate nohighlight">
+\[
 \sum_{i=0}^{n} b_i \cdot w_i = \int pdf(x) dx = 1
-\end{equation}</p>
+\]</div>
 <p>dove <span class="math notranslate nohighlight">\(n\)</span> è il numero totale di bin.</p>
 <p>Per ottenere un istogramma di questo tipo, dobbiamo passare il parametro <code class="docutils literal notranslate"><span class="pre">density=True</span></code> alla funzione <code class="docutils literal notranslate"><span class="pre">hist</span></code>:</p>
 <div class="cell docutils container">
@@ -992,9 +1110,10 @@ dtype: int64
 </div>
 </div>
 <p>Possiamo verificare che la condizione</p>
-<p>\begin{equation}
+<div class="math notranslate nohighlight">
+\[
 \sum_{i=0}^{n} b_i \cdot w_i = 1
-\end{equation}</p>
+\]</div>
 <p>sia effettivamente soddisfatta:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1015,7 +1134,7 @@ dtype: int64
 <div><p><strong>🙋‍♂️ Domanda 9</strong></p>
 <p>Utilizzare l’istogramma sopra per ottenere la probabilità che un soggetto abbia un peso compreso tra <span class="math notranslate nohighlight">\(40Kg\)</span> e <span class="math notranslate nohighlight">\(50Kg\)</span>.</p>
 </div></blockquote>
-<p>Gli istogrammi possono essere visualizzati anche direttamente da <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>:</p>
+<p>Gli istogrammi possono essere plottati anche direttamente da <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="n">width</span><span class="o">=</span><span class="mf">9.5</span><span class="p">,</span> 
@@ -1033,8 +1152,111 @@ dtype: int64
 <p>La funzione prende gli stessi parametri in input della funzione <code class="docutils literal notranslate"><span class="pre">hist</span></code> di matplotlib. Tuttavia, a differenza di essa, non restituisce i valori dei bin e i rispettivi bordi.</p>
 </section>
 <section id="stima-della-densita">
-<h3><span class="section-number">3.3.2. </span>Stima della densità<a class="headerlink" href="#stima-della-densita" title="Permalink to this heading">#</a></h3>
-<p>Esistono delle tecniche che permettono di stimare in maniera non parametrica (non vengono ciò fatte assunzioni sulla natura della distribuzione dei dati) la densità di probabilità seguita dai dati. Queste tecniche permettono di ottenere una versione più “continua” di un istogramma. Possiamo stimare e plottare le densità mediante Pandas come segue:</p>
+<h3><span class="section-number">4.3.3. </span>Stima della densità<a class="headerlink" href="#stima-della-densita" title="Permalink to this heading">#</a></h3>
+<p>Uno svantaggio degli istogrammi è che categorizzano dei dati continui in maniera arbitraria mediante dei bin. La scelta degli intervalli dei bin cambia l’aspetto finale dell’istogramma.</p>
+<p>La stima della densità cerca di risolvere questo problema ottenendo una versione “continua” dell’istogramma. Invece di suddividere l’asse delle <span class="math notranslate nohighlight">\(x\)</span> in bin, la stima della densità calcola un valore per ciascun punto dell’asse delle <span class="math notranslate nohighlight">\(x\)</span>, ottenendo così una rappresentazione continua. Il calcolo avviene mediante la seguente formula:</p>
+<div class="math notranslate nohighlight">
+\[\hat f_n(x)=\frac{1}{nh}\sum_{i=1}^n K(\frac{x-x_i}{h}), h&gt;0\]</div>
+<p>Dove <span class="math notranslate nohighlight">\(n\)</span> è la dimensione del campione, <span class="math notranslate nohighlight">\(h\)</span> è un parametro detto “bandwidth” e <span class="math notranslate nohighlight">\(K\)</span> è una funzione “kernel” che determina quanto gli elementi del campione devono contribuire alla stima nel punto <span class="math notranslate nohighlight">\(x\)</span>, dipendentemente dalla loro distanza da <span class="math notranslate nohighlight">\(x\)</span>. Una scelta comune di kernel è quello di Epanechnikov:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+K(x) = \begin{cases}
+\frac{3}{4}(1-x^2) &amp; \text{if } |x| \leq 1 \\
+    0 &amp; \text{otherwise.}
+\end{cases}
+\end{split}\]</div>
+<p>In pratica il Kernel di Epanechnikov ha la seguente forma:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">y</span><span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-4.0, 4.0)
+</pre></div>
+</div>
+<img alt="../../_images/dfec68187868a997ee58eb76847d5f2d99de85fbcf4661fb71ac098602bf1bd3.png" src="../../_images/dfec68187868a997ee58eb76847d5f2d99de85fbcf4661fb71ac098602bf1bd3.png" />
+</div>
+</div>
+<p>Facendo “scorrere” questo kernel su diversi punti dell’asse delle x e sommando i contributi, si ottiene la stima di densità finale:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Generate fewer random data points</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+
+<span class="c1"># Create a range of x values for plotting</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+
+<span class="c1"># Bandwidth for the Epanechnikov kernel</span>
+<span class="n">bandwidth</span> <span class="o">=</span> <span class="mf">0.5</span>
+
+<span class="c1"># Initialize arrays to store the kernel contributions and the kernel density estimate</span>
+<span class="n">kernel_contributions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">kernel_density_estimate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Create subplots with separate y-axes</span>
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">gridspec_kw</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;height_ratios&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]},</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Plot individual kernels centered at data points</span>
+<span class="k">for</span> <span class="n">xi</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+    <span class="c1"># Calculate the Epanechnikov kernel at xi</span>
+    <span class="n">kernel_values</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">bandwidth</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">xi</span><span class="p">)</span> <span class="o">/</span> <span class="n">bandwidth</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">xi</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">bandwidth</span><span class="p">)</span>
+    
+    <span class="c1"># Add the kernel contribution to the array</span>
+    <span class="n">kernel_contributions</span> <span class="o">+=</span> <span class="n">kernel_values</span>
+    
+    <span class="c1"># Plot the individual kernel on the upper subplot</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">kernel_values</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Kernel at Data Point </span><span class="si">{</span><span class="n">xi</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="c1"># Calculate the kernel density estimate</span>
+<span class="n">kernel_density_estimate</span> <span class="o">=</span> <span class="n">kernel_contributions</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">*</span> <span class="n">bandwidth</span><span class="p">)</span>
+
+<span class="c1"># Plot the kernel density estimate on the upper subplot</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">kernel_density_estimate</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Kernel Density Estimate&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add labels and a legend to the upper subplot</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Kernel Density&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Kernel Density Estimation (KDE)&#39;</span><span class="p">)</span>
+<span class="c1">#ax1.legend()</span>
+
+<span class="c1"># Plot the histogram of the data in the lower subplot</span>
+<span class="n">hist_values</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Histogram&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Value&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Density&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># Create a subplot for data points (shared x-axis with the lower subplot)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data Points&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+
+<span class="c1"># Adjust layout</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+<span class="c1"># Show the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../_images/80cdbf635452d38f429e7c71965ce711ba37901c73828eb484dbeb40abdb0460.png" src="../../_images/80cdbf635452d38f429e7c71965ce711ba37901c73828eb484dbeb40abdb0460.png" />
+</div>
+</div>
+<p>Possiamo stimare e plottare le densità mediante Pandas come segue:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">density</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
@@ -1044,7 +1266,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/3441a192a8658ee055af97f8719634efd3f966baaf2e01f60ede7cc91661a8e9.png" src="../../_images/3441a192a8658ee055af97f8719634efd3f966baaf2e01f60ede7cc91661a8e9.png" />
+<img alt="../../_images/8a78a063158c514a47b58d01f4e9d7c3bc2a2f92602191baa02e24493175fc25.png" src="../../_images/8a78a063158c514a47b58d01f4e9d7c3bc2a2f92602191baa02e24493175fc25.png" />
 </div>
 </div>
 <p>Confrontiamo la stima della densità con l’istogramma:</p>
@@ -1067,7 +1289,7 @@ dtype: int64
 </div></blockquote>
 </section>
 <section id="confrontare-campioni-mediante-istogrammi">
-<h3><span class="section-number">3.3.3. </span>Confrontare campioni mediante istogrammi<a class="headerlink" href="#confrontare-campioni-mediante-istogrammi" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">4.3.4. </span>Confrontare campioni mediante istogrammi<a class="headerlink" href="#confrontare-campioni-mediante-istogrammi" title="Permalink to this heading">#</a></h3>
 <p>Gli istogrammi possono essere utili per comparare campioni. Confrontiamo ad esempio gli istogrammi del campione dei pesi degli uomini e del campione dei pesi delle donne:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1086,7 +1308,7 @@ dtype: int64
 </div>
 <blockquote>
 <div><p><strong>🙋‍♂️ Domanda 11</strong></p>
-<p>Si metta in relazione il plot dei due istogrammi con il plot delle dure relative CDF. I due plot sono concordi? Quali dei due plot è più immediato?</p>
+<p>Si metta in relazione il plot dei due istogrammi con il plot delle dure relative ECDF. I due plot sono concordi? Quali dei due plot è più immediato?</p>
 </div></blockquote>
 <p>E’ possibile effettuare plot combinati simili direttamente da <code class="docutils literal notranslate"><span class="pre">Pandas</span></code> utilizzando il <code class="docutils literal notranslate"><span class="pre">groupby</span></code>:</p>
 <div class="cell docutils container">
@@ -1105,8 +1327,8 @@ dtype: int64
 </div>
 </section>
 </section>
-<section id="visualizzazioni">
-<h2><span class="section-number">3.4. </span>Visualizzazioni<a class="headerlink" href="#visualizzazioni" title="Permalink to this heading">#</a></h2>
+<section id="altre-visualizzazioni-dei-dati">
+<h2><span class="section-number">4.4. </span>Altre Visualizzazioni dei Dati<a class="headerlink" href="#altre-visualizzazioni-dei-dati" title="Permalink to this heading">#</a></h2>
 <p>Abbiamo visto che i grafici a barre possono essere utilizzati per graficare le frequenze assolute e relative dei dati. Vediamo adesso alcune altre visualizzazioni che fanno uso di grafici a barre e grafici a torta per confrontare diverse quantità. Per iniziare a discutere di visualizzazioni, utilizzeremo il dataset Titanic caricato precedentemente.</p>
 <p>Mostriamo le prime righe del dataset:</p>
 <div class="cell docutils container">
@@ -1237,7 +1459,7 @@ dtype: int64
 </div></div></div>
 </div>
 <section id="barplot">
-<h3><span class="section-number">3.4.1. </span>Barplot<a class="headerlink" href="#barplot" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">4.4.1. </span>Barplot<a class="headerlink" href="#barplot" title="Permalink to this heading">#</a></h3>
 <p>Oltre a mostrare le frequenze dei dati, i barplot possono essere utili per confrontare diverse quantità numeriche. Supponiamo di voler confrontare il numero di donne e uomini a bordo del Titanic. Possiamo calcolare questi numeri mediante un <code class="docutils literal notranslate"><span class="pre">groupby</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1555,7 +1777,7 @@ Name: Age, dtype: float64
 </div>
 </section>
 <section id="grafici-a-torta">
-<h3><span class="section-number">3.4.2. </span>Grafici a Torta<a class="headerlink" href="#grafici-a-torta" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">4.4.2. </span>Grafici a Torta<a class="headerlink" href="#grafici-a-torta" title="Permalink to this heading">#</a></h3>
 <p>I grafici a torta vengono utilizzati per confrontare diverse quantità <strong>senza imporre</strong> un ordinamento a priori. Supponiamo ad esempio di voler confrontare il numero di sopravvissuti in rispetto ai due sessi. Iniziamo ottenendo una tabella che riassume i numeri da confrontare:</p>
 <p>Possiamo plottare un grafico a torta come segue:</p>
 <div class="cell docutils container">
@@ -1593,7 +1815,7 @@ Name: Survived, dtype: int64
 </section>
 </section>
 <section id="esercizi">
-<h2><span class="section-number">3.5. </span>Esercizi<a class="headerlink" href="#esercizi" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">4.5. </span>Esercizi<a class="headerlink" href="#esercizi" title="Permalink to this heading">#</a></h2>
 <blockquote>
 <div><p>🧑‍💻 Esercizio 1</p>
 <p>Considerando il dataset Titanic, si mostrino i diagrammi a barre delle frequenze assolute e relative dei valori della colonna <code class="docutils literal notranslate"><span class="pre">Pclass</span></code>. Scegliendo a caso tra i passeggeri, qual è la probabilità che egli si sia imbarcato in seconda classe?</p>
@@ -1648,20 +1870,20 @@ Name: Survived, dtype: int64
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../intro_python/05_intro_pandas.html"
+       href="../main_data_analysis_concepts/00_main.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">2.5. </span>Introduzione a Pandas</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Main data analysis concepts</p>
       </div>
     </a>
     <a class="right-next"
-       href="02_statistica_descrittiva.html"
+       href="02_misure_di_tendenza_centrale_dispersione_e_forma.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">4. </span>Statistica Descrittiva</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Misure di Tendenza Centrale, Dispersione e Forma</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1680,24 +1902,31 @@ Name: Survived, dtype: int64
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-mass-function-pmf">3.1. Probability Mass Function (PMF)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diagramma-a-barre-delle-frequenze-assolute">3.1.1. Diagramma a barre delle frequenze assolute</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-mass-function">3.1.2. Probability Mass Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frequenze-assolute-e-relative">4.1. Frequenze Assolute e Relative</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frequenze-assolute">4.1.1. Frequenze Assolute</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#diagramam-a-barre-delle-frequenze-assolute">4.1.1.1. Diagramam a Barre delle Frequenze Assolute</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cumulative-distribution-function-cdf">3.2. Cumulative Distribution Function (CDF)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#approssimare-una-pdf-istogrammi">3.3. 4 Approssimare una PDF - Istogrammi</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#istogrammi-di-densita">3.3.1. Istogrammi di densità</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stima-della-densita">3.3.2. Stima della densità</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confrontare-campioni-mediante-istogrammi">3.3.3. Confrontare campioni mediante istogrammi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frequenze-relative">4.1.2. Frequenze Relative</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#diagramma-a-barre-delle-frequenze-relative">4.1.2.1. Diagramma a Barre delle Frequenze Relative</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizzazioni">3.4. Visualizzazioni</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#barplot">3.4.1. Barplot</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grafici-a-torta">3.4.2. Grafici a Torta</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">3.5. Esercizi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#empirical-cumulative-distribution-function-ecdf">4.2. Empirical Cumulative Distribution Function (ECDF)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#istogrammi">4.3. Istogrammi</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struges-e-rice">4.3.1. Struges e Rice</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#istogrammi-di-densita">4.3.2. Istogrammi di densità</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stima-della-densita">4.3.3. Stima della densità</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confrontare-campioni-mediante-istogrammi">4.3.4. Confrontare campioni mediante istogrammi</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#altre-visualizzazioni-dei-dati">4.4. Altre Visualizzazioni dei Dati</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#barplot">4.4.1. Barplot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grafici-a-torta">4.4.2. Grafici a Torta</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">4.5. Esercizi</a></li>
 </ul>
   </nav></div>
 

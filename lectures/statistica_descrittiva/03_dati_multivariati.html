@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>5. 8 Dati Multivariati &#8212; Lecture Notes on Fundamental of Data Analysis</title>
+    <title>8 Dati Multivariati &#8212; Lecture Notes on Fundamental of Data Analysis</title>
   
   
   
@@ -68,7 +68,6 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="prev" title="4. Statistica Descrittiva" href="02_statistica_descrittiva.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -160,7 +159,7 @@ const thebe_selector_output = ".output, .cell_output"
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        <ul class="current nav bd-sidenav">
+        <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../intro_data_analysis/00_main.html">1. What is Data Analysis?</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../intro_data_analysis/01_what_is_data.html">1.1. What is Data? An informal Definition</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../intro_data_analysis/02_data_analysis_definition.html">1.2. A Definition of Data Analysis</a></li>
@@ -178,10 +177,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../intro_python/05_intro_pandas.html">2.5. Introduzione a Pandas</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="01_distribuzione_dei_dati.html">3. Distribuzioni dei dati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_statistica_descrittiva.html">4. Statistica Descrittiva</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">5. 8 Dati Multivariati</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="../main_data_analysis_concepts/00_main.html">3. Main data analysis concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_distribuzione_dei_dati.html">4. Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_misure_di_tendenza_centrale_dispersione_e_forma.html">5. Misure di Tendenza Centrale, Dispersione e Forma</a></li>
 </ul>
 
     </div>
@@ -359,13 +357,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">5. 8 Dati Multivariati</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plot">5.1. 8.1 Scatter Plot</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#medie-e-covarianze">5.2. 8.2 Medie e Covarianze</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinate-parallele">5.3. 8.3 Coordinate Parallele</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">8 Dati Multivariati</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plot">8.1 Scatter Plot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#medie-e-covarianze">8.2 Medie e Covarianze</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinate-parallele">8.3 Coordinate Parallele</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">6. Esercizi</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">Esercizi</a></li>
 </ul>
 
             </nav>
@@ -379,7 +377,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="dati-multivariati">
-<h1><span class="section-number">5. </span>8 Dati Multivariati<a class="headerlink" href="#dati-multivariati" title="Permalink to this heading">#</a></h1>
+<h1>8 Dati Multivariati<a class="headerlink" href="#dati-multivariati" title="Permalink to this heading">#</a></h1>
 <p>Abbiamo finora considerato dati univariati. In pratica, capita spesso che le osservazioni sotto analisi siano costituite da più variabili. In questi casi è utile considerare dei metodi per descrivere e visualizzare i dati in maniera multivariata, in modo da studiare le interazioni tra i vari fattori che descrivono il fenomeno in analisi. Considereremo il dataset delle iris di fisher come dataset di esempio. Carichiamo il dataset mediante la libreria <code class="docutils literal notranslate"><span class="pre">seaborn</span></code> e visualizziamone informazioni e prime righe:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -603,7 +601,7 @@ memory usage: 5.9+ KB
 </div>
 </div>
 <section id="scatter-plot">
-<h2><span class="section-number">5.1. </span>8.1 Scatter Plot<a class="headerlink" href="#scatter-plot" title="Permalink to this heading">#</a></h2>
+<h2>8.1 Scatter Plot<a class="headerlink" href="#scatter-plot" title="Permalink to this heading">#</a></h2>
 <p>Il plot sopra ci permette di studiare alcune caratteristiche delle variabili. Tuttavia esso tratta i dati come <span class="math notranslate nohighlight">\(4\)</span> campioni univariati indipendenti e dunque non mette in evidenza le eventuali relazioni che sussistono tra le variabili. Se consideriamo i dati in maniera univariata, possiamo considerare ognuna delle osservazioni come un punto che vive in uno spazio a <span class="math notranslate nohighlight">\(4\)</span> dimensioni. In principio, sarebbe interessante studiare come tali dati si distribuiscono nello spazio, ma in pratica possiamo visualizzare al massimo punti dello spazio tridimensionale. Inoltre, i plot 3D sono in genere meno leggibili dei plot 2D.</p>
 <p>Un primo modo per visualizzare i dati, consiste dunque nello scegliere una coppia di variabili e plottare le osservazioni come se fossero punti in uno spazio 2D. Questo tipo di grafico si chiama <strong>scatter plot</strong>. Scegliamo ad esempio <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code> e <code class="docutils literal notranslate"><span class="pre">petal_width</span></code> e visualizziamone lo scatter plot mediante la libreria <code class="docutils literal notranslate"><span class="pre">seaborn</span></code>:</p>
 <div class="cell docutils container">
@@ -702,7 +700,7 @@ memory usage: 5.9+ KB
 <br><br><br><br><br><br>
 </div></section>
 <section id="medie-e-covarianze">
-<h2><span class="section-number">5.2. </span>8.2 Medie e Covarianze<a class="headerlink" href="#medie-e-covarianze" title="Permalink to this heading">#</a></h2>
+<h2>8.2 Medie e Covarianze<a class="headerlink" href="#medie-e-covarianze" title="Permalink to this heading">#</a></h2>
 <p>Nel caso <strong>multivariato</strong>, la <strong>media</strong> viene calcolata in maniera del tutto analoga al caso <strong>univariato</strong> come <strong>media di vettori</strong>. Possiamo banalmente calcolare la media dei nostri dati multivariati mediante il metodo <code class="docutils literal notranslate"><span class="pre">mean</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -830,7 +828,7 @@ dtype: float64
 <br><br><br><br><br><br>
 </div></section>
 <section id="coordinate-parallele">
-<h2><span class="section-number">5.3. </span>8.3 Coordinate Parallele<a class="headerlink" href="#coordinate-parallele" title="Permalink to this heading">#</a></h2>
+<h2>8.3 Coordinate Parallele<a class="headerlink" href="#coordinate-parallele" title="Permalink to this heading">#</a></h2>
 <p>Gli scatterplot permettono di esplorare le relazioni tra coppie di variabili. Quando i dati sono divisi in classi, un diagramma che permette di mostrare le relazioni tra variabili allo stesso tempo è il diagramma a coordinate parallele. Tali diagrammi si possono ottenere usando la funzione <code class="docutils literal notranslate"><span class="pre">parallel_coordinates</span></code> di <code class="docutils literal notranslate"><span class="pre">Pandas</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -879,7 +877,7 @@ dtype: float64
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="esercizi">
-<h1><span class="section-number">6. </span>Esercizi<a class="headerlink" href="#esercizi" title="Permalink to this heading">#</a></h1>
+<h1>Esercizi<a class="headerlink" href="#esercizi" title="Permalink to this heading">#</a></h1>
 <img src="img/code.png" style="width:150px; margin-right:30px; float:left">
 <b>Esercizio 1</b>
 <p>Considerando il dataset Titanic, si calcolino per ogni variabile la numerosità, la media, la deviazione standard, il minimo, il massimo, il valore mediano, il primo e il terzo quartile. Dopo aver calcolato i valori richiesti individualmente, si utilizzi il metodo <code class="docutils literal notranslate"><span class="pre">describe</span></code> per ottenere tali valori. Qual è la variabile più dispersa?</p>
@@ -927,15 +925,6 @@ dtype: float64
                 <footer class="prev-next-footer">
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="02_statistica_descrittiva.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">4. </span>Statistica Descrittiva</p>
-      </div>
-    </a>
 </div>
                 </footer>
               
@@ -951,13 +940,13 @@ dtype: float64
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">5. 8 Dati Multivariati</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plot">5.1. 8.1 Scatter Plot</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#medie-e-covarianze">5.2. 8.2 Medie e Covarianze</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinate-parallele">5.3. 8.3 Coordinate Parallele</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">8 Dati Multivariati</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plot">8.1 Scatter Plot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#medie-e-covarianze">8.2 Medie e Covarianze</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinate-parallele">8.3 Coordinate Parallele</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">6. Esercizi</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">Esercizi</a></li>
 </ul>
 
   </nav></div>

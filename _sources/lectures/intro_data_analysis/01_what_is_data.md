@@ -59,7 +59,7 @@ For example, the graph below represents four observations related to the followi
 |6|190|110|
 
 
-![](/_static/lecture_specific/lecture1/datapoint.png)
+![](/_static/lecture_specific/intro_data_analysis/datapoint.png)
 
 ## Phenomenon
 When we analyze data, we are usually interested in **investigating some phenomenon**. For instance, we may be curious of **what is the rate of overweight students in a school**. This can be useful, e.g., to understand whether a new diet proposed in the school canteen is generating good or bad consequences. The phenomenon we want to study is important to keep in mind when collecting and analyzing data, as an inappropriate data collection could create some bias or make our conclusions limited. For instance, **if we collected only data of male subjects**, we may not be able to fully understand the problem we am considering.
