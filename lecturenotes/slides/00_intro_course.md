@@ -95,7 +95,7 @@ Due tipi di lezioni:
 </style>
 
 Verranno di volta in volta indicati capitoli dei seguenti libri:
-* Peck, Roxy, Chris Olsen, and Jay L. Devore. Introduction to statistics and data analysis. Cengage Learning, 2015.
+* Heumann, Christian, and Michael Schomaker Shalabh. Introduction to statistics and data analysis. Springer International Publishing Switzerland, 2016.
 * James, Gareth Gareth Michael. An introduction to statistical learning: with applications in Python, 2023.https://www.statlearning.com
 * Bishop, Christopher M. "Machine Learning. Machine learning, 2006. https://www.microsoft.com/en-us/research/publication/pattern-recognition-machine-learning/
 * Hernán, Miguel A., and James M. Robins. Causal inference, 2010. https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/
