@@ -130,7 +130,7 @@ a = (b*h)/2;
         float:left;
     }
 </style>
-![](../_static/lecture_specific/lecture1/datapoint.png)
+![](../_static/lecture_specific/intro_data_analysis/datapoint.png)
 
 |Subject|Height (cm)|Weight (Kg)|
 |-|-|-|
@@ -254,7 +254,7 @@ We'll see some examples of each of these goals in the following sections.
     }
 </style>
 
-![](../_static/lecture_specific/lecture1/darwin.jpg) ![](../_static/lecture_specific/lecture1/origin.jpg)
+![](../_static/lecture_specific/intro_data_analysis/darwin.jpg) ![](../_static/lecture_specific/intro_data_analysis/origin.jpg)
 
 Darwin conceived the theory of evolution by observing specimens of finches collected in the Galapagos Island.
 
@@ -301,7 +301,7 @@ While different categorizations are possible, we will consider the following mai
         margin-right: 20px;
     }
 </style>
-![](../_static/lecture_specific/lecture1/descriptive.png)
+![](../_static/lecture_specific/intro_data_analysis/descriptive.png)
 ---
 
 The goal of descriptive analysis is to provide a series of numbers or visualization of the data that describe their main characteristics. 
@@ -316,7 +316,7 @@ The goal of descriptive analysis is to provide a series of numbers or visualizat
         margin-right: 20px;
     }
 </style>
-![](../_static/lecture_specific/lecture1/exploratory.png)
+![](../_static/lecture_specific/intro_data_analysis/exploratory.png)
 
 Exploratory analysis examines the structure of the data to find problems, make initial hypotheses, understand if data is good for our analysis.
 
@@ -330,7 +330,7 @@ Exploratory analysis examines the structure of the data to find problems, make i
         margin-right: 20px;
     }
 </style>
-![](../_static/lecture_specific/lecture1/selection_bias.png)
+![](../_static/lecture_specific/intro_data_analysis/selection_bias.png)
 
 Aims to formally check whether some feature of pattern that we are observing in our dataset is actually likely to be true outside of the dataset at hand. 
 
@@ -344,7 +344,7 @@ Aims to formally check whether some feature of pattern that we are observing in 
         margin-right: 20px;
     }
 </style>
-![](../_static/lecture_specific/lecture1/spurious_correlation.jpg)
+![](../_static/lecture_specific/intro_data_analysis/spurious_correlation.jpg)
 
 Causal analysis provides a series of mathematical tools to determine if a causal effect between two events exist, beyond what we simply observe in the data.
 
@@ -389,7 +389,7 @@ We can predict "group" from the other variables.
     }
 </style>
 
-![](../_static/lecture_specific/lecture1/probabilistic_forecast.png)
+![](../_static/lecture_specific/intro_data_analysis/probabilistic_forecast.png)
 
 * Time series analysis aims to analyze series of data points s to uncover patterns, trends, seasonality, and other characteristics of the data and to make forecasts based on historical data. 
 
@@ -496,7 +496,7 @@ In this stage, we will use a set of techniques to "fix" these problems in order 
     }
 </style>
 
-![](../_static/lecture_specific/lecture1/workflow.png)
+![](../_static/lecture_specific/intro_data_analysis/workflow.png)
 
 A good data analysis will iterate over the different steps and possibly jump back to any of those steps to revise it. 
 
@@ -552,7 +552,7 @@ Before concluding this introduction, we will analyze and discuss three notable e
     }
 </style>
 
-![](../_static/lecture_specific/lecture1/miasma.jpg)
+![](../_static/lecture_specific/intro_data_analysis/miasma.jpg)
 
 * In the 19th century, a common belief was that cholera pandemics was caused by "miasma", particles in the air carrying the disease. 
 * This was justified by the observation that pandemics tended to be localized - people getting the disease lived in the same neighborhood.
@@ -569,7 +569,7 @@ Before concluding this introduction, we will analyze and discuss three notable e
     }
 </style>
 
-![](..//_static/lecture_specific/lecture1/John_Snow.jpg)
+![](..//_static/lecture_specific/intro_data_analysis/John_Snow.jpg)
 
 * In 1854, John Snow, an English doctor, hypothesized that pandemics were due to the contamination of water with the contents of the sewer's system.
 * Snow was skeptical of the miasma theory and, hypothesized that cholera was spread by some contaminating agent in the water.
@@ -587,7 +587,7 @@ Before concluding this introduction, we will analyze and discuss three notable e
     }
 </style>
 
-![](..//_static/lecture_specific/lecture1/ghostmap.jpeg)
+![](..//_static/lecture_specific/intro_data_analysis/ghostmap.jpeg)
 
 * When a severe outbreak of cholera started in Broad Street in London, John Snow analyzed the deaths due to cholera and put them on a dot distribution map.
 * To collect, the data, John Snow interviewed local residents with the help of Reverend Henry Whitehead.
@@ -605,7 +605,7 @@ Before concluding this introduction, we will analyze and discuss three notable e
     }
 </style>
 
-![](../_static/lecture_specific/lecture1/ghostmap.jpeg)
+![](../_static/lecture_specific/intro_data_analysis/ghostmap.jpeg)
 
 * In the map, bars represented the deaths, while circles represented the positions of public water pumps. 
 * At the time, people did not have water in their homes, hence they had to get water from water pumps. 
@@ -622,7 +622,7 @@ Before concluding this introduction, we will analyze and discuss three notable e
     }
 </style>
 
-![](../_static/lecture_specific/lecture1/broad_street_pump_handle.jpeg)
+![](../_static/lecture_specific/intro_data_analysis/broad_street_pump_handle.jpeg)
 
 * Based on this evidence, John Snow convinced the authorities to remove the handle of the pump, hence forcing people to take water from somewhere else. 
 * John Snow noted a drastic reduction in the number of deaths in the subsequent days. 
@@ -647,7 +647,7 @@ Before concluding this introduction, we will analyze and discuss three notable e
     }
 </style>
 
-![](../_static/lecture_specific/lecture1/retracted.png)
+![](../_static/lecture_specific/intro_data_analysis/retracted.png)
 
 * Based on 12 carefully selected children.
 * Wakefield had been paid by lawyers involved in lawsuits against immunization manufacturers and was applying for a new vaccine patent.
@@ -665,7 +665,7 @@ Before concluding this introduction, we will analyze and discuss three notable e
     }
 </style>
 
-![](../_static/lecture_specific/lecture1/mmr_coverage.jpg)
+![](../_static/lecture_specific/intro_data_analysis/mmr_coverage.jpg)
 
 The paper had a profound impact on the rate of immunizations which decreased dramatically, with increased risks for children. 
 
@@ -681,7 +681,7 @@ The paper had a profound impact on the rate of immunizations which decreased dra
     }
 </style>
 
-![](../_static/lecture_specific/lecture1/cambridge_analytica.png)
+![](../_static/lecture_specific/intro_data_analysis/cambridge_analytica.png)
 
 * Cambridge Analytica (founded 2013) was a company claiming expertise in psychographic profiling, a method that categorizes individuals based on their psychological traits and behaviors.
 * Thanks to the Facebook app "This Is Your Digital Life", a personality quiz, they obtained profiles from around 87 million Facebook users.
@@ -697,7 +697,7 @@ The paper had a profound impact on the rate of immunizations which decreased dra
     }
 </style>
 
-![](../_static/lecture_specific/lecture1/bigfive.png)
+![](../_static/lecture_specific/intro_data_analysis/bigfive.png)
 
 * Based on this data, Cambridge Analytica employed data analysis techniques to construct detailed psychological profiles of individuals using the Big Five personality traits model.
 * This enabled them to tailor political messages and advertisements to specific personality types.
