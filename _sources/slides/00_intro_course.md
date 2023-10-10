@@ -25,7 +25,7 @@ Dept. of Maths and Computer Science
 * Orario delle lezioni: Martedì e Giovedì 15.00-18.00
 * Luogo delle lezioni: Aula 23
 * Materiale didattico e annunci: su Microsoft Teams (codice i87g4nb)
-* Ricevimento: Lunedì 14.00-16.00 – controllare disponibilità qui: http://antoninofurnari.it/ricevimento
+* Ricevimento: Lunedì 14.00-16.00 – controllare disponibilità e prenotarsi qui: http://antoninofurnari.it/ricevimento
 
 ---
 
