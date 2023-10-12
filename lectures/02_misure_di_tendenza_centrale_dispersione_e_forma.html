@@ -1,0 +1,1119 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>6. Misure di Tendenza Centrale, Dispersione e Forma &#8212; Lecture Notes on Fundamental of Data Analysis</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures/02_misure_di_tendenza_centrale_dispersione_e_forma';</script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="7. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma" href="../laboratories/02_misure_di_tendenza_centrale_dispersione_e_forma.html" />
+    <link rel="prev" title="5. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati" href="../laboratories/01_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="intro_data_analysis/00_main.html">1. What is Data Analysis?</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="intro_data_analysis/01_what_is_data.html">1.1. What is Data? An informal Definition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro_data_analysis/02_data_analysis_definition.html">1.2. A Definition of Data Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro_data_analysis/03_data_analysis_workflow.html">1.3. Data Analysis Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro_data_analysis/04_examples_data_analysis.html">1.4. Examples of Data Analysis: the Good, the Bad, and the Ugly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro_data_analysis/05_data_analysis_uses.html">1.5. What’s Data Analysis Used For Today</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro_data_analysis/06_map_course.html">1.6. Where do We Go From Here?</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="intro_python/00_main.html">2. Introduction to Python for Data Analysis</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="intro_python/01_setup.html">2.1. Installazione dell’ambiente di lavoro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro_python/02_intro_python.html">2.2. Introduzione a Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro_python/03_intro_numpy.html">2.3. Introduzione a Numpy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro_python/04_intro_matplotlib.html">2.4. Introduzione a Matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro_python/05_intro_pandas.html">2.5. Introduzione a Pandas</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="main_data_analysis_concepts/00_main.html">3. Main data analysis concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_misure_di_frequenze_e_rappresentazione_grafica_dei_dati.html">4. Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/01_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">5. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/02_misure_di_tendenza_centrale_dispersione_e_forma.html">7. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/antoninofurnari/fadlecturenotes/blob/master/lecturenotes/lectures/02_misure_di_tendenza_centrale_dispersione_e_forma.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/lectures/02_misure_di_tendenza_centrale_dispersione_e_forma.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Misure di Tendenza Centrale, Dispersione e Forma</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerosita">6.1. Numerosità</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indicatori-centrali-media-mediana-e-moda">6.2. Indicatori Centrali: Media, Mediana e Moda</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#media">6.2.1. Media</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mediana">6.2.2. Mediana</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moda">6.2.3. Moda</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indicatori-di-dispersione-1-estremi-range-quartili">6.3. Indicatori di dispersione (1): estremi, range, quartili</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimo-massimo-e-range">6.3.1. Minimo, Massimo e Range</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizzazioni-del-range-dei-dati">6.3.2. Normalizzazioni del Range dei Dati</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizzazione-tra-0-e-1">6.3.2.1. Normalizzazione tra 0 e 1</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizzazione-tra-1-e-1">6.3.2.2. Normalizzazione tra -1 e 1</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantili-percentili-e-quartili">6.3.3. Quantili, Percentili e Quartili</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#quantili">6.3.3.1. Quantili</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#percentili">6.3.3.2. Percentili</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#quartili">6.3.3.3. Quartili</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot">6.4. Boxplot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indicatori-di-dispersione-2-distanza-inter-quartile-e-varianza">6.5. Indicatori di dispersione (2), distanza inter-quartile e varianza</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distanza-interquartile">6.5.1. Distanza interquartile</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#varianza-e-deviazione-standard">6.5.2. Varianza e Deviazione Standard</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standardizzazione-z-scoring">6.5.3. Standardizzazione (z-scoring)</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="misure-di-tendenza-centrale-dispersione-e-forma">
+<h1><span class="section-number">6. </span>Misure di Tendenza Centrale, Dispersione e Forma<a class="headerlink" href="#misure-di-tendenza-centrale-dispersione-e-forma" title="Permalink to this heading">#</a></h1>
+<p>La statistica descrittiva si occupa di descrivere, rappresentare e sintetizzare un campione di dati relativo ad una popolazione. Gli strumenti della statistica descrittiva possono essere sia numerici che grafici. I dati analizzati possono essere descritti secondo diversi aspetti. Esistono pertanto diversi “indicatori” oggettivi:</p>
+<ul class="simple">
+<li><p><strong>numerosità</strong> del campione;</p></li>
+<li><p><strong>indicatori centrali</strong>: media, mediana, moda;</p></li>
+<li><p><strong>Indicatori di dispersione</strong>: estremi, range, quantili, percentili, quartili, distanza inter-quartile, varianza;</p></li>
+</ul>
+<p>Per esaminare questi strumenti, iniziamo considerando un semplice campione univariato:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    3.0
+1    4.0
+2    NaN
+3    4.0
+4    4.0
+5    1.0
+6    2.0
+7    2.0
+8    NaN
+9    4.0
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Il campione contiene dei valori <code class="docutils literal notranslate"><span class="pre">NaN</span></code>. Si tratta di valori mancanti che per qualche motivo non sono stati rilevati e andranno gestiti opportunamente.</p>
+<section id="numerosita">
+<h2><span class="section-number">6.1. </span>Numerosità<a class="headerlink" href="#numerosita" title="Permalink to this heading">#</a></h2>
+<p>La numerosità di un campione univariato <span class="math notranslate nohighlight">\(\{x^{(i)}\}_i^N\)</span> è data dal numero di valori in esso contenuto: <span class="math notranslate nohighlight">\(|X|=|\{x^{(i)}\}_i^N| = N\)</span>. La numerosità di ciascuna colonna può anche essere diversa in quanto possono essistere dei valori mancanti, indicanti in genere con <code class="docutils literal notranslate"><span class="pre">NA</span></code> o <code class="docutils literal notranslate"><span class="pre">NaN</span></code>. Nel nostro caso:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.series.Series&#39;&gt;
+RangeIndex: 10 entries, 0 to 9
+Series name: None
+Non-Null Count  Dtype  
+--------------  -----  
+8 non-null      float64
+dtypes: float64(1)
+memory usage: 208.0 bytes
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="indicatori-centrali-media-mediana-e-moda">
+<h2><span class="section-number">6.2. </span>Indicatori Centrali: Media, Mediana e Moda<a class="headerlink" href="#indicatori-centrali-media-mediana-e-moda" title="Permalink to this heading">#</a></h2>
+<p>Gli indicatori centrali danno un’idea approssimata dell’ordine di grandezza dei valori del campione.</p>
+<section id="media">
+<h3><span class="section-number">6.2.1. </span>Media<a class="headerlink" href="#media" title="Permalink to this heading">#</a></h3>
+<p>La media di un campione è definita come la somma dei suoi valori diviso la sua numerosità:</p>
+<div class="math notranslate nohighlight">
+\[\overline X = \frac{1}{N}\sum_i^N x^{(i)}\]</div>
+<p>La media del nostro campione sarà:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="mediana">
+<h3><span class="section-number">6.2.2. </span>Mediana<a class="headerlink" href="#mediana" title="Permalink to this heading">#</a></h3>
+<p>Quando gli elementi di un campione possono essere ordinati (ad esempio se sono valori numerici), la mediana di un campione (o l’elemento mediano) è l’elemento che divide in due parti uguali l’insieme ordinato dei valori del campione.</p>
+<p>L’elemento mediano si può ottenere ordinando i valori del campione e procedendo come segue:</p>
+<ul class="simple">
+<li><p>Se il numero di elementi è dispari, si prende il centrale. Ad esempio <span class="math notranslate nohighlight">\([1,2,\mathbf{2},3,5] \to 2\)</span>.</p></li>
+<li><p>Se il numero di elementi è pari, si prende la media tra i due centrali. Ad esempio <span class="math notranslate nohighlight">\([1,2,\mathbf{2},\mathbf{3},3,5] \to \frac{2+3}{2} = 2.5\)</span>.</p></li>
+</ul>
+<p>Nel caso del nostro campione:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5    1.0
+6    2.0
+7    2.0
+0    3.0
+1    4.0
+3    4.0
+4    4.0
+9    4.0
+2    NaN
+8    NaN
+dtype: float64
+Valore mediano: 3.5
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="moda">
+<h3><span class="section-number">6.2.3. </span>Moda<a class="headerlink" href="#moda" title="Permalink to this heading">#</a></h3>
+<p>La moda di un campione è l’elemento che si ripete più spesso. Ad esempio, consideriamo il seguente campione:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0     1
+1     2
+2     3
+3     4
+4     2
+5     5
+6     4
+7     2
+8     6
+9     5
+10    8
+11    4
+12    3
+13    2
+14    3
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Consideriamo dunque le frequenze assolute:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2    4
+3    3
+4    3
+5    2
+1    1
+6    1
+8    1
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>La moda sarà pari a <span class="math notranslate nohighlight">\(4\)</span>.</p>
+</section>
+</section>
+<section id="indicatori-di-dispersione-1-estremi-range-quartili">
+<h2><span class="section-number">6.3. </span>Indicatori di dispersione (1): estremi, range, quartili<a class="headerlink" href="#indicatori-di-dispersione-1-estremi-range-quartili" title="Permalink to this heading">#</a></h2>
+<p>Gli indici di dispersione hanno il compito di quantificare in quale misura i valori di una distribuzione sono “dispersi”, ovvero “lontani tra loro”.</p>
+<section id="minimo-massimo-e-range">
+<h3><span class="section-number">6.3.1. </span>Minimo, Massimo e Range<a class="headerlink" href="#minimo-massimo-e-range" title="Permalink to this heading">#</a></h3>
+<p>Semplici indici di dispersione sono il minimo (<span class="math notranslate nohighlight">\(min \{x^{(i)}\}_i^N\)</span>), il massimo (<span class="math notranslate nohighlight">\(max \{x^{(i)}\}_i^N\)</span>) e il range (<span class="math notranslate nohighlight">\(max \{x^{(i)}\}_i^N\)</span> - <span class="math notranslate nohighlight">\(min \{x^{(i)}\}_i^N\)</span>). Tornando al ultimo esempio:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0     1
+1     2
+2     3
+3     4
+4     2
+5     5
+6     4
+7     2
+8     6
+9     5
+10    8
+11    4
+12    3
+13    2
+14    3
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Avremo che:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Minimo: 1
+Massimo: 8
+Range: 7
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="normalizzazioni-del-range-dei-dati">
+<h3><span class="section-number">6.3.2. </span>Normalizzazioni del Range dei Dati<a class="headerlink" href="#normalizzazioni-del-range-dei-dati" title="Permalink to this heading">#</a></h3>
+<p>Il range dei dati dipende fortemente dalla natura dei dati e dalla loro unità di misura. Ad esempio, le età si misurano in anni, mentre i pesi in Kg o libbre. Pertanto, esistono delle tecniche di normalizzazione dei dati che permettono di rendere dati basati su unità di misura diverse comparabili tra di loro.</p>
+<section id="normalizzazione-tra-0-e-1">
+<h4><span class="section-number">6.3.2.1. </span>Normalizzazione tra 0 e 1<a class="headerlink" href="#normalizzazione-tra-0-e-1" title="Permalink to this heading">#</a></h4>
+<p>Questa normalizzazione scala i dati in modo che i valori minimo e massimo risultino esattamente pari a <span class="math notranslate nohighlight">\(0\)</span> e <span class="math notranslate nohighlight">\(1\)</span>, usando la seguente formula:
+\begin{equation}
+x_{norm} = (x-x_{min})/(x_{max}-x_{min})
+\end{equation}</p>
+<p>Nel caso del nostro campione, otterremmo:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0     0.000000
+1     0.142857
+2     0.285714
+3     0.428571
+4     0.142857
+5     0.571429
+6     0.428571
+7     0.142857
+8     0.714286
+9     0.571429
+10    1.000000
+11    0.428571
+12    0.285714
+13    0.142857
+14    0.285714
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="normalizzazione-tra-1-e-1">
+<h4><span class="section-number">6.3.2.2. </span>Normalizzazione tra -1 e 1<a class="headerlink" href="#normalizzazione-tra-1-e-1" title="Permalink to this heading">#</a></h4>
+<p>In questo caso, i dati vengono riscalati in modo che i nuovi minimo e massimo siano <span class="math notranslate nohighlight">\(-1\)</span> e <span class="math notranslate nohighlight">\(1\)</span>, usando la seguente formula:
+\begin{equation}
+x_{norm} = (x_{max}+x_{min}-2\cdot x)/(x_{max}-x_{min})
+\end{equation}</p>
+<p>Possiamo effettuare questa trasformazione in Pandas come segue:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0     1.000000
+1     0.714286
+2     0.428571
+3     0.142857
+4     0.714286
+5    -0.142857
+6     0.142857
+7     0.714286
+8    -0.428571
+9    -0.142857
+10   -1.000000
+11    0.142857
+12    0.428571
+13    0.714286
+14    0.428571
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="quantili-percentili-e-quartili">
+<h3><span class="section-number">6.3.3. </span>Quantili, Percentili e Quartili<a class="headerlink" href="#quantili-percentili-e-quartili" title="Permalink to this heading">#</a></h3>
+<p>Quantili, percentili e quartili generalizzano il concetto di mediana.</p>
+<section id="quantili">
+<h4><span class="section-number">6.3.3.1. </span>Quantili<a class="headerlink" href="#quantili" title="Permalink to this heading">#</a></h4>
+<p>Un quantile di ordine <span class="math notranslate nohighlight">\(\alpha\)</span> è un valore <span class="math notranslate nohighlight">\(q_\alpha\)</span> che divide un campione in due parti di dimensioni proprozionali a <span class="math notranslate nohighlight">\(\alpha\)</span> e <span class="math notranslate nohighlight">\(1-\alpha\)</span>. Valori più piccoli o uguali a <span class="math notranslate nohighlight">\(q_\alpha\)</span> appartengono alla prima parte della suddivisione, mentre valori maggiori a <span class="math notranslate nohighlight">\(q_\alpha\)</span> appartengono alla seconda parte.</p>
+<p>Ad esempio, dato il campione già ordinato <code class="docutils literal notranslate"><span class="pre">[1,2,3,3,4,5,6,6,7,8,8,9]</span></code>, un quantile <span class="math notranslate nohighlight">\(q_{0.25}\)</span> dividerà il campione in due parti di dimensione proporzionale a <span class="math notranslate nohighlight">\(0.25\)</span> e <span class="math notranslate nohighlight">\(1-0.25=0.75\)</span>. In questo caso <span class="math notranslate nohighlight">\(q_{0.25}=3\)</span> e le due parti saranno <code class="docutils literal notranslate"><span class="pre">[1,2,3,3]</span></code> e <code class="docutils literal notranslate"><span class="pre">[4,5,6,6,7,8,8,9]</span></code>.</p>
+<p>Anche in questo caso, come nel caso della mediana, si effettuano medie di valori adiacenti ove opportuno.</p>
+<p>I quantili vanno interpretati così:</p>
+<blockquote>
+<div><p>Se un quantile di ordine <span class="math notranslate nohighlight">\(\alpha\)</span> è pari al numero <span class="math notranslate nohighlight">\(x\)</span>, allora vuole dire che <span class="math notranslate nohighlight">\(\alpha \times n\)</span> elementi hanno un valore inferiore o uguale a <span class="math notranslate nohighlight">\(x\)</span>, dove <span class="math notranslate nohighlight">\(n\)</span> è il numero di elementi nel campione.</p>
+</div></blockquote>
+<p>Va notato che:</p>
+<ul class="simple">
+<li><p>Il minimo è un quantile di ordine 0;</p></li>
+<li><p>Il massimo è un quantile di ordine 1;</p></li>
+<li><p>La mediana è un quantile di ordine 0.5.</p></li>
+</ul>
+<p>Vediamo alcuni esempi sul nostro piccolo campione:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Quantile di ordine 0 (minimo): 1.0
+Quantile di ordine 0.5 (mediana): 3.0
+Quantile di ordine 1 (massimo): 8.0
+Quantile di ordine 0.15: 2.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Dai dati sopra deduciamo che:</p>
+<ul class="simple">
+<li><p>Il <span class="math notranslate nohighlight">\(50\%\)</span> dei valori sono inferiori o uguali a 3;</p></li>
+<li><p>Il <span class="math notranslate nohighlight">\(15\%\)</span> dei valori sono minori o ugualei a 2.</p></li>
+</ul>
+</section>
+<section id="percentili">
+<h4><span class="section-number">6.3.3.2. </span>Percentili<a class="headerlink" href="#percentili" title="Permalink to this heading">#</a></h4>
+<p>I percentili sono semplicemente quantili espressi in precentuale. Un quantile di ordine <span class="math notranslate nohighlight">\(0.25\)</span> è un percentile di ordine <span class="math notranslate nohighlight">\(25\%\)</span>.</p>
+</section>
+<section id="quartili">
+<h4><span class="section-number">6.3.3.3. </span>Quartili<a class="headerlink" href="#quartili" title="Permalink to this heading">#</a></h4>
+<p>I quartili sono degli specifici quantili che suddividono il campione in quattro parti. In particolare:</p>
+<ul class="simple">
+<li><p>Il quartile di ordine 0 è un quantile di ordine 0;</p></li>
+<li><p>Il quartile di ordine 1 è un quantile di ordine <span class="math notranslate nohighlight">\(1/4=0.25\)</span>;</p></li>
+<li><p>Il quartile di ordine 2 è un quantile di ordine <span class="math notranslate nohighlight">\(2/4=0.5\)</span>;</p></li>
+<li><p>Il quartile di ordine 3 è un quantile di ordine <span class="math notranslate nohighlight">\(3/4=0.75\)</span>;</p></li>
+<li><p>Il quartile di ordine 4 è un qauntile di ordine <span class="math notranslate nohighlight">\(4/4=1\)</span>.</p></li>
+</ul>
+<p>Vediamo qualche esempio sul nostro piccolo campione:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Quartile di ordine 0 (minimo): 1.0
+Quartile di ordine 1: 2.0
+Quartile di ordine 2 (mediana): 3.0
+Quartile di ordine 3: 4.5
+Quartile di ordine 4 (massimo): 8.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="boxplot">
+<h2><span class="section-number">6.4. </span>Boxplot<a class="headerlink" href="#boxplot" title="Permalink to this heading">#</a></h2>
+<p>I boxplot costituiscono un metodo di visualizzazione compatto per rappresentare alcune caratteristiche descrittive dei dati sotto analisi. In particolare, dato un campione, un boxplot riesce a rappresentarne efficacemente le seguenti quantità:</p>
+<ul class="simple">
+<li><p>Valore mediano;</p></li>
+<li><p>Primo e terzo quartile;</p></li>
+<li><p>Minimo e massimo (a seconda della “versione” del boxplot, come discusso di seguito).</p></li>
+</ul>
+<p>Per illustrare l’utilità dei boxplot, considereremo il dataset di pesi e altezze visto in precedenza:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sex</th>
+      <th>height</th>
+      <th>weight</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>M</td>
+      <td>74</td>
+      <td>53.484771</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>M</td>
+      <td>70</td>
+      <td>38.056472</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>F</td>
+      <td>61</td>
+      <td>34.970812</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>M</td>
+      <td>68</td>
+      <td>35.999365</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>F</td>
+      <td>66</td>
+      <td>34.559390</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>4226</th>
+      <td>F</td>
+      <td>69</td>
+      <td>23.862436</td>
+    </tr>
+    <tr>
+      <th>4227</th>
+      <td>M</td>
+      <td>69</td>
+      <td>38.262182</td>
+    </tr>
+    <tr>
+      <th>4228</th>
+      <td>F</td>
+      <td>64</td>
+      <td>34.970812</td>
+    </tr>
+    <tr>
+      <th>4229</th>
+      <td>F</td>
+      <td>64</td>
+      <td>28.388071</td>
+    </tr>
+    <tr>
+      <th>4230</th>
+      <td>F</td>
+      <td>61</td>
+      <td>22.628172</td>
+    </tr>
+  </tbody>
+</table>
+<p>4231 rows × 3 columns</p>
+</div></div></div>
+</div>
+<p>I quartili sul campione dei pesi saranno i seguenti:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>min    20.571066
+25%    29.828045
+50%    34.970812
+75%    41.142132
+max    61.301776
+Name: weight, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Il boxplot delle altezze si presenta come segue:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/db9870db93f43d1f5fad5b884eb5a5ef92962c8a9bb875fa1febbea3a817d64c.png" src="../_images/db9870db93f43d1f5fad5b884eb5a5ef92962c8a9bb875fa1febbea3a817d64c.png" />
+</div>
+</div>
+<p>Il boxplot si mostra come una “scatola” con dei “baffi” in cui:</p>
+<ul class="simple">
+<li><p>l’estremo inferiore della scatola indica il primo quartile;</p></li>
+<li><p>l’estremo superiore della scatola indica il terzo quartile;</p></li>
+<li><p>la linea orizzontale in mezzo alla scatola rappresenta il valore mediano del campione;</p></li>
+<li><p>il baffo inferiore rappresenta il primo valore nel campione che risulta essere maggiore o uguale al primo quartile meno una volta e mezza la distanza tra i il terzo e il primo quartile;</p></li>
+<li><p>il baffo superiore rappresenta il primo valore nel campione che risulta essere minore o uguale al terzo quartile più una volta e mezza la distanza tra i il terzo e il primo quartile;</p></li>
+<li><p>i tondini rappresentano i valori “fuori limite” che ricadono fuori dall’intervallo contrassegnato dai baffi. Vengono in genere considerati come “outliers”.</p></li>
+</ul>
+<p>I boxplot possono essere utili a comparare campioni. Ad esempio, i seguenti boxplot comparano le distribuzioni di pesi e altezze:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/de9d9858067cfff7aba0e57b0a745dcab64a42666616ae4f88072f53d881a1a3.png" src="../_images/de9d9858067cfff7aba0e57b0a745dcab64a42666616ae4f88072f53d881a1a3.png" />
+</div>
+</div>
+<p>Dal grafico sopra possiamo notare che, mentre weight contiene degli outliers nella parte alta, height non li contiene. Questo non è particolarmente sorprendente, perché è più facile trovare un certo numero di persone sovrappeso che persone molto più alte della norma.</p>
+</section>
+<section id="indicatori-di-dispersione-2-distanza-inter-quartile-e-varianza">
+<h2><span class="section-number">6.5. </span>Indicatori di dispersione (2), distanza inter-quartile e varianza<a class="headerlink" href="#indicatori-di-dispersione-2-distanza-inter-quartile-e-varianza" title="Permalink to this heading">#</a></h2>
+<section id="distanza-interquartile">
+<h3><span class="section-number">6.5.1. </span>Distanza interquartile<a class="headerlink" href="#distanza-interquartile" title="Permalink to this heading">#</a></h3>
+<p>Il range non è un indice di dispersione molto robusto, in quanto non tiene conto della presenza di evenutali outliers. Si considerino ad esempio i seguenti campioni “artificiali”:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/d8888e6023c667d85351db4551c13e84e7e761205b98f161c331e49ae02b34ce.png" src="../_images/d8888e6023c667d85351db4551c13e84e7e761205b98f161c331e49ae02b34ce.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Range sample 1: 4.0
+Range sample 2: 20.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>I campioni sono simili, ma la presenza di due outliers (-5 e 15) nel secondo campione rende i range molto diversi (4 e 20).</p>
+<p>Confrontando i due boxplot mostrati sopra, notiamo che le posizioni del terzo e del primo quartile sono più “robuste” agli outliers. Una misura di dispersione un po’ più espressiva è dunque lo <strong>scarto interquartile</strong> (o <strong>distanza interquartile</strong>), che si misura come la differenza tra il terzo e il primo quartile:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Lo scarto interquartile di sample 1 è: 2.0
+Lo scarto interquartile di sample 2 è: 2.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="varianza-e-deviazione-standard">
+<h3><span class="section-number">6.5.2. </span>Varianza e Deviazione Standard<a class="headerlink" href="#varianza-e-deviazione-standard" title="Permalink to this heading">#</a></h3>
+<p>La varianza (detto anche scarto quadratico medio) fornisce una stima di quanto i dati osservati si allontanano dalla media. La varianza calcola la media dei quadrati degli scarti dei valori rispetto alla media, penalizzando i grandi scostamenti dal valore medio (dovuti agli outliers) maggiormente più dei piccoli scostamenti:</p>
+<div class="math notranslate nohighlight">
+\[s^2 = \frac{\sum_{i=1}^n(x_i-\overline x)^2}{n}\]</div>
+<p>La varianza dei pesi nel nostro dataset di pesi-altezze è:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>63.806668494405045
+</pre></div>
+</div>
+</div>
+</div>
+<p>Gli indici di dispersione visti fino ad ora (esclusa la varianza) hanno come unità di misura la stessa dei dati di input. Nel caso dei pesi, i dati vengono misurati in libbre. E’ pertanto corretto dire che <strong>minimo</strong>, <strong>massimo</strong>, <strong>range</strong>, <strong>scarto interquartile</strong> e <strong>scarto medio assoluto</strong> calcolati sui pesi si misurano in libbre.</p>
+<p>Lo stesso discorso non vale per la varianza, che si misurera in <strong>libbre al quadrato</strong>. Se vogliamo ottenere una misura di dispersione <strong>commensurabile</strong>, possiamo calcolare la radice quadrata della varianza, ottenendo così la <strong>deviazione standard</strong> (o <strong>scarto quadratico medio</strong>), che si definisce come segue:</p>
+<div class="math notranslate nohighlight">
+\[s = \sqrt{s^2}=\sqrt{\frac{\sum_{i=1}{n}(x_i-x^2)}{n}}\]</div>
+<p>Le medie e deviazioni standard delle due variabili pesi e altezze sono:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>height</th>
+      <th>weight</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>mean</th>
+      <td>66.826046</td>
+      <td>35.818062</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>4.002658</td>
+      <td>7.987908</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>La deviazione standard ci dice qualcosa anche sulla “forma” della distribuzione. Confrontiamo ad esempio le deviazioni standard delle altezze di uomini e donne:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sex
+F    2.686187
+M    2.911766
+Name: height, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Dal confronto notiamo che le altezze degli uomini sono “più disperse” (hanno cioè una deviazione standard più alta). Confrontiamo le stime di densità dei due campioni:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/3e1d342ea774c5638c00bffa719e95fd1f28aab04b141f49bc0fa5707434a51b.png" src="../_images/3e1d342ea774c5638c00bffa719e95fd1f28aab04b141f49bc0fa5707434a51b.png" />
+</div>
+</div>
+<p>Notiamo che in effetti la stima di densità per gli uomini ha individuato una curva più “spanciata”, che si correla bene con la più alta devizione standard.</p>
+</section>
+<section id="standardizzazione-z-scoring">
+<h3><span class="section-number">6.5.3. </span>Standardizzazione (z-scoring)<a class="headerlink" href="#standardizzazione-z-scoring" title="Permalink to this heading">#</a></h3>
+<p>In molti casi è utile normalizzare i dati in modo che essi presentino media nulla e deviazione standard unitaria. Questo tipo di normalizzazione viene detta “z-scoring” e viene effettuata sottraendo ai dati la media e dividendo per la deviazione standard.</p>
+<div class="math notranslate nohighlight">
+\[
+z_i = \frac{x_i-\mu_X}{\sigma_X}
+\]</div>
+<p>dove <span class="math notranslate nohighlight">\(\sigma_X\)</span> è la deviazione standard della popolazione alla quale appartiene <span class="math notranslate nohighlight">\(X\)</span>. Si noti che gli zeta scores sono <strong>adimensionali</strong> (ovvero, non hanno unità di misura).</p>
+<p>Per capire qual è l’effetto di questa normalizzazione, osserviamo i boxplot di pesi e altezze prima e dopo la normalizzazione:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/cc2e55b3c690503aaa7e315c81f85d3b8d7ce0f1df1f7e83f4897dd48f0b76e8.png" src="../_images/cc2e55b3c690503aaa7e315c81f85d3b8d7ce0f1df1f7e83f4897dd48f0b76e8.png" />
+<img alt="../_images/4046cf66396bad07e6051ab469934346124da26d000c499b220cd289e85b9b19.png" src="../_images/4046cf66396bad07e6051ab469934346124da26d000c499b220cd289e85b9b19.png" />
+</div>
+</div>
+<p>Notiamo che l’asse delle y ha cambiato scala e che adesso i boxplot sono centrati intorno all’origine e hanno dimensioni comparabili. Confrontiamo anche le stime di densità:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/e88731b86854f66f80115bbfa82151cea18f1b6aa9d4279ad3cac4b8e9ae0891.png" src="../_images/e88731b86854f66f80115bbfa82151cea18f1b6aa9d4279ad3cac4b8e9ae0891.png" />
+<img alt="../_images/b7095ad32f4c247eb6b4af50ad31b0448fdbc5160e57533c1f9867d18d147b33.png" src="../_images/b7095ad32f4c247eb6b4af50ad31b0448fdbc5160e57533c1f9867d18d147b33.png" />
+</div>
+</div>
+<p>Una interpretazione comune degli z-scores è che essi misurano la deviazione dalla media in termini di deviazione standard della popolazione rispondendo alla domande “quante <span class="math notranslate nohighlight">\(\sigma\)</span> ci sono tra il campione e la media”?</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lectures"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../laboratories/01_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../laboratories/02_misure_di_tendenza_centrale_dispersione_e_forma.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerosita">6.1. Numerosità</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indicatori-centrali-media-mediana-e-moda">6.2. Indicatori Centrali: Media, Mediana e Moda</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#media">6.2.1. Media</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mediana">6.2.2. Mediana</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moda">6.2.3. Moda</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indicatori-di-dispersione-1-estremi-range-quartili">6.3. Indicatori di dispersione (1): estremi, range, quartili</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimo-massimo-e-range">6.3.1. Minimo, Massimo e Range</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizzazioni-del-range-dei-dati">6.3.2. Normalizzazioni del Range dei Dati</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizzazione-tra-0-e-1">6.3.2.1. Normalizzazione tra 0 e 1</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizzazione-tra-1-e-1">6.3.2.2. Normalizzazione tra -1 e 1</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantili-percentili-e-quartili">6.3.3. Quantili, Percentili e Quartili</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#quantili">6.3.3.1. Quantili</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#percentili">6.3.3.2. Percentili</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#quartili">6.3.3.3. Quartili</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot">6.4. Boxplot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indicatori-di-dispersione-2-distanza-inter-quartile-e-varianza">6.5. Indicatori di dispersione (2), distanza inter-quartile e varianza</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distanza-interquartile">6.5.1. Distanza interquartile</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#varianza-e-deviazione-standard">6.5.2. Varianza e Deviazione Standard</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standardizzazione-z-scoring">6.5.3. Standardizzazione (z-scoring)</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Antonino Furnari
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

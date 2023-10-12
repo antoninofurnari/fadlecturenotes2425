@@ -1,0 +1,2116 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Associazione tra Variabili e Dati Multivariati &#8212; Lecture Notes on Fundamental of Data Analysis</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'laboratories/03_dati_multivariati';</script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../lectures/index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../lectures/intro_data_analysis/00_main.html">1. What is Data Analysis?</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/intro_data_analysis/01_what_is_data.html">1.1. What is Data? An informal Definition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/intro_data_analysis/02_data_analysis_definition.html">1.2. A Definition of Data Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/intro_data_analysis/03_data_analysis_workflow.html">1.3. Data Analysis Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/intro_data_analysis/04_examples_data_analysis.html">1.4. Examples of Data Analysis: the Good, the Bad, and the Ugly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/intro_data_analysis/05_data_analysis_uses.html">1.5. What’s Data Analysis Used For Today</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/intro_data_analysis/06_map_course.html">1.6. Where do We Go From Here?</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../lectures/intro_python/00_main.html">2. Introduction to Python for Data Analysis</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/intro_python/01_setup.html">2.1. Installazione dell’ambiente di lavoro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/intro_python/02_intro_python.html">2.2. Introduzione a Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/intro_python/03_intro_numpy.html">2.3. Introduzione a Numpy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/intro_python/04_intro_matplotlib.html">2.4. Introduzione a Matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/intro_python/05_intro_pandas.html">2.5. Introduzione a Pandas</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/main_data_analysis_concepts/00_main.html">3. Main data analysis concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/01_misure_di_frequenze_e_rappresentazione_grafica_dei_dati.html">4. Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">5. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/02_misure_di_tendenza_centrale_dispersione_e_forma.html">6. Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_misure_di_tendenza_centrale_dispersione_e_forma.html">7. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/antoninofurnari/fadlecturenotes/blob/master/lecturenotes/laboratories/03_dati_multivariati.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/laboratories/03_dati_multivariati.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Associazione tra Variabili e Dati Multivariati</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Associazione tra Variabili e Dati Multivariati</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#riassumere-la-distribuzione-di-due-variabili-discrete">Riassumere la Distribuzione di due Variabili Discrete</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabelle-di-contingenza">Tabelle di Contingenza</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzioni-di-frequenze-relative-congiunte">Distribuzioni di Frequenze Relative Congiunte</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzioni-di-frequenze-relative-marginali">Distribuzioni di Frequenze Relative Marginali</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzioni-di-frequenze-relative-condizionali">Distribuzioni di Frequenze Relative Condizionali</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rappresentazioni-grafiche">Rappresentazioni Grafiche</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#misure-di-associazione-tra-due-variabili-discrete">Misure di Associazione tra due Variabili Discrete</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#statistica-mathcal-x-2-di-pearson">Statistica <span class="math notranslate nohighlight">\(\mathcal{X}^2\)</span> di Pearson</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#statistica-v-di-cramer">Statistica <span class="math notranslate nohighlight">\(V\)</span> di Cramer</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#rischio-relativo-e-odds-ratio">Rischio Relativo e Odds Ratio</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#associazioni-tra-variabili-ordinali-e-continue">Associazioni tra Variabili Ordinali e Continue</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plot">Scatter Plot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#medie-e-covarianze">Medie e Covarianze</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">Esercizi</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="associazione-tra-variabili-e-dati-multivariati">
+<h1>Associazione tra Variabili e Dati Multivariati<a class="headerlink" href="#associazione-tra-variabili-e-dati-multivariati" title="Permalink to this heading">#</a></h1>
+<p>Abbiamo finora analizzato dati “univariati”, ovvero composte di una sola variabile. Più precisamente, anche quando diverse variabili erano disponibili, abbiamo analizzato le variabili ad una ad una. In pratica, capita spesso che le osservazioni sotto analisi siano costituite da più variabili. In questi casi è utile considerare dei metodi per descrivere e visualizzare i dati in maniera “multivariata”, in modo da studiare le interazioni tra i vari fattori che descrivono il fenomeno in analisi.</p>
+<p>Utilizzeremo come esempio nuovamente il dataset Titanic:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">titanic</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/agconti/kaggle-titanic/master/data/train.csv&#39;</span><span class="p">,</span>
+                     <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;PassengerId&#39;</span><span class="p">)</span>
+<span class="n">titanic</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Survived</th>
+      <th>Pclass</th>
+      <th>Name</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>SibSp</th>
+      <th>Parch</th>
+      <th>Ticket</th>
+      <th>Fare</th>
+      <th>Cabin</th>
+      <th>Embarked</th>
+    </tr>
+    <tr>
+      <th>PassengerId</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>3</td>
+      <td>Braund, Mr. Owen Harris</td>
+      <td>male</td>
+      <td>22.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>A/5 21171</td>
+      <td>7.2500</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>1</td>
+      <td>Cumings, Mrs. John Bradley (Florence Briggs Th...</td>
+      <td>female</td>
+      <td>38.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>PC 17599</td>
+      <td>71.2833</td>
+      <td>C85</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>3</td>
+      <td>Heikkinen, Miss. Laina</td>
+      <td>female</td>
+      <td>26.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>STON/O2. 3101282</td>
+      <td>7.9250</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>1</td>
+      <td>Futrelle, Mrs. Jacques Heath (Lily May Peel)</td>
+      <td>female</td>
+      <td>35.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>113803</td>
+      <td>53.1000</td>
+      <td>C123</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0</td>
+      <td>3</td>
+      <td>Allen, Mr. William Henry</td>
+      <td>male</td>
+      <td>35.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>373450</td>
+      <td>8.0500</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Dato il dataset sopra, potremmo chiederci se delle variabili influenzano i valori di altre. Ad esempio, trovarsi in prima, seconda o terza classe (variabile <code class="docutils literal notranslate"><span class="pre">Pclass</span></code>) influenza in qualche modo la probabilità di sopravvivere (variabile <code class="docutils literal notranslate"><span class="pre">Survived</span></code>)?, o ancora, l’età (variabile <code class="docutils literal notranslate"><span class="pre">Age</span></code>) o il prezzo pagato (<code class="docutils literal notranslate"><span class="pre">Fare</span></code>) influenza in qualche modo la probabilità di salvarsi (<code class="docutils literal notranslate"><span class="pre">Survived</span></code>)?</p>
+<p>In questa lezione, vedremo diversi modi per riassumere le distribuzioni di due variabili e verificare eventuali associazioni (o correlazioni) tra le variabili.</p>
+<section id="riassumere-la-distribuzione-di-due-variabili-discrete">
+<h2>Riassumere la Distribuzione di due Variabili Discrete<a class="headerlink" href="#riassumere-la-distribuzione-di-due-variabili-discrete" title="Permalink to this heading">#</a></h2>
+<p>Se entrambe le variabili che stiamo studiando sono discrete, possiamo enumerare tutte le possibili combinazioni di valori e riassumerle in una tabella di contingenza che indica i valori di una variabile sulle righe e quelli dell’altra variabile sulle colonne. Ogni cella indicherà il numero di volte in cui osserviamo una data coppia di valori.</p>
+<section id="tabelle-di-contingenza">
+<h3>Tabelle di Contingenza<a class="headerlink" href="#tabelle-di-contingenza" title="Permalink to this heading">#</a></h3>
+<p>Costruiamo la tabella di contingenza per le variabili <code class="docutils literal notranslate"><span class="pre">Sex</span></code> e <code class="docutils literal notranslate"><span class="pre">Pclass</span></code>. Per farlo utilizzeremo la funzione <code class="docutils literal notranslate"><span class="pre">crosstab</span></code> di Pandas:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">titanic</span><span class="p">[</span><span class="s1">&#39;Sex&#39;</span><span class="p">],</span> <span class="n">titanic</span><span class="p">[</span><span class="s1">&#39;Pclass&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Pclass</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+    </tr>
+    <tr>
+      <th>Sex</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>female</th>
+      <td>94</td>
+      <td>76</td>
+      <td>144</td>
+    </tr>
+    <tr>
+      <th>male</th>
+      <td>122</td>
+      <td>108</td>
+      <td>347</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>La tabella sopra indica ad esempio che <span class="math notranslate nohighlight">\(94\)</span> passeggeri in classe <span class="math notranslate nohighlight">\(1\)</span> erano di sesso femminile. Specificando <code class="docutils literal notranslate"><span class="pre">margins=True</span></code> possiamo ottenere le somme per righe e colonne, che indicheranno le frequenze assolute di ciascuna variabile:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">titanic</span><span class="p">[</span><span class="s1">&#39;Sex&#39;</span><span class="p">],</span> <span class="n">titanic</span><span class="p">[</span><span class="s1">&#39;Pclass&#39;</span><span class="p">],</span><span class="n">margins</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Pclass</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>All</th>
+    </tr>
+    <tr>
+      <th>Sex</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>female</th>
+      <td>94</td>
+      <td>76</td>
+      <td>144</td>
+      <td>314</td>
+    </tr>
+    <tr>
+      <th>male</th>
+      <td>122</td>
+      <td>108</td>
+      <td>347</td>
+      <td>577</td>
+    </tr>
+    <tr>
+      <th>All</th>
+      <td>216</td>
+      <td>184</td>
+      <td>491</td>
+      <td>891</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>In generale, una tabella di contingenza è organizzata come segue:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>X=<span class="math notranslate nohighlight">\(x_1\)</span></p></th>
+<th class="head"><p>X=<span class="math notranslate nohighlight">\(x_2\)</span></p></th>
+<th class="head"><p>…</p></th>
+<th class="head"><p>X=<span class="math notranslate nohighlight">\(x_l\)</span></p></th>
+<th class="head"><p>Total</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Y=<span class="math notranslate nohighlight">\(y_1\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(n_{11}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(n_{12}\)</span></p></td>
+<td><p>…</p></td>
+<td><p><span class="math notranslate nohighlight">\(n_{1l}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(n_{1+}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Y=<span class="math notranslate nohighlight">\(y_2\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(n_{21}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(n_{22}\)</span></p></td>
+<td><p>…</p></td>
+<td><p><span class="math notranslate nohighlight">\(n_{2l}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(n_{2+}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+</tr>
+<tr class="row-odd"><td><p>Y=<span class="math notranslate nohighlight">\(y_k\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(n_{k1}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(n_{k2}\)</span></p></td>
+<td><p>…</p></td>
+<td><p><span class="math notranslate nohighlight">\(n_{kl}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(n_{k+}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Total</p></td>
+<td><p><span class="math notranslate nohighlight">\(n_{+1}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(n_{+2}\)</span></p></td>
+<td><p>…</p></td>
+<td><p><span class="math notranslate nohighlight">\(n_{+l}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(n\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>Dove:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(n_{ij}\)</span> denota il numero di coppie di valori per cui <span class="math notranslate nohighlight">\(X=x_1\)</span> e <span class="math notranslate nohighlight">\(Y=y_1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(n_{i+} = \sum_j n_{ij}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(n_{+j} = \sum_j n_{ij}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(n = \sum_i n_{i+} = \sum_j n_{+j} = \sum_{ij} n_ij\)</span></p></li>
+</ul>
+</section>
+<section id="distribuzioni-di-frequenze-relative-congiunte">
+<h3>Distribuzioni di Frequenze Relative Congiunte<a class="headerlink" href="#distribuzioni-di-frequenze-relative-congiunte" title="Permalink to this heading">#</a></h3>
+<p>Così come nel caso dei campioni univariati, anche in questo caso possiamo ragionare in termini di frequenze relative. In particolare, possiamo definire le frequenze relative congiunte, dividendo ciascun elemento <span class="math notranslate nohighlight">\(n_{ij}\)</span> per <span class="math notranslate nohighlight">\(n\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[f_{ij} = \frac{n_{ij}}{n}\]</div>
+<p>Mettendo le frequenze relative in una tabella, otterremmo la seguente:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>X=<span class="math notranslate nohighlight">\(x_1\)</span></p></th>
+<th class="head"><p>X=<span class="math notranslate nohighlight">\(x_2\)</span></p></th>
+<th class="head"><p>…</p></th>
+<th class="head"><p>X=<span class="math notranslate nohighlight">\(x_l\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Y=<span class="math notranslate nohighlight">\(y_1\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(f_{11}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(f_{12}\)</span></p></td>
+<td><p>…</p></td>
+<td><p><span class="math notranslate nohighlight">\(f_{1l}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Y=<span class="math notranslate nohighlight">\(y_2\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(f_{21}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(f_{22}\)</span></p></td>
+<td><p>…</p></td>
+<td><p><span class="math notranslate nohighlight">\(f_{2l}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+</tr>
+<tr class="row-odd"><td><p>Y=<span class="math notranslate nohighlight">\(y_k\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(f_{k1}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(f_{k2}\)</span></p></td>
+<td><p>…</p></td>
+<td><p><span class="math notranslate nohighlight">\(f_{kl}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>Possiamo ottenere la tabella delle frequenze relative congiunte passando <code class="docutils literal notranslate"><span class="pre">normalize=True</span></code> alla funzione crosstab:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">titanic</span><span class="p">[</span><span class="s1">&#39;Sex&#39;</span><span class="p">],</span> <span class="n">titanic</span><span class="p">[</span><span class="s1">&#39;Pclass&#39;</span><span class="p">],</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Pclass</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+    </tr>
+    <tr>
+      <th>Sex</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>female</th>
+      <td>0.105499</td>
+      <td>0.085297</td>
+      <td>0.161616</td>
+    </tr>
+    <tr>
+      <th>male</th>
+      <td>0.136925</td>
+      <td>0.121212</td>
+      <td>0.389450</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="distribuzioni-di-frequenze-relative-marginali">
+<h3>Distribuzioni di Frequenze Relative Marginali<a class="headerlink" href="#distribuzioni-di-frequenze-relative-marginali" title="Permalink to this heading">#</a></h3>
+<p>Possiamo riportare le somme per righe e colonne, ottenendo così le frequenze “marginali” (perché si scrivono a margine):</p>
+<div class="math notranslate nohighlight">
+\[f_{i+} = \sum_j f_{ij} \]</div>
+<div class="math notranslate nohighlight">
+\[f_{j+} = \sum_i f_{ij} \]</div>
+<p>Mettendo tutto in una tabella:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>X=<span class="math notranslate nohighlight">\(x_1\)</span></p></th>
+<th class="head"><p>X=<span class="math notranslate nohighlight">\(x_2\)</span></p></th>
+<th class="head"><p>…</p></th>
+<th class="head"><p>X=<span class="math notranslate nohighlight">\(x_l\)</span></p></th>
+<th class="head"><p>Total</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Y=<span class="math notranslate nohighlight">\(y_1\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(f_{11}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(f_{12}\)</span></p></td>
+<td><p>…</p></td>
+<td><p><span class="math notranslate nohighlight">\(f_{1l}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(f_{1+}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Y=<span class="math notranslate nohighlight">\(y_2\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(f_{21}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(f_{22}\)</span></p></td>
+<td><p>…</p></td>
+<td><p><span class="math notranslate nohighlight">\(f_{2l}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(f_{2+}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+</tr>
+<tr class="row-odd"><td><p>Y=<span class="math notranslate nohighlight">\(y_k\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(f_{k1}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(f_{k2}\)</span></p></td>
+<td><p>…</p></td>
+<td><p><span class="math notranslate nohighlight">\(f_{kl}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(f_{k+}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Total</p></td>
+<td><p><span class="math notranslate nohighlight">\(f_{+1}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(f_{+2}\)</span></p></td>
+<td><p>…</p></td>
+<td><p><span class="math notranslate nohighlight">\(f_{+l}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(n\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>Possiamo ottenre questa tabella come segue:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">titanic</span><span class="p">[</span><span class="s1">&#39;Sex&#39;</span><span class="p">],</span> <span class="n">titanic</span><span class="p">[</span><span class="s1">&#39;Pclass&#39;</span><span class="p">],</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">margins</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Pclass</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>All</th>
+    </tr>
+    <tr>
+      <th>Sex</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>female</th>
+      <td>0.105499</td>
+      <td>0.085297</td>
+      <td>0.161616</td>
+      <td>0.352413</td>
+    </tr>
+    <tr>
+      <th>male</th>
+      <td>0.136925</td>
+      <td>0.121212</td>
+      <td>0.389450</td>
+      <td>0.647587</td>
+    </tr>
+    <tr>
+      <th>All</th>
+      <td>0.242424</td>
+      <td>0.206510</td>
+      <td>0.551066</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Va notato che le frequenze relative marginali ottenute, sono identiche alle frequenze relative dei campioni univariati:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">titanic</span><span class="p">[</span><span class="s1">&#39;Sex&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sex
+male      0.647587
+female    0.352413
+Name: proportion, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Che sono esattamente i valori nell’ultima colonna della tabella precedente. Analogamente:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">titanic</span><span class="p">[</span><span class="s1">&#39;Pclass&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pclass
+3    0.551066
+1    0.242424
+2    0.206510
+Name: proportion, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Che sono i valori nell’ultima riga della tabella precedente.</p>
+</section>
+<section id="distribuzioni-di-frequenze-relative-condizionali">
+<h3>Distribuzioni di Frequenze Relative Condizionali<a class="headerlink" href="#distribuzioni-di-frequenze-relative-condizionali" title="Permalink to this heading">#</a></h3>
+<p>In certi casi, è utile calcolare le frequenze dei valori di una variabile nel caso in cui i valori di un’altra variabile sono tenuti costanti. Queste frequenze ci permettono di rispondere a domande del tipo:</p>
+<ul class="simple">
+<li><p>Qual è la distribuzione delle classi tra gli uomini?</p></li>
+<li><p>Qual è la distribuzione delle classi tra le donne?</p></li>
+<li><p>Qual è la distribuzione dei sessi in prima classe?</p></li>
+<li><p>Qual è la distribuzione dei sessi in seconda classe?</p></li>
+<li><p>Qual è la distribuzione dei sessi in terza classe?</p></li>
+</ul>
+<p>Le frequenze condizionate sono definite come segue:</p>
+<div class="math notranslate nohighlight">
+\[ f_{i|j}^{X|Y} = f(X=x_i|Y=y_j) = \frac{n_{ij}}{n_{+j}} \]</div>
+<div class="math notranslate nohighlight">
+\[ f_{j|i}^{Y|X} = f(Y=y_j|X=x_i) = \frac{n_{ij}}{n_{i+}} \]</div>
+<p>In pratica, se si condiziona rispetto a un valore <span class="math notranslate nohighlight">\(Y=y_j\)</span> si deve dividere il numero di occorrenze delle coppie per il numero di volte in cui si verifica <span class="math notranslate nohighlight">\(Y=y_j\)</span>.</p>
+<p>In pratica, è possibile ottenere le frequenze condizionate relative normalizzando per la riga opportuna. Se voglio condizionare rispetto alla variabile X, normalizzerò per righe:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#normalize=0 indica di condizionare rispetto alla prima variabile</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">titanic</span><span class="p">[</span><span class="s1">&#39;Sex&#39;</span><span class="p">],</span> <span class="n">titanic</span><span class="p">[</span><span class="s1">&#39;Pclass&#39;</span><span class="p">],</span> <span class="n">normalize</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Pclass</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+    </tr>
+    <tr>
+      <th>Sex</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>female</th>
+      <td>0.299363</td>
+      <td>0.242038</td>
+      <td>0.458599</td>
+    </tr>
+    <tr>
+      <th>male</th>
+      <td>0.211438</td>
+      <td>0.187175</td>
+      <td>0.601386</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Dalla tabella sopra, ad esempio, posso evincere:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f(Pclass=1|Sex=female) = 0.290363\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(f(Pclass=2|Sex=female) = 0.242038\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(f(Pclass=3|Sex=female) = 0.458599\)</span></p></li>
+</ul>
+<p>Queste sono le frequenze delle donne nelle tre classi. Analogamente, la seconda riga rappresenta le frequenze condizionate rispetto a <code class="docutils literal notranslate"><span class="pre">Sex=male</span></code>. Dalla tabella, notiamo che la distribuzione dei passeggeri cambia nelle tre classi. In particolare, tra gli uomini, la terza classe è più frequente che tra le donne.</p>
+<p>Possiamo ottenere la prospettiva complementare condizionando su classe invece:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#normalize=1 indica di condizionare rispetto alla prima variabile</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">titanic</span><span class="p">[</span><span class="s1">&#39;Sex&#39;</span><span class="p">],</span> <span class="n">titanic</span><span class="p">[</span><span class="s1">&#39;Pclass&#39;</span><span class="p">],</span> <span class="n">normalize</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Pclass</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+    </tr>
+    <tr>
+      <th>Sex</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>female</th>
+      <td>0.435185</td>
+      <td>0.413043</td>
+      <td>0.293279</td>
+    </tr>
+    <tr>
+      <th>male</th>
+      <td>0.564815</td>
+      <td>0.586957</td>
+      <td>0.706721</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>In questo caso, ogni colonna sarà una distribuzione di probabilità. Ad esempio:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P(Sex=female|Pclass=1) = 0.435185\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(Sex=male|Pclass=1) = 0.564815\)</span></p></li>
+</ul>
+<p>Notiamo che le proporzione tra uomini e donne cambiano nelle tre classi e in particolare nella terza classe ci sono molti più uomini che donne.</p>
+</section>
+<section id="rappresentazioni-grafiche">
+<h3>Rappresentazioni Grafiche<a class="headerlink" href="#rappresentazioni-grafiche" title="Permalink to this heading">#</a></h3>
+<p>Possiamo facilmente ottenere rappresentazioni grafiche delle relazioni tra due variabili mediante grafici a barre, direttamente dalle tabelle di contingenza.</p>
+<p>Possiamo confrontare le frequenze assolute di passeggeri e sessi nelle tre classi come segue:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">titanic</span><span class="p">[</span><span class="s1">&#39;Sex&#39;</span><span class="p">],</span> <span class="n">titanic</span><span class="p">[</span><span class="s1">&#39;Pclass&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;Sex&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/7c625285f9c2253ab0c6214edc8c32fffd8108d941e88cbef73fe6ed0e10124b.png" src="../_images/7c625285f9c2253ab0c6214edc8c32fffd8108d941e88cbef73fe6ed0e10124b.png" />
+</div>
+</div>
+<p>Da qui notiamo che molti passeggeri sono uomini e in terza classe. In questi casi, può essere a volte utile uno stacked plot:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">titanic</span><span class="p">[</span><span class="s1">&#39;Sex&#39;</span><span class="p">],</span> <span class="n">titanic</span><span class="p">[</span><span class="s1">&#39;Pclass&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">stacked</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;Sex&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/eb97e6f2d21e6f04fee1b702ec7fab5524070ba9d2e986b1c13ea1283d0bfb82.png" src="../_images/eb97e6f2d21e6f04fee1b702ec7fab5524070ba9d2e986b1c13ea1283d0bfb82.png" />
+</div>
+</div>
+<p>È spesso utile visualizzare le distribuzioni condizionate. Ad esempio, il grafico che segue ci permette di confrontare le distribuzioni di passeggeri nelle tre classi, suddividendo in due gruppi sulla base del sesso:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">titanic</span><span class="p">[</span><span class="s1">&#39;Sex&#39;</span><span class="p">],</span> <span class="n">titanic</span><span class="p">[</span><span class="s1">&#39;Pclass&#39;</span><span class="p">],</span> <span class="n">normalize</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;Sex&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/e9abf6b76c9e08d2f943796b2aefb276eea110d1b16a81712347a39f39522dc4.png" src="../_images/e9abf6b76c9e08d2f943796b2aefb276eea110d1b16a81712347a39f39522dc4.png" />
+</div>
+</div>
+<p>Possiamo ottenere il grafico delle frequenze condizionate rispetto alle classi per una vista complementare. In questo caso, per avere un grafico significativo, dobbiamo trasporre la tabella di contingenza con un <code class="docutils literal notranslate"><span class="pre">.T</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#normalize=1 indica di condizionare rispetto alla prima variabile</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">titanic</span><span class="p">[</span><span class="s1">&#39;Sex&#39;</span><span class="p">],</span> <span class="n">titanic</span><span class="p">[</span><span class="s1">&#39;Pclass&#39;</span><span class="p">],</span> <span class="n">normalize</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;Pclass&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/521191d07773f6bcff67e214f6e2ab4a54461de49f3a8b085222bd65ac99330c.png" src="../_images/521191d07773f6bcff67e214f6e2ab4a54461de49f3a8b085222bd65ac99330c.png" />
+</div>
+</div>
+</section>
+<section id="misure-di-associazione-tra-due-variabili-discrete">
+<h3>Misure di Associazione tra due Variabili Discrete<a class="headerlink" href="#misure-di-associazione-tra-due-variabili-discrete" title="Permalink to this heading">#</a></h3>
+<p>Vediamo adesso delle misure che ci permettono di stimare se due variabili sono o meno “associate”, ovvero fino a che punto i valori di una variabile influenzano quelli dell’altra. Abbiamo visto che le variabili <code class="docutils literal notranslate"><span class="pre">Sex</span></code> e <code class="docutils literal notranslate"><span class="pre">Pclass</span></code> sembrano avere un qualche grado di associazione. Vediamo adesso un caso di associazione più forte, esplorando la relazione tra <code class="docutils literal notranslate"><span class="pre">Pclass</span></code> e <code class="docutils literal notranslate"><span class="pre">Survived</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">titanic</span><span class="p">[</span><span class="s1">&#39;Pclass&#39;</span><span class="p">],</span> <span class="n">titanic</span><span class="p">[</span><span class="s1">&#39;Survived&#39;</span><span class="p">],</span> <span class="n">normalize</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Survived</th>
+      <th>0</th>
+      <th>1</th>
+    </tr>
+    <tr>
+      <th>Pclass</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>0.370370</td>
+      <td>0.629630</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.527174</td>
+      <td>0.472826</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.757637</td>
+      <td>0.242363</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>La tabella mostra tre distribuzioni di frequenze relative di <code class="docutils literal notranslate"><span class="pre">Survived</span></code> condizionando rispetto ai valori <code class="docutils literal notranslate"><span class="pre">Pclass</span></code>:</p>
+<ul class="simple">
+<li><p>f(Survived|Pclass=1)</p></li>
+<li><p>f(Survived|Pclass=2)</p></li>
+<li><p>f(Survived|Pclass=3)</p></li>
+</ul>
+<p>Dai numeri vediamo che le distribuzioni sono molto diverse, a seconda del condizionamento operato. Ciò non è soprendente, perché immaginiamo che i passeggeri in prima e seconda classe abbiano avuto un trattamento diverso rispetto a quelli in terza classe.</p>
+<p>Visualizziamo le distribuzioni graficamente:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">titanic</span><span class="p">[</span><span class="s1">&#39;Pclass&#39;</span><span class="p">],</span> <span class="n">titanic</span><span class="p">[</span><span class="s1">&#39;Survived&#39;</span><span class="p">],</span> <span class="n">normalize</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">stacked</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;Pclass&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/2270260a296cc79c1ce184d09258ee07b72e86f235a191714e94400accec18f5.png" src="../_images/2270260a296cc79c1ce184d09258ee07b72e86f235a191714e94400accec18f5.png" />
+</div>
+</div>
+<p>Il grafico mostra chiaramente lo sbilanciamento, per cui deduciamo che <code class="docutils literal notranslate"><span class="pre">Pclass</span></code> e <code class="docutils literal notranslate"><span class="pre">Survived</span></code> sono in effetti associate (o correlate).</p>
+<p>Calcoliamo le frequenze relative marginali, indipendentemente dalle classi:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">titanic</span><span class="p">[</span><span class="s1">&#39;Survived&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Survived
+0    0.616162
+1    0.383838
+Name: proportion, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Queste sono le frequenze <span class="math notranslate nohighlight">\(f(Survived=0)\)</span> e <span class="math notranslate nohighlight">\(f(Survived=1)\)</span>.</p>
+<p>Se le due variabili non fossero correlate, ci aspetteremmo di avere delle frequenze assolute proporzionali alle frequenze relative marginali:</p>
+<div class="math notranslate nohighlight">
+\[\tilde{n}_{ij} = f_{ij} \cdot n_{i+}\]</div>
+<p>Ovvero:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f_ij</span> <span class="o">=</span> <span class="n">titanic</span><span class="p">[</span><span class="s1">&#39;Survived&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+<span class="n">n_iplus</span> <span class="o">=</span> <span class="n">titanic</span><span class="p">[</span><span class="s1">&#39;Pclass&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">f_ij</span><span class="o">*</span><span class="n">n_iplus</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[133.09090909,  82.90909091],
+       [113.37373737,  70.62626263],
+       [302.53535354, 188.46464646]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Confrontiamo queste con le frequenze effettive:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">titanic</span><span class="p">[</span><span class="s1">&#39;Pclass&#39;</span><span class="p">],</span> <span class="n">titanic</span><span class="p">[</span><span class="s1">&#39;Survived&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Survived</th>
+      <th>0</th>
+      <th>1</th>
+    </tr>
+    <tr>
+      <th>Pclass</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>80</td>
+      <td>136</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>97</td>
+      <td>87</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>372</td>
+      <td>119</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="statistica-mathcal-x-2-di-pearson">
+<h4>Statistica <span class="math notranslate nohighlight">\(\mathcal{X}^2\)</span> di Pearson<a class="headerlink" href="#statistica-mathcal-x-2-di-pearson" title="Permalink to this heading">#</a></h4>
+<p>La statistica <span class="math notranslate nohighlight">\(\mathcal{X}^2\)</span> di Pearson misura questa differenza con la seguente formula:</p>
+<p>$$\mathcal{X}^2 = \sum_{i=1}^k \sum_{j=1}^l \frac{(n_{ij}-\tilde{n}<em>{ij})^2}{\tilde{n}</em>{ij}}</p>
+<p>Nel caso precedente, il risultato sarà:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_ij_pred</span> <span class="o">=</span> <span class="n">f_ij</span><span class="o">*</span><span class="n">n_iplus</span>
+<span class="n">n_ij</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">titanic</span><span class="p">[</span><span class="s1">&#39;Pclass&#39;</span><span class="p">],</span> <span class="n">titanic</span><span class="p">[</span><span class="s1">&#39;Survived&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">values</span>
+
+<span class="n">chi_square</span> <span class="o">=</span> <span class="p">((</span><span class="n">n_ij</span><span class="o">-</span><span class="n">n_ij_pred</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="n">n_ij_pred</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">chi_square</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>102.88898875696056
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="statistica-v-di-cramer">
+<h4>Statistica <span class="math notranslate nohighlight">\(V\)</span> di Cramer<a class="headerlink" href="#statistica-v-di-cramer" title="Permalink to this heading">#</a></h4>
+<p>La statistica <span class="math notranslate nohighlight">\(\mathcal{X}^2\)</span> di Pearson non è normalizzata, nel senso che il suo valore massimo dipende dalla dimensione del campione. Per ovviare a questo problema, si può usare la statistica V di Cramer, definita come segue:</p>
+<p>$$V = \sqrt{\frac{\mathcal{X}^2}{n(min(k,l)-1)}}</p>
+<p>È possibile calcolare la statistica V di Cramer come segue:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats.contingency</span> <span class="kn">import</span> <span class="n">association</span>
+
+<span class="n">association</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">titanic</span><span class="p">[</span><span class="s1">&#39;Pclass&#39;</span><span class="p">],</span> <span class="n">titanic</span><span class="p">[</span><span class="s1">&#39;Survived&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.33981738800531175
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="rischio-relativo-e-odds-ratio">
+<h4>Rischio Relativo e Odds Ratio<a class="headerlink" href="#rischio-relativo-e-odds-ratio" title="Permalink to this heading">#</a></h4>
+<p>Il rischio relativo e l’odds ratio sono dei metodi di misurazione del grado di correlazione tra due variabili discrete, tra i più diffusi in epidemiologia. Consideriamo ad esempio la seguente matrice di contingenza che mette in relazione la variabile “Diseased/Healthy” con quella “Exposed/Non Exposed”:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">contingency</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Smoking&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">34</span><span class="p">,</span> <span class="mi">22</span><span class="p">],</span>
+    <span class="s2">&quot;Non Smoking&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">66</span><span class="p">,</span><span class="mi">118</span><span class="p">]</span>
+<span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Disease&quot;</span><span class="p">,</span> <span class="s2">&quot;Non Disease&quot;</span><span class="p">])</span>
+<span class="n">contingency</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Smoking</th>
+      <th>Non Smoking</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Disease</th>
+      <td>34</td>
+      <td>66</td>
+    </tr>
+    <tr>
+      <th>Non Disease</th>
+      <td>22</td>
+      <td>118</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Consideriamo le distribuzioni condizionali delle frequenze relative:</p>
+<table>
+<tr>
+<td> f(Disease|Smoking)  </td><td>    f(Disease|Non Smoking)</td>
+</tr>
+<tr>
+<td> f(Non Disease|Smoking)  </td><td>    f(Non Disease|Non Smoking)</td>
+</tr>
+</table>
+<p>Possiamo ottenere la tabella normalizzando per righe:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">frequencies</span><span class="o">=</span><span class="n">contingency</span><span class="o">/</span><span class="n">contingency</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">frequencies</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Smoking</th>
+      <th>Non Smoking</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Disease</th>
+      <td>0.607143</td>
+      <td>0.358696</td>
+    </tr>
+    <tr>
+      <th>Non Disease</th>
+      <td>0.392857</td>
+      <td>0.641304</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Definiamo il <strong>rischio relativo</strong> come il rapporto tra le due distribuzioni di frequenze relative. Avremo dunque due valori di rischio relativo:</p>
+<div class="math notranslate nohighlight">
+\[\frac{f(Disease|Smoking)}{f(Disease|Non\ Smoking)}; \frac{f(Non\ Disease|Smoking)}{f(Non\ Disease|Non\ Smoking)}\]</div>
+<p>Per ottenere i due rischi relativi, è sufficiente dividere la prima colonna per la seconda:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">relative_risks</span> <span class="o">=</span> <span class="n">frequencies</span><span class="p">[</span><span class="s1">&#39;Smoking&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">frequencies</span><span class="p">[</span><span class="s1">&#39;Non Smoking&#39;</span><span class="p">]</span>
+<span class="n">relative_risks</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Disease        1.692641
+Non Disease    0.612591
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Il risultato sopra può essere interpretato così:</p>
+<ul class="simple">
+<li><p>La proporzione di individui malati è <span class="math notranslate nohighlight">\(1.69\)</span> volte superiore nei fumatori, se comparati ai non fumatori. Ad esempio, se tra <span class="math notranslate nohighlight">\(100\)</span> individui non fumatori ci sono 3 malati, mi aspetto di vederne <span class="math notranslate nohighlight">\(3\cdot 1.69 \approx 5\)</span> tra <span class="math notranslate nohighlight">\(100\)</span> individui fumatori.</p></li>
+<li><p>La proporzione di individui sani è <span class="math notranslate nohighlight">\(0.61\)</span> volte più piccola nei fumatori, se comparati ai non fumatori. Ad esempio, se tra <span class="math notranslate nohighlight">\(100\)</span> individui non fumatori ci sono <span class="math notranslate nohighlight">\(97\)</span> individui sani, mi aspetto di vederne <span class="math notranslate nohighlight">\(97\cdot 0.61 \approx 60\)</span> tra <span class="math notranslate nohighlight">\(100\)</span> fumatori.</p></li>
+</ul>
+<p>L’odds ratio viene definito come rapporto tra i rischi relativi:</p>
+<div class="math notranslate nohighlight">
+\[OR = \frac{\frac{f(Disease|Smoking)}{f(Disease|Non\ Smoking)}}{\frac{f(Non\ Disease|Smoking)}{f(Non\ Disease|Non\ Smoking)}}\]</div>
+<p>Calcoliamo il rischio relativo dividendo i due numeri:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">relative_risks</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">relative_risks</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.7630853994490354
+</pre></div>
+</div>
+</div>
+</div>
+<p>Possiamo interpretare il valore ottenuto come segue:</p>
+<blockquote>
+<div><p>Le probabilità di essere malati sono superiori di <span class="math notranslate nohighlight">\(2.76\)</span> volte nei fumatori rispetto che nei non fumatori.</p>
+</div></blockquote>
+<p>O alternativamente:</p>
+<blockquote>
+<div><p>Le probabilità di essere un fumatore sono superiori di <span class="math notranslate nohighlight">\(2.76\)</span> volte nei soggetti malati rispetto che nei soggetti sani.</p>
+</div></blockquote>
+</section>
+</section>
+</section>
+<section id="associazioni-tra-variabili-ordinali-e-continue">
+<h2>Associazioni tra Variabili Ordinali e Continue<a class="headerlink" href="#associazioni-tra-variabili-ordinali-e-continue" title="Permalink to this heading">#</a></h2>
+<p>Considereremo il dataset delle iris di fisher come dataset di esempio. Carichiamo il dataset mediante la libreria <code class="docutils literal notranslate"><span class="pre">seaborn</span></code> e visualizziamone informazioni e prime righe:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="n">iris</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;iris&#39;</span><span class="p">)</span>
+<span class="n">iris</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="n">iris</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 150 entries, 0 to 149
+Data columns (total 5 columns):
+ #   Column        Non-Null Count  Dtype  
+---  ------        --------------  -----  
+ 0   sepal_length  150 non-null    float64
+ 1   sepal_width   150 non-null    float64
+ 2   petal_length  150 non-null    float64
+ 3   petal_width   150 non-null    float64
+ 4   species       150 non-null    object 
+dtypes: float64(4), object(1)
+memory usage: 6.0+ KB
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sepal_length</th>
+      <th>sepal_width</th>
+      <th>petal_length</th>
+      <th>petal_width</th>
+      <th>species</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4.6</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Il dataset contiene <span class="math notranslate nohighlight">\(150\)</span> osservazioni riportanti le misure di 4 grandezze (lunghezza e larghezza di sepalo e petalo) per <span class="math notranslate nohighlight">\(150\)</span> esemplari di iris appartenenti a tre specie diverse: Iris setosa, Iris virginica e Iris versicolor.</p>
+<p>Tutte le variabili sono numeriche, eccetto <code class="docutils literal notranslate"><span class="pre">species</span></code> che è categorica. Visualizziamone i valori univoci:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;species&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;setosa&#39;, &#39;versicolor&#39;, &#39;virginica&#39;], dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Esploriamo i dati calcolando i principali indicatori statistici mediante <code class="docutils literal notranslate"><span class="pre">describe</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sepal_length</th>
+      <th>sepal_width</th>
+      <th>petal_length</th>
+      <th>petal_width</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>150.000000</td>
+      <td>150.000000</td>
+      <td>150.000000</td>
+      <td>150.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>5.843333</td>
+      <td>3.057333</td>
+      <td>3.758000</td>
+      <td>1.199333</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.828066</td>
+      <td>0.435866</td>
+      <td>1.765298</td>
+      <td>0.762238</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>4.300000</td>
+      <td>2.000000</td>
+      <td>1.000000</td>
+      <td>0.100000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>5.100000</td>
+      <td>2.800000</td>
+      <td>1.600000</td>
+      <td>0.300000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>5.800000</td>
+      <td>3.000000</td>
+      <td>4.350000</td>
+      <td>1.300000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>6.400000</td>
+      <td>3.300000</td>
+      <td>5.100000</td>
+      <td>1.800000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>7.900000</td>
+      <td>4.400000</td>
+      <td>6.900000</td>
+      <td>2.500000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<blockquote>
+<div><p><strong>🙋‍♂️ Domanda 1</strong></p>
+<p>La variabile <code class="docutils literal notranslate"><span class="pre">species</span></code> non è stata inclusa nel sommario. Perché?</p>
+</div></blockquote>
+<p>Confrontiamo le diverse variabili mediante boxplot:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">box</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/520949c188edcefd25096a0b7256ae9115382db757151307ecbd8b1e9716407b.png" src="../_images/520949c188edcefd25096a0b7256ae9115382db757151307ecbd8b1e9716407b.png" />
+</div>
+</div>
+</section>
+<section id="scatter-plot">
+<h2>Scatter Plot<a class="headerlink" href="#scatter-plot" title="Permalink to this heading">#</a></h2>
+<p>Il plot sopra ci permette di studiare alcune caratteristiche delle variabili. Tuttavia esso tratta i dati come <span class="math notranslate nohighlight">\(4\)</span> campioni univariati indipendenti e dunque non mette in evidenza le eventuali relazioni che sussistono tra le variabili. Se consideriamo i dati in maniera univariata, possiamo considerare ognuna delle osservazioni come un punto che vive in uno spazio a <span class="math notranslate nohighlight">\(4\)</span> dimensioni. In principio, sarebbe interessante studiare come tali dati si distribuiscono nello spazio, ma in pratica possiamo visualizzare al massimo punti dello spazio tridimensionale. Inoltre, i plot 3D sono in genere meno leggibili dei plot 2D.</p>
+<p>Un primo modo per visualizzare i dati, consiste dunque nello scegliere una coppia di variabili e plottare le osservazioni come se fossero punti in uno spazio 2D. Questo tipo di grafico si chiama <strong>scatter plot</strong>. Scegliamo ad esempio <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code> e <code class="docutils literal notranslate"><span class="pre">petal_width</span></code> e visualizziamone lo scatter plot mediante la libreria <code class="docutils literal notranslate"><span class="pre">seaborn</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;sepal_width&#39;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;sepal_length&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/55f1591f69556374f6f4849b20d57e9c01cebe64e5ea86cf8948dcb7f96062a4.png" src="../_images/55f1591f69556374f6f4849b20d57e9c01cebe64e5ea86cf8948dcb7f96062a4.png" />
+</div>
+</div>
+<p>Possiamo colorare i punti in maniera diversa a seconda dell’appartenenza alle diverse classi di iris utilizzando il parametro <code class="docutils literal notranslate"><span class="pre">hue</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;sepal_width&#39;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;sepal_length&#39;</span><span class="p">],</span> <span class="n">hue</span><span class="o">=</span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;species&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/384c4158593fc32af5069f382a0008b9cbb7b51aa93349b4702634d8dfb8dc9c.png" src="../_images/384c4158593fc32af5069f382a0008b9cbb7b51aa93349b4702634d8dfb8dc9c.png" />
+</div>
+</div>
+<blockquote>
+<div><p><strong>🙋‍♂️ Domanda 2</strong></p>
+<p>Cosa apprendiamo dal plot? La coppia di variabili considerata costituisce un fattore discriminante per l’appartenenza alle diverse classi?</p>
+</div></blockquote>
+<p>Lo scatterplot può essere effettuato con diverse coppie di variabili. Consideriamo la coppia (<code class="docutils literal notranslate"><span class="pre">sepal_length</span></code>, <code class="docutils literal notranslate"><span class="pre">petal_length</span></code>):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;petal_length&#39;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;sepal_length&#39;</span><span class="p">],</span> <span class="n">hue</span><span class="o">=</span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;species&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/dc148cedf093301d03870a159f9cb97385d21eca150c85d39d6fde6842c3d762.png" src="../_images/dc148cedf093301d03870a159f9cb97385d21eca150c85d39d6fde6842c3d762.png" />
+</div>
+</div>
+<blockquote>
+<div><p><strong>🙋‍♂️ Domanda 3</strong></p>
+<p>Si confronti l’ultimo scatterplot visualizzato con lo scatterplot visto in precedenza. La nuova coppia di variabili costituisce un fattore discriminante per l’appartenenza alle diverse classi?</p>
+</div></blockquote>
+<p>Come possiamo notare dai due plot, ogni coppia di variabili ci permette di vedere “una parte” delle possibili interazioni tra le diverse variabili. Per avere un quadro più completo, in pratica si visualizzano gli scatter plot di tutte le coppie possibili. Questo plot prende il nome di scatter matrix. Possiamo ottenere una scatter matrix con <code class="docutils literal notranslate"><span class="pre">seaborn</span></code> come segue:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">iris</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/homebrew/lib/python3.11/site-packages/seaborn/axisgrid.py:123: UserWarning: The figure layout has changed to tight
+  self._figure.tight_layout(*args, **kwargs)
+</pre></div>
+</div>
+<img alt="../_images/3ba2dcefc36028d915ddb3670ac49204bdb4f22bc8bdc0d8f20a7dd398262985.png" src="../_images/3ba2dcefc36028d915ddb3670ac49204bdb4f22bc8bdc0d8f20a7dd398262985.png" />
+</div>
+</div>
+<blockquote>
+<div><p><strong>🙋‍♂️ Domanda 4</strong></p>
+<p>Perché sulla diagonale principale vengono mostrati degli istogrammi al posto di scatter plot? Si mostrino gli scatterplot corrispondenti alle coppie di variabili sulla diagonale principale.</p>
+</div></blockquote>
+<p>Possiamo evidenziare i punti per classe specificando una variabile sulla base della quale colorare i punti:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">iris</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;species&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/homebrew/lib/python3.11/site-packages/seaborn/axisgrid.py:123: UserWarning: The figure layout has changed to tight
+  self._figure.tight_layout(*args, **kwargs)
+</pre></div>
+</div>
+<img alt="../_images/9ac98c8b94676c1ac7763d392668bf098079732a3bf27975162b6565fb1b5133.png" src="../_images/9ac98c8b94676c1ac7763d392668bf098079732a3bf27975162b6565fb1b5133.png" />
+</div>
+</div>
+<blockquote>
+<div><p><strong>🙋‍♂️ Domanda 5</strong></p>
+<p>Esiste una coppia di variabili che individua uno spazio nel quale le osservazioni appartenenti alle diverse classi sono maggiormente distinte? Esiste una unica variabile che presenta distribuzioni particolarmente diverse a seconda dell’appartenenza alle tre classi?</p>
+</div></blockquote>
+</section>
+<section id="medie-e-covarianze">
+<h2>Medie e Covarianze<a class="headerlink" href="#medie-e-covarianze" title="Permalink to this heading">#</a></h2>
+<p>Nel caso <strong>multivariato</strong>, la <strong>media</strong> viene calcolata in maniera del tutto analoga al caso <strong>univariato</strong> come <strong>media di vettori</strong>. Possiamo banalmente calcolare la media dei nostri dati multivariati mediante il metodo <code class="docutils literal notranslate"><span class="pre">mean</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sepal_length    5.843333
+sepal_width     3.057333
+petal_length    3.758000
+petal_width     1.199333
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Il risultato sarà un vettore (una serie di Pandas) che individua un punto nello spazio a quattro dimensioni che rappresenta la media delle osservazioni. Vediamo un semplice esempio a due dimensioni, considerando solo alcune variabili:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris2d</span> <span class="o">=</span> <span class="n">iris</span><span class="p">[[</span><span class="s1">&#39;sepal_length&#39;</span><span class="p">,</span><span class="s1">&#39;sepal_width&#39;</span><span class="p">]]</span>
+<span class="n">mean_point</span> <span class="o">=</span> <span class="n">iris2d</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">iris2d</span><span class="p">[</span><span class="s1">&#39;sepal_length&#39;</span><span class="p">],</span><span class="n">iris2d</span><span class="p">[</span><span class="s1">&#39;sepal_width&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mean_point</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mean_point</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;rx&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ea5f10155b4689864dd40385518d9877c5e63d9ea09f933f3eb7b3c67bf4ac85.png" src="../_images/ea5f10155b4689864dd40385518d9877c5e63d9ea09f933f3eb7b3c67bf4ac85.png" />
+</div>
+</div>
+<p>La croce rossa rappresenta il punto medio del dataset bidimensionale considerato.</p>
+<p>Il concetto di <strong>varianza</strong> viene generalizzato dal concetto di <strong>covarianza</strong> nel caso di dati bivariati. La covarianza misura quanto i valori assunti dalle due variabili cambino assieme e si misura come segue:</p>
+<p>\begin{equation}
+\sigma_{XY} = \frac{1}{N}\sum_i^N (x_i - \overline x) (y_i - \overline y)
+\end{equation}</p>
+<p>dove <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span> sono le due variabili di interesse, <span class="math notranslate nohighlight">\(x_i\)</span> è il valore di <span class="math notranslate nohighlight">\(X\)</span> per l’iesima osservazione, <span class="math notranslate nohighlight">\(y_i\)</span> è il valore di <span class="math notranslate nohighlight">\(Y\)</span> per l’iesima osservazione e <span class="math notranslate nohighlight">\(\overline x\)</span>, <span class="math notranslate nohighlight">\(\overline y\)</span> sono le medie delle osservazioni per le due variabili <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span>.</p>
+<p>Intuitivamente, la covarianza assumerà valori molto positivi quando <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span> variano in maniera concorde (ovvero, se <span class="math notranslate nohighlight">\(X\)</span> assume valori alti, <span class="math notranslate nohighlight">\(Y\)</span> assume valori alti e se <span class="math notranslate nohighlight">\(X\)</span> assume valori bassi <span class="math notranslate nohighlight">\(Y\)</span> assume valori bassi). In tal caso infatti i segni dei due fattori all’interno della sommatoria saranno concordi e il loro prodotto avrà segno positivo. Se invece <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span> variano in maniera discorde, il prodotto avrà segno negativo e la varianza assumerà valori negativi.</p>
+<blockquote>
+<div><p><strong>🙋‍♂️ Domanda 6</strong></p>
+<p>A cosa corrisponde la varianza se <span class="math notranslate nohighlight">\(X=Y\)</span>?</p>
+</div></blockquote>
+<p>In pratica, in presenza di più variabili, si calcolano le covarianze di tutte le coppie possibili di variabili, un po’ come visto nel caso della scatter matrix. Ciò si ottiene mediante il metodo <code class="docutils literal notranslate"><span class="pre">cov</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">cov</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sepal_length</th>
+      <th>sepal_width</th>
+      <th>petal_length</th>
+      <th>petal_width</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>sepal_length</th>
+      <td>0.685694</td>
+      <td>-0.042434</td>
+      <td>1.274315</td>
+      <td>0.516271</td>
+    </tr>
+    <tr>
+      <th>sepal_width</th>
+      <td>-0.042434</td>
+      <td>0.189979</td>
+      <td>-0.329656</td>
+      <td>-0.121639</td>
+    </tr>
+    <tr>
+      <th>petal_length</th>
+      <td>1.274315</td>
+      <td>-0.329656</td>
+      <td>3.116278</td>
+      <td>1.295609</td>
+    </tr>
+    <tr>
+      <th>petal_width</th>
+      <td>0.516271</td>
+      <td>-0.121639</td>
+      <td>1.295609</td>
+      <td>0.581006</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<blockquote>
+<div><p><strong>🙋‍♂️ Domanda 7</strong></p>
+<p>A cosa serve il codice <code class="docutils literal notranslate"><span class="pre">drop(&quot;species&quot;,</span> <span class="pre">axis=1)</span></code> inserito sopra?</p>
+<p>Che cosa rappresentano i valori sulla diagonale principale?</p>
+</div></blockquote>
+<blockquote>
+<div><p><strong>🙋‍♂️ Domanda 8</strong></p>
+<p>Ci sono coppie di variabili che presentano covarianze fortemente positive? Si confrontino i valori della matrice di covarianza con i relativi plot dello scatterplot. I due indicatori ci dicono la stessa cosa?</p>
+</div></blockquote>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="esercizi">
+<h1>Esercizi<a class="headerlink" href="#esercizi" title="Permalink to this heading">#</a></h1>
+<blockquote>
+<div><p>🧑‍💻 Esercizio 1</p>
+<p>Considerando il dataset Titanic, si calcolino per ogni variabile la numerosità, la media, la deviazione standard, il minimo, il massimo, il valore mediano, il primo e il terzo quartile. Dopo aver calcolato i valori richiesti individualmente, si utilizzi il metodo <code class="docutils literal notranslate"><span class="pre">describe</span></code> per ottenere tali valori. Qual è la variabile più dispersa?</p>
+</div></blockquote>
+<blockquote>
+<div><p>🧑‍💻 Esercizio 2</p>
+<p>Considerando il dataset Titanic, per ognuna delle tre classi, si calcolino medie e varianze delle età dei passeggeri. In quale classe le età sono meno disperse? Quale classe contiene i soggetti più giovani? Si completi l’analisi con dei grafici a barre.</p>
+</div></blockquote>
+<blockquote>
+<div><p>🧑‍💻 Esercizio 3</p>
+<p>Si aggiunga al dataset Titanic una nuova colonna “Old” che assume valore pari a 1 per le osservazioni che presentano età superiore al valore medio e 0 altrimenti. Si calcoli dunque una crosstab che calcoli il numero di soggetti “anziani” (soggetti per i quali old è pari a 1) rispetto alle variabili Pclass e Sex. Si mostri un barplot a partire dalla tabella. In quale classe gli uomini tendono ad essere molto più anziani delle donne?</p>
+</div></blockquote>
+<blockquote>
+<div><p>🧑‍💻 Esercizio 4</p>
+<p>Si carichi il dataset mpg mediante la libreria seaborn (usare l’istruzione <code class="docutils literal notranslate"><span class="pre">t=sns.load_dataset('mpg')</span></code>). Si visualizzi la scatter matrix differenziando i colori dei punti a seconda dei valori della variabile <code class="docutils literal notranslate"><span class="pre">origin</span></code>. Chi produce le macchine più pesanti? Esistono coppie di variabili che costituiscono un fattore decisivo per distinguere una delle origini dalle altre?</p>
+</div></blockquote>
+<blockquote>
+<div><p>🧑‍💻 Esercizio 5</p>
+<p>Considerando il dataset <code class="docutils literal notranslate"><span class="pre">mpg</span></code>, si scelga un gruppo di variabili rispetto alle quali ottenere un diagramma a coordinate parallele. Che cosa possiamo inferire dal diagramma?</p>
+</div></blockquote>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./laboratories"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Associazione tra Variabili e Dati Multivariati</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#riassumere-la-distribuzione-di-due-variabili-discrete">Riassumere la Distribuzione di due Variabili Discrete</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabelle-di-contingenza">Tabelle di Contingenza</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzioni-di-frequenze-relative-congiunte">Distribuzioni di Frequenze Relative Congiunte</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzioni-di-frequenze-relative-marginali">Distribuzioni di Frequenze Relative Marginali</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzioni-di-frequenze-relative-condizionali">Distribuzioni di Frequenze Relative Condizionali</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rappresentazioni-grafiche">Rappresentazioni Grafiche</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#misure-di-associazione-tra-due-variabili-discrete">Misure di Associazione tra due Variabili Discrete</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#statistica-mathcal-x-2-di-pearson">Statistica <span class="math notranslate nohighlight">\(\mathcal{X}^2\)</span> di Pearson</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#statistica-v-di-cramer">Statistica <span class="math notranslate nohighlight">\(V\)</span> di Cramer</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#rischio-relativo-e-odds-ratio">Rischio Relativo e Odds Ratio</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#associazioni-tra-variabili-ordinali-e-continue">Associazioni tra Variabili Ordinali e Continue</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plot">Scatter Plot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#medie-e-covarianze">Medie e Covarianze</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">Esercizi</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Antonino Furnari
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
