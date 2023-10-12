@@ -22,6 +22,9 @@ chapters:
     - file: lectures/intro_python/04_intro_matplotlib
     - file: lectures/intro_python/05_intro_pandas
   - file: lectures/main_data_analysis_concepts/00_main
-  - file: lectures/statistica_descrittiva/01_distribuzione_dei_dati
-  - file: lectures/statistica_descrittiva/02_misure_di_tendenza_centrale_dispersione_e_forma
+  - file: lectures/01_misure_di_frequenze_e_rappresentazione_grafica_dei_dati
+  - file: laboratories/01_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati
+  - file: lectures/02_misure_di_tendenza_centrale_dispersione_e_forma
+  - file: laboratories/02_misure_di_tendenza_centrale_dispersione_e_forma
+  #- file: lectures/statistica_descrittiva/02_misure_di_tendenza_centrale_dispersione_e_forma
   # - file: lectures/statistica_descrittiva/03_dati_multivariati
