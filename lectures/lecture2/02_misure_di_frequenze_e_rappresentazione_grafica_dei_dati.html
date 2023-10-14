@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>4. Misure di Frequenze e Rappresentazione Grafica dei Dati &#8212; Lecture Notes on Fundamental of Data Analysis</title>
+    <title>8. Misure di Frequenze e Rappresentazione Grafica dei Dati &#8212; Lecture Notes on Fundamental of Data Analysis</title>
   
   
   
@@ -19,57 +19,56 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
-  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
+    <script src="../../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures/01_misure_di_frequenze_e_rappresentazione_grafica_dei_dati';</script>
-    <link rel="shortcut icon" href="../_static/favicon.ico"/>
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="5. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati" href="../laboratories/01_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html" />
-    <link rel="prev" title="3. Main data analysis concepts" href="main_data_analysis_concepts/00_main.html" />
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures/lecture2/02_misure_di_frequenze_e_rappresentazione_grafica_dei_dati';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="9. Misure di Tendenza Centrale, Dispersione e Forma" href="../lecture3/01_misure_di_tendenza_centrale_dispersione_e_forma.html" />
+    <link rel="prev" title="7. Main data analysis concepts" href="01_main_data_analysis_concepts.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -106,7 +105,7 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="search-button__overlay"></div>
     <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
-      action="../search.html"
+      action="../../search.html"
       method="get">
   <i class="fa-solid fa-magnifying-glass"></i>
   <input type="search"
@@ -144,7 +143,7 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="sidebar-primary-item">
   
 
-<a class="navbar-brand logo" href="index.html">
+<a class="navbar-brand logo" href="../index.html">
   
   
   
@@ -154,36 +153,38 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="intro_data_analysis/00_main.html">1. What is Data Analysis?</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="intro_data_analysis/01_what_is_data.html">1.1. What is Data? An informal Definition</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro_data_analysis/02_data_analysis_definition.html">1.2. A Definition of Data Analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro_data_analysis/03_data_analysis_workflow.html">1.3. Data Analysis Workflow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro_data_analysis/04_examples_data_analysis.html">1.4. Examples of Data Analysis: the Good, the Bad, and the Ugly</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro_data_analysis/05_data_analysis_uses.html">1.5. What’s Data Analysis Used For Today</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro_data_analysis/06_map_course.html">1.6. Where do We Go From Here?</a></li>
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Lecture Notes on Fundamental of Data Analysis
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 1</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lecture1/01_intro_data_analysis.html">1. What is Data Analysis?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture1/01_setup.html">2. Installazione dell’Ambiente di Lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture1/02_intro_python.html">3. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture1/03_intro_numpy.html">4. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture1/04_intro_matplotlib.html">5. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture1/05_intro_pandas.html">6. Introduzione a Pandas</a></li>
 </ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="intro_python/00_main.html">2. Introduction to Python for Data Analysis</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="intro_python/01_setup.html">2.1. Installazione dell’ambiente di lavoro</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro_python/02_intro_python.html">2.2. Introduzione a Python</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro_python/03_intro_numpy.html">2.3. Introduzione a Numpy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro_python/04_intro_matplotlib.html">2.4. Introduzione a Matplotlib</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro_python/05_intro_pandas.html">2.5. Introduzione a Pandas</a></li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 2</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_main_data_analysis_concepts.html">7. Main data analysis concepts</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">8. Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="main_data_analysis_concepts/00_main.html">3. Main data analysis concepts</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/01_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">5. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_misure_di_tendenza_centrale_dispersione_e_forma.html">6. Misure di Tendenza Centrale, Dispersione e Forma</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/02_misure_di_tendenza_centrale_dispersione_e_forma.html">7. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 3</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lecture3/01_misure_di_tendenza_centrale_dispersione_e_forma.html">9. Misure di Tendenza Centrale, Dispersione e Forma</a></li>
 </ul>
 
     </div>
@@ -238,7 +239,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://colab.research.google.com/github/antoninofurnari/fadlecturenotes/blob/master/lecturenotes/lectures/01_misure_di_frequenze_e_rappresentazione_grafica_dei_dati.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/antoninofurnari/fadlecturenotes/blob/master/lecturenotes/lectures/lecture2/02_misure_di_frequenze_e_rappresentazione_grafica_dei_dati.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -247,9 +248,56 @@ const thebe_selector_output = ".output, .cell_output"
 
 <span class="btn__icon-container">
   
-    <img src="../_static/images/logo_colab.png">
+    <img src="../../_static/images/logo_colab.png">
   </span>
 <span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/antoninofurnari/fadlecturenotes" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/antoninofurnari/fadlecturenotes/issues/new?title=Issue%20on%20page%20%2Flectures/lecture2/02_misure_di_frequenze_e_rappresentazione_grafica_dei_dati.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
 </a>
 </li>
       
@@ -269,7 +317,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/lectures/01_misure_di_frequenze_e_rappresentazione_grafica_dei_dati.ipynb" target="_blank"
+      <li><a href="../../_sources/lectures/lecture2/02_misure_di_frequenze_e_rappresentazione_grafica_dei_dati.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -361,38 +409,38 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frequenze-assolute-e-relative">4.1. Frequenze Assolute e Relative</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frequenze-assolute">4.1.1. Frequenze Assolute</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#esempi">4.1.1.1. Esempi</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#diagramma-a-barre-delle-frequenze-assolute">4.1.1.2. Diagramma a Barre delle Frequenze Assolute</a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">4.1.1.2.1. Esempi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frequenze-assolute-e-relative">8.1. Frequenze Assolute e Relative</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frequenze-assolute">8.1.1. Frequenze Assolute</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#esempi">8.1.1.1. Esempi</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#diagramma-a-barre-delle-frequenze-assolute">8.1.1.2. Diagramma a Barre delle Frequenze Assolute</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">8.1.1.2.1. Esempi</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frequenze-relative">4.1.2. Frequenze Relative</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">4.1.2.1. Esempi</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#diagramma-a-barre-delle-frequenze-relative">4.1.2.2. Diagramma a Barre delle Frequenze Relative</a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">4.1.2.2.1. Esempi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frequenze-relative">8.1.2. Frequenze Relative</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">8.1.2.1. Esempi</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#diagramma-a-barre-delle-frequenze-relative">8.1.2.2. Diagramma a Barre delle Frequenze Relative</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">8.1.2.2.1. Esempi</a></li>
 </ul>
 </li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#grafici-a-torta">4.1.2.3. Grafici a Torta</a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">4.1.2.3.1. Esempi</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#grafici-a-torta">8.1.2.3. Grafici a Torta</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">8.1.2.3.1. Esempi</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#empirical-cumulative-distribution-function-ecdf">4.2. Empirical Cumulative Distribution Function (ECDF)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#istogrammi">4.3. Istogrammi</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scegliere-il-numero-di-bin-struges-e-rice">4.3.1. Scegliere il numero di bin: Struges e Rice</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#istogrammi-di-densita">4.3.2. Istogrammi di densità</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stima-della-densita">4.3.3. Stima della densità</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confrontare-campioni-mediante-istogrammi">4.3.4. Confrontare campioni mediante istogrammi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#empirical-cumulative-distribution-function-ecdf">8.2. Empirical Cumulative Distribution Function (ECDF)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#istogrammi">8.3. Istogrammi</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scegliere-il-numero-di-bin-struges-e-rice">8.3.1. Scegliere il numero di bin: Struges e Rice</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#istogrammi-di-densita">8.3.2. Istogrammi di densità</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stima-della-densita">8.3.3. Stima della densità</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confrontare-campioni-mediante-istogrammi">8.3.4. Confrontare campioni mediante istogrammi</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referenze">4.4. Referenze</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referenze">8.4. Referenze</a></li>
 </ul>
             </nav>
         </div>
@@ -405,12 +453,12 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="misure-di-frequenze-e-rappresentazione-grafica-dei-dati">
-<h1><span class="section-number">4. </span>Misure di Frequenze e Rappresentazione Grafica dei Dati<a class="headerlink" href="#misure-di-frequenze-e-rappresentazione-grafica-dei-dati" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">8. </span>Misure di Frequenze e Rappresentazione Grafica dei Dati<a class="headerlink" href="#misure-di-frequenze-e-rappresentazione-grafica-dei-dati" title="Permalink to this heading">#</a></h1>
 <p>In questa lezione, inizieremo a vedere dei primi strumenti per riassumere le caratteristiche fondamentali dei dati.</p>
 <section id="frequenze-assolute-e-relative">
-<h2><span class="section-number">4.1. </span>Frequenze Assolute e Relative<a class="headerlink" href="#frequenze-assolute-e-relative" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">8.1. </span>Frequenze Assolute e Relative<a class="headerlink" href="#frequenze-assolute-e-relative" title="Permalink to this heading">#</a></h2>
 <section id="frequenze-assolute">
-<h3><span class="section-number">4.1.1. </span>Frequenze Assolute<a class="headerlink" href="#frequenze-assolute" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">8.1.1. </span>Frequenze Assolute<a class="headerlink" href="#frequenze-assolute" title="Permalink to this heading">#</a></h3>
 <p>Un primo modo di descrivere i dati consiste nel calcolare il numero di volte in cui ciascun valore appare. Queste sono chiamate “frequenze assolute”. Le frequenze assolute sono in genere calcolate per variabili discrete in cui le osservazioni assumono un numero finito di valori.</p>
 <p>Siano</p>
 <div class="math notranslate nohighlight">
@@ -421,7 +469,7 @@ document.write(`
 \[\sum_i n_i = n\]</div>
 <p>Dove <span class="math notranslate nohighlight">\(n\)</span> è il numero totale di elementi nel campione.</p>
 <section id="esempi">
-<h4><span class="section-number">4.1.1.1. </span>Esempi<a class="headerlink" href="#esempi" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">8.1.1.1. </span>Esempi<a class="headerlink" href="#esempi" title="Permalink to this heading">#</a></h4>
 <p>Consideriamo un semplice campione di 10 pazienti per i quali sono stati rilevati dei dati. Consideriamo una variabile <code class="docutils literal notranslate"><span class="pre">gender</span></code> che indica il genere dei pazienti:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -593,10 +641,10 @@ Name: height, dtype: int64
 </div>
 </section>
 <section id="diagramma-a-barre-delle-frequenze-assolute">
-<h4><span class="section-number">4.1.1.2. </span>Diagramma a Barre delle Frequenze Assolute<a class="headerlink" href="#diagramma-a-barre-delle-frequenze-assolute" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">8.1.1.2. </span>Diagramma a Barre delle Frequenze Assolute<a class="headerlink" href="#diagramma-a-barre-delle-frequenze-assolute" title="Permalink to this heading">#</a></h4>
 <p>Le frequenze dei dati possono essere rappresentate graficamente mediante un diagramma a barre che pone sull’asse delle <span class="math notranslate nohighlight">\(x\)</span> il valore univoco (<span class="math notranslate nohighlight">\(a_i\)</span>) e che rappresenta la frequenza assoluta <span class="math notranslate nohighlight">\(n_i\)</span> come altezza della barra.</p>
 <section id="id1">
-<h5><span class="section-number">4.1.1.2.1. </span>Esempi<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h5>
+<h5><span class="section-number">8.1.1.2.1. </span>Esempi<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h5>
 <p>Nel caso del campione <code class="docutils literal notranslate"><span class="pre">gender</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -608,13 +656,13 @@ Name: height, dtype: int64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
 </pre></div>
 </div>
-<img alt="../_images/dd6422424a7e86c6cc34b85062a26cee4b28b1df917c3c1c9f1415f56914beab.png" src="../_images/dd6422424a7e86c6cc34b85062a26cee4b28b1df917c3c1c9f1415f56914beab.png" />
+<img alt="../../_images/dd6422424a7e86c6cc34b85062a26cee4b28b1df917c3c1c9f1415f56914beab.png" src="../../_images/dd6422424a7e86c6cc34b85062a26cee4b28b1df917c3c1c9f1415f56914beab.png" />
 </div>
 </div>
-<p>Il diagramma a barre delle frequenze assolute per il campione di pesi e altezze sarà il seguente:</p>
+<p>Il diagramma a barre delle frequenze assolute delle altezze nel nostro campione di pesi e altezze è il seguente:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/bcf638ff094561c97b255a89f216fd8b8f112bba038681bacda8821431394f4a.png" src="../_images/bcf638ff094561c97b255a89f216fd8b8f112bba038681bacda8821431394f4a.png" />
+<img alt="../../_images/bcf638ff094561c97b255a89f216fd8b8f112bba038681bacda8821431394f4a.png" src="../../_images/bcf638ff094561c97b255a89f216fd8b8f112bba038681bacda8821431394f4a.png" />
 </div>
 </div>
 <p>Il grafico sopra ci dice qualcosa sul numero di occorrenze di un dato valore e ci da anche una idea di quali valori siano più o meno frequenti. Vediamo che i dati seguono una forma “a campana”. Troveremo spesso questo tipo di forma e ne parleremo meglio in seguito.</p>
@@ -622,7 +670,7 @@ Name: height, dtype: int64
 </section>
 </section>
 <section id="frequenze-relative">
-<h3><span class="section-number">4.1.2. </span>Frequenze Relative<a class="headerlink" href="#frequenze-relative" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">8.1.2. </span>Frequenze Relative<a class="headerlink" href="#frequenze-relative" title="Permalink to this heading">#</a></h3>
 <p>Le frequenze assolute ci permettono di farci un’idea più precisa su come i dati sono distribuiti, indipendentemente dalla dimensione del nostro campione. Sappiamo ad esempio che il campione contiene più individui di altezza pari a <span class="math notranslate nohighlight">\(167.64\ cm\)</span> che individui di altezza pari a <span class="math notranslate nohighlight">\(193.04\ cm\)</span>. Tuttavia, tale rappresentazione è legata al numero totale di elementi contenuti nel campione. Ad esempio, un campione distribuito in maniera simile, ma con più osservazioni, darà luogo a frequenze assolute più grandi. Possiamo ottenere una rappresentazione indipendente rispetto alla dimensione del campione mediante l’analisi delle frequenze relative, definite come seguono:</p>
 <div class="math notranslate nohighlight">
 \[f_j = f(a_j) = \frac{n_j}{n}, j=1,2,\ldots,k\]</div>
@@ -632,7 +680,7 @@ Name: height, dtype: int64
 <div class="math notranslate nohighlight">
 \[ \sum_j f_j = \sum_j \frac{n_j}{n} = \frac{1}{n}\sum_j n_j = \frac{n}{n} = 1\]</div>
 <section id="id2">
-<h4><span class="section-number">4.1.2.1. </span>Esempi<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">8.1.2.1. </span>Esempi<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h4>
 <p>Nel caso del nostro piccolo campione <code class="docutils literal notranslate"><span class="pre">gender</span></code> avremo:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -678,52 +726,52 @@ Name: height, dtype: float64
 In particolare, questa rappresentazione è chiamata anche <strong>probability mass function (PMF)</strong> e associa ad <strong>ogni valore discreto</strong> presente nel campione una <strong>probabilità</strong>. Possiamo ad esempio dire che la probabilità di trovare un individuo di altezza <span class="math notranslate nohighlight">\(67 inches\)</span> (circa <span class="math notranslate nohighlight">\(170.18 cm\)</span>) è pari a <span class="math notranslate nohighlight">\(0.089104\)</span>.</p>
 </section>
 <section id="diagramma-a-barre-delle-frequenze-relative">
-<h4><span class="section-number">4.1.2.2. </span>Diagramma a Barre delle Frequenze Relative<a class="headerlink" href="#diagramma-a-barre-delle-frequenze-relative" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">8.1.2.2. </span>Diagramma a Barre delle Frequenze Relative<a class="headerlink" href="#diagramma-a-barre-delle-frequenze-relative" title="Permalink to this heading">#</a></h4>
 <p>Plottando le frequenze relative con un diagramma a barre, otteniamo un grafico molto simile a quello delle frequenze relative, ma con una differente scala sull’asse delle <span class="math notranslate nohighlight">\(y\)</span>.</p>
 <section id="id3">
-<h5><span class="section-number">4.1.2.2.1. </span>Esempi<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h5>
+<h5><span class="section-number">8.1.2.2.1. </span>Esempi<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h5>
 <p>Nel caso del campione <code class="docutils literal notranslate"><span class="pre">gender</span></code> avremo:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
 </pre></div>
 </div>
-<img alt="../_images/32edea448c951584d9d802a1a6b82af0fa28eb4cb22ae17e35b216609513fae6.png" src="../_images/32edea448c951584d9d802a1a6b82af0fa28eb4cb22ae17e35b216609513fae6.png" />
+<img alt="../../_images/32edea448c951584d9d802a1a6b82af0fa28eb4cb22ae17e35b216609513fae6.png" src="../../_images/32edea448c951584d9d802a1a6b82af0fa28eb4cb22ae17e35b216609513fae6.png" />
 </div>
 </div>
 <p>Nel caso del campione pesi-altezze, avremo:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/57b17bf9535c760b48fb6eff28a20d82468d94f9873c175fe614afcb4fa5e16a.png" src="../_images/57b17bf9535c760b48fb6eff28a20d82468d94f9873c175fe614afcb4fa5e16a.png" />
+<img alt="../../_images/57b17bf9535c760b48fb6eff28a20d82468d94f9873c175fe614afcb4fa5e16a.png" src="../../_images/57b17bf9535c760b48fb6eff28a20d82468d94f9873c175fe614afcb4fa5e16a.png" />
 </div>
 </div>
 <p>I diagrammi a barre delle frequenze relative sono utili per confrontare tra di loro campioni diversi. Ad esempio, possiamo considerare le altezze di uomini e donne nel dataset pesi-altezze:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/53da4cd4a510b7ef73386425fd4ea9dfac8de3b9bf96258de1a15f766f99024f.png" src="../_images/53da4cd4a510b7ef73386425fd4ea9dfac8de3b9bf96258de1a15f766f99024f.png" />
+<img alt="../../_images/53da4cd4a510b7ef73386425fd4ea9dfac8de3b9bf96258de1a15f766f99024f.png" src="../../_images/53da4cd4a510b7ef73386425fd4ea9dfac8de3b9bf96258de1a15f766f99024f.png" />
 </div>
 </div>
 <p>Dal confronto sopra, possiamo già fare delle considerazioni qualitative sui due campioni. In particolare notiamo (poco sorprendentemente) che gli uomini sono generalmente più alti delle donne. Ciò non vuol dire che non esistano uomini più bassi di alcune donne o viceversa, ma ragionevolmente si tratta di casi meno frequenti.</p>
 </section>
 </section>
 <section id="grafici-a-torta">
-<h4><span class="section-number">4.1.2.3. </span>Grafici a Torta<a class="headerlink" href="#grafici-a-torta" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">8.1.2.3. </span>Grafici a Torta<a class="headerlink" href="#grafici-a-torta" title="Permalink to this heading">#</a></h4>
 <p>In alternativa ai grafici a barre, le frequenze relative possono essere visualizzate anche mediante dei grafici a torta.</p>
 <section id="id4">
-<h5><span class="section-number">4.1.2.3.1. </span>Esempi<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h5>
+<h5><span class="section-number">8.1.2.3.1. </span>Esempi<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h5>
 <p>Nel caso del campione <code class="docutils literal notranslate"><span class="pre">gender</span></code>:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:ylabel=&#39;None&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/493348f1929dc5c369be87f057cc206fb2eb6b8ab88be7b74b4999a386c4efa5.png" src="../_images/493348f1929dc5c369be87f057cc206fb2eb6b8ab88be7b74b4999a386c4efa5.png" />
+<img alt="../../_images/493348f1929dc5c369be87f057cc206fb2eb6b8ab88be7b74b4999a386c4efa5.png" src="../../_images/493348f1929dc5c369be87f057cc206fb2eb6b8ab88be7b74b4999a386c4efa5.png" />
 </div>
 </div>
 <p>Nel caso del campione pesi-altezze:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/94cb6f07df626992be09967525c94d7ad0b864459036f942ec8d811b26e7b19f.png" src="../_images/94cb6f07df626992be09967525c94d7ad0b864459036f942ec8d811b26e7b19f.png" />
+<img alt="../../_images/94cb6f07df626992be09967525c94d7ad0b864459036f942ec8d811b26e7b19f.png" src="../../_images/94cb6f07df626992be09967525c94d7ad0b864459036f942ec8d811b26e7b19f.png" />
 </div>
 </div>
 </section>
@@ -731,7 +779,7 @@ In particolare, questa rappresentazione è chiamata anche <strong>probability ma
 </section>
 </section>
 <section id="empirical-cumulative-distribution-function-ecdf">
-<h2><span class="section-number">4.2. </span>Empirical Cumulative Distribution Function (ECDF)<a class="headerlink" href="#empirical-cumulative-distribution-function-ecdf" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">8.2. </span>Empirical Cumulative Distribution Function (ECDF)<a class="headerlink" href="#empirical-cumulative-distribution-function-ecdf" title="Permalink to this heading">#</a></h2>
 <p>Le frequenze relative funzionano particolarmente bene quando i valori unici sono pochi. Quando invece il numero di valori univoci cresce, le frequenze discrete calcolate per i valori diventano molto piccole e dunque soggette a rumore (ad esempio dovuto ad errori di misura).</p>
 <p>Torniamo al nostro esempio di dataset di pesi e altezze:</p>
 <div class="cell tag_remove-input docutils container">
@@ -834,13 +882,13 @@ In particolare, questa rappresentazione è chiamata anche <strong>probability ma
 <p>I valori dei pesi, a differenza di quelli delle altezze, non sono quantizzati. Un grafico a barre delle frequenze relative (o Probability Mass Function) avrebbe questo aspetto:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/4b43281830ceb014851b9078c2c78e6133a3a063ab89823019bac7e986eb3a4c.png" src="../_images/4b43281830ceb014851b9078c2c78e6133a3a063ab89823019bac7e986eb3a4c.png" />
+<img alt="../../_images/4b43281830ceb014851b9078c2c78e6133a3a063ab89823019bac7e986eb3a4c.png" src="../../_images/4b43281830ceb014851b9078c2c78e6133a3a063ab89823019bac7e986eb3a4c.png" />
 </div>
 </div>
 <p>Come possiamo notare, abbiamo ottenuto una rappresentazione grafica più “rumorosa”. Supponiamo adesso di voler confrontare le distribuzioni dei pesi di donne e uomini:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/0d45258e85fda3d595f4f3e5b6bd15d766e8423fa0c41023107e09c011578ec4.png" src="../_images/0d45258e85fda3d595f4f3e5b6bd15d766e8423fa0c41023107e09c011578ec4.png" />
+<img alt="../../_images/0d45258e85fda3d595f4f3e5b6bd15d766e8423fa0c41023107e09c011578ec4.png" src="../../_images/0d45258e85fda3d595f4f3e5b6bd15d766e8423fa0c41023107e09c011578ec4.png" />
 </div>
 </div>
 <p>Le due rappresentazioni sono affette da rumore dovuto alla natura discreta dei dati per cui due valori molto vicini vengono trattati come due casi distinti nel calcolo delle probabilità. Vedremo alcuni modi per ovviare a questo problema. Uno di essi consiste nel calcolare una <strong>Empirical Cumulative Distribution Function (ECDF)</strong>. Una <strong>ECDF</strong> calcola per un valore <span class="math notranslate nohighlight">\(x\)</span> la somma delle frequenze relative di tutti i valori <span class="math notranslate nohighlight">\(y\)</span> minori o uguali a <span class="math notranslate nohighlight">\(x\)</span>:</p>
@@ -903,7 +951,7 @@ dtype: float64
 <p>Una ECDF può essere rappresentata graficamente mettendo i valori di <span class="math notranslate nohighlight">\(x\)</span> sulle ascisse e i valori di <span class="math notranslate nohighlight">\(ECDF(x)\)</span> sulle ordinate. Ad esempio, la ECDF dei pesi nel nostro dataset di pesi-altezze sarà la seguente:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/0486d2eec4c593f5a8d4e3ca6500537ced7ef6127e899a0aeca0783fd43dd09b.png" src="../_images/0486d2eec4c593f5a8d4e3ca6500537ced7ef6127e899a0aeca0783fd43dd09b.png" />
+<img alt="../../_images/0486d2eec4c593f5a8d4e3ca6500537ced7ef6127e899a0aeca0783fd43dd09b.png" src="../../_images/0486d2eec4c593f5a8d4e3ca6500537ced7ef6127e899a0aeca0783fd43dd09b.png" />
 </div>
 </div>
 <p>La definizione della ECDF ci dice che, dato un punto di coordinate <span class="math notranslate nohighlight">\((x,y)\)</span>, la somma delle frequenze degli elementi minori o uguali a <span class="math notranslate nohighlight">\(x\)</span> è pari a <span class="math notranslate nohighlight">\(y\)</span>. Alternativamente, possiamo dire che l’<span class="math notranslate nohighlight">\(y\%\)</span> degli elementi ha un valore inferiore a <span class="math notranslate nohighlight">\(x\)</span>.</p>
@@ -915,7 +963,7 @@ dtype: float64
 <p>Le ECDF tornano utili per verificare graficamente se due fenomeni hanno distribuzioni simili. Possiamo ad esempio usarle per confrontare le distribuzioni dei pesi di uomini e donne:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/829bf5414a5ced7ec03d79454ca958564b251c4e961c2585168f3b9bb0b111d5.png" src="../_images/829bf5414a5ced7ec03d79454ca958564b251c4e961c2585168f3b9bb0b111d5.png" />
+<img alt="../../_images/829bf5414a5ced7ec03d79454ca958564b251c4e961c2585168f3b9bb0b111d5.png" src="../../_images/829bf5414a5ced7ec03d79454ca958564b251c4e961c2585168f3b9bb0b111d5.png" />
 </div>
 </div>
 <p>Osservando il grafico sopra, possiamo dire che:</p>
@@ -928,16 +976,16 @@ dtype: float64
 <p>In generale, il grafico sopra ci dice che gli uomini tendono a essere più pesanti delle donne.</p>
 </section>
 <section id="istogrammi">
-<h2><span class="section-number">4.3. </span>Istogrammi<a class="headerlink" href="#istogrammi" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">8.3. </span>Istogrammi<a class="headerlink" href="#istogrammi" title="Permalink to this heading">#</a></h2>
 <p>Abbiamo visto che i diagrammi a barre delle frequenze diventano poco chiari quando le variabili sono continue (es. nel caso dei pesi). In questi casi, per ridurre l’influenza del rumore, è possibile utilizzare gli istogrammi. Un istogramma divide il range dei dati in un certo numero di “bin” e riporta per ogni bin il numero di valori che ricadono in quell’intervallo. Di seguito l’istogramma dei pesi nel dataset pesi-altezze:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/58b47ec6466d3f435fa38bc161a20faf895d652384c1714769df7f8a165f5a43.png" src="../_images/58b47ec6466d3f435fa38bc161a20faf895d652384c1714769df7f8a165f5a43.png" />
+<img alt="../../_images/58b47ec6466d3f435fa38bc161a20faf895d652384c1714769df7f8a165f5a43.png" src="../../_images/58b47ec6466d3f435fa38bc161a20faf895d652384c1714769df7f8a165f5a43.png" />
 </div>
 </div>
 <p>Ogni “bin” dell’istogramma copre un determinato range. Pratica comune è quella di suddividere il range dei dati, dal minimo al massimo, in un determinato numero di bin della stessa larghezza.</p>
 <section id="scegliere-il-numero-di-bin-struges-e-rice">
-<h3><span class="section-number">4.3.1. </span>Scegliere il numero di bin: Struges e Rice<a class="headerlink" href="#scegliere-il-numero-di-bin-struges-e-rice" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">8.3.1. </span>Scegliere il numero di bin: Struges e Rice<a class="headerlink" href="#scegliere-il-numero-di-bin-struges-e-rice" title="Permalink to this heading">#</a></h3>
 <p>Il numero di bin può essere specificato arbitrariamente o determinato a seconda del risultato grafico che si vuole ottenere. Esistono due criteri euristici per trovare dei valori di partenza:</p>
 <ul class="simple">
 <li><p>Struges: <span class="math notranslate nohighlight">\(\#bins=3.3\log(n)\)</span></p></li>
@@ -947,25 +995,25 @@ dtype: float64
 <p>Va notato che il numero di bin, può cambiare il risultato grafico. Di seguito due esempi ottenuti calcolando il numero di bin con i due criteri considerati:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/fc535dee25a697124fb8308a99e85cd706d576b504eda185e66ac778136a4852.png" src="../_images/fc535dee25a697124fb8308a99e85cd706d576b504eda185e66ac778136a4852.png" />
+<img alt="../../_images/fc535dee25a697124fb8308a99e85cd706d576b504eda185e66ac778136a4852.png" src="../../_images/fc535dee25a697124fb8308a99e85cd706d576b504eda185e66ac778136a4852.png" />
 </div>
 </div>
 <p>Alternativamente, possiamo definire dei range arbitrari per i nostri bin. Ad esempio, considerando i seguenti limiti per i bin <code class="docutils literal notranslate"><span class="pre">[20,25,30,35,40,45,50,55,60,65]</span></code>, otterremmo il seguente istogramma:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/3f41927ff506a9894b6649861a3e238a54950b4d0a1d0867c485d7cb5da253c9.png" src="../_images/3f41927ff506a9894b6649861a3e238a54950b4d0a1d0867c485d7cb5da253c9.png" />
+<img alt="../../_images/3f41927ff506a9894b6649861a3e238a54950b4d0a1d0867c485d7cb5da253c9.png" src="../../_images/3f41927ff506a9894b6649861a3e238a54950b4d0a1d0867c485d7cb5da253c9.png" />
 </div>
 </div>
 <p>L’istogramma mostrato sopra riporta le frequenze assolute per ogni bin e ci permette di rispondere a domande del genere “quanti soggetti hanno un peso compreso tra <span class="math notranslate nohighlight">\(30\)</span> e <span class="math notranslate nohighlight">\(35\)</span> libbre”?</p>
 <p>In casi particolari, è possibile anche definire istogrammi con bin di dimensioni variabili. Ad esempio:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/65275d156d36686e1b0a894fb597d948a3f151280f090e10722d3ef9df9c90d7.png" src="../_images/65275d156d36686e1b0a894fb597d948a3f151280f090e10722d3ef9df9c90d7.png" />
+<img alt="../../_images/65275d156d36686e1b0a894fb597d948a3f151280f090e10722d3ef9df9c90d7.png" src="../../_images/65275d156d36686e1b0a894fb597d948a3f151280f090e10722d3ef9df9c90d7.png" />
 </div>
 </div>
 </section>
 <section id="istogrammi-di-densita">
-<h3><span class="section-number">4.3.2. </span>Istogrammi di densità<a class="headerlink" href="#istogrammi-di-densita" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">8.3.2. </span>Istogrammi di densità<a class="headerlink" href="#istogrammi-di-densita" title="Permalink to this heading">#</a></h3>
 <p>Un istogramma può essere utilizzato anche per approssimare una Probability Density Function (ne parleremo meglio più in là). L’istogramma delle frequenze assolute mostrato sopra, tuttavia, non ci permette di ragionare in termini probabilistici.</p>
 <p>Ad esempio, non ci permette di dire qual è la probabilità che un soggetto abbia un peso contenuto tra <span class="math notranslate nohighlight">\(30\)</span> e <span class="math notranslate nohighlight">\(40\)</span> libbre. Se avessimo la PDF della popolazione dalla quale è stata estratto il campione, potremmo rispondere a questa domanda calcolando l’integrale:</p>
 <div class="math notranslate nohighlight">
@@ -986,12 +1034,12 @@ dtype: float64
 <p>Il risultato è graficamente molto simile a quello ottenuto in precedenza, ma cambia la scala sull’asse delle y:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/97bb08ffda8bc8b99c85f7345b4e555eaee66342f09a25c86f723088f9e123e8.png" src="../_images/97bb08ffda8bc8b99c85f7345b4e555eaee66342f09a25c86f723088f9e123e8.png" />
+<img alt="../../_images/97bb08ffda8bc8b99c85f7345b4e555eaee66342f09a25c86f723088f9e123e8.png" src="../../_images/97bb08ffda8bc8b99c85f7345b4e555eaee66342f09a25c86f723088f9e123e8.png" />
 </div>
 </div>
 </section>
 <section id="stima-della-densita">
-<h3><span class="section-number">4.3.3. </span>Stima della densità<a class="headerlink" href="#stima-della-densita" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">8.3.3. </span>Stima della densità<a class="headerlink" href="#stima-della-densita" title="Permalink to this heading">#</a></h3>
 <p>Uno svantaggio degli istogrammi è che categorizzano dei dati continui in maniera arbitraria mediante dei bin. La scelta degli intervalli dei bin cambia l’aspetto finale dell’istogramma.</p>
 <p>La stima della densità cerca di risolvere questo problema ottenendo una versione “continua” dell’istogramma. Invece di suddividere l’asse delle <span class="math notranslate nohighlight">\(x\)</span> in bin, la stima della densità calcola un valore per ciascun punto dell’asse delle <span class="math notranslate nohighlight">\(x\)</span>, ottenendo così una rappresentazione continua. Il calcolo avviene mediante la seguente formula:</p>
 <div class="math notranslate nohighlight">
@@ -1010,40 +1058,40 @@ K(x) = \begin{cases}
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-4.0, 4.0)
 </pre></div>
 </div>
-<img alt="../_images/dfec68187868a997ee58eb76847d5f2d99de85fbcf4661fb71ac098602bf1bd3.png" src="../_images/dfec68187868a997ee58eb76847d5f2d99de85fbcf4661fb71ac098602bf1bd3.png" />
+<img alt="../../_images/dfec68187868a997ee58eb76847d5f2d99de85fbcf4661fb71ac098602bf1bd3.png" src="../../_images/dfec68187868a997ee58eb76847d5f2d99de85fbcf4661fb71ac098602bf1bd3.png" />
 </div>
 </div>
 <p>Facendo “scorrere” questo kernel su diversi punti dell’asse delle x e sommando i contributi, si ottiene la stima di densità finale:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/80cdbf635452d38f429e7c71965ce711ba37901c73828eb484dbeb40abdb0460.png" src="../_images/80cdbf635452d38f429e7c71965ce711ba37901c73828eb484dbeb40abdb0460.png" />
+<img alt="../../_images/80cdbf635452d38f429e7c71965ce711ba37901c73828eb484dbeb40abdb0460.png" src="../../_images/80cdbf635452d38f429e7c71965ce711ba37901c73828eb484dbeb40abdb0460.png" />
 </div>
 </div>
 <p>Confrontiamo la stima di densità dei pesi nel nostro dataset di pesi-altezze con il relativo istogramma:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/8e9fdb9d8a80cc9619a21984072c114d2f5189a8cc8433ecd5f562afcd501a6b.png" src="../_images/8e9fdb9d8a80cc9619a21984072c114d2f5189a8cc8433ecd5f562afcd501a6b.png" />
+<img alt="../../_images/8e9fdb9d8a80cc9619a21984072c114d2f5189a8cc8433ecd5f562afcd501a6b.png" src="../../_images/8e9fdb9d8a80cc9619a21984072c114d2f5189a8cc8433ecd5f562afcd501a6b.png" />
 </div>
 </div>
 <p>Se nel caso degli istogrammi cambiare il numero di bin cambiava il risultato grafico, qui è cambiare la bandwidth a cambiare il risultato grafico. Il grafico seguente mostra diversi esempi di stima di densità con diversi valori di bandwidth:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/e542885b91740f6a6f79532aabedf52870d66366ccb0977a1a72fb7c0c50f383.png" src="../_images/e542885b91740f6a6f79532aabedf52870d66366ccb0977a1a72fb7c0c50f383.png" />
+<img alt="../../_images/e542885b91740f6a6f79532aabedf52870d66366ccb0977a1a72fb7c0c50f383.png" src="../../_images/e542885b91740f6a6f79532aabedf52870d66366ccb0977a1a72fb7c0c50f383.png" />
 </div>
 </div>
 </section>
 <section id="confrontare-campioni-mediante-istogrammi">
-<h3><span class="section-number">4.3.4. </span>Confrontare campioni mediante istogrammi<a class="headerlink" href="#confrontare-campioni-mediante-istogrammi" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">8.3.4. </span>Confrontare campioni mediante istogrammi<a class="headerlink" href="#confrontare-campioni-mediante-istogrammi" title="Permalink to this heading">#</a></h3>
 <p>Gli istogrammi possono essere utili per comparare campioni. In grafico che segue confronta i pesi di uomini e donne nel nostro campione pesi-altezze:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/84071ed97d1dba96ac8461823f0612c5218c291acb4c93866de842da236aa52f.png" src="../_images/84071ed97d1dba96ac8461823f0612c5218c291acb4c93866de842da236aa52f.png" />
+<img alt="../../_images/84071ed97d1dba96ac8461823f0612c5218c291acb4c93866de842da236aa52f.png" src="../../_images/84071ed97d1dba96ac8461823f0612c5218c291acb4c93866de842da236aa52f.png" />
 </div>
 </div>
 </section>
 </section>
 <section id="referenze">
-<h2><span class="section-number">4.4. </span>Referenze<a class="headerlink" href="#referenze" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">8.4. </span>Referenze<a class="headerlink" href="#referenze" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Capitolo 2 di: Heumann, Christian, and Michael Schomaker Shalabh. Introduction to statistics and data analysis. Springer International Publishing Switzerland, 2016.</p></li>
 </ul>
@@ -1063,7 +1111,7 @@ K(x) = \begin{cases}
         },
         kernelOptions: {
             name: "python3",
-            path: "./lectures"
+            path: "./lectures/lecture2"
         },
         predefinedOutput: true
     }
@@ -1081,20 +1129,20 @@ K(x) = \begin{cases}
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="main_data_analysis_concepts/00_main.html"
+       href="01_main_data_analysis_concepts.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">3. </span>Main data analysis concepts</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Main data analysis concepts</p>
       </div>
     </a>
     <a class="right-next"
-       href="../laboratories/01_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html"
+       href="../lecture3/01_misure_di_tendenza_centrale_dispersione_e_forma.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">5. </span>Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</p>
+        <p class="prev-next-title"><span class="section-number">9. </span>Misure di Tendenza Centrale, Dispersione e Forma</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1113,38 +1161,38 @@ K(x) = \begin{cases}
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frequenze-assolute-e-relative">4.1. Frequenze Assolute e Relative</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frequenze-assolute">4.1.1. Frequenze Assolute</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#esempi">4.1.1.1. Esempi</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#diagramma-a-barre-delle-frequenze-assolute">4.1.1.2. Diagramma a Barre delle Frequenze Assolute</a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">4.1.1.2.1. Esempi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frequenze-assolute-e-relative">8.1. Frequenze Assolute e Relative</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frequenze-assolute">8.1.1. Frequenze Assolute</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#esempi">8.1.1.1. Esempi</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#diagramma-a-barre-delle-frequenze-assolute">8.1.1.2. Diagramma a Barre delle Frequenze Assolute</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">8.1.1.2.1. Esempi</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frequenze-relative">4.1.2. Frequenze Relative</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">4.1.2.1. Esempi</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#diagramma-a-barre-delle-frequenze-relative">4.1.2.2. Diagramma a Barre delle Frequenze Relative</a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">4.1.2.2.1. Esempi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frequenze-relative">8.1.2. Frequenze Relative</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">8.1.2.1. Esempi</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#diagramma-a-barre-delle-frequenze-relative">8.1.2.2. Diagramma a Barre delle Frequenze Relative</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">8.1.2.2.1. Esempi</a></li>
 </ul>
 </li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#grafici-a-torta">4.1.2.3. Grafici a Torta</a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">4.1.2.3.1. Esempi</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#grafici-a-torta">8.1.2.3. Grafici a Torta</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">8.1.2.3.1. Esempi</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#empirical-cumulative-distribution-function-ecdf">4.2. Empirical Cumulative Distribution Function (ECDF)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#istogrammi">4.3. Istogrammi</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scegliere-il-numero-di-bin-struges-e-rice">4.3.1. Scegliere il numero di bin: Struges e Rice</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#istogrammi-di-densita">4.3.2. Istogrammi di densità</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stima-della-densita">4.3.3. Stima della densità</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confrontare-campioni-mediante-istogrammi">4.3.4. Confrontare campioni mediante istogrammi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#empirical-cumulative-distribution-function-ecdf">8.2. Empirical Cumulative Distribution Function (ECDF)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#istogrammi">8.3. Istogrammi</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scegliere-il-numero-di-bin-struges-e-rice">8.3.1. Scegliere il numero di bin: Struges e Rice</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#istogrammi-di-densita">8.3.2. Istogrammi di densità</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stima-della-densita">8.3.3. Stima della densità</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confrontare-campioni-mediante-istogrammi">8.3.4. Confrontare campioni mediante istogrammi</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referenze">4.4. Referenze</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referenze">8.4. Referenze</a></li>
 </ul>
   </nav></div>
 
@@ -1192,8 +1240,8 @@ By Antonino Furnari
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
 
   <footer class="bd-footer">
   </footer>

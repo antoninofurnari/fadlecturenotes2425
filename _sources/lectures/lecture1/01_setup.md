@@ -1,4 +1,4 @@
-# Installazione dell'ambiente di lavoro
+# Installazione dell'Ambiente di Lavoro
 Queste note discutono come impostare l'ambiente di lavoro per utilizzare Python per l'analisi dei dati nelle principali piattaforme.
 
 ## Installazione di Python
