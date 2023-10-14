@@ -27,10 +27,6 @@ repository:
 launch_buttons:
   colab_url: "https://colab.research.google.com"
 
-binder:
-  binderhub_url               : "https://mybinder.org"
-  text                        : "Launch binder"
-
 # LaTeX settings
 bibtex_bibfiles:
    - _bibliography/references.bib
@@ -38,6 +34,10 @@ latex:
   latex_engine                : "xelatex"
   latex_documents:
     targetname: book.tex
+
+html:
+  use_issues_button: true
+  use_repository_button: true
 
 sphinx:
   extra_extensions:

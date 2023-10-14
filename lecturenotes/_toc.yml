@@ -1,30 +1,29 @@
 # Table of contents
 # Learn more at https://jupyterbook.org/customize/toc.html
-
 format: jb-book
 root: lectures/index
-options:  # The options key will be applied to all chapters, but not sub-sections
-  numbered: True
-chapters:
-  - file: lectures/intro_data_analysis/00_main
-    sections:
-    - file: lectures/intro_data_analysis/01_what_is_data
-    - file: lectures/intro_data_analysis/02_data_analysis_definition
-    - file: lectures/intro_data_analysis/03_data_analysis_workflow
-    - file: lectures/intro_data_analysis/04_examples_data_analysis
-    - file: lectures/intro_data_analysis/05_data_analysis_uses
-    - file: lectures/intro_data_analysis/06_map_course
-  - file: lectures/intro_python/00_main
-    sections:
-    - file: lectures/intro_python/01_setup
-    - file: lectures/intro_python/02_intro_python
-    - file: lectures/intro_python/03_intro_numpy
-    - file: lectures/intro_python/04_intro_matplotlib
-    - file: lectures/intro_python/05_intro_pandas
-  - file: lectures/main_data_analysis_concepts/00_main
-  - file: lectures/01_misure_di_frequenze_e_rappresentazione_grafica_dei_dati
-  - file: laboratories/01_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati
-  - file: lectures/02_misure_di_tendenza_centrale_dispersione_e_forma
-  - file: laboratories/02_misure_di_tendenza_centrale_dispersione_e_forma
-  #- file: lectures/statistica_descrittiva/02_misure_di_tendenza_centrale_dispersione_e_forma
-  # - file: lectures/statistica_descrittiva/03_dati_multivariati
+
+parts:
+  - caption: Lecture 1
+    numbered: True
+    chapters:
+      - file: lectures/lecture1/01_intro_data_analysis
+      - file: lectures/lecture1/01_setup
+      - file: lectures/lecture1/02_intro_python
+      - file: lectures/lecture1/03_intro_numpy
+      - file: lectures/lecture1/04_intro_matplotlib
+      - file: lectures/lecture1/05_intro_pandas
+  - caption: Lecture 2
+    numbered: True
+    chapters:
+      - file: lectures/lecture2/01_main_data_analysis_concepts
+      - file: lectures/lecture2/02_misure_di_frequenze_e_rappresentazione_grafica_dei_dati
+  - caption: Lecture 3
+    numbered: True
+    chapters:
+      - file: lectures/lecture3/01_misure_di_tendenza_centrale_dispersione_e_forma
+  #     - file: laboratories/01_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati
+  #     - file: lectures/02_misure_di_tendenza_centrale_dispersione_e_forma
+  #     - file: laboratories/02_misure_di_tendenza_centrale_dispersione_e_forma
+  #     #- file: lectures/statistica_descrittiva/02_misure_di_tendenza_centrale_dispersione_e_forma
+  #     # - file: lectures/statistica_descrittiva/03_dati_multivariati
