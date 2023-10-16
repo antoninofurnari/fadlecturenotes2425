@@ -437,6 +437,11 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#standardizzazione-z-scoring">9.3.4.3. Standardizzazione (z-scoring)</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indicatori-di-forma">9.3.5. Indicatori di Forma</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#asimmetria-skewness">9.3.5.1. Asimmetria (skewness)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#curtosi-kurtosis">9.3.6. Curtosi (kurtosis)</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot">9.4. Boxplot</a></li>
@@ -909,6 +914,74 @@ z_i = \frac{x_i-\overline x}{s_x}
 </div>
 </section>
 </section>
+<section id="indicatori-di-forma">
+<h3><span class="section-number">9.3.5. </span>Indicatori di Forma<a class="headerlink" href="#indicatori-di-forma" title="Permalink to this heading">#</a></h3>
+<p>Vediamo adesso alcuni indicatori che permettono di farsi un’idea su determinati aspetti della “forma” della distribuzione dei dati.</p>
+<section id="asimmetria-skewness">
+<h4><span class="section-number">9.3.5.1. </span>Asimmetria (skewness)<a class="headerlink" href="#asimmetria-skewness" title="Permalink to this heading">#</a></h4>
+<p>La skewness è indice dello “sbilanciamento” a sinistra (valore negativo) o a destra (valore positivo) di un campione di dati rispetto al valore centrale. La formula della skewness è la seguente:</p>
+<div class="math notranslate nohighlight">
+\[ \sum_i^n \frac{(x_i-\overline x)^3}{n \cdot s_x^3}\]</div>
+<p>I valori della skeweness saranno:</p>
+<ul class="simple">
+<li><p><strong>Negativi</strong> se la distribuzione è sbilanciata a sinistra;</p></li>
+<li><p><strong>Positivi</strong> se la distribuzione è sbilanciata a destra;</p></li>
+<li><p><strong>Prossimi allo zero</strong> in caso di distribuzioni non sbilanciate.</p></li>
+</ul>
+<p>Vediamo degli esempi:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/a0162381b60be69f42ad6b8dec0d6ff9a3cc31ef61efc3738e6ffddb3a650c89.png" src="../../_images/a0162381b60be69f42ad6b8dec0d6ff9a3cc31ef61efc3738e6ffddb3a650c89.png" />
+</div>
+</div>
+<p>I valori di skewness di pesi e altezze sarnno:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">hw</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;http://antoninofurnari.it/downloads/height_weight.csv&#39;</span><span class="p">)</span>
+<span class="n">hw</span><span class="p">[</span><span class="s1">&#39;height&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">hw</span><span class="p">[</span><span class="s1">&#39;height&#39;</span><span class="p">]</span><span class="o">/</span><span class="mf">2.54</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">hw</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">hw</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span><span class="o">/</span><span class="mf">2.205</span>
+<span class="k">del</span> <span class="n">hw</span><span class="p">[</span><span class="s1">&#39;BMI&#39;</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Skweness pesi: </span><span class="si">{</span><span class="n">hw</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">skew</span><span class="p">()</span><span class="si">:</span><span class="s2">0.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Skweness altezza: </span><span class="si">{</span><span class="n">hw</span><span class="p">[</span><span class="s1">&#39;height&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">skew</span><span class="p">()</span><span class="si">:</span><span class="s2">0.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Skweness pesi: 0.57
+Skweness altezza: 0.14
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="curtosi-kurtosis">
+<h3><span class="section-number">9.3.6. </span>Curtosi (kurtosis)<a class="headerlink" href="#curtosi-kurtosis" title="Permalink to this heading">#</a></h3>
+<p>L’indice di curtosi misura lo “spessore” delle code di una misura di densità. Esso è definito come segue:</p>
+<p>\begin{equation}
+K = \frac{1}{n} \sum_{i=1}^{n} \left(\frac{X_i - \bar{X}}{s}\right)^4 - 3
+\end{equation}</p>
+<p>L’indice va interpretato così:</p>
+<ul class="simple">
+<li><p>Se è maggiore di zero, la distribuzione è <em>leptocurtica</em>, ovvero più “appuntita” di una distribuzione Normale;</p></li>
+<li><p>Se è minore di zero, la distribuzione è <em>platicurtica</em>, ovvero più “piatta” di una distribuzione Normale;</p></li>
+<li><p>Se è uguale a zero, la distribuzione è <em>normocurtica</em>, ovvero le code sono simili a quelle di una normale.</p></li>
+</ul>
+<p>Vedremo meglio cosa è una funzione normale più in là nel corso. Vediamo degli esempi di valori di Kurtosi:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/faa729d80401ac66250bb746be76c37a17459d0930f202e4b6ad17f81481d6b5.png" src="../../_images/faa729d80401ac66250bb746be76c37a17459d0930f202e4b6ad17f81481d6b5.png" />
+</div>
+</div>
+</section>
 </section>
 <section id="boxplot">
 <h2><span class="section-number">9.4. </span>Boxplot<a class="headerlink" href="#boxplot" title="Permalink to this heading">#</a></h2>
@@ -1155,6 +1228,11 @@ Name: weight, dtype: float64
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#standardizzazione-z-scoring">9.3.4.3. Standardizzazione (z-scoring)</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indicatori-di-forma">9.3.5. Indicatori di Forma</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#asimmetria-skewness">9.3.5.1. Asimmetria (skewness)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#curtosi-kurtosis">9.3.6. Curtosi (kurtosis)</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot">9.4. Boxplot</a></li>
