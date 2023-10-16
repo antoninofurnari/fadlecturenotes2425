@@ -23,8 +23,7 @@ parts:
     chapters:
       - file: lectures/lecture3/01_misure_di_tendenza_centrale_dispersione_e_forma
       - file: lectures/lecture3/02_associazione_variabili
-  #     - file: laboratories/01_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati
-  #     - file: lectures/02_misure_di_tendenza_centrale_dispersione_e_forma
-  #     - file: laboratories/02_misure_di_tendenza_centrale_dispersione_e_forma
-  #     #- file: lectures/statistica_descrittiva/02_misure_di_tendenza_centrale_dispersione_e_forma
-  #     # - file: lectures/statistica_descrittiva/03_dati_multivariati
+  - caption: Lecture 4
+    numbered: True
+    chapters:
+      - file: lectures/lecture4/01_probability
