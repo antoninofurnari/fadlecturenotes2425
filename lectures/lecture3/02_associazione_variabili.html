@@ -67,6 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'lectures/lecture3/02_associazione_variabili';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="11. Manipulating Data with Probability Theory" href="../lecture4/01_probability.html" />
     <link rel="prev" title="9. Misure di Tendenza Centrale, Dispersione e Forma" href="01_misure_di_tendenza_centrale_dispersione_e_forma.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -185,6 +186,10 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01_misure_di_tendenza_centrale_dispersione_e_forma.html">9. Misure di Tendenza Centrale, Dispersione e Forma</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">10. Associazione tra Variabili</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 4</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lecture4/01_probability.html">11. Manipulating Data with Probability Theory</a></li>
 </ul>
 
     </div>
@@ -428,12 +433,13 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#associazioni-tra-variabili-continue">10.2. Associazioni tra Variabili Continue</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rappresentazione-grafica-di-due-variabili-continue">10.2.1. Rappresentazione grafica di due variabili continue</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indice-di-correlazione-di-pearson">10.2.2. Indice di Correlazione di Pearson</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione-dei-valori-dell-indice-di-correlazione-di-pearson">10.2.2.1. Interpretazione dei valori dell’indice di correlazione di Pearson</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#covarianza">10.2.2. Covarianza</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indice-di-correlazione-di-pearson">10.2.3. Indice di Correlazione di Pearson</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione-dei-valori-dell-indice-di-correlazione-di-pearson">10.2.3.1. Interpretazione dei valori dell’indice di correlazione di Pearson</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indice-di-correlazione-di-spearman-per-ranghi">10.2.3. Indice di Correlazione di Spearman per ranghi</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrice-di-correlazione">10.2.4. Matrice di Correlazione</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indice-di-correlazione-di-spearman-per-ranghi">10.2.4. Indice di Correlazione di Spearman per ranghi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrice-di-correlazione">10.2.5. Matrice di Correlazione</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referenze">10.3. Referenze</a></li>
@@ -1971,7 +1977,7 @@ diagnostic group, a factor with levels <code class="docutils literal notranslate
 <p>Notiamo che in questo caso la relazione appare meno marcata, ma notiamo comunque un trend ascendente di <code class="docutils literal notranslate"><span class="pre">sspg</span></code> al crescere di <code class="docutils literal notranslate"><span class="pre">relwt</span></code>. È spesso utile cercare studiare le correlazioni con una <strong>scattermatrix</strong> che mostra tutti i possibili scatterplot. Nel caso del nostro esempio:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7fadb4103370&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f9950da50a0&gt;
 </pre></div>
 </div>
 <img alt="../../_images/a79a952db4c21e82aad889a200fa92adaed5af142fbd6d1a23d0f1809a1d2954.png" src="../../_images/a79a952db4c21e82aad889a200fa92adaed5af142fbd6d1a23d0f1809a1d2954.png" />
@@ -1984,31 +1990,32 @@ diagnostic group, a factor with levels <code class="docutils literal notranslate
 <li><p>alcune coppie di variabili (ad esempio <code class="docutils literal notranslate"><span class="pre">sspg</span></code> e <code class="docutils literal notranslate"><span class="pre">relwt</span></code>) non sembrano essere correlate.</p></li>
 </ul>
 </section>
-<section id="indice-di-correlazione-di-pearson">
-<h3><span class="section-number">10.2.2. </span>Indice di Correlazione di Pearson<a class="headerlink" href="#indice-di-correlazione-di-pearson" title="Permalink to this heading">#</a></h3>
-<p>L’analisi dello scatterplot ci permette di capire se ci sono coppie di variabili più o meno correlate. Tuttavia, gli scatterplot non forniscono un indicatore che possa “quantificare” la correlazione tra due variabili.</p>
-<p>Il coefficiente di correlazione di Pearson cerca proprio di fornire uno score quantitativo. Dato un campione bivariato <span class="math notranslate nohighlight">\(\{(x^{(i)},y^{(i)})\}\)</span>, il coefficiente di correlazione di Pearson è definito secondo questa formula:</p>
-<div class="math notranslate nohighlight">
-\[
-\rho(x,y) = \frac{\sum_{i=1}^n (x^{(i)}-\overline x)(y^{(i)}-\overline y)}{\sqrt{\sum_{i=1}^n (x^{(i)}-\overline x)^2} \sqrt{\sum_{i=1}^n (y^{(i)}-\overline y)^2}}
-\]</div>
-<p>Dove <span class="math notranslate nohighlight">\(\overline x\)</span> e <span class="math notranslate nohighlight">\(\overline y\)</span> sono rispettivamente le medie dei valori delle due variabili. I principali “attori” nella formula sopra sono i termini:</p>
+<section id="covarianza">
+<h3><span class="section-number">10.2.2. </span>Covarianza<a class="headerlink" href="#covarianza" title="Permalink to this heading">#</a></h3>
+<p>Abbiamo visto che la <strong>varianza</strong> indica quanto un campione univariato sia disperso attorno alla sua media. Possiamo utilizzare un’idea simile per quantificare fino a che punto <strong>due variabili si distribuiscono in modo simile attorno alla loro media</strong>. Ci aspettiamo che, se le variabili sono correlate, allora si distribuiranno in maniera simile.</p>
+<p>Il concetto di <strong>varianza</strong> viene generalizzato dal concetto di <strong>covarianza</strong> nel caso di dati bivariati. La covarianza misura quanto le due variabili varino assieme e si misura come segue:</p>
+<p>\begin{equation}
+Cov(X,Y) = \frac{1}{n}\sum_i^n (x^{(i)} - \overline x) (y^{(i)} - \overline y)
+\end{equation}</p>
+<p>dove <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span> sono le due variabili di interesse, <span class="math notranslate nohighlight">\(x^{(i)}\)</span> è il valore di <span class="math notranslate nohighlight">\(X\)</span> per l’iesima osservazione, <span class="math notranslate nohighlight">\(y^{(i)}\)</span> è il valore di <span class="math notranslate nohighlight">\(Y\)</span> per l’iesima osservazione e <span class="math notranslate nohighlight">\(\overline x\)</span>, <span class="math notranslate nohighlight">\(\overline y\)</span> sono le medie delle osservazioni per le due variabili <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span>.</p>
+<p>I principali “attori” nella formula sopra sono i termini:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\((x^{(i)}-\overline x)\)</span>: misura la distanza tra un punto <span class="math notranslate nohighlight">\(x^{(i)}\)</span> e la rispettiva media <span class="math notranslate nohighlight">\(\overline x\)</span>. Se il valore del punto in considerazione è sopra la media, allora questa differenza sarà positiva, altrimenti negativa.</p></li>
 <li><p><span class="math notranslate nohighlight">\((y^{(i)}-\overline y)\)</span>: misura la distanza tra un punto <span class="math notranslate nohighlight">\(y^{(i)}\)</span> e la rispettiva media <span class="math notranslate nohighlight">\(\overline y\)</span>. Se il valore del punto in considerazione è sopra la media, allora questa differenza sarà positiva, altrimenti negativa.</p></li>
 </ul>
-<p>Il numeratore della formula sopra effettua i prodotti tra questi due termini:</p>
+<p>Ogni termine della somma nella formula della covarianza effettua i prodotti tra questi due termini:</p>
 <div class="math notranslate nohighlight">
 \[(x^{(i)}-\overline x)(y^{(i)}-\overline y)\]</div>
 <p>Che saranno:</p>
 <ul class="simple">
 <li><p><strong>positivi</strong> se gli elementi <span class="math notranslate nohighlight">\(x^{(i)}\)</span> e <span class="math notranslate nohighlight">\(y^{(i)}\)</span> sono “concordi”, ovvero se sono entrambi sopra le rispettive medie o entrambi sotto le rispettive medie;</p></li>
-<li><p><strong>negativi</strong> se gli elementi <span class="math notranslate nohighlight">\(x^{(i)}\)</span> e <span class="math notranslate nohighlight">\(y^{(i)}\)</span> sono “discordi”, ovvero se uno dei due è sopra la rispettiva media, mentre l’altro è sotto la rispettiva media.</p></li>
+<li><p><strong>negativi</strong> se gli elementi <span class="math notranslate nohighlight">\(x^{(i)}\)</span> e <span class="math notranslate nohighlight">\(y^{(i)}\)</span> sono “discordi”, ovvero se uno dei due è sopra la rispettiva media, mentre l’altro è sotto la rispettiva media;</p></li>
+<li><p><strong>nulli o prossimi allo zero</strong> se gli elementi <span class="math notranslate nohighlight">\(x^{(i)}\)</span> e <span class="math notranslate nohighlight">\(y^{(i)}\)</span> sono molto vicini alle rispettive medie.</p></li>
 </ul>
 <p>Queste quantità hanno una interpretazione geometrica. Consideriamo il seguente plot:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../_images/51c2c93546f05f8d36d0a921481d3f5f03c0923db2f33d42e9427652f674e1fe.png" src="../../_images/51c2c93546f05f8d36d0a921481d3f5f03c0923db2f33d42e9427652f674e1fe.png" />
+<img alt="../../_images/3da6313b7718ddb85fb100765759924a10a83fa16ef270ceef33839b74365296.png" src="../../_images/3da6313b7718ddb85fb100765759924a10a83fa16ef270ceef33839b74365296.png" />
 </div>
 </div>
 <p>Il grafico mostra un campione di punti e le rispettive medie con una linea orizzontale (per Y) e verticale (per X). Le due medie dividono il grafico in quattro quadranti. Per ogni punto, le linee tratteggiate rosse indicano i valori delle grandezze <span class="math notranslate nohighlight">\((x^{(i)}-\overline x)\)</span> e <span class="math notranslate nohighlight">\((y^{(i)}-\overline y)\)</span>. In particolare:</p>
@@ -2021,17 +2028,139 @@ diagnostic group, a factor with levels <code class="docutils literal notranslate
 <ul class="simple">
 <li><p>i punti nel primo e terzo quadrante contribuiscono <strong>positivamente</strong> all’indice di correlazione;</p></li>
 <li><p>i punti nel secondo e quarto quadrante contribuiscono <strong>negativamente</strong> all’indice di correlazione.</p></li>
+<li><p>I punti vicini alla media (l’intersezione tra le due medie) corrisponderanno a grandezze molto piccole e <strong>non contribuiranno</strong> a cambiare il valore della covarianza.</p></li>
 </ul>
-<p>Inoltre, fissati i valori di <span class="math notranslate nohighlight">\(x\)</span>, i valori di <span class="math notranslate nohighlight">\(y\)</span> che massimizzano il coefficiente di correlazione, sono quelli che massimizzano la lunghezza dei segmenti in rosso. Si può facilmente vedere graficamente che questi sono i valori <span class="math notranslate nohighlight">\(y=x\)</span>:</p>
+<p>Intuitivamente, la covarianza assumerà valori molto positivi quando <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span> variano in maniera concorde (ovvero, se <span class="math notranslate nohighlight">\(X\)</span> assume valori alti, <span class="math notranslate nohighlight">\(Y\)</span> assume valori alti e se <span class="math notranslate nohighlight">\(X\)</span> assume valori bassi <span class="math notranslate nohighlight">\(Y\)</span> assume valori bassi). In tal caso infatti i segni dei due fattori all’interno della sommatoria saranno concordi e il loro prodotto avrà segno positivo. Se invece <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span> variano in maniera discorde, il prodotto avrà segno negativo e la varianza assumerà valori negativi.</p>
+<p>Notiamo che la covarianza di una variabile <span class="math notranslate nohighlight">\(X\)</span> con se stessa è uguale alla varianza:</p>
+<p>\begin{equation}
+Cov(X,X) = \frac{1}{n}\sum_i^n (x_i - \overline x) (x_i - \overline x) = s_X
+\end{equation}</p>
+<p>Va notato che:</p>
+<ul class="simple">
+<li><p>Valori negativi indicano una correlazione negativa (quando una delle due variabili cresce, l’altra diminuisce);</p></li>
+<li><p>Valori positivi indicano una correlazione positiva (le due variabili crescono o decrescono insieme);</p></li>
+<li><p>Valori nulli (o vicini allo zero) indicano che le due variabili non sono correlate (o lo sono debolmente).</p></li>
+</ul>
+<p>Va anche notato che i valori della correlazione non sono normalizzati e dipendono dai range delle singole variabili, per cui non è possibile confrontare le covarianze. Ad esempio, la covarianza tra <code class="docutils literal notranslate"><span class="pre">relwt</span></code> e se stessa (dunque la varianza di <code class="docutils literal notranslate"><span class="pre">relwt</span></code>) è prossima allo zero, tuttavia, ciò non vuol dire che <code class="docutils literal notranslate"><span class="pre">relwt</span></code> non sia correlata con se stessa!</p>
+<p>In pratica, in presenza di più variabili, si calcolano le covarianze di tutte le coppie possibili di variabili, un po’ come visto nel caso della scatter matrix. Ciò si ottiene mediante il metodo <code class="docutils literal notranslate"><span class="pre">cov</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">cov</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>relwt</th>
+      <th>glufast</th>
+      <th>glutest</th>
+      <th>instest</th>
+      <th>sspg</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>relwt</th>
+      <td>0.016702</td>
+      <td>-0.072815</td>
+      <td>0.982426</td>
+      <td>3.473373</td>
+      <td>5.266255</td>
+    </tr>
+    <tr>
+      <th>glufast</th>
+      <td>-0.072815</td>
+      <td>4087.097031</td>
+      <td>19546.064080</td>
+      <td>-3063.463649</td>
+      <td>4849.905651</td>
+    </tr>
+    <tr>
+      <th>glutest</th>
+      <td>0.982426</td>
+      <td>19546.064080</td>
+      <td>100457.849808</td>
+      <td>-12918.162739</td>
+      <td>25908.490182</td>
+    </tr>
+    <tr>
+      <th>instest</th>
+      <td>3.473373</td>
+      <td>-3063.463649</td>
+      <td>-12918.162739</td>
+      <td>14625.312548</td>
+      <td>101.482519</td>
+    </tr>
+    <tr>
+      <th>sspg</th>
+      <td>5.266255</td>
+      <td>4849.905651</td>
+      <td>25908.490182</td>
+      <td>101.482519</td>
+      <td>11242.331897</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>La matrice vista sopra viene anche detta “matrice di covarianza” e indicata con la lettere <span class="math notranslate nohighlight">\(\Sigma\)</span>. Date le variabili <span class="math notranslate nohighlight">\(X=(X_i,\ldots,X_k)\)</span>, <span class="math notranslate nohighlight">\(\Sigma\)</span> è una matrice <span class="math notranslate nohighlight">\([k \times k]\)</span> il cui termine generale è:</p>
+<div class="math notranslate nohighlight">
+\[\Sigma_{ij} = Cov(X_i,X_j)\]</div>
+</section>
+<section id="indice-di-correlazione-di-pearson">
+<h3><span class="section-number">10.2.3. </span>Indice di Correlazione di Pearson<a class="headerlink" href="#indice-di-correlazione-di-pearson" title="Permalink to this heading">#</a></h3>
+<p>Il coefficiente di correlazione di Pearson cerca di risolvere i problemi della covarianza fornendo uno score quantitativo normalizzato. Dato un campione bivariato <span class="math notranslate nohighlight">\(\{(x^{(i)},y^{(i)})\}\)</span>, il coefficiente di correlazione di Pearson è definito come la covarianza tra le due variabili, diviso il prodotto delle deviazioni standard:</p>
+<div class="math notranslate nohighlight">
+\[
+\rho(x,y)= \frac{Cov(X,Y)}{s_X s_Y} 
+\]</div>
+<p>Notiamo che:</p>
+<div class="math notranslate nohighlight">
+\[
+ \rho(x,y) = \frac{Cov(X,Y)}{s_X s_Y}  = \frac{1}{n} \sum \frac{(x_i - \overline x)}{s_X} \frac{(y_i - \overline y)}{s_X} = Cov(z(X),z(Y))
+\]</div>
+<p>Dove</p>
+<div class="math notranslate nohighlight">
+\[
+z(X) = \frac{X-\overline X}{s_x}
+\]</div>
+<p>è la funzione di z-scoring.</p>
+<p>Possiamo dunque vedere l’indice di correlazione di Pearson come la covarianza delle variabili normalizzate con z-scoring. Si può facilmente vedere che il coefficiente di correlazione di Pearson può essere scritto anche come segue:</p>
+<div class="math notranslate nohighlight">
+\[
+\rho(x,y) = \frac{\sum_{i=1}^n (x^{(i)}-\overline x)(y^{(i)}-\overline y)}{\sqrt{\sum_{i=1}^n (x^{(i)}-\overline x)^2} \sqrt{\sum_{i=1}^n (y^{(i)}-\overline y)^2}}
+\]</div>
+<p>Dove <span class="math notranslate nohighlight">\(\overline x\)</span> e <span class="math notranslate nohighlight">\(\overline y\)</span> sono rispettivamente le medie dei valori delle due variabili.</p>
+<p>Il grafico che segue mostra un plot analogo al precedente dopo aver effettuato lo z-scoring. Si noti come adesso i range di <span class="math notranslate nohighlight">\(x\)</span> e <span class="math notranslate nohighlight">\(y\)</span> sono normalizzati e la media si trova nell’origine.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../_images/60d865a900b05bd0d30b330a3298472585ef60577d01b65dcf49b3791f3237e0.png" src="../../_images/60d865a900b05bd0d30b330a3298472585ef60577d01b65dcf49b3791f3237e0.png" />
+<img alt="../../_images/678c1017ce1a57225a15e996d5d0c28533f3ea183469220416da82cfc88a1339.png" src="../../_images/678c1017ce1a57225a15e996d5d0c28533f3ea183469220416da82cfc88a1339.png" />
 </div>
 </div>
-<p>Mentre il numeratore del coefficiente di correlazione di Pearson accumula le lunghezze dei segmenti, il denominatore effettua una <strong>normalizzazione</strong>, dividendo il risultato per il prodotto delle deviazioni standard:</p>
-<div class="math notranslate nohighlight">
-\[\sqrt{\sum_{i=1}^n (x^{(i)}-\overline x)^2} \sqrt{\sum_{i=1}^n (y^{(i)}-\overline y)^2}\]</div>
-<p>Questa fa si che l’indice di correlazione di Pearson sia un numero compreso tra <span class="math notranslate nohighlight">\(-1\)</span> (massima anticorrelazione) e <span class="math notranslate nohighlight">\(1\)</span> (massima correlazione).</p>
+<p>In questo contesto, è facile vedere come, fissati i valori di <span class="math notranslate nohighlight">\(x\)</span>, i valori di <span class="math notranslate nohighlight">\(y\)</span> che massimizzano il coefficiente sono tali che <span class="math notranslate nohighlight">\(y=x\)</span>, come mostrato nel grafico che segue:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/45c77ab4b65a3654c8f67f3da5c6418a5a8007d8b21daadc8b3d7cdb7c09ca49.png" src="../../_images/45c77ab4b65a3654c8f67f3da5c6418a5a8007d8b21daadc8b3d7cdb7c09ca49.png" />
+</div>
+</div>
+<p>L’indice di correlazione di Pearson è un numero compreso tra <span class="math notranslate nohighlight">\(-1\)</span> (massima anticorrelazione) e <span class="math notranslate nohighlight">\(1\)</span> (massima correlazione).</p>
 <p>In pratica, si avrà:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\rho(x,-x)=-1\)</span></p></li>
@@ -2046,7 +2175,7 @@ diagnostic group, a factor with levels <code class="docutils literal notranslate
 </div>
 </div>
 <section id="interpretazione-dei-valori-dell-indice-di-correlazione-di-pearson">
-<h4><span class="section-number">10.2.2.1. </span>Interpretazione dei valori dell’indice di correlazione di Pearson<a class="headerlink" href="#interpretazione-dei-valori-dell-indice-di-correlazione-di-pearson" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">10.2.3.1. </span>Interpretazione dei valori dell’indice di correlazione di Pearson<a class="headerlink" href="#interpretazione-dei-valori-dell-indice-di-correlazione-di-pearson" title="Permalink to this heading">#</a></h4>
 <p>L’indice di correlazione di Pearson è un numero compreso tra <span class="math notranslate nohighlight">\(-1\)</span> e <span class="math notranslate nohighlight">\(1\)</span> che indica se sussiste una correlazione (ovvero, quando i valori della prima variabile crescono, anche i valori della seconda variabile crescono) o un’anticorrelazione (ovvero, quando i valori della prima variabile crescono, i valori della seconda variabile decrescono e viceversa). Valori prossimi a <span class="math notranslate nohighlight">\(-1\)</span> indicano che le variabili sono anticorrelate; valori prossimi a <span class="math notranslate nohighlight">\(1\)</span> indicano che le variabili sono correlate; valori prossimi a <span class="math notranslate nohighlight">\(0\)</span> indicano che le variabili sono decorrelate. In pratica:</p>
 <ul class="simple">
 <li><p>Il segno dell’indice indica il “verso” della correlazione:</p>
@@ -2085,7 +2214,7 @@ diagnostic group, a factor with levels <code class="docutils literal notranslate
 </section>
 </section>
 <section id="indice-di-correlazione-di-spearman-per-ranghi">
-<h3><span class="section-number">10.2.3. </span>Indice di Correlazione di Spearman per ranghi<a class="headerlink" href="#indice-di-correlazione-di-spearman-per-ranghi" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">10.2.4. </span>Indice di Correlazione di Spearman per ranghi<a class="headerlink" href="#indice-di-correlazione-di-spearman-per-ranghi" title="Permalink to this heading">#</a></h3>
 <p>L’indice di Pearson cattura le relazioni lineari tra le variabili. Esistono tuttavia dei casi in cui la relazione tra due variabili può non essere lineare, ma ha comunque senso cercare di capire se esiste una correlazione.</p>
 <p>Immaginiamo di avere una serie di utenti che assegnano dei punteggi a dei prodotti che recensiscono. Ogni utente userà una scala soggettiva diversa e probabilmente non lineare. L’indice di correlazione di Pearson non sarebbe il più adeguato per verificare se i punteggi assegnati da due utenti sono correlati.</p>
 <p>L’indice di correlazione di Spearman cerca di risolvere questo probelma passando dai punteggi ai ranghi. Invece di ragionare sui punteggi individuali, l’indice di correlazione di Spearman ordina i prodotti per score e verifica se gli ordinamenti ottenuti sono simili.</p>
@@ -2177,7 +2306,7 @@ Spearman Correlation (Chocolate vs. MintChip): -0.77
 </div>
 </section>
 <section id="matrice-di-correlazione">
-<h3><span class="section-number">10.2.4. </span>Matrice di Correlazione<a class="headerlink" href="#matrice-di-correlazione" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">10.2.5. </span>Matrice di Correlazione<a class="headerlink" href="#matrice-di-correlazione" title="Permalink to this heading">#</a></h3>
 <p>Analogamente a quanto visto nel caso degli scatterplot, quando abbiamo più variabili, possiamo calcolare gli indici di correlazione tra tutte le variabili del dataset. Otteniamo in questo modo una “matrice di correlazione”. La matrice di correlazione calcolata mediante il coefficiente di Pearson, nel caso del nostro dataset <code class="docutils literal notranslate"><span class="pre">diabetes</span></code> sarà:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -2307,6 +2436,15 @@ Spearman Correlation (Chocolate vs. MintChip): -0.77
         <p class="prev-next-title"><span class="section-number">9. </span>Misure di Tendenza Centrale, Dispersione e Forma</p>
       </div>
     </a>
+    <a class="right-next"
+       href="../lecture4/01_probability.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">11. </span>Manipulating Data with Probability Theory</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -2341,12 +2479,13 @@ Spearman Correlation (Chocolate vs. MintChip): -0.77
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#associazioni-tra-variabili-continue">10.2. Associazioni tra Variabili Continue</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rappresentazione-grafica-di-due-variabili-continue">10.2.1. Rappresentazione grafica di due variabili continue</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indice-di-correlazione-di-pearson">10.2.2. Indice di Correlazione di Pearson</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione-dei-valori-dell-indice-di-correlazione-di-pearson">10.2.2.1. Interpretazione dei valori dell’indice di correlazione di Pearson</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#covarianza">10.2.2. Covarianza</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indice-di-correlazione-di-pearson">10.2.3. Indice di Correlazione di Pearson</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione-dei-valori-dell-indice-di-correlazione-di-pearson">10.2.3.1. Interpretazione dei valori dell’indice di correlazione di Pearson</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indice-di-correlazione-di-spearman-per-ranghi">10.2.3. Indice di Correlazione di Spearman per ranghi</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrice-di-correlazione">10.2.4. Matrice di Correlazione</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indice-di-correlazione-di-spearman-per-ranghi">10.2.4. Indice di Correlazione di Spearman per ranghi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrice-di-correlazione">10.2.5. Matrice di Correlazione</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referenze">10.3. Referenze</a></li>

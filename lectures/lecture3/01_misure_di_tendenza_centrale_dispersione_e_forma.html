@@ -187,6 +187,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">9. Misure di Tendenza Centrale, Dispersione e Forma</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_associazione_variabili.html">10. Associazione tra Variabili</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 4</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lecture4/01_probability.html">11. Manipulating Data with Probability Theory</a></li>
+</ul>
 
     </div>
 </nav></div>
@@ -893,9 +897,9 @@ dtype: float64
 <p>In molti casi è utile normalizzare i dati in modo che essi presentino media nulla e deviazione standard unitaria. Questo tipo di normalizzazione viene detta “z-scoring” e viene effettuata sottraendo ai dati la media e dividendo per la deviazione standard.</p>
 <div class="math notranslate nohighlight">
 \[
-z_i = \frac{x_i-\mu_X}{\sigma_X}
+z_i = \frac{x_i-\overline x}{s_x}
 \]</div>
-<p>dove <span class="math notranslate nohighlight">\(\sigma_X\)</span> è la deviazione standard della popolazione alla quale appartiene <span class="math notranslate nohighlight">\(X\)</span>. Si noti che gli zeta scores sono <strong>adimensionali</strong> (ovvero, non hanno unità di misura).</p>
+<p>dove <span class="math notranslate nohighlight">\(s_x\)</span> è la deviazione standard della popolazione alla quale appartiene <span class="math notranslate nohighlight">\(X\)</span>. Si noti che gli zeta scores sono <strong>adimensionali</strong> (ovvero, non hanno unità di misura).</p>
 <p>Per capire qual è l’effetto di questa normalizzazione, osserviamo le stime di densità dei campioni prima e dopo la normalizzazione:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
