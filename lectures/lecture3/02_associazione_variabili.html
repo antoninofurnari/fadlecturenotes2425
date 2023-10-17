@@ -2042,13 +2042,8 @@ Cov(X,X) = \frac{1}{n}\sum_i^n (x_i - \overline x) (x_i - \overline x) = s_X
 <li><p>Valori nulli (o vicini allo zero) indicano che le due variabili non sono correlate (o lo sono debolmente).</p></li>
 </ul>
 <p>Va anche notato che i valori della correlazione non sono normalizzati e dipendono dai range delle singole variabili, per cui non è possibile confrontare le covarianze. Ad esempio, la covarianza tra <code class="docutils literal notranslate"><span class="pre">relwt</span></code> e se stessa (dunque la varianza di <code class="docutils literal notranslate"><span class="pre">relwt</span></code>) è prossima allo zero, tuttavia, ciò non vuol dire che <code class="docutils literal notranslate"><span class="pre">relwt</span></code> non sia correlata con se stessa!</p>
-<p>In pratica, in presenza di più variabili, si calcolano le covarianze di tutte le coppie possibili di variabili, un po’ come visto nel caso della scatter matrix. Ciò si ottiene mediante il metodo <code class="docutils literal notranslate"><span class="pre">cov</span></code>:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">cov</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
+<p>In pratica, in presenza di più variabili, si calcolano le covarianze di tutte le coppie possibili di variabili, un po’ come visto nel caso della scatter matrix. Nel nostro caso avrem:</p>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html"><div>
 <style scoped>
