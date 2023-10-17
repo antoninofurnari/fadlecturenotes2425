@@ -571,15 +571,7 @@ x_{(n+1)/2} &amp; \text{if } n \textit{ is odd}\\
 <li><p>La mediana è un quantile di ordine 0.5.</p></li>
 </ul>
 <p>Vediamo alcuni esempi sul nostro piccolo campione:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Quantile di ordine 0 (minimo):&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Quantile di ordine 0.5 (mediana):&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Quantile di ordine 1 (massimo):&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Quantile di ordine 0.15:&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.15</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Quantile di ordine 0 (minimo): 1.0
 Quantile di ordine 0.5 (mediana): 3.5
@@ -610,16 +602,7 @@ Quantile di ordine 0.15: 2.0
 <li><p>Il quartile di ordine 4 è un qauntile di ordine <span class="math notranslate nohighlight">\(4/4=1\)</span>.</p></li>
 </ul>
 <p>Vediamo qualche esempio sul nostro piccolo campione:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Quartile di ordine 0 (minimo):&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mi">0</span><span class="o">/</span><span class="mi">4</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Quartile di ordine 1:&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Quartile di ordine 2 (mediana):&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="mi">4</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Quartile di ordine 3:&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Quartile di ordine 4 (massimo):&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mi">4</span><span class="o">/</span><span class="mi">4</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Quartile di ordine 0 (minimo): 1.0
 Quartile di ordine 1: 2.0
@@ -723,8 +706,18 @@ Range: 7
 <p>Il range non è un indice di dispersione molto robusto, in quanto non tiene conto della presenza di evenutali outliers. Si considerino ad esempio i seguenti campioni “artificiali”:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../_images/d8888e6023c667d85351db4551c13e84e7e761205b98f161c331e49ae02b34ce.png" src="../../_images/d8888e6023c667d85351db4551c13e84e7e761205b98f161c331e49ae02b34ce.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Range sample 1: 4.0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         s1         s2
+0  3.000000  -5.000000
+1  3.444444   3.444444
+2  3.888889   3.888889
+3  4.333333   4.333333
+4  4.777778   4.777778
+5  5.222222   5.222222
+6  5.666667   5.666667
+7  6.111111   6.111111
+8  6.555556   6.555556
+9  7.000000  15.000000
+Range sample 1: 4.0
 Range sample 2: 20.0
 </pre></div>
 </div>
@@ -835,10 +828,11 @@ Name: height, dtype: float64
 <p>Gli indicatori di dispersione dei dati visti dipendono fortemente dalla natura dei dati e dalla loro unità di misura. Ad esempio, le età si misurano in anni, mentre i pesi in Kg o libbre. Pertanto, esistono delle tecniche di normalizzazione dei dati che permettono di rendere dati basati su unità di misura diverse comparabili tra di loro.</p>
 <section id="normalizzazione-tra-0-e-1">
 <h4><span class="section-number">9.3.4.1. </span>Normalizzazione tra 0 e 1<a class="headerlink" href="#normalizzazione-tra-0-e-1" title="Permalink to this heading">#</a></h4>
-<p>Questa normalizzazione scala i dati in modo che i valori minimo e massimo risultino esattamente pari a <span class="math notranslate nohighlight">\(0\)</span> e <span class="math notranslate nohighlight">\(1\)</span>, usando la seguente formula:
-\begin{equation}
+<p>Questa normalizzazione scala i dati in modo che i valori minimo e massimo risultino esattamente pari a <span class="math notranslate nohighlight">\(0\)</span> e <span class="math notranslate nohighlight">\(1\)</span>, usando la seguente formula:</p>
+<div class="math notranslate nohighlight">
+\[
 x_{norm} = (x-x_{min})/(x_{max}-x_{min})
-\end{equation}</p>
+\]</div>
 <p>Nel caso del nostro campione, otterremmo:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -865,10 +859,11 @@ dtype: float64
 </section>
 <section id="normalizzazione-tra-1-e-1">
 <h4><span class="section-number">9.3.4.2. </span>Normalizzazione tra -1 e 1<a class="headerlink" href="#normalizzazione-tra-1-e-1" title="Permalink to this heading">#</a></h4>
-<p>In questo caso, i dati vengono riscalati in modo che i nuovi minimo e massimo siano <span class="math notranslate nohighlight">\(-1\)</span> e <span class="math notranslate nohighlight">\(1\)</span>, usando la seguente formula:
-\begin{equation}
+<p>In questo caso, i dati vengono riscalati in modo che i nuovi minimo e massimo siano <span class="math notranslate nohighlight">\(-1\)</span> e <span class="math notranslate nohighlight">\(1\)</span>, usando la seguente formula:</p>
+<div class="math notranslate nohighlight">
+\[
 x_{norm} = (x_{max}+x_{min}-2\cdot x)/(x_{max}-x_{min})
-\end{equation}</p>
+\]</div>
 <p>Possiamo effettuare questa trasformazione in Pandas come segue:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -944,9 +939,10 @@ Skweness altezza: 0.14
 <section id="curtosi-kurtosis">
 <h3><span class="section-number">9.3.6. </span>Curtosi (kurtosis)<a class="headerlink" href="#curtosi-kurtosis" title="Permalink to this heading">#</a></h3>
 <p>L’indice di curtosi misura lo “spessore” delle code di una misura di densità. Esso è definito come segue:</p>
-<p>\begin{equation}
+<div class="math notranslate nohighlight">
+\[
 K = \frac{1}{n} \sum_{i=1}^{n} \left(\frac{X_i - \bar{X}}{s}\right)^4 - 3
-\end{equation}</p>
+\]</div>
 <p>L’indice va interpretato così:</p>
 <ul class="simple">
 <li><p>Se è maggiore di zero, la distribuzione è <em>leptocurtica</em>, ovvero più “appuntita” di una distribuzione Normale;</p></li>

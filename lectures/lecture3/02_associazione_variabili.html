@@ -1650,7 +1650,8 @@ Name: Survived, dtype: float64
 <section id="statistica-v-di-cramer">
 <h4><span class="section-number">10.1.7.3. </span>Statistica <span class="math notranslate nohighlight">\(V\)</span> di Cramer<a class="headerlink" href="#statistica-v-di-cramer" title="Permalink to this heading">#</a></h4>
 <p>La statistica <span class="math notranslate nohighlight">\(\mathcal{X}^2\)</span> di Pearson non è normalizzata, nel senso che il suo valore massimo dipende dalla dimensione del campione. Per ovviare a questo problema, si può usare la statistica V di Cramer, definita come segue:</p>
-<p>$$V = \sqrt{\frac{\mathcal{X}^2}{n(min(k,l)-1)}}</p>
+<div class="math notranslate nohighlight">
+\[V = \sqrt{\frac{\mathcal{X}^2}{n(min(k,l)-1)}}\]</div>
 <p>Il risultato sarà un valore compreso tra <span class="math notranslate nohighlight">\(0\)</span> e <span class="math notranslate nohighlight">\(1\)</span>.</p>
 <p>La statistica V di Cramer sarà pari al seguente valore per l’esempio visto prima:</p>
 <div class="cell tag_remove-input docutils container">
@@ -1989,9 +1990,10 @@ diagnostic group, a factor with levels <code class="docutils literal notranslate
 <h3><span class="section-number">10.2.2. </span>Covarianza<a class="headerlink" href="#covarianza" title="Permalink to this heading">#</a></h3>
 <p>Abbiamo visto che la <strong>varianza</strong> indica quanto un campione univariato sia disperso attorno alla sua media. Possiamo utilizzare un’idea simile per quantificare fino a che punto <strong>due variabili si distribuiscono in modo simile attorno alla loro media</strong>. Ci aspettiamo che, se le variabili sono correlate, allora si distribuiranno in maniera simile.</p>
 <p>Il concetto di <strong>varianza</strong> viene generalizzato dal concetto di <strong>covarianza</strong> nel caso di dati bivariati. La covarianza misura quanto le due variabili varino assieme e si misura come segue:</p>
-<p>\begin{equation}
+<div class="math notranslate nohighlight">
+\[
 Cov(X,Y) = \frac{1}{n}\sum_i^n (x^{(i)} - \overline x) (y^{(i)} - \overline y)
-\end{equation}</p>
+\]</div>
 <p>dove <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span> sono le due variabili di interesse, <span class="math notranslate nohighlight">\(x^{(i)}\)</span> è il valore di <span class="math notranslate nohighlight">\(X\)</span> per l’iesima osservazione, <span class="math notranslate nohighlight">\(y^{(i)}\)</span> è il valore di <span class="math notranslate nohighlight">\(Y\)</span> per l’iesima osservazione e <span class="math notranslate nohighlight">\(\overline x\)</span>, <span class="math notranslate nohighlight">\(\overline y\)</span> sono le medie delle osservazioni per le due variabili <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span>.</p>
 <p>I principali “attori” nella formula sopra sono i termini:</p>
 <ul class="simple">
@@ -2027,9 +2029,10 @@ Cov(X,Y) = \frac{1}{n}\sum_i^n (x^{(i)} - \overline x) (y^{(i)} - \overline y)
 </ul>
 <p>Intuitivamente, la covarianza assumerà valori molto positivi quando <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span> variano in maniera concorde (ovvero, se <span class="math notranslate nohighlight">\(X\)</span> assume valori alti, <span class="math notranslate nohighlight">\(Y\)</span> assume valori alti e se <span class="math notranslate nohighlight">\(X\)</span> assume valori bassi <span class="math notranslate nohighlight">\(Y\)</span> assume valori bassi). In tal caso infatti i segni dei due fattori all’interno della sommatoria saranno concordi e il loro prodotto avrà segno positivo. Se invece <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span> variano in maniera discorde, il prodotto avrà segno negativo e la varianza assumerà valori negativi.</p>
 <p>Notiamo che la covarianza di una variabile <span class="math notranslate nohighlight">\(X\)</span> con se stessa è uguale alla varianza:</p>
-<p>\begin{equation}
+<div class="math notranslate nohighlight">
+\[
 Cov(X,X) = \frac{1}{n}\sum_i^n (x_i - \overline x) (x_i - \overline x) = s_X
-\end{equation}</p>
+\]</div>
 <p>Va notato che:</p>
 <ul class="simple">
 <li><p>Valori negativi indicano una correlazione negativa (quando una delle due variabili cresce, l’altra diminuisce);</p></li>
