@@ -23,7 +23,7 @@ parts:
     chapters:
       - file: lectures/lecture3/01_misure_di_tendenza_centrale_dispersione_e_forma
       - file: lectures/lecture3/02_associazione_variabili
-  - caption: Lecture 4
-    numbered: True
-    chapters:
-      - file: lectures/lecture4/01_probability
+  # - caption: Lecture 4
+  #   numbered: True
+  #   chapters:
+  #     - file: lectures/lecture4/01_probability
