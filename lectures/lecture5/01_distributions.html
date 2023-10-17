@@ -1,0 +1,900 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Probability Distributions &#8212; Lecture Notes on Fundamental of Data Analysis</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures/lecture5/01_distributions';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Lecture Notes on Fundamental of Data Analysis
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 1</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lecture1/01_intro_data_analysis.html">1. What is Data Analysis?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture1/01_setup.html">2. Installazione dell’Ambiente di Lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture1/02_intro_python.html">3. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture1/03_intro_numpy.html">4. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture1/04_intro_matplotlib.html">5. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture1/05_intro_pandas.html">6. Introduzione a Pandas</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 2</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lecture2/01_main_data_analysis_concepts.html">7. Main data analysis concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture2/02_misure_di_frequenze_e_rappresentazione_grafica_dei_dati.html">8. Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 3</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lecture3/01_misure_di_tendenza_centrale_dispersione_e_forma.html">9. Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture3/02_associazione_variabili.html">10. Associazione tra Variabili</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/antoninofurnari/fadlecturenotes/blob/master/lecturenotes/lectures/lecture5/01_distributions.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/antoninofurnari/fadlecturenotes" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/antoninofurnari/fadlecturenotes/issues/new?title=Issue%20on%20page%20%2Flectures/lecture5/01_distributions.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/lectures/lecture5/01_distributions.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Probability Distributions</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Probability Distributions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-mass-functions-pmf-discrete-variables">Probability Mass Functions (PMF) - Discrete Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-probability-mass-function-for-a-fair-coin">Example: Probability Mass Function for a Fair Coin</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-probability-mass-function-for-a-biased-coin">Example: Probability Mass Function for a Biased Coin</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-probability-mass-function">Exercise: Probability Mass Function</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-density-functions-pdf-continuous-variables">Probability Density Functions (PDF) - Continuous Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-uniform-pdf">Example: Uniform PDF</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cumulative-distribution-functions-cdf">Cumulative Distribution Functions (CDF)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cdf-of-continuous-random-variables">CDF of Continuous Random Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cdf-of-discrete-random-variables">CDF of Discrete Random Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-pdf-and-cdf-of-a-fair-die">Example - PDF and CDF of a fair die</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation">Expectation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variance">Variance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#covariance">Covariance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#standardization">Standardization</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="probability-distributions">
+<h1>Probability Distributions<a class="headerlink" href="#probability-distributions" title="Permalink to this heading">#</a></h1>
+<p>We have seen how it is possible to assign a probability value to a given
+outcome of a random variable.</p>
+<p>In practice, it is often useful to assign probability values to <strong>all
+the values</strong> that the random variable can assume.</p>
+<p>To do so, we can define a <strong>function</strong>, which we will call <strong>probability
+distribution</strong> which assigns a probability value to each of the possible
+values of a random variable.</p>
+<p>In the case of discrete variables, we will talk about “<strong>probability
+mass functions</strong>”, whereas in the case of continuous variable, we will
+refer to “<strong>probability density functions</strong>”.</p>
+<p>A probability distribution characterizes the random variable and defines
+which outcomes it is more likely to observe.</p>
+<p>Once we find that a given random variable <span class="math notranslate nohighlight">\(X\)</span> is characterized by a
+probability distirbution <span class="math notranslate nohighlight">\(P(X)\)</span>, we can say that <strong>“X follows P”</strong> and
+write:</p>
+<div class="math notranslate nohighlight">
+\[X \sim P\]</div>
+<section id="probability-mass-functions-pmf-discrete-variables">
+<h2>Probability Mass Functions (PMF) - Discrete Variables<a class="headerlink" href="#probability-mass-functions-pmf-discrete-variables" title="Permalink to this heading">#</a></h2>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is discrete, <span class="math notranslate nohighlight">\(P(X)\)</span> is called a “probability mass function”
+(PMF). <span class="math notranslate nohighlight">\(P\)</span> maps the values of <span class="math notranslate nohighlight">\(X\)</span> to real numbers indicating whether a
+given value is more or less likely.</p>
+<p>A PMF on a random variable <span class="math notranslate nohighlight">\(X\)</span> is a function</p>
+<div class="math notranslate nohighlight">
+\[P:\chi \rightarrow \lbrack 0,1\rbrack\]</div>
+<p>Where <span class="math notranslate nohighlight">\(\chi\)</span> is the alphabet of <span class="math notranslate nohighlight">\(X\)</span>.</p>
+<p>This function satisfies the following properties:</p>
+<ul class="simple">
+<li><p><strong>The domain of</strong> <span class="math notranslate nohighlight">\(\mathbf{P}\)</span> <strong>is the set of all possible states
+of</strong> <span class="math notranslate nohighlight">\(\mathbf{X}\)</span><strong>.</strong></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{\forall}\mathbf{x}\mathbf{\in}\chi\mathbf{,\ }\mathbf{0}\mathbf{\leq}\mathbf{P}\left( \mathbf{x} \right)\mathbf{\leq}\mathbf{1}\)</span>.
+An impossible event has probability 0, whereas a certain event has
+probability 1. No event can have negative probability or probability
+larger than 1.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sum_{\mathbf{x}\mathbf{\in}\mathbf{\chi}}^{}{\mathbf{P}\mathbf{(}\mathbf{x}\mathbf{)}}\mathbf{=}\mathbf{1}\)</span>.
+The sum of the probabilities associated to all possible events must
+be one. This implies that the probability distribution is
+normalized. Also, this means that at least one of the events should
+happen.</p></li>
+</ul>
+<p><strong>Example:</strong> Let <span class="math notranslate nohighlight">\(X\)</span> be the random variable indicating the outcome of a
+coin toss.</p>
+<ul class="simple">
+<li><p>The space of all possible functions (the domain of <span class="math notranslate nohighlight">\(P(X)\)</span>) is
+<span class="math notranslate nohighlight">\(\{ head,\ tail\}\)</span>.</p></li>
+<li><p>The probabilities <span class="math notranslate nohighlight">\(P(head)\)</span> and <span class="math notranslate nohighlight">\(P(tail)\)</span> must be larger than or
+equal to zero and smaller than or equal to 1.</p></li>
+<li><p>Also, <span class="math notranslate nohighlight">\(P(head) + P(tail) = 1\ \)</span>. This is obvious, as one of the two
+outcomes will always happen. Indeed, if we had <span class="math notranslate nohighlight">\(P(tail) = 0.3\)</span>, this
+would mean that, 30 times out of 100 times we toss a coin, the
+outcome will be tail. What will happen in all other cases? The
+outcome will be head, hence, <span class="math notranslate nohighlight">\(P(head)\)</span>, so <span class="math notranslate nohighlight">\(P(head) + P(tail) = 1\)</span>.</p></li>
+<li><p>In the case of a fair coin, we can characterize <span class="math notranslate nohighlight">\(P(X)\)</span> as a
+“discrete uniform distribution”, i.e., a distribution which maps any
+value <span class="math notranslate nohighlight">\(x \in X\)</span> to a constant, such that the properties of the
+probability mass functions are satisfied.</p></li>
+<li><p>If we have <span class="math notranslate nohighlight">\(N\)</span> possible outcomes, the discrete uniform probability
+will be <span class="math notranslate nohighlight">\(P(X = x) = \frac{1}{N}\)</span> , which means that all outcomes
+have the same probability.</p></li>
+<li><p>This definition satisfies the constraints. Indeed,
+<span class="math notranslate nohighlight">\(\frac{1}{N} \geq 0,\ \forall N\)</span> and
+<span class="math notranslate nohighlight">\(\sum_{i}^{}{P\left( X = x_{i} \right)} = 1\)</span>.</p></li>
+</ul>
+<section id="example-probability-mass-function-for-a-fair-coin">
+<h3>Example: Probability Mass Function for a Fair Coin<a class="headerlink" href="#example-probability-mass-function-for-a-fair-coin" title="Permalink to this heading">#</a></h3>
+<p>A probability mass function can be plotted as a 2D diagram where the
+values of the function (<span class="math notranslate nohighlight">\(P(x)\)</span>) is plotted against the values of the
+independent variable <span class="math notranslate nohighlight">\(x\)</span>. This is the diagram associated to the PMF of
+the previous example, where <span class="math notranslate nohighlight">\(P(head) = P(tail) = 0.5\)</span>.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/888a70ac931c8fe0436e04741501456ef024eb997604c71fdf4d99dbff9985b2.png" src="../../_images/888a70ac931c8fe0436e04741501456ef024eb997604c71fdf4d99dbff9985b2.png" />
+</div>
+</div>
+</section>
+<section id="example-probability-mass-function-for-a-biased-coin">
+<h3>Example: Probability Mass Function for a Biased Coin<a class="headerlink" href="#example-probability-mass-function-for-a-biased-coin" title="Permalink to this heading">#</a></h3>
+<p>Now suppose we tossed our coin for 10000 times and discovered that 6000
+times the outcome was “head”, whereas 4000 times it was “tail”. We
+deduce the coin is not fair.</p>
+<p>Using a <strong>frequentist</strong> approach, we can manually assign values to our
+PMF using the general formula:</p>
+<div class="math notranslate nohighlight">
+\[P(x) = \frac{\# trials\ in\ which\ X = x}{\#\ trials}\]</div>
+<p>That is, in our case:</p>
+<div class="math notranslate nohighlight">
+\[P(head) = \frac{6000}{10000} = 0.6;P(tail) = \frac{4000}{10000} = 0.4\]</div>
+<p>We shall note that the probability we just defined satisfies all
+properties of probabilities, i.e.:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(0 \leq P(x) \leq 1\ \forall x\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\sum_{x}^{}{P(x) = 1}.\)</span></p></li>
+</ul>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/c738a5bad6a12903b8ef1cac7fbee67d920bab1e09697f9d72cb615a10fe4226.png" src="../../_images/c738a5bad6a12903b8ef1cac7fbee67d920bab1e09697f9d72cb615a10fe4226.png" />
+</div>
+</div>
+</section>
+<section id="exercise-probability-mass-function">
+<h3>Exercise: Probability Mass Function<a class="headerlink" href="#exercise-probability-mass-function" title="Permalink to this heading">#</a></h3>
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> be a random variable representing the outcome of rolling a fair
+dice with <span class="math notranslate nohighlight">\(6\)</span> faces:</p>
+<ul class="simple">
+<li><p>What is the space of possible values of <span class="math notranslate nohighlight">\(X\)</span>?</p></li>
+<li><p>What is its cardinality?</p></li>
+<li><p>What is the associated probability mass function <span class="math notranslate nohighlight">\(P(X)\)</span>?</p></li>
+<li><p>Suppose the dice is not fair and <span class="math notranslate nohighlight">\(P(X = 1) = 0.2\)</span>, whereas all other
+outcomes are equally probable. What is the probability mass function
+of <span class="math notranslate nohighlight">\(P(X)\)</span>?</p></li>
+<li><p>Draw the PMF obtained for the dice.</p></li>
+</ul>
+</section>
+</section>
+<section id="probability-density-functions-pdf-continuous-variables">
+<h2>Probability Density Functions (PDF) - Continuous Variables<a class="headerlink" href="#probability-density-functions-pdf-continuous-variables" title="Permalink to this heading">#</a></h2>
+<p>Probability distributions are called “probability density functions”
+when the random variable is continuous.</p>
+<p>To be a probability density function over a variable <span class="math notranslate nohighlight">\(X\)</span>, a function
+<span class="math notranslate nohighlight">\(f:\Omega \rightarrow \lbrack 0,1\rbrack\)</span> must satisfy the following
+properties:</p>
+<ul class="simple">
+<li><p>The domain of <span class="math notranslate nohighlight">\(f\)</span> is the set of all possible values of <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\forall x \in \chi,\ P(x) \geq 0\)</span>. No probability can be negative.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\int f(x)dx = 1\)</span>. This is equivalent to <span class="math notranslate nohighlight">\(\sum P(x) = 1\)</span> in the
+case of a discrete variable. The sum turns into an integral in the
+case of continuous variables.</p></li>
+</ul>
+<p>Note that, in the case of continuous variables, we have:</p>
+<div class="math notranslate nohighlight">
+\[ P(a \leq x \leq b) = \int_{a}^b f(x) \]</div>
+<p><strong>NOTE</strong>: In general, we say that the density function at a given value <span class="math notranslate nohighlight">\(x\)</span> is zero: <span class="math notranslate nohighlight">\(f(x)=0\)</span>. While this may seem counter-intuitive, we should consider the density function as the limit fo the probability as we narrow a neighborhood around <span class="math notranslate nohighlight">\(x\)</span>. If the neighborhood has size <span class="math notranslate nohighlight">\(0\)</span>, then the density will be zero. In practice, if we take a neighborhood which is non-zero, then we get an integral between two values and a final probability not equal to zero.</p>
+<p>After all, from an intuitive point of view, the probability of having a value exactly equal to <span class="math notranslate nohighlight">\(x\)</span> is indeed zero, in the case of a continuous variable! So we should be more interested in the probability in a given range of values.</p>
+<section id="example-uniform-pdf">
+<h3>Example: Uniform PDF<a class="headerlink" href="#example-uniform-pdf" title="Permalink to this heading">#</a></h3>
+<p>Let us consider a random number generator which outputs numbers comprised between <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> be a random variable assuming the values generated by the
+random number generator.</p>
+<p>The PDF of <span class="math notranslate nohighlight">\(X\)</span> will be a uniform distribution such that:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P(x) = 0\ \forall x &lt; a\ \ or\ x &gt; b\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(P(x) = \frac{1}{b - a}\ \forall a \leq x \leq b\)</span>;</p></li>
+</ul>
+<p>We can see that this PDF satisfies all constraints:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P(x) \geq 0\ \forall x.\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\int P(x)dx = 1\)</span> (prove that this is true as an exercise).</p></li>
+</ul>
+<p>The diagram below shows an illustration of a uniform PDF with bounds a and b,
+i.e., <span class="math notranslate nohighlight">\(U(a,b)\)</span>. Of course, continuous distributions can be (and
+generally are) much more complicated than that.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/f511b722e64c3d354c9622cf02e03ef28ca948bdaf4f84407b5ce27775a9f8ea.png" src="../../_images/f511b722e64c3d354c9622cf02e03ef28ca948bdaf4f84407b5ce27775a9f8ea.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="cumulative-distribution-functions-cdf">
+<h2>Cumulative Distribution Functions (CDF)<a class="headerlink" href="#cumulative-distribution-functions-cdf" title="Permalink to this heading">#</a></h2>
+<p>Similar to the Empirical Cumulative Distribution Functions, we can define Cumulative Distribution Functions for random variables, starting from the density or mass functions. A cumulative distribution function is generally defined as:</p>
+<div class="math notranslate nohighlight">
+\[ F(x) = P(X \leq x) \]</div>
+<section id="cdf-of-continuous-random-variables">
+<h3>CDF of Continuous Random Variables<a class="headerlink" href="#cdf-of-continuous-random-variables" title="Permalink to this heading">#</a></h3>
+<p>In the case of continuous random variables, the definition leads to:</p>
+<div class="math notranslate nohighlight">
+\[F(x) = \int_{-\infty}^x P(x)dx\]</div>
+<p>The CDF is useful in different ways. For instance, it’s easy to see that:</p>
+<div class="math notranslate nohighlight">
+\[P(a \leq X \leq b) = \int_a^b f(x)dx = \int_{-\infty}^b f(x)dx - \int_{-\infty}^a f(x)dx = F(b) - F(a)\]</div>
+<section id="example">
+<h4>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h4>
+<p>The CDF of the uniform distribution will be given by:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(F(x) = 0\)</span> for <span class="math notranslate nohighlight">\(x &lt; a\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(F(x) = \frac{x - a}{b - a}\)</span> for <span class="math notranslate nohighlight">\(a \leq x \leq b\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(F(x) = 1\)</span> for <span class="math notranslate nohighlight">\(x &gt; b\)</span></p></li>
+</ul>
+<p>The plot below shows a diagram:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/00a4f47c84852bb09012db4118569e52f61380509db4e20454d4686e00d27f1e.png" src="../../_images/00a4f47c84852bb09012db4118569e52f61380509db4e20454d4686e00d27f1e.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="cdf-of-discrete-random-variables">
+<h3>CDF of Discrete Random Variables<a class="headerlink" href="#cdf-of-discrete-random-variables" title="Permalink to this heading">#</a></h3>
+<p>In the case of discrete random variables, the definition of CDF leads to:</p>
+<div class="math notranslate nohighlight">
+\[F(x) = \sum_{y\leq x} P(y)\]</div>
+<section id="example-pdf-and-cdf-of-a-fair-die">
+<h4>Example - PDF and CDF of a fair die<a class="headerlink" href="#example-pdf-and-cdf-of-a-fair-die" title="Permalink to this heading">#</a></h4>
+<p>In the case of a fair die, the PMF will be:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f(x) = \begin{cases} 
+\frac{1}{6} &amp; \text{if } x \in \{1, 2, 3, 4, 5, 6\} \\
+0 &amp; \text{otherwise}
+\end{cases}
+\end{split}\]</div>
+<p>The CDF will be:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+F(x) = \begin{cases} 
+0 &amp; \text{if } x &lt; 1 \\
+\frac{1}{6} &amp; \text{if } 1 \leq x &lt; 2 \\
+\frac{1}{3} &amp; \text{if } 2 \leq x &lt; 3 \\
+\frac{1}{2} &amp; \text{if } 3 \leq x &lt; 4 \\
+\frac{2}{3} &amp; \text{if } 4 \leq x &lt; 5 \\
+1 &amp; \text{if } x \geq 5
+\end{cases}
+\end{split}\]</div>
+<p>The diagram below shows an example:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/b96fc33c7fc05bf59bd380dab928b8f83fdd5ee97fe60e06e6065fa77f644e77.png" src="../../_images/b96fc33c7fc05bf59bd380dab928b8f83fdd5ee97fe60e06e6065fa77f644e77.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="expectation">
+<h2>Expectation<a class="headerlink" href="#expectation" title="Permalink to this heading">#</a></h2>
+<p>When it is known that a random variable follows a probability
+distribution, <strong>it is possible to characterize that variable</strong> (and
+hence the related probability distribution) <strong>with some statistics</strong>.</p>
+<p>The most straightforward of them is the expectation. <strong>The concept of
+expectation is very related to the concept of mean.</strong> When we compute
+the mean of a given set of numbers, we usually sum all the numbers
+together and then divide by the total.</p>
+<p>Since a probability distribution will tell us which values will be more
+frequent than others, we can compute this mean with a weighted average,
+where the weights are given by the probability distribution.</p>
+<p>Specifically, we can define the expectation of a random variable X as
+follows:</p>
+<div class="math notranslate nohighlight">
+\[E_{X\sim P}\lbrack X\rbrack = \sum_{x \in \chi}^{}{xP(x)}\]</div>
+<p>In the case of continuous variables, the expectation takes the form of
+an integral:</p>
+<div class="math notranslate nohighlight">
+\[E_{X \sim P}\lbrack X\rbrack = \int xP(x)dx\]</div>
+<p>This is very related to the concept of mean value (or expected value) of
+a random variable.</p>
+</section>
+<section id="variance">
+<h2>Variance<a class="headerlink" href="#variance" title="Permalink to this heading">#</a></h2>
+<p>The variance gives a measure of how much variability there is in a
+variable <span class="math notranslate nohighlight">\(X\)</span> around its mean <span class="math notranslate nohighlight">\(E\lbrack X\rbrack\)</span>.</p>
+<p>The variance is defined as follows:</p>
+<div class="math notranslate nohighlight">
+\[var\lbrack X\rbrack = E\lbrack\left( X - E\lbrack X\rbrack \right)^{2}\rbrack\]</div>
+</section>
+<section id="covariance">
+<h2>Covariance<a class="headerlink" href="#covariance" title="Permalink to this heading">#</a></h2>
+<p>The covariance gives a measure of how two variables are linearly related
+to each other. It allows to <strong>measure to what extent the increase of one
+of the variables corresponds to an increase of the value of the other
+one</strong>.</p>
+<p>Given two random variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>, the covariance is defined as
+follows:</p>
+<div class="math notranslate nohighlight">
+\[Cov(X,Y) = E\lbrack\left( X - E\lbrack X\rbrack \right)\left( Y - E\lbrack Y\rbrack \right)\rbrack\]</div>
+<p>We can distinguish the following terms:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(E\lbrack X\rbrack\)</span> and <span class="math notranslate nohighlight">\(E\lbrack Y\rbrack\)</span> are the expectations of
+<span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y.\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((X - E\lbrack X\rbrack)\)</span> and <span class="math notranslate nohighlight">\((Y - E\lbrack Y\rbrack)\)</span> are the
+differences between the samples and the expected values.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\left( X - E\lbrack X\rbrack \right)\left( Y - E\lbrack Y\rbrack \right)\)</span>
+computes the product between the differences.</p></li>
+</ul>
+<p>We have:</p>
+<ul class="simple">
+<li><p>If the signs of the terms agree, the product is positive.</p></li>
+<li><p>If the signs of the terms disagree, the product is negative.</p></li>
+</ul>
+<p>In practice, if when <span class="math notranslate nohighlight">\(X\)</span> is larger than the mean, then <span class="math notranslate nohighlight">\(Y\)</span>
+is larger than the mean and vice versa, when <span class="math notranslate nohighlight">\(X\)</span> is lower
+than the mean then <span class="math notranslate nohighlight">\(Y\)</span> is lower than the mean, then the two
+variables are <em>correlated,</em> and the covariance is high.</p>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is a multi-dimensional variable
+<span class="math notranslate nohighlight">\(X = \lbrack X_{1},X_{2},\ldots,X_{n}\rbrack\)</span>, we can compute all the
+possible covariances between variable pairs:
+<span class="math notranslate nohighlight">\(Cov\lbrack X_{i},X_{j}\rbrack\)</span>. This allows to create a matrix, which
+is generally referred to as <strong>the covariance matrix</strong>. The general term
+of the covariance matrix <span class="math notranslate nohighlight">\(Cov(X)\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[Cov(X)_{i,j} = \Sigma_{ij} = Cov(X_{i},X_{j})\]</div>
+</section>
+<section id="standardization">
+<h2>Standardization<a class="headerlink" href="#standardization" title="Permalink to this heading">#</a></h2>
+<p>Similar to z-scoring, standardization transforms a random variable <span class="math notranslate nohighlight">\(X\)</span> into a variable <span class="math notranslate nohighlight">\(Z\)</span> so that it has:</p>
+<ul class="simple">
+<li><p>Expectation equal to zero: <span class="math notranslate nohighlight">\(E(X) = 0\)</span>.</p></li>
+<li><p>Variance equal to one: <span class="math notranslate nohighlight">\(Var(X) = 1\)</span>.</p></li>
+</ul>
+<p>The new standardized variable will be:</p>
+<div class="math notranslate nohighlight">
+\[Z = \frac{X - \mu_X}{\sigma_X} = \frac{X-E[X]}{\sqrt{Var[X]}}\]</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="references">
+<h1>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Parts of chapter 1 of [1];</p></li>
+<li><p>Most of chapter 3 of [2];</p></li>
+<li><p>Parts of chapter 7 of [3].</p></li>
+</ul>
+<p>[1] Bishop, Christopher M. <em>Pattern recognition and machine learning</em>.
+springer, 2006.
+<a class="reference external" href="https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf">https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf</a></p>
+<p>[2] Goodfellow, Ian, Yoshua Bengio, and Aaron Courville. <em>Deep
+learning</em>. MIT press, 2016. <a class="reference external" href="https://www.deeplearningbook.org/">https://www.deeplearningbook.org/</a></p>
+<p>[3] Heumann, Christian, and Michael Schomaker Shalabh. Introduction to statistics and data analysis. Springer International Publishing Switzerland, 2016.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lectures/lecture5"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Probability Distributions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-mass-functions-pmf-discrete-variables">Probability Mass Functions (PMF) - Discrete Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-probability-mass-function-for-a-fair-coin">Example: Probability Mass Function for a Fair Coin</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-probability-mass-function-for-a-biased-coin">Example: Probability Mass Function for a Biased Coin</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-probability-mass-function">Exercise: Probability Mass Function</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-density-functions-pdf-continuous-variables">Probability Density Functions (PDF) - Continuous Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-uniform-pdf">Example: Uniform PDF</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cumulative-distribution-functions-cdf">Cumulative Distribution Functions (CDF)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cdf-of-continuous-random-variables">CDF of Continuous Random Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cdf-of-discrete-random-variables">CDF of Discrete Random Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-pdf-and-cdf-of-a-fair-die">Example - PDF and CDF of a fair die</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation">Expectation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variance">Variance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#covariance">Covariance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#standardization">Standardization</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Antonino Furnari
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
