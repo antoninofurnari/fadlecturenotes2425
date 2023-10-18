@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>17. Associazione tra Variabili &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+    <title>16. Associazione tra Variabili &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
   
   
   
@@ -68,7 +68,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="16. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma" href="07_misure_di_tendenza_centrale_dispersione_e_forma.html" />
+    <link rel="prev" title="15. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma" href="07_misure_di_tendenza_centrale_dispersione_e_forma.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -178,18 +178,17 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../lectures/07_probability.html">6. Probability for Data Manipulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lectures/08_common_distributions.html">7. Common Probability Distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lectures/09_information_theory.html">8. Basic Elements of Information Theory</a></li>
-
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratories</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_setup.html">10. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_intro_python.html">11. Introduzione a Python</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_intro_numpy.html">12. Introduzione a Numpy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_intro_matplotlib.html">13. Introduzione a Matplotlib</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_intro_pandas.html">14. Introduzione a Pandas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">15. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="07_misure_di_tendenza_centrale_dispersione_e_forma.html">16. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">17. Associazione tra Variabili</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_setup.html">9. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_intro_python.html">10. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_intro_numpy.html">11. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_intro_matplotlib.html">12. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_intro_pandas.html">13. Introduzione a Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">14. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_misure_di_tendenza_centrale_dispersione_e_forma.html">15. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">16. Associazione tra Variabili</a></li>
 </ul>
 
     </div>
@@ -414,28 +413,28 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#riassumere-la-distribuzione-di-due-variabili-discrete">17.1. Riassumere la Distribuzione di due Variabili Discrete</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabelle-di-contingenza">17.1.1. Tabelle di Contingenza</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzioni-di-frequenze-relative-congiunte">17.1.2. Distribuzioni di Frequenze Relative Congiunte</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzioni-di-frequenze-relative-marginali">17.1.3. Distribuzioni di Frequenze Relative Marginali</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzioni-di-frequenze-relative-condizionali">17.1.4. Distribuzioni di Frequenze Relative Condizionali</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rappresentazioni-grafiche">17.1.5. Rappresentazioni Grafiche</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#misure-di-associazione-tra-due-variabili-discrete">17.1.6. Misure di Associazione tra due Variabili Discrete</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#statistica-mathcal-x-2-di-pearson">17.1.6.1. Statistica <span class="math notranslate nohighlight">\(\mathcal{X}^2\)</span> di Pearson</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#statistica-v-di-cramer">17.1.6.2. Statistica <span class="math notranslate nohighlight">\(V\)</span> di Cramer</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#rischio-relativo-e-odds-ratio">17.1.6.3. Rischio Relativo e Odds Ratio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#riassumere-la-distribuzione-di-due-variabili-discrete">16.1. Riassumere la Distribuzione di due Variabili Discrete</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabelle-di-contingenza">16.1.1. Tabelle di Contingenza</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzioni-di-frequenze-relative-congiunte">16.1.2. Distribuzioni di Frequenze Relative Congiunte</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzioni-di-frequenze-relative-marginali">16.1.3. Distribuzioni di Frequenze Relative Marginali</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzioni-di-frequenze-relative-condizionali">16.1.4. Distribuzioni di Frequenze Relative Condizionali</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rappresentazioni-grafiche">16.1.5. Rappresentazioni Grafiche</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#misure-di-associazione-tra-due-variabili-discrete">16.1.6. Misure di Associazione tra due Variabili Discrete</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#statistica-mathcal-x-2-di-pearson">16.1.6.1. Statistica <span class="math notranslate nohighlight">\(\mathcal{X}^2\)</span> di Pearson</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#statistica-v-di-cramer">16.1.6.2. Statistica <span class="math notranslate nohighlight">\(V\)</span> di Cramer</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#rischio-relativo-e-odds-ratio">16.1.6.3. Rischio Relativo e Odds Ratio</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#associazioni-tra-variabili-continue">17.2. Associazioni tra Variabili Continue</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plot">17.3. Scatter Plot</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#medie-e-covarianze">17.4. Medie e Covarianze</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indici-di-correlazione">17.5. Indici di Correlazione</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-plot">17.5.1. Correlation Plot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#associazioni-tra-variabili-continue">16.2. Associazioni tra Variabili Continue</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plot">16.3. Scatter Plot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#medie-e-covarianze">16.4. Medie e Covarianze</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indici-di-correlazione">16.5. Indici di Correlazione</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-plot">16.5.1. Correlation Plot</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">17.6. Esercizi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">16.6. Esercizi</a></li>
 </ul>
             </nav>
         </div>
@@ -448,7 +447,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="associazione-tra-variabili">
-<h1><span class="section-number">17. </span>Associazione tra Variabili<a class="headerlink" href="#associazione-tra-variabili" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">16. </span>Associazione tra Variabili<a class="headerlink" href="#associazione-tra-variabili" title="Permalink to this heading">#</a></h1>
 <p>Utilizzeremo come esempio nuovamente il dataset Titanic:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -583,10 +582,10 @@ document.write(`
 <p>Dato il dataset sopra, potremmo chiederci se delle variabili influenzano i valori di altre. Ad esempio, trovarsi in prima, seconda o terza classe (variabile <code class="docutils literal notranslate"><span class="pre">Pclass</span></code>) influenza in qualche modo la probabilità di sopravvivere (variabile <code class="docutils literal notranslate"><span class="pre">Survived</span></code>)?, o ancora, l’età (variabile <code class="docutils literal notranslate"><span class="pre">Age</span></code>) o il prezzo pagato (<code class="docutils literal notranslate"><span class="pre">Fare</span></code>) influenza in qualche modo la probabilità di salvarsi (<code class="docutils literal notranslate"><span class="pre">Survived</span></code>)?</p>
 <p>In questa lezione, vedremo diversi modi per riassumere le distribuzioni di due variabili e verificare eventuali associazioni (o correlazioni) tra le variabili.</p>
 <section id="riassumere-la-distribuzione-di-due-variabili-discrete">
-<h2><span class="section-number">17.1. </span>Riassumere la Distribuzione di due Variabili Discrete<a class="headerlink" href="#riassumere-la-distribuzione-di-due-variabili-discrete" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">16.1. </span>Riassumere la Distribuzione di due Variabili Discrete<a class="headerlink" href="#riassumere-la-distribuzione-di-due-variabili-discrete" title="Permalink to this heading">#</a></h2>
 <p>Se entrambe le variabili che stiamo studiando sono discrete, possiamo enumerare tutte le possibili combinazioni di valori e riassumerle in una tabella di contingenza che indica i valori di una variabile sulle righe e quelli dell’altra variabile sulle colonne. Ogni cella indicherà il numero di volte in cui osserviamo una data coppia di valori.</p>
 <section id="tabelle-di-contingenza">
-<h3><span class="section-number">17.1.1. </span>Tabelle di Contingenza<a class="headerlink" href="#tabelle-di-contingenza" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">16.1.1. </span>Tabelle di Contingenza<a class="headerlink" href="#tabelle-di-contingenza" title="Permalink to this heading">#</a></h3>
 <p>Costruiamo la tabella di contingenza per le variabili <code class="docutils literal notranslate"><span class="pre">Sex</span></code> e <code class="docutils literal notranslate"><span class="pre">Pclass</span></code>. Per farlo utilizzeremo la funzione <code class="docutils literal notranslate"><span class="pre">crosstab</span></code> di Pandas:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -708,7 +707,7 @@ document.write(`
 </div>
 </section>
 <section id="distribuzioni-di-frequenze-relative-congiunte">
-<h3><span class="section-number">17.1.2. </span>Distribuzioni di Frequenze Relative Congiunte<a class="headerlink" href="#distribuzioni-di-frequenze-relative-congiunte" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">16.1.2. </span>Distribuzioni di Frequenze Relative Congiunte<a class="headerlink" href="#distribuzioni-di-frequenze-relative-congiunte" title="Permalink to this heading">#</a></h3>
 <p>Possiamo ottenere la tabella delle frequenze relative congiunte passando <code class="docutils literal notranslate"><span class="pre">normalize=True</span></code> alla funzione crosstab:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -765,7 +764,7 @@ document.write(`
 </div>
 </section>
 <section id="distribuzioni-di-frequenze-relative-marginali">
-<h3><span class="section-number">17.1.3. </span>Distribuzioni di Frequenze Relative Marginali<a class="headerlink" href="#distribuzioni-di-frequenze-relative-marginali" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">16.1.3. </span>Distribuzioni di Frequenze Relative Marginali<a class="headerlink" href="#distribuzioni-di-frequenze-relative-marginali" title="Permalink to this heading">#</a></h3>
 <p>Otteniamo i marginali passando <code class="docutils literal notranslate"><span class="pre">margins=True</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -865,7 +864,7 @@ Name: Pclass, dtype: float64
 <p>Che sono i valori nell’ultima riga della tabella precedente.</p>
 </section>
 <section id="distribuzioni-di-frequenze-relative-condizionali">
-<h3><span class="section-number">17.1.4. </span>Distribuzioni di Frequenze Relative Condizionali<a class="headerlink" href="#distribuzioni-di-frequenze-relative-condizionali" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">16.1.4. </span>Distribuzioni di Frequenze Relative Condizionali<a class="headerlink" href="#distribuzioni-di-frequenze-relative-condizionali" title="Permalink to this heading">#</a></h3>
 <p>È possibile ottenere le frequenze condizionate relative normalizzando per la riga opportuna. Se voglio condizionare rispetto alla variabile X, normalizzerò per righe:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -991,7 +990,7 @@ Name: Pclass, dtype: float64
 <p>Notiamo che le proporzione tra uomini e donne cambiano nelle tre classi e in particolare nella terza classe ci sono molti più uomini che donne.</p>
 </section>
 <section id="rappresentazioni-grafiche">
-<h3><span class="section-number">17.1.5. </span>Rappresentazioni Grafiche<a class="headerlink" href="#rappresentazioni-grafiche" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">16.1.5. </span>Rappresentazioni Grafiche<a class="headerlink" href="#rappresentazioni-grafiche" title="Permalink to this heading">#</a></h3>
 <p>Possiamo facilmente ottenere rappresentazioni grafiche delle relazioni tra due variabili mediante grafici a barre, direttamente dalle tabelle di contingenza.</p>
 <p>Possiamo confrontare le frequenze assolute di passeggeri e sessi nelle tre classi come segue:</p>
 <div class="cell docutils container">
@@ -1052,9 +1051,9 @@ Name: Pclass, dtype: float64
 </div>
 </section>
 <section id="misure-di-associazione-tra-due-variabili-discrete">
-<h3><span class="section-number">17.1.6. </span>Misure di Associazione tra due Variabili Discrete<a class="headerlink" href="#misure-di-associazione-tra-due-variabili-discrete" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">16.1.6. </span>Misure di Associazione tra due Variabili Discrete<a class="headerlink" href="#misure-di-associazione-tra-due-variabili-discrete" title="Permalink to this heading">#</a></h3>
 <section id="statistica-mathcal-x-2-di-pearson">
-<h4><span class="section-number">17.1.6.1. </span>Statistica <span class="math notranslate nohighlight">\(\mathcal{X}^2\)</span> di Pearson<a class="headerlink" href="#statistica-mathcal-x-2-di-pearson" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">16.1.6.1. </span>Statistica <span class="math notranslate nohighlight">\(\mathcal{X}^2\)</span> di Pearson<a class="headerlink" href="#statistica-mathcal-x-2-di-pearson" title="Permalink to this heading">#</a></h4>
 <p>Possiamo calcolare la statistica <span class="math notranslate nohighlight">\(\mathcal{X}^2\)</span> di Pearson come segue:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1136,7 +1135,7 @@ Name: Pclass, dtype: float64
 </div>
 </section>
 <section id="statistica-v-di-cramer">
-<h4><span class="section-number">17.1.6.2. </span>Statistica <span class="math notranslate nohighlight">\(V\)</span> di Cramer<a class="headerlink" href="#statistica-v-di-cramer" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">16.1.6.2. </span>Statistica <span class="math notranslate nohighlight">\(V\)</span> di Cramer<a class="headerlink" href="#statistica-v-di-cramer" title="Permalink to this heading">#</a></h4>
 <p>È possibile calcolare la statistica V di Cramer come segue:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1154,7 +1153,7 @@ Name: Pclass, dtype: float64
 </div>
 </section>
 <section id="rischio-relativo-e-odds-ratio">
-<h4><span class="section-number">17.1.6.3. </span>Rischio Relativo e Odds Ratio<a class="headerlink" href="#rischio-relativo-e-odds-ratio" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">16.1.6.3. </span>Rischio Relativo e Odds Ratio<a class="headerlink" href="#rischio-relativo-e-odds-ratio" title="Permalink to this heading">#</a></h4>
 <p>Consideriamo questa matrice di contingenza:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1222,7 +1221,7 @@ Name: Pclass, dtype: float64
 </section>
 </section>
 <section id="associazioni-tra-variabili-continue">
-<h2><span class="section-number">17.2. </span>Associazioni tra Variabili Continue<a class="headerlink" href="#associazioni-tra-variabili-continue" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">16.2. </span>Associazioni tra Variabili Continue<a class="headerlink" href="#associazioni-tra-variabili-continue" title="Permalink to this heading">#</a></h2>
 <p>Per studiare le associazioni tra variabili continue, considereremo il dataset delle iris di fisher come dataset di esempio. Carichiamo il dataset mediante la libreria <code class="docutils literal notranslate"><span class="pre">seaborn</span></code> e visualizziamone informazioni e prime righe:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1445,7 +1444,7 @@ memory usage: 6.0+ KB
 </div>
 </section>
 <section id="scatter-plot">
-<h2><span class="section-number">17.3. </span>Scatter Plot<a class="headerlink" href="#scatter-plot" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">16.3. </span>Scatter Plot<a class="headerlink" href="#scatter-plot" title="Permalink to this heading">#</a></h2>
 <p>Possiamo mostrare uno scatterplot in seaborn come segue:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1540,7 +1539,7 @@ memory usage: 6.0+ KB
 </div></blockquote>
 </section>
 <section id="medie-e-covarianze">
-<h2><span class="section-number">17.4. </span>Medie e Covarianze<a class="headerlink" href="#medie-e-covarianze" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">16.4. </span>Medie e Covarianze<a class="headerlink" href="#medie-e-covarianze" title="Permalink to this heading">#</a></h2>
 <p>Nel caso <strong>multivariato</strong>, la <strong>media</strong> viene calcolata in maniera del tutto analoga al caso <strong>univariato</strong> come <strong>media di vettori</strong>. Possiamo banalmente calcolare la media dei nostri dati multivariati mediante il metodo <code class="docutils literal notranslate"><span class="pre">mean</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1654,7 +1653,7 @@ dtype: float64
 </div></blockquote>
 </section>
 <section id="indici-di-correlazione">
-<h2><span class="section-number">17.5. </span>Indici di Correlazione<a class="headerlink" href="#indici-di-correlazione" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">16.5. </span>Indici di Correlazione<a class="headerlink" href="#indici-di-correlazione" title="Permalink to this heading">#</a></h2>
 <p>Posso calcolare la matrice di correlazione con l’indice di correlazione di Pearson mediante il metodo <code class="docutils literal notranslate"><span class="pre">corr</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1854,7 +1853,7 @@ dtype: float64
 </div></div></div>
 </div>
 <section id="correlation-plot">
-<h3><span class="section-number">17.5.1. </span>Correlation Plot<a class="headerlink" href="#correlation-plot" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">16.5.1. </span>Correlation Plot<a class="headerlink" href="#correlation-plot" title="Permalink to this heading">#</a></h3>
 <p>Possiamo facilmente ottenere un correlation plot in <code class="docutils literal notranslate"><span class="pre">Seaborn</span></code> come segue:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1870,7 +1869,7 @@ dtype: float64
 </section>
 </section>
 <section id="esercizi">
-<h2><span class="section-number">17.6. </span>Esercizi<a class="headerlink" href="#esercizi" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">16.6. </span>Esercizi<a class="headerlink" href="#esercizi" title="Permalink to this heading">#</a></h2>
 <blockquote>
 <div><p>🧑‍💻 Esercizio 1</p>
 <p>Considerando il dataset Titanic, si calcolino per ogni variabile la numerosità, la media, la deviazione standard, il minimo, il massimo, il valore mediano, il primo e il terzo quartile. Dopo aver calcolato i valori richiesti individualmente, si utilizzi il metodo <code class="docutils literal notranslate"><span class="pre">describe</span></code> per ottenere tali valori. Qual è la variabile più dispersa?</p>
@@ -1930,7 +1929,7 @@ dtype: float64
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">16. </span>Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</p>
+        <p class="prev-next-title"><span class="section-number">15. </span>Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</p>
       </div>
     </a>
 </div>
@@ -1948,28 +1947,28 @@ dtype: float64
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#riassumere-la-distribuzione-di-due-variabili-discrete">17.1. Riassumere la Distribuzione di due Variabili Discrete</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabelle-di-contingenza">17.1.1. Tabelle di Contingenza</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzioni-di-frequenze-relative-congiunte">17.1.2. Distribuzioni di Frequenze Relative Congiunte</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzioni-di-frequenze-relative-marginali">17.1.3. Distribuzioni di Frequenze Relative Marginali</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzioni-di-frequenze-relative-condizionali">17.1.4. Distribuzioni di Frequenze Relative Condizionali</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rappresentazioni-grafiche">17.1.5. Rappresentazioni Grafiche</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#misure-di-associazione-tra-due-variabili-discrete">17.1.6. Misure di Associazione tra due Variabili Discrete</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#statistica-mathcal-x-2-di-pearson">17.1.6.1. Statistica <span class="math notranslate nohighlight">\(\mathcal{X}^2\)</span> di Pearson</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#statistica-v-di-cramer">17.1.6.2. Statistica <span class="math notranslate nohighlight">\(V\)</span> di Cramer</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#rischio-relativo-e-odds-ratio">17.1.6.3. Rischio Relativo e Odds Ratio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#riassumere-la-distribuzione-di-due-variabili-discrete">16.1. Riassumere la Distribuzione di due Variabili Discrete</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabelle-di-contingenza">16.1.1. Tabelle di Contingenza</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzioni-di-frequenze-relative-congiunte">16.1.2. Distribuzioni di Frequenze Relative Congiunte</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzioni-di-frequenze-relative-marginali">16.1.3. Distribuzioni di Frequenze Relative Marginali</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzioni-di-frequenze-relative-condizionali">16.1.4. Distribuzioni di Frequenze Relative Condizionali</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rappresentazioni-grafiche">16.1.5. Rappresentazioni Grafiche</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#misure-di-associazione-tra-due-variabili-discrete">16.1.6. Misure di Associazione tra due Variabili Discrete</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#statistica-mathcal-x-2-di-pearson">16.1.6.1. Statistica <span class="math notranslate nohighlight">\(\mathcal{X}^2\)</span> di Pearson</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#statistica-v-di-cramer">16.1.6.2. Statistica <span class="math notranslate nohighlight">\(V\)</span> di Cramer</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#rischio-relativo-e-odds-ratio">16.1.6.3. Rischio Relativo e Odds Ratio</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#associazioni-tra-variabili-continue">17.2. Associazioni tra Variabili Continue</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plot">17.3. Scatter Plot</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#medie-e-covarianze">17.4. Medie e Covarianze</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indici-di-correlazione">17.5. Indici di Correlazione</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-plot">17.5.1. Correlation Plot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#associazioni-tra-variabili-continue">16.2. Associazioni tra Variabili Continue</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plot">16.3. Scatter Plot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#medie-e-covarianze">16.4. Medie e Covarianze</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indici-di-correlazione">16.5. Indici di Correlazione</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-plot">16.5.1. Correlation Plot</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">17.6. Esercizi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">16.6. Esercizi</a></li>
 </ul>
   </nav></div>
 

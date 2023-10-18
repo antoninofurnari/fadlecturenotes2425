@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>15. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+    <title>14. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
   
   
   
@@ -68,8 +68,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="16. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma" href="07_misure_di_tendenza_centrale_dispersione_e_forma.html" />
-    <link rel="prev" title="14. Introduzione a Pandas" href="05_intro_pandas.html" />
+    <link rel="next" title="15. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma" href="07_misure_di_tendenza_centrale_dispersione_e_forma.html" />
+    <link rel="prev" title="13. Introduzione a Pandas" href="05_intro_pandas.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -179,18 +179,17 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../lectures/07_probability.html">6. Probability for Data Manipulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lectures/08_common_distributions.html">7. Common Probability Distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lectures/09_information_theory.html">8. Basic Elements of Information Theory</a></li>
-
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratories</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_setup.html">10. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_intro_python.html">11. Introduzione a Python</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_intro_numpy.html">12. Introduzione a Numpy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_intro_matplotlib.html">13. Introduzione a Matplotlib</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_intro_pandas.html">14. Introduzione a Pandas</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">15. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="07_misure_di_tendenza_centrale_dispersione_e_forma.html">16. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
-<li class="toctree-l1"><a class="reference internal" href="08_associazione_variabili.html">17. Associazione tra Variabili</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_setup.html">9. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_intro_python.html">10. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_intro_numpy.html">11. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_intro_matplotlib.html">12. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_intro_pandas.html">13. Introduzione a Pandas</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">14. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_misure_di_tendenza_centrale_dispersione_e_forma.html">15. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_associazione_variabili.html">16. Associazione tra Variabili</a></li>
 </ul>
 
     </div>
@@ -415,28 +414,28 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frequenze-assolute-e-relative">15.1. Frequenze Assolute e Relative</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diagramma-a-barre-delle-frequenze-assolute">15.1.1. Diagramma a Barre delle Frequenze Assolute</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frequenze-relative">15.1.2. Frequenze Relative</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#diagramma-a-barre-delle-frequenze-relative">15.1.2.1. Diagramma a Barre delle Frequenze Relative</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frequenze-assolute-e-relative">14.1. Frequenze Assolute e Relative</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diagramma-a-barre-delle-frequenze-assolute">14.1.1. Diagramma a Barre delle Frequenze Assolute</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frequenze-relative">14.1.2. Frequenze Relative</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#diagramma-a-barre-delle-frequenze-relative">14.1.2.1. Diagramma a Barre delle Frequenze Relative</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#empirical-cumulative-distribution-function-ecdf">15.2. Empirical Cumulative Distribution Function (ECDF)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#istogrammi">15.3. Istogrammi</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struges-e-rice">15.3.1. Struges e Rice</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#istogrammi-di-densita">15.3.2. Istogrammi di densità</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stima-della-densita">15.3.3. Stima della densità</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confrontare-campioni-mediante-istogrammi">15.3.4. Confrontare campioni mediante istogrammi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#empirical-cumulative-distribution-function-ecdf">14.2. Empirical Cumulative Distribution Function (ECDF)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#istogrammi">14.3. Istogrammi</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struges-e-rice">14.3.1. Struges e Rice</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#istogrammi-di-densita">14.3.2. Istogrammi di densità</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stima-della-densita">14.3.3. Stima della densità</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confrontare-campioni-mediante-istogrammi">14.3.4. Confrontare campioni mediante istogrammi</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#altre-visualizzazioni-dei-dati">15.4. Altre Visualizzazioni dei Dati</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#barplot">15.4.1. Barplot</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grafici-a-torta">15.4.2. Grafici a Torta</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#altre-visualizzazioni-dei-dati">14.4. Altre Visualizzazioni dei Dati</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#barplot">14.4.1. Barplot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grafici-a-torta">14.4.2. Grafici a Torta</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">15.5. Esercizi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">14.5. Esercizi</a></li>
 </ul>
             </nav>
         </div>
@@ -449,7 +448,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="laboratorio-su-misure-di-frequenze-e-rappresentazione-grafica-dei-dati">
-<h1><span class="section-number">15. </span>Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati<a class="headerlink" href="#laboratorio-su-misure-di-frequenze-e-rappresentazione-grafica-dei-dati" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">14. </span>Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati<a class="headerlink" href="#laboratorio-su-misure-di-frequenze-e-rappresentazione-grafica-dei-dati" title="Permalink to this heading">#</a></h1>
 <p>In questo Laboratorio, utilizzeremo un semplice dataset di esempio contenente osservazioni relativi a pesi e altezze di diversi soggetti. Il dataset è disponibile al seguente URL: <a class="reference external" href="http://antoninofurnari.it/downloads/height_weight.csv">http://antoninofurnari.it/downloads/height_weight.csv</a>.</p>
 <p>Carichiamo il dataset mediante la libreria Pandas e visualizziamo alcune informazioni sul DataFrame:</p>
 <div class="cell docutils container">
@@ -556,7 +555,7 @@ Visualizziamo le prime righe del dataframe:</p></li>
 </div></div></div>
 </div>
 <section id="frequenze-assolute-e-relative">
-<h2><span class="section-number">15.1. </span>Frequenze Assolute e Relative<a class="headerlink" href="#frequenze-assolute-e-relative" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">14.1. </span>Frequenze Assolute e Relative<a class="headerlink" href="#frequenze-assolute-e-relative" title="Permalink to this heading">#</a></h2>
 <p>Possiamo ottenere i valori univoci in una variabile con la funzione <code class="docutils literal notranslate"><span class="pre">unique()</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -691,7 +690,7 @@ Name: height, dtype: int64
 </div>
 </div>
 <section id="diagramma-a-barre-delle-frequenze-assolute">
-<h3><span class="section-number">15.1.1. </span>Diagramma a Barre delle Frequenze Assolute<a class="headerlink" href="#diagramma-a-barre-delle-frequenze-assolute" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">14.1.1. </span>Diagramma a Barre delle Frequenze Assolute<a class="headerlink" href="#diagramma-a-barre-delle-frequenze-assolute" title="Permalink to this heading">#</a></h3>
 <p>Le frequenze dei dati possono essere rappresentate graficamente mediante un grafico a barre utilizzando le funzionalità di plot di <code class="docutils literal notranslate"><span class="pre">Pandas</span></code>. Tali funzionalità si appoggiano a matplotlib, per cui, per avere maggiore controllo su di esse dobbiamo importare <code class="docutils literal notranslate"><span class="pre">pyplot</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -731,7 +730,7 @@ Name: height, dtype: int64
 <p>In molti casi sarà possibile utilizzare le funzioni compatte messe a disposizione da Pandas, mentre in altri sarà necessario utilizzare matplotlib esplicitamente.</p>
 </section>
 <section id="frequenze-relative">
-<h3><span class="section-number">15.1.2. </span>Frequenze Relative<a class="headerlink" href="#frequenze-relative" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">14.1.2. </span>Frequenze Relative<a class="headerlink" href="#frequenze-relative" title="Permalink to this heading">#</a></h3>
 <p>Possiamo calcolare le frequenze relative dividendo quelle assolute per il numero di elementi contenuti nel dataset:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -808,7 +807,7 @@ Name: height, dtype: float64
 </div>
 </div>
 <section id="diagramma-a-barre-delle-frequenze-relative">
-<h4><span class="section-number">15.1.2.1. </span>Diagramma a Barre delle Frequenze Relative<a class="headerlink" href="#diagramma-a-barre-delle-frequenze-relative" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">14.1.2.1. </span>Diagramma a Barre delle Frequenze Relative<a class="headerlink" href="#diagramma-a-barre-delle-frequenze-relative" title="Permalink to this heading">#</a></h4>
 <p>Possiamo ottenere un diagramma a barre delle frequenze relative come segue:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -863,7 +862,7 @@ Name: height, dtype: float64
 </section>
 </section>
 <section id="empirical-cumulative-distribution-function-ecdf">
-<h2><span class="section-number">15.2. </span>Empirical Cumulative Distribution Function (ECDF)<a class="headerlink" href="#empirical-cumulative-distribution-function-ecdf" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">14.2. </span>Empirical Cumulative Distribution Function (ECDF)<a class="headerlink" href="#empirical-cumulative-distribution-function-ecdf" title="Permalink to this heading">#</a></h2>
 <p>Possiamo calcolare una ECDF mediante la funzione <strong>cumsum</strong>, che, data una serie di valori calcola ad ogni posizione <span class="math notranslate nohighlight">\(i\)</span> la somma dei primi <span class="math notranslate nohighlight">\(i\)</span> valori. Ad esempio:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -968,7 +967,7 @@ memory usage: 83.5+ KB
 <p>Com’è possibile vedere, in questo caso le due curve hanno delle forme molto simili. Ciò suggerisce che i due fenomeni obbediscono a simili densità di probabilità. Tuttavia è possibile notare che le donne tendono ad essere più giovani degli uomini.</p>
 </section>
 <section id="istogrammi">
-<h2><span class="section-number">15.3. </span>Istogrammi<a class="headerlink" href="#istogrammi" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">14.3. </span>Istogrammi<a class="headerlink" href="#istogrammi" title="Permalink to this heading">#</a></h2>
 <p>Possiamo plottare un istogramma con matplotlib come segue:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -992,7 +991,7 @@ memory usage: 83.5+ KB
 </ul>
 <p>Nell’esempio sopra abbiamo utilizzato la notazione <code class="docutils literal notranslate"><span class="pre">_,edges,_=...</span></code> per scartare il primo e l’ultimo valore e ottenere i “bordi” dell’istogramma.</p>
 <section id="struges-e-rice">
-<h3><span class="section-number">15.3.1. </span>Struges e Rice<a class="headerlink" href="#struges-e-rice" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">14.3.1. </span>Struges e Rice<a class="headerlink" href="#struges-e-rice" title="Permalink to this heading">#</a></h3>
 <p>Vediamo come rappresentare gli istogrammi scegliendo i numeri di bin con Struges e Rice:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1044,7 +1043,7 @@ memory usage: 83.5+ KB
 </div></blockquote>
 </section>
 <section id="istogrammi-di-densita">
-<h3><span class="section-number">15.3.2. </span>Istogrammi di densità<a class="headerlink" href="#istogrammi-di-densita" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">14.3.2. </span>Istogrammi di densità<a class="headerlink" href="#istogrammi-di-densita" title="Permalink to this heading">#</a></h3>
 <p>Per ottenere un istogramma di densità, dobbiamo passare il parametro <code class="docutils literal notranslate"><span class="pre">density=True</span></code> alla funzione <code class="docutils literal notranslate"><span class="pre">hist</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1104,7 +1103,7 @@ memory usage: 83.5+ KB
 <p>La funzione prende gli stessi parametri in input della funzione <code class="docutils literal notranslate"><span class="pre">hist</span></code> di matplotlib. Tuttavia, a differenza di essa, non restituisce i valori dei bin e i rispettivi bordi.</p>
 </section>
 <section id="stima-della-densita">
-<h3><span class="section-number">15.3.3. </span>Stima della densità<a class="headerlink" href="#stima-della-densita" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">14.3.3. </span>Stima della densità<a class="headerlink" href="#stima-della-densita" title="Permalink to this heading">#</a></h3>
 <p>Possiamo stimare e plottare le densità mediante Pandas come segue:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1124,7 +1123,7 @@ memory usage: 83.5+ KB
 </div></blockquote>
 </section>
 <section id="confrontare-campioni-mediante-istogrammi">
-<h3><span class="section-number">15.3.4. </span>Confrontare campioni mediante istogrammi<a class="headerlink" href="#confrontare-campioni-mediante-istogrammi" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">14.3.4. </span>Confrontare campioni mediante istogrammi<a class="headerlink" href="#confrontare-campioni-mediante-istogrammi" title="Permalink to this heading">#</a></h3>
 <p>Gli istogrammi possono essere utili per comparare campioni. Confrontiamo ad esempio gli istogrammi del campione dei pesi degli uomini e del campione dei pesi delle donne:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1163,7 +1162,7 @@ memory usage: 83.5+ KB
 </section>
 </section>
 <section id="altre-visualizzazioni-dei-dati">
-<h2><span class="section-number">15.4. </span>Altre Visualizzazioni dei Dati<a class="headerlink" href="#altre-visualizzazioni-dei-dati" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">14.4. </span>Altre Visualizzazioni dei Dati<a class="headerlink" href="#altre-visualizzazioni-dei-dati" title="Permalink to this heading">#</a></h2>
 <p>Abbiamo visto che i grafici a barre possono essere utilizzati per graficare le frequenze assolute e relative dei dati. Vediamo adesso alcune altre visualizzazioni che fanno uso di grafici a barre e grafici a torta per confrontare diverse quantità. Per iniziare a discutere di visualizzazioni, utilizzeremo il dataset Titanic caricato precedentemente.</p>
 <p>Mostriamo le prime righe del dataset:</p>
 <div class="cell docutils container">
@@ -1294,7 +1293,7 @@ memory usage: 83.5+ KB
 </div></div></div>
 </div>
 <section id="barplot">
-<h3><span class="section-number">15.4.1. </span>Barplot<a class="headerlink" href="#barplot" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">14.4.1. </span>Barplot<a class="headerlink" href="#barplot" title="Permalink to this heading">#</a></h3>
 <p>Oltre a mostrare le frequenze dei dati, i barplot possono essere utili per confrontare diverse quantità numeriche. Supponiamo di voler confrontare il numero di donne e uomini a bordo del Titanic. Possiamo calcolare questi numeri mediante un <code class="docutils literal notranslate"><span class="pre">groupby</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1611,7 +1610,7 @@ Name: Age, dtype: float64
 </div>
 </section>
 <section id="grafici-a-torta">
-<h3><span class="section-number">15.4.2. </span>Grafici a Torta<a class="headerlink" href="#grafici-a-torta" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">14.4.2. </span>Grafici a Torta<a class="headerlink" href="#grafici-a-torta" title="Permalink to this heading">#</a></h3>
 <p>I grafici a torta vengono utilizzati per confrontare diverse quantità <strong>senza imporre</strong> un ordinamento a priori. Supponiamo ad esempio di voler confrontare il numero di sopravvissuti in rispetto ai due sessi. Iniziamo ottenendo una tabella che riassume i numeri da confrontare:</p>
 <p>Possiamo plottare un grafico a torta come segue:</p>
 <div class="cell docutils container">
@@ -1649,7 +1648,7 @@ Name: Survived, dtype: int64
 </section>
 </section>
 <section id="esercizi">
-<h2><span class="section-number">15.5. </span>Esercizi<a class="headerlink" href="#esercizi" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">14.5. </span>Esercizi<a class="headerlink" href="#esercizi" title="Permalink to this heading">#</a></h2>
 <blockquote>
 <div><p>🧑‍💻 Esercizio 1</p>
 <p>Considerando il dataset Titanic, si mostrino i diagrammi a barre delle frequenze assolute e relative dei valori della colonna <code class="docutils literal notranslate"><span class="pre">Pclass</span></code>. Scegliendo a caso tra i passeggeri, qual è la probabilità che egli si sia imbarcato in seconda classe?</p>
@@ -1709,7 +1708,7 @@ Name: Survived, dtype: int64
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">14. </span>Introduzione a Pandas</p>
+        <p class="prev-next-title"><span class="section-number">13. </span>Introduzione a Pandas</p>
       </div>
     </a>
     <a class="right-next"
@@ -1717,7 +1716,7 @@ Name: Survived, dtype: int64
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">16. </span>Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</p>
+        <p class="prev-next-title"><span class="section-number">15. </span>Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1736,28 +1735,28 @@ Name: Survived, dtype: int64
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frequenze-assolute-e-relative">15.1. Frequenze Assolute e Relative</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diagramma-a-barre-delle-frequenze-assolute">15.1.1. Diagramma a Barre delle Frequenze Assolute</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frequenze-relative">15.1.2. Frequenze Relative</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#diagramma-a-barre-delle-frequenze-relative">15.1.2.1. Diagramma a Barre delle Frequenze Relative</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frequenze-assolute-e-relative">14.1. Frequenze Assolute e Relative</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diagramma-a-barre-delle-frequenze-assolute">14.1.1. Diagramma a Barre delle Frequenze Assolute</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frequenze-relative">14.1.2. Frequenze Relative</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#diagramma-a-barre-delle-frequenze-relative">14.1.2.1. Diagramma a Barre delle Frequenze Relative</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#empirical-cumulative-distribution-function-ecdf">15.2. Empirical Cumulative Distribution Function (ECDF)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#istogrammi">15.3. Istogrammi</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struges-e-rice">15.3.1. Struges e Rice</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#istogrammi-di-densita">15.3.2. Istogrammi di densità</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stima-della-densita">15.3.3. Stima della densità</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confrontare-campioni-mediante-istogrammi">15.3.4. Confrontare campioni mediante istogrammi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#empirical-cumulative-distribution-function-ecdf">14.2. Empirical Cumulative Distribution Function (ECDF)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#istogrammi">14.3. Istogrammi</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struges-e-rice">14.3.1. Struges e Rice</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#istogrammi-di-densita">14.3.2. Istogrammi di densità</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stima-della-densita">14.3.3. Stima della densità</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confrontare-campioni-mediante-istogrammi">14.3.4. Confrontare campioni mediante istogrammi</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#altre-visualizzazioni-dei-dati">15.4. Altre Visualizzazioni dei Dati</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#barplot">15.4.1. Barplot</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grafici-a-torta">15.4.2. Grafici a Torta</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#altre-visualizzazioni-dei-dati">14.4. Altre Visualizzazioni dei Dati</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#barplot">14.4.1. Barplot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grafici-a-torta">14.4.2. Grafici a Torta</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">15.5. Esercizi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">14.5. Esercizi</a></li>
 </ul>
   </nav></div>
 

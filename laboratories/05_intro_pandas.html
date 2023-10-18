@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>14. Introduzione a Pandas &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+    <title>13. Introduzione a Pandas &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
   
   
   
@@ -68,8 +68,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="15. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati" href="06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html" />
-    <link rel="prev" title="13. Introduzione a Matplotlib" href="04_intro_matplotlib.html" />
+    <link rel="next" title="14. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati" href="06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html" />
+    <link rel="prev" title="12. Introduzione a Matplotlib" href="04_intro_matplotlib.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -179,18 +179,17 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../lectures/07_probability.html">6. Probability for Data Manipulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lectures/08_common_distributions.html">7. Common Probability Distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lectures/09_information_theory.html">8. Basic Elements of Information Theory</a></li>
-
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratories</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_setup.html">10. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_intro_python.html">11. Introduzione a Python</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_intro_numpy.html">12. Introduzione a Numpy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_intro_matplotlib.html">13. Introduzione a Matplotlib</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">14. Introduzione a Pandas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">15. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="07_misure_di_tendenza_centrale_dispersione_e_forma.html">16. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
-<li class="toctree-l1"><a class="reference internal" href="08_associazione_variabili.html">17. Associazione tra Variabili</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_setup.html">9. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_intro_python.html">10. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_intro_numpy.html">11. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_intro_matplotlib.html">12. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">13. Introduzione a Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">14. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_misure_di_tendenza_centrale_dispersione_e_forma.html">15. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_associazione_variabili.html">16. Associazione tra Variabili</a></li>
 </ul>
 
     </div>
@@ -415,33 +414,33 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#series">14.1. Series</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creazione-di-series">14.1.1. Creazione di Series</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indicizzazione-di-series">14.1.2. Indicizzazione di Series</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tipi-di-dato">14.1.3. Tipi di dato</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dati-mancanti">14.1.4. Dati Mancanti</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operazioni-su-e-tra-series">14.1.5. Operazioni su e tra Series</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conversione-in-array-di-numpy">14.1.6. Conversione in array di Numpy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#series">13.1. Series</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creazione-di-series">13.1.1. Creazione di Series</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indicizzazione-di-series">13.1.2. Indicizzazione di Series</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tipi-di-dato">13.1.3. Tipi di dato</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dati-mancanti">13.1.4. Dati Mancanti</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operazioni-su-e-tra-series">13.1.5. Operazioni su e tra Series</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conversione-in-array-di-numpy">13.1.6. Conversione in array di Numpy</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe">14.2. DataFrame</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#costruzione-e-visualizzazione-di-dataframe">14.2.1. Costruzione e visualizzazione di DataFrame</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indicizzazione">14.2.2. Indicizzazione</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manipolazione-di-dataframe">14.2.3. Manipolazione di DataFrame</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operazioni-tra-e-su-dataframe">14.2.4. Operazioni tra e su DataFrame</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rimuovere-righe-e-colonne">14.2.5. Rimuovere righe e colonne</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#groupby">14.2.6. Groupby</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#crosstab">14.2.7. Crosstab</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manipolazione-esplicita-di-dataframe">14.2.8. Manipolazione “esplicita” di DataFrame</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#concatenazione-di-dataframe">14.2.9. Concatenazione di DataFrame</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#merge-di-dataframe">14.2.10. Merge di DataFrame</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#join-di-dataframe">14.2.11. Join di DataFrame</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#input-output">14.2.12. Input/Output</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe">13.2. DataFrame</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#costruzione-e-visualizzazione-di-dataframe">13.2.1. Costruzione e visualizzazione di DataFrame</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indicizzazione">13.2.2. Indicizzazione</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manipolazione-di-dataframe">13.2.3. Manipolazione di DataFrame</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operazioni-tra-e-su-dataframe">13.2.4. Operazioni tra e su DataFrame</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rimuovere-righe-e-colonne">13.2.5. Rimuovere righe e colonne</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#groupby">13.2.6. Groupby</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#crosstab">13.2.7. Crosstab</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manipolazione-esplicita-di-dataframe">13.2.8. Manipolazione “esplicita” di DataFrame</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#concatenazione-di-dataframe">13.2.9. Concatenazione di DataFrame</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#merge-di-dataframe">13.2.10. Merge di DataFrame</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#join-di-dataframe">13.2.11. Join di DataFrame</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#input-output">13.2.12. Input/Output</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esempio-di-manipolazione-dati">14.3. Esempio di manipolazione dati</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">14.4. Esercizi</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referenze">14.5. Referenze</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esempio-di-manipolazione-dati">13.3. Esempio di manipolazione dati</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">13.4. Esercizi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referenze">13.5. Referenze</a></li>
 </ul>
             </nav>
         </div>
@@ -454,7 +453,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="introduzione-a-pandas">
-<h1><span class="section-number">14. </span>Introduzione a Pandas<a class="headerlink" href="#introduzione-a-pandas" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">13. </span>Introduzione a Pandas<a class="headerlink" href="#introduzione-a-pandas" title="Permalink to this heading">#</a></h1>
 <p>Abbiamo visto come Python, unito a numpy e matplotlib possa essere un potente strumento per il calcolo scientifico. Esistono tuttavia altre librerie che forniscono una maggiore astrazione per una più agevole gestione e analisi dei dati. In questo laboratorio vedremo le basi di della libreria Pandas, utile per l’analisi dei dati. In particolare vedremo:</p>
 <ul class="simple">
 <li><p>Come creare e gestire serie di dati (Pandas Series);</p></li>
@@ -463,10 +462,10 @@ document.write(`
 </ul>
 <p>Pandas è una libreria di alto livello che mette a disposizione diversi strumenti e strutture dati per l’analisi dei dati. In particolare, Pandas è molto utile per caricare, manipolare e visualizzare i dati i maniera veloce e conveniente prima di passare all’analisi vera e propria. Le due strutture dati principali di Pandas sono le <code class="docutils literal notranslate"><span class="pre">Series</span></code> e i <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>.</p>
 <section id="series">
-<h2><span class="section-number">14.1. </span>Series<a class="headerlink" href="#series" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">13.1. </span>Series<a class="headerlink" href="#series" title="Permalink to this heading">#</a></h2>
 <p>Una <code class="docutils literal notranslate"><span class="pre">Series</span></code> è una struttura monodimensionale (una serie di dati) molto simile a un array di numpy. A differenza di esso, i suoi elementi possono essere indicizzati mediante delle etichette, oltre che mediante numeri. I valori contenuti in una serie possono essere di qualsiasi tipo.</p>
 <section id="creazione-di-series">
-<h3><span class="section-number">14.1.1. </span>Creazione di Series<a class="headerlink" href="#creazione-di-series" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">13.1.1. </span>Creazione di Series<a class="headerlink" href="#creazione-di-series" title="Permalink to this heading">#</a></h3>
 <p>E’ possibile definire una <code class="docutils literal notranslate"><span class="pre">Series</span></code> a partire da una lista o da un array di numpy:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -551,7 +550,7 @@ Name: Mia Serie, dtype: int64
 </div></blockquote>
 </section>
 <section id="indicizzazione-di-series">
-<h3><span class="section-number">14.1.2. </span>Indicizzazione di Series<a class="headerlink" href="#indicizzazione-di-series" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">13.1.2. </span>Indicizzazione di Series<a class="headerlink" href="#indicizzazione-di-series" title="Permalink to this heading">#</a></h3>
 <p>Quando gli indici sono numerici, le serie possono essere indicizzate come gli array di numpy:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -836,7 +835,7 @@ dtype: int64
 </div></blockquote>
 </section>
 <section id="tipi-di-dato">
-<h3><span class="section-number">14.1.3. </span>Tipi di dato<a class="headerlink" href="#tipi-di-dato" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">13.1.3. </span>Tipi di dato<a class="headerlink" href="#tipi-di-dato" title="Permalink to this heading">#</a></h3>
 <p>Le <code class="docutils literal notranslate"><span class="pre">Series</span></code> possono contenere diversi tipi di dato:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -911,7 +910,7 @@ dtype: float64
 </div></blockquote>
 </section>
 <section id="dati-mancanti">
-<h3><span class="section-number">14.1.4. </span>Dati Mancanti<a class="headerlink" href="#dati-mancanti" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">13.1.4. </span>Dati Mancanti<a class="headerlink" href="#dati-mancanti" title="Permalink to this heading">#</a></h3>
 <p>In Pandas, è possibile specificare Series (e come vedremo anche DataFrame) con dati mancanti. Per indicare tali valori, viene utilizzato il valore <code class="docutils literal notranslate"><span class="pre">np.nan</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -976,7 +975,7 @@ dtype: float64
 </div>
 </section>
 <section id="operazioni-su-e-tra-series">
-<h3><span class="section-number">14.1.5. </span>Operazioni su e tra Series<a class="headerlink" href="#operazioni-su-e-tra-series" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">13.1.5. </span>Operazioni su e tra Series<a class="headerlink" href="#operazioni-su-e-tra-series" title="Permalink to this heading">#</a></h3>
 <p>Sono definite sulle serie le principali operazioni disponibili per gli array di numpy:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1281,7 +1280,7 @@ dtype: int64
 </div></blockquote>
 </section>
 <section id="conversione-in-array-di-numpy">
-<h3><span class="section-number">14.1.6. </span>Conversione in array di Numpy<a class="headerlink" href="#conversione-in-array-di-numpy" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">13.1.6. </span>Conversione in array di Numpy<a class="headerlink" href="#conversione-in-array-di-numpy" title="Permalink to this heading">#</a></h3>
 <p>E’ possibile accedere ai valori della series in forma di array di numpy mediante la proprietà <code class="docutils literal notranslate"><span class="pre">values</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1327,7 +1326,7 @@ dtype: float64
 </section>
 </section>
 <section id="dataframe">
-<h2><span class="section-number">14.2. </span>DataFrame<a class="headerlink" href="#dataframe" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">13.2. </span>DataFrame<a class="headerlink" href="#dataframe" title="Permalink to this heading">#</a></h2>
 <p>Un <strong>DataFrame</strong> è sostanzialmente una tabella di numeri in cui:</p>
 <ul class="simple">
 <li><p>Ogni riga rappresenta una <em>osservazione</em> diversa;</p></li>
@@ -1335,7 +1334,7 @@ dtype: float64
 </ul>
 <p>Righe e colonne possono avere dei nomi. In particolare, è molto comune assegnare dei nomi alle colonne per indicare a quale variabile corrisponde ognuna di esse.</p>
 <section id="costruzione-e-visualizzazione-di-dataframe">
-<h3><span class="section-number">14.2.1. </span>Costruzione e visualizzazione di DataFrame<a class="headerlink" href="#costruzione-e-visualizzazione-di-dataframe" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">13.2.1. </span>Costruzione e visualizzazione di DataFrame<a class="headerlink" href="#costruzione-e-visualizzazione-di-dataframe" title="Permalink to this heading">#</a></h3>
 <p>E’ possibile costruire un DataFrame a partire da un array bidimensionale (una matrice) di numpy:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1828,7 +1827,7 @@ W  0.392118  0.343178  0.729050
 </div></blockquote>
 </section>
 <section id="indicizzazione">
-<h3><span class="section-number">14.2.2. </span>Indicizzazione<a class="headerlink" href="#indicizzazione" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">13.2.2. </span>Indicizzazione<a class="headerlink" href="#indicizzazione" title="Permalink to this heading">#</a></h3>
 <p>Pandas mette a disposizione una serie di strumenti per indicizzare i <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> selezionandone righe o colonne. Ad esempio, possiamo selezionare la colonna B come segue:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2557,7 +2556,7 @@ W  0.392118  0.343178  0.729050
 </div></blockquote>
 </section>
 <section id="manipolazione-di-dataframe">
-<h3><span class="section-number">14.2.3. </span>Manipolazione di DataFrame<a class="headerlink" href="#manipolazione-di-dataframe" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">13.2.3. </span>Manipolazione di DataFrame<a class="headerlink" href="#manipolazione-di-dataframe" title="Permalink to this heading">#</a></h3>
 <p>I valori contenuti nelle righe e nelle colonne del dataframe possono essere facilmente modificati. Il seguente esempio moltiplica tutti i valori della colonna B per 2:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3233,7 +3232,7 @@ Name: H, dtype: int64
 </div></blockquote>
 </section>
 <section id="operazioni-tra-e-su-dataframe">
-<h3><span class="section-number">14.2.4. </span>Operazioni tra e su DataFrame<a class="headerlink" href="#operazioni-tra-e-su-dataframe" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">13.2.4. </span>Operazioni tra e su DataFrame<a class="headerlink" href="#operazioni-tra-e-su-dataframe" title="Permalink to this heading">#</a></h3>
 <p>Restano definite sui DataFrame, con le opportune differenze, le operazioni viste nel caso delle serie. In genere, queste vengono applicate a tutte le colonne del DataFrame in maniera indipendente:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3570,7 +3569,7 @@ dtype: float64
 </div></blockquote>
 </section>
 <section id="rimuovere-righe-e-colonne">
-<h3><span class="section-number">14.2.5. </span>Rimuovere righe e colonne<a class="headerlink" href="#rimuovere-righe-e-colonne" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">13.2.5. </span>Rimuovere righe e colonne<a class="headerlink" href="#rimuovere-righe-e-colonne" title="Permalink to this heading">#</a></h3>
 <p>È possibile rimuovere una riga o una colonna da un DataFrame:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3840,7 +3839,7 @@ dtype: float64
 </div>
 </section>
 <section id="groupby">
-<h3><span class="section-number">14.2.6. </span>Groupby<a class="headerlink" href="#groupby" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">13.2.6. </span>Groupby<a class="headerlink" href="#groupby" title="Permalink to this heading">#</a></h3>
 <p>Il metodo <code class="docutils literal notranslate"><span class="pre">groupby</span></code> permette di raggruppare le righe di un <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> e richiamare delle funzioni aggreggate su di esse. Consideriamo un <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> un po’ più rappresentativo:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -4382,7 +4381,7 @@ Name: age, dtype: float64
 </div></blockquote>
 </section>
 <section id="crosstab">
-<h3><span class="section-number">14.2.7. </span>Crosstab<a class="headerlink" href="#crosstab" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">13.2.7. </span>Crosstab<a class="headerlink" href="#crosstab" title="Permalink to this heading">#</a></h3>
 <p>Le <code class="docutils literal notranslate"><span class="pre">Crosstab</span></code> permettono di descrivere le relazioni tra due o più variabili <strong>categoriche</strong>. Una volta specificata una
 coppia di variabili categoriche, le righe e colonne della crosstab (nota anche come “tabella di contingenza”) enumerano indipendentemente tutti i valori univoci delle due variabili categoriche, così che ogni cella della crosstab identifica una determinata coppia di volari. All’interno delle celle, vengono dunque riportati i numeri di elementi per i quali le due variabili categoriche assumono una determinata coppia di valori.</p>
 <p>Supponiamo di voler studiare le relazioni tra <code class="docutils literal notranslate"><span class="pre">company</span></code> e <code class="docutils literal notranslate"><span class="pre">sex</span></code>:</p>
@@ -4761,7 +4760,7 @@ coppia di variabili categoriche, le righe e colonne della crosstab (nota anche c
 </div></blockquote>
 </section>
 <section id="manipolazione-esplicita-di-dataframe">
-<h3><span class="section-number">14.2.8. </span>Manipolazione “esplicita” di DataFrame<a class="headerlink" href="#manipolazione-esplicita-di-dataframe" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">13.2.8. </span>Manipolazione “esplicita” di DataFrame<a class="headerlink" href="#manipolazione-esplicita-di-dataframe" title="Permalink to this heading">#</a></h3>
 <p>In alcuni casi può essere utile trattare i DataFrame “esplicitamente” come matrici di valori. Consideriamo ad esempio il seguente DataFrame:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -5005,7 +5004,7 @@ coppia di variabili categoriche, le righe e colonne della crosstab (nota anche c
 </div>
 </section>
 <section id="concatenazione-di-dataframe">
-<h3><span class="section-number">14.2.9. </span>Concatenazione di DataFrame<a class="headerlink" href="#concatenazione-di-dataframe" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">13.2.9. </span>Concatenazione di DataFrame<a class="headerlink" href="#concatenazione-di-dataframe" title="Permalink to this heading">#</a></h3>
 <p>I DataFrame possono essere concatenati per righe come mostrato di seguito:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -5241,7 +5240,7 @@ coppia di variabili categoriche, le righe e colonne della crosstab (nota anche c
 </div>
 </section>
 <section id="merge-di-dataframe">
-<h3><span class="section-number">14.2.10. </span>Merge di DataFrame<a class="headerlink" href="#merge-di-dataframe" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">13.2.10. </span>Merge di DataFrame<a class="headerlink" href="#merge-di-dataframe" title="Permalink to this heading">#</a></h3>
 <p>Due DataFrame possono essere uniti mediante una operazione di <code class="docutils literal notranslate"><span class="pre">merge</span></code> simile a quanto avviene nei database. Consideriamo due dataframe di esempio:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -5429,7 +5428,7 @@ coppia di variabili categoriche, le righe e colonne della crosstab (nota anche c
 </div>
 </section>
 <section id="join-di-dataframe">
-<h3><span class="section-number">14.2.11. </span>Join di DataFrame<a class="headerlink" href="#join-di-dataframe" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">13.2.11. </span>Join di DataFrame<a class="headerlink" href="#join-di-dataframe" title="Permalink to this heading">#</a></h3>
 <p>Le operazioni di <code class="docutils literal notranslate"><span class="pre">join</span></code> possono essere applicate per unire dataframe indicizzati in maniera compatibile:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -5605,7 +5604,7 @@ coppia di variabili categoriche, le righe e colonne della crosstab (nota anche c
 <p>Come si può notare, l’operazione di join avviene solo utilizzando gli indici in comune.</p>
 </section>
 <section id="input-output">
-<h3><span class="section-number">14.2.12. </span>Input/Output<a class="headerlink" href="#input-output" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">13.2.12. </span>Input/Output<a class="headerlink" href="#input-output" title="Permalink to this heading">#</a></h3>
 <p>Pandas mette a disposizione diverse funzioni per leggere e scrivere dati. Vedremo in particolare le funzioni per leggere e scrivere file <code class="docutils literal notranslate"><span class="pre">csv</span></code>. E’ possibile leggere file csv (<a class="reference external" href="https://it.wikipedia.org/wiki/Comma-separated_values">https://it.wikipedia.org/wiki/Comma-separated_values</a>) mediante la funzione <code class="docutils literal notranslate"><span class="pre">pd.read_csv</span></code>. La lettura può avvenire da file locali passando il path relativo o da URL:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -6001,7 +6000,7 @@ coppia di variabili categoriche, le righe e colonne della crosstab (nota anche c
 </section>
 </section>
 <section id="esempio-di-manipolazione-dati">
-<h2><span class="section-number">14.3. </span>Esempio di manipolazione dati<a class="headerlink" href="#esempio-di-manipolazione-dati" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">13.3. </span>Esempio di manipolazione dati<a class="headerlink" href="#esempio-di-manipolazione-dati" title="Permalink to this heading">#</a></h2>
 <p>Spesso, i dati devono essere opportunamente trattati per poterli analizzare. Vediamo un esempio di come combinare gli strumenti discussi sopra per manipolare un dataset reale.</p>
 <p>Considereremo dataset disponibile a questo URL: <a class="reference external" href="https://www.kaggle.com/lava18/google-play-store-apps">https://www.kaggle.com/lava18/google-play-store-apps</a>. Una copia del dataset è disponibile al seguente URL per scopi didattici: <a class="reference external" href="http://iplab.dmi.unict.it/furnari/downloads/googleplaystore.csv">http://iplab.dmi.unict.it/furnari/downloads/googleplaystore.csv</a>. Carichiamo il dataset e visualizziamo le prime righe per assicurarci che sia stato caricato correttamente:</p>
 <div class="cell docutils container">
@@ -6789,7 +6788,7 @@ memory usage: 1.0+ MB
 </div>
 </section>
 <section id="esercizi">
-<h2><span class="section-number">14.4. </span>Esercizi<a class="headerlink" href="#esercizi" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">13.4. </span>Esercizi<a class="headerlink" href="#esercizi" title="Permalink to this heading">#</a></h2>
 <blockquote>
 <div><p>🧑‍💻 Esercizio 1</p>
 <p>Si carichi il dataset disponibile al seguente URL: <a class="reference external" href="https://raw.githubusercontent.com/agconti/kaggle-titanic/master/data/train.csv">https://raw.githubusercontent.com/agconti/kaggle-titanic/master/data/train.csv</a> in modo da utilizzare i valori della colonna “PassengerId” come indici e si applichino le seguenti trasfromazioni:</p>
@@ -6849,7 +6848,7 @@ memory usage: 1.0+ MB
 </div></blockquote>
 </section>
 <section id="referenze">
-<h2><span class="section-number">14.5. </span>Referenze<a class="headerlink" href="#referenze" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">13.5. </span>Referenze<a class="headerlink" href="#referenze" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Documentazione di Pandas: <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/">https://pandas.pydata.org/pandas-docs/stable/</a></p></li>
 <li><p>Sito Kaggle (dove trovare dati da analizzare): <a class="reference external" href="http://kaggle.com/">http://kaggle.com/</a></p></li>
@@ -6894,7 +6893,7 @@ memory usage: 1.0+ MB
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">13. </span>Introduzione a Matplotlib</p>
+        <p class="prev-next-title"><span class="section-number">12. </span>Introduzione a Matplotlib</p>
       </div>
     </a>
     <a class="right-next"
@@ -6902,7 +6901,7 @@ memory usage: 1.0+ MB
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">15. </span>Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</p>
+        <p class="prev-next-title"><span class="section-number">14. </span>Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -6921,33 +6920,33 @@ memory usage: 1.0+ MB
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#series">14.1. Series</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creazione-di-series">14.1.1. Creazione di Series</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indicizzazione-di-series">14.1.2. Indicizzazione di Series</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tipi-di-dato">14.1.3. Tipi di dato</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dati-mancanti">14.1.4. Dati Mancanti</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operazioni-su-e-tra-series">14.1.5. Operazioni su e tra Series</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conversione-in-array-di-numpy">14.1.6. Conversione in array di Numpy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#series">13.1. Series</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creazione-di-series">13.1.1. Creazione di Series</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indicizzazione-di-series">13.1.2. Indicizzazione di Series</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tipi-di-dato">13.1.3. Tipi di dato</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dati-mancanti">13.1.4. Dati Mancanti</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operazioni-su-e-tra-series">13.1.5. Operazioni su e tra Series</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conversione-in-array-di-numpy">13.1.6. Conversione in array di Numpy</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe">14.2. DataFrame</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#costruzione-e-visualizzazione-di-dataframe">14.2.1. Costruzione e visualizzazione di DataFrame</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indicizzazione">14.2.2. Indicizzazione</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manipolazione-di-dataframe">14.2.3. Manipolazione di DataFrame</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operazioni-tra-e-su-dataframe">14.2.4. Operazioni tra e su DataFrame</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rimuovere-righe-e-colonne">14.2.5. Rimuovere righe e colonne</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#groupby">14.2.6. Groupby</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#crosstab">14.2.7. Crosstab</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manipolazione-esplicita-di-dataframe">14.2.8. Manipolazione “esplicita” di DataFrame</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#concatenazione-di-dataframe">14.2.9. Concatenazione di DataFrame</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#merge-di-dataframe">14.2.10. Merge di DataFrame</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#join-di-dataframe">14.2.11. Join di DataFrame</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#input-output">14.2.12. Input/Output</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe">13.2. DataFrame</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#costruzione-e-visualizzazione-di-dataframe">13.2.1. Costruzione e visualizzazione di DataFrame</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indicizzazione">13.2.2. Indicizzazione</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manipolazione-di-dataframe">13.2.3. Manipolazione di DataFrame</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operazioni-tra-e-su-dataframe">13.2.4. Operazioni tra e su DataFrame</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rimuovere-righe-e-colonne">13.2.5. Rimuovere righe e colonne</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#groupby">13.2.6. Groupby</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#crosstab">13.2.7. Crosstab</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manipolazione-esplicita-di-dataframe">13.2.8. Manipolazione “esplicita” di DataFrame</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#concatenazione-di-dataframe">13.2.9. Concatenazione di DataFrame</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#merge-di-dataframe">13.2.10. Merge di DataFrame</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#join-di-dataframe">13.2.11. Join di DataFrame</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#input-output">13.2.12. Input/Output</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esempio-di-manipolazione-dati">14.3. Esempio di manipolazione dati</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">14.4. Esercizi</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referenze">14.5. Referenze</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esempio-di-manipolazione-dati">13.3. Esempio di manipolazione dati</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">13.4. Esercizi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referenze">13.5. Referenze</a></li>
 </ul>
   </nav></div>
 
