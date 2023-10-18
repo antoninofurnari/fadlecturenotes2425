@@ -1,0 +1,991 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>2. Main data analysis concepts &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures/03_main_data_analysis_concepts';</script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3. Misure di Frequenze e Rappresentazione Grafica dei Dati" href="04_misure_di_frequenze_e_rappresentazione_grafica_dei_dati.html" />
+    <link rel="prev" title="1. Introduction to Data Analysis" href="01_intro_data_analysis.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Lecture Notes on Fundamental of Data Analysis
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_intro_data_analysis.html">1. Introduction to Data Analysis</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Main data analysis concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_misure_di_frequenze_e_rappresentazione_grafica_dei_dati.html">3. Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_misure_di_tendenza_centrale_dispersione_e_forma.html">4. Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_associazione_variabili.html">5. Associazione tra Variabili</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratories</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/01_setup.html">6. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/02_intro_python.html">7. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/03_intro_numpy.html">8. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/04_intro_matplotlib.html">9. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/05_intro_pandas.html">10. Introduzione a Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">11. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/07_misure_di_tendenza_centrale_dispersione_e_forma.html">12. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/08_associazione_variabili.html">13. Associazione tra Variabili</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/antoninofurnari/fadlecturenotes/blob/master/lecturenotes/lectures/03_main_data_analysis_concepts.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/antoninofurnari/fadlecturenotes" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/antoninofurnari/fadlecturenotes/issues/new?title=Issue%20on%20page%20%2Flectures/03_main_data_analysis_concepts.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/lectures/03_main_data_analysis_concepts.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Main data analysis concepts</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#observations-populations-samples">2.1. Observations, Populations, Samples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#observations">2.1.1. Observations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#population">2.1.2. Population</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sample">2.1.3. Sample</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">2.1.4. Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables">2.2. Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">2.2.1. Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantitative-and-qualitative">2.2.2. Quantitative and Qualitative</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discrete-and-continuous">2.2.3. Discrete and Continuous</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scalar-and-multi-dimensional">2.2.4. Scalar and Multi-Dimensional</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">2.2.5. Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#discrete-scalar-variables">2.2.5.1. Discrete Scalar Variables</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-scalar-variables">2.2.5.2. Continuous Scalar Variables</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-multi-dimensional-variables">2.2.5.3. Continuous Multi-Dimensional Variables</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scales">2.2.6. Scales</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-collection">2.3. Data Collection</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#survey">2.3.1. Survey</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#experiments">2.3.2. Experiments</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#randomized-controlled-experiments-example">2.3.2.1. Randomized Controlled Experiments - Example</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#observational-data">2.3.3. Observational Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#primary-and-secondary-data">2.3.4. Primary and Secondary Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-sets-design-matrix-and-features">2.4. Data Sets, Design Matrix, and Features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">2.5. References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="main-data-analysis-concepts">
+<h1><span class="section-number">2. </span>Main data analysis concepts<a class="headerlink" href="#main-data-analysis-concepts" title="Permalink to this heading">#</a></h1>
+<p>In this lecture, we will consider the main data analysis concepts.</p>
+<section id="observations-populations-samples">
+<h2><span class="section-number">2.1. </span>Observations, Populations, Samples<a class="headerlink" href="#observations-populations-samples" title="Permalink to this heading">#</a></h2>
+<p>We will see three fundamental concepts: observations, populations, samples.</p>
+<section id="observations">
+<h3><span class="section-number">2.1.1. </span>Observations<a class="headerlink" href="#observations" title="Permalink to this heading">#</a></h3>
+<p>We will call observations, the units by which we measure data. These could be persons, cars, animals, plants, etc. We often indicate an observation as <span class="math notranslate nohighlight">\(x\)</span>. Please consider these as “abstract” entities, not necessarily numerical observations. E.g., “let’s consider a person <span class="math notranslate nohighlight">\(x\)</span>”.</p>
+</section>
+<section id="population">
+<h3><span class="section-number">2.1.2. </span>Population<a class="headerlink" href="#population" title="Permalink to this heading">#</a></h3>
+<p>When we study a given phenomenon, we will be interested in a set of observations, which is called a “population”. For instance:</p>
+<ul class="simple">
+<li><p>if we want to study the distribution of heights of people in the world, we will need to look at the population of all people in the world.</p></li>
+<li><p>if we want to study the age of people attending a computer science course in Italy, then we need to look at the population of all students of computer science courses in Italy.</p></li>
+</ul>
+<p>Note that a population can sometimes be a theoretical concept and identify sets of elements which are not even finite. E.g., <em>“all movies which will ever be filmed”</em>.</p>
+<p>We can denote a population with the symbol <span class="math notranslate nohighlight">\(\Omega\)</span>. Al our observations will be <span class="math notranslate nohighlight">\(\omega \in \Omega\)</span>.</p>
+</section>
+<section id="sample">
+<h3><span class="section-number">2.1.3. </span>Sample<a class="headerlink" href="#sample" title="Permalink to this heading">#</a></h3>
+<p>In practice, working with population can be very hard, as it is not always possible to obtain observations from those large sets. Intuitively, in practice, working on a large enough set of observations from a population could be good enough. We refer to a subset of a population as “a sample”: <span class="math notranslate nohighlight">\(\{\omega^{(1)}, \omega^{(2)}, \ldots, \omega^{(n)}\} \subseteq \Omega\)</span>.</p>
+</section>
+<section id="example">
+<h3><span class="section-number">2.1.4. </span>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h3>
+<p>We want to study how the height of people in the world changed in the years. Here the <strong>population</strong> <span class="math notranslate nohighlight">\(\Omega\)</span> is the set of people ever existed on earth, a <strong>sample</strong> <span class="math notranslate nohighlight">\(\{\omega^{(1)},\ldots,\omega^{(n)}\} \subseteq \Omega\)</span> is a subset of people for which we have some data (e.g., say we measured height of many people in most countries since the 16th century). An observation is a person <span class="math notranslate nohighlight">\(\omega^{(i)}\)</span>.</p>
+</section>
+</section>
+<section id="variables">
+<h2><span class="section-number">2.2. </span>Variables<a class="headerlink" href="#variables" title="Permalink to this heading">#</a></h2>
+<p>We have identified our problem, defined a suitable population and identified a sample of observations. While observations are abstract concepts such as “a person” or “a student”, we usually want to capture specific features of such observations, such as “the person’s age” or “the student’s height”. We collect these features by means of <strong>statistical variables</strong>.</p>
+<p>We may also be interested in different features of an observation. For instance, for each person in a population, we may want to record their age, gender, and height. We can introduce a variable to capture each of these features. For instance, given observation <span class="math notranslate nohighlight">\(\omega\)</span>, we may obtain “height = 180cm”, “weight=80Kg”, “gender=male”.</p>
+<p>Formally, we’ll define a variable <span class="math notranslate nohighlight">\(X\)</span> as:</p>
+<div class="math notranslate nohighlight">
+\[X : \Omega \to S\]</div>
+<div class="math notranslate nohighlight">
+\[ \omega \mapsto x\]</div>
+<p>Where <span class="math notranslate nohighlight">\(S\)</span> is the set of possible values for variable <span class="math notranslate nohighlight">\(X\)</span>. The definition above specifies that a variable maps an abstract observation <span class="math notranslate nohighlight">\(\omega\)</span> to some (possibly more concrete) value <span class="math notranslate nohighlight">\(x \in S\)</span>.</p>
+<section id="id1">
+<h3><span class="section-number">2.2.1. </span>Example<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<p>Given the population of all people currently living in the world <span class="math notranslate nohighlight">\(\Omega\)</span>, we define a variable <span class="math notranslate nohighlight">\(H\)</span> to collect the heights of the observed people <span class="math notranslate nohighlight">\(\omega\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[H : \Omega \to \mathbb{R}\]</div>
+<div class="math notranslate nohighlight">
+\[ \omega \mapsto h \]</div>
+<p>Given an observation <span class="math notranslate nohighlight">\(\omega^{(1)}\)</span>, we may obtain <span class="math notranslate nohighlight">\(H(\omega)=180\)</span>. We often say that <span class="math notranslate nohighlight">\(H\)</span> assumes the value <span class="math notranslate nohighlight">\(180\)</span> and write: <span class="math notranslate nohighlight">\(H=180\)</span>.</p>
+</section>
+<section id="quantitative-and-qualitative">
+<h3><span class="section-number">2.2.2. </span>Quantitative and Qualitative<a class="headerlink" href="#quantitative-and-qualitative" title="Permalink to this heading">#</a></h3>
+<p>Variables can be of two main kinds:</p>
+<ul class="simple">
+<li><p><strong>Qualitative</strong>: represent properties that can be observed and cannot generally be measured with a numerical value (e.g., ‘color’, ‘sex’);</p></li>
+<li><p><strong>Quantitative</strong>: represent properties that can be quantified with a number (e.g., ‘height’, ‘weight’, ‘age’).</p></li>
+</ul>
+</section>
+<section id="discrete-and-continuous">
+<h3><span class="section-number">2.2.3. </span>Discrete and Continuous<a class="headerlink" href="#discrete-and-continuous" title="Permalink to this heading">#</a></h3>
+<p>Variables can also be discrete or continues:</p>
+<ul class="simple">
+<li><p><strong>Discrete variables</strong> can assume a finite number (or a countable infinite number) of possible values</p></li>
+<li><p><strong>Continuous variable</strong> assume a continuous, infinite number of values, which can be generally denoted with real numbers</p></li>
+</ul>
+</section>
+<section id="scalar-and-multi-dimensional">
+<h3><span class="section-number">2.2.4. </span>Scalar and Multi-Dimensional<a class="headerlink" href="#scalar-and-multi-dimensional" title="Permalink to this heading">#</a></h3>
+<p>Variables can be:</p>
+<ul class="simple">
+<li><p><strong>scalar</strong> or uni-dimensional: they assume real numbers (e.g., <span class="math notranslate nohighlight">\(X=1\)</span>)</p></li>
+<li><p><strong>multi-dimensional</strong>: they assume vector or matrix values, (e.g., <span class="math notranslate nohighlight">\(X = \binom{1}{3}\)</span>, or <span class="math notranslate nohighlight">\(X = \begin{pmatrix}
+1 &amp; 2 \\
+3 &amp; 4 \\
+\end{pmatrix}\)</span>).</p></li>
+</ul>
+</section>
+<section id="examples">
+<h3><span class="section-number">2.2.5. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h3>
+<p>Let’s see some examples:</p>
+<section id="discrete-scalar-variables">
+<h4><span class="section-number">2.2.5.1. </span>Discrete Scalar Variables<a class="headerlink" href="#discrete-scalar-variables" title="Permalink to this heading">#</a></h4>
+<p>We want to assess if a coin is fair or not.</p>
+<ul class="simple">
+<li><p>We consider as population all possible tosses of that coin.</p></li>
+<li><p>An observation will be a specific tossing.</p></li>
+<li><p>A discrete scalar variable <span class="math notranslate nohighlight">\(X\)</span> may record the outcome of a given tossing. The set of possible values will be <span class="math notranslate nohighlight">\(S=\{head,\ tail\}\)</span> (discrete values). The variable is scalar as it will contain a single value.</p></li>
+<li><p>If we toss a coin, we may get <span class="math notranslate nohighlight">\(X=tail\)</span>.</p></li>
+</ul>
+</section>
+<section id="continuous-scalar-variables">
+<h4><span class="section-number">2.2.5.2. </span>Continuous Scalar Variables<a class="headerlink" href="#continuous-scalar-variables" title="Permalink to this heading">#</a></h4>
+<p>We want to study the heights in centimeters of students in this class.</p>
+<ul class="simple">
+<li><p>Our population is the set of all students in this class.</p></li>
+<li><p>We can use a continuous scalar variable <span class="math notranslate nohighlight">\(X\)</span> to record the heights of the students. In this case, we can choose <span class="math notranslate nohighlight">\(S=\mathbb{R}_+\)</span>.</p></li>
+<li><p>If we pick a student, we may get <span class="math notranslate nohighlight">\(X=175\)</span>.</p></li>
+</ul>
+</section>
+<section id="continuous-multi-dimensional-variables">
+<h4><span class="section-number">2.2.5.3. </span>Continuous Multi-Dimensional Variables<a class="headerlink" href="#continuous-multi-dimensional-variables" title="Permalink to this heading">#</a></h4>
+<p>We want to study the positions of all cars in the world.</p>
+<ul class="simple">
+<li><p>Our population is the set of all cars in the world.</p></li>
+<li><p>We could use the variable <span class="math notranslate nohighlight">\(X\)</span> to denote the latitude and longitude coordinates of a car in the world. The set of possible values may be <span class="math notranslate nohighlight">\(S=\mathbb{R}^2\)</span>.</p></li>
+<li><p>Once we pick a car, we may have <span class="math notranslate nohighlight">\(X = \binom{37}{15}\)</span>.</p></li>
+</ul>
+</section>
+</section>
+<section id="scales">
+<h3><span class="section-number">2.2.6. </span>Scales<a class="headerlink" href="#scales" title="Permalink to this heading">#</a></h3>
+<p>The values of the variables can sometimes be ordered. For instance, we can say that a student is taller than another one. In other cases, an order is not possible. For instance, it may not be meaningful to order students by color of the eyes or gender. We can classify whether and how a variable can be sorted using scales. Variables can be characterized with respect to the following scales:</p>
+<ul class="simple">
+<li><p><strong>Nominal scale</strong>: nominal variables cannot be ordered. Examples are the gender of a person and the color of the eyes.</p></li>
+<li><p><strong>Ordinal scale</strong>: ordinal variables can be ordered, but the difference between two ordinal variables is usually not meaningful. For instance, we may have the following scale to classify the level of expertise of a basketball player: <em>novice, amateur, intermediate, expert</em>. While this scale allows to meaningful sort players, the difference between two levels may not be meaningful.</p></li>
+<li><p><strong>Continuous scale</strong>: continuous variables are generally expressed with real numbers and can be ordered. For instance, the <em>height of people</em> and the <em>amount of money in the bank account</em> are examples of continuous variables.</p></li>
+</ul>
+</section>
+</section>
+<section id="data-collection">
+<h2><span class="section-number">2.3. </span>Data Collection<a class="headerlink" href="#data-collection" title="Permalink to this heading">#</a></h2>
+<p>Data collection is the crucial first step in the data analysis process. It involves gathering observations that will serve as the foundation for all subsequent analysis. The methods of data collection can vary widely depending on the goals of the analysis, the type of data required, and available resources.</p>
+<section id="survey">
+<h3><span class="section-number">2.3.1. </span>Survey<a class="headerlink" href="#survey" title="Permalink to this heading">#</a></h3>
+<p>Surveys are a common method of data collection used to gather information from individuals or groups. They involve asking specific questions to respondents, often in a structured format. Surveys can be conducted through various means, such as paper questionnaires, online forms, telephone interviews, or in-person interviews. Surveys are particularly useful when seeking opinions, attitudes, preferences, or demographic information from a target population.</p>
+<p>Key characteristics of surveys:</p>
+<ul class="simple">
+<li><p>Structured and standardized questions.</p></li>
+<li><p>Can be administered in various formats.</p></li>
+<li><p>Allow for quantifiable responses.</p></li>
+</ul>
+</section>
+<section id="experiments">
+<h3><span class="section-number">2.3.2. </span>Experiments<a class="headerlink" href="#experiments" title="Permalink to this heading">#</a></h3>
+<p>Another way to collect data is through experiments. These allow to collect data in a <strong>controlled</strong> way and they are usually employed to establish cause-and-effect relationships between variables. In an experiment, researchers manipulate one or more independent variables to observe their effects on dependent variables. Experiments are characterized by their ability to provide evidence of causation, which is a significant advantage in many scientific and practical applications.</p>
+<p>The most common form of experiments for data collection are <strong>randomized controlled experiments</strong> (or randomized controlled trials), which have the following characteristics:</p>
+<ul class="simple">
+<li><p>Controlled manipulation of variables.</p></li>
+<li><p>Random assignment of participants (in randomized experiments).</p></li>
+<li><p>Replicability to test hypotheses.</p></li>
+</ul>
+<section id="randomized-controlled-experiments-example">
+<h4><span class="section-number">2.3.2.1. </span>Randomized Controlled Experiments - Example<a class="headerlink" href="#randomized-controlled-experiments-example" title="Permalink to this heading">#</a></h4>
+<p>We want to test whether a given drug is effective in treating a disease. We will consider a suitable population (e.g., all people affected by the disease), obtain a suitable sample (a random set of people, diverse by age, gender and health conditions) and set up an experiment in which half of the people take the drug, while the remaining half take a placebo. The assignment are <strong>randomized</strong> to avoid any bias in the data. We will discuss this better when we’ll talk of causal inference.</p>
+</section>
+</section>
+<section id="observational-data">
+<h3><span class="section-number">2.3.3. </span>Observational Data<a class="headerlink" href="#observational-data" title="Permalink to this heading">#</a></h3>
+<p>Observational data collection involves the passive recording of information as it naturally occurs, without any interference or manipulation by the researcher. This method is commonly used when experiments are not feasible, ethical, or practical. For instance, if we want to affect the effects of smoke on young people, it would be unethical to ask people to smoke. Observational studies can be valuable for exploring patterns, relationships, and behaviors in real-world settings.</p>
+<p>Key characteristics of observational data:</p>
+<ul class="simple">
+<li><p>No direct manipulation of variables.</p></li>
+<li><p>Captures data as it naturally occurs.</p></li>
+<li><p>Useful for studying complex, uncontrolled environments.</p></li>
+</ul>
+</section>
+<section id="primary-and-secondary-data">
+<h3><span class="section-number">2.3.4. </span>Primary and Secondary Data<a class="headerlink" href="#primary-and-secondary-data" title="Permalink to this heading">#</a></h3>
+<p>Data can be classified into two main categories: primary and secondary.</p>
+<ul class="simple">
+<li><p><strong>Primary Data:</strong> This type of data is collected firsthand by researchers for a specific purpose. Primary data collection methods include surveys, experiments, interviews, and observations. Primary data is original and tailored to the research objectives.</p></li>
+<li><p><strong>Secondary Data:</strong> Secondary data is pre-existing data collected for purposes other than the current research. Researchers can obtain secondary data from sources such as government agencies, academic studies, industry reports, and databases. Secondary data can be a valuable resource for cost-effective research and historical analysis.</p></li>
+</ul>
+</section>
+</section>
+<section id="data-sets-design-matrix-and-features">
+<h2><span class="section-number">2.4. </span>Data Sets, Design Matrix, and Features<a class="headerlink" href="#data-sets-design-matrix-and-features" title="Permalink to this heading">#</a></h2>
+<p>As we have already seen, data is usually organized in a tabular format for convenience. The “table” structure is often called a <strong>data matrix</strong> or a <strong>design matrix</strong>. In this format, each column of the matrix represents a variable, which is often also referred to as a <strong>feature</strong>, while each row is a different observation.</p>
+<p>Let’s have a look at a real, but simple, dataset we’ll use often in the future, the <code class="docutils literal notranslate"><span class="pre">Titanic</span></code> dataset, which like like this:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Survived</th>
+      <th>Pclass</th>
+      <th>Name</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>SibSp</th>
+      <th>Parch</th>
+      <th>Ticket</th>
+      <th>Fare</th>
+      <th>Cabin</th>
+      <th>Embarked</th>
+    </tr>
+    <tr>
+      <th>PassengerId</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>3</td>
+      <td>Braund, Mr. Owen Harris</td>
+      <td>male</td>
+      <td>22.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>A/5 21171</td>
+      <td>7.2500</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>1</td>
+      <td>Cumings, Mrs. John Bradley (Florence Briggs Th...</td>
+      <td>female</td>
+      <td>38.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>PC 17599</td>
+      <td>71.2833</td>
+      <td>C85</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>3</td>
+      <td>Heikkinen, Miss. Laina</td>
+      <td>female</td>
+      <td>26.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>STON/O2. 3101282</td>
+      <td>7.9250</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>1</td>
+      <td>Futrelle, Mrs. Jacques Heath (Lily May Peel)</td>
+      <td>female</td>
+      <td>35.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>113803</td>
+      <td>53.1000</td>
+      <td>C123</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0</td>
+      <td>3</td>
+      <td>Allen, Mr. William Henry</td>
+      <td>male</td>
+      <td>35.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>373450</td>
+      <td>8.0500</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>887</th>
+      <td>0</td>
+      <td>2</td>
+      <td>Montvila, Rev. Juozas</td>
+      <td>male</td>
+      <td>27.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>211536</td>
+      <td>13.0000</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>888</th>
+      <td>1</td>
+      <td>1</td>
+      <td>Graham, Miss. Margaret Edith</td>
+      <td>female</td>
+      <td>19.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>112053</td>
+      <td>30.0000</td>
+      <td>B42</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>889</th>
+      <td>0</td>
+      <td>3</td>
+      <td>Johnston, Miss. Catherine Helen "Carrie"</td>
+      <td>female</td>
+      <td>NaN</td>
+      <td>1</td>
+      <td>2</td>
+      <td>W./C. 6607</td>
+      <td>23.4500</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>890</th>
+      <td>1</td>
+      <td>1</td>
+      <td>Behr, Mr. Karl Howell</td>
+      <td>male</td>
+      <td>26.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>111369</td>
+      <td>30.0000</td>
+      <td>C148</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>891</th>
+      <td>0</td>
+      <td>3</td>
+      <td>Dooley, Mr. Patrick</td>
+      <td>male</td>
+      <td>32.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>370376</td>
+      <td>7.7500</td>
+      <td>NaN</td>
+      <td>Q</td>
+    </tr>
+  </tbody>
+</table>
+<p>891 rows × 11 columns</p>
+</div></div></div>
+</div>
+<p>The dataset shows different observations related to the passengers of the Titanic. We can see each row of this matrix as a multi-dimensional variable (a vector) summarizing the main properties of the observations. Indeed, in the example above, each passenger is a different observation, while the different column are the different <strong>features</strong>.</p>
+</section>
+<section id="references">
+<h2><span class="section-number">2.5. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Chapter 1 of <em>Heumann, Christian, and Michael Schomaker Shalabh. Introduction to statistics and data analysis. Springer International Publishing Switzerland, 2016.</em></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lectures"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="01_intro_data_analysis.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Introduction to Data Analysis</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="04_misure_di_frequenze_e_rappresentazione_grafica_dei_dati.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Misure di Frequenze e Rappresentazione Grafica dei Dati</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#observations-populations-samples">2.1. Observations, Populations, Samples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#observations">2.1.1. Observations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#population">2.1.2. Population</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sample">2.1.3. Sample</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">2.1.4. Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables">2.2. Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">2.2.1. Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantitative-and-qualitative">2.2.2. Quantitative and Qualitative</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discrete-and-continuous">2.2.3. Discrete and Continuous</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scalar-and-multi-dimensional">2.2.4. Scalar and Multi-Dimensional</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">2.2.5. Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#discrete-scalar-variables">2.2.5.1. Discrete Scalar Variables</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-scalar-variables">2.2.5.2. Continuous Scalar Variables</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-multi-dimensional-variables">2.2.5.3. Continuous Multi-Dimensional Variables</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scales">2.2.6. Scales</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-collection">2.3. Data Collection</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#survey">2.3.1. Survey</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#experiments">2.3.2. Experiments</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#randomized-controlled-experiments-example">2.3.2.1. Randomized Controlled Experiments - Example</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#observational-data">2.3.3. Observational Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#primary-and-secondary-data">2.3.4. Primary and Secondary Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-sets-design-matrix-and-features">2.4. Data Sets, Design Matrix, and Features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">2.5. References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Antonino Furnari
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
