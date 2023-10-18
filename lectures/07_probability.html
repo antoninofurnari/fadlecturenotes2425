@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Probability for Data Manipulation &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+    <title>6. Probability for Data Manipulation &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
   
   
   
@@ -68,6 +68,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="7. Common Probability Distributions" href="08_common_distributions.html" />
+    <link rel="prev" title="5. Associazione tra Variabili" href="06_associazione_variabili.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -168,23 +170,27 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01_intro_data_analysis.html">1. Introduction to Data Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03_main_data_analysis_concepts.html">2. Main data analysis concepts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04_misure_di_frequenze_e_rappresentazione_grafica_dei_dati.html">3. Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05_misure_di_tendenza_centrale_dispersione_e_forma.html">4. Misure di Tendenza Centrale, Dispersione e Forma</a></li>
 <li class="toctree-l1"><a class="reference internal" href="06_associazione_variabili.html">5. Associazione tra Variabili</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Probability for Data Manipulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_common_distributions.html">7. Common Probability Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_information_theory.html">8. Basic Elements of Information Theory</a></li>
+
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratories</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/01_setup.html">6. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/02_intro_python.html">7. Introduzione a Python</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/03_intro_numpy.html">8. Introduzione a Numpy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/04_intro_matplotlib.html">9. Introduzione a Matplotlib</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/05_intro_pandas.html">10. Introduzione a Pandas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">11. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/07_misure_di_tendenza_centrale_dispersione_e_forma.html">12. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/08_associazione_variabili.html">13. Associazione tra Variabili</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/01_setup.html">10. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/02_intro_python.html">11. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/03_intro_numpy.html">12. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/04_intro_matplotlib.html">13. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/05_intro_pandas.html">14. Introduzione a Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">15. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/07_misure_di_tendenza_centrale_dispersione_e_forma.html">16. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/08_associazione_variabili.html">17. Associazione tra Variabili</a></li>
 </ul>
 
     </div>
@@ -409,93 +415,93 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-importance-of-probability-theory">Uncertainty &amp; Importance of Probability Theory</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importance-of-probability-theory">Importance of Probability Theory</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-experiments">Random Experiments</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-importance-of-probability-theory">6.1. Uncertainty &amp; Importance of Probability Theory</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">6.1.1. Examples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importance-of-probability-theory">6.1.2. Importance of Probability Theory</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-experiments">6.1.3. Random Experiments</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example">6.1.3.1. Example</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-variables">Random Variables</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-discrete-scalar">Example - discrete scalar</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-continuous-scalar">Example - continuous scalar</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-continuous-multi-dimensional">Example - continuous multi-dimensional</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-discrete-multi-dimensional">Example - discrete multi-dimensional</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#urns-and-marble-example">Urns and Marble Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-variables">6.2. Random Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-discrete-scalar">6.2.1. Example - discrete scalar</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-continuous-scalar">6.2.2. Example - continuous scalar</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-continuous-multi-dimensional">6.2.3. Example - continuous multi-dimensional</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-discrete-multi-dimensional">6.2.4. Example - discrete multi-dimensional</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#urns-and-marble-example">6.2.5. Urns and Marble Example</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-definition-of-data">Working Definition of Data</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-definition-of-data">6.3. Working Definition of Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">6.3.1. Example</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability">Probability</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-axioms">Probability Axioms</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#laplace-probability">Laplace Probability</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-probabilities-from-observations">Estimating probabilities from observations</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#frequentist-approach">Frequentist approach</a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability">6.4. Probability</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-axioms">6.4.1. Probability Axioms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#laplace-probability">6.4.2. Laplace Probability</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-probabilities-from-observations">6.4.3. Estimating probabilities from observations</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#frequentist-approach">6.4.3.1. Frequentist approach</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">6.4.3.1.1. Examples</a></li>
 </ul>
 </li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-approach">Bayesian Approach</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-approach">6.4.3.2. Bayesian Approach</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-probability">Example of Probability</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-probability">6.4.4. Example of Probability</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#joint-probability">Joint probability</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#joint-probability">6.5. Joint probability</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">6.5.1. Example</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-rule-marginal-probability">Sum Rule (Marginal Probability)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-probability">Conditional Probability</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#product-rule-factorization">Product Rule (Factorization)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-compute-a-conditional-probability">How to compute a conditional probability?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-rule-marginal-probability">6.6. Sum Rule (Marginal Probability)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-probability">6.7. Conditional Probability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#product-rule-factorization">6.8. Product Rule (Factorization)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-compute-a-conditional-probability">6.8.1. How to compute a conditional probability?</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-chain-rule-of-conditional-probabilities">The Chain Rule of Conditional Probabilities</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-theorem">Bayes’ Theorem</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-probability-example">Bayesian Probability Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-chain-rule-of-conditional-probabilities">6.9. The Chain Rule of Conditional Probabilities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-theorem">6.10. Bayes’ Theorem</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-probability-example">6.10.1. Bayesian Probability Example</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#independence-and-conditional-independence">Independence and Conditional Independence</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Examples</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-independence">Conditional independence</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Example</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-probability-manipulation">Example of Probability Manipulation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#excercise">Excercise</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-distributions">Probability Distributions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-mass-functions-pmf-discrete-variables">Probability Mass Functions (PMF) - Discrete Variables</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-probability-mass-function-for-a-fair-coin">Example: Probability Mass Function for a Fair Coin</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-probability-mass-function-for-a-biased-coin">Example: Probability Mass Function for a Biased Coin</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-probability-mass-function">Exercise: Probability Mass Function</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-density-functions-pdf-continuous-variables">Probability Density Functions (PDF) - Continuous Variables</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-uniform-pdf">Example: Uniform PDF</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cumulative-distribution-functions-cdf">Cumulative Distribution Functions (CDF)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cdf-of-continuous-random-variables">CDF of Continuous Random Variables</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Example</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cdf-of-discrete-random-variables">CDF of Discrete Random Variables</a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#example-pdf-and-cdf-of-a-fair-die">Example - PDF and CDF of a fair die</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#independence-and-conditional-independence">6.11. Independence and Conditional Independence</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">6.11.1. Examples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-independence">6.11.2. Conditional independence</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">6.11.2.1. Example</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation">Expectation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variance">Variance</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#covariance">Covariance</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standardization">Standardization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-probability-manipulation">6.12. Example of Probability Manipulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#excercise">6.12.1. Excercise</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-distributions">6.13. Probability Distributions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-mass-functions-pmf-discrete-variables">6.13.1. Probability Mass Functions (PMF) - Discrete Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-probability-mass-function-for-a-fair-coin">6.13.1.1. Example: Probability Mass Function for a Fair Coin</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-probability-mass-function-for-a-biased-coin">6.13.1.2. Example: Probability Mass Function for a Biased Coin</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-probability-mass-function">6.13.1.3. Exercise: Probability Mass Function</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-density-functions-pdf-continuous-variables">6.13.2. Probability Density Functions (PDF) - Continuous Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-uniform-pdf">6.13.2.1. Example: Uniform PDF</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cumulative-distribution-functions-cdf">6.13.2.2. Cumulative Distribution Functions (CDF)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cdf-of-continuous-random-variables">6.13.2.3. CDF of Continuous Random Variables</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">6.13.2.4. Example</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cdf-of-discrete-random-variables">6.13.2.5. CDF of Discrete Random Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#example-pdf-and-cdf-of-a-fair-die">6.13.2.5.1. Example - PDF and CDF of a fair die</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation">6.13.3. Expectation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variance">6.13.4. Variance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#covariance">6.13.5. Covariance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standardization">6.13.6. Standardization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">6.14. References</a></li>
 </ul>
             </nav>
         </div>
@@ -508,10 +514,10 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="probability-for-data-manipulation">
-<h1>Probability for Data Manipulation<a class="headerlink" href="#probability-for-data-manipulation" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">6. </span>Probability for Data Manipulation<a class="headerlink" href="#probability-for-data-manipulation" title="Permalink to this heading">#</a></h1>
 <p>In this lecture, we will look at some basic elements of probability theory which will help us manipulate data in a more accurate and principled way.</p>
 <section id="uncertainty-importance-of-probability-theory">
-<h2>Uncertainty &amp; Importance of Probability Theory<a class="headerlink" href="#uncertainty-importance-of-probability-theory" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">6.1. </span>Uncertainty &amp; Importance of Probability Theory<a class="headerlink" href="#uncertainty-importance-of-probability-theory" title="Permalink to this heading">#</a></h2>
 <p>We have seen that dealing with data means dealing with “some variables
 assuming some values”.</p>
 <p>However, <strong>what can we say about what values such variables will assume</strong>?</p>
@@ -528,7 +534,7 @@ deterministic way is not possible. We often say that this is due to <strong>unce
 <li><p><em>Incomplete modeling.</em> Sometimes a system has to discard some of the information needed to make a decision. For instance, imagine a robotic system aiming to pick objects from a table with a single RGB camera. The system cannot reconstruct the 3D position of the objects, but the RGB camera an allow to obtain an estimate of the 2D coordinates of each objects with respect to the robot’s point of view. All the information which cannot be observed is uncertain, despite the problem is a deterministic one.</p></li>
 </ul>
 <section id="examples">
-<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.1.1. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p><em>Tossing a coin or rolling a die</em>: these kinds of experiments are
 generally impossible to model in a deterministic way. This can be
@@ -543,7 +549,7 @@ from incomplete observability.</p></li>
 </ul>
 </section>
 <section id="importance-of-probability-theory">
-<h3>Importance of Probability Theory<a class="headerlink" href="#importance-of-probability-theory" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.1.2. </span>Importance of Probability Theory<a class="headerlink" href="#importance-of-probability-theory" title="Permalink to this heading">#</a></h3>
 <p>Probability theory provides a consistent framework to work with
 uncertain events.</p>
 <p>It allows to quantify and manipulate uncertainty with a set of axioms,
@@ -553,7 +559,7 @@ will start to revise the main concepts behind probability theory by
 talking about random variables.</p>
 </section>
 <section id="random-experiments">
-<h3>Random Experiments<a class="headerlink" href="#random-experiments" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.1.3. </span>Random Experiments<a class="headerlink" href="#random-experiments" title="Permalink to this heading">#</a></h3>
 <p>In practice, when the acquisition of data is affected by uncertainty, we will use the term <strong>random experiment</strong>. We will informally define a random experiment as:</p>
 <blockquote>
 <div><p>An experiment which can be repeated any number of times, leading to different outcomes.</p>
@@ -566,7 +572,7 @@ talking about random variables.</p>
 </ul>
 <p>Given the definitions above, <span class="math notranslate nohighlight">\(\Omega\)</span> is often called the <strong>sure event</strong> or <strong>certain event</strong>, because it contains all possible outcomes. The null set <span class="math notranslate nohighlight">\(\emptyset\)</span> is called the <strong>impossible event</strong>.</p>
 <section id="example">
-<h4>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">6.1.3.1. </span>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h4>
 <p>Let us consider the random experiment of tossing a die. Our outcomes will be numbers which we read on the top face of the die when it lands. We will have:</p>
 <ul class="simple">
 <li><p>Sample space: <span class="math notranslate nohighlight">\(\Omega=\{1,2,3,4,5,6\}\)</span>;</p></li>
@@ -577,7 +583,7 @@ talking about random variables.</p>
 </section>
 </section>
 <section id="random-variables">
-<h2>Random Variables<a class="headerlink" href="#random-variables" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">6.2. </span>Random Variables<a class="headerlink" href="#random-variables" title="Permalink to this heading">#</a></h2>
 <p>We have so far talked about “statistical variables”. When
 dealing with uncertain events, we need to use the concept of ‘random
 variables’. Informally (from wikipedia):</p>
@@ -627,7 +633,7 @@ instance, if a random variable takes the values of tossing a coin, then
 </tbody>
 </table>
 <section id="example-discrete-scalar">
-<h3>Example - discrete scalar<a class="headerlink" href="#example-discrete-scalar" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.2.1. </span>Example - discrete scalar<a class="headerlink" href="#example-discrete-scalar" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>For example, <span class="math notranslate nohighlight">\(X\)</span> may denote the outcome of tossing a coin;</p></li>
 <li><p>In this context, ‘tossing a coin’ is the random phenomenon
@@ -640,14 +646,14 @@ assumes the value <span class="math notranslate nohighlight">\(X = head\)</span>
 </ul>
 </section>
 <section id="example-continuous-scalar">
-<h3>Example - continuous scalar<a class="headerlink" href="#example-continuous-scalar" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.2.2. </span>Example - continuous scalar<a class="headerlink" href="#example-continuous-scalar" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(X\)</span> may denote the height in meters of a student in this class;</p></li>
 <li><p>If we pick a student of heigh 1.75m, then <span class="math notranslate nohighlight">\(X = 1.75\)</span>;</p></li>
 </ul>
 </section>
 <section id="example-continuous-multi-dimensional">
-<h3>Example - continuous multi-dimensional<a class="headerlink" href="#example-continuous-multi-dimensional" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.2.3. </span>Example - continuous multi-dimensional<a class="headerlink" href="#example-continuous-multi-dimensional" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(X\)</span> may denote the latitude and longitude coordinates of a car in
 the world;</p></li>
@@ -655,7 +661,7 @@ the world;</p></li>
 </ul>
 </section>
 <section id="example-discrete-multi-dimensional">
-<h3>Example - discrete multi-dimensional<a class="headerlink" href="#example-discrete-multi-dimensional" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.2.4. </span>Example - discrete multi-dimensional<a class="headerlink" href="#example-discrete-multi-dimensional" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(X\)</span> may denote the outcome of rolling two dice.</p></li>
 <li><p>In this context, rolling two dice is the random phenomenon
@@ -667,7 +673,7 @@ characterizing the random variable.</p></li>
 </ul>
 </section>
 <section id="urns-and-marble-example">
-<h3>Urns and Marble Example<a class="headerlink" href="#urns-and-marble-example" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.2.5. </span>Urns and Marble Example<a class="headerlink" href="#urns-and-marble-example" title="Permalink to this heading">#</a></h3>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <img alt="../_images/0348ffb762dec1fe5d265de10b007bc1983957a2fe06ce3ace85176d34fee5f9.png" src="../_images/0348ffb762dec1fe5d265de10b007bc1983957a2fe06ce3ace85176d34fee5f9.png" />
@@ -696,13 +702,13 @@ experiment can be characterized by the values <span class="math notranslate nohi
 </section>
 </section>
 <section id="working-definition-of-data">
-<h2>Working Definition of Data<a class="headerlink" href="#working-definition-of-data" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">6.3. </span>Working Definition of Data<a class="headerlink" href="#working-definition-of-data" title="Permalink to this heading">#</a></h2>
 <p>We will define “data” as follows:</p>
 <blockquote>
 <div><p>The values assumed by a random variable</p>
 </div></blockquote>
 <section id="id1">
-<h3>Example<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.3.1. </span>Example<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>For instance, if the outcome of tossing a coing is <span class="math notranslate nohighlight">\(head\)</span>, then
 <span class="math notranslate nohighlight">\(X = head\)</span> <em>is data</em>;</p></li>
@@ -718,7 +724,7 @@ event’;</p></li>
 </section>
 </section>
 <section id="probability">
-<h2>Probability<a class="headerlink" href="#probability" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">6.4. </span>Probability<a class="headerlink" href="#probability" title="Permalink to this heading">#</a></h2>
 <p>Since random variables are related to stochastic phenomena, we cannot
 say much about the outcome of a single phenomenon.</p>
 <p>However, we expect to be able to characterize the class of experiments
@@ -749,7 +755,7 @@ the probability can also be expressed simply as:</p>
 <div class="math notranslate nohighlight">
 \[P(b) = P(U = b)\]</div>
 <section id="probability-axioms">
-<h3>Probability Axioms<a class="headerlink" href="#probability-axioms" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.4.1. </span>Probability Axioms<a class="headerlink" href="#probability-axioms" title="Permalink to this heading">#</a></h3>
 <p>Kolmogorov in 1933 provided three axioms which define the “main rules” that probability should follow:</p>
 <p><strong>Axiom 1</strong>
 Any event has a probability in the range <span class="math notranslate nohighlight">\([0,1]\)</span>:</p>
@@ -774,7 +780,7 @@ If <span class="math notranslate nohighlight">\(A\)</span> and <span class="math
 \[A \subseteq B \Rightarrow P(A) \leq P(B)\]</div>
 </section>
 <section id="laplace-probability">
-<h3>Laplace Probability<a class="headerlink" href="#laplace-probability" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.4.2. </span>Laplace Probability<a class="headerlink" href="#laplace-probability" title="Permalink to this heading">#</a></h3>
 <p>When all outcomes in a random experiment are considered equally probable, this is called a <strong>Laplace experiment</strong>. In this case, we can calculate the probability of a given event <span class="math notranslate nohighlight">\(A\)</span> as the ratio between the favorable outcomes and the possible outcomes:</p>
 <div class="math notranslate nohighlight">
 \[P(A) = \frac{|A|}{|\Omega|} = \frac{\text{\# favorable outcomes}}{\text{\# possible outcomes}}\]</div>
@@ -785,10 +791,10 @@ If <span class="math notranslate nohighlight">\(A\)</span> and <span class="math
 </ul>
 </section>
 <section id="estimating-probabilities-from-observations">
-<h3>Estimating probabilities from observations<a class="headerlink" href="#estimating-probabilities-from-observations" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.4.3. </span>Estimating probabilities from observations<a class="headerlink" href="#estimating-probabilities-from-observations" title="Permalink to this heading">#</a></h3>
 <p>What about the cases in which we cannot make any assumption on the equal probability of events? In those cases we would like to estimate probabilities from observations. There are two main approaches to do so: frequentist and Bayesian.</p>
 <section id="frequentist-approach">
-<h4>Frequentist approach<a class="headerlink" href="#frequentist-approach" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">6.4.3.1. </span>Frequentist approach<a class="headerlink" href="#frequentist-approach" title="Permalink to this heading">#</a></h4>
 <p>Probability theory was initially developed to analyze the frequency of
 events. For instance, it can be used to study events like drawing a
 certain hand of cards in a poker game. These events are repeatable and
@@ -816,7 +822,7 @@ probability of obtaining head as follows:</p>
 <p>The probability of obtaining head will be 499/1000=0.49</p>
 <p>This is the approach we have seen so far in the course when dealing with relative frequencies.</p>
 <section id="id2">
-<h5>Examples<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h5>
+<h5><span class="section-number">6.4.3.1.1. </span>Examples<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h5>
 <ul class="simple">
 <li><p>The probability of obtaining ‘head’ when tossing a coin is 0.5. We
 know that because, if we toss a coin for a large number of times,
@@ -829,14 +835,14 @@ proportion.</p></li>
 </section>
 </section>
 <section id="bayesian-approach">
-<h4>Bayesian Approach<a class="headerlink" href="#bayesian-approach" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">6.4.3.2. </span>Bayesian Approach<a class="headerlink" href="#bayesian-approach" title="Permalink to this heading">#</a></h4>
 <p>The Bayesian approach to probability offers a different perspective on probability theory. Unlike the frequentist approach, which focuses on analyzing the frequency of events based on observations, the <strong>Bayesian approach allows us to incorporate prior knowledge and update our beliefs as new information becomes available</strong>.</p>
 <p>In Bayesian probability, we view <strong>probability as a measure of uncertainty or belief</strong>. When we assign a probability to an event, it reflects our <strong>subjective degree of belief in the event’s likelihood</strong>. This approach is particularly useful when dealing with unique or one-time events where frequency-based analysis may not be applicable (e.g., “<strong>what is the probability that the sun will extinguish in 5 billion years?</strong>”).</p>
 <p>We will discuss better the Bayesian approach when we’ll discuss Bayes theorem.</p>
 </section>
 </section>
 <section id="example-of-probability">
-<h3>Example of Probability<a class="headerlink" href="#example-of-probability" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.4.4. </span>Example of Probability<a class="headerlink" href="#example-of-probability" title="Permalink to this heading">#</a></h3>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <img alt="../_images/0348ffb762dec1fe5d265de10b007bc1983957a2fe06ce3ace85176d34fee5f9.png" src="../_images/0348ffb762dec1fe5d265de10b007bc1983957a2fe06ce3ace85176d34fee5f9.png" />
@@ -862,7 +868,7 @@ marble contained in it, but we know that colors are not distributed evenly in th
 </section>
 </section>
 <section id="joint-probability">
-<h2>Joint probability<a class="headerlink" href="#joint-probability" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">6.5. </span>Joint probability<a class="headerlink" href="#joint-probability" title="Permalink to this heading">#</a></h2>
 <p>We can define <strong>univariate</strong> (= with respect to only one variable)
 probabilities <span class="math notranslate nohighlight">\(P(U)\)</span> and <span class="math notranslate nohighlight">\(P(M)\)</span> as we have seen in the previous
 examples.</p>
@@ -882,7 +888,7 @@ all of them:</p>
 <li><p><span class="math notranslate nohighlight">\(P(X) = P\left( X_{1},X_{2} \right)\)</span>.</p></li>
 </ul>
 <section id="id3">
-<h3>Example<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.5.1. </span>Example<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <img alt="../_images/0348ffb762dec1fe5d265de10b007bc1983957a2fe06ce3ace85176d34fee5f9.png" src="../_images/0348ffb762dec1fe5d265de10b007bc1983957a2fe06ce3ace85176d34fee5f9.png" />
@@ -978,7 +984,7 @@ figure by the total number of trials (100):</p>
 </section>
 </section>
 <section id="sum-rule-marginal-probability">
-<h2>Sum Rule (Marginal Probability)<a class="headerlink" href="#sum-rule-marginal-probability" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">6.6. </span>Sum Rule (Marginal Probability)<a class="headerlink" href="#sum-rule-marginal-probability" title="Permalink to this heading">#</a></h2>
 <p>In the previous example, we have seen how we can compute <strong>marginal
 (univariate) probabilities</strong> from the contingency table. This is
 possible because the contingency table contains information on how the
@@ -1061,7 +1067,7 @@ seen in more general terms as:</p>
 marginalization.</p>
 </section>
 <section id="conditional-probability">
-<h2>Conditional Probability<a class="headerlink" href="#conditional-probability" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">6.7. </span>Conditional Probability<a class="headerlink" href="#conditional-probability" title="Permalink to this heading">#</a></h2>
 <p><strong>In many cases, we are interested in the probability of some event,
 given that some other event happened.</strong></p>
 <p>This is called <strong>conditional</strong> <strong>probability</strong> and is denoted
@@ -1137,7 +1143,7 @@ happens. It should be noted that, in general
 <span class="math notranslate nohighlight">\(P\left( X \middle| Y \right) \neq P(X)\)</span>.</p>
 </section>
 <section id="product-rule-factorization">
-<h2>Product Rule (Factorization)<a class="headerlink" href="#product-rule-factorization" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">6.8. </span>Product Rule (Factorization)<a class="headerlink" href="#product-rule-factorization" title="Permalink to this heading">#</a></h2>
 <p>We can see the definition of conditional probability:</p>
 <div class="math notranslate nohighlight">
 \[P\left( X = x \middle| Y = y \right) = \frac{P(X = x,\ Y = y)}{P(Y = y)}\]</div>
@@ -1153,7 +1159,7 @@ to derive.</p>
 <p>This operation of expressing a joint probability in terms of two factors
 is known as <em>factorization</em>.</p>
 <section id="how-to-compute-a-conditional-probability">
-<h3>How to compute a conditional probability?<a class="headerlink" href="#how-to-compute-a-conditional-probability" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.8.1. </span>How to compute a conditional probability?<a class="headerlink" href="#how-to-compute-a-conditional-probability" title="Permalink to this heading">#</a></h3>
 <p>We just said that factorization can be useful for computing joint
 probabilities starting from conditional probabilities. However, two
 questions arise: “how can we compute a conditional probability?” and “Is
@@ -1216,7 +1222,7 @@ all observations in which the user has drawn from the red box).</p>
 </section>
 </section>
 <section id="the-chain-rule-of-conditional-probabilities">
-<h2>The Chain Rule of Conditional Probabilities<a class="headerlink" href="#the-chain-rule-of-conditional-probabilities" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">6.9. </span>The Chain Rule of Conditional Probabilities<a class="headerlink" href="#the-chain-rule-of-conditional-probabilities" title="Permalink to this heading">#</a></h2>
 <p>When dealing with multiple variables, the product rule can be applied in
 an iterative fashion, thus obtaining the ‘chain rule’ of conditional
 probabilities.</p>
@@ -1237,7 +1243,7 @@ probabilities.</p>
 \[P\left( X_{1},\ldots,\ X_{n} \right) = P\left( X_{1} \right)\prod_{i = 2}^{n}{P(X_{i}|X_{1},\ldots,\ X_{i - 1})}\]</div>
 </section>
 <section id="bayes-theorem">
-<h2>Bayes’ Theorem<a class="headerlink" href="#bayes-theorem" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">6.10. </span>Bayes’ Theorem<a class="headerlink" href="#bayes-theorem" title="Permalink to this heading">#</a></h2>
 <p>Given two variables A and B, from the product rule, we obtain:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(P(A,B) = P\left( A \middle| B \right)P(B)\)</span></p></li>
@@ -1274,7 +1280,7 @@ observed B happening</p></li>
 </ul>
 <p>We’ll see an example in the section below.</p>
 <section id="bayesian-probability-example">
-<h3>Bayesian Probability Example<a class="headerlink" href="#bayesian-probability-example" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.10.1. </span>Bayesian Probability Example<a class="headerlink" href="#bayesian-probability-example" title="Permalink to this heading">#</a></h3>
 <p>Let’s imagine we are trying to understand if a friend has COVID or not.
 If we do not know anything about our friend’s symptoms (i.e., we don’t
 know if they have any symptoms or not), then we would expect our friend
@@ -1321,7 +1327,7 @@ to have COVID) and the evidence <span class="math notranslate nohighlight">\(P(F
 </section>
 </section>
 <section id="independence-and-conditional-independence">
-<h2>Independence and Conditional Independence<a class="headerlink" href="#independence-and-conditional-independence" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">6.11. </span>Independence and Conditional Independence<a class="headerlink" href="#independence-and-conditional-independence" title="Permalink to this heading">#</a></h2>
 <p>Two variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are independent if the outcome of one of the
 two does not influence the outcome of the other. Formally speaking, two
 variables are <strong>said to be independent</strong> if and only if:</p>
@@ -1340,7 +1346,7 @@ as we cannot always assume that two variables are independent.</p>
 not influence the fact that <span class="math notranslate nohighlight">\(X\)</span> happens”, which is what we would expect
 of two independent variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>.</p>
 <section id="id4">
-<h3>Examples<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.11.1. </span>Examples<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
 <p>Intuitively, two variables are independent if the values of one of them
 do not affect the values of the other one:</p>
 <ul class="simple">
@@ -1351,7 +1357,7 @@ depend on the height of a person.</p></li>
 </ul>
 </section>
 <section id="conditional-independence">
-<h3>Conditional independence<a class="headerlink" href="#conditional-independence" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.11.2. </span>Conditional independence<a class="headerlink" href="#conditional-independence" title="Permalink to this heading">#</a></h3>
 <p>Two random variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are said to be <strong>conditionally
 independent</strong> given a random variable <span class="math notranslate nohighlight">\(Z\)</span> if:</p>
 <div class="math notranslate nohighlight">
@@ -1360,7 +1366,7 @@ independent</strong> given a random variable <span class="math notranslate nohig
 <div class="math notranslate nohighlight">
 \[X\bot Y\ |\ Z\]</div>
 <section id="id5">
-<h4>Example<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">6.11.2.1. </span>Example<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h4>
 <p>Height and vocabulary are not independent: taller people are usually
 older, and hence they have a more sophisticated vocabulary (they know
 more words). However, if we condition on age, they become independent.
@@ -1371,7 +1377,7 @@ independent</strong> with respect to age.</p>
 </section>
 </section>
 <section id="example-of-probability-manipulation">
-<h2>Example of Probability Manipulation<a class="headerlink" href="#example-of-probability-manipulation" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">6.12. </span>Example of Probability Manipulation<a class="headerlink" href="#example-of-probability-manipulation" title="Permalink to this heading">#</a></h2>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <img alt="../_images/0348ffb762dec1fe5d265de10b007bc1983957a2fe06ce3ace85176d34fee5f9.png" src="../_images/0348ffb762dec1fe5d265de10b007bc1983957a2fe06ce3ace85176d34fee5f9.png" />
@@ -1435,7 +1441,7 @@ conditional probabilities using the Bayes’ rule:</p>
 <div class="math notranslate nohighlight">
 \[P\left( U = g \middle| M = b \right) = \frac{P\left( M = b \middle| U = g \right)P(U = g)}{P(M = b)} = \frac{\frac{3}{4} \cdot \frac{4}{10}}{\frac{9}{20}} = \frac{12}{40} \cdot \frac{20}{9} = \frac{6}{9} = \frac{2}{3}\]</div>
 <section id="excercise">
-<h3>Excercise<a class="headerlink" href="#excercise" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.12.1. </span>Excercise<a class="headerlink" href="#excercise" title="Permalink to this heading">#</a></h3>
 <p>Suppose that we have three colored boxes r (red), b (blue), and g
 (green). Box r contains 3 apples, 4 oranges, and 3 limes, box b contains
 1 apple, 1 orange, and 0 limes, and box g contains 3 apples, 3 oranges,
@@ -1448,7 +1454,7 @@ came from the green box?</p>
 </section>
 </section>
 <section id="probability-distributions">
-<h2>Probability Distributions<a class="headerlink" href="#probability-distributions" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">6.13. </span>Probability Distributions<a class="headerlink" href="#probability-distributions" title="Permalink to this heading">#</a></h2>
 <p>We have seen how it is possible to assign a probability value to a given
 outcome of a random variable.</p>
 <p>In practice, it is often useful to assign probability values to <strong>all
@@ -1467,7 +1473,7 @@ write:</p>
 <div class="math notranslate nohighlight">
 \[X \sim P\]</div>
 <section id="probability-mass-functions-pmf-discrete-variables">
-<h3>Probability Mass Functions (PMF) - Discrete Variables<a class="headerlink" href="#probability-mass-functions-pmf-discrete-variables" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.13.1. </span>Probability Mass Functions (PMF) - Discrete Variables<a class="headerlink" href="#probability-mass-functions-pmf-discrete-variables" title="Permalink to this heading">#</a></h3>
 <p>If <span class="math notranslate nohighlight">\(X\)</span> is discrete, <span class="math notranslate nohighlight">\(P(X)\)</span> is called a “probability mass function”
 (PMF). <span class="math notranslate nohighlight">\(P\)</span> maps the values of <span class="math notranslate nohighlight">\(X\)</span> to real numbers indicating whether a
 given value is more or less likely.</p>
@@ -1513,7 +1519,7 @@ have the same probability.</p></li>
 <span class="math notranslate nohighlight">\(\sum_{i}^{}{P\left( X = x_{i} \right)} = 1\)</span>.</p></li>
 </ul>
 <section id="example-probability-mass-function-for-a-fair-coin">
-<h4>Example: Probability Mass Function for a Fair Coin<a class="headerlink" href="#example-probability-mass-function-for-a-fair-coin" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">6.13.1.1. </span>Example: Probability Mass Function for a Fair Coin<a class="headerlink" href="#example-probability-mass-function-for-a-fair-coin" title="Permalink to this heading">#</a></h4>
 <p>A probability mass function can be plotted as a 2D diagram where the
 values of the function (<span class="math notranslate nohighlight">\(P(x)\)</span>) is plotted against the values of the
 independent variable <span class="math notranslate nohighlight">\(x\)</span>. This is the diagram associated to the PMF of
@@ -1549,7 +1555,7 @@ the previous example, where <span class="math notranslate nohighlight">\(P(head)
 </div>
 </section>
 <section id="example-probability-mass-function-for-a-biased-coin">
-<h4>Example: Probability Mass Function for a Biased Coin<a class="headerlink" href="#example-probability-mass-function-for-a-biased-coin" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">6.13.1.2. </span>Example: Probability Mass Function for a Biased Coin<a class="headerlink" href="#example-probability-mass-function-for-a-biased-coin" title="Permalink to this heading">#</a></h4>
 <p>Now suppose we tossed our coin for 10000 times and discovered that 6000
 times the outcome was “head”, whereas 4000 times it was “tail”. We
 deduce the coin is not fair.</p>
@@ -1597,7 +1603,7 @@ properties of probabilities, i.e.:</p>
 </div>
 </section>
 <section id="exercise-probability-mass-function">
-<h4>Exercise: Probability Mass Function<a class="headerlink" href="#exercise-probability-mass-function" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">6.13.1.3. </span>Exercise: Probability Mass Function<a class="headerlink" href="#exercise-probability-mass-function" title="Permalink to this heading">#</a></h4>
 <p>Let <span class="math notranslate nohighlight">\(X\)</span> be a random variable representing the outcome of rolling a fair
 dice with <span class="math notranslate nohighlight">\(6\)</span> faces:</p>
 <ul class="simple">
@@ -1612,7 +1618,7 @@ of <span class="math notranslate nohighlight">\(P(X)\)</span>?</p></li>
 </section>
 </section>
 <section id="probability-density-functions-pdf-continuous-variables">
-<h3>Probability Density Functions (PDF) - Continuous Variables<a class="headerlink" href="#probability-density-functions-pdf-continuous-variables" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.13.2. </span>Probability Density Functions (PDF) - Continuous Variables<a class="headerlink" href="#probability-density-functions-pdf-continuous-variables" title="Permalink to this heading">#</a></h3>
 <p>Probability distributions are called “probability density functions”
 when the random variable is continuous.</p>
 <p>To be a probability density function over a variable <span class="math notranslate nohighlight">\(X\)</span>, a function
@@ -1631,7 +1637,7 @@ case of continuous variables.</p></li>
 <p><strong>NOTE</strong>: In general, we say that the density function at a given value <span class="math notranslate nohighlight">\(x\)</span> is zero: <span class="math notranslate nohighlight">\(f(x)=0\)</span>. While this may seem counter-intuitive, we should consider the density function as the limit fo the probability as we narrow a neighborhood around <span class="math notranslate nohighlight">\(x\)</span>. If the neighborhood has size <span class="math notranslate nohighlight">\(0\)</span>, then the density will be zero. In practice, if we take a neighborhood which is non-zero, then we get an integral between two values and a final probability not equal to zero.</p>
 <p>After all, from an intuitive point of view, the probability of having a value exactly equal to <span class="math notranslate nohighlight">\(x\)</span> is indeed zero, in the case of a continuous variable! So we should be more interested in the probability in a given range of values.</p>
 <section id="example-uniform-pdf">
-<h4>Example: Uniform PDF<a class="headerlink" href="#example-uniform-pdf" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">6.13.2.1. </span>Example: Uniform PDF<a class="headerlink" href="#example-uniform-pdf" title="Permalink to this heading">#</a></h4>
 <p>Let us consider a random number generator which outputs numbers comprised between <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>.</p>
 <p>Let <span class="math notranslate nohighlight">\(X\)</span> be a random variable assuming the values generated by the
 random number generator.</p>
@@ -1693,13 +1699,13 @@ generally are) much more complicated than that.</p>
 </div>
 </section>
 <section id="cumulative-distribution-functions-cdf">
-<h4>Cumulative Distribution Functions (CDF)<a class="headerlink" href="#cumulative-distribution-functions-cdf" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">6.13.2.2. </span>Cumulative Distribution Functions (CDF)<a class="headerlink" href="#cumulative-distribution-functions-cdf" title="Permalink to this heading">#</a></h4>
 <p>Similar to the Empirical Cumulative Distribution Functions, we can define Cumulative Distribution Functions for random variables, starting from the density or mass functions. A cumulative distribution function is generally defined as:</p>
 <div class="math notranslate nohighlight">
 \[ F(x) = P(X \leq x) \]</div>
 </section>
 <section id="cdf-of-continuous-random-variables">
-<h4>CDF of Continuous Random Variables<a class="headerlink" href="#cdf-of-continuous-random-variables" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">6.13.2.3. </span>CDF of Continuous Random Variables<a class="headerlink" href="#cdf-of-continuous-random-variables" title="Permalink to this heading">#</a></h4>
 <p>In the case of continuous random variables, the definition leads to:</p>
 <div class="math notranslate nohighlight">
 \[F(x) = \int_{-\infty}^x P(x)dx\]</div>
@@ -1708,7 +1714,7 @@ generally are) much more complicated than that.</p>
 \[P(a \leq X \leq b) = \int_a^b f(x)dx = \int_{-\infty}^b f(x)dx - \int_{-\infty}^a f(x)dx = F(b) - F(a)\]</div>
 </section>
 <section id="id6">
-<h4>Example<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">6.13.2.4. </span>Example<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h4>
 <p>The CDF of the uniform distribution will be given by:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(F(x) = 0\)</span> for <span class="math notranslate nohighlight">\(x &lt; a\)</span></p></li>
@@ -1758,12 +1764,12 @@ generally are) much more complicated than that.</p>
 </div>
 </section>
 <section id="cdf-of-discrete-random-variables">
-<h4>CDF of Discrete Random Variables<a class="headerlink" href="#cdf-of-discrete-random-variables" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">6.13.2.5. </span>CDF of Discrete Random Variables<a class="headerlink" href="#cdf-of-discrete-random-variables" title="Permalink to this heading">#</a></h4>
 <p>In the case of discrete random variables, the definition of CDF leads to:</p>
 <div class="math notranslate nohighlight">
 \[F(x) = \sum_{y\leq x} P(y)\]</div>
 <section id="example-pdf-and-cdf-of-a-fair-die">
-<h5>Example - PDF and CDF of a fair die<a class="headerlink" href="#example-pdf-and-cdf-of-a-fair-die" title="Permalink to this heading">#</a></h5>
+<h5><span class="section-number">6.13.2.5.1. </span>Example - PDF and CDF of a fair die<a class="headerlink" href="#example-pdf-and-cdf-of-a-fair-die" title="Permalink to this heading">#</a></h5>
 <p>In the case of a fair die, the PMF will be:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -1839,7 +1845,7 @@ F(x) = \begin{cases}
 </section>
 </section>
 <section id="expectation">
-<h3>Expectation<a class="headerlink" href="#expectation" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.13.3. </span>Expectation<a class="headerlink" href="#expectation" title="Permalink to this heading">#</a></h3>
 <p>When it is known that a random variable follows a probability
 distribution, <strong>it is possible to characterize that variable</strong> (and
 hence the related probability distribution) <strong>with some statistics</strong>.</p>
@@ -1862,7 +1868,7 @@ an integral:</p>
 a random variable.</p>
 </section>
 <section id="variance">
-<h3>Variance<a class="headerlink" href="#variance" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.13.4. </span>Variance<a class="headerlink" href="#variance" title="Permalink to this heading">#</a></h3>
 <p>The variance gives a measure of how much variability there is in a
 variable <span class="math notranslate nohighlight">\(X\)</span> around its mean <span class="math notranslate nohighlight">\(E\lbrack X\rbrack\)</span>.</p>
 <p>The variance is defined as follows:</p>
@@ -1870,7 +1876,7 @@ variable <span class="math notranslate nohighlight">\(X\)</span> around its mean
 \[var\lbrack X\rbrack = E\lbrack\left( X - E\lbrack X\rbrack \right)^{2}\rbrack\]</div>
 </section>
 <section id="covariance">
-<h3>Covariance<a class="headerlink" href="#covariance" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.13.5. </span>Covariance<a class="headerlink" href="#covariance" title="Permalink to this heading">#</a></h3>
 <p>The covariance gives a measure of how two variables are linearly related
 to each other. It allows to <strong>measure to what extent the increase of one
 of the variables corresponds to an increase of the value of the other
@@ -1907,7 +1913,7 @@ of the covariance matrix <span class="math notranslate nohighlight">\(Cov(X)\)</
 \[Cov(X)_{i,j} = \Sigma_{ij} = Cov(X_{i},X_{j})\]</div>
 </section>
 <section id="standardization">
-<h3>Standardization<a class="headerlink" href="#standardization" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.13.6. </span>Standardization<a class="headerlink" href="#standardization" title="Permalink to this heading">#</a></h3>
 <p>Similar to z-scoring, standardization transforms a random variable <span class="math notranslate nohighlight">\(X\)</span> into a variable <span class="math notranslate nohighlight">\(Z\)</span> so that it has:</p>
 <ul class="simple">
 <li><p>Expectation equal to zero: <span class="math notranslate nohighlight">\(E(X) = 0\)</span>.</p></li>
@@ -1919,7 +1925,7 @@ of the covariance matrix <span class="math notranslate nohighlight">\(Cov(X)\)</
 </section>
 </section>
 <section id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">6.14. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Parts of chapter 1 of [1];</p></li>
 <li><p>Most of chapter 3 of [2];</p></li>
@@ -1964,6 +1970,24 @@ learning</em>. MIT press, 2016. <a class="reference external" href="https://www.
                 <footer class="prev-next-footer">
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="06_associazione_variabili.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Associazione tra Variabili</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="08_common_distributions.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Common Probability Distributions</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -1979,93 +2003,93 @@ learning</em>. MIT press, 2016. <a class="reference external" href="https://www.
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-importance-of-probability-theory">Uncertainty &amp; Importance of Probability Theory</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importance-of-probability-theory">Importance of Probability Theory</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-experiments">Random Experiments</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-importance-of-probability-theory">6.1. Uncertainty &amp; Importance of Probability Theory</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">6.1.1. Examples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importance-of-probability-theory">6.1.2. Importance of Probability Theory</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-experiments">6.1.3. Random Experiments</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example">6.1.3.1. Example</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-variables">Random Variables</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-discrete-scalar">Example - discrete scalar</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-continuous-scalar">Example - continuous scalar</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-continuous-multi-dimensional">Example - continuous multi-dimensional</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-discrete-multi-dimensional">Example - discrete multi-dimensional</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#urns-and-marble-example">Urns and Marble Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-variables">6.2. Random Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-discrete-scalar">6.2.1. Example - discrete scalar</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-continuous-scalar">6.2.2. Example - continuous scalar</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-continuous-multi-dimensional">6.2.3. Example - continuous multi-dimensional</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-discrete-multi-dimensional">6.2.4. Example - discrete multi-dimensional</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#urns-and-marble-example">6.2.5. Urns and Marble Example</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-definition-of-data">Working Definition of Data</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-definition-of-data">6.3. Working Definition of Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">6.3.1. Example</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability">Probability</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-axioms">Probability Axioms</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#laplace-probability">Laplace Probability</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-probabilities-from-observations">Estimating probabilities from observations</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#frequentist-approach">Frequentist approach</a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability">6.4. Probability</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-axioms">6.4.1. Probability Axioms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#laplace-probability">6.4.2. Laplace Probability</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-probabilities-from-observations">6.4.3. Estimating probabilities from observations</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#frequentist-approach">6.4.3.1. Frequentist approach</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">6.4.3.1.1. Examples</a></li>
 </ul>
 </li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-approach">Bayesian Approach</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-approach">6.4.3.2. Bayesian Approach</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-probability">Example of Probability</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-probability">6.4.4. Example of Probability</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#joint-probability">Joint probability</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#joint-probability">6.5. Joint probability</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">6.5.1. Example</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-rule-marginal-probability">Sum Rule (Marginal Probability)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-probability">Conditional Probability</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#product-rule-factorization">Product Rule (Factorization)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-compute-a-conditional-probability">How to compute a conditional probability?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-rule-marginal-probability">6.6. Sum Rule (Marginal Probability)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-probability">6.7. Conditional Probability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#product-rule-factorization">6.8. Product Rule (Factorization)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-compute-a-conditional-probability">6.8.1. How to compute a conditional probability?</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-chain-rule-of-conditional-probabilities">The Chain Rule of Conditional Probabilities</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-theorem">Bayes’ Theorem</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-probability-example">Bayesian Probability Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-chain-rule-of-conditional-probabilities">6.9. The Chain Rule of Conditional Probabilities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-theorem">6.10. Bayes’ Theorem</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-probability-example">6.10.1. Bayesian Probability Example</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#independence-and-conditional-independence">Independence and Conditional Independence</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Examples</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-independence">Conditional independence</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Example</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-probability-manipulation">Example of Probability Manipulation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#excercise">Excercise</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-distributions">Probability Distributions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-mass-functions-pmf-discrete-variables">Probability Mass Functions (PMF) - Discrete Variables</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-probability-mass-function-for-a-fair-coin">Example: Probability Mass Function for a Fair Coin</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-probability-mass-function-for-a-biased-coin">Example: Probability Mass Function for a Biased Coin</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-probability-mass-function">Exercise: Probability Mass Function</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-density-functions-pdf-continuous-variables">Probability Density Functions (PDF) - Continuous Variables</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-uniform-pdf">Example: Uniform PDF</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cumulative-distribution-functions-cdf">Cumulative Distribution Functions (CDF)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cdf-of-continuous-random-variables">CDF of Continuous Random Variables</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Example</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cdf-of-discrete-random-variables">CDF of Discrete Random Variables</a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#example-pdf-and-cdf-of-a-fair-die">Example - PDF and CDF of a fair die</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#independence-and-conditional-independence">6.11. Independence and Conditional Independence</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">6.11.1. Examples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-independence">6.11.2. Conditional independence</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">6.11.2.1. Example</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation">Expectation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variance">Variance</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#covariance">Covariance</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standardization">Standardization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-probability-manipulation">6.12. Example of Probability Manipulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#excercise">6.12.1. Excercise</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-distributions">6.13. Probability Distributions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-mass-functions-pmf-discrete-variables">6.13.1. Probability Mass Functions (PMF) - Discrete Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-probability-mass-function-for-a-fair-coin">6.13.1.1. Example: Probability Mass Function for a Fair Coin</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-probability-mass-function-for-a-biased-coin">6.13.1.2. Example: Probability Mass Function for a Biased Coin</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-probability-mass-function">6.13.1.3. Exercise: Probability Mass Function</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-density-functions-pdf-continuous-variables">6.13.2. Probability Density Functions (PDF) - Continuous Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-uniform-pdf">6.13.2.1. Example: Uniform PDF</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cumulative-distribution-functions-cdf">6.13.2.2. Cumulative Distribution Functions (CDF)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cdf-of-continuous-random-variables">6.13.2.3. CDF of Continuous Random Variables</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">6.13.2.4. Example</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cdf-of-discrete-random-variables">6.13.2.5. CDF of Discrete Random Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#example-pdf-and-cdf-of-a-fair-die">6.13.2.5.1. Example - PDF and CDF of a fair die</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation">6.13.3. Expectation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variance">6.13.4. Variance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#covariance">6.13.5. Covariance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standardization">6.13.6. Standardization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">6.14. References</a></li>
 </ul>
   </nav></div>
 
