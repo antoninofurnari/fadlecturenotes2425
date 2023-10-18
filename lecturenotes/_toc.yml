@@ -11,12 +11,13 @@ parts:
   numbered: True
   chapters:
   - file: lectures/01_intro_data_analysis
-  #- file: lectures/02_intro_labs/00_intro_labs
-  #  sections: 
   - file: lectures/03_main_data_analysis_concepts
   - file: lectures/04_misure_di_frequenze_e_rappresentazione_grafica_dei_dati
   - file: lectures/05_misure_di_tendenza_centrale_dispersione_e_forma
   - file: lectures/06_associazione_variabili
+  - file: lectures/07_probability
+  - file: lectures/08_common_distributions
+  - file: lectures/09_information_theory
 - caption: Laboratories
   numbered: True
   chapters:
