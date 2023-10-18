@@ -1,18 +1,21 @@
-title : Lecture Notes on Fundamental of Data Analysis
+title : Lecture Notes on Fundamentals of Data Analysis
 author: Antonino Furnari
 logo: 'logo.png'
 
 # Short description about the book
 description: >-
-  Lecture Notes on Fundamental of Data Analysis
+  Lecture Notes on Fundamentals of Data Analysis
 
 execute:
   execute_notebooks           : 'off'
 
 # HTML-specific settings
 html:
-  home_page_in_navbar         : false
+  home_page_in_navbar         : true
   favicon                     : 'favicon.ico'
+  use_multitoc_numbering      : false
+  use_issues_button           : true
+  use_repository_button       : true
 
 
 # Interact link settings
@@ -35,13 +38,10 @@ latex:
   latex_documents:
     targetname: book.tex
 
-html:
-  use_issues_button: true
-  use_repository_button: true
-
 sphinx:
   extra_extensions:
     - sphinxcontrib.mermaid
+    - sphinx_multitoc_numbering
   # config:
   #   html_theme_options:
   #       use_download_button: false

@@ -1,5 +1,5 @@
-# Installazione dell'Ambiente di Lavoro
-Queste note discutono come impostare l'ambiente di lavoro per utilizzare Python per l'analisi dei dati nelle principali piattaforme.
+# Introduzione ai laboratori e Installazione dell'Ambiente di Lavoro
+Questo corso include ore di laboratorio in cui affronteremo manipolazioni pratiche di analisi dei dati. Tutti i laboratori verranno condotti utilizzando il linguaggio Python e il notebook Jupyter (tramite un'installazione locale o Google Colab). Inizieremo vedendo come installare l'ambiente di lavoro.
 
 ## Installazione di Python
 Nel corso, utilizzeremo il linguaggio Python. Scegliamo Python in quanto un linguaggio moderno, diffuso, multi-piattaforma, portabile, facile da usare ed elegante e dotato di una modalità interattiva. Questa ultima caratteristica risulterà molto utile per sperimentare con il codice e apprendere bene il funzionamento del linguaggio e delle librerie.
