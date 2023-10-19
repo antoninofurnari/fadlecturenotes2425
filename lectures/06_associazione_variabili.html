@@ -423,12 +423,12 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#misure-di-associazione-tra-due-variabili-discrete">5.1.6. Misure di Associazione tra due Variabili Discrete</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indipendenza-e-frequenze-attese">5.1.7. Indipendenza e Frequenze Attese</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#esempio">5.1.7.1. Esempio</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#statistica-mathcal-x-2-di-pearson">5.1.7.2. Statistica <span class="math notranslate nohighlight">\(\mathcal{X}^2\)</span> di Pearson</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#statistica-v-di-cramer">5.1.7.3. Statistica <span class="math notranslate nohighlight">\(V\)</span> di Cramer</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#rischio-relativo">5.1.7.4. Rischio Relativo</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#odds-ratio">5.1.7.5. Odds Ratio</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistica-mathcal-x-2-di-pearson">5.1.8. Statistica <span class="math notranslate nohighlight">\(\mathcal{X}^2\)</span> di Pearson</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistica-v-di-cramer">5.1.9. Statistica <span class="math notranslate nohighlight">\(V\)</span> di Cramer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rischio-relativo">5.1.10. Rischio Relativo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#odds-ratio">5.1.11. Odds Ratio</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#associazioni-tra-variabili-continue">5.2. Associazioni tra Variabili Continue</a><ul class="nav section-nav flex-column">
@@ -1637,8 +1637,9 @@ Name: Survived, dtype: float64
 </div></div></div>
 </div>
 </section>
+</section>
 <section id="statistica-mathcal-x-2-di-pearson">
-<h4><span class="section-number">5.1.7.2. </span>Statistica <span class="math notranslate nohighlight">\(\mathcal{X}^2\)</span> di Pearson<a class="headerlink" href="#statistica-mathcal-x-2-di-pearson" title="Permalink to this heading">#</a></h4>
+<h3><span class="section-number">5.1.8. </span>Statistica <span class="math notranslate nohighlight">\(\mathcal{X}^2\)</span> di Pearson<a class="headerlink" href="#statistica-mathcal-x-2-di-pearson" title="Permalink to this heading">#</a></h3>
 <p>La statistica <span class="math notranslate nohighlight">\(\mathcal{X}^2\)</span> di Pearson misura queste discrepanze con la seguente formula:</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{X}^2 = \sum_{i=1}^k \sum_{j=1}^l \frac{(n_{ij}-\tilde{n}_{ij})^2}{\tilde{n}_{ij}}\]</div>
@@ -1654,7 +1655,7 @@ Name: Survived, dtype: float64
 </div>
 </section>
 <section id="statistica-v-di-cramer">
-<h4><span class="section-number">5.1.7.3. </span>Statistica <span class="math notranslate nohighlight">\(V\)</span> di Cramer<a class="headerlink" href="#statistica-v-di-cramer" title="Permalink to this heading">#</a></h4>
+<h3><span class="section-number">5.1.9. </span>Statistica <span class="math notranslate nohighlight">\(V\)</span> di Cramer<a class="headerlink" href="#statistica-v-di-cramer" title="Permalink to this heading">#</a></h3>
 <p>La statistica <span class="math notranslate nohighlight">\(\mathcal{X}^2\)</span> di Pearson non è normalizzata, nel senso che il suo valore massimo dipende dalla dimensione del campione. Per ovviare a questo problema, si può usare la statistica V di Cramer, definita come segue:</p>
 <div class="math notranslate nohighlight">
 \[V = \sqrt{\frac{\mathcal{X}^2}{n(min(k,l)-1)}}\]</div>
@@ -1670,7 +1671,7 @@ Name: Survived, dtype: float64
 <p>Questo valore indica una piccola associazione tra le due variabili, perché il valore è maggiore di <span class="math notranslate nohighlight">\(0\)</span>, ma comunque non prossimo a <span class="math notranslate nohighlight">\(1\)</span>.</p>
 </section>
 <section id="rischio-relativo">
-<h4><span class="section-number">5.1.7.4. </span>Rischio Relativo<a class="headerlink" href="#rischio-relativo" title="Permalink to this heading">#</a></h4>
+<h3><span class="section-number">5.1.10. </span>Rischio Relativo<a class="headerlink" href="#rischio-relativo" title="Permalink to this heading">#</a></h3>
 <p>Il rischio relativo è uno dei metodi di misurazione del grado di correlazione tra due variabili discrete più diffuso in epidemiologia.</p>
 <p>Vediamo un esempio (da <a class="reference external" href="https://en.wikipedia.org/wiki/Odds_ratio">qui</a>): supponiamo che in un villaggio di <span class="math notranslate nohighlight">\(1000\)</span> persone sia aumentata l’incidenza di una malattia rara. Investigando, scopriamo che recentemente una parte della popolazione è stata esposta a una radiazione.</p>
 <p>I dati relativi a soggetti malati e sani esposti o non esposti al rischio (la radiazione) viene riassunta dalla seguente tabella di contingenza che mette in relazione la variabile “Diseased/Healthy” con quella “Exposed/Non Exposed”:</p>
@@ -1740,7 +1741,7 @@ Name: Survived, dtype: float64
 <p><strong>Attenzione al fatto che il rischio relativo misura una correlazione tra variabili, non un rapporto di causa-effetto, quindi non è sempre corretto dire che un in presenza di un rischio relativo maggiore di 1, allora l’esposizione al rischio “causa” la malattia. Esistono però degli strumenti (analisi causale) che ci permettono di verificare in quali casi possiamo dare questa interpretazione. Questi strumenti sono fondamentali per poter appurare se un determinato farmaco causa (o è co-responsabile di) una guarigione o se una determinata abitudine (es. il fumo) causa (o è co-responsabile della) comparsa di una malattia. Vedremo meglio qualche esempio più in là nel corso.</strong></p>
 </section>
 <section id="odds-ratio">
-<h4><span class="section-number">5.1.7.5. </span>Odds Ratio<a class="headerlink" href="#odds-ratio" title="Permalink to this heading">#</a></h4>
+<h3><span class="section-number">5.1.11. </span>Odds Ratio<a class="headerlink" href="#odds-ratio" title="Permalink to this heading">#</a></h3>
 <p>Il rischio relativo non è sempre calcolabile. Infatti, nel caso precedente abbiamo assunto di avere a disposizione tutti i dati sulla popolazione: di tutti i <span class="math notranslate nohighlight">\(1000\)</span> abitanti sapevamo chi era stato esposto al rischio e chi no e chi aveva sviluppato la malattia e chi no. In molti casi, potremmo non avere tutti questi dati. Ad esempio, immaginiamo che l’incidente sia avvenuto <span class="math notranslate nohighlight">\(50\)</span> fa e che ai tempi sia stato intervistato solo un campione casuale del <span class="math notranslate nohighlight">\(50\%\)</span> dei <span class="math notranslate nohighlight">\(1000\)</span> abitanti del villaggio. Immaginiamo di aver ottenere la seguente tabella di contingenza:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -1802,7 +1803,6 @@ Name: Survived, dtype: float64
 <div class="math notranslate nohighlight">
 \[odd = \frac{\frac{f(Diseased|Exposed)}{f(Healthy|Exposed)}}{\frac{f(Diseased|Non\ Exposed)}{f(Healthy|Non\ Exposed)}} = \frac{2}{0.375} \approx 5.3\]</div>
 <p>Notiamo come l’odds ratio ottenuto sia molto vicino al rischio relativo calolcato in precedenza <span class="math notranslate nohighlight">\(5\)</span>. In pratica si dimostra che, se si assume che la malattia sia rara (rare-disease assumption), l’odds ratio e il rischio relativo convergono a volori simili. È quindi una pratica abbastanza comune di effettuare questa ipotesi e calcolare l’odds ratio al posto del rischio relativo.</p>
-</section>
 </section>
 </section>
 <section id="associazioni-tra-variabili-continue">
@@ -2314,7 +2314,7 @@ Spearman Correlation (Chocolate vs. MintChip): -0.77
 </ul>
 <p>Il coefficiente <span class="math notranslate nohighlight">\(\tau\)</span> di Kendall è definito come segue:</p>
 <div class="math notranslate nohighlight">
-\[\tau = \frac{\text{\#concordant pairs} - \text{\#discordant pairs}}{\text{\#pairs}}\]</div>
+\[\tau = \frac{\text{concordant pairs} - \text{discordant pairs}}{\text{pairs}}\]</div>
 <p>Il grafico che segue mostra un campione con sei punti. Ciascuna linea mostra una possibile coppia di punti. Le linee verdi mostrano i campioni concordanti, mentre quelle rosse mostrano i campioni discordanti. Il coefficiente di Kendall per questo esempio è dato da:</p>
 <div class="math notranslate nohighlight">
 \[\tau = \frac{4-2}{6} = \frac{1}{3}\]</div>
@@ -2488,12 +2488,12 @@ Spearman Correlation (Chocolate vs. MintChip): -0.77
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#misure-di-associazione-tra-due-variabili-discrete">5.1.6. Misure di Associazione tra due Variabili Discrete</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indipendenza-e-frequenze-attese">5.1.7. Indipendenza e Frequenze Attese</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#esempio">5.1.7.1. Esempio</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#statistica-mathcal-x-2-di-pearson">5.1.7.2. Statistica <span class="math notranslate nohighlight">\(\mathcal{X}^2\)</span> di Pearson</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#statistica-v-di-cramer">5.1.7.3. Statistica <span class="math notranslate nohighlight">\(V\)</span> di Cramer</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#rischio-relativo">5.1.7.4. Rischio Relativo</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#odds-ratio">5.1.7.5. Odds Ratio</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistica-mathcal-x-2-di-pearson">5.1.8. Statistica <span class="math notranslate nohighlight">\(\mathcal{X}^2\)</span> di Pearson</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistica-v-di-cramer">5.1.9. Statistica <span class="math notranslate nohighlight">\(V\)</span> di Cramer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rischio-relativo">5.1.10. Rischio Relativo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#odds-ratio">5.1.11. Odds Ratio</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#associazioni-tra-variabili-continue">5.2. Associazioni tra Variabili Continue</a><ul class="nav section-nav flex-column">
