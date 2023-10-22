@@ -18,6 +18,7 @@ parts:
   - file: lectures/07_probability
   - file: lectures/08_common_distributions
   - file: lectures/09_information_theory
+  - file: lectures/10_statistical_inference
 - caption: Laboratories
   numbered: True
   chapters:
