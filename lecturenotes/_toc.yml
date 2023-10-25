@@ -30,7 +30,6 @@ parts:
   - file: laboratories/06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati
   - file: laboratories/07_misure_di_tendenza_centrale_dispersione_e_forma
   - file: laboratories/08_associazione_variabili
-  - file: laboratories/08_associazione_variabili
   - file: laboratories/09_heart-disease-analysis
 
   
