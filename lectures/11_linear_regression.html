@@ -1,0 +1,910 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Linear Regression &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=c5ced968eda925caa686"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures/11_linear_regression';</script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Lecture Notes on Fundamentals of Data Analysis - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Lecture Notes on Fundamentals of Data Analysis - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Lecture Notes on Fundamental of Data Analysis
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_intro_data_analysis.html">1. Introduction to Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_main_data_analysis_concepts.html">2. Main data analysis concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_misure_di_frequenze_e_rappresentazione_grafica_dei_dati.html">3. Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_misure_di_tendenza_centrale_dispersione_e_forma.html">4. Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_associazione_variabili.html">5. Associazione tra Variabili</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_probability.html">6. Probability for Data Manipulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_common_distributions.html">7. Common Probability Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_information_theory.html">8. Basic Elements of Information Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_statistical_inference.html">9. Statistical Inference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratories</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/01_setup.html">10. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/02_intro_python.html">11. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/03_intro_numpy.html">12. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/04_intro_matplotlib.html">13. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/05_intro_pandas.html">14. Introduzione a Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">15. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/07_misure_di_tendenza_centrale_dispersione_e_forma.html">16. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/08_associazione_variabili.html">17. Associazione tra Variabili</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/09_heart-disease-analysis.html">18. Exploratory Analysis on the Heart Disease Dataset</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/antoninofurnari/fadlecturenotes/blob/master/lecturenotes/lectures/11_linear_regression.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/antoninofurnari/fadlecturenotes" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/antoninofurnari/fadlecturenotes/issues/new?title=Issue%20on%20page%20%2Flectures/11_linear_regression.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/lectures/11_linear_regression.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Linear Regression</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-auto-mpg-dataset">The Auto MPG Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-models">Regression Models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-linear-regression">Simple Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-coefficients-ordinary-least-squares-ols">Estimating the Coefficients - Ordinary Least Squares (OLS)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-coefficients-of-linear-regression">Interpretation of the Coefficients of Linear Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-of-the-coefficient-estimates">Accuracy of the Coefficient Estimates</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-linear-regression">Multiple Linear Regression</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="linear-regression">
+<h1>Linear Regression<a class="headerlink" href="#linear-regression" title="Permalink to this heading">#</a></h1>
+<p>Linear regression is a fundamental and widely used statistical technique in data analysis and machine learning. It is a powerful tool for <strong>modeling and understanding the relationships between variables</strong>. At its core, linear regression aims to establish a linear relationship between a <strong>dependent variable</strong> (the one you want to predict) and <strong>one or more independent variables</strong> (the ones used for prediction). This technique allows us to make predictions, infer associations, and gain insights into how changes in independent variables influence the target variable. Linear regression is both intuitive and versatile, making it a valuable tool for tasks ranging from simple trend analysis to more complex predictive modeling and hypothesis testing.</p>
+<p>In this context, we will explore the concepts and applications of linear regression, its different types, and how to implement it using Python.</p>
+<section id="the-auto-mpg-dataset">
+<h2>The Auto MPG Dataset<a class="headerlink" href="#the-auto-mpg-dataset" title="Permalink to this heading">#</a></h2>
+<p>We will consider the <a class="reference external" href="https://archive.ics.uci.edu/dataset/9/auto+mpg">Auto MPG</a> dataset, which contains <span class="math notranslate nohighlight">\(398\)</span> measurements of <span class="math notranslate nohighlight">\(8\)</span> different properties of different cars:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ucimlrepo</span> <span class="kn">import</span> <span class="n">fetch_ucirepo</span> 
+  
+<span class="c1"># fetch dataset </span>
+<span class="n">auto_mpg</span> <span class="o">=</span> <span class="n">fetch_ucirepo</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span> 
+  
+<span class="c1"># data (as pandas dataframes) </span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">auto_mpg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span> 
+<span class="n">y</span> <span class="o">=</span> <span class="n">auto_mpg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">targets</span> 
+  
+<span class="n">data</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>displacement</th>
+      <th>cylinders</th>
+      <th>horsepower</th>
+      <th>weight</th>
+      <th>acceleration</th>
+      <th>model_year</th>
+      <th>origin</th>
+      <th>mpg</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>307.0</td>
+      <td>8</td>
+      <td>130.0</td>
+      <td>3504</td>
+      <td>12.0</td>
+      <td>70</td>
+      <td>1</td>
+      <td>18.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>350.0</td>
+      <td>8</td>
+      <td>165.0</td>
+      <td>3693</td>
+      <td>11.5</td>
+      <td>70</td>
+      <td>1</td>
+      <td>15.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>318.0</td>
+      <td>8</td>
+      <td>150.0</td>
+      <td>3436</td>
+      <td>11.0</td>
+      <td>70</td>
+      <td>1</td>
+      <td>18.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>304.0</td>
+      <td>8</td>
+      <td>150.0</td>
+      <td>3433</td>
+      <td>12.0</td>
+      <td>70</td>
+      <td>1</td>
+      <td>16.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>302.0</td>
+      <td>8</td>
+      <td>140.0</td>
+      <td>3449</td>
+      <td>10.5</td>
+      <td>70</td>
+      <td>1</td>
+      <td>17.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>393</th>
+      <td>140.0</td>
+      <td>4</td>
+      <td>86.0</td>
+      <td>2790</td>
+      <td>15.6</td>
+      <td>82</td>
+      <td>1</td>
+      <td>27.0</td>
+    </tr>
+    <tr>
+      <th>394</th>
+      <td>97.0</td>
+      <td>4</td>
+      <td>52.0</td>
+      <td>2130</td>
+      <td>24.6</td>
+      <td>82</td>
+      <td>2</td>
+      <td>44.0</td>
+    </tr>
+    <tr>
+      <th>395</th>
+      <td>135.0</td>
+      <td>4</td>
+      <td>84.0</td>
+      <td>2295</td>
+      <td>11.6</td>
+      <td>82</td>
+      <td>1</td>
+      <td>32.0</td>
+    </tr>
+    <tr>
+      <th>396</th>
+      <td>120.0</td>
+      <td>4</td>
+      <td>79.0</td>
+      <td>2625</td>
+      <td>18.6</td>
+      <td>82</td>
+      <td>1</td>
+      <td>28.0</td>
+    </tr>
+    <tr>
+      <th>397</th>
+      <td>119.0</td>
+      <td>4</td>
+      <td>82.0</td>
+      <td>2720</td>
+      <td>19.4</td>
+      <td>82</td>
+      <td>1</td>
+      <td>31.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>398 rows × 8 columns</p>
+</div></div></div>
+</div>
+<p>Here is a description of the different variables:</p>
+<ul class="simple">
+<li><p><strong>Displacement</strong>: The engine’s displacement (in cubic inches), which indicates the engine’s size and power.</p></li>
+<li><p><strong>Cylinders</strong>: The number of cylinders in the engine of the car. This is a categorical variable.</p></li>
+<li><p><strong>Horsepower</strong>: The engine’s horsepower, a measure of the engine’s performance.</p></li>
+<li><p><strong>Weight</strong>: The weight of the car in pounds.</p></li>
+<li><p><strong>Acceleration</strong>: The car’s acceleration (in seconds) from 0 to 60 miles per hour.</p></li>
+<li><p><strong>Model Year</strong>: The year the car was manufactured. This is often converted into a categorical variable representing the car’s age.</p></li>
+<li><p><strong>Origin</strong>: The car’s country of origin or manufacturing.
+Car Name: The name or identifier of the car model.</p></li>
+<li><p><strong>MPG (Miles per Gallon)</strong>: The fuel efficiency of the car in miles per gallon. It is the variable to be predicted in regression analysis.</p></li>
+</ul>
+<p>We will start by exploring the relationship between the variables <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> and <code class="docutils literal notranslate"><span class="pre">MPG</span></code>. Let’s visualize the related scatterplot:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/1fb0c4e965f84bea87a10dff24242ac884f289a50476243e5c973efb3ba80747.png" src="../_images/1fb0c4e965f84bea87a10dff24242ac884f289a50476243e5c973efb3ba80747.png" />
+</div>
+</div>
+</section>
+<section id="regression-models">
+<h2>Regression Models<a class="headerlink" href="#regression-models" title="Permalink to this heading">#</a></h2>
+<p>Regression models, in general, aim to <strong>study the relationship between two variables</strong>, <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>, by defining a mathematical model <span class="math notranslate nohighlight">\(f\)</span> such that:</p>
+<div class="math notranslate nohighlight">
+\[Y=f(X) + \epsilon\]</div>
+<p>Here:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f\)</span> is a deterministic function which can be used to <strong>predict the values of <span class="math notranslate nohighlight">\(Y\)</span> from the values of <span class="math notranslate nohighlight">\(X\)</span></strong>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(\epsilon\)</span> is an <strong>error term</strong>, i.e., a variable capturing everything that is not captured by the deterministic function <span class="math notranslate nohighlight">\(f\)</span>. It can be due to different reasons, the main of which are:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(f\)</span> is not an accurate deterministic function of the process. Since we don’t know the “true” function <span class="math notranslate nohighlight">\(f\)</span> and we are only estimating it, we may obtain a suboptimal <span class="math notranslate nohighlight">\(f\)</span> for which <span class="math notranslate nohighlight">\(Y \neq f(X)\)</span>. The error term captures the differences between our predictions and the true values.</p></li>
+<li><p><span class="math notranslate nohighlight">\(Y\)</span> cannot only be predicted from <span class="math notranslate nohighlight">\(X\)</span>, but some other variable is needed to correctly predict <span class="math notranslate nohighlight">\(Y\)</span> from <span class="math notranslate nohighlight">\(X\)</span>. For instance, <span class="math notranslate nohighlight">\(X\)</span> could be “years of education” and <span class="math notranslate nohighlight">\(Y\)</span> can be “income”. While may expect that “income” is not completely predicted from “years of education”. This can happen also because we don’t always have observations for all relevant variables.</p></li>
+<li><p>the problem has inherent stochasticity which cannot be entirely modeled within the deterministic function <span class="math notranslate nohighlight">\(f\)</span>. For instance, consider the problem of predicting the rate of wins in poker based on the expertise of the player. The expertise surely allows to predict the rate of wins, but wins partially depend also on random factors, such as how the deck was shuffled.</p></li>
+</ul>
+</li>
+</ul>
+<p>Note that, often, we model <span class="math notranslate nohighlight">\(f\)</span> in a way that we have its <strong>analytical form</strong>. This is very powerful. If we have the analytical form of the function <span class="math notranslate nohighlight">\(f\)</span> which <strong>explains</strong> how <span class="math notranslate nohighlight">\(Y\)</span> is influenced from <span class="math notranslate nohighlight">\(X\)</span> (<strong>can be predicted from <span class="math notranslate nohighlight">\(X\)</span></strong>), then we can really understand deeply the connection between the two variables!</p>
+<p>The function <span class="math notranslate nohighlight">\(f\)</span> can take different forms. The most common one is the <strong>linear form</strong> that we will see in the next section. While the linear form is very simple (and hence we can anticipate it will be a limited model in many cases), it has the great advantage to be <strong>easy to interpret</strong>.</p>
+</section>
+<section id="simple-linear-regression">
+<h2>Simple Linear Regression<a class="headerlink" href="#simple-linear-regression" title="Permalink to this heading">#</a></h2>
+<p>Simple linear regression aims to model the <strong>linear relationship</strong> between two variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>. In our example dataset, we will consider <span class="math notranslate nohighlight">\(X=\text{horsepower}\)</span> and <span class="math notranslate nohighlight">\(Y=\text{mpg}\)</span>.</p>
+<p>Since we are trying to model a linear relationship, we can imagine <strong>a line passing through the data</strong>. The simple linear regression model is defined as:</p>
+<div class="math notranslate nohighlight">
+\[Y \approx \beta_0 + \beta_1X\]</div>
+<p>In our example:</p>
+<div class="math notranslate nohighlight">
+\[\text{mpg} \approx \beta_0 + \beta_1 \text{horsepower}\]</div>
+<p>It is often common to introduce a <strong>“noise” variable</strong> which captures the randomness due to which the expression above is approximated and write:</p>
+<div class="math notranslate nohighlight">
+\[Y = \beta_0 + \beta_1X + \epsilon\]</div>
+<p>As we will see later, we expect <span class="math notranslate nohighlight">\(\epsilon\)</span> to be <strong>small and randomly distributed</strong>.</p>
+<p>Given the model above, we will call:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(X\)</span>, the <strong>dependent variable</strong> or <strong>regressor</strong>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(Y\)</span>, the <strong>independent variable</strong> or <strong>regressed variable</strong>.</p></li>
+</ul>
+<p>The values <span class="math notranslate nohighlight">\(\beta_0\)</span> and <span class="math notranslate nohighlight">\(\beta_1\)</span> are called <strong>coefficients</strong> or <strong>parameters</strong> of the model.</p>
+<p>The mathematical model above has a geometrical interpretation. Indeed, specific values of <span class="math notranslate nohighlight">\(\beta_0\)</span> and <span class="math notranslate nohighlight">\(\beta_1\)</span> identify a given line in the 2D plane, as shown in the plot below:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/2a666893895881e826c843f1cc97b4d2e6292b30af6f5084f9d4aeb041ec1fb6.png" src="../_images/2a666893895881e826c843f1cc97b4d2e6292b30af6f5084f9d4aeb041ec1fb6.png" />
+</div>
+</div>
+<p>We hence aim to estimate two appropriate values <span class="math notranslate nohighlight">\(\hat \beta_0\)</span> and <span class="math notranslate nohighlight">\(\hat \beta_1\)</span> from data in a way that they provide a model which represent well our data. In the case of our example, we expect the geometrical model to have this aspect:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/528afcac8e04ed0389165862a00453351b8a1980d8f1adb134e6947820a6de46.png" src="../_images/528afcac8e04ed0389165862a00453351b8a1980d8f1adb134e6947820a6de46.png" />
+</div>
+</div>
+<p>This line will also be called the <strong>regression line</strong>.</p>
+<section id="estimating-the-coefficients-ordinary-least-squares-ols">
+<h3>Estimating the Coefficients - Ordinary Least Squares (OLS)<a class="headerlink" href="#estimating-the-coefficients-ordinary-least-squares-ols" title="Permalink to this heading">#</a></h3>
+<p>To estimate the coefficients of our optimal model, we should first define what is a good model. We will say that <strong>a good model is one that predicts well the <span class="math notranslate nohighlight">\(Y\)</span> variable from the <span class="math notranslate nohighlight">\(X\)</span> one</strong>. We already know from the example above that, since the relationship is not perfectly linear, the model will make some mistakes.</p>
+<p>Let <span class="math notranslate nohighlight">\(\{(x_i,y_i)\}\)</span> be our set of observations. Let</p>
+<div class="math notranslate nohighlight">
+\[\hat y_i = \hat \beta_0 + \hat \beta_1 x_i\]</div>
+<p>be the prediction of the model for the observation <span class="math notranslate nohighlight">\(x_i\)</span>. For each data point <span class="math notranslate nohighlight">\((x_i,y_i)\)</span>, we will define the deviation of the prediction from the <span class="math notranslate nohighlight">\(y_i\)</span> value as follows:</p>
+<div class="math notranslate nohighlight">
+\[e_i = y_i - \hat y_i\]</div>
+<p>These numbers will be positive or negative based on whether we underestimate or overestimate the <span class="math notranslate nohighlight">\(y_i\)</span> values. As a global error indicator for the model, given the data, we will define the <strong>residual sum of squares (RSS)</strong> as:</p>
+<div class="math notranslate nohighlight">
+\[RSS = e_1^2 + e_2^2 + \ldots + e_n^2 \]</div>
+<p>or equivalently:</p>
+<div class="math notranslate nohighlight">
+\[RSS = (y_1 - \hat \beta_0 - \hat \beta_1 x_1)^2 + (y_2 - \hat \beta_0 - \hat \beta_1 x_2)^2 + \ldots + (y_n - \hat \beta_0 - \hat \beta_1 x_n)^2\]</div>
+<p>This number will be the sum of the square values of the dashed segments in the plot below:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/f46d194f5a10e9b2e959291a111eb37f0c9614f92203318a61c27a0b269ed329.png" src="../_images/f46d194f5a10e9b2e959291a111eb37f0c9614f92203318a61c27a0b269ed329.png" />
+</div>
+</div>
+<p>Intuitively, if we minimize these numbers, we will find the line which <strong>best fits the data</strong>.</p>
+<p>We can obtain estimates for <span class="math notranslate nohighlight">\(\hat \beta_0\)</span> and <span class="math notranslate nohighlight">\(\hat \beta_1\)</span> by minimizing the RSS using an approach called <strong>ordinary least squares</strong>.</p>
+<p>We can write the RSS value as:</p>
+<div class="math notranslate nohighlight">
+\[RSS(\beta_0, \beta_1) = \sum_{i=1}^n(y_i - \beta_0 -  \beta_1 x_i)^2 \]</div>
+<p>We aim to find:</p>
+<div class="math notranslate nohighlight">
+\[(\hat \beta_0, \hat \beta_1) = \argmin_{\beta_0, \beta_1} RSS(\beta_0, \beta_1)\]</div>
+<p>The minimum can be found setting:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial RSS(\beta_0, \beta_1)}{\partial \beta_0} = 0\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{\partial RSS(\beta_0, \beta_1)}{\partial \beta_1} = 0\]</div>
+<p>Doing the math, it can be shown that:</p>
+<div class="math notranslate nohighlight">
+\[\hat \beta_1 = \frac{\sum_{i=1}^n(x_i - \overline x)(y_i - \overline y)}{\sum_{i=1}^n(x_i - \overline x)}\]</div>
+<div class="math notranslate nohighlight">
+\[\hat \beta_0 = \overline y - \hat \beta_1 \overline x\]</div>
+</section>
+<section id="interpretation-of-the-coefficients-of-linear-regression">
+<h3>Interpretation of the Coefficients of Linear Regression<a class="headerlink" href="#interpretation-of-the-coefficients-of-linear-regression" title="Permalink to this heading">#</a></h3>
+<p>Using the formulas above, we find the following values for the example above:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>beta_0: 39.94
+beta_1: -0.16
+</pre></div>
+</div>
+</div>
+</div>
+<p>These parameters identify the following line:</p>
+<div class="math notranslate nohighlight">
+\[y = 39.94 - 0.15 x\]</div>
+<p>The plot below shows the line on the data:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/2eadbea9271f07cbcd11ded62deaf40105d594525ded3a7b279610e5c4adcb15.png" src="../_images/2eadbea9271f07cbcd11ded62deaf40105d594525ded3a7b279610e5c4adcb15.png" />
+</div>
+</div>
+<p>Apart from the geometric interpretation, the coefficients of a linear regressor have an important <strong>statistical interpretation</strong>. In particular:</p>
+<p><strong>The intercept <span class="math notranslate nohighlight">\(\beta_0\)</span> is the value of <span class="math notranslate nohighlight">\(y\)</span> that we get when the input value <span class="math notranslate nohighlight">\(x\)</span> is equal to zero <span class="math notranslate nohighlight">\(x=0\)</span> (i.e., <span class="math notranslate nohighlight">\(f(0)\)</span>)</strong>. This value <strong>may not always make sense</strong>. For instance, in the example above, we have: <span class="math notranslate nohighlight">\(\beta_0 = -39.94\)</span>, which means that, <strong>when the horsepower is <span class="math notranslate nohighlight">\(0\)</span>, then the consumption in mpg is equal to <span class="math notranslate nohighlight">\(-39.94\)</span></strong>. This is not a reasonable value, but, after all, also setting the horsepower to <span class="math notranslate nohighlight">\(0\)</span> is not reasonable. We can see this as a “base value” which can be incremented or decremented based on the values of the independent variable <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p><strong>The coefficient <span class="math notranslate nohighlight">\(\beta_1\)</span> indicates the steepness of the curve</strong>. If <span class="math notranslate nohighlight">\(\beta_1\)</span> is large, then the curve is steep. This indicates that a small change in <span class="math notranslate nohighlight">\(x\)</span> is associates to a large change in <span class="math notranslate nohighlight">\(y\)</span>. In general, we can see that:</p>
+<div class="math notranslate nohighlight">
+\[f(x+1)-f(x)=\beta_0+\beta_1 (x+1)-\beta_0-\beta_1 x=\beta_1 (x+1-x)=\beta_1\]</div>
+<p>which reveals that <strong>when we observe an increment of one unit of x, we observe an increment of <span class="math notranslate nohighlight">\(\beta_1\)</span> units in y</strong>. In our example, <span class="math notranslate nohighlight">\(\beta_1=0.15\)</span>, hence we can say that, for cars with one additional unit of horsepower, we observe an increment in consumption of <span class="math notranslate nohighlight">\(0.15\)</span> units of mpg.</p>
+</section>
+<section id="accuracy-of-the-coefficient-estimates">
+<h3>Accuracy of the Coefficient Estimates<a class="headerlink" href="#accuracy-of-the-coefficient-estimates" title="Permalink to this heading">#</a></h3>
+<p>Recall that we are trying to model the relationship between two random variables <span class="math notranslate nohighlight">\(X\)</span> as <span class="math notranslate nohighlight">\(Y\)</span> with a simple linear model:</p>
+<div class="math notranslate nohighlight">
+\[Y = \beta_0 + \beta_1X+\epsilon\]</div>
+<p>This means that, once we find appropriate values of <span class="math notranslate nohighlight">\(\beta_0\)</span> and <span class="math notranslate nohighlight">\(\beta_1\)</span>, we expect these to summarize the <strong>linear relationship in the population</strong> or the <strong>population regression line</strong>. Also, recall that these values are obtained using two formulas which are based on realizations of <span class="math notranslate nohighlight">\(X\)</span> of <span class="math notranslate nohighlight">\(Y\)</span> and can be hence seen as <strong>estimators</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\hat \beta_1 = \frac{\sum_{i=1}^n(x_i - \overline x)(y_i - \overline y)}{\sum_{i=1}^n(x_i - \overline x)}\]</div>
+<div class="math notranslate nohighlight">
+\[\hat \beta_0 = \overline y - \hat \beta_1 \overline x\]</div>
+<p>We now recall that, being estimates, they provide values related to a given <strong>realization of the random variables</strong>.</p>
+<p>Let us consider an ideal population for which:</p>
+<div class="math notranslate nohighlight">
+\[Y=2x+1\]</div>
+<p>Ideally, given a sample from the population, we expect to obtain <span class="math notranslate nohighlight">\(\hat \beta_0 \approx 1\)</span> and <span class="math notranslate nohighlight">\(\hat \beta_1 \approx 2\)</span>. In practice, different samples may lead to different estimates and hence different regression lines, as shown in the plot below:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/c4fd62442231f408f86ccbad547786768adda153ce75381ddf95623eb21c5f08.png" src="../_images/c4fd62442231f408f86ccbad547786768adda153ce75381ddf95623eb21c5f08.png" />
+</div>
+</div>
+<p>Each of the first three subplots shows a different sample drawn from the population, with its corresponding estimated regression line, along with the true population regression line. The last subplot compares the different estimated lines with the population regression line and the average regression line (in red). Coefficient estimates are shown in the subplot titles.</p>
+<p>As can be noted, each estimate can be inaccurate, while the average regression line is very close to the population regression line. This is due to the fact that our estimators for the parameters of the regression coefficients <strong>have non-zero variance</strong>. In practice, in can be shown that these estimators are <strong>unbiased</strong> (hence the average regression line is close to the population line).</p>
+<p>A natural question is hence <strong>“how do we assess how good our estimates of the regression coefficients are”</strong>. We resort here to <strong>statistical inference</strong>. It can be shown that the squared standard errors associated to the coefficient estimates are:</p>
+<div class="math notranslate nohighlight">
+\[SE(\hat \beta_0)^2 = \sigma^2 \left[\frac{1}{n} + \frac{\overline x^2}{\sum_{i=1}^{n}(x_i-\overline x)^2}\right], SE(\hat \beta_1)^2 = \frac{\sigma_2}{\sum_{i=1}^{n}(x_i-\overline x)^2}\]</div>
+<p>Where:</p>
+<div class="math notranslate nohighlight">
+\[\sigma^2 = Var(\epsilon)\]</div>
+<p>Note that <span class="math notranslate nohighlight">\(\sigma^2\)</span> is generally unknown, but it can be estimated as the residual standard error:</p>
+<div class="math notranslate nohighlight">
+\[RSE = \sqrt{\frac{RSS}{n-2}}\]</div>
+<p>In the formulas above, we see that:</p>
+<ul class="simple">
+<li><p>The standard errors are proportional to <span class="math notranslate nohighlight">\(\sigma^2\)</span>. This is expected, as we will have more uncertainty when the variance of the error term is high, hence when the points are more <strong>scattered around the population regression line</strong>.</p></li>
+<li><p>The standard errors depend inversely on the <span class="math notranslate nohighlight">\(n\sigma_x^2 = \sum_{i=1}^n(x_i-\overline x)\)</span> (the variance of <span class="math notranslate nohighlight">\(x\)</span> multiplied by the sample size). This means that we will have more uncertainty in the estimates if <span class="math notranslate nohighlight">\(x\)</span> concentrate in a narrow range.</p></li>
+</ul>
+<p>The plot below shows some examples of fit for different values of <span class="math notranslate nohighlight">\(RSE\)</span> and <span class="math notranslate nohighlight">\(n\sigma_x^2\)</span>:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/85c4bf480bc845a3c79ad4cb0b7a46868eb1e58d02dd55661f66b4c4e8f69b72.png" src="../_images/85c4bf480bc845a3c79ad4cb0b7a46868eb1e58d02dd55661f66b4c4e8f69b72.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="multiple-linear-regression">
+<h2>Multiple Linear Regression<a class="headerlink" href="#multiple-linear-regression" title="Permalink to this heading">#</a></h2>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lectures"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-auto-mpg-dataset">The Auto MPG Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-models">Regression Models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-linear-regression">Simple Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-coefficients-ordinary-least-squares-ols">Estimating the Coefficients - Ordinary Least Squares (OLS)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-coefficients-of-linear-regression">Interpretation of the Coefficients of Linear Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-of-the-coefficient-estimates">Accuracy of the Coefficient Estimates</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-linear-regression">Multiple Linear Regression</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Antonino Furnari
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

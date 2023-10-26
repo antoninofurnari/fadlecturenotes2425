@@ -424,8 +424,13 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-size-and-standard-error">9.2. Sample Size and Standard Error</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unbiased-estimators">9.3. Unbiased Estimators</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unbiased-estimators-for-sample-mean-and-variance">9.3.1. Unbiased Estimators for Sample Mean and Variance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-and-variance-of-estimators">9.3. Bias and Variance of Estimators</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-of-an-estimator">9.3.1. Bias of an Estimator</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#unbiased-estimators-for-sample-mean-and-variance">9.3.1.1. Unbiased Estimators for Sample Mean and Variance</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-of-an-estimator">9.3.2. Variance of an Estimator</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-variance-tradeoff">9.3.3. Bias-Variance Tradeoff</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-distribution-of-the-mean">9.4. Sampling Distribution of the Mean</a></li>
@@ -608,23 +613,35 @@ document.write(`
 </div>
 <p>The distribution on the right is narrower, meaning that the probability of estimating a defect rate closer to the true value is higher.</p>
 </section>
-<section id="unbiased-estimators">
-<h2><span class="section-number">9.3. </span>Unbiased Estimators<a class="headerlink" href="#unbiased-estimators" title="Permalink to this heading">#</a></h2>
-<p>In the example above, we have seen that we can use:</p>
+<section id="bias-and-variance-of-estimators">
+<h2><span class="section-number">9.3. </span>Bias and Variance of Estimators<a class="headerlink" href="#bias-and-variance-of-estimators" title="Permalink to this heading">#</a></h2>
+<p>In the example above, we have seen that we can use the formula</p>
 <div class="math notranslate nohighlight">
 \[\hat p = \frac{x}{n}\]</div>
 <p>as a way to estimate the true value of <span class="math notranslate nohighlight">\(p\)</span>. We will call the formula above an <strong>estimator</strong>, while its result <span class="math notranslate nohighlight">\(\hat p\)</span>, an <strong>estimate</strong>.</p>
 <p>Let again consider the random variable arising from multiple random samples:</p>
 <div class="math notranslate nohighlight">
 \[\hat P = \frac{X}{n}\]</div>
+<p>We expect that this estimator will give different results depending on sampling, leading to a distribution of values. In practice, it is important to measure two important aspects of an estimator, namely, its <strong>bias</strong> and its <strong>variance</strong>.</p>
+<section id="bias-of-an-estimator">
+<h3><span class="section-number">9.3.1. </span>Bias of an Estimator<a class="headerlink" href="#bias-of-an-estimator" title="Permalink to this heading">#</a></h3>
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> be a random variable (e.g., the heights of all people in the world) and let <span class="math notranslate nohighlight">\(x=(x_1,x_2,\ldots,x_n)\)</span> be a realization of <span class="math notranslate nohighlight">\(X\)</span> (a sample from the population). Let <span class="math notranslate nohighlight">\(T(X)\)</span> be an estimator of the true value <span class="math notranslate nohighlight">\(\phi\)</span> depending on the variable <span class="math notranslate nohighlight">\(X\)</span>. For instance, <span class="math notranslate nohighlight">\(\phi\)</span> could be the mean value of all heights. <span class="math notranslate nohighlight">\(T(X)\)</span> is then an estimator of the mean and <span class="math notranslate nohighlight">\(\hat phi = T(x)\)</span> is the estimate we obtain considering the sample <span class="math notranslate nohighlight">\(x\)</span>, for instance:</p>
+<div class="math notranslate nohighlight">
+\[T(x) = \frac{\sum_{i=1}^n x_i}{n}\]</div>
+<p>Note that <strong><span class="math notranslate nohighlight">\(T(x)\)</span> is a random variable</strong>, while <span class="math notranslate nohighlight">\(T(x)\)</span> is the value we obtain when we consider the realization <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>We will define the <strong>bias</strong> of the estimator as:</p>
+<div class="math notranslate nohighlight">
+\[Bias_\theta (T(X)) = E_\theta[T(X)] - \phi\]</div>
+<p>That is to say, the <strong>difference between the expected value of the estimate (under different samplings) minus the true value of the quantity we are trying to estimate</strong>.</p>
 <p>We will say that an estimator <span class="math notranslate nohighlight">\(T(X)\)</span> is an unbiased estimator of <span class="math notranslate nohighlight">\(\phi\)</span> if:</p>
 <div class="math notranslate nohighlight">
 \[E_\theta[T(X)] = \phi\]</div>
-<p>It can be shown that this is not always true. In general, we will define the <strong>bias</strong> of the estimator as:</p>
+<p>or equivalently:</p>
 <div class="math notranslate nohighlight">
-\[Bias_\theta (T(X)) = E_\theta[T(X)] - \phi\]</div>
+\[Bias_{\phi}(T(X)) = 0\]</div>
+<p>The bias indicates if the estimator <strong>systematically underestimate or overestimate the property of the population we are interested in</strong>. A bias equal to zero means that, <strong>on average</strong> our estimates will be close to true value. This means that, if we could perform sampling many times and take the average of the estimates, we would get a value close to the true one.</p>
 <section id="unbiased-estimators-for-sample-mean-and-variance">
-<h3><span class="section-number">9.3.1. </span>Unbiased Estimators for Sample Mean and Variance<a class="headerlink" href="#unbiased-estimators-for-sample-mean-and-variance" title="Permalink to this heading">#</a></h3>
+<h4><span class="section-number">9.3.1.1. </span>Unbiased Estimators for Sample Mean and Variance<a class="headerlink" href="#unbiased-estimators-for-sample-mean-and-variance" title="Permalink to this heading">#</a></h4>
 <p>Let us consider a univariate sample <span class="math notranslate nohighlight">\(\{X^{(i)}\}_{i=1}^n\)</span>. The mean estimator:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -651,6 +668,32 @@ s_{n-1}^2=\frac{1}{n-1}\sum_{i=0}^{n}(x_i-\overline x)^2
 <li><p>When <span class="math notranslate nohighlight">\(n\)</span> is small, it does make sense to use the unbiased estimator <span class="math notranslate nohighlight">\(s_{n-1}^2\)</span> if we want to estimate the variance of the population;</p></li>
 <li><p>When <span class="math notranslate nohighlight">\(n\)</span> is very large, the two estimates will be similar (often equivalent).</p></li>
 </ul>
+</section>
+</section>
+<section id="variance-of-an-estimator">
+<h3><span class="section-number">9.3.2. </span>Variance of an Estimator<a class="headerlink" href="#variance-of-an-estimator" title="Permalink to this heading">#</a></h3>
+<p>The variance of <span class="math notranslate nohighlight">\(T(X)\)</span> is defined as:</p>
+<div class="math notranslate nohighlight">
+\[Var_\phi(T(X)) = E[(T(X)-E(T(X)))^2]\]</div>
+<p>That is, the variance of the random variable T(X). The variance measures another characteristic of the estimator, telling us <strong>how disperse the different estimates will be</strong>. A low variance indicates that, if we perform sampling multiple times and take different estimates, we <strong>end up with similar values</strong>. A high variance indicates that different samplings will lead to drastically different estimates.</p>
+</section>
+<section id="bias-variance-tradeoff">
+<h3><span class="section-number">9.3.3. </span>Bias-Variance Tradeoff<a class="headerlink" href="#bias-variance-tradeoff" title="Permalink to this heading">#</a></h3>
+<p>Ideally, we would like our estimates to have <strong>low variance and low bias</strong>. Indeed, in this case we would be sure that each estimate will be close to the true value. Indeed, since we have <strong>low variance</strong> estimates will be close to each other, while, since we have <strong>low bias</strong> the average (and hence all estimates) will be close to the true value.</p>
+<p>In practice, we can distinguish four cases, described in the plot below. In the plot, the true value is the center of the circle, while each point is a different estimate. The circle represents a range of values which we may define as <strong>acceptable estimates</strong>. Alternatively, we can see the circe as a target and each estimate as a dart we are throwing at the target.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/02c559276766f7a717f8cb62072d5383c7d2707f34c41363214b17416c680e2f.png" src="../_images/02c559276766f7a717f8cb62072d5383c7d2707f34c41363214b17416c680e2f.png" />
+</div>
+</div>
+<p>The four cases are:</p>
+<ul class="simple">
+<li><p>Low bias, low variance: all estimates will be close to the true value;</p></li>
+<li><p>Low bias, high variance: in average, estimates will be close to the true value, but different estimates may greatly differ;</p></li>
+<li><p>High bias, low variance: while different estimates will be similar, they all are very far away from the true value;</p></li>
+<li><p>High bias, high variance: we don’t have many guarantees - estimates will all be different, but also far from the real value, even in average.</p></li>
+</ul>
+<p>It’s clear that having low bias and low variance is desirable, but, as we will see, this is not always easy to achieve. In practice, we’ll see that in many cases it there is a trade-off between bias and variance, meaning that <strong>we can tweak our estimator to find a balance between these two properties</strong>.</p>
 </section>
 </section>
 <section id="sampling-distribution-of-the-mean">
@@ -1660,8 +1703,13 @@ Sample does not look Gaussian (reject H0)
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-size-and-standard-error">9.2. Sample Size and Standard Error</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unbiased-estimators">9.3. Unbiased Estimators</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unbiased-estimators-for-sample-mean-and-variance">9.3.1. Unbiased Estimators for Sample Mean and Variance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-and-variance-of-estimators">9.3. Bias and Variance of Estimators</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-of-an-estimator">9.3.1. Bias of an Estimator</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#unbiased-estimators-for-sample-mean-and-variance">9.3.1.1. Unbiased Estimators for Sample Mean and Variance</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-of-an-estimator">9.3.2. Variance of an Estimator</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-variance-tradeoff">9.3.3. Bias-Variance Tradeoff</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-distribution-of-the-mean">9.4. Sampling Distribution of the Mean</a></li>

@@ -531,19 +531,19 @@ according to Newtonian laws</em>.</p>
 deterministic way is not possible. We often say that this is due to <strong>uncertainty</strong>.</p>
 <p>As reported <a class="reference external" href="https://www.deeplearningbook.org/contents/prob.html">here</a>, <strong>uncertainty in a system can be due to different factors</strong>:</p>
 <ul class="simple">
-<li><p><em>Inherent stochasticity in the system being modeled.</em> Some events such as drawing a card from a deck of cards, tossing a die, or the movements of subatomic particles can be seen as truly random events. The outcomes of such events cannot be predicted with perfect accuracy, so they are stochastic (random).</p></li>
-<li><p><em>Incomplete observability.</em> Sometimes, even in a deterministic system, we cannot observe anything. For instance, in the Monty Hall problem, the participant to the game is asked to choose between three doors. One of the doors contains a prize, while the others lead to a goat. Even if the event is deterministic, the game contestant cannot observe everything, so from their point of view, the outcome is uncertain.</p></li>
-<li><p><em>Incomplete modeling.</em> Sometimes a system has to discard some of the information needed to make a decision. For instance, imagine a robotic system aiming to pick objects from a table with a single RGB camera. The system cannot reconstruct the 3D position of the objects, but the RGB camera an allow to obtain an estimate of the 2D coordinates of each objects with respect to the robot’s point of view. All the information which cannot be observed is uncertain, despite the problem is a deterministic one.</p></li>
+<li><p><strong>Inherent stochasticity in the system being modeled.</strong> Some events such as <em>drawing a card from a deck of cards</em>, <em>rolling a die</em>, or the movements of subatomic particles can be seen as truly random events. The outcomes of such events cannot be predicted with perfect accuracy, so they are stochastic (random).</p></li>
+<li><p><strong>Incomplete observability.</strong> Sometimes, even in a deterministic system, we cannot observe anything. For instance, <em>in the Monty Hall problem, the participant to the game is asked to choose between three doors</em>. One of the doors contains a prize, while the others lead to a goat. Even if the event is deterministic, the game contestant cannot observe everything, so from their point of view, the outcome is uncertain.</p></li>
+<li><p><strong>Incomplete modeling.</strong> Sometimes a system has to discard some of the information needed to make a decision. For instance, imagine a robotic system aiming to pick objects from a table with a single RGB camera. <em>The system cannot reconstruct the 3D position of the objects, but the RGB camera an allow to obtain an estimate of the 2D coordinates of each objects with respect to the robot’s point of view</em>. All the information which cannot be observed is uncertain, despite the problem is a deterministic one.</p></li>
 </ul>
 <section id="examples">
 <h3><span class="section-number">6.1.1. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p><em>Tossing a coin or rolling a die</em>: these kinds of experiments are
+<li><p><strong>Tossing a coin or rolling a die</strong>: these kinds of experiments are
 generally impossible to model in a deterministic way. This can be
 due to our limited ability to model the event (i.e., rolling a die
 might be deterministic, but deriving a set of equations to determine
 the outcome given the initial motion of the hand is intractable).</p></li>
-<li><p><em>Determining if a patient has a given pathology</em>: different
+<li><p><strong>Determining if a patient has a given pathology</strong>: different
 pathologies might have similar symptoms. Hence, observing some of
 them does not allow to determine with perfect accuracy if the
 patient has that pathology. In this case, uncertainty might arise
@@ -575,7 +575,7 @@ talking about random variables.</p>
 <p>Given the definitions above, <span class="math notranslate nohighlight">\(\Omega\)</span> is often called the <strong>sure event</strong> or <strong>certain event</strong>, because it contains all possible outcomes. The null set <span class="math notranslate nohighlight">\(\emptyset\)</span> is called the <strong>impossible event</strong>.</p>
 <section id="example">
 <h4><span class="section-number">6.1.3.1. </span>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h4>
-<p>Let us consider the random experiment of tossing a die. Our outcomes will be numbers which we read on the top face of the die when it lands. We will have:</p>
+<p>Let us consider the random experiment of rolling a die. Our outcomes will be numbers which we read on the top face of the die when it lands. We will have:</p>
 <ul class="simple">
 <li><p>Sample space: <span class="math notranslate nohighlight">\(\Omega=\{1,2,3,4,5,6\}\)</span>;</p></li>
 <li><p>Simple event: an example of a simple event would be <span class="math notranslate nohighlight">\(\omega_1=1\)</span>;</p></li>
@@ -599,7 +599,7 @@ from an alphabet, in which case the values of <span class="math notranslate nohi
 <p>Formally, if <span class="math notranslate nohighlight">\(\Omega\)</span> is the <em>sample space</em>, we will define a random variable as a function:</p>
 <div class="math notranslate nohighlight">
 \[ X : \Omega \to E \]</div>
-<p>Where E is a measurable space and often <span class="math notranslate nohighlight">\(E=\mathbb{R}\)</span>. This definition is similar to the one of statistical variable we have given before.</p>
+<p>Where <strong>E is a measurable space</strong> and often <span class="math notranslate nohighlight">\(E=\mathbb{R}\)</span>. This definition is similar to the one of statistical variable we have given before.</p>
 <p>A random variable is generally denoted by a <em>capital letter</em>, such as
 <span class="math notranslate nohighlight">\(X\)</span>.</p>
 <p>Random variables can be <em>discrete</em> or <em>continuous</em>. Discrete random
@@ -783,9 +783,9 @@ If <span class="math notranslate nohighlight">\(A\)</span> and <span class="math
 </section>
 <section id="laplace-probability">
 <h3><span class="section-number">6.4.2. </span>Laplace Probability<a class="headerlink" href="#laplace-probability" title="Permalink to this heading">#</a></h3>
-<p>When all outcomes in a random experiment are considered equally probable, this is called a <strong>Laplace experiment</strong>. In this case, we can calculate the probability of a given event <span class="math notranslate nohighlight">\(A\)</span> as the ratio between the favorable outcomes and the possible outcomes:</p>
+<p><strong>When all outcomes in a random experiment are considered equally probable</strong>, this is called a <strong>Laplace experiment</strong>. In this case, we can calculate the probability of a given event <span class="math notranslate nohighlight">\(A\)</span> as the ratio between the favorable outcomes and the possible outcomes:</p>
 <div class="math notranslate nohighlight">
-\[P(A) = \frac{|A|}{|\Omega|} = \frac{\text{\# favorable outcomes}}{\text{\# possible outcomes}}\]</div>
+\[P(A) = \frac{|A|}{|\Omega|} = \frac{\text{number of favorable outcomes}}{\text{number of possible outcomes}}\]</div>
 <p>For instance, if we are tossing a die:</p>
 <ul class="simple">
 <li><p>The probability of obtaining any of the faces will be: <span class="math notranslate nohighlight">\(\frac{1}{6}\)</span>;</p></li>
@@ -1261,13 +1261,13 @@ probabilities.</p>
 <p>Technically speaking, the Bayes’ rule can be used to “turn”
 probabilities of the kind <span class="math notranslate nohighlight">\(P(A|B)\)</span> into probabilities of the kind
 <span class="math notranslate nohighlight">\(P(B|A)\)</span>.</p>
-<p>More formally, the Bayes’ rule can be used to *<strong>update
+<p>More formally, the Bayes’ rule can be used to <strong>update
 our expectation that some event will happen (event A) when we observe
 some evidence (event B)</strong>. This links to the Bayesian interpretation of
 probability, according to which probability can be seen as <strong>a
 <em>reasonable expectation</em> representing <em>the quantification of a degree of
 belief</em></strong> (i.e., how much we believe some event will happen).</p>
-<p>The different terms on the Bayes’ rule have specific names:</p>
+<p>The different terms in the Bayes’ rule have specific names:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(P(A)\)</span> is called ‘the prior’ – this is our expectation that A
 happens when we do not have any other data to rely on</p></li>
@@ -1481,17 +1481,17 @@ write:</p>
 given value is more or less likely.</p>
 <p>A PMF on a random variable <span class="math notranslate nohighlight">\(X\)</span> is a function</p>
 <div class="math notranslate nohighlight">
-\[P:\chi \rightarrow \lbrack 0,1\rbrack\]</div>
-<p>Where <span class="math notranslate nohighlight">\(\chi\)</span> is the alphabet of <span class="math notranslate nohighlight">\(X\)</span>.</p>
+\[P:\Omega \rightarrow \lbrack 0,1\rbrack\]</div>
+<p>Where <span class="math notranslate nohighlight">\(\Omega\)</span> is the sample space <span class="math notranslate nohighlight">\(X\)</span>.</p>
 <p>This function satisfies the following properties:</p>
 <ul class="simple">
 <li><p><strong>The domain of</strong> <span class="math notranslate nohighlight">\(\mathbf{P}\)</span> <strong>is the set of all possible states
 of</strong> <span class="math notranslate nohighlight">\(\mathbf{X}\)</span><strong>.</strong></p></li>
-<li><p><span class="math notranslate nohighlight">\(\mathbf{\forall}\mathbf{x}\mathbf{\in}\chi\mathbf{,\ }\mathbf{0}\mathbf{\leq}\mathbf{P}\left( \mathbf{x} \right)\mathbf{\leq}\mathbf{1}\)</span>.
+<li><p><span class="math notranslate nohighlight">\(\mathbf{\forall}\mathbf{x}\mathbf{\in}\Omega\mathbf{,\ }\mathbf{0}\mathbf{\leq}\mathbf{P}\left( \mathbf{x} \right)\mathbf{\leq}\mathbf{1}\)</span>.
 An impossible event has probability 0, whereas a certain event has
 probability 1. No event can have negative probability or probability
 larger than 1.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\sum_{\mathbf{x}\mathbf{\in}\mathbf{\chi}}^{}{\mathbf{P}\mathbf{(}\mathbf{x}\mathbf{)}}\mathbf{=}\mathbf{1}\)</span>.
+<li><p><span class="math notranslate nohighlight">\(\sum_{\mathbf{x}\mathbf{\in}\mathbf{\Omega}}^{}{\mathbf{P}\mathbf{(}\mathbf{x}\mathbf{)}}\mathbf{=}\mathbf{1}\)</span>.
 The sum of the probabilities associated to all possible events must
 be one. This implies that the probability distribution is
 normalized. Also, this means that at least one of the events should
@@ -1526,31 +1526,7 @@ have the same probability.</p></li>
 values of the function (<span class="math notranslate nohighlight">\(P(x)\)</span>) is plotted against the values of the
 independent variable <span class="math notranslate nohighlight">\(x\)</span>. This is the diagram associated to the PMF of
 the previous example, where <span class="math notranslate nohighlight">\(P(head) = P(tail) = 0.5\)</span>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-<span class="c1"># Define the outcomes of a fair coin (0 for tails, 1 for heads)</span>
-<span class="n">outcomes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Tail&quot;</span><span class="p">,</span> <span class="s2">&quot;Head&quot;</span><span class="p">]</span>
-
-<span class="c1"># Probability of each outcome for a fair coin</span>
-<span class="n">probability</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]</span>
-
-<span class="c1"># Create the PMF plot with vertical lines and dots</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">outcomes</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">probability</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linestyles</span><span class="o">=</span><span class="s1">&#39;solid&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">outcomes</span><span class="p">,</span> <span class="n">probability</span><span class="p">,</span> <span class="s1">&#39;bo&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Outcome&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;PMF of a Fair Coin&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">outcomes</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="c1"># Show the plot</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <img alt="../_images/888a70ac931c8fe0436e04741501456ef024eb997604c71fdf4d99dbff9985b2.png" src="../_images/888a70ac931c8fe0436e04741501456ef024eb997604c71fdf4d99dbff9985b2.png" />
 </div>
@@ -1574,31 +1550,7 @@ properties of probabilities, i.e.:</p>
 <li><p><span class="math notranslate nohighlight">\(0 \leq P(x) \leq 1\ \forall x\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(\sum_{x}^{}{P(x) = 1}.\)</span></p></li>
 </ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-<span class="c1"># Define the outcomes of a biased coin (0 for tails, 1 for heads)</span>
-<span class="n">outcomes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Tail&quot;</span><span class="p">,</span> <span class="s2">&quot;Head&quot;</span><span class="p">]</span>
-
-<span class="c1"># Probability of each outcome for a biased coin</span>
-<span class="n">probability</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">]</span>
-
-<span class="c1"># Create the PMF plot with vertical lines and dots</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">outcomes</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">probability</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linestyles</span><span class="o">=</span><span class="s1">&#39;solid&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">outcomes</span><span class="p">,</span> <span class="n">probability</span><span class="p">,</span> <span class="s1">&#39;bo&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Outcome&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;PMF of a Biased Coin&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">outcomes</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="c1"># Show the plot</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <img alt="../_images/c738a5bad6a12903b8ef1cac7fbee67d920bab1e09697f9d72cb615a10fe4226.png" src="../_images/c738a5bad6a12903b8ef1cac7fbee67d920bab1e09697f9d72cb615a10fe4226.png" />
 </div>
@@ -1628,14 +1580,14 @@ when the random variable is continuous.</p>
 properties:</p>
 <ul class="simple">
 <li><p>The domain of <span class="math notranslate nohighlight">\(f\)</span> is the set of all possible values of <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\forall x \in \chi,\ P(x) \geq 0\)</span>. No probability can be negative.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\forall x \in \Omega,\ P(x) \geq 0\)</span>. No probability can be negative.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\int f(x)dx = 1\)</span>. This is equivalent to <span class="math notranslate nohighlight">\(\sum P(x) = 1\)</span> in the
 case of a discrete variable. The sum turns into an integral in the
 case of continuous variables.</p></li>
 </ul>
 <p>Note that, in the case of continuous variables, we have:</p>
 <div class="math notranslate nohighlight">
-\[ P(a \leq x \leq b) = \int_{a}^b f(x) \]</div>
+\[ P(a \leq x \leq b) = \int_{a}^b f(x) dx\]</div>
 <p><strong>NOTE</strong>: In general, we say that the density function at a given value <span class="math notranslate nohighlight">\(x\)</span> is zero: <span class="math notranslate nohighlight">\(f(x)=0\)</span>. While this may seem counter-intuitive, we should consider the density function as the limit fo the probability as we narrow a neighborhood around <span class="math notranslate nohighlight">\(x\)</span>. If the neighborhood has size <span class="math notranslate nohighlight">\(0\)</span>, then the density will be zero. In practice, if we take a neighborhood which is non-zero, then we get an integral between two values and a final probability not equal to zero.</p>
 <p>After all, from an intuitive point of view, the probability of having a value exactly equal to <span class="math notranslate nohighlight">\(x\)</span> is indeed zero, in the case of a continuous variable! So we should be more interested in the probability in a given range of values.</p>
 <section id="example-uniform-pdf">
@@ -1656,45 +1608,7 @@ random number generator.</p>
 <p>The diagram below shows an illustration of a uniform PDF with bounds a and b,
 i.e., <span class="math notranslate nohighlight">\(U(a,b)\)</span>. Of course, continuous distributions can be (and
 generally are) much more complicated than that.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-<span class="c1"># Define the parameters for the uniform distribution</span>
-<span class="n">a</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># Start of the interval</span>
-<span class="n">b</span> <span class="o">=</span> <span class="mi">8</span>  <span class="c1"># End of the interval</span>
-
-<span class="c1"># Generate data points for the uniform distribution</span>
-<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)]</span> <span class="o">*</span> <span class="mi">2</span>
-
-<span class="c1"># Create the uniform distribution plot</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Blue line representing the uniform distribution</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">)</span>  <span class="c1"># Highlight the area under the curve</span>
-
-<span class="c1"># Highlight &quot;a&quot; and &quot;b&quot; with vertical lines that stop at the blue line</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="p">(</span><span class="mf">3.3</span> <span class="o">/</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="p">(</span><span class="mf">3.3</span> <span class="o">/</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)))</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">((</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.02</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;1 / (b - a)&#39;</span><span class="p">,</span> <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
-
-
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability Density&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Uniform Distribution&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="n">b</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.05</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.15</span><span class="p">,</span><span class="mf">0.2</span><span class="p">,</span><span class="mf">0.25</span><span class="p">,</span><span class="mf">0.3</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">])</span>
-
-
-<span class="c1"># Show the plot</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <img alt="../_images/f511b722e64c3d354c9622cf02e03ef28ca948bdaf4f84407b5ce27775a9f8ea.png" src="../_images/f511b722e64c3d354c9622cf02e03ef28ca948bdaf4f84407b5ce27775a9f8ea.png" />
 </div>
@@ -1713,7 +1627,7 @@ generally are) much more complicated than that.</p>
 \[F(x) = \int_{-\infty}^x P(x)dx\]</div>
 <p>The CDF is useful in different ways. For instance, it’s easy to see that:</p>
 <div class="math notranslate nohighlight">
-\[P(a \leq X \leq b) = \int_a^b f(x)dx = \int_{-\infty}^b f(x)dx - \int_{-\infty}^a f(x)dx = F(b) - F(a)\]</div>
+\[P(a \leq X \leq b) = \int_a^b P(x)dx = \int_{-\infty}^b P(x)dx - \int_{-\infty}^a P(x)dx = F(b) - F(a)\]</div>
 </section>
 <section id="id6">
 <h4><span class="section-number">6.13.2.4. </span>Example<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h4>
@@ -1724,42 +1638,7 @@ generally are) much more complicated than that.</p>
 <li><p><span class="math notranslate nohighlight">\(F(x) = 1\)</span> for <span class="math notranslate nohighlight">\(x &gt; b\)</span></p></li>
 </ul>
 <p>The plot below shows a diagram:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-<span class="c1"># Define the parameters for the uniform distribution</span>
-<span class="n">a</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># Start of the interval</span>
-<span class="n">b</span> <span class="o">=</span> <span class="mi">8</span>  <span class="c1"># End of the interval</span>
-
-<span class="c1"># Generate data points for the CDF of the uniform distribution</span>
-<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">b</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">),</span> <span class="mi">1</span><span class="p">]</span>
-
-<span class="c1"># Create the CDF plot</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
-
-<span class="c1"># Highlight &quot;a&quot; and &quot;b&quot; with vertical lines that stop at the blue line</span>
-<span class="c1">#plt.axvline(a, color=&#39;red&#39;, linestyle=&#39;--&#39;, label=&#39;a&#39;, lw=1.5, ymax=(x[1] - a) / (b - a))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">((</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;F(x)&#39;</span><span class="p">,</span> <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Cumulative Distribution Function (CDF) of the Uniform Distribution&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="n">b</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">])</span>
-<span class="c1">#plt.yticks([0, 0.2, 0.4, 0.6, 0.8, 1], [&#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;])</span>
-
-<span class="c1"># Show the plot</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <img alt="../_images/00a4f47c84852bb09012db4118569e52f61380509db4e20454d4686e00d27f1e.png" src="../_images/00a4f47c84852bb09012db4118569e52f61380509db4e20454d4686e00d27f1e.png" />
 </div>
@@ -1793,52 +1672,7 @@ F(x) = \begin{cases}
 \end{cases}
 \end{split}\]</div>
 <p>The diagram below shows an example:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
-<span class="c1"># Number of sides on the die</span>
-<span class="n">num_sides</span> <span class="o">=</span> <span class="mi">6</span>
-
-<span class="c1"># Create an array of possible outcomes (1 through 6)</span>
-<span class="n">outcomes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_sides</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-
-<span class="c1"># Calculate the PMF for a fair die</span>
-<span class="n">pmf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">num_sides</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="n">num_sides</span><span class="p">)</span>
-
-<span class="c1"># Calculate the CDF for a fair die</span>
-<span class="n">cdf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">pmf</span><span class="p">)</span>
-
-<span class="c1"># Create a figure with vertical subplots</span>
-<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-
-<span class="c1"># Plot the PMF with vertical lines and dots in the first subplot</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">outcomes</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">pmf</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;PMF&#39;</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">outcomes</span><span class="p">,</span> <span class="n">pmf</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Probability&#39;</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;PMF of a Fair Six-Sided Die&#39;</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="c1"># Plot the CDF in the second subplot with only horizontal lines</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">outcomes</span><span class="p">,</span> <span class="n">cdf</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;mid&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Outcome&#39;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Probability&#39;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;CDF of a Fair Six-Sided Die&#39;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">outcomes</span><span class="p">)</span>
-
-<span class="c1"># Adjust layout to prevent overlap</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-
-<span class="c1"># Show the plots</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <img alt="../_images/b96fc33c7fc05bf59bd380dab928b8f83fdd5ee97fe60e06e6065fa77f644e77.png" src="../_images/b96fc33c7fc05bf59bd380dab928b8f83fdd5ee97fe60e06e6065fa77f644e77.png" />
 </div>
