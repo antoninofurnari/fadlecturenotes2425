@@ -420,10 +420,43 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-linear-regression">Simple Linear Regression</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-coefficients-ordinary-least-squares-ols">Estimating the Coefficients - Ordinary Least Squares (OLS)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-coefficients-of-linear-regression">Interpretation of the Coefficients of Linear Regression</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-of-the-coefficient-estimates">Accuracy of the Coefficient Estimates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-of-the-coefficient-estimates">Accuracy of the Coefficient Estimates</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-errors-of-the-regression-coefficients">Standard Errors of the Regression Coefficients</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-of-the-regression-coefficients">Confidence Intervals of the Regression Coefficients</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-tests-for-the-relevance-of-coefficients">Statistical Tests for the Relevance of Coefficients</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-linear-regression">Multiple Linear Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-of-the-model">Accuracy of the Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#residual-standard-error">Residual Standard Error</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#r-2-statistic"><span class="math notranslate nohighlight">\(R^2\)</span> Statistic</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-linear-regression">Multiple Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geometrical-interpretation">Geometrical Interpretation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-interpretation">Statistical Interpretation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-regression-coefficients">Estimating the Regression Coefficients</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#collinearity">Collinearity</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-f-test">The F-Test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-selection">Variable Selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adjusted-r-2">Adjusted <span class="math notranslate nohighlight">\(R^2\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qualitative-predictors">Qualitative Predictors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predictors-with-only-two-levels">Predictors with Only Two Levels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predictors-with-more-than-two-levels">Predictors with More than Two Levels</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extensions-of-the-linear-model">Extensions of the Linear Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interaction-terms">Interaction Terms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#non-linear-relationships-quadratic-and-polynomial-regression">Non-linear Relationships: Quadratic and Polynomial Regression</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#residual-plots-and-residual-q-q-plots">Residual Plots and Residual Q-Q Plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References:</a></li>
 </ul>
             </nav>
         </div>
@@ -707,9 +740,10 @@ Car Name: The name or identifier of the car model.</p></li>
 </div>
 <p>Intuitively, if we minimize these numbers, we will find the line which <strong>best fits the data</strong>.</p>
 <p>We can obtain estimates for <span class="math notranslate nohighlight">\(\hat \beta_0\)</span> and <span class="math notranslate nohighlight">\(\hat \beta_1\)</span> by minimizing the RSS using an approach called <strong>ordinary least squares</strong>.</p>
-<p>We can write the RSS value as:</p>
+<p>We can write the RSS as a function of the parameters to estimate:</p>
 <div class="math notranslate nohighlight">
 \[RSS(\beta_0, \beta_1) = \sum_{i=1}^n(y_i - \beta_0 -  \beta_1 x_i)^2 \]</div>
+<p>This is also called a <strong>cost function</strong> or <strong>loss function</strong>.</p>
 <p>We aim to find:</p>
 <div class="math notranslate nohighlight">
 \[(\hat \beta_0, \hat \beta_1) = \argmin_{\beta_0, \beta_1} RSS(\beta_0, \beta_1)\]</div>
@@ -745,11 +779,11 @@ beta_1: -0.16
 </div>
 </div>
 <p>Apart from the geometric interpretation, the coefficients of a linear regressor have an important <strong>statistical interpretation</strong>. In particular:</p>
-<p><strong>The intercept <span class="math notranslate nohighlight">\(\beta_0\)</span> is the value of <span class="math notranslate nohighlight">\(y\)</span> that we get when the input value <span class="math notranslate nohighlight">\(x\)</span> is equal to zero <span class="math notranslate nohighlight">\(x=0\)</span> (i.e., <span class="math notranslate nohighlight">\(f(0)\)</span>)</strong>. This value <strong>may not always make sense</strong>. For instance, in the example above, we have: <span class="math notranslate nohighlight">\(\beta_0 = -39.94\)</span>, which means that, <strong>when the horsepower is <span class="math notranslate nohighlight">\(0\)</span>, then the consumption in mpg is equal to <span class="math notranslate nohighlight">\(-39.94\)</span></strong>. This is not a reasonable value, but, after all, also setting the horsepower to <span class="math notranslate nohighlight">\(0\)</span> is not reasonable. We can see this as a “base value” which can be incremented or decremented based on the values of the independent variable <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p><strong>The intercept <span class="math notranslate nohighlight">\(\beta_0\)</span> is the value of <span class="math notranslate nohighlight">\(y\)</span> that we get when the input value <span class="math notranslate nohighlight">\(x\)</span> is equal to zero <span class="math notranslate nohighlight">\(x=0\)</span> (i.e., <span class="math notranslate nohighlight">\(f(0)\)</span>)</strong>. This value <strong>may not always make sense</strong>. For instance, in the example above, we have: <span class="math notranslate nohighlight">\(\beta_0 = 39.94\)</span>, which means that, <strong>when the horsepower is <span class="math notranslate nohighlight">\(0\)</span>, then the consumption in mpg is equal to <span class="math notranslate nohighlight">\(39.94\)</span></strong>.</p>
 <p><strong>The coefficient <span class="math notranslate nohighlight">\(\beta_1\)</span> indicates the steepness of the curve</strong>. If <span class="math notranslate nohighlight">\(\beta_1\)</span> is large, then the curve is steep. This indicates that a small change in <span class="math notranslate nohighlight">\(x\)</span> is associates to a large change in <span class="math notranslate nohighlight">\(y\)</span>. In general, we can see that:</p>
 <div class="math notranslate nohighlight">
 \[f(x+1)-f(x)=\beta_0+\beta_1 (x+1)-\beta_0-\beta_1 x=\beta_1 (x+1-x)=\beta_1\]</div>
-<p>which reveals that <strong>when we observe an increment of one unit of x, we observe an increment of <span class="math notranslate nohighlight">\(\beta_1\)</span> units in y</strong>. In our example, <span class="math notranslate nohighlight">\(\beta_1=0.15\)</span>, hence we can say that, for cars with one additional unit of horsepower, we observe an increment in consumption of <span class="math notranslate nohighlight">\(0.15\)</span> units of mpg.</p>
+<p>which reveals that <strong>when we observe an increment of one unit of x, we observe an increment of <span class="math notranslate nohighlight">\(\beta_1\)</span> units in y</strong>. In our example, <span class="math notranslate nohighlight">\(\beta_1=-0.15\)</span>, hence we can say that, for cars with one additional unit of horsepower, we observe an drop in mps <span class="math notranslate nohighlight">\(-0.15\)</span> units.</p>
 </section>
 <section id="accuracy-of-the-coefficient-estimates">
 <h3>Accuracy of the Coefficient Estimates<a class="headerlink" href="#accuracy-of-the-coefficient-estimates" title="Permalink to this heading">#</a></h3>
@@ -773,13 +807,15 @@ beta_1: -0.16
 </div>
 <p>Each of the first three subplots shows a different sample drawn from the population, with its corresponding estimated regression line, along with the true population regression line. The last subplot compares the different estimated lines with the population regression line and the average regression line (in red). Coefficient estimates are shown in the subplot titles.</p>
 <p>As can be noted, each estimate can be inaccurate, while the average regression line is very close to the population regression line. This is due to the fact that our estimators for the parameters of the regression coefficients <strong>have non-zero variance</strong>. In practice, in can be shown that these estimators are <strong>unbiased</strong> (hence the average regression line is close to the population line).</p>
+<section id="standard-errors-of-the-regression-coefficients">
+<h4>Standard Errors of the Regression Coefficients<a class="headerlink" href="#standard-errors-of-the-regression-coefficients" title="Permalink to this heading">#</a></h4>
 <p>A natural question is hence <strong>“how do we assess how good our estimates of the regression coefficients are”</strong>. We resort here to <strong>statistical inference</strong>. It can be shown that the squared standard errors associated to the coefficient estimates are:</p>
 <div class="math notranslate nohighlight">
 \[SE(\hat \beta_0)^2 = \sigma^2 \left[\frac{1}{n} + \frac{\overline x^2}{\sum_{i=1}^{n}(x_i-\overline x)^2}\right], SE(\hat \beta_1)^2 = \frac{\sigma_2}{\sum_{i=1}^{n}(x_i-\overline x)^2}\]</div>
 <p>Where:</p>
 <div class="math notranslate nohighlight">
 \[\sigma^2 = Var(\epsilon)\]</div>
-<p>Note that <span class="math notranslate nohighlight">\(\sigma^2\)</span> is generally unknown, but it can be estimated as the residual standard error:</p>
+<p>Note that <span class="math notranslate nohighlight">\(\sigma^2\)</span> is generally unknown, but it can be estimated as the <strong>residual standard error</strong>:</p>
 <div class="math notranslate nohighlight">
 \[RSE = \sqrt{\frac{RSS}{n-2}}\]</div>
 <p>In the formulas above, we see that:</p>
@@ -790,13 +826,943 @@ beta_1: -0.16
 <p>The plot below shows some examples of fit for different values of <span class="math notranslate nohighlight">\(RSE\)</span> and <span class="math notranslate nohighlight">\(n\sigma_x^2\)</span>:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/85c4bf480bc845a3c79ad4cb0b7a46868eb1e58d02dd55661f66b4c4e8f69b72.png" src="../_images/85c4bf480bc845a3c79ad4cb0b7a46868eb1e58d02dd55661f66b4c4e8f69b72.png" />
+<img alt="../_images/1f889cba8fce5410f87cb8276a475d6cd0c313eb99a1c8fffa72b297398b7fb8.png" src="../_images/1f889cba8fce5410f87cb8276a475d6cd0c313eb99a1c8fffa72b297398b7fb8.png" />
 </div>
 </div>
+</section>
+<section id="confidence-intervals-of-the-regression-coefficients">
+<h4>Confidence Intervals of the Regression Coefficients<a class="headerlink" href="#confidence-intervals-of-the-regression-coefficients" title="Permalink to this heading">#</a></h4>
+<p>As we have seen, standard errors allow to compute confidence intervals. We will not see it into details, but it turns out that the true values will be in the following intervals with a <span class="math notranslate nohighlight">\(95\%\)</span> confidence:</p>
+<div class="math notranslate nohighlight">
+\[[\hat \beta_0 - 1.96 \cdot SE(\beta_0)], \hat \beta_0 + 1.96 \cdot SE(\hat \beta_0)\]</div>
+<div class="math notranslate nohighlight">
+\[[\hat \beta_1 - 1.96 \cdot SE(\beta_1)], \hat \beta_1 + 1.96 \cdot SE(\hat \beta_1)\]</div>
+<p>In practice, it is common to compute confidence intervals with a <span class="math notranslate nohighlight">\(95\%\)</span> confidence. In the case of our model:</p>
+<div class="math notranslate nohighlight">
+\[horsepower \approx = \beta_0 + mpg \cdot beta_1\]</div>
+<p>We will have:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>COEFFICIENT</p></th>
+<th class="head"><p>STD ERROR</p></th>
+<th class="head"><p>CONFIDENCE INTERVAL</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\beta_0\)</span></p></td>
+<td><p>39.94</p></td>
+<td><p>0.717</p></td>
+<td><p><span class="math notranslate nohighlight">\([38.53, 41.35]\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\beta_1\)</span></p></td>
+<td><p>-0.1578</p></td>
+<td><p>0.006</p></td>
+<td><p><span class="math notranslate nohighlight">\([-0.17, -0.15]\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>From the table above, we can say that:</p>
+<ul class="simple">
+<li><p>The value of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> for <code class="docutils literal notranslate"><span class="pre">horsepower=0</span></code> lies somewhere between <span class="math notranslate nohighlight">\(38.53\)</span> and <span class="math notranslate nohighlight">\(41.35\)</span>;</p></li>
+<li><p>An increase of <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> by one unit is associated to an decrease of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> between <span class="math notranslate nohighlight">\(-0.17\)</span> and <span class="math notranslate nohighlight">\(.015\)</span>.</p></li>
+</ul>
+<p>It is also common to see plots like the following one:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;horsepower&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;mpg&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/99a1dc89c41e1e1f1fe741d100d9b713250994651e2042407614d2a881468af8.png" src="../_images/99a1dc89c41e1e1f1fe741d100d9b713250994651e2042407614d2a881468af8.png" />
+</div>
+</div>
+<p>In the plot above, the shading around the line illustrates the variability induced by the confidence intervals estimated for the coefficients.</p>
+</section>
+<section id="statistical-tests-for-the-relevance-of-coefficients">
+<h4>Statistical Tests for the Relevance of Coefficients<a class="headerlink" href="#statistical-tests-for-the-relevance-of-coefficients" title="Permalink to this heading">#</a></h4>
+<p>Standard errors are also used to perform <strong>hypothesis tests</strong> on the coefficients. In practice, it is common to perform a statistical test to assess whether the coefficient <span class="math notranslate nohighlight">\(\beta_1\)</span> is significantly different from zero. It is interesting to check this because, if <span class="math notranslate nohighlight">\(\beta_1\)</span> was equal to zero, then there would not be any correlation between the variables (and hence the linear regressor would not be useful). Indeed, if <span class="math notranslate nohighlight">\(\beta-1=0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[Y=\beta_0 + \epsilon\]</div>
+<p>Hence <span class="math notranslate nohighlight">\(Y\)</span> cannot be predicted from <span class="math notranslate nohighlight">\(X\)</span> and the two variables are not associated.</p>
+<p>The <strong>null hypothesis</strong> of the test is as follows:</p>
+<div class="math notranslate nohighlight">
+\[H_0: \text{There is no association between } X \text{ and } Y \Leftrightarrow \beta_1=0\]</div>
+<p>While the <strong>alternative hypothesis</strong> is formulated as follows:</p>
+<div class="math notranslate nohighlight">
+\[H_1: \text{There is some association between } X \text{ and } Y \Leftrightarrow \beta_1 \neq 0\]</div>
+<p>To conduct the test, the following t-statistic is computed from the estimate of <span class="math notranslate nohighlight">\(\beta_1\)</span> and the standard error:</p>
+<div class="math notranslate nohighlight">
+\[t=\frac{\hat \beta_1 - 0}{SE(\hat \beta_1)}\]</div>
+<p>Where the <span class="math notranslate nohighlight">\(-0\)</span> term indicates that we are subtracting the value assumed by the null hypothesis (<span class="math notranslate nohighlight">\(\beta_1=0\)</span>). The statistic will follow a t-Student distribution with <span class="math notranslate nohighlight">\(n-2\)</span> degrees of freedom (<span class="math notranslate nohighlight">\(n\)</span> being the number of data points). If <span class="math notranslate nohighlight">\(n&gt;30\)</span> the distribution is approximately Gaussian. Using this statistic, a <strong><span class="math notranslate nohighlight">\(p-value\)</span></strong> indicating the <strong>probability of observing a t statistic more extreme than this one if there is no associated between the two variables</strong> is computed. Chosen a significance level <span class="math notranslate nohighlight">\(\alpha\)</span> (often <span class="math notranslate nohighlight">\(\alpha=0.05\)</span>), we will reject the null hypothesis if <span class="math notranslate nohighlight">\(p&lt;\alpha\)</span>.</p>
+<p>A similar test is conducted to check that <span class="math notranslate nohighlight">\(\beta_0\)</span> is significantly different from zero.</p>
+<p>Let’s see the updated table from the same example:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>COEFFICIENT</p></th>
+<th class="head"><p>STD ERROR</p></th>
+<th class="head"><p>t</p></th>
+<th class="head"><p>P&gt;|t|</p></th>
+<th class="head"><p>CONFIDENCE INTERVAL</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\beta_0\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(39.94\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0.717\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(55.66\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\([38.53, 41.35]\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\beta_1\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(-0.1578\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0.006\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(-24.49\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\([-0.17, -0.15]\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>From the table above, we can conclude that both <span class="math notranslate nohighlight">\(\beta_0\)</span> and <span class="math notranslate nohighlight">\(\beta_1\)</span> are significantly different than <span class="math notranslate nohighlight">\(0\)</span> (p-value is equal to zero). This can also be noted by the fact that the confidence intervals do not contain the zero number.</p>
+</section>
+</section>
+<section id="accuracy-of-the-model">
+<h3>Accuracy of the Model<a class="headerlink" href="#accuracy-of-the-model" title="Permalink to this heading">#</a></h3>
+<p>The tests performed above will tell us if there is a relationship between the variables, but they will not tell us <strong>how well does the model fit the data</strong>. For instance, if the relationship between <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> is not linear, we would expect the model not to fit the data very well. In practice, we can use different measures of accuracy of the model.</p>
+<section id="residual-standard-error">
+<h4>Residual Standard Error<a class="headerlink" href="#residual-standard-error" title="Permalink to this heading">#</a></h4>
+<p>One way to measure how well the model fits the data is to check the variance of the residuals <span class="math notranslate nohighlight">\(\epsilon\)</span>. Recall that our model is:</p>
+<div class="math notranslate nohighlight">
+\[Y=\beta_0 + \beta_1 X + \epsilon\]</div>
+<p>If the model fits the data well, then the values of <span class="math notranslate nohighlight">\(\epsilon\)</span> will be close to zero and their variance will be small. We have already seen that the <strong>Residual Sum of Squares (RSS)</strong> is defined as:</p>
+<div class="math notranslate nohighlight">
+\[RSE = \sqrt{\frac{RSS}{n-2}} = \sqrt{\frac{1}{n-2}\sum_{i=1}^n (y_i-\hat y_i)^2}\]</div>
+<p>The residual standard error is a measure of the <strong>lack of fit</strong>. Large values will indicate that the model is not a good fit. For instance, in our example we have:</p>
+<div class="math notranslate nohighlight">
+\[RSE = 4.91\]</div>
+<p>This value has to be interpreted depending on the scale of the <span class="math notranslate nohighlight">\(Y\)</span> variable. The average value of <span class="math notranslate nohighlight">\(Y\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[\overline{mpg} = 23.52\]</div>
+<p>So the percentage error will be <span class="math notranslate nohighlight">\(4.91/23.52 \approx 20\%\)</span>.</p>
+</section>
+<section id="r-2-statistic">
+<h4><span class="math notranslate nohighlight">\(R^2\)</span> Statistic<a class="headerlink" href="#r-2-statistic" title="Permalink to this heading">#</a></h4>
+<p>The RSE value is an absolute measure, which is measured in the units of <span class="math notranslate nohighlight">\(Y\)</span>. Indeed, to interpret it, we had to check the range of the <span class="math notranslate nohighlight">\(Y\)</span> values. An alternative way to check if the model is fitting the data well, would be to compare the performance of our model with the performance of a <strong>baseline model</strong> which assumes no association between the <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> variables. This model would be:</p>
+<div class="math notranslate nohighlight">
+\[Y = k\]</div>
+<p>This model has a single parameter <span class="math notranslate nohighlight">\(k\)</span>. The <strong>Residual Sum of Squares</strong> of this model would be:</p>
+<div class="math notranslate nohighlight">
+\[RSS(k)=\sum_{i=1}^n{(k-y_i)^2}\]</div>
+<p>To find the optimal value <span class="math notranslate nohighlight">\(k\)</span>, we can compute the derivative of the RSS and set it to zero:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial RSS(k)}{\partial k}=2\sum_{i=1}^n{(k-y_i)} = 2(nk - \sum_{i=1}^n y_i) = 2(nk - n\overline y_i)\]</div>
+<div class="math notranslate nohighlight">
+\[2n(k - \overline y_i) = 0 \Leftrightarrow k=\overline y_i\]</div>
+<p>Hence, the optimal estimator, <strong>when there is not relationship between <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> is the average value of <span class="math notranslate nohighlight">\(Y\)</span></strong>. We will call its RSS value the <strong>total sum of squares</strong>:</p>
+<div class="math notranslate nohighlight">
+\[TSS = \sum_{i=1}^n(y_i-\overline y)^2\]</div>
+<p>We can compare the RSS value obtained by our model to the TSS, which is the error of the baseline method:</p>
+<div class="math notranslate nohighlight">
+\[\frac{RSS}{TSS}\]</div>
+<p>This number will be <strong>comprised between 0 and 1</strong>, and in particular:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\frac{RSS}{TSS}=0\)</span> when <span class="math notranslate nohighlight">\(RSS=0\)</span>, i.e., we have a perfect model;</p></li>
+<li><p><span class="math notranslate nohighlight">\(\frac{RSS}{TSS}=1\)</span> when <span class="math notranslate nohighlight">\(RSS=TSS\)</span>, i.e., we are not doing any better than the baseline model (so our model is poor).</p></li>
+</ul>
+<p>Note that the RSS measures <strong>the variability in <span class="math notranslate nohighlight">\(Y\)</span> left unexplained after regression</strong> (the one that the model could not capture), while the TSS measures <strong>the total variability in <span class="math notranslate nohighlight">\(Y\)</span></strong>. The fraction hence explains the <strong>proportion of variability which the model could not explain</strong>.</p>
+<p>We define the <span class="math notranslate nohighlight">\(R^2\)</span> statistic as:</p>
+<div class="math notranslate nohighlight">
+\[R^2 = 1 - \frac{RSS}{TSS}\]</div>
+<p>Inverting by the <span class="math notranslate nohighlight">\(1-\)</span> subtraction, this number measures the <strong>proportion of variability in <span class="math notranslate nohighlight">\(Y\)</span> that can be explained using <span class="math notranslate nohighlight">\(X\)</span></strong></p>
+<p>The plot below shows examples of linear regression fits with different <span class="math notranslate nohighlight">\(R^2\)</span> values.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/3d62b26713ecd8bf2fc4bb00fdd1e4f749a313553f209878086fc881d42a9656.png" src="../_images/3d62b26713ecd8bf2fc4bb00fdd1e4f749a313553f209878086fc881d42a9656.png" />
+</div>
+</div>
+<p>The interpretation of the <span class="math notranslate nohighlight">\(R^2\)</span> is related to the one of the Pearson’s <span class="math notranslate nohighlight">\(\rho\)</span> correlation coefficient. Indeed, both scores are independent of the slope of the regression line, but quantify how liner the relationship between <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> is. In practice, it can be shown that:</p>
+<div class="math notranslate nohighlight">
+\[R^2 = \rho^2\]</div>
+<p>The <span class="math notranslate nohighlight">\(R^2\)</span> value in our example of regressing <code class="docutils literal notranslate"><span class="pre">mpg</span></code> from <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> is:</p>
+<div class="math notranslate nohighlight">
+\[R^2 = 0.61\]</div>
+<p>Which indicates that <span class="math notranslate nohighlight">\(61\%\)</span> of the variance of the <span class="math notranslate nohighlight">\(Y\)</span> variable is explained by the model.</p>
+</section>
 </section>
 </section>
 <section id="multiple-linear-regression">
 <h2>Multiple Linear Regression<a class="headerlink" href="#multiple-linear-regression" title="Permalink to this heading">#</a></h2>
+<p>In the example above, we have seen that about <span class="math notranslate nohighlight">\(61\%\)</span> of the variance in <span class="math notranslate nohighlight">\(Y\)</span> was explained by the model. One may wonder why about <span class="math notranslate nohighlight">\(39\%\)</span> of the variance could not be explained. Some common reasons may be:</p>
+<ul class="simple">
+<li><p>There is stochasticity in the data which prevents us to learn an accurate function to predict <span class="math notranslate nohighlight">\(Y\)</span> from <span class="math notranslate nohighlight">\(X\)</span>;</p></li>
+<li><p>The relationship between <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> is far from linear, so we cannot predict <span class="math notranslate nohighlight">\(Y\)</span> accurately;</p></li>
+<li><p>The prediction of <span class="math notranslate nohighlight">\(Y\)</span> also depends on other variables.</p></li>
+</ul>
+<p>While in general the unexplained variance is due to a combinations of the aforementioned factors, the third one is often very common and relatively easy to fix. In our case, we are trying to predict <code class="docutils literal notranslate"><span class="pre">mpg</span></code> from <code class="docutils literal notranslate"><span class="pre">horsepower</span></code>. However, we can easily imagine how other variables may contribute to the estimation of <code class="docutils literal notranslate"><span class="pre">mpg</span></code>. For instance, two cars with the same <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> by different <code class="docutils literal notranslate"><span class="pre">weight</span></code> may have different values of <code class="docutils literal notranslate"><span class="pre">mpg</span></code>. We can hence try to find a model with <strong>also uses <code class="docutils literal notranslate"><span class="pre">weight</span></code> to predict <code class="docutils literal notranslate"><span class="pre">mpg</span></code></strong>. This is simply done by adding an additional coefficient for the new variable:</p>
+<div class="math notranslate nohighlight">
+\[mpg = \beta_0 + \beta_1 horsepower + \beta_2 weight\]</div>
+<p>The obtained model is called <strong>multiple linear regression</strong>. If I fit this model (we will see how to estimate coefficients in this case), we obtain the following <span class="math notranslate nohighlight">\(R^2\)</span> value:</p>
+<div class="math notranslate nohighlight">
+\[R^2=0.71\]</div>
+<p>An increment of <span class="math notranslate nohighlight">\(+0.1\)</span>!</p>
+<p>In general, we can include as many variables as we think is relevant to add and define the following model:</p>
+<div class="math notranslate nohighlight">
+\[Y = \beta_0 + \beta_1 X_1 + \ldots + \beta_n X_n\]</div>
+<p>For instance, the following model:</p>
+<div class="math notranslate nohighlight">
+\[mpg = \beta_0 + \beta_1 horsepower + \beta_2 weight + \beta_3 model\_year\]</div>
+<p>Has an <span class="math notranslate nohighlight">\(R^2\)</span> value of:</p>
+<div class="math notranslate nohighlight">
+\[R^2=0.808\]</div>
+<section id="geometrical-interpretation">
+<h3>Geometrical Interpretation<a class="headerlink" href="#geometrical-interpretation" title="Permalink to this heading">#</a></h3>
+<p>The multiple regression model based on two variable has a geometrical interpretation. Indeed, the equation:</p>
+<div class="math notranslate nohighlight">
+\[Z = \beta_0 + \beta_1 X + \beta_2 Y\]</div>
+<p>identifies a plane in the 3D space. We can visualize the plane identified by the <span class="math notranslate nohighlight">\(mpg = \beta_0 + \beta_1 horsepower + \beta_2 weight\)</span> model as follows:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/a9a15334cb0d1ea09bbf96f4ab8ac2ec1d66efe826bd3ec4736af6d7eb2e9f86.png" src="../_images/a9a15334cb0d1ea09bbf96f4ab8ac2ec1d66efe826bd3ec4736af6d7eb2e9f86.png" />
+</div>
+</div>
+<p>The dashed lines indicate the residuals. The best fit of the model minimizes again the sum of squared residuals. This model makes predictions selecting the <span class="math notranslate nohighlight">\(Z\)</span> value which intersect the plane for given values of <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>.</p>
+<p>In general, when we consider <span class="math notranslate nohighlight">\(n\)</span> variables, the linear regressor will be <strong>a (n-1)-dimensional hyperplane in the n-dimensional space</strong>.</p>
+</section>
+<section id="statistical-interpretation">
+<h3>Statistical Interpretation<a class="headerlink" href="#statistical-interpretation" title="Permalink to this heading">#</a></h3>
+<p>The statistical interpretation of a multiple linear regression model is very similar to the interpretation of a simple linear regression model. Given the general model:</p>
+<div class="math notranslate nohighlight">
+\[y=\beta_0 + \beta_1 x_1 + \ldots + \beta_i x_i + \ldots + \beta_n x_n\]</div>
+<p>we can interpret the coefficients as follows:</p>
+<ul class="simple">
+<li><p>The value of <span class="math notranslate nohighlight">\(\beta_0\)</span> indicates the value of <span class="math notranslate nohighlight">\(y\)</span> when all independent variables are set to zero;</p></li>
+<li><p>The value of <span class="math notranslate nohighlight">\(\beta_i\)</span> indicates the increment of <span class="math notranslate nohighlight">\(y\)</span> that we expect to see when <span class="math notranslate nohighlight">\(x_i\)</span> increments by one unit, <strong>provided that all other values <span class="math notranslate nohighlight">\(x_j | j\neq i\)</span> are constant</strong>.</p></li>
+</ul>
+<p>In the considered example:</p>
+<div class="math notranslate nohighlight">
+\[mpg = \beta_0 + \beta_1 horsepower + \beta_2 weight\]</div>
+<p>we obtain the following estimates for the coefficients:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><span class="math notranslate nohighlight">\(\hat \beta_0\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\hat \beta_1\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\hat \beta_2\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(45.64\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(-0.05\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(-0.01\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>We can interpret these estimates as follows:</p>
+<ul class="simple">
+<li><p>Cars with zero <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> and zero <code class="docutils literal notranslate"><span class="pre">weight</span></code> will have an <code class="docutils literal notranslate"><span class="pre">mpg</span></code> of <span class="math notranslate nohighlight">\(45.64\)</span> (<span class="math notranslate nohighlight">\(\approx 19.4 Km/l\)</span>).</p></li>
+<li><p>An increment of one unit of <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> is associated to a decrement of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> of <span class="math notranslate nohighlight">\(-0.05\)</span> units, provided that <code class="docutils literal notranslate"><span class="pre">weight</span></code> is constant. This makes sense: cars with more <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> will probably consume more fuel.</p></li>
+<li><p>An increment of one unit of <code class="docutils literal notranslate"><span class="pre">weight</span></code> is associated to a decrement of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> of <code class="docutils literal notranslate"><span class="pre">-0.01</span></code> units, provided that <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> is constant. This makes sense: heavier cars will consume more fuel.</p></li>
+</ul>
+<p>Let’s compare the estimates above with the estimates of our previous model:</p>
+<div class="math notranslate nohighlight">
+\[mpg = \beta_0 + \beta_1 horsepower\]</div>
+<p>In that case, we obtained:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><span class="math notranslate nohighlight">\(\hat \beta_0\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\hat \beta_1\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(39.94\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(-0.16\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>We can note that the coefficients are different. This happens because, when we add more variables <strong>the model explain variance in a different way</strong>. If we think more about it, this is coherent with the interpretation of the coefficients. Indeed:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(39.94\)</span> is the expected value of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> when <code class="docutils literal notranslate"><span class="pre">horsepower=0</span></code>, but all other variables have unknown values. <span class="math notranslate nohighlight">\(45.64\)</span> is the expected value of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> when <code class="docutils literal notranslate"><span class="pre">horsepower=0</span></code> and <code class="docutils literal notranslate"><span class="pre">weight=0</span></code>. This is different, as in the second case we are (virtually) looking at a subset of data for which both horsepower and weight are zero, while in the first case, we are only looking at data for which <code class="docutils literal notranslate"><span class="pre">horsepower=0</span></code>, but <code class="docutils literal notranslate"><span class="pre">weight</span></code> can be any value. In some sense, we can see <span class="math notranslate nohighlight">\(39.94\)</span> as an average value for different values of <code class="docutils literal notranslate"><span class="pre">weight</span></code> (and all other unobserved variables).</p></li>
+<li><p><span class="math notranslate nohighlight">\(-0.16\)</span> is the expected increment of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> when we observe an increment of one unit of <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> and we don’t know anything about the values of the other variables. <span class="math notranslate nohighlight">\(-0.05\)</span> is the expected increment of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> when <code class="docutils literal notranslate"><span class="pre">horsepower=0</span></code> and <code class="docutils literal notranslate"><span class="pre">weight=0</span></code>, so, again, we are (virtually) looking at a different subset of the data in which the relationship between <code class="docutils literal notranslate"><span class="pre">mpg</span></code> and <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> may be a bit different.</p></li>
+</ul>
+<p>Note that, also in the case of multiple regression, we can estimate confidence intervals and perform statistical tests. In our example, we will get this table:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>COEFFICIENT</p></th>
+<th class="head"><p>STD ERROR</p></th>
+<th class="head"><p>t</p></th>
+<th class="head"><p>P&gt;|t|</p></th>
+<th class="head"><p>CONFIDENCE INTERVAL</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\beta_0\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(45.64\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0.793\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(57.54\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\([44.08, 47.20]\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\beta_1\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(-0.05\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0.011\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(-4.26\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\([-0.07, -0.03]\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\beta_2\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(-0.01\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0.001\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(-11.53\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\([-0.007, -0.005]\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="estimating-the-regression-coefficients">
+<h3>Estimating the Regression Coefficients<a class="headerlink" href="#estimating-the-regression-coefficients" title="Permalink to this heading">#</a></h3>
+<p>Given the general model:</p>
+<div class="math notranslate nohighlight">
+\[y=\beta_0 + \beta_1 x_1 + \ldots + \beta_i x_i + \ldots + \beta_n x_n\]</div>
+<p>We can define our <strong>cost function</strong> again as the residual sum of squares:</p>
+<div class="math notranslate nohighlight">
+\[RSS(\beta_0,\ldots,\beta_n) = \sum_{i=1}^n (y_i - \beta_0+\beta_1x_i + \ldots + \beta_n x_n)^2\]</div>
+<p>The values <span class="math notranslate nohighlight">\(\hat \beta_0,\ldots,\hat \beta_n\)</span> values that minimize the loss function above are the <strong>multiple least square coefficient estimates</strong>.</p>
+<p>To find these optimal values, it is convenient to use matrix notation. Given <span class="math notranslate nohighlight">\(m\)</span> observations, we will have <span class="math notranslate nohighlight">\(m\)</span> equations:</p>
+<div class="math notranslate nohighlight">
+\[y^{(1)} = \beta_0 + \beta_1 x_1^{(1)} + \ldots + \beta_n x_n^{(1)} + e^{(1)}\]</div>
+<div class="math notranslate nohighlight">
+\[y^{(2)} = \beta_0 + \beta_1 x_1^{(2)} + \ldots + \beta_n x_n^{(2)} + e^{(2)}\]</div>
+<div class="math notranslate nohighlight">
+\[\ldots\]</div>
+<div class="math notranslate nohighlight">
+\[y^{(m)} = \beta_0 + \beta_1 x_1^{(m)} + \ldots + \beta_n x_n^{(m)} + e^{(m)}\]</div>
+<p>We can write the <span class="math notranslate nohighlight">\(m\)</span> equations in matrix form as follows:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{y} = \mathbf{X} \mathbf{\beta} + \mathbf{e}\]</div>
+<p>where:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{y} = \begin{bmatrix}
+y^{(1)} \\
+y^{(2)} \\
+\vdots \\
+y^{(m)}
+\end{bmatrix},
+\mathbf{X}=
+\begin{bmatrix}
+1 &amp; x_1^{(1)} &amp; x_2^{(1)} &amp; \ldots &amp; x_n^{(1)} \\
+1 &amp; x_1^{(2)} &amp; x_2^{(2)} &amp; \ldots &amp;  x_n^{(2)} \\
+\vdots &amp; \vdots &amp; \vdots \\
+1 &amp; x_1^{(m)} &amp; x_2^{(m)} &amp; \ldots &amp;  x_n^{(m)} \\
+\end{bmatrix},
+\mathbf{\beta} = \begin{bmatrix}
+\beta_{0} \\
+\beta_{1} \\
+\vdots \\
+\beta_{n}
+\end{bmatrix},
+\mathbf{e} = \begin{bmatrix}
+e^{(1)} \\
+e^{(2)} \\
+\vdots \\
+e^{(m)}
+\end{bmatrix}
+\end{split}\]</div>
+<p>The matrix <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> is called the <strong>design matrix</strong>.</p>
+<p>In the notation above, we want to minimize:</p>
+<div class="math notranslate nohighlight">
+\[RSS(\mathbf{\beta}) = \sum_{i=1}^m (e^{(i)})^2 = \mathbf{e}^T \mathbf{e}\]</div>
+<p>It can be shown that, by the <strong>least squares method</strong>, the RSS is minimized by the estimate:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{\hat \beta} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y}\]</div>
+<section id="collinearity">
+<h4>Collinearity<a class="headerlink" href="#collinearity" title="Permalink to this heading">#</a></h4>
+<p>When fitting multiple linear regressor, we should bear in mind that having two very correlated variables can lead to a poor model. For instance, in the case of perfectly correlated variables, two rows of the <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> matrix will be linearly dependent (one can be computed as a linear function of the other), hence the determinant of <span class="math notranslate nohighlight">\(\mathbf{X}^T\mathbf{X}\)</span> will be zero, the matrix cannot be inverted, and the coefficients cannot be estimated.</p>
+<p>Even if two variables are near collinear (strongly correlated), the <span class="math notranslate nohighlight">\(\mathbf{X}^T\mathbf{X}\)</span> matrix will be ill conditioned and the parameters will be estimated with high numerical imprecision.</p>
+<p>In general, when there is collinearity between two variables, <strong>the results of the multiple linear regressor cannot be trusted</strong>. In such cases, we can try to remove the correlated variables (we can identify correlated variables with the correlation matrix), apply regularization techniques (discussed later) or perform Principal Component Analysis (PCA), which aims to provide a set of decorrelated features from <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>. The PCA method will be presented later.</p>
+</section>
+</section>
+<section id="the-f-test">
+<h3>The F-Test<a class="headerlink" href="#the-f-test" title="Permalink to this heading">#</a></h3>
+<p>When fitting a multiple linear regressor, it is common to perform a statistical test to check whether at least one of the regression coefficients is significantly different from zero (in the population). This test is called an <span class="math notranslate nohighlight">\(F-test\)</span>. We define the <strong>null and alternative hypotheses</strong> as follows:</p>
+<div class="math notranslate nohighlight">
+\[H_0: \beta_1=\beta_2=\ldots=\beta_n=0\]</div>
+<div class="math notranslate nohighlight">
+\[H_a: \exists j\ s.t.\ \beta_j \neq 0\]</div>
+<p>The null hypothesis (the one we want to reject with this test) is that all coefficients are zero in the population. If this is true, than the multiple regressor is not reliable and we should discard it. The alternative hypothesis is that at least one of the coefficients is different from zero.</p>
+<p>The test is performed by computing the following F-statistic:</p>
+<div class="math notranslate nohighlight">
+\[F=\frac{(TSS-RSS)/n}{RSS(m-n-1)}\]</div>
+<p>In practice, the F-statistic will be:</p>
+<ul class="simple">
+<li><p>Close to <span class="math notranslate nohighlight">\(1\)</span> if there is no relationship between the response and the predictors (<span class="math notranslate nohighlight">\(H_0\)</span> is true);</p></li>
+<li><p>Greater than <span class="math notranslate nohighlight">\(1\)</span> if <span class="math notranslate nohighlight">\(H_a\)</span> is true.</p></li>
+</ul>
+<p>The test is carried out as usual, finding a p-value which indicates the probability to observe a statistic larger than the observed one if all regression coefficients are zero in the population.</p>
+<p>In our example of regressing <code class="docutils literal notranslate"><span class="pre">mpg</span></code> from <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> and <code class="docutils literal notranslate"><span class="pre">weight</span></code>, we will find:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><span class="math notranslate nohighlight">\(R^2\)</span></p></th>
+<th class="head"><p>F-statistic</p></th>
+<th class="head"><p>Prob(F-statistic)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0.706</p></td>
+<td><p>467.9</p></td>
+<td><p>3.06e-104</p></td>
+</tr>
+</tbody>
+</table>
+<p>This indicates that the regressor is statistically relevant. The <span class="math notranslate nohighlight">\(F-statistic\)</span> is much larger than <span class="math notranslate nohighlight">\(1\)</span> and the p-value (Prob(F-statistic)) is very small (under the significance level <span class="math notranslate nohighlight">\(\alpha = 0.05\)</span>).</p>
+</section>
+<section id="variable-selection">
+<h3>Variable Selection<a class="headerlink" href="#variable-selection" title="Permalink to this heading">#</a></h3>
+<p>Let’s now try to fit a multiple linear regressor on our dataset by including all variables. Our dependent variable will be <code class="docutils literal notranslate"><span class="pre">mpg</span></code>, while the set of dependent variables will be:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;displacement&#39; &#39;cylinders&#39; &#39;horsepower&#39; &#39;weight&#39; &#39;acceleration&#39;
+ &#39;model_year&#39; &#39;origin&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We obtain the following measures of fit:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><span class="math notranslate nohighlight">\(R^2\)</span></p></th>
+<th class="head"><p>F-statistic</p></th>
+<th class="head"><p>Prob(F-statistic)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0.821</p></td>
+<td><p>252.4</p></td>
+<td><p>2.04e-139</p></td>
+</tr>
+</tbody>
+</table>
+<p>The regressor has a good <span class="math notranslate nohighlight">\(R^2\)</span> and the p-value of the F-test is very small. We can conclude that there is some relationship between the independent variables and the dependent one.</p>
+<p>The estimates of the regression coefficients will be:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<tr>
+        <td></td>          <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>    <td>  -17.2184</td> <td>    4.644</td> <td>   -3.707</td> <td> 0.000</td> <td>  -26.350</td> <td>   -8.087</td>
+</tr>
+<tr>
+  <th>horsepower</th>   <td>   -0.0170</td> <td>    0.014</td> <td>   -1.230</td> <td> 0.220</td> <td>   -0.044</td> <td>    0.010</td>
+</tr>
+<tr>
+  <th>weight</th>       <td>   -0.0065</td> <td>    0.001</td> <td>   -9.929</td> <td> 0.000</td> <td>   -0.008</td> <td>   -0.005</td>
+</tr>
+<tr>
+  <th>displacement</th> <td>    0.0199</td> <td>    0.008</td> <td>    2.647</td> <td> 0.008</td> <td>    0.005</td> <td>    0.035</td>
+</tr>
+<tr>
+  <th>cylinders</th>    <td>   -0.4934</td> <td>    0.323</td> <td>   -1.526</td> <td> 0.128</td> <td>   -1.129</td> <td>    0.142</td>
+</tr>
+<tr>
+  <th>acceleration</th> <td>    0.0806</td> <td>    0.099</td> <td>    0.815</td> <td> 0.415</td> <td>   -0.114</td> <td>    0.275</td>
+</tr>
+<tr>
+  <th>model_year</th>   <td>    0.7508</td> <td>    0.051</td> <td>   14.729</td> <td> 0.000</td> <td>    0.651</td> <td>    0.851</td>
+</tr>
+<tr>
+  <th>origin</th>       <td>    1.4261</td> <td>    0.278</td> <td>    5.127</td> <td> 0.000</td> <td>    0.879</td> <td>    1.973</td>
+</tr>
+</table></div></div>
+</div>
+<p>From the table, we can see that not all predictors have a p-value below the significance level <span class="math notranslate nohighlight">\(\alpha=0.05\)</span>. In particular:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">horsepower</span></code> has a large p-value of <span class="math notranslate nohighlight">\(0.22\)</span>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cylinders</span></code> has a large p-value of <span class="math notranslate nohighlight">\(0.128\)</span>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">acceleration</span></code> has a large p-value of <span class="math notranslate nohighlight">\(0.415\)</span>.</p></li>
+</ul>
+<p>This means that, within the current regressor, there is no meaningful relationship between these variables and <code class="docutils literal notranslate"><span class="pre">mpg</span></code>. A legitimate question is</p>
+<blockquote>
+<div><p>How is it possible that <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> is not associated to <code class="docutils literal notranslate"><span class="pre">mpg</span></code> in this regressor if it was associated to it before?!</p>
+</div></blockquote>
+<p>However, we should recall that, when we consider a different set of variables, the interpretation of the coefficients changes. So, even if in the previous models, <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> was correlated to <code class="docutils literal notranslate"><span class="pre">mpg</span></code>, now it is not correlated anymore. We can imagine that the relationship between these variables is now explained by the other variables which we have introduced.</p>
+<p>Even if the model is statistically significant, it does make sense to get rid of the variables with poor relationships with <code class="docutils literal notranslate"><span class="pre">mpg</span></code>. After all, if we remove a variable, the estimates of the other coefficients may change.</p>
+<p>A common way to remove these variables is by <strong>backward selection</strong> or <strong>backward elimination</strong>. This consists in iteratively removing the variable with the largest p-value. We remove one variable at a time and re-compute the results, iterating until all variables have a small p-value.</p>
+<p>let’s start by removing <code class="docutils literal notranslate"><span class="pre">acceleration</span></code>. This is the result:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;mpg ~ horsepower + weight + displacement + cylinders + model_year + origin&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<tr>
+        <td></td>          <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>    <td>  -15.5635</td> <td>    4.175</td> <td>   -3.728</td> <td> 0.000</td> <td>  -23.773</td> <td>   -7.354</td>
+</tr>
+<tr>
+  <th>horsepower</th>   <td>   -0.0239</td> <td>    0.011</td> <td>   -2.205</td> <td> 0.028</td> <td>   -0.045</td> <td>   -0.003</td>
+</tr>
+<tr>
+  <th>weight</th>       <td>   -0.0062</td> <td>    0.001</td> <td>  -10.883</td> <td> 0.000</td> <td>   -0.007</td> <td>   -0.005</td>
+</tr>
+<tr>
+  <th>displacement</th> <td>    0.0193</td> <td>    0.007</td> <td>    2.579</td> <td> 0.010</td> <td>    0.005</td> <td>    0.034</td>
+</tr>
+<tr>
+  <th>cylinders</th>    <td>   -0.5067</td> <td>    0.323</td> <td>   -1.570</td> <td> 0.117</td> <td>   -1.141</td> <td>    0.128</td>
+</tr>
+<tr>
+  <th>model_year</th>   <td>    0.7475</td> <td>    0.051</td> <td>   14.717</td> <td> 0.000</td> <td>    0.648</td> <td>    0.847</td>
+</tr>
+<tr>
+  <th>origin</th>       <td>    1.4282</td> <td>    0.278</td> <td>    5.138</td> <td> 0.000</td> <td>    0.882</td> <td>    1.975</td>
+</tr>
+</table></div></div>
+</div>
+<p>Note that the coefficients have changed. We now remove <code class="docutils literal notranslate"><span class="pre">cylinders</span></code>, which has the largest p-value of <span class="math notranslate nohighlight">\(0.117\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;mpg ~ horsepower + weight + displacement  + model_year + origin&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<tr>
+        <td></td>          <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>    <td>  -16.6939</td> <td>    4.120</td> <td>   -4.051</td> <td> 0.000</td> <td>  -24.795</td> <td>   -8.592</td>
+</tr>
+<tr>
+  <th>horsepower</th>   <td>   -0.0219</td> <td>    0.011</td> <td>   -2.033</td> <td> 0.043</td> <td>   -0.043</td> <td>   -0.001</td>
+</tr>
+<tr>
+  <th>weight</th>       <td>   -0.0063</td> <td>    0.001</td> <td>  -11.124</td> <td> 0.000</td> <td>   -0.007</td> <td>   -0.005</td>
+</tr>
+<tr>
+  <th>displacement</th> <td>    0.0114</td> <td>    0.006</td> <td>    2.054</td> <td> 0.041</td> <td>    0.000</td> <td>    0.022</td>
+</tr>
+<tr>
+  <th>model_year</th>   <td>    0.7484</td> <td>    0.051</td> <td>   14.707</td> <td> 0.000</td> <td>    0.648</td> <td>    0.848</td>
+</tr>
+<tr>
+  <th>origin</th>       <td>    1.3853</td> <td>    0.277</td> <td>    4.998</td> <td> 0.000</td> <td>    0.840</td> <td>    1.930</td>
+</tr>
+</table></div></div>
+</div>
+<p>All variables now have an acceptable p-value (<span class="math notranslate nohighlight">\(\alpha=0.05\)</span>). We are done. Note that, by removing the two variables, <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> now has an acceptable p-value. This indicates that one of the removed variables was redundant with respect to <code class="docutils literal notranslate"><span class="pre">horsepower</span></code>.</p>
+</section>
+<section id="adjusted-r-2">
+<h3>Adjusted <span class="math notranslate nohighlight">\(R^2\)</span><a class="headerlink" href="#adjusted-r-2" title="Permalink to this heading">#</a></h3>
+<p>While in the case of simple regression we saw that <span class="math notranslate nohighlight">\(R^2=\rho\)</span> (where <span class="math notranslate nohighlight">\(\rho\)</span> is the correlation coefficient), in the case of multiple regression, it turns out that:</p>
+<div class="math notranslate nohighlight">
+\[R^2 = Cov(Y, \hat Y)^2\]</div>
+<p>In general, having more variables in the linear regressor will reduce the error term and improve the covariance between <span class="math notranslate nohighlight">\(Y\)</span> and <span class="math notranslate nohighlight">\(\hat Y\)</span>, hence increasing the <span class="math notranslate nohighlight">\(R^2\)</span>. However, in general having a small increase in <span class="math notranslate nohighlight">\(R^2\)</span> when we add a new variable may not be good. Indeed, we could prefer a simpler model with a slightly smaller <span class="math notranslate nohighlight">\(R^2\)</span> value.</p>
+<p>To express this, we can compute the adjusted <span class="math notranslate nohighlight">\(R^2\)</span> as follows:</p>
+<div class="math notranslate nohighlight">
+\[\overline R^2 = 1- \frac{m-1}{m-n-1} R^2\]</div>
+<p>Where <span class="math notranslate nohighlight">\(m\)</span> is the number of data points and <span class="math notranslate nohighlight">\(n\)</span> is the number of independent variables. The <span class="math notranslate nohighlight">\(\overline R^2\)</span> re-balances the <span class="math notranslate nohighlight">\(R^2\)</span> accounting for the introduction of additional variables.</p>
+<p>For instance the last model we fit has an <span class="math notranslate nohighlight">\(R^2=0.820\)</span> and <span class="math notranslate nohighlight">\(\overline R^2=0.818\)</span>. We will see more in details how to use the <span class="math notranslate nohighlight">\(\overline R^2\)</span> in the laboratory.</p>
+</section>
+</section>
+<section id="qualitative-predictors">
+<h2>Qualitative Predictors<a class="headerlink" href="#qualitative-predictors" title="Permalink to this heading">#</a></h2>
+<p>So far, we have studied relationships between continuous variables. In practice, linear regression allows to also study relationship between <strong>continuous dependent variables</strong> and <strong>qualitative independent variables</strong>. We will consider another dataset similar to the <strong>Auto MPG</strong> dataset:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mpg</th>
+      <th>horsepower</th>
+      <th>fuelsystem</th>
+      <th>fueltype</th>
+      <th>length</th>
+      <th>cylinders</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>21</td>
+      <td>111.0</td>
+      <td>mpfi</td>
+      <td>gas</td>
+      <td>168.8</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>21</td>
+      <td>111.0</td>
+      <td>mpfi</td>
+      <td>gas</td>
+      <td>168.8</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>19</td>
+      <td>154.0</td>
+      <td>mpfi</td>
+      <td>gas</td>
+      <td>171.2</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>24</td>
+      <td>102.0</td>
+      <td>mpfi</td>
+      <td>gas</td>
+      <td>176.6</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>18</td>
+      <td>115.0</td>
+      <td>mpfi</td>
+      <td>gas</td>
+      <td>176.6</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>200</th>
+      <td>23</td>
+      <td>114.0</td>
+      <td>mpfi</td>
+      <td>gas</td>
+      <td>188.8</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>201</th>
+      <td>19</td>
+      <td>160.0</td>
+      <td>mpfi</td>
+      <td>gas</td>
+      <td>188.8</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>202</th>
+      <td>18</td>
+      <td>134.0</td>
+      <td>mpfi</td>
+      <td>gas</td>
+      <td>188.8</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>203</th>
+      <td>26</td>
+      <td>106.0</td>
+      <td>idi</td>
+      <td>diesel</td>
+      <td>188.8</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>204</th>
+      <td>19</td>
+      <td>114.0</td>
+      <td>mpfi</td>
+      <td>gas</td>
+      <td>188.8</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+<p>205 rows × 6 columns</p>
+</div></div></div>
+</div>
+<p>In this case, besides having numerical variables, we also have qualitative ones such as <code class="docutils literal notranslate"><span class="pre">fuelsystem</span></code> and <code class="docutils literal notranslate"><span class="pre">fueltype</span></code>. Let’s see what are their unique values:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fuel System: [&#39;mpfi&#39; &#39;2bbl&#39; &#39;mfi&#39; &#39;1bbl&#39; &#39;spfi&#39; &#39;4bbl&#39; &#39;idi&#39; &#39;spdi&#39;]
+Fuel Type: [&#39;gas&#39; &#39;diesel&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will not see the meaning of all the values of <code class="docutils literal notranslate"><span class="pre">fuelsystem</span></code>, while the values of <code class="docutils literal notranslate"><span class="pre">fueltype</span></code> are self-explanatory.</p>
+<section id="predictors-with-only-two-levels">
+<h3>Predictors with Only Two Levels<a class="headerlink" href="#predictors-with-only-two-levels" title="Permalink to this heading">#</a></h3>
+<p>We will first see the case in which qualitative predictors only have two levels. To handle these as independent variables, we can define a new <strong>dummy variable</strong> which will encode <span class="math notranslate nohighlight">\(1\)</span> as one of the two levels and <span class="math notranslate nohighlight">\(0\)</span> as the other one. For instance, we can introduce a <code class="docutils literal notranslate"><span class="pre">fueltype[T.gas]</span></code> variable defined as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}fueltype[T.gas] = \begin{cases} 1 &amp; \text{if } fueltype=gas \\ 0 &amp; \text{otherwise}\end{cases}\end{split}\]</div>
+<p>If we fit the model:</p>
+<div class="math notranslate nohighlight">
+\[mpg = \beta_0 + \beta_1 horsepower + \beta_1 fueltype[T.gas]\]</div>
+<p>We obtain an <span class="math notranslate nohighlight">\(R^2=0.661\)</span> with <span class="math notranslate nohighlight">\(Prob(F-statistic) \approx 0\)</span> and the following estimates for the regression parameters:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<tr>
+         <td></td>            <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>       <td>   41.2379</td> <td>    1.039</td> <td>   39.705</td> <td> 0.000</td> <td>   39.190</td> <td>   43.286</td>
+</tr>
+<tr>
+  <th>fueltype[T.gas]</th> <td>   -2.7658</td> <td>    0.918</td> <td>   -3.013</td> <td> 0.003</td> <td>   -4.576</td> <td>   -0.956</td>
+</tr>
+<tr>
+  <th>horsepower</th>      <td>   -0.1295</td> <td>    0.007</td> <td>  -18.758</td> <td> 0.000</td> <td>   -0.143</td> <td>   -0.116</td>
+</tr>
+</table></div></div>
+</div>
+<p>How do we interpret this result?</p>
+<ul class="simple">
+<li><p>The value of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> when <code class="docutils literal notranslate"><span class="pre">horsepower=0</span></code> <code class="docutils literal notranslate"><span class="pre">fueltype=diesel</span></code> (i.e., <code class="docutils literal notranslate"><span class="pre">fueltype[T.gas]=0</span></code>) is <span class="math notranslate nohighlight">\(41.2379\)</span>;</p></li>
+<li><p>An increase of one unit of <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> is associated to a decrease of <span class="math notranslate nohighlight">\(0.1295\)</span> units of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> provided that <code class="docutils literal notranslate"><span class="pre">fueltype=diesel</span></code>;</p></li>
+<li><p>For gas vehicles we expect to see a decrease of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> equal to <span class="math notranslate nohighlight">\(2.7658\)</span> with respect to diesel vehicles.</p></li>
+</ul>
+</section>
+<section id="predictors-with-more-than-two-levels">
+<h3>Predictors with More than Two Levels<a class="headerlink" href="#predictors-with-more-than-two-levels" title="Permalink to this heading">#</a></h3>
+<p>When predictors have <span class="math notranslate nohighlight">\(n\)</span> levels, we need to introduce <strong>multiple dummy variables</strong>. Specifically, we need to introduce <span class="math notranslate nohighlight">\(n-1\)</span> binary variables. For instance, if the levels of the variable <code class="docutils literal notranslate"><span class="pre">income</span></code> are <code class="docutils literal notranslate"><span class="pre">low</span></code>, <code class="docutils literal notranslate"><span class="pre">medium</span></code> and <code class="docutils literal notranslate"><span class="pre">high</span></code>, we could introduce two variables <code class="docutils literal notranslate"><span class="pre">income[T.low]</span></code> and <code class="docutils literal notranslate"><span class="pre">income[T.medium]</span></code>. These are sufficient to express all possible values of <code class="docutils literal notranslate"><span class="pre">income</span></code> as shown in the table below:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><code class="docutils literal notranslate"><span class="pre">income</span></code></p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">income[T.low]</span></code></p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">income[T.medium]</span></code></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">low</span></code></p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">medium</span></code></p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">high</span></code></p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+<p>Note that we could have introduced a new variable <code class="docutils literal notranslate"><span class="pre">income[T.high]</span></code> but this would have been redundant and so <strong>correlated to the other two variables</strong>, which is something we know we have to avoid in linear regression.</p>
+<p>If we fit the model which predicts <code class="docutils literal notranslate"><span class="pre">mpg</span></code> from <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> and <code class="docutils literal notranslate"><span class="pre">fuelsystem</span></code> we obtain <span class="math notranslate nohighlight">\(R^2=0.734\)</span>, <span class="math notranslate nohighlight">\(Prob(F-statistic) \approx 0\)</span> and the following estimates for the regression coefficients:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<tr>
+           <td></td>             <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>          <td>   38.8638</td> <td>    1.234</td> <td>   31.504</td> <td> 0.000</td> <td>   36.431</td> <td>   41.297</td>
+</tr>
+<tr>
+  <th>fuelsystem[T.2bbl]</th> <td>   -1.6374</td> <td>    1.127</td> <td>   -1.453</td> <td> 0.148</td> <td>   -3.860</td> <td>    0.585</td>
+</tr>
+<tr>
+  <th>fuelsystem[T.4bbl]</th> <td>  -12.0875</td> <td>    2.263</td> <td>   -5.341</td> <td> 0.000</td> <td>  -16.551</td> <td>   -7.624</td>
+</tr>
+<tr>
+  <th>fuelsystem[T.idi]</th>  <td>   -0.3894</td> <td>    1.300</td> <td>   -0.299</td> <td> 0.765</td> <td>   -2.954</td> <td>    2.175</td>
+</tr>
+<tr>
+  <th>fuelsystem[T.mfi]</th>  <td>   -5.8285</td> <td>    3.661</td> <td>   -1.592</td> <td> 0.113</td> <td>  -13.049</td> <td>    1.392</td>
+</tr>
+<tr>
+  <th>fuelsystem[T.mpfi]</th> <td>   -5.4942</td> <td>    1.202</td> <td>   -4.570</td> <td> 0.000</td> <td>   -7.865</td> <td>   -3.123</td>
+</tr>
+<tr>
+  <th>fuelsystem[T.spdi]</th> <td>   -5.2446</td> <td>    1.612</td> <td>   -3.254</td> <td> 0.001</td> <td>   -8.423</td> <td>   -2.066</td>
+</tr>
+<tr>
+  <th>fuelsystem[T.spfi]</th> <td>   -6.1522</td> <td>    3.615</td> <td>   -1.702</td> <td> 0.090</td> <td>  -13.282</td> <td>    0.978</td>
+</tr>
+<tr>
+  <th>horsepower</th>         <td>   -0.0968</td> <td>    0.009</td> <td>  -11.248</td> <td> 0.000</td> <td>   -0.114</td> <td>   -0.080</td>
+</tr>
+</table></div></div>
+</div>
+<p>As we can see, we have added different correlation coefficients in order to deal with the different levels. Not all predictors have a low p-value, so we can remove those with backward elimination. We will see some more examples in the laboratory.</p>
+</section>
+</section>
+<section id="extensions-of-the-linear-model">
+<h2>Extensions of the Linear Model<a class="headerlink" href="#extensions-of-the-linear-model" title="Permalink to this heading">#</a></h2>
+<p>The linear model makes the very restrictive assumption that the the nature of the relationship between the variables is linear. However, in many cases, it is common to find relationships which deviate from this assumption. In the following sections, we will see some simple ways to deviate from these assumption within a linear regression model.</p>
+<section id="interaction-terms">
+<h3>Interaction Terms<a class="headerlink" href="#interaction-terms" title="Permalink to this heading">#</a></h3>
+<p>A linear regression model assumes that <strong>the effect of the different independent variables to the prediction of the dependent variable is additive</strong>:</p>
+<div class="math notranslate nohighlight">
+\[y = \beta_0 + \beta_1 x_1 + \ldots + \beta_n x_n + \epsilon\]</div>
+<p>In some cases, however, it makes sense to assume the presence of <strong>interaction terms</strong>, i.e., terms in the model which account for the interactions between some variables. For instance:</p>
+<div class="math notranslate nohighlight">
+\[y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_1x_2\]</div>
+<p>As a concrete example, consider the problem of regressing <code class="docutils literal notranslate"><span class="pre">mpg</span></code> from <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> and <code class="docutils literal notranslate"><span class="pre">weight</span></code>. A simple model of the kind:</p>
+<div class="math notranslate nohighlight">
+\[mpg = \beta_0 + \beta_1 horsepower + \beta_1 weight\]</div>
+<p>assumes that the <span class="math notranslate nohighlight">\(\beta_1\)</span>, the increment that we observe in <code class="docutils literal notranslate"><span class="pre">mpg</span></code> when <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> increments by one unit is <strong>constant even when other variables change their values</strong>. However, we can imagine how, for light vehicles <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> affects <code class="docutils literal notranslate"><span class="pre">mpg</span></code> in a way, while for heavy vehicles <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> affects <code class="docutils literal notranslate"><span class="pre">mpg</span></code> in a different way. For example, we expect light vehicle with big <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> to be more efficient than heavy vehicles with small <code class="docutils literal notranslate"><span class="pre">horsepower</span></code>. To account for this, we could consider the following model instead:</p>
+<div class="math notranslate nohighlight">
+\[mpg = \beta_0 + \beta_1 horsepower + \beta_2 weight + \beta_3 horsepower \times weight\]</div>
+<p>Note that the model above is nonlinear in <span class="math notranslate nohighlight">\(horsepower\)</span> and <span class="math notranslate nohighlight">\(weight\)</span>, but it is still linear if we introduce a variable <span class="math notranslate nohighlight">\(hw = horsepower \times weight\)</span>. We can easily do this by adding a new column to our design matrix computed as the product of the two variables. Then we can fit the model using the same exact estimators seen before.</p>
+<p>This new regressor obtained <span class="math notranslate nohighlight">\(R^2=0.748\)</span>, which is larger as compared to <span class="math notranslate nohighlight">\(R^2=0.706\)</span> obtained for the <span class="math notranslate nohighlight">\(mpg = \beta_0 + \beta_1 horsepower + \beta_2 weight\)</span> regressor. Both regressor have a large F-statistic and an associated p-value close to zero. The new regressor explains more variance than the previous one.</p>
+<p>The estimated coefficients are:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<tr>
+          <td></td>             <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>         <td>   63.5579</td> <td>    2.343</td> <td>   27.127</td> <td> 0.000</td> <td>   58.951</td> <td>   68.164</td>
+</tr>
+<tr>
+  <th>horsepower</th>        <td>   -0.2508</td> <td>    0.027</td> <td>   -9.195</td> <td> 0.000</td> <td>   -0.304</td> <td>   -0.197</td>
+</tr>
+<tr>
+  <th>weight</th>            <td>   -0.0108</td> <td>    0.001</td> <td>  -13.921</td> <td> 0.000</td> <td>   -0.012</td> <td>   -0.009</td>
+</tr>
+<tr>
+  <th>horsepower:weight</th> <td> 5.355e-05</td> <td> 6.65e-06</td> <td>    8.054</td> <td> 0.000</td> <td> 4.05e-05</td> <td> 6.66e-05</td>
+</tr>
+</table></div></div>
+</div>
+<p>Let’s compare these with the ones obtained for the <span class="math notranslate nohighlight">\(mpg = \beta_0 + \beta_1 horsepower + \beta_2 weight\)</span> regressor:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<tr>
+       <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>  <td>   45.6402</td> <td>    0.793</td> <td>   57.540</td> <td> 0.000</td> <td>   44.081</td> <td>   47.200</td>
+</tr>
+<tr>
+  <th>horsepower</th> <td>   -0.0473</td> <td>    0.011</td> <td>   -4.267</td> <td> 0.000</td> <td>   -0.069</td> <td>   -0.026</td>
+</tr>
+<tr>
+  <th>weight</th>     <td>   -0.0058</td> <td>    0.001</td> <td>  -11.535</td> <td> 0.000</td> <td>   -0.007</td> <td>   -0.005</td>
+</tr>
+</table></div></div>
+</div>
+<p>We can note that:</p>
+<ul class="simple">
+<li><p>The p-value of the product <span class="math notranslate nohighlight">\(horsepower \times weight\)</span> is almost zero. This is a strong evidence that the true relationship is not merely additive, but an interaction between the two variables actually happens.</p></li>
+<li><p>The coefficient for the product <span class="math notranslate nohighlight">\(horsepower \times weight\)</span> is almost zero. This is to be expected: if the values of horsepower and weight are constant, their product will not change, so it is not influential on the final result.</p></li>
+<li><p>The coefficients of <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> and <code class="docutils literal notranslate"><span class="pre">weight</span></code> have changed. This makes sense, also their interpretation has changed. For instance, in the new regressor an increase of one unit of <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> is associated to an decrease of <span class="math notranslate nohighlight">\(0.2508\)</span> units of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> if <strong>the product between <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> and <code class="docutils literal notranslate"><span class="pre">weight</span></code> does not change</strong>, i.e., if the way the two quantities interact does not change.</p></li>
+</ul>
+</section>
+<section id="non-linear-relationships-quadratic-and-polynomial-regression">
+<h3>Non-linear Relationships: Quadratic and Polynomial Regression<a class="headerlink" href="#non-linear-relationships-quadratic-and-polynomial-regression" title="Permalink to this heading">#</a></h3>
+<p>In many cases, the relationship between two variables is not linear. Let’s visualize the scatterplot between <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/00f2868fa38957995abd2a520a22ea2428ba3dceb185f71054c3de10fb434315.png" src="../_images/00f2868fa38957995abd2a520a22ea2428ba3dceb185f71054c3de10fb434315.png" />
+</div>
+</div>
+<p>This relationship does not look linear. It looks instead as a quadratic, which would be fit by the following model:</p>
+<div class="math notranslate nohighlight">
+\[mpg = \beta_0 + \beta_1 horsepower + \beta_2 horsepower^2\]</div>
+<p>Again, the model above is nonlinear in <code class="docutils literal notranslate"><span class="pre">horsepower</span></code>, but we can still fit it with a linear regressor if we add a new variable <span class="math notranslate nohighlight">\(z=horsepower\)</span>.</p>
+<p>The fit model will obtain <span class="math notranslate nohighlight">\(R^2=0.688\)</span>, larger than <span class="math notranslate nohighlight">\(R^2=608\)</span> obtained by the base model (<span class="math notranslate nohighlight">\(mpg = \beta_0 + \beta_1 horsepower\)</span>). Both have a large F-statistic.</p>
+<p>The estimated coefficients are:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<tr>
+           <td></td>             <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>          <td>   56.9001</td> <td>    1.800</td> <td>   31.604</td> <td> 0.000</td> <td>   53.360</td> <td>   60.440</td>
+</tr>
+<tr>
+  <th>horsepower</th>         <td>   -0.4662</td> <td>    0.031</td> <td>  -14.978</td> <td> 0.000</td> <td>   -0.527</td> <td>   -0.405</td>
+</tr>
+<tr>
+  <th>I(horsepower ** 2)</th> <td>    0.0012</td> <td>    0.000</td> <td>   10.080</td> <td> 0.000</td> <td>    0.001</td> <td>    0.001</td>
+</tr>
+</table></div></div>
+</div>
+<p>The coefficients now describe the quadratic:</p>
+<div class="math notranslate nohighlight">
+\[y = 58.9001 - 0.4662 x + 0.0012 x^2\]</div>
+<p>If we plot it on the data, we obtain the following:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/e738b8873300d9c7544d5c714998aa9325b362d565b7e27ed58babb98791b19b.png" src="../_images/e738b8873300d9c7544d5c714998aa9325b362d565b7e27ed58babb98791b19b.png" />
+</div>
+</div>
+<p>In general, we can fit a polynomial model to the data, choosing a suitable degree <span class="math notranslate nohighlight">\(d\)</span>. For instance, for <span class="math notranslate nohighlight">\(d=4\)</span> we have:</p>
+<div class="math notranslate nohighlight">
+\[mpg = \beta_0 + \beta_1 horsepower + \beta_2 horsepower^2 + \beta_3 horsepower^3 + \beta_4 horsepower^4\]</div>
+<p>which identifies the following fit:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/c633f07afcf8225e73d306c1a82a5cc2ba213db2ffbce86f01d0fb2426676b44.png" src="../_images/c633f07afcf8225e73d306c1a82a5cc2ba213db2ffbce86f01d0fb2426676b44.png" />
+</div>
+</div>
+<p>This approach is known as <strong>polynomial regression</strong> and allows to turn the linear regression into a nonlinear model. Note that, when we have more variables, polynomial regression also includes interaction terms. For instance, the linear model:</p>
+<div class="math notranslate nohighlight">
+\[y = \beta_0 + \beta_1x + \beta_2y\]</div>
+<p>becomes the following polynomial model of degree <span class="math notranslate nohighlight">\(2\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[y = \beta_0 + \beta_1x + \beta_2y + \beta_3x^2 + \beta_4y^2 + \beta_5 xy\]</div>
+<p>As usual, we only have to add new variables for the squared and interaction term and solve the problem as a linear regression one. This is easily handled by libraries. Note that, as the number of variables increases, the number of terms to add for a given degree also increases.</p>
+</section>
+</section>
+<section id="residual-plots-and-residual-q-q-plots">
+<h2>Residual Plots and Residual Q-Q Plots<a class="headerlink" href="#residual-plots-and-residual-q-q-plots" title="Permalink to this heading">#</a></h2>
+<p>Residual plots are a way to diagnose if the linear model we are fitting on the data actually describes the relationship between the variables. For instance, if the relationship is not linear, and we try to force a linear model, the model will not be accurate.</p>
+<p>If the relation is accurate, we expect the residuals of the model (i.e., the <span class="math notranslate nohighlight">\(e_i=\hat y_i - y_i\)</span> terms) to be random and approximately Gaussian.</p>
+<p><strong>To check if the residuals are random, it is common to show a residual plot</strong>, which plots the residuals on the <span class="math notranslate nohighlight">\(y\)</span> axis and the true <span class="math notranslate nohighlight">\(y\)</span> values on the y axis. We expect to observe a cloud of points centered around the zero  with no specific patters.</p>
+<p><strong>To check if the residuals are Gaussian, we can show Q-Q plots</strong></p>
+<p>The graph below compares residual plots and Q-Q Plots of the residuals of different regression models:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/62711d7e773d3cd04a90c4168d76998f2488514d01f62196427f0f428441051d.png" src="../_images/62711d7e773d3cd04a90c4168d76998f2488514d01f62196427f0f428441051d.png" />
+</div>
+</div>
+</section>
+<section id="references">
+<h2>References:<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Chapter 3 of [1]</p></li>
+<li><p>Parts of chapter 11 of [2]</p></li>
+</ul>
+<p>[1] Heumann, Christian, and Michael Schomaker Shalabh. Introduction to statistics and data analysis. Springer International Publishing Switzerland, 2016.</p>
+<p>[2] James, Gareth Gareth Michael. An introduction to statistical learning: with applications in Python, 2023.<a class="reference external" href="https://www.statlearning.com">https://www.statlearning.com</a></p>
 </section>
 </section>
 
@@ -850,10 +1816,43 @@ beta_1: -0.16
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-linear-regression">Simple Linear Regression</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-coefficients-ordinary-least-squares-ols">Estimating the Coefficients - Ordinary Least Squares (OLS)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-coefficients-of-linear-regression">Interpretation of the Coefficients of Linear Regression</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-of-the-coefficient-estimates">Accuracy of the Coefficient Estimates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-of-the-coefficient-estimates">Accuracy of the Coefficient Estimates</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-errors-of-the-regression-coefficients">Standard Errors of the Regression Coefficients</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-of-the-regression-coefficients">Confidence Intervals of the Regression Coefficients</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-tests-for-the-relevance-of-coefficients">Statistical Tests for the Relevance of Coefficients</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-linear-regression">Multiple Linear Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-of-the-model">Accuracy of the Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#residual-standard-error">Residual Standard Error</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#r-2-statistic"><span class="math notranslate nohighlight">\(R^2\)</span> Statistic</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-linear-regression">Multiple Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geometrical-interpretation">Geometrical Interpretation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-interpretation">Statistical Interpretation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-regression-coefficients">Estimating the Regression Coefficients</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#collinearity">Collinearity</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-f-test">The F-Test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-selection">Variable Selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adjusted-r-2">Adjusted <span class="math notranslate nohighlight">\(R^2\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qualitative-predictors">Qualitative Predictors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predictors-with-only-two-levels">Predictors with Only Two Levels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predictors-with-more-than-two-levels">Predictors with More than Two Levels</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extensions-of-the-linear-model">Extensions of the Linear Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interaction-terms">Interaction Terms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#non-linear-relationships-quadratic-and-polynomial-regression">Non-linear Relationships: Quadratic and Polynomial Regression</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#residual-plots-and-residual-q-q-plots">Residual Plots and Residual Q-Q Plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References:</a></li>
 </ul>
   </nav></div>
 
