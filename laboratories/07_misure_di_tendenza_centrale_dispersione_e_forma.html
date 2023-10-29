@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>16. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+    <title>17. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
   
   
   
@@ -68,8 +68,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="17. Associazione tra Variabili" href="08_associazione_variabili.html" />
-    <link rel="prev" title="15. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati" href="06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html" />
+    <link rel="next" title="18. Associazione tra Variabili" href="08_associazione_variabili.html" />
+    <link rel="prev" title="16. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati" href="06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -181,18 +181,19 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../lectures/08_common_distributions.html">7. Common Probability Distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lectures/09_information_theory.html">8. Basic Elements of Information Theory</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lectures/10_statistical_inference.html">9. Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/11_linear_regression.html">10. Linear Regression</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratories</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_setup.html">10. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_intro_python.html">11. Introduzione a Python</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_intro_numpy.html">12. Introduzione a Numpy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_intro_matplotlib.html">13. Introduzione a Matplotlib</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_intro_pandas.html">14. Introduzione a Pandas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">15. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">16. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
-<li class="toctree-l1"><a class="reference internal" href="08_associazione_variabili.html">17. Associazione tra Variabili</a></li>
-<li class="toctree-l1"><a class="reference internal" href="09_heart-disease-analysis.html">18. Exploratory Analysis on the Heart Disease Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_setup.html">11. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_intro_python.html">12. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_intro_numpy.html">13. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_intro_matplotlib.html">14. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_intro_pandas.html">15. Introduzione a Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">16. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">17. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_associazione_variabili.html">18. Associazione tra Variabili</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_heart-disease-analysis.html">19. Exploratory Analysis on the Heart Disease Dataset</a></li>
 </ul>
 
     </div>
@@ -417,35 +418,35 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerosita">16.1. Numerosità</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indicatori-centrali-media-mediana-e-moda">16.2. Indicatori Centrali: Media, Mediana e Moda</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#media">16.2.1. Media</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mediana">16.2.2. Mediana</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantili-percentili-e-quartili">16.2.3. Quantili, Percentili e Quartili</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moda">16.2.4. Moda</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerosita">17.1. Numerosità</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indicatori-centrali-media-mediana-e-moda">17.2. Indicatori Centrali: Media, Mediana e Moda</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#media">17.2.1. Media</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mediana">17.2.2. Mediana</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantili-percentili-e-quartili">17.2.3. Quantili, Percentili e Quartili</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moda">17.2.4. Moda</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indicatori-di-dispersione">16.3. Indicatori di dispersione</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimo-massimo-e-range">16.3.1. Minimo, Massimo e Range</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distanza-interquartile">16.3.2. Distanza interquartile</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#varianza-e-deviazione-standard">16.3.3. Varianza e Deviazione Standard</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizzazione-tra-0-e-1">16.3.3.1. Normalizzazione tra 0 e 1</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizzazione-tra-1-e-1">16.3.3.2. Normalizzazione tra -1 e 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indicatori-di-dispersione">17.3. Indicatori di dispersione</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimo-massimo-e-range">17.3.1. Minimo, Massimo e Range</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distanza-interquartile">17.3.2. Distanza interquartile</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#varianza-e-deviazione-standard">17.3.3. Varianza e Deviazione Standard</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizzazione-tra-0-e-1">17.3.3.1. Normalizzazione tra 0 e 1</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizzazione-tra-1-e-1">17.3.3.2. Normalizzazione tra -1 e 1</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standardizzazione-z-scoring">16.3.4. Standardizzazione (z-scoring)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indicatori-di-forma">16.3.5. Indicatori di Forma</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#asimmetria-skewness">16.3.5.1. Asimmetria (skewness)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#curtosi-kurtosis">16.3.5.2. Curtosi (kurtosis)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standardizzazione-z-scoring">17.3.4. Standardizzazione (z-scoring)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indicatori-di-forma">17.3.5. Indicatori di Forma</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#asimmetria-skewness">17.3.5.1. Asimmetria (skewness)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#curtosi-kurtosis">17.3.5.2. Curtosi (kurtosis)</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot">16.4. Boxplot</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot-multipli">16.4.1. Boxplot Multipli</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot">17.4. Boxplot</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot-multipli">17.4.1. Boxplot Multipli</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">16.5. Esercizi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">17.5. Esercizi</a></li>
 </ul>
             </nav>
         </div>
@@ -458,7 +459,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="laboratorio-su-misure-di-tendenza-centrale-dispersione-e-forma">
-<h1><span class="section-number">16. </span>Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma<a class="headerlink" href="#laboratorio-su-misure-di-tendenza-centrale-dispersione-e-forma" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">17. </span>Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma<a class="headerlink" href="#laboratorio-su-misure-di-tendenza-centrale-dispersione-e-forma" title="Permalink to this heading">#</a></h1>
 <p>Per esaminare gli strumenti in oggetto, ci avvremo del dataset <strong>Titanic</strong>. Si tratta di un dataset classico, che riporta alcune informazioni, quali sesso, età, classe di imbarco e sopravvivenza di alcuni passaggeri del Titanic. Troviamo una versione del dataset al seguente URL:</p>
 <p><a class="reference external" href="https://raw.githubusercontent.com/agconti/kaggle-titanic/master/data/train.csv">https://raw.githubusercontent.com/agconti/kaggle-titanic/master/data/train.csv</a></p>
 <p>Carichiamo il dataset mediante la libreria Pandas:</p>
@@ -630,7 +631,7 @@ memory usage: 83.5+ KB
 </div></div></div>
 </div>
 <section id="numerosita">
-<h2><span class="section-number">16.1. </span>Numerosità<a class="headerlink" href="#numerosita" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">17.1. </span>Numerosità<a class="headerlink" href="#numerosita" title="Permalink to this heading">#</a></h2>
 <p>La numerosità dei campioni costituiti dalle singole colonne può essere ottenuta mediante il metodo <code class="docutils literal notranslate"><span class="pre">len</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -694,9 +695,9 @@ memory usage: 83.5+ KB
 </div></blockquote>
 </section>
 <section id="indicatori-centrali-media-mediana-e-moda">
-<h2><span class="section-number">16.2. </span>Indicatori Centrali: Media, Mediana e Moda<a class="headerlink" href="#indicatori-centrali-media-mediana-e-moda" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">17.2. </span>Indicatori Centrali: Media, Mediana e Moda<a class="headerlink" href="#indicatori-centrali-media-mediana-e-moda" title="Permalink to this heading">#</a></h2>
 <section id="media">
-<h3><span class="section-number">16.2.1. </span>Media<a class="headerlink" href="#media" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">17.2.1. </span>Media<a class="headerlink" href="#media" title="Permalink to this heading">#</a></h3>
 <p>Possiamo calcolarlo manualmente la media come segue</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -729,7 +730,7 @@ memory usage: 83.5+ KB
 </div></blockquote>
 </section>
 <section id="mediana">
-<h3><span class="section-number">16.2.2. </span>Mediana<a class="headerlink" href="#mediana" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">17.2.2. </span>Mediana<a class="headerlink" href="#mediana" title="Permalink to this heading">#</a></h3>
 <p>Possiamo calcolare la mediana manualmente come segue:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -784,7 +785,7 @@ Mediana: 1
 </div></blockquote>
 </section>
 <section id="quantili-percentili-e-quartili">
-<h3><span class="section-number">16.2.3. </span>Quantili, Percentili e Quartili<a class="headerlink" href="#quantili-percentili-e-quartili" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">17.2.3. </span>Quantili, Percentili e Quartili<a class="headerlink" href="#quantili-percentili-e-quartili" title="Permalink to this heading">#</a></h3>
 <p>In pandas, i quantili si ottengono mediante il metodo <code class="docutils literal notranslate"><span class="pre">quantile</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -846,7 +847,7 @@ Quartile di ordine 4 (massimo): 80.0
 </div></blockquote>
 </section>
 <section id="moda">
-<h3><span class="section-number">16.2.4. </span>Moda<a class="headerlink" href="#moda" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">17.2.4. </span>Moda<a class="headerlink" href="#moda" title="Permalink to this heading">#</a></h3>
 <p>Possiamo calcolare la moda manualmente come segue:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -888,9 +889,9 @@ Name: Age, dtype: float64
 </section>
 </section>
 <section id="indicatori-di-dispersione">
-<h2><span class="section-number">16.3. </span>Indicatori di dispersione<a class="headerlink" href="#indicatori-di-dispersione" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">17.3. </span>Indicatori di dispersione<a class="headerlink" href="#indicatori-di-dispersione" title="Permalink to this heading">#</a></h2>
 <section id="minimo-massimo-e-range">
-<h3><span class="section-number">16.3.1. </span>Minimo, Massimo e Range<a class="headerlink" href="#minimo-massimo-e-range" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">17.3.1. </span>Minimo, Massimo e Range<a class="headerlink" href="#minimo-massimo-e-range" title="Permalink to this heading">#</a></h3>
 <p>Massimo, minimo e range vengono calcolati semplicemente come segue:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -914,7 +915,7 @@ Range: 79.58
 </div></blockquote>
 </section>
 <section id="distanza-interquartile">
-<h3><span class="section-number">16.3.2. </span>Distanza interquartile<a class="headerlink" href="#distanza-interquartile" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">17.3.2. </span>Distanza interquartile<a class="headerlink" href="#distanza-interquartile" title="Permalink to this heading">#</a></h3>
 <p>Possiamo calcolare la distanza interquartile come segue:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -938,7 +939,7 @@ Lo scarto interquartile di sample 2 è: 19.0
 </div></blockquote>
 </section>
 <section id="varianza-e-deviazione-standard">
-<h3><span class="section-number">16.3.3. </span>Varianza e Deviazione Standard<a class="headerlink" href="#varianza-e-deviazione-standard" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">17.3.3. </span>Varianza e Deviazione Standard<a class="headerlink" href="#varianza-e-deviazione-standard" title="Permalink to this heading">#</a></h3>
 <p>La varianza può essere calcolata richiamando il metodo <code class="docutils literal notranslate"><span class="pre">var</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1004,7 +1005,7 @@ Name: Age, dtype: float64
 <p>Esiste una relazione tra le deviazioni standard dei campioni e le relative densità? Quale?</p>
 </div></blockquote>
 <section id="normalizzazione-tra-0-e-1">
-<h4><span class="section-number">16.3.3.1. </span>Normalizzazione tra 0 e 1<a class="headerlink" href="#normalizzazione-tra-0-e-1" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">17.3.3.1. </span>Normalizzazione tra 0 e 1<a class="headerlink" href="#normalizzazione-tra-0-e-1" title="Permalink to this heading">#</a></h4>
 <p>Secondo la normalizzazione tra 0 e 1, i dati vengono riscalati come segue:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1033,7 +1034,7 @@ x_{norm} = (x-x_{min})/(x_{max}-x_{min})
 </div>
 </section>
 <section id="normalizzazione-tra-1-e-1">
-<h4><span class="section-number">16.3.3.2. </span>Normalizzazione tra -1 e 1<a class="headerlink" href="#normalizzazione-tra-1-e-1" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">17.3.3.2. </span>Normalizzazione tra -1 e 1<a class="headerlink" href="#normalizzazione-tra-1-e-1" title="Permalink to this heading">#</a></h4>
 <p>I dati vengono riscalati come segue:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1063,7 +1064,7 @@ x_{norm} = (x_{max}+x_{min}-2\cdot x)/(x_{max}-x_{min})
 </section>
 </section>
 <section id="standardizzazione-z-scoring">
-<h3><span class="section-number">16.3.4. </span>Standardizzazione (z-scoring)<a class="headerlink" href="#standardizzazione-z-scoring" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">17.3.4. </span>Standardizzazione (z-scoring)<a class="headerlink" href="#standardizzazione-z-scoring" title="Permalink to this heading">#</a></h3>
 <p>Possiamo effettuare questa normalizzazione usando la funzione <code class="docutils literal notranslate"><span class="pre">zscore</span></code> di <code class="docutils literal notranslate"><span class="pre">scipy</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1099,9 +1100,9 @@ x_{norm} = (x_{max}+x_{min}-2\cdot x)/(x_{max}-x_{min})
 </div>
 </section>
 <section id="indicatori-di-forma">
-<h3><span class="section-number">16.3.5. </span>Indicatori di Forma<a class="headerlink" href="#indicatori-di-forma" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">17.3.5. </span>Indicatori di Forma<a class="headerlink" href="#indicatori-di-forma" title="Permalink to this heading">#</a></h3>
 <section id="asimmetria-skewness">
-<h4><span class="section-number">16.3.5.1. </span>Asimmetria (skewness)<a class="headerlink" href="#asimmetria-skewness" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">17.3.5.1. </span>Asimmetria (skewness)<a class="headerlink" href="#asimmetria-skewness" title="Permalink to this heading">#</a></h4>
 <p>Posso calcolare il valore di skewness mediante il metodo di Pandas <code class="docutils literal notranslate"><span class="pre">skew</span></code>. Vediamo un paio di esempi sul dataset di pesi e altezze:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1179,7 +1180,7 @@ Skweness altezza: 0.19
 </div>
 </section>
 <section id="curtosi-kurtosis">
-<h4><span class="section-number">16.3.5.2. </span>Curtosi (kurtosis)<a class="headerlink" href="#curtosi-kurtosis" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">17.3.5.2. </span>Curtosi (kurtosis)<a class="headerlink" href="#curtosi-kurtosis" title="Permalink to this heading">#</a></h4>
 <p>Analogamente, possiamo calcolare la curtosi con il metodo <code class="docutils literal notranslate"><span class="pre">Kurtosis</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1226,7 +1227,7 @@ dtype: float64
 </section>
 </section>
 <section id="boxplot">
-<h2><span class="section-number">16.4. </span>Boxplot<a class="headerlink" href="#boxplot" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">17.4. </span>Boxplot<a class="headerlink" href="#boxplot" title="Permalink to this heading">#</a></h2>
 <p>Possiamo visualizzare un boxplot direttamente mediante <code class="docutils literal notranslate"><span class="pre">Pandas</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1256,7 +1257,7 @@ dtype: float64
 </div>
 </div>
 <section id="boxplot-multipli">
-<h3><span class="section-number">16.4.1. </span>Boxplot Multipli<a class="headerlink" href="#boxplot-multipli" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">17.4.1. </span>Boxplot Multipli<a class="headerlink" href="#boxplot-multipli" title="Permalink to this heading">#</a></h3>
 <p>Mediante <code class="docutils literal notranslate"><span class="pre">Pandas</span></code> è possibile mostrare i boxplot di tutte le variabili numeriche di un DataFrame come segue:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1337,7 +1338,7 @@ dtype: float64
 </section>
 </section>
 <section id="esercizi">
-<h2><span class="section-number">16.5. </span>Esercizi<a class="headerlink" href="#esercizi" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">17.5. </span>Esercizi<a class="headerlink" href="#esercizi" title="Permalink to this heading">#</a></h2>
 <blockquote>
 <div><p>🧑‍💻 Esercizio 1</p>
 <p>Considerando il dataset Titanic, si calcolino per ogni variabile la numerosità, la media, la deviazione standard, il minimo, il massimo, il valore mediano, il primo e il terzo quartile. Dopo aver calcolato i valori richiesti individualmente, si utilizzi il metodo <code class="docutils literal notranslate"><span class="pre">describe</span></code> per ottenere tali valori. Qual è la variabile più dispersa?</p>
@@ -1385,7 +1386,7 @@ dtype: float64
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">15. </span>Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</p>
+        <p class="prev-next-title"><span class="section-number">16. </span>Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</p>
       </div>
     </a>
     <a class="right-next"
@@ -1393,7 +1394,7 @@ dtype: float64
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">17. </span>Associazione tra Variabili</p>
+        <p class="prev-next-title"><span class="section-number">18. </span>Associazione tra Variabili</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1412,35 +1413,35 @@ dtype: float64
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerosita">16.1. Numerosità</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indicatori-centrali-media-mediana-e-moda">16.2. Indicatori Centrali: Media, Mediana e Moda</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#media">16.2.1. Media</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mediana">16.2.2. Mediana</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantili-percentili-e-quartili">16.2.3. Quantili, Percentili e Quartili</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moda">16.2.4. Moda</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerosita">17.1. Numerosità</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indicatori-centrali-media-mediana-e-moda">17.2. Indicatori Centrali: Media, Mediana e Moda</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#media">17.2.1. Media</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mediana">17.2.2. Mediana</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantili-percentili-e-quartili">17.2.3. Quantili, Percentili e Quartili</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moda">17.2.4. Moda</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indicatori-di-dispersione">16.3. Indicatori di dispersione</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimo-massimo-e-range">16.3.1. Minimo, Massimo e Range</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distanza-interquartile">16.3.2. Distanza interquartile</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#varianza-e-deviazione-standard">16.3.3. Varianza e Deviazione Standard</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizzazione-tra-0-e-1">16.3.3.1. Normalizzazione tra 0 e 1</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizzazione-tra-1-e-1">16.3.3.2. Normalizzazione tra -1 e 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indicatori-di-dispersione">17.3. Indicatori di dispersione</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimo-massimo-e-range">17.3.1. Minimo, Massimo e Range</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distanza-interquartile">17.3.2. Distanza interquartile</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#varianza-e-deviazione-standard">17.3.3. Varianza e Deviazione Standard</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizzazione-tra-0-e-1">17.3.3.1. Normalizzazione tra 0 e 1</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizzazione-tra-1-e-1">17.3.3.2. Normalizzazione tra -1 e 1</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standardizzazione-z-scoring">16.3.4. Standardizzazione (z-scoring)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indicatori-di-forma">16.3.5. Indicatori di Forma</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#asimmetria-skewness">16.3.5.1. Asimmetria (skewness)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#curtosi-kurtosis">16.3.5.2. Curtosi (kurtosis)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standardizzazione-z-scoring">17.3.4. Standardizzazione (z-scoring)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indicatori-di-forma">17.3.5. Indicatori di Forma</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#asimmetria-skewness">17.3.5.1. Asimmetria (skewness)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#curtosi-kurtosis">17.3.5.2. Curtosi (kurtosis)</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot">16.4. Boxplot</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot-multipli">16.4.1. Boxplot Multipli</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot">17.4. Boxplot</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot-multipli">17.4.1. Boxplot Multipli</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">16.5. Esercizi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">17.5. Esercizi</a></li>
 </ul>
   </nav></div>
 
