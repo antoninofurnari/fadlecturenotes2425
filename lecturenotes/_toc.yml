@@ -19,6 +19,7 @@ parts:
   - file: lectures/08_common_distributions
   - file: lectures/09_information_theory
   - file: lectures/10_statistical_inference
+  - file: lectures/11_linear_regression
 - caption: Laboratories
   numbered: True
   chapters:
