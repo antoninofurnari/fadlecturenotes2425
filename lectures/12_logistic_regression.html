@@ -1,0 +1,1943 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Logistic Regression &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=c5ced968eda925caa686"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures/12_logistic_regression';</script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Lecture Notes on Fundamentals of Data Analysis - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Lecture Notes on Fundamentals of Data Analysis - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Lecture Notes on Fundamental of Data Analysis
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_intro_data_analysis.html">1. Introduction to Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_main_data_analysis_concepts.html">2. Main data analysis concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_misure_di_frequenze_e_rappresentazione_grafica_dei_dati.html">3. Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_misure_di_tendenza_centrale_dispersione_e_forma.html">4. Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_associazione_variabili.html">5. Associazione tra Variabili</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_probability.html">6. Probability for Data Manipulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_common_distributions.html">7. Common Probability Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_information_theory.html">8. Basic Elements of Information Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_statistical_inference.html">9. Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_linear_regression.html">10. Linear Regression</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratories</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/01_setup.html">11. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/02_intro_python.html">12. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/03_intro_numpy.html">13. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/04_intro_matplotlib.html">14. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/05_intro_pandas.html">15. Introduzione a Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">16. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/07_misure_di_tendenza_centrale_dispersione_e_forma.html">17. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/08_associazione_variabili.html">18. Associazione tra Variabili</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/09_heart-disease-analysis.html">19. Exploratory Analysis on the Heart Disease Dataset</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/antoninofurnari/fadlecturenotes/blob/master/lecturenotes/lectures/12_logistic_regression.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/antoninofurnari/fadlecturenotes" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/antoninofurnari/fadlecturenotes/issues/new?title=Issue%20on%20page%20%2Flectures/12_logistic_regression.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/lectures/12_logistic_regression.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Logistic Regression</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-data">Example Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limits-of-linear-regression">Limits of Linear Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-binary-values-to-probabilities">From Binary Values to Probabilities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-function">The Logistic Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-regression-model">The Logistic Regression Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-interpretation-of-the-coefficients-of-a-linear-regressor">Statistical Interpretation of the Coefficients of a Linear Regressor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geometrical-interpretation-of-the-coefficients-of-a-linear-regressor">Geometrical Interpretation of the Coefficients of a Linear Regressor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimation-of-the-parameters-of-a-logistic-regressor">Estimation of the Parameters of a Logistic Regressor</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="logistic-regression">
+<h1>Logistic Regression<a class="headerlink" href="#logistic-regression" title="Permalink to this heading">#</a></h1>
+<p>Linear regression allows to model relationships between <strong>continuos independent and dependent variables</strong> and <strong>between qualitative independent variables and continuous variables</strong>. However, it does not allow to model relationships between continuous or qualitative independent variables and <strong>qualitative dependent variables</strong>.</p>
+<section id="example-data">
+<h2>Example Data<a class="headerlink" href="#example-data" title="Permalink to this heading">#</a></h2>
+<p>Establishing such relationships is useful in different contexts. For instance, let us consider the <a class="reference external" href="https://archive.ics.uci.edu/dataset/17/breast+cancer+wisconsin+diagnostic">Breast Cancer Wisconsin</a> dataset:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>radius1</th>
+      <th>texture1</th>
+      <th>perimeter1</th>
+      <th>area1</th>
+      <th>smoothness1</th>
+      <th>compactness1</th>
+      <th>concavity1</th>
+      <th>concave_points1</th>
+      <th>symmetry1</th>
+      <th>fractal_dimension1</th>
+      <th>...</th>
+      <th>texture3</th>
+      <th>perimeter3</th>
+      <th>area3</th>
+      <th>smoothness3</th>
+      <th>compactness3</th>
+      <th>concavity3</th>
+      <th>concave_points3</th>
+      <th>symmetry3</th>
+      <th>fractal_dimension3</th>
+      <th>Diagnosis</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>17.99</td>
+      <td>10.38</td>
+      <td>122.80</td>
+      <td>1001.0</td>
+      <td>0.11840</td>
+      <td>0.27760</td>
+      <td>0.30010</td>
+      <td>0.14710</td>
+      <td>0.2419</td>
+      <td>0.07871</td>
+      <td>...</td>
+      <td>17.33</td>
+      <td>184.60</td>
+      <td>2019.0</td>
+      <td>0.16220</td>
+      <td>0.66560</td>
+      <td>0.7119</td>
+      <td>0.2654</td>
+      <td>0.4601</td>
+      <td>0.11890</td>
+      <td>M</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>20.57</td>
+      <td>17.77</td>
+      <td>132.90</td>
+      <td>1326.0</td>
+      <td>0.08474</td>
+      <td>0.07864</td>
+      <td>0.08690</td>
+      <td>0.07017</td>
+      <td>0.1812</td>
+      <td>0.05667</td>
+      <td>...</td>
+      <td>23.41</td>
+      <td>158.80</td>
+      <td>1956.0</td>
+      <td>0.12380</td>
+      <td>0.18660</td>
+      <td>0.2416</td>
+      <td>0.1860</td>
+      <td>0.2750</td>
+      <td>0.08902</td>
+      <td>M</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>19.69</td>
+      <td>21.25</td>
+      <td>130.00</td>
+      <td>1203.0</td>
+      <td>0.10960</td>
+      <td>0.15990</td>
+      <td>0.19740</td>
+      <td>0.12790</td>
+      <td>0.2069</td>
+      <td>0.05999</td>
+      <td>...</td>
+      <td>25.53</td>
+      <td>152.50</td>
+      <td>1709.0</td>
+      <td>0.14440</td>
+      <td>0.42450</td>
+      <td>0.4504</td>
+      <td>0.2430</td>
+      <td>0.3613</td>
+      <td>0.08758</td>
+      <td>M</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>11.42</td>
+      <td>20.38</td>
+      <td>77.58</td>
+      <td>386.1</td>
+      <td>0.14250</td>
+      <td>0.28390</td>
+      <td>0.24140</td>
+      <td>0.10520</td>
+      <td>0.2597</td>
+      <td>0.09744</td>
+      <td>...</td>
+      <td>26.50</td>
+      <td>98.87</td>
+      <td>567.7</td>
+      <td>0.20980</td>
+      <td>0.86630</td>
+      <td>0.6869</td>
+      <td>0.2575</td>
+      <td>0.6638</td>
+      <td>0.17300</td>
+      <td>M</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>20.29</td>
+      <td>14.34</td>
+      <td>135.10</td>
+      <td>1297.0</td>
+      <td>0.10030</td>
+      <td>0.13280</td>
+      <td>0.19800</td>
+      <td>0.10430</td>
+      <td>0.1809</td>
+      <td>0.05883</td>
+      <td>...</td>
+      <td>16.67</td>
+      <td>152.20</td>
+      <td>1575.0</td>
+      <td>0.13740</td>
+      <td>0.20500</td>
+      <td>0.4000</td>
+      <td>0.1625</td>
+      <td>0.2364</td>
+      <td>0.07678</td>
+      <td>M</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>564</th>
+      <td>21.56</td>
+      <td>22.39</td>
+      <td>142.00</td>
+      <td>1479.0</td>
+      <td>0.11100</td>
+      <td>0.11590</td>
+      <td>0.24390</td>
+      <td>0.13890</td>
+      <td>0.1726</td>
+      <td>0.05623</td>
+      <td>...</td>
+      <td>26.40</td>
+      <td>166.10</td>
+      <td>2027.0</td>
+      <td>0.14100</td>
+      <td>0.21130</td>
+      <td>0.4107</td>
+      <td>0.2216</td>
+      <td>0.2060</td>
+      <td>0.07115</td>
+      <td>M</td>
+    </tr>
+    <tr>
+      <th>565</th>
+      <td>20.13</td>
+      <td>28.25</td>
+      <td>131.20</td>
+      <td>1261.0</td>
+      <td>0.09780</td>
+      <td>0.10340</td>
+      <td>0.14400</td>
+      <td>0.09791</td>
+      <td>0.1752</td>
+      <td>0.05533</td>
+      <td>...</td>
+      <td>38.25</td>
+      <td>155.00</td>
+      <td>1731.0</td>
+      <td>0.11660</td>
+      <td>0.19220</td>
+      <td>0.3215</td>
+      <td>0.1628</td>
+      <td>0.2572</td>
+      <td>0.06637</td>
+      <td>M</td>
+    </tr>
+    <tr>
+      <th>566</th>
+      <td>16.60</td>
+      <td>28.08</td>
+      <td>108.30</td>
+      <td>858.1</td>
+      <td>0.08455</td>
+      <td>0.10230</td>
+      <td>0.09251</td>
+      <td>0.05302</td>
+      <td>0.1590</td>
+      <td>0.05648</td>
+      <td>...</td>
+      <td>34.12</td>
+      <td>126.70</td>
+      <td>1124.0</td>
+      <td>0.11390</td>
+      <td>0.30940</td>
+      <td>0.3403</td>
+      <td>0.1418</td>
+      <td>0.2218</td>
+      <td>0.07820</td>
+      <td>M</td>
+    </tr>
+    <tr>
+      <th>567</th>
+      <td>20.60</td>
+      <td>29.33</td>
+      <td>140.10</td>
+      <td>1265.0</td>
+      <td>0.11780</td>
+      <td>0.27700</td>
+      <td>0.35140</td>
+      <td>0.15200</td>
+      <td>0.2397</td>
+      <td>0.07016</td>
+      <td>...</td>
+      <td>39.42</td>
+      <td>184.60</td>
+      <td>1821.0</td>
+      <td>0.16500</td>
+      <td>0.86810</td>
+      <td>0.9387</td>
+      <td>0.2650</td>
+      <td>0.4087</td>
+      <td>0.12400</td>
+      <td>M</td>
+    </tr>
+    <tr>
+      <th>568</th>
+      <td>7.76</td>
+      <td>24.54</td>
+      <td>47.92</td>
+      <td>181.0</td>
+      <td>0.05263</td>
+      <td>0.04362</td>
+      <td>0.00000</td>
+      <td>0.00000</td>
+      <td>0.1587</td>
+      <td>0.05884</td>
+      <td>...</td>
+      <td>30.37</td>
+      <td>59.16</td>
+      <td>268.6</td>
+      <td>0.08996</td>
+      <td>0.06444</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.2871</td>
+      <td>0.07039</td>
+      <td>B</td>
+    </tr>
+  </tbody>
+</table>
+<p>569 rows × 31 columns</p>
+</div></div></div>
+</div>
+<p>The dataset contains several measurements of given quantities measured from digitized image of a fine needle aspirate (FNA) of a breast mass, together with a categorical variable <code class="docutils literal notranslate"><span class="pre">Diagnosis</span></code> with two levels: <code class="docutils literal notranslate"><span class="pre">M</span></code> (malignant) and <code class="docutils literal notranslate"><span class="pre">B</span></code> (benign).</p>
+<p>In this case, it would be good to be able to study whether a relationship exists between some of the considered independent variables and the dependent variable.</p>
+<p>We will consider the <code class="docutils literal notranslate"><span class="pre">radius1</span></code> variable for the moment. Let us plot this variable with respect to <code class="docutils literal notranslate"><span class="pre">Diagnosis</span></code>:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/01c33ebded8bb30ea7bb8492a0c9edac9908961157669eb728f33788ce57ff28.png" src="../_images/01c33ebded8bb30ea7bb8492a0c9edac9908961157669eb728f33788ce57ff28.png" />
+</div>
+</div>
+<p>From the plot above, we can note that there is some form of relationship between the two variables. Indeed:</p>
+<ul class="simple">
+<li><p>For low values of <code class="docutils literal notranslate"><span class="pre">radius1</span></code>, we tend to have more benign cases;</p></li>
+<li><p>For large values of <code class="docutils literal notranslate"><span class="pre">radius1</span></code>, we tend to have more malignant cases.</p></li>
+</ul>
+</section>
+<section id="limits-of-linear-regression">
+<h2>Limits of Linear Regression<a class="headerlink" href="#limits-of-linear-regression" title="Permalink to this heading">#</a></h2>
+<p>Of course, we would like to quantify this relationship in a more formal way.
+<strong>As in the case of a linear regressor, we want to define a model which can predict the independent variable <span class="math notranslate nohighlight">\(y\)</span> from the dependent variables <span class="math notranslate nohighlight">\(x_i\)</span>. If such model gives good predictions, than we can trust its interpretation as a means of studying the relationship between the variables.</strong></p>
+<p>We can think of converting <code class="docutils literal notranslate"><span class="pre">B</span> <span class="pre">=&gt;</span> <span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">M</span> <span class="pre">=&gt;</span> <span class="pre">0</span></code>, and then compute a linear regressor:</p>
+<div class="math notranslate nohighlight">
+\[Diagnosis = \beta_0 + \beta_1 radius1\]</div>
+<p>This would be the result:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/ee318307dbc7f52c1a2c2a7f5c8daee9f19f1d06e6b2ed625dfcccff403e0df5.png" src="../_images/ee318307dbc7f52c1a2c2a7f5c8daee9f19f1d06e6b2ed625dfcccff403e0df5.png" />
+</div>
+</div>
+<p>We can immediately see that this function does not model the relationship between the two variables very well. While we obtain a statistically relevant regressor with <span class="math notranslate nohighlight">\(R^2=0.533\)</span> and statistically relevant coefficients, the residual plot will look like this:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/cb22e8950a18ed9d77288bf5aaf8f32f3fa2d4ebee49d85905d6c1576a8ec27e.png" src="../_images/cb22e8950a18ed9d77288bf5aaf8f32f3fa2d4ebee49d85905d6c1576a8ec27e.png" />
+</div>
+</div>
+<p>The correlation between the residuals and the independent variable is a strong indication that the true relationship between the two variables is not correcly modeled. After all, from a purely predictive point of view, we are using a linear regressor which takes the form:</p>
+<div class="math notranslate nohighlight">
+\[f:\mathbb{R} \to \mathbb{R}\]</div>
+<p>while the values <code class="docutils literal notranslate"><span class="pre">Diagnosis</span></code> variable belong to the set <span class="math notranslate nohighlight">\(\{0,1\}\)</span> and we would need instead a function with the following form:</p>
+<div class="math notranslate nohighlight">
+\[f:\mathbb{R} \to \{0,1\}\]</div>
+<p>However, the linear regressor cannot directly predict <strong>discrete values</strong>.</p>
+<p><strong>In practice, while with a linear regressor we wanted to predict continuous values, now we want to assign observations <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> to discrete bins (in this case only two possible ones). As we will better study later in the course, this problem is known as classification.</strong></p>
+</section>
+<section id="from-binary-values-to-probabilities">
+<h2>From Binary Values to Probabilities<a class="headerlink" href="#from-binary-values-to-probabilities" title="Permalink to this heading">#</a></h2>
+<p>If we want to model some form of continuous value, we could think to transition from <span class="math notranslate nohighlight">\(\{0,1\}\)</span> to <span class="math notranslate nohighlight">\([0,1]\)</span> using probabilities, which is a way to turn discretized values to “soft” values indicating our belief in the fact that <code class="docutils literal notranslate"><span class="pre">Diagnosis</span></code> will take either a <span class="math notranslate nohighlight">\(0\)</span> or <span class="math notranslate nohighlight">\(1\)</span> value. We could hence think to model the following probability, rather than modeling <code class="docutils literal notranslate"><span class="pre">Diagnosis</span></code> directly:</p>
+<div class="math notranslate nohighlight">
+\[P(Diagnosis=1| radius1)\]</div>
+<p>However, even in this case, a model of the form:</p>
+<div class="math notranslate nohighlight">
+\[P(Diagnosis=1|radius1) = \beta_0 + \beta_1 radius1\]</div>
+<p>Would not be appropriate. Indeed, while <span class="math notranslate nohighlight">\(P(Diagnosis=1| radius1)\)</span> needs to be in the <span class="math notranslate nohighlight">\([0,1]\)</span> range, the linear combination <span class="math notranslate nohighlight">\(\beta_0 + \beta_1 radius1\)</span> will naturally output values <strong>smaller than <span class="math notranslate nohighlight">\(0\)</span></strong> and <strong>larger than <span class="math notranslate nohighlight">\(1\)</span></strong>. How should we interpret such values?</p>
+<p>Intuitively, we would expect to <span class="math notranslate nohighlight">\(P(Diagnosis=1| radius1)\)</span> to assume values in the <span class="math notranslate nohighlight">\([0,1]\)</span> range for intermediate values (say <code class="docutils literal notranslate"><span class="pre">radius</span></code> <span class="math notranslate nohighlight">\(\in [10,20]\)</span>), while for extremely low values of (say <code class="docutils literal notranslate"><span class="pre">radius</span></code> <span class="math notranslate nohighlight">\(&lt;10\)</span>) the probability <strong>should saturate to <span class="math notranslate nohighlight">\(0\)</span></strong> and for extremely large values (say <code class="docutils literal notranslate"><span class="pre">radius</span></code> <span class="math notranslate nohighlight">\(&gt;20\)</span>) the probability should saturate to 1.</p>
+<p>when <code class="docutils literal notranslate"><span class="pre">radius1</span></code> takes large values (say larger than <span class="math notranslate nohighlight">\(20\)</span>), we expect <strong>probability to saturate to <span class="math notranslate nohighlight">\(1\)</span></strong>.</p>
+<p>In practice, we would expect a result similar to the following:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/65b1ad849523ee9c99475d6bbe79b679a33735a93fea247a052e153198cc37bc.png" src="../_images/65b1ad849523ee9c99475d6bbe79b679a33735a93fea247a052e153198cc37bc.png" />
+</div>
+</div>
+<p>As can be noted, the function above is not linear, and hence it cannot be fit with a linear regressor. However, we have seen that a linear regressor can be tweaked to also represent nonlinear functions.</p>
+</section>
+<section id="the-logistic-function">
+<h2>The Logistic Function<a class="headerlink" href="#the-logistic-function" title="Permalink to this heading">#</a></h2>
+<p>Similarly to polynomial regression, we need to find a <strong>transformation of the formulation of the linear regressor to transform its output into a nonlinear function of the independent variables</strong>. Of course, we do not want <em>any</em> transformation, but one that has the previously highlighted properties. While different functions have similar characteristics, in practice the <strong>logistic function has some nice properties that, as we will se in a moment, allow to easily interpret the resulting model in a probabilistic way</strong>. The logistic function is defined as:</p>
+<div class="math notranslate nohighlight">
+\[f(x) = \frac{1}{1+e^{-x}}\]</div>
+<p>and has the following shape:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/cc727668f29fecd8a6d4ca465dbb298a07d5ce320a48c8aa16ca077b3e7b70c4.png" src="../_images/cc727668f29fecd8a6d4ca465dbb298a07d5ce320a48c8aa16ca077b3e7b70c4.png" />
+</div>
+</div>
+<p>As we can see, the function has the properties we need:</p>
+<ul class="simple">
+<li><p>Its values are comprised between <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(1\)</span>;</p></li>
+<li><p>It saturates to <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(1\)</span> for extreme values of <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+</ul>
+</section>
+<section id="the-logistic-regression-model">
+<h2>The Logistic Regression Model<a class="headerlink" href="#the-logistic-regression-model" title="Permalink to this heading">#</a></h2>
+<p>In practice, we define our model, <strong>the logistic regressor model</strong> as follows (<strong>simple logistic regression</strong>):</p>
+<div class="math notranslate nohighlight">
+\[P(Diagnosis=1|X) = f(\beta_0 + \beta_1 X) = \frac{1}{1+e^{-(\beta_0 + \beta_1 X)}}\]</div>
+<p>Or, more in general (<strong>multiple logistic regression</strong>):</p>
+<div class="math notranslate nohighlight">
+\[P(y=1|\mathbf{x}) = \frac{1}{1+e^{-(\beta_0 + \beta_1 x_1 + \ldots + \beta_n x_n)}}\]</div>
+<p>It is easy to see that:</p>
+<div class="math notranslate nohighlight">
+\[p=\frac{1}{1+e^{-x}} \Rightarrow p+pe^{-x} = 1 \Rightarrow pe^{-x} = 1-p \Rightarrow e^{-x} = \frac{1-p}{p} \Rightarrow e^{x} = \frac{p}{1-p}\]</div>
+<p>Hence:</p>
+<div class="math notranslate nohighlight">
+\[e^{\beta_0+\beta_1x_1 + \ldots + \beta_nx_n} = \frac{P(y=1|\mathbf{x})}{1-P(y=1|\mathbf{x})}\]</div>
+<p>We note that the term on the right is the odd of <span class="math notranslate nohighlight">\(P(y=1|\mathbf{x})\)</span>. We recall that the odd of <span class="math notranslate nohighlight">\(P(y=1|\mathbf{x})\)</span> is the number of times we believe the example will be positive (observed <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>) over the number of times we believe the example will be negative. For instance, if we believe that the example will be positive <span class="math notranslate nohighlight">\(3\)</span> times out of <span class="math notranslate nohighlight">\(10\)</span>, then the odd will be <span class="math notranslate nohighlight">\(\frac{3}{7}\)</span>.</p>
+<p>By taking the logarithm of both terms, we obtain:</p>
+<div class="math notranslate nohighlight">
+\[\log \left(\frac{P(y=1|\mathbf{x})}{1-P(y=1|\mathbf{x})}\right) = \beta_0 + \beta_1 x_1 + \ldots + \beta_n x_n\]</div>
+<p>The expression:</p>
+<div class="math notranslate nohighlight">
+\[\log \left(\frac{P(y=1|\mathbf{x})}{1-P(y=1|\mathbf{x})}\right)\]</div>
+<p>Is the logarithm of the odd (log odd), and it is called <strong>logit</strong>, hence the <strong>logistic regression</strong> is sometimes called <strong>logit regression</strong>.</p>
+<p>The expression above shows how a logistic regressor can be seen as <strong>a linear regressor (the expression on the right side of the equation) on the logit (the log odd)</strong>. This paves the way to useful interpretations of the model, as shown in the next section.</p>
+</section>
+<section id="statistical-interpretation-of-the-coefficients-of-a-linear-regressor">
+<h2>Statistical Interpretation of the Coefficients of a Linear Regressor<a class="headerlink" href="#statistical-interpretation-of-the-coefficients-of-a-linear-regressor" title="Permalink to this heading">#</a></h2>
+<p>Let’s now see how to interpret the coefficients of a logistic regressor. Remember that the regression model (in the case of simple logistic regression) is as follows:</p>
+<div class="math notranslate nohighlight">
+\[
+\log(\frac{p}{1-p})=\beta_0 + \beta_1 x
+\]</div>
+<p>Applying what we know about linear regressors, we can write:</p>
+<div class="math notranslate nohighlight">
+\[x=0 \Rightarrow \ln(\frac{p}{1-p})=\beta_0\]</div>
+<p>To have a clearer picture, we can exponentiate both sides of the equation and write:</p>
+<div class="math notranslate nohighlight">
+\[x=0 \Rightarrow \frac{p}{1-p}=e^{\beta_0}\]</div>
+<p>Remember that <span class="math notranslate nohighlight">\(\frac{p}{1-p}\)</span> is the odds that the dependent variable is equal to 1 when observing <span class="math notranslate nohighlight">\(x\)</span> and, as such, it has a clear interpretation. For example, if the odds of an event are \frac{3}{1}, then it is <span class="math notranslate nohighlight">\(3\)</span> times more likely to occur than not to occur. So, <strong>for <span class="math notranslate nohighlight">\(x=0\)</span>, it is <span class="math notranslate nohighlight">\(e^{\beta_0}\)</span> times more likely that the dependent variable is equal to 1, rather than being equal to 0</strong>.</p>
+<p>How can we interpret the <strong>coefficient values</strong>?</p>
+<p>Let us define:</p>
+<div class="math notranslate nohighlight">
+\[odds(p|x) = \frac{P(y=1|x)}{1-P(y=1|x)}\]</div>
+<p>We can write:</p>
+<div class="math notranslate nohighlight">
+\[
+\log odds(p|x) = \beta_0 + \beta_1 x
+\]</div>
+<p>We can write:
+$<span class="math notranslate nohighlight">\(
+\log odds(p|x+1) - \log odds(p|x) = \beta_0 + \beta_1 (x+1) - \beta_0 - \beta_1 x = \beta_1 (x+1) - \beta_1 x = \beta_1
+\)</span>$</p>
+<p>Exponentiating both sides, we get:
+$<span class="math notranslate nohighlight">\(
+e^{\log odds(p|x+1) - \log odds(p|x)} = e^{\beta_1} \Rightarrow \frac{e^{\log odds(p|x+1)}}{e^{\log odds(p|x)}} = e^{\beta_1} \Rightarrow \frac{odds(p|x+1)}{odds(p|x)} = e^{\beta_1} \Rightarrow odds(p|x+1) = e^{\beta_1}odds(p|x)
+\)</span>$</p>
+<p>We can thus say that <strong>increasing the variable <span class="math notranslate nohighlight">\(x\)</span> by one unit corresponds to a multiplicative increase in odds by <span class="math notranslate nohighlight">\(e^{\beta_1}\)</span></strong>.</p>
+<p>This analysis can be easily extended to the case of a multiple logistic regressor. Hence in general, given the model:</p>
+<div class="math notranslate nohighlight">
+\[P(y=1|\mathbf{x}) = \beta_0 + \beta_1 x_1 + \ldots + \beta_n x_n\]</div>
+<p>We can say that:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(e^\beta_0\)</span> is the odd of <span class="math notranslate nohighlight">\(y\)</span> being equal to <span class="math notranslate nohighlight">\(1\)</span> rather than <span class="math notranslate nohighlight">\(0\)</span> when <span class="math notranslate nohighlight">\(x_i=0 \forall i\)</span>;</p></li>
+<li><p>An increment of one unit in the independent variable <span class="math notranslate nohighlight">\(x_i\)</span> corresponds to a multiplicative increment of <span class="math notranslate nohighlight">\(e^\beta_i\)</span> in the odds of <span class="math notranslate nohighlight">\(y=1\)</span>. So if <span class="math notranslate nohighlight">\(e^\beta_i=0.05\)</span>, then <span class="math notranslate nohighlight">\(y=1\)</span> is <span class="math notranslate nohighlight">\(5\%\)</span> more likely for a one-unit increment of <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+</ul>
+</section>
+<section id="geometrical-interpretation-of-the-coefficients-of-a-linear-regressor">
+<h2>Geometrical Interpretation of the Coefficients of a Linear Regressor<a class="headerlink" href="#geometrical-interpretation-of-the-coefficients-of-a-linear-regressor" title="Permalink to this heading">#</a></h2>
+<p>Similar to linear regression, also the coefficients of logistic
+regression have a geometrical interpretation. We will see that, while
+linear regression finds a «curve» that fits the data, logistic
+regression finds a hyperplane that separates the data.</p>
+<p>Let us consider a simple example with bi-dimensional data
+<span class="math notranslate nohighlight">\(\mathbf{x} \in \mathfrak{R}^{2}\)</span> as the one shown in the following:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/ed4444bd0a9e6b07c81907e63ea4d252830a806440d4d7aaae2b53ed96c3f903.png" src="../_images/ed4444bd0a9e6b07c81907e63ea4d252830a806440d4d7aaae2b53ed96c3f903.png" />
+</div>
+</div>
+<p>Let us assume that we fit a logistic regressor model to this data</p>
+<div class="math notranslate nohighlight">
+\[P\left( y=1 | \mathbf{x} \right) = \frac{1}{1 + e^{- {(\beta}_{0} + \beta_{1}x_{1} + \beta_{2}x_{2})}}\]</div>
+<p>and find the following values for the parameters:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\left\{ \begin{matrix}
+\beta_{0} = - 3.47 \\
+\beta_{1} = 1.17 \\
+\beta_{2} = 1.43 \\
+\end{matrix} \right.\ \end{split}\]</div>
+<p>We know that these parameters allow to find a probability value according to the formula above.
+We can use these values to <strong>classify the observations</strong> <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>. In practice, a reasonable criterion to classify observations would be:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\hat y = \begin{cases}1 &amp; \text{if } P(y=1|\mathbf{x}) \geq 0.5\\0 &amp; \text{otherwise}\end{cases}\end{split}\]</div>
+<p>This makes sense as we are assigning the observations to the group for which the posterior probability <span class="math notranslate nohighlight">\(P(y|\mathbf{x})\)</span> is higher.</p>
+<p>To understand how the data is classified, we can look at those points in
+which the classifier is uncertain, which is often called <strong>the decision boundary</strong>, i.e.,
+those points in which <span class="math notranslate nohighlight">\(P\left( y=1 | \mathbf{x} \right) = 0.5\)</span>.</p>
+<p>We note that:</p>
+<div class="math notranslate nohighlight">
+\[P\left(y=1 | \mathbf{x} \right) = 0.5 \Leftrightarrow e^{- (\beta_{0} + \beta_{1}x_{1} + \beta_{2}x_{2})} = 1 \Leftrightarrow 0 = \beta_{0} + \beta_{1}x_{1} + \beta_{2}x_{2}\]</div>
+<p>This last equation is the equation of a line (in the form
+<span class="math notranslate nohighlight">\(ax + by + c = 0\)</span>). We can see it in explicit form:</p>
+<div class="math notranslate nohighlight">
+\[x_{2} = - \frac{\beta_{1}}{\beta_{2}}x_{1} - \frac{\beta_{0}}{\beta_{2}}\]</div>
+<p>So, we have found a line which has a</p>
+<ul class="simple">
+<li><p>Angular coefficient equal to <span class="math notranslate nohighlight">\(- \frac{\beta_{1}}{\beta_{2}}\)</span>;</p></li>
+<li><p>Intercept equal to <span class="math notranslate nohighlight">\(- \frac{\beta_{0}}{\beta_{2}}\)</span>;</p></li>
+</ul>
+<p>If we plot this line, we obtain the <strong>decision boundary</strong> which
+separates the elements from the two classes:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/7c6497a61f2d5ee042921550f5d9e07de857c9865259eb1d8884613361a45af1.png" src="../_images/7c6497a61f2d5ee042921550f5d9e07de857c9865259eb1d8884613361a45af1.png" />
+</div>
+</div>
+<p>As can be seen, the decision boundary found by a logistic regressor is a
+line. This is because <strong>a logistic regressor is a linear classifier</strong>,
+despite the logistic function is not linear!</p>
+</section>
+<section id="estimation-of-the-parameters-of-a-logistic-regressor">
+<h2>Estimation of the Parameters of a Logistic Regressor<a class="headerlink" href="#estimation-of-the-parameters-of-a-logistic-regressor" title="Permalink to this heading">#</a></h2>
+<p>To fit the model and find suitable values for the <span class="math notranslate nohighlight">\(\mathbf{\beta_i}\)</span>
+parameters, we will define a <strong>cost function</strong>, similarly to what we have
+done in the case of linear regression.</p>
+<p>Even if we can see the logistic
+regression problem as the linear regression problem of fitting the
+<span class="math notranslate nohighlight">\(logit(p) = \mathbf{\beta}^{T}\mathbf{x}\)</span> function, differently from
+linear regression, <em>we should note that we do not have the ground truth
+probabilities p</em>. Indeed, our dataset only provides input examples
+<span class="math notranslate nohighlight">\(\mathbf{x}^{(i)}\)</span> and the corresponding labels <span class="math notranslate nohighlight">\(y\)</span>.</p>
+<p>Starting from the definition:</p>
+<div class="math notranslate nohighlight">
+\[P\left( y = 1 \middle| \mathbf{x} \right) = f_{\mathbf{\theta}}\left( \mathbf{x} \right) = \frac{1}{1 + e^{- \mathbf{\theta}^{T}\mathbf{x}}} = \sigma(\mathbf{\theta}^{T}\mathbf{x})\]</div>
+<p>We can write:</p>
+<div class="math notranslate nohighlight">
+\[P\left( y = 1 \middle| \mathbf{x};\mathbf{\theta} \right) = f_{\mathbf{\theta}}(\mathbf{x})\]</div>
+<div class="math notranslate nohighlight">
+\[P\left( y = 0 \middle| \mathbf{x};\mathbf{\theta} \right) = 1 - f_{\mathbf{\theta}}(\mathbf{x})\]</div>
+<p>This can also be written as follows in a more compact form:</p>
+<div class="math notranslate nohighlight">
+\[P\left( y \middle| \mathbf{x};\mathbf{\theta} \right) = \left( f_{\mathbf{\theta}}\left( \mathbf{x} \right) \right)^{y}\left( 1 - f_{\mathbf{\theta}}\left( \mathbf{x} \right) \right)^{1 - y}\]</div>
+<p>Indeed, when <span class="math notranslate nohighlight">\(y = 1\)</span>, the second factor is equal to <span class="math notranslate nohighlight">\(1\)</span> and the
+expression reduces to
+<span class="math notranslate nohighlight">\(P\left( y = 1 \middle| \mathbf{x};\mathbf{\theta} \right) = f_{\mathbf{\theta}}(\mathbf{x})\)</span>.
+Similarly, if <span class="math notranslate nohighlight">\(y = 0\)</span>, the first factor is equal to <span class="math notranslate nohighlight">\(1\)</span> and the
+expression reduces to <span class="math notranslate nohighlight">\(1 - f_{\mathbf{\theta}}(x)\)</span>.</p>
+<p>We can estimate the parameters by maximum likelihood, i.e., choosing the
+values of the parameters which maximize the probability of the data
+under the model identified by the parameters <span class="math notranslate nohighlight">\(\mathbf{\theta}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[L\left( \mathbf{\theta} \right) = P(Y|X;\mathbf{\theta})\]</div>
+<p>If we assume that the training examples are all independent, the
+likelihood can be expressed as:</p>
+<div class="math notranslate nohighlight">
+\[L\left( \mathbf{\theta} \right) = \prod_{i = 1}^{N}{P(y^{(i)}|\mathbf{x}^{(i)};\mathbf{\theta})} = \prod_{i = 1}^{N}{f_{\mathbf{\theta}}\left( \mathbf{x}^{(i)} \right)^{y^{(i)}}\left( 1 - f_{\mathbf{\theta}}\left( \mathbf{x}^{(i)} \right) \right)^{{1 - y}^{(i)}}}\]</div>
+<p>Maximizing this expression is equivalent to minimizing the negative
+logarithm of <span class="math notranslate nohighlight">\(L(\mathbf{\theta})\)</span> (negative log-likelihood - nll):</p>
+<div class="math notranslate nohighlight">
+\[nll\left( \mathbf{\theta} \right) = - \log{L\left( \mathbf{\theta} \right)} = - \sum_{i = 1}^{N}{\log\left\lbrack f_{\mathbf{\theta}}\left( \mathbf{x}^{(i)} \right)^{y^{(i)}}\left( 1 - f_{\mathbf{\theta}}\left( \mathbf{x}^{(i)} \right) \right)^{{1 - y}^{(i)}} \right\rbrack} =\]</div>
+<div class="math notranslate nohighlight">
+\[= - \sum_{i = 1}^{N}{\lbrack y^{(i)}\log{f_{\mathbf{\theta}}\left( \mathbf{x}^{(i)} \right)}} + \left( 1 - y^{(i)} \right)\log{(1 - f_{\mathbf{\theta}}\left( \mathbf{x}^{(i)} \right)})\rbrack\]</div>
+<p>Hence, we will define our cost function as:</p>
+<div class="math notranslate nohighlight">
+\[J\left( \mathbf{\theta} \right) = - \sum_{i = 1}^{N}{\lbrack y^{(i)}\log{f_{\mathbf{\theta}}\left( \mathbf{x}^{(i)} \right)}} + \left( 1 - y^{(i)} \right)\log{(1 - f_{\mathbf{\theta}}\left( \mathbf{x}^{(i)} \right)})\rbrack\]</div>
+<p>This can be rewritten more explicitly in terms of the <span class="math notranslate nohighlight">\(\mathbf{\theta}\)</span>
+parameters as follows:</p>
+<div class="math notranslate nohighlight">
+\[J\left( \mathbf{\theta} \right) = - \sum_{i = 1}^{N}{\lbrack y^{(i)}\log{\sigma\left( {\mathbf{\theta}^{T}\mathbf{x}}^{(i)} \right)}} + \left( 1 - y^{(i)} \right)\log{(1 - \sigma\left( \mathbf{\theta}^{T}\mathbf{x}^{(i)} \right)})\rbrack\]</div>
+<p>The cost function is differentiable with respect to each parameter
+<span class="math notranslate nohighlight">\(\theta_{i}\)</span>, hence it can be optimized through gradient descent.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">breast</span><span class="p">[</span><span class="s1">&#39;Diagnosis&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">breast</span><span class="p">[</span><span class="s1">&#39;Diagnosis&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s1">&#39;M&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;B&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">breast</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;radius1&#39;, &#39;texture1&#39;, &#39;perimeter1&#39;, &#39;area1&#39;, &#39;smoothness1&#39;,
+       &#39;compactness1&#39;, &#39;concavity1&#39;, &#39;concave_points1&#39;, &#39;symmetry1&#39;,
+       &#39;fractal_dimension1&#39;, &#39;radius2&#39;, &#39;texture2&#39;, &#39;perimeter2&#39;, &#39;area2&#39;,
+       &#39;smoothness2&#39;, &#39;compactness2&#39;, &#39;concavity2&#39;, &#39;concave_points2&#39;,
+       &#39;symmetry2&#39;, &#39;fractal_dimension2&#39;, &#39;radius3&#39;, &#39;texture3&#39;, &#39;perimeter3&#39;,
+       &#39;area3&#39;, &#39;smoothness3&#39;, &#39;compactness3&#39;, &#39;concavity3&#39;, &#39;concave_points3&#39;,
+       &#39;symmetry3&#39;, &#39;fractal_dimension3&#39;, &#39;Diagnosis&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">breast</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">breast</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">c</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;Diagnosis&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/01c4ade5b8ed079a6870dd8aa880ae52836adc41ac16bc1091b40d66e4eecbbd.png" src="../_images/01c4ade5b8ed079a6870dd8aa880ae52836adc41ac16bc1091b40d66e4eecbbd.png" />
+<img alt="../_images/1645bf882bfb2e44cbaf182b7c01d3bbab26068473954d7d6742310a98d22a94.png" src="../_images/1645bf882bfb2e44cbaf182b7c01d3bbab26068473954d7d6742310a98d22a94.png" />
+<img alt="../_images/e8134ed4656abbb9deb92f87d0157c80c745e9bdc15810522440f83367033573.png" src="../_images/e8134ed4656abbb9deb92f87d0157c80c745e9bdc15810522440f83367033573.png" />
+<img alt="../_images/2317afa689cbd6b1200cf4475251943233e58027c362fb7d38b60439a0103f11.png" src="../_images/2317afa689cbd6b1200cf4475251943233e58027c362fb7d38b60439a0103f11.png" />
+<img alt="../_images/cd65bd5b239e6ec1c9d3caa4584899b41d3635b51d96f9687080c147d87ac0fe.png" src="../_images/cd65bd5b239e6ec1c9d3caa4584899b41d3635b51d96f9687080c147d87ac0fe.png" />
+<img alt="../_images/8cf3767360bd36356bc89eabb727a2a7480bfdec06b667209bb76c07e2812ebc.png" src="../_images/8cf3767360bd36356bc89eabb727a2a7480bfdec06b667209bb76c07e2812ebc.png" />
+<img alt="../_images/0bbdef8e2ab0138b34c1c36b36d6a7c748dbbb3ea23e41f6187b19ca47ec4f78.png" src="../_images/0bbdef8e2ab0138b34c1c36b36d6a7c748dbbb3ea23e41f6187b19ca47ec4f78.png" />
+<img alt="../_images/14655f35b0384ab1c932d5bed29f22d9e1326e2e25f458362bfed2a36259a265.png" src="../_images/14655f35b0384ab1c932d5bed29f22d9e1326e2e25f458362bfed2a36259a265.png" />
+<img alt="../_images/911a91c8047b02d08e0623adf97b83fe11b21f54f2d4b6d6d744acfba4d05318.png" src="../_images/911a91c8047b02d08e0623adf97b83fe11b21f54f2d4b6d6d744acfba4d05318.png" />
+<img alt="../_images/deaf72bf948c728376f18aa4b9d81b31723f04d1445b7b2066fbf0158a500546.png" src="../_images/deaf72bf948c728376f18aa4b9d81b31723f04d1445b7b2066fbf0158a500546.png" />
+<img alt="../_images/3d0ef29a51e09fcb17afef79057383c8ccb0e7a3b1d57d07cbec4b3fc3730318.png" src="../_images/3d0ef29a51e09fcb17afef79057383c8ccb0e7a3b1d57d07cbec4b3fc3730318.png" />
+<img alt="../_images/0aa2d13c4b91f6b7272d1b5cec97833dee1488ab7d259e533d99ee0ee1571f1c.png" src="../_images/0aa2d13c4b91f6b7272d1b5cec97833dee1488ab7d259e533d99ee0ee1571f1c.png" />
+<img alt="../_images/6781d098eee8cac01e09c738a6b12c5c0bd76ce5f401d97dff922158f9048a34.png" src="../_images/6781d098eee8cac01e09c738a6b12c5c0bd76ce5f401d97dff922158f9048a34.png" />
+<img alt="../_images/71959e4b26038cb7f5a0dcbe7b950d397ec220b6983a284f1b1a8435325e80c4.png" src="../_images/71959e4b26038cb7f5a0dcbe7b950d397ec220b6983a284f1b1a8435325e80c4.png" />
+<img alt="../_images/e5f0df67bd8e3c4ab1ebf8486cb6bca5c096b451ecae68e0b215d74555352796.png" src="../_images/e5f0df67bd8e3c4ab1ebf8486cb6bca5c096b451ecae68e0b215d74555352796.png" />
+<img alt="../_images/f401b749d3ef97c12c3e2377853f88ecf80b6bff17ba35f073ee19b6bc9ffc00.png" src="../_images/f401b749d3ef97c12c3e2377853f88ecf80b6bff17ba35f073ee19b6bc9ffc00.png" />
+<img alt="../_images/360125e4d9bfb0b1b06b49bdfd3e6e500e3958b8da721b8322150955fb11859b.png" src="../_images/360125e4d9bfb0b1b06b49bdfd3e6e500e3958b8da721b8322150955fb11859b.png" />
+<img alt="../_images/a711839df6b97f101a327d14f4cde8d12c3d0508193a85381e37d7170f80fee0.png" src="../_images/a711839df6b97f101a327d14f4cde8d12c3d0508193a85381e37d7170f80fee0.png" />
+<img alt="../_images/f788905cd1a96ee40e74c09a6723f781b27166a9b5471f0c476ecefadbc2190f.png" src="../_images/f788905cd1a96ee40e74c09a6723f781b27166a9b5471f0c476ecefadbc2190f.png" />
+<img alt="../_images/d307b26b5da3ea5b2d93541740a7af456751f95c436e354ffaac4b11f5a79f23.png" src="../_images/d307b26b5da3ea5b2d93541740a7af456751f95c436e354ffaac4b11f5a79f23.png" />
+<img alt="../_images/107741efe889a00a270a23424f87f55f9a09e0a043dd31d9c47f6edd7805e832.png" src="../_images/107741efe889a00a270a23424f87f55f9a09e0a043dd31d9c47f6edd7805e832.png" />
+<img alt="../_images/867a9dde16a786f6fdb39c546cac026cc9c14277e14581c3104c1cceafd74823.png" src="../_images/867a9dde16a786f6fdb39c546cac026cc9c14277e14581c3104c1cceafd74823.png" />
+<img alt="../_images/ccc2ed6dc4d659fa31f92defadabb247238868bfcfbc60c65c60f984805a6ee7.png" src="../_images/ccc2ed6dc4d659fa31f92defadabb247238868bfcfbc60c65c60f984805a6ee7.png" />
+<img alt="../_images/1b2bcb26b1668d2d656a9d71ad8c7940ecd9f6ce143b37d2dd105c5d489ff0b4.png" src="../_images/1b2bcb26b1668d2d656a9d71ad8c7940ecd9f6ce143b37d2dd105c5d489ff0b4.png" />
+<img alt="../_images/7bdaf14889ce3b807e3ad8cc5d9aff3bbf0c7abd4203c9fcd2ae43c283c9be7f.png" src="../_images/7bdaf14889ce3b807e3ad8cc5d9aff3bbf0c7abd4203c9fcd2ae43c283c9be7f.png" />
+<img alt="../_images/84cd0808bad63be390062a6f5799090da403b4f9c05137d8fdb45a7356d34f29.png" src="../_images/84cd0808bad63be390062a6f5799090da403b4f9c05137d8fdb45a7356d34f29.png" />
+<img alt="../_images/f1bf7fb754d2ad8afe3a2605eb4439931ce5e7b0d5cdb656230a4b862d778cfb.png" src="../_images/f1bf7fb754d2ad8afe3a2605eb4439931ce5e7b0d5cdb656230a4b862d778cfb.png" />
+<img alt="../_images/22d619759192074dc041feba74ef15ba79bed0bd569100cc19c0de24e04f9f7f.png" src="../_images/22d619759192074dc041feba74ef15ba79bed0bd569100cc19c0de24e04f9f7f.png" />
+<img alt="../_images/08c4460f5500bccab6a9f12254cb3b50e9856bb8cf394f4aaac376677f6dc0ba.png" src="../_images/08c4460f5500bccab6a9f12254cb3b50e9856bb8cf394f4aaac376677f6dc0ba.png" />
+<img alt="../_images/cb3fbcb4808e88e4ec8c3e7ef69ba754bc87a188acc64551daf998b9eb4905a3.png" src="../_images/cb3fbcb4808e88e4ec8c3e7ef69ba754bc87a188acc64551daf998b9eb4905a3.png" />
+<img alt="../_images/c008ad909de8c2e58d956ad659aba3227be62a50fbfba2a494faa9b172e86ce6.png" src="../_images/c008ad909de8c2e58d956ad659aba3227be62a50fbfba2a494faa9b172e86ce6.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ucimlrepo</span> <span class="kn">import</span> <span class="n">fetch_ucirepo</span> 
+  
+<span class="c1"># fetch dataset </span>
+<span class="n">adult</span> <span class="o">=</span> <span class="n">fetch_ucirepo</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> 
+  
+<span class="c1"># data (as pandas dataframes) </span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">adult</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span> 
+<span class="n">y</span> <span class="o">=</span> <span class="n">adult</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">targets</span> 
+
+<span class="n">adult</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">adult</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f94f202e5b0&gt;
+</pre></div>
+</div>
+<img alt="../_images/1decac372ff49f28ab9584fba07b07d1a87ed4fc5daf881a75a1427ee8ceac1f.png" src="../_images/1decac372ff49f28ab9584fba07b07d1a87ed4fc5daf881a75a1427ee8ceac1f.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adult</span><span class="p">[</span><span class="s1">&#39;income&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">adult</span><span class="p">[</span><span class="s1">&#39;income&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s1">&#39;&lt;=50K.&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;&lt;=50K&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;&gt;50K.&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;&gt;50K&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">adult</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f94d2509e20&gt;
+</pre></div>
+</div>
+<img alt="../_images/11cb4626e35ff6496f8c97d4f581af5ac20e9384b3b7492de881fa39e8de9e08.png" src="../_images/11cb4626e35ff6496f8c97d4f581af5ac20e9384b3b7492de881fa39e8de9e08.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ucimlrepo</span> <span class="kn">import</span> <span class="n">fetch_ucirepo</span> 
+  
+<span class="c1"># fetch dataset </span>
+<span class="n">wine</span> <span class="o">=</span> <span class="n">fetch_ucirepo</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">109</span><span class="p">)</span> 
+  
+<span class="c1"># data (as pandas dataframes) </span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">wine</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span> 
+<span class="n">y</span> <span class="o">=</span> <span class="n">wine</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">targets</span> 
+
+<span class="n">wine</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wine</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Alcohol</th>
+      <th>Malicacid</th>
+      <th>Ash</th>
+      <th>Alcalinity_of_ash</th>
+      <th>Magnesium</th>
+      <th>Total_phenols</th>
+      <th>Flavanoids</th>
+      <th>Nonflavanoid_phenols</th>
+      <th>Proanthocyanins</th>
+      <th>Color_intensity</th>
+      <th>Hue</th>
+      <th>0D280_0D315_of_diluted_wines</th>
+      <th>Proline</th>
+      <th>class</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>14.23</td>
+      <td>1.71</td>
+      <td>2.43</td>
+      <td>15.6</td>
+      <td>127</td>
+      <td>2.80</td>
+      <td>3.06</td>
+      <td>0.28</td>
+      <td>2.29</td>
+      <td>5.64</td>
+      <td>1.04</td>
+      <td>3.92</td>
+      <td>1065</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>13.20</td>
+      <td>1.78</td>
+      <td>2.14</td>
+      <td>11.2</td>
+      <td>100</td>
+      <td>2.65</td>
+      <td>2.76</td>
+      <td>0.26</td>
+      <td>1.28</td>
+      <td>4.38</td>
+      <td>1.05</td>
+      <td>3.40</td>
+      <td>1050</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>13.16</td>
+      <td>2.36</td>
+      <td>2.67</td>
+      <td>18.6</td>
+      <td>101</td>
+      <td>2.80</td>
+      <td>3.24</td>
+      <td>0.30</td>
+      <td>2.81</td>
+      <td>5.68</td>
+      <td>1.03</td>
+      <td>3.17</td>
+      <td>1185</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>14.37</td>
+      <td>1.95</td>
+      <td>2.50</td>
+      <td>16.8</td>
+      <td>113</td>
+      <td>3.85</td>
+      <td>3.49</td>
+      <td>0.24</td>
+      <td>2.18</td>
+      <td>7.80</td>
+      <td>0.86</td>
+      <td>3.45</td>
+      <td>1480</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>13.24</td>
+      <td>2.59</td>
+      <td>2.87</td>
+      <td>21.0</td>
+      <td>118</td>
+      <td>2.80</td>
+      <td>2.69</td>
+      <td>0.39</td>
+      <td>1.82</td>
+      <td>4.32</td>
+      <td>1.04</td>
+      <td>2.93</td>
+      <td>735</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>173</th>
+      <td>13.71</td>
+      <td>5.65</td>
+      <td>2.45</td>
+      <td>20.5</td>
+      <td>95</td>
+      <td>1.68</td>
+      <td>0.61</td>
+      <td>0.52</td>
+      <td>1.06</td>
+      <td>7.70</td>
+      <td>0.64</td>
+      <td>1.74</td>
+      <td>740</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>174</th>
+      <td>13.40</td>
+      <td>3.91</td>
+      <td>2.48</td>
+      <td>23.0</td>
+      <td>102</td>
+      <td>1.80</td>
+      <td>0.75</td>
+      <td>0.43</td>
+      <td>1.41</td>
+      <td>7.30</td>
+      <td>0.70</td>
+      <td>1.56</td>
+      <td>750</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>175</th>
+      <td>13.27</td>
+      <td>4.28</td>
+      <td>2.26</td>
+      <td>20.0</td>
+      <td>120</td>
+      <td>1.59</td>
+      <td>0.69</td>
+      <td>0.43</td>
+      <td>1.35</td>
+      <td>10.20</td>
+      <td>0.59</td>
+      <td>1.56</td>
+      <td>835</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>176</th>
+      <td>13.17</td>
+      <td>2.59</td>
+      <td>2.37</td>
+      <td>20.0</td>
+      <td>120</td>
+      <td>1.65</td>
+      <td>0.68</td>
+      <td>0.53</td>
+      <td>1.46</td>
+      <td>9.30</td>
+      <td>0.60</td>
+      <td>1.62</td>
+      <td>840</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>177</th>
+      <td>14.13</td>
+      <td>4.10</td>
+      <td>2.74</td>
+      <td>24.5</td>
+      <td>96</td>
+      <td>2.05</td>
+      <td>0.76</td>
+      <td>0.56</td>
+      <td>1.35</td>
+      <td>9.20</td>
+      <td>0.61</td>
+      <td>1.60</td>
+      <td>560</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+<p>178 rows × 14 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">wine</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f952429f130&gt;
+</pre></div>
+</div>
+<img alt="../_images/f585f1bdb792e912d008209fad159fff3af44754c671563d5463d5bd943be90c.png" src="../_images/f585f1bdb792e912d008209fad159fff3af44754c671563d5463d5bd943be90c.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.formula.api</span> <span class="kn">import</span> <span class="n">logit</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">titanic</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/agconti/kaggle-titanic/master/data/train.csv&#39;</span><span class="p">,</span>
+                     <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;PassengerId&#39;</span><span class="p">)</span>
+<span class="n">titanic</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Survived</th>
+      <th>Pclass</th>
+      <th>Name</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>SibSp</th>
+      <th>Parch</th>
+      <th>Ticket</th>
+      <th>Fare</th>
+      <th>Cabin</th>
+      <th>Embarked</th>
+    </tr>
+    <tr>
+      <th>PassengerId</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>3</td>
+      <td>Braund, Mr. Owen Harris</td>
+      <td>male</td>
+      <td>22.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>A/5 21171</td>
+      <td>7.2500</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>1</td>
+      <td>Cumings, Mrs. John Bradley (Florence Briggs Th...</td>
+      <td>female</td>
+      <td>38.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>PC 17599</td>
+      <td>71.2833</td>
+      <td>C85</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>3</td>
+      <td>Heikkinen, Miss. Laina</td>
+      <td>female</td>
+      <td>26.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>STON/O2. 3101282</td>
+      <td>7.9250</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>1</td>
+      <td>Futrelle, Mrs. Jacques Heath (Lily May Peel)</td>
+      <td>female</td>
+      <td>35.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>113803</td>
+      <td>53.1000</td>
+      <td>C123</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0</td>
+      <td>3</td>
+      <td>Allen, Mr. William Henry</td>
+      <td>male</td>
+      <td>35.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>373450</td>
+      <td>8.0500</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>887</th>
+      <td>0</td>
+      <td>2</td>
+      <td>Montvila, Rev. Juozas</td>
+      <td>male</td>
+      <td>27.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>211536</td>
+      <td>13.0000</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>888</th>
+      <td>1</td>
+      <td>1</td>
+      <td>Graham, Miss. Margaret Edith</td>
+      <td>female</td>
+      <td>19.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>112053</td>
+      <td>30.0000</td>
+      <td>B42</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>889</th>
+      <td>0</td>
+      <td>3</td>
+      <td>Johnston, Miss. Catherine Helen "Carrie"</td>
+      <td>female</td>
+      <td>NaN</td>
+      <td>1</td>
+      <td>2</td>
+      <td>W./C. 6607</td>
+      <td>23.4500</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>890</th>
+      <td>1</td>
+      <td>1</td>
+      <td>Behr, Mr. Karl Howell</td>
+      <td>male</td>
+      <td>26.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>111369</td>
+      <td>30.0000</td>
+      <td>C148</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>891</th>
+      <td>0</td>
+      <td>3</td>
+      <td>Dooley, Mr. Patrick</td>
+      <td>male</td>
+      <td>32.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>370376</td>
+      <td>7.7500</td>
+      <td>NaN</td>
+      <td>Q</td>
+    </tr>
+  </tbody>
+</table>
+<p>891 rows × 11 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+
+<span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;species&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span>
+<span class="n">iris</span> <span class="o">=</span> <span class="n">iris</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span>
+<span class="n">iris</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sepal length (cm)</th>
+      <th>sepal width (cm)</th>
+      <th>petal length (cm)</th>
+      <th>petal width (cm)</th>
+      <th>species</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4.6</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>145</th>
+      <td>6.7</td>
+      <td>3.0</td>
+      <td>5.2</td>
+      <td>2.3</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>146</th>
+      <td>6.3</td>
+      <td>2.5</td>
+      <td>5.0</td>
+      <td>1.9</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>147</th>
+      <td>6.5</td>
+      <td>3.0</td>
+      <td>5.2</td>
+      <td>2.0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>148</th>
+      <td>6.2</td>
+      <td>3.4</td>
+      <td>5.4</td>
+      <td>2.3</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>149</th>
+      <td>5.9</td>
+      <td>3.0</td>
+      <td>5.1</td>
+      <td>1.8</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+<p>150 rows × 5 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span><span class="o">=</span><span class="n">iris</span><span class="p">[</span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;species&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;petal length (cm)&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;species&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;petal length (cm)&#39;, ylabel=&#39;species&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/d7444bba8bf27b4c3603c811aa011c309445ce57794009508f74d985d8574a79.png" src="../_images/d7444bba8bf27b4c3603c811aa011c309445ce57794009508f74d985d8574a79.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">iris</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f956418da00&gt;
+</pre></div>
+</div>
+<img alt="../_images/de2e6b0e74403b595ee3a8c0ab4dd0da2fb53fb011665af05c16d63c015245be.png" src="../_images/de2e6b0e74403b595ee3a8c0ab4dd0da2fb53fb011665af05c16d63c015245be.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logit</span><span class="p">(</span><span class="s2">&quot;Survived ~ Pclass + Sex &quot;</span><span class="p">,</span><span class="n">titanic</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
+         Current function value: 0.464195
+         Iterations 6
+</pre></div>
+</div>
+<div class="output text_html"><table class="simpletable">
+<caption>Logit Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>       <td>Survived</td>     <th>  No. Observations:  </th>  <td>   891</td>  
+</tr>
+<tr>
+  <th>Model:</th>                 <td>Logit</td>      <th>  Df Residuals:      </th>  <td>   888</td>  
+</tr>
+<tr>
+  <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>     2</td>  
+</tr>
+<tr>
+  <th>Date:</th>            <td>Sun, 29 Oct 2023</td> <th>  Pseudo R-squ.:     </th>  <td>0.3029</td>  
+</tr>
+<tr>
+  <th>Time:</th>                <td>20:56:05</td>     <th>  Log-Likelihood:    </th> <td> -413.60</td> 
+</tr>
+<tr>
+  <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -593.33</td> 
+</tr>
+<tr>
+  <th>Covariance Type:</th>     <td>nonrobust</td>    <th>  LLR p-value:       </th> <td>8.798e-79</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+       <td></td>          <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>   <td>    3.2946</td> <td>    0.297</td> <td>   11.077</td> <td> 0.000</td> <td>    2.712</td> <td>    3.878</td>
+</tr>
+<tr>
+  <th>Sex[T.male]</th> <td>   -2.6434</td> <td>    0.184</td> <td>  -14.380</td> <td> 0.000</td> <td>   -3.004</td> <td>   -2.283</td>
+</tr>
+<tr>
+  <th>Pclass</th>      <td>   -0.9606</td> <td>    0.106</td> <td>   -9.057</td> <td> 0.000</td> <td>   -1.168</td> <td>   -0.753</td>
+</tr>
+</table></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">titanic</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/agconti/kaggle-titanic/master/data/train.csv&#39;</span><span class="p">,</span>
+                     <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;PassengerId&#39;</span><span class="p">)</span>
+<span class="n">titanic</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lectures"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-data">Example Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limits-of-linear-regression">Limits of Linear Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-binary-values-to-probabilities">From Binary Values to Probabilities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-function">The Logistic Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-regression-model">The Logistic Regression Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-interpretation-of-the-coefficients-of-a-linear-regressor">Statistical Interpretation of the Coefficients of a Linear Regressor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geometrical-interpretation-of-the-coefficients-of-a-linear-regressor">Geometrical Interpretation of the Coefficients of a Linear Regressor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimation-of-the-parameters-of-a-logistic-regressor">Estimation of the Parameters of a Logistic Regressor</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Antonino Furnari
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
