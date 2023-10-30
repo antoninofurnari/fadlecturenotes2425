@@ -20,6 +20,7 @@ parts:
   - file: lectures/09_information_theory
   - file: lectures/10_statistical_inference
   - file: lectures/11_linear_regression
+  - file: lectures/12_logistic_regression
 - caption: Laboratories
   numbered: True
   chapters:
