@@ -524,24 +524,20 @@ required on the average to describe the random variable</strong>.</p>
 <p><strong>Example</strong></p>
 <ul class="simple">
 <li><p>Let’s consider a die with six faces.</p></li>
-<li><p>We can describe the outcomes of rolling the dice with a random
+<li><p>We can describe the outcomes of rolling the die with a random
 variable <span class="math notranslate nohighlight">\(X\)</span> with alphabet <span class="math notranslate nohighlight">\(\chi = \ \left\{ 1,\ldots,6 \right\}\)</span>.</p></li>
-<li><p>If the dice is fair, then <span class="math notranslate nohighlight">\(P(x) = \frac{1}{6},\ \forall x \in \chi\)</span>.</p></li>
+<li><p>If the die is fair, then <span class="math notranslate nohighlight">\(P(x) = \frac{1}{6},\ \forall x \in \chi\)</span>.</p></li>
 <li><p>The entropy associated with this random variable is:
 <span class="math notranslate nohighlight">\(H(X) = - \sum_{i = 1}^{6}{\frac{1}{6}\log}\frac{1}{6} = \log(6) = 2.58\ bits\)</span>.</p>
-<ol class="arabic simple">
+<ul>
 <li><p>This makes sense as the minimum number of bits needed to
 represent 8 numbers is 3 (<span class="math notranslate nohighlight">\(2^{3} = 8\)</span>). Since we have less than
 8 numbers, in average we need less than 3 bits.</p></li>
-</ol>
-</li>
 </ul>
-<p> </p>
-<ul class="simple">
-<li><p>Let’s suppose the dice is not fair and in particular Let’s suppose
+</li>
+<li><p>Let’s suppose the die is not fair and in particular Let’s suppose
 it follows a categorical distribution with
-<span class="math notranslate nohighlight">\(\mathbf{p} = \lbrack 0.1,0.1,0.1,0.1,0.1\rbrack\)</span>. The probability
-of number “6” will be <span class="math notranslate nohighlight">\(0.5\)</span>;</p></li>
+<span class="math notranslate nohighlight">\(\mathbf{p} = \lbrack 0.1,0.1,0.1,0.1,0.1,0.5\rbrack\)</span>.</p></li>
 <li><p>Intuitively, we need less bits to represent this variable. Indeed,
 since event <span class="math notranslate nohighlight">\(X = 6\)</span> is much more frequent, we can represent it with
 the least number of bits, whereas we can represent less frequent
