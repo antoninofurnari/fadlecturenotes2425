@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Logistic Regression &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+    <title>11. Logistic Regression &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
   
   
   
@@ -19,12 +19,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=c5ced968eda925caa686" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
@@ -38,9 +38,9 @@
     <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686" />
-  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=c5ced968eda925caa686"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=365ca57ee442770a23c6"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -68,6 +68,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="12. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro" href="../laboratories/01_setup.html" />
+    <link rel="prev" title="10. Linear Regression" href="11_linear_regression.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -169,7 +171,7 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01_intro_data_analysis.html">1. Introduction to Data Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03_main_data_analysis_concepts.html">2. Main data analysis concepts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04_misure_di_frequenze_e_rappresentazione_grafica_dei_dati.html">3. Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
@@ -180,18 +182,22 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="09_information_theory.html">8. Basic Elements of Information Theory</a></li>
 <li class="toctree-l1"><a class="reference internal" href="10_statistical_inference.html">9. Statistical Inference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="11_linear_regression.html">10. Linear Regression</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">11. Logistic Regression</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratories</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/01_setup.html">11. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/02_intro_python.html">12. Introduzione a Python</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/03_intro_numpy.html">13. Introduzione a Numpy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/04_intro_matplotlib.html">14. Introduzione a Matplotlib</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/05_intro_pandas.html">15. Introduzione a Pandas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">16. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/07_misure_di_tendenza_centrale_dispersione_e_forma.html">17. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/08_associazione_variabili.html">18. Associazione tra Variabili</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/09_heart-disease-analysis.html">19. Exploratory Analysis on the Heart Disease Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/01_setup.html">12. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/02_intro_python.html">13. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/03_intro_numpy.html">14. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/04_intro_matplotlib.html">15. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/05_intro_pandas.html">16. Introduzione a Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">17. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/07_misure_di_tendenza_centrale_dispersione_e_forma.html">18. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/08_associazione_variabili.html">19. Associazione tra Variabili</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/09_heart-disease-analysis.html">20. Exploratory Analysis on the Heart Disease Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/10_statistical_inference.html">21. Laboratory on Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/11_regressione_lineare.html">22. Laboratorio su Regressione Lineare</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/12_regressione_logistica.html">23. Laboratorio su regressione logistica</a></li>
 </ul>
 
     </div>
@@ -416,14 +422,27 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-data">Example Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limits-of-linear-regression">Limits of Linear Regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-binary-values-to-probabilities">From Binary Values to Probabilities</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-function">The Logistic Function</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-regression-model">The Logistic Regression Model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-interpretation-of-the-coefficients-of-a-linear-regressor">Statistical Interpretation of the Coefficients of a Linear Regressor</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geometrical-interpretation-of-the-coefficients-of-a-linear-regressor">Geometrical Interpretation of the Coefficients of a Linear Regressor</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimation-of-the-parameters-of-a-logistic-regressor">Estimation of the Parameters of a Logistic Regressor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-data">11.1. Example Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limits-of-linear-regression">11.2. Limits of Linear Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-binary-values-to-probabilities">11.3. From Binary Values to Probabilities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-function">11.4. The Logistic Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-regression-model">11.5. The Logistic Regression Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-interpretation-of-the-coefficients-of-a-linear-regressor">11.6. Statistical Interpretation of the Coefficients of a Linear Regressor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geometrical-interpretation-of-the-coefficients-of-a-linear-regressor">11.7. Geometrical Interpretation of the Coefficients of a Linear Regressor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimation-of-the-parameters-of-a-logistic-regressor">11.8. Estimation of the Parameters of a Logistic Regressor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-logistic-regression">11.9. Example of Logistic Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-logistic-regression">11.10. Multinomial Logistic Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-iris-dataset">11.10.1. The Iris Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-limitations-of-a-linear-regression-in-the-presence-of-more-than-two-classes">11.10.2. Additional Limitations of a Linear Regression in the Presence of More than Two Classes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-multinomial-logistic-regression-model">11.10.3. The Multinomial Logistic Regression Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-parameters-of-the-multinomial-logistic-regressor-model">11.10.3.1. Estimating the Parameters of the Multinomial Logistic Regressor Model</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-parameters-of-a-multinomial-logistic-regressor">11.10.3.2. Interpretation of the Parameters of a Multinomial Logistic Regressor</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-softmax-regressor">11.10.3.3. The Softmax Regressor</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">11.11. References</a></li>
 </ul>
             </nav>
         </div>
@@ -436,10 +455,10 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="logistic-regression">
-<h1>Logistic Regression<a class="headerlink" href="#logistic-regression" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">11. </span>Logistic Regression<a class="headerlink" href="#logistic-regression" title="Permalink to this heading">#</a></h1>
 <p>Linear regression allows to model relationships between <strong>continuos independent and dependent variables</strong> and <strong>between qualitative independent variables and continuous variables</strong>. However, it does not allow to model relationships between continuous or qualitative independent variables and <strong>qualitative dependent variables</strong>.</p>
 <section id="example-data">
-<h2>Example Data<a class="headerlink" href="#example-data" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">11.1. </span>Example Data<a class="headerlink" href="#example-data" title="Permalink to this heading">#</a></h2>
 <p>Establishing such relationships is useful in different contexts. For instance, let us consider the <a class="reference external" href="https://archive.ics.uci.edu/dataset/17/breast+cancer+wisconsin+diagnostic">Breast Cancer Wisconsin</a> dataset:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -769,7 +788,7 @@ document.write(`
 </ul>
 </section>
 <section id="limits-of-linear-regression">
-<h2>Limits of Linear Regression<a class="headerlink" href="#limits-of-linear-regression" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">11.2. </span>Limits of Linear Regression<a class="headerlink" href="#limits-of-linear-regression" title="Permalink to this heading">#</a></h2>
 <p>Of course, we would like to quantify this relationship in a more formal way.
 <strong>As in the case of a linear regressor, we want to define a model which can predict the independent variable <span class="math notranslate nohighlight">\(y\)</span> from the dependent variables <span class="math notranslate nohighlight">\(x_i\)</span>. If such model gives good predictions, than we can trust its interpretation as a means of studying the relationship between the variables.</strong></p>
 <p>We can think of converting <code class="docutils literal notranslate"><span class="pre">B</span> <span class="pre">=&gt;</span> <span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">M</span> <span class="pre">=&gt;</span> <span class="pre">0</span></code>, and then compute a linear regressor:</p>
@@ -797,7 +816,7 @@ document.write(`
 <p><strong>In practice, while with a linear regressor we wanted to predict continuous values, now we want to assign observations <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> to discrete bins (in this case only two possible ones). As we will better study later in the course, this problem is known as classification.</strong></p>
 </section>
 <section id="from-binary-values-to-probabilities">
-<h2>From Binary Values to Probabilities<a class="headerlink" href="#from-binary-values-to-probabilities" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">11.3. </span>From Binary Values to Probabilities<a class="headerlink" href="#from-binary-values-to-probabilities" title="Permalink to this heading">#</a></h2>
 <p>If we want to model some form of continuous value, we could think to transition from <span class="math notranslate nohighlight">\(\{0,1\}\)</span> to <span class="math notranslate nohighlight">\([0,1]\)</span> using probabilities, which is a way to turn discretized values to “soft” values indicating our belief in the fact that <code class="docutils literal notranslate"><span class="pre">Diagnosis</span></code> will take either a <span class="math notranslate nohighlight">\(0\)</span> or <span class="math notranslate nohighlight">\(1\)</span> value. We could hence think to model the following probability, rather than modeling <code class="docutils literal notranslate"><span class="pre">Diagnosis</span></code> directly:</p>
 <div class="math notranslate nohighlight">
 \[P(Diagnosis=1| radius1)\]</div>
@@ -816,7 +835,7 @@ document.write(`
 <p>As can be noted, the function above is not linear, and hence it cannot be fit with a linear regressor. However, we have seen that a linear regressor can be tweaked to also represent nonlinear functions.</p>
 </section>
 <section id="the-logistic-function">
-<h2>The Logistic Function<a class="headerlink" href="#the-logistic-function" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">11.4. </span>The Logistic Function<a class="headerlink" href="#the-logistic-function" title="Permalink to this heading">#</a></h2>
 <p>Similarly to polynomial regression, we need to find a <strong>transformation of the formulation of the linear regressor to transform its output into a nonlinear function of the independent variables</strong>. Of course, we do not want <em>any</em> transformation, but one that has the previously highlighted properties. While different functions have similar characteristics, in practice the <strong>logistic function has some nice properties that, as we will se in a moment, allow to easily interpret the resulting model in a probabilistic way</strong>. The logistic function is defined as:</p>
 <div class="math notranslate nohighlight">
 \[f(x) = \frac{1}{1+e^{-x}}\]</div>
@@ -833,7 +852,7 @@ document.write(`
 </ul>
 </section>
 <section id="the-logistic-regression-model">
-<h2>The Logistic Regression Model<a class="headerlink" href="#the-logistic-regression-model" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">11.5. </span>The Logistic Regression Model<a class="headerlink" href="#the-logistic-regression-model" title="Permalink to this heading">#</a></h2>
 <p>In practice, we define our model, <strong>the logistic regressor model</strong> as follows (<strong>simple logistic regression</strong>):</p>
 <div class="math notranslate nohighlight">
 \[P(Diagnosis=1|X) = f(\beta_0 + \beta_1 X) = \frac{1}{1+e^{-(\beta_0 + \beta_1 X)}}\]</div>
@@ -857,7 +876,7 @@ document.write(`
 <p>The expression above shows how a logistic regressor can be seen as <strong>a linear regressor (the expression on the right side of the equation) on the logit (the log odd)</strong>. This paves the way to useful interpretations of the model, as shown in the next section.</p>
 </section>
 <section id="statistical-interpretation-of-the-coefficients-of-a-linear-regressor">
-<h2>Statistical Interpretation of the Coefficients of a Linear Regressor<a class="headerlink" href="#statistical-interpretation-of-the-coefficients-of-a-linear-regressor" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">11.6. </span>Statistical Interpretation of the Coefficients of a Linear Regressor<a class="headerlink" href="#statistical-interpretation-of-the-coefficients-of-a-linear-regressor" title="Permalink to this heading">#</a></h2>
 <p>Let’s now see how to interpret the coefficients of a logistic regressor. Remember that the regression model (in the case of simple logistic regression) is as follows:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -898,7 +917,7 @@ e^{\log odds(p|x+1) - \log odds(p|x)} = e^{\beta_1} \Rightarrow \frac{e^{\log od
 </ul>
 </section>
 <section id="geometrical-interpretation-of-the-coefficients-of-a-linear-regressor">
-<h2>Geometrical Interpretation of the Coefficients of a Linear Regressor<a class="headerlink" href="#geometrical-interpretation-of-the-coefficients-of-a-linear-regressor" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">11.7. </span>Geometrical Interpretation of the Coefficients of a Linear Regressor<a class="headerlink" href="#geometrical-interpretation-of-the-coefficients-of-a-linear-regressor" title="Permalink to this heading">#</a></h2>
 <p>Similar to linear regression, also the coefficients of logistic
 regression have a geometrical interpretation. We will see that, while
 linear regression finds a «curve» that fits the data, logistic
@@ -907,7 +926,7 @@ regression finds a hyperplane that separates the data.</p>
 <span class="math notranslate nohighlight">\(\mathbf{x} \in \mathfrak{R}^{2}\)</span> as the one shown in the following:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/ed4444bd0a9e6b07c81907e63ea4d252830a806440d4d7aaae2b53ed96c3f903.png" src="../_images/ed4444bd0a9e6b07c81907e63ea4d252830a806440d4d7aaae2b53ed96c3f903.png" />
+<img alt="../_images/d3f5c09f0f264dc55c163080d421b6a2e28653b2c3e463f302984e021cdbe2e3.png" src="../_images/d3f5c09f0f264dc55c163080d421b6a2e28653b2c3e463f302984e021cdbe2e3.png" />
 </div>
 </div>
 <p>Let us assume that we fit a logistic regressor model to this data</p>
@@ -944,7 +963,7 @@ those points in which <span class="math notranslate nohighlight">\(P\left( y=1 |
 separates the elements from the two classes:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/7c6497a61f2d5ee042921550f5d9e07de857c9865259eb1d8884613361a45af1.png" src="../_images/7c6497a61f2d5ee042921550f5d9e07de857c9865259eb1d8884613361a45af1.png" />
+<img alt="../_images/c0c82e00d05df69a65ebe76581a0935b0c7c8bdbfdbb4a78dc43c85e69233dc8.png" src="../_images/c0c82e00d05df69a65ebe76581a0935b0c7c8bdbfdbb4a78dc43c85e69233dc8.png" />
 </div>
 </div>
 <p>As can be seen, the decision boundary found by a logistic regressor is a
@@ -952,671 +971,417 @@ line. This is because <strong>a logistic regressor is a linear classifier</stron
 despite the logistic function is not linear!</p>
 </section>
 <section id="estimation-of-the-parameters-of-a-logistic-regressor">
-<h2>Estimation of the Parameters of a Logistic Regressor<a class="headerlink" href="#estimation-of-the-parameters-of-a-logistic-regressor" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">11.8. </span>Estimation of the Parameters of a Logistic Regressor<a class="headerlink" href="#estimation-of-the-parameters-of-a-logistic-regressor" title="Permalink to this heading">#</a></h2>
 <p>To fit the model and find suitable values for the <span class="math notranslate nohighlight">\(\mathbf{\beta_i}\)</span>
 parameters, we will define a <strong>cost function</strong>, similarly to what we have
 done in the case of linear regression.</p>
 <p>Even if we can see the logistic
 regression problem as the linear regression problem of fitting the
 <span class="math notranslate nohighlight">\(logit(p) = \mathbf{\beta}^{T}\mathbf{x}\)</span> function, differently from
-linear regression, <em>we should note that we do not have the ground truth
-probabilities p</em>. Indeed, our dataset only provides input examples
-<span class="math notranslate nohighlight">\(\mathbf{x}^{(i)}\)</span> and the corresponding labels <span class="math notranslate nohighlight">\(y\)</span>.</p>
+linear regression, <strong>we should note that we do not have the ground truth probabilities p</strong>.
+Indeed, our observations only provides input examples
+<span class="math notranslate nohighlight">\(\mathbf{x}^{(i)}\)</span> and the corresponding labels <span class="math notranslate nohighlight">\(y^{(i)}\)</span>.</p>
 <p>Starting from the definition:</p>
 <div class="math notranslate nohighlight">
-\[P\left( y = 1 \middle| \mathbf{x} \right) = f_{\mathbf{\theta}}\left( \mathbf{x} \right) = \frac{1}{1 + e^{- \mathbf{\theta}^{T}\mathbf{x}}} = \sigma(\mathbf{\theta}^{T}\mathbf{x})\]</div>
+\[P\left( y = 1 \middle| \mathbf{x}; \mathbf{\beta} \right) = f_{\mathbf{\beta}}\left( \mathbf{x} \right) = \frac{1}{1 + e^{- \mathbf{\beta}^{T}\mathbf{x}}} = \sigma(\mathbf{\beta}^{T}\mathbf{x})\]</div>
 <p>We can write:</p>
 <div class="math notranslate nohighlight">
-\[P\left( y = 1 \middle| \mathbf{x};\mathbf{\theta} \right) = f_{\mathbf{\theta}}(\mathbf{x})\]</div>
+\[P\left( y = 1 \middle| \mathbf{x};\mathbf{\beta} \right) = f_{\mathbf{\beta}}(\mathbf{x})\]</div>
 <div class="math notranslate nohighlight">
-\[P\left( y = 0 \middle| \mathbf{x};\mathbf{\theta} \right) = 1 - f_{\mathbf{\theta}}(\mathbf{x})\]</div>
-<p>This can also be written as follows in a more compact form:</p>
+\[P\left( y = 0 \middle| \mathbf{x};\mathbf{\beta} \right) = 1 - f_{\mathbf{\beta}}(\mathbf{x})\]</div>
+<p>Since <span class="math notranslate nohighlight">\(y\)</span> can only take values <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(1\)</span>, this can also be written as follows in a more compact form:</p>
 <div class="math notranslate nohighlight">
-\[P\left( y \middle| \mathbf{x};\mathbf{\theta} \right) = \left( f_{\mathbf{\theta}}\left( \mathbf{x} \right) \right)^{y}\left( 1 - f_{\mathbf{\theta}}\left( \mathbf{x} \right) \right)^{1 - y}\]</div>
+\[P\left( y \middle| \mathbf{x};\mathbf{\beta} \right) = \left( f_{\mathbf{\beta}}\left( \mathbf{x} \right) \right)^{y}\left( 1 - f_{\mathbf{\beta}}\left( \mathbf{x} \right) \right)^{1 - y}\]</div>
 <p>Indeed, when <span class="math notranslate nohighlight">\(y = 1\)</span>, the second factor is equal to <span class="math notranslate nohighlight">\(1\)</span> and the
 expression reduces to
-<span class="math notranslate nohighlight">\(P\left( y = 1 \middle| \mathbf{x};\mathbf{\theta} \right) = f_{\mathbf{\theta}}(\mathbf{x})\)</span>.
+<span class="math notranslate nohighlight">\(P\left( y = 1 \middle| \mathbf{x};\mathbf{\beta} \right) = f_{\mathbf{\beta}}(\mathbf{x})\)</span>.
 Similarly, if <span class="math notranslate nohighlight">\(y = 0\)</span>, the first factor is equal to <span class="math notranslate nohighlight">\(1\)</span> and the
-expression reduces to <span class="math notranslate nohighlight">\(1 - f_{\mathbf{\theta}}(x)\)</span>.</p>
+expression reduces to <span class="math notranslate nohighlight">\(1 - f_{\mathbf{\beta}}(x)\)</span>.</p>
 <p>We can estimate the parameters by maximum likelihood, i.e., choosing the
 values of the parameters which maximize the probability of the data
-under the model identified by the parameters <span class="math notranslate nohighlight">\(\mathbf{\theta}\)</span>:</p>
+under the model identified by the parameters <span class="math notranslate nohighlight">\(\mathbf{\beta}\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[L\left( \mathbf{\theta} \right) = P(Y|X;\mathbf{\theta})\]</div>
+\[L\left( \mathbf{\beta} \right) = P(Y|X;\mathbf{\beta})\]</div>
 <p>If we assume that the training examples are all independent, the
 likelihood can be expressed as:</p>
 <div class="math notranslate nohighlight">
-\[L\left( \mathbf{\theta} \right) = \prod_{i = 1}^{N}{P(y^{(i)}|\mathbf{x}^{(i)};\mathbf{\theta})} = \prod_{i = 1}^{N}{f_{\mathbf{\theta}}\left( \mathbf{x}^{(i)} \right)^{y^{(i)}}\left( 1 - f_{\mathbf{\theta}}\left( \mathbf{x}^{(i)} \right) \right)^{{1 - y}^{(i)}}}\]</div>
+\[L\left( \mathbf{\beta} \right) = \prod_{i = 1}^{N}{P(y^{(i)}|\mathbf{x}^{(i)};\mathbf{\beta})} = \prod_{i = 1}^{N}{f_{\mathbf{\beta}}\left( \mathbf{x}^{(i)} \right)^{y^{(i)}}\left( 1 - f_{\mathbf{\beta}}\left( \mathbf{x}^{(i)} \right) \right)^{{1 - y}^{(i)}}}\]</div>
 <p>Maximizing this expression is equivalent to minimizing the negative
-logarithm of <span class="math notranslate nohighlight">\(L(\mathbf{\theta})\)</span> (negative log-likelihood - nll):</p>
+logarithm of <span class="math notranslate nohighlight">\(L(\mathbf{\beta})\)</span> (negative log-likelihood - nll):</p>
 <div class="math notranslate nohighlight">
-\[nll\left( \mathbf{\theta} \right) = - \log{L\left( \mathbf{\theta} \right)} = - \sum_{i = 1}^{N}{\log\left\lbrack f_{\mathbf{\theta}}\left( \mathbf{x}^{(i)} \right)^{y^{(i)}}\left( 1 - f_{\mathbf{\theta}}\left( \mathbf{x}^{(i)} \right) \right)^{{1 - y}^{(i)}} \right\rbrack} =\]</div>
+\[nll\left( \mathbf{\beta} \right) = - \log{L\left( \mathbf{\beta} \right)} = - \sum_{i = 1}^{N}{\log\left\lbrack f_{\mathbf{\beta}}\left( \mathbf{x}^{(i)} \right)^{y^{(i)}}\left( 1 - f_{\mathbf{\beta}}\left( \mathbf{x}^{(i)} \right) \right)^{{1 - y}^{(i)}} \right\rbrack} =\]</div>
 <div class="math notranslate nohighlight">
-\[= - \sum_{i = 1}^{N}{\lbrack y^{(i)}\log{f_{\mathbf{\theta}}\left( \mathbf{x}^{(i)} \right)}} + \left( 1 - y^{(i)} \right)\log{(1 - f_{\mathbf{\theta}}\left( \mathbf{x}^{(i)} \right)})\rbrack\]</div>
+\[= - \sum_{i = 1}^{N}{\lbrack y^{(i)}\log{f_{\mathbf{\beta}}\left( \mathbf{x}^{(i)} \right)}} + \left( 1 - y^{(i)} \right)\log{(1 - f_{\mathbf{\beta}}\left( \mathbf{x}^{(i)} \right)})\rbrack\]</div>
 <p>Hence, we will define our cost function as:</p>
 <div class="math notranslate nohighlight">
-\[J\left( \mathbf{\theta} \right) = - \sum_{i = 1}^{N}{\lbrack y^{(i)}\log{f_{\mathbf{\theta}}\left( \mathbf{x}^{(i)} \right)}} + \left( 1 - y^{(i)} \right)\log{(1 - f_{\mathbf{\theta}}\left( \mathbf{x}^{(i)} \right)})\rbrack\]</div>
-<p>This can be rewritten more explicitly in terms of the <span class="math notranslate nohighlight">\(\mathbf{\theta}\)</span>
+\[J\left( \mathbf{\beta} \right) = - \sum_{i = 1}^{N}{\lbrack y^{(i)}\log{f_{\mathbf{\beta}}\left( \mathbf{x}^{(i)} \right)}} + \left( 1 - y^{(i)} \right)\log{(1 - f_{\mathbf{\beta}}\left( \mathbf{x}^{(i)} \right)})\rbrack\]</div>
+<p>This can be rewritten more explicitly in terms of the <span class="math notranslate nohighlight">\(\mathbf{\beta}\)</span>
 parameters as follows:</p>
 <div class="math notranslate nohighlight">
-\[J\left( \mathbf{\theta} \right) = - \sum_{i = 1}^{N}{\lbrack y^{(i)}\log{\sigma\left( {\mathbf{\theta}^{T}\mathbf{x}}^{(i)} \right)}} + \left( 1 - y^{(i)} \right)\log{(1 - \sigma\left( \mathbf{\theta}^{T}\mathbf{x}^{(i)} \right)})\rbrack\]</div>
-<p>The cost function is differentiable with respect to each parameter
-<span class="math notranslate nohighlight">\(\theta_{i}\)</span>, hence it can be optimized through gradient descent.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">breast</span><span class="p">[</span><span class="s1">&#39;Diagnosis&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">breast</span><span class="p">[</span><span class="s1">&#39;Diagnosis&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s1">&#39;M&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;B&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">})</span>
-</pre></div>
+\[J\left( \mathbf{\beta} \right) = - \sum_{i = 1}^{N}{\lbrack y^{(i)}\log{\sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right)}} + \left( 1 - y^{(i)} \right)\log{(1 - \sigma\left( \mathbf{\beta}^{T}\mathbf{x}^{(i)} \right)})\rbrack\]</div>
+<p>Similarly to linear regression, we now have a cost function to minimize in order to find the values of the <span class="math notranslate nohighlight">\(\beta_i\)</span> parameters. Unfortunately, in this case, <span class="math notranslate nohighlight">\(J(\mathbf{\beta})\)</span> assumes a nonlinear form <strong>which prevents us to use the least square principles</strong> and <strong>there is no closed form solution for the parameter estimation</strong>. In these cases, parameters can be estimated using some form of <strong>iterative solver</strong>, which begins with an initial guess for the parameters and iteratively refine them to find the final solution. Luckily, the logistic regression cost function <strong>is convex, and hence only a single solution is admitted, independently from the initial guess</strong>.</p>
+<p>Different iterative solvers can be used in practice. The most commonly used is the <strong>gradient descent algorithm</strong>, which requires the cost function to be differentiable. We will not see this algorithm in details, but an introduction to it and its application to the estimation of the parameters of a logistic regressor are given in the following (hidden) section.</p>
+<div class="toggle docutils container">
+<p class="rubric">Estimating the Parameters of a Logistic Regressor through Gradient Descent</p>
+<p>Given the cost function <span class="math notranslate nohighlight">\(J(\mathcal{\beta})\)</span> above, we want to find suitable values <span class="math notranslate nohighlight">\(\mathbf{\beta}\)</span> by
+solving the following optimization problem:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{\beta} = \arg_{\mathbf{\beta}}\min{J(\mathbf{\beta})}\]</div>
+<p>As we already discussed, since <span class="math notranslate nohighlight">\(J\)</span> is nonlinear, we cannot find a closed form solution for the estimation of the parameters.</p>
+<p>Alternatively, we could <strong>compute</strong>
+<span class="math notranslate nohighlight">\(\mathbf{J}\left( \mathbf{\beta} \right)\)</span> <strong>for all possible values
+of</strong> <span class="math notranslate nohighlight">\(\mathbf{\beta}\)</span> <strong>and choose the values of</strong> <span class="math notranslate nohighlight">\(\mathbf{\beta}\)</span>
+<strong>which minimizes the cost</strong>. However, this option is unfeasible in
+practice as <span class="math notranslate nohighlight">\(\beta\)</span> may assume an infinite number of values. Hence, we
+need a way to <strong>find the values of</strong> <span class="math notranslate nohighlight">\(\mathbf{\beta}\)</span> <strong>which
+minimize</strong> <span class="math notranslate nohighlight">\(\mathbf{J(}\mathbf{\beta}\mathbf{)}\)</span> <strong>without computing</strong>
+<span class="math notranslate nohighlight">\(\mathbf{J(}\mathbf{\beta}\mathbf{)}\)</span> <strong>for all possible values of</strong>
+<span class="math notranslate nohighlight">\(\mathbf{\beta}\)</span><strong>.</strong></p>
+<p>In these cases, we can use <strong>gradient descent</strong>, a numerical optimization strategy
+which allows to <strong>minimize differentiable functions</strong> with respect
+to their parameters.</p>
+<p>We will introduce the gradient descent algorithm considering initially
+the problem of minimizing a function of a single variable <span class="math notranslate nohighlight">\(J(\theta)\)</span>.
+We will then extend to the case of multiple variables.</p>
+<p><strong>The gradient descent algorithm is based on the observation that, if a
+function</strong> <span class="math notranslate nohighlight">\(J(\theta)\)</span> <em>is defined and differentiable in a neighborhood
+of a point</em> <span class="math notranslate nohighlight">\(\theta^{(0)}\)</span><em>, then</em> <span class="math notranslate nohighlight">\(J(\theta)\)</span> <em>decreases fastest if one
+goes from</em> <span class="math notranslate nohighlight">\(\theta^{(0)}\)</span> <em>towards the direction of the negative
+derivative of</em> <span class="math notranslate nohighlight">\(J\)</span> <em>computed in</em> <span class="math notranslate nohighlight">\(\theta^{(0)}\)</span><em>.</em> Consider the function
+<span class="math notranslate nohighlight">\(J(\theta)\)</span> shown in the plot below:</p>
+<p>In these cases, we can use <strong>gradient descent</strong>, a numerical optimization strategy
+which allows to <strong>minimize differentiable functions</strong> with respect
+to their parameters.</p>
+<p>We will introduce the gradient descent algorithm considering initially
+the problem of minimizing a function of a single variable <span class="math notranslate nohighlight">\(J(\theta)\)</span>.
+We will then extend to the case of multiple variables.</p>
+<p><strong>The gradient descent algorithm is based on the observation that, if a
+function</strong> <span class="math notranslate nohighlight">\(J(\theta)\)</span> <em>is defined and differentiable in a neighborhood
+of a point</em> <span class="math notranslate nohighlight">\(\theta^{(0)}\)</span><em>, then</em> <span class="math notranslate nohighlight">\(J(\theta)\)</span> <em>decreases fastest if one
+goes from</em> <span class="math notranslate nohighlight">\(\theta^{(0)}\)</span> <em>towards the direction of the negative
+derivative of</em> <span class="math notranslate nohighlight">\(J\)</span> <em>computed in</em> <span class="math notranslate nohighlight">\(\theta^{(0)}\)</span><em>.</em> Consider the function
+<span class="math notranslate nohighlight">\(J(\theta)\)</span> shown in the plot below:</p>
+<p><img alt="" src="_static/lecture_specific/gradient_descent/gd1.png" /></p>
+<p>Let us assume that we are at the initial point <span class="math notranslate nohighlight">\(\theta^{(0)}\)</span>. From the
+plot, we can see that we should move to the right part of the x axis in
+order to reach the minimum of the function.</p>
+<p><img alt="" src="_static/lecture_specific/gradient_descent/gd2.png" /></p>
+<p>The first derivative of the function in that point <span class="math notranslate nohighlight">\(J'(\beta^{(0)})\)</span>
+will be equal to the angular coefficient of the tangent to the curve in
+the point <span class="math notranslate nohighlight">\((\theta^{(0)},J\left( \theta^{(0)} \right))\)</span>. Since the curve
+is decreasing in a neighborhood of <span class="math notranslate nohighlight">\(\beta^{(0)}\)</span>, the tangent line will
+also be decreasing. Therefore, its angular coefficient
+<span class="math notranslate nohighlight">\(J'(\theta^{(0)})\)</span> will be negative. If we want to move to the right, we
+should follow in the <em>inverse direction</em> of the derivative of the curve
+in that point.</p>
+<p>The gradient descent is an iterative algorithm; hence we are not trying
+to reach the minimum of the function in one step. Instead, we would like
+to move to another point <span class="math notranslate nohighlight">\(\theta^{(1)}\)</span> such that
+<span class="math notranslate nohighlight">\(J\left( \theta^{(1)} \right) &lt; J(\theta^{(0)})\)</span>. If we can do this for
+every point, we can reach the minimum in a number of steps.</p>
+<p>At each step, we will move proportionally to the value of the
+derivative. This is based on the observation that larger absolute values
+of the derivative indicate steeper curves. If we choose a multiplier
+factor <span class="math notranslate nohighlight">\(\gamma\)</span>, we will move to the point:</p>
+<div class="math notranslate nohighlight">
+\[\theta^{(1)} = \theta^{(0)} - \gamma J'(\theta^{(0)})\]</div>
+<p>For instance, if we choose <span class="math notranslate nohighlight">\(\gamma = 0.02\)</span>, we will move to point
+<span class="math notranslate nohighlight">\(\theta^{(1)} = 0.4 + 0.02 \cdot 1.8 = 0.436\)</span>. The procedure works
+iteratively until the derivative is so small that no movement is
+possible, as shown in the following figure:</p>
+<p><img alt="" src="_static/lecture_specific/gradient_descent/gd3.png" /></p>
+<p>In the next step, we compute the derivative of the function in the
+current point <span class="math notranslate nohighlight">\(J\left( \beta^{(1)} \right) = - 0.8\)</span> and move to point
+<span class="math notranslate nohighlight">\(\beta^{(2)} = \beta_{1} - \gamma J'(\beta^{(1)})\)</span>.</p>
+<p><img alt="" src="_static/lecture_specific/gradient_descent/gd4.png" /></p>
+<p>Next, we compute the derivative of the function in the current point
+<span class="math notranslate nohighlight">\(f\left( \theta^{(2)} \right) = - 0.4\)</span> and move to point
+<span class="math notranslate nohighlight">\(\theta^{(3)} = \theta^{(2)} - \gamma J'(\theta^{(2)})\)</span>:</p>
+<p><img alt="" src="_static/lecture_specific/gradient_descent/gd5.png" /></p>
+<p>We then compute the derivative of the current point
+<span class="math notranslate nohighlight">\(J\left( \theta^{(3)} \right) \approx 0\)</span>:</p>
+<p><img alt="" src="_static/lecture_specific/gradient_descent/gd6.png" /></p>
+<p>This derivative is so small that we cannot advance further. We are in a
+local minimum. The optimization terminates here. We have found the value
+<span class="math notranslate nohighlight">\(\theta^{(3)} = \arg_{\theta}\min{J(\theta)}\)</span>.</p>
+<p>In practice, the algorithm is terminated following a <strong>given termination
+criterion</strong>. Two common criteria are:</p>
+<ul class="simple">
+<li><p>A maximum number of iterations is reached.</p></li>
+<li><p>The value <span class="math notranslate nohighlight">\(\gamma J'(\theta)\)</span> is below a given threshold.</p></li>
+</ul>
+<p class="rubric">Global vs Local Minima</p>
+<p>It is important to note that gradient descent can be applied only if the
+cost function is <strong>differentiable with respect to its parameters</strong>.
+Moreover, the algorithm is guaranteed to converge to the global minimum
+<strong>only if the cost function is convex</strong>. In the general case of
+non-convex loss function, the algorithm may converge to a <strong>local
+minimum</strong>, which may represent a <strong>suboptimal solution</strong>. Nevertheless,
+when the number of parameters is very large, gradient descent <strong>usually
+finds a good enough solution</strong>, even if it only converges to a local
+minimum.</p>
+<p class="rubric">One Variable</p>
+<p>The gradient descent algorithm can be written in the following form in
+the case of one variable:</p>
+<ol class="arabic simple">
+<li><p>Choose an initial random point <span class="math notranslate nohighlight">\(\beta\)</span>;</p></li>
+<li><p>Compute the first derivative of the function <span class="math notranslate nohighlight">\(J'\)</span> in the current
+point <span class="math notranslate nohighlight">\(\theta\)</span>: <span class="math notranslate nohighlight">\(J'(\theta)\)</span>;</p></li>
+<li><p>Update the position of the current point using the formula
+<span class="math notranslate nohighlight">\(\theta = \theta - \gamma J'(\theta)\)</span>;</p></li>
+<li><p>Repeat 2-3 until some termination criteria are met.</p></li>
+</ol>
+<p class="rubric">Multiple Variables</p>
+<p>The gradient descent algorithm generalizes to the case in which the
+function <span class="math notranslate nohighlight">\(J\)</span> to optimize depends on multiple variables
+<span class="math notranslate nohighlight">\(J(\theta_{1},\theta_{2},\ldots,\theta_{n})\)</span>.</p>
+<p>For instance, let’s consider a function of two variables
+<span class="math notranslate nohighlight">\(J(\theta_{1},\theta_{2})\)</span>. We can plot such function as a 3D plot
+(left) or as a contour plot (right). In both cases, our goal is to reach
+the point with the minimum value (the ‘center’ of the two plots). Given
+a point <span class="math notranslate nohighlight">\(\mathbf{\theta} = (\theta_{1},\theta_{2})\)</span>, the direction of
+steepest descent is the <strong>gradient</strong> of the function in the point.</p>
+<p><img alt="" src="_static/lecture_specific/gradient_descent/gd7.png" /></p>
+<p>The gradient is a multi-variable generalization of the derivative. The
+gradient of a function of <span class="math notranslate nohighlight">\(n\)</span> variable computed in a point
+<span class="math notranslate nohighlight">\(\mathbf{\theta}\)</span> is a vector whose <span class="math notranslate nohighlight">\(i^{th}\)</span> variable is given by the
+partial derivative of the function with respect to the <span class="math notranslate nohighlight">\(i^{th}\)</span>
+variable:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\nabla J\left( \mathbf{\theta} \right) = \begin{pmatrix}
+J_{\theta_{1}}(\mathbf{\theta}) \\
+J_{\theta_{2}}(\mathbf{\theta}) \\
+\begin{matrix}
+\ldots \\
+J_{\theta_{n}}(\mathbf{\theta}) \\
+\end{matrix} \\
+\end{pmatrix}\end{split}\]</div>
+<p>In the case of two variables, the gradient will be a 2D vector (the
+gradient) indicating the direction to follow. Since in general we want
+to optimize multi-variable functions, the algorithm is called ‘gradient
+descent’.</p>
+<p>The following figure shows an example of an optimization procedure to
+reach the center of the curve from a given starting point:</p>
+<p><img alt="" src="_static/lecture_specific/gradient_descent/gd8.png" /></p>
+<p>The pseudocode of the procedure, in the case of the multiple variables
+is as follows:</p>
+<ol class="arabic simple">
+<li><p>Initialize
+<span class="math notranslate nohighlight">\(\mathbf{\theta} = (\theta_{1},\theta_{2},\ldots,\theta_{n})\)</span>
+randomly.</p></li>
+<li><p>For each variable <span class="math notranslate nohighlight">\(x_{i}\)</span>:</p></li>
+<li><p>Compute the partial derivative at the point:</p></li>
+<li><p><span class="math notranslate nohighlight">\(\frac{\partial}{\partial\theta_{i}}J\left( \mathbf{\theta} \right)\)</span></p></li>
+<li><p>Update the current variable using the formula:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\theta_{i} = \theta_{i} - \gamma\frac{\partial}{\partial\theta_{i}}J(\mathbf{\theta})\]</div>
+<ol class="arabic simple" start="6">
+<li><p>Repeat 2-3 until the termination criteria are met.</p></li>
+</ol>
+<p class="rubric">Logistic Regression and Gradient Descent</p>
+<p>It can be shown that, in the case of the logistic regressor, the update rule will be:</p>
+<div class="math notranslate nohighlight">
+\[\beta_{j}\mathbf{=}\beta_{j}\mathbf{-}\gamma\sum_{i = 1\ }^{N}{x_{j}^{(i)}\left( \sigma\left( \mathbf{\beta}^{T}\mathbf{x}^{(i)} \right) - y^{(i)} \right)}\]</div>
+<p>For the most curious, the details are in the following section.</p>
+<p class="rubric">Derivation of the Update Rule</p>
+<p>Let us first consider the derivative of the logistic function:</p>
+<div class="math notranslate nohighlight">
+\[\sigma(x) = \frac{1}{1 + e^{- x}}\]</div>
+<p>This will be:</p>
+<p><span class="math notranslate nohighlight">\(\sigma^{'}(x) = - \frac{1}{\left( 1 + e^{- x} \right)^{2}}D\left\lbrack e^{- x} \right\rbrack = \frac{e^{- x}}{\left( 1 + e^{- x} \right)^{2}}\)</span>
+[Applying the rule
+<span class="math notranslate nohighlight">\(D\left\lbrack \frac{1}{f(x)} \right\rbrack = - \frac{D\left\lbrack f(x) \right\rbrack}{f(x)^{2}}\)</span>]</p>
+<p><span class="math notranslate nohighlight">\(\sigma^{'}(x) = \frac{1 + e^{- x} - 1}{\left( 1 + e^{- x} \right)^{2}}\)</span>
+[Summing and subtracting <span class="math notranslate nohighlight">\(1\)</span> to the numerator]</p>
+<p><span class="math notranslate nohighlight">\(\sigma^{'}(x) = \frac{1 + e^{- x}}{\left( 1 + e^{- x} \right)^{2}} - \frac{1}{\left( 1 + e^{- x} \right)^{2}}\)</span>
+[Splitting the numerator in two terms]</p>
+<p><span class="math notranslate nohighlight">\(\sigma^{'}(x) = \frac{1}{1 + e^{- x}}\left( 1 - \frac{1}{1 + e^{- x}} \right)\)</span>
+[making the <span class="math notranslate nohighlight">\(\frac{1}{1 + e^{- x}}\)</span> factor explicit]</p>
+<p><span class="math notranslate nohighlight">\(\sigma^{'}(x) = \sigma(x)\left( 1 - \sigma(x) \right)\)</span> [replacing the
+formula <span class="math notranslate nohighlight">\(\sigma(x) = \frac{1}{1 + e^{- x}}\)</span>]</p>
+<p class="rubric">Partial Derivatives of the Cost Function</p>
+<p>We now need to obtain the partial derivatives of the cost function with
+respect to the j-th parameter:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial J\left( \mathbf{\beta} \right)}{\partial\beta_{j}}\]</div>
+<p>Remember that the cost function is defined as:</p>
+<div class="math notranslate nohighlight">
+\[J\left( \mathbf{\beta} \right) = - \sum_{i = 1}^{N}{y^{(i)}\log{\sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right)}} + \left( 1 - y^{(i)} \right)\log{(1 - \sigma\left( \mathbf{\beta}^{T}\mathbf{x}^{(i)} \right)})\]</div>
+<p>Let us first compute the derivative of the first term of the addition:</p>
+<p><span class="math notranslate nohighlight">\(\frac{\partial}{\partial\beta_{j}}y^{(i)}\log{\sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right)}\)</span>
+[Initial expression]</p>
+<p><span class="math notranslate nohighlight">\(= y^{(i)}\frac{1}{\sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right)}\frac{\partial}{\beta_{j}}\left\lbrack \sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right) \right\rbrack\)</span>
+[Applying
+<span class="math notranslate nohighlight">\(D\left\lbrack \log\left( f(x) \right) \right\rbrack = \frac{1}{f(x)}f'(x)\)</span>]</p>
+<p><span class="math notranslate nohighlight">\(= y^{(i)}\frac{1}{\sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right)}\sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right)\left( 1 - \sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right) \right)\frac{\partial}{\beta_{j}}\left\lbrack {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right\rbrack\)</span>
+[Applying
+<span class="math notranslate nohighlight">\(\sigma^{'}\left( f(x) \right) = \sigma\left( f(x) \right)\left( 1 - \sigma\left( f(x) \right) \right)f'(x)\rbrack\)</span></p>
+<p><span class="math notranslate nohighlight">\(= y^{(i)}\frac{1}{\sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right)}\sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right)\left( 1 - \sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right) \right)x_{j}^{(i)}\)</span>
+[Applying
+<span class="math notranslate nohighlight">\(\frac{\partial}{\beta_{j}}\left\lbrack {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right\rbrack = x_{j}\)</span>]</p>
+<p>The derivative of the second term will be:</p>
+<p><span class="math notranslate nohighlight">\(\frac{\partial}{\partial\beta_{j}}{(1 - y}^{(i)})\log\left( 1 - \sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right) \right)\)</span>
+[Initial Expression]</p>
+<p><span class="math notranslate nohighlight">\(= \left( 1 - y^{(i)} \right)\frac{1}{1 - \sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right)}\frac{\partial}{\beta_{j}}\ \lbrack 1 - \sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right)\rbrack\)</span>
+[Applying
+<span class="math notranslate nohighlight">\(D\left\lbrack \log\left( f(x) \right) \right\rbrack = \frac{1}{f(x)}f'(x)\)</span>]</p>
+<p><span class="math notranslate nohighlight">\(= \left( 1 - y^{(i)} \right)\frac{1}{1 - \sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right)}( - 1)\sigma\left( \mathbf{\beta}^{T}\mathbf{x}^{(i)} \right)\left( 1 - \sigma\left( \mathbf{\beta}^{T}x^{(i)} \right) \right)x_{j}^{(i)}\)</span>
+[Applying <span class="math notranslate nohighlight">\(\sigma(x)\left( 1 - \sigma(x) \right)\)</span> and
+<span class="math notranslate nohighlight">\(\frac{\partial}{\beta_{j}}\left\lbrack {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right\rbrack = x_{j}\)</span>]</p>
+<p><span class="math notranslate nohighlight">\(= \frac{y^{(i)} - 1}{1 - \sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right)}\sigma\left( \mathbf{\beta}^{T}\mathbf{x}^{(i)} \right)\left( 1 - \sigma\left( \mathbf{\beta}^{T}x^{(i)} \right) \right)x_{j}^{(i)}\)</span>
+[Simplifying]</p>
+<p>We can write the sum of the last two derivatives as follows:</p>
+<p><span class="math notranslate nohighlight">\(\frac{\partial}{\partial\beta_{j}}y^{(i)}\log{\sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right)} + \frac{\partial}{\partial\beta_{j}}{(1 - y}^{(i)})\log\left( 1 - \sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right) \right)\)</span>
+[Initial Expression]</p>
+<p><span class="math notranslate nohighlight">\(= \frac{y^{(i)}}{\sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right)}\sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right)\left( 1 - \sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right) \right)x_{j}^{(i)} + \frac{y^{(i)} - 1}{1 - \sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right)}\sigma\left( \mathbf{\beta}^{T}\mathbf{x}^{(i)} \right)\left( 1 - \sigma\left( \mathbf{\beta}^{T}x^{(i)} \right) \right)x_{j}^{(i)}\)</span>
+[Replacing derivatives]</p>
+<p><span class="math notranslate nohighlight">\(= \sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right)\left( 1 - \sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right) \right)x_{j}^{(i)}\left\lbrack \frac{y^{(i)}}{\sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right)} + \frac{y^{(i)} - 1}{1 - \sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right)} \right\rbrack\)</span>
+[Simplifying]</p>
+<p><span class="math notranslate nohighlight">\(= \sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right)\left( 1 - \sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right) \right)x_{j}^{(i)}\left\lbrack \frac{y^{(i)}\left( 1 - \sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right) \right) + (y^{(i)} - 1)\sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right)}{\sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right)\left( 1 - \sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right) \right)} \right\rbrack\)</span>
+[Simplifying]</p>
+<p><span class="math notranslate nohighlight">\(= \frac{\sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right)\left( 1 - \sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right) \right)}{\sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right)\left( 1 - \sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right) \right)}x_{j}^{(i)}\left\lbrack y^{(i)}\left( 1 - \sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right) \right) + (y^{(i)} - 1)\sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right) \right\rbrack\)</span>
+[Simplifying]</p>
+<p><span class="math notranslate nohighlight">\(= x_{j}^{(i)}\left\lbrack y^{(i)} - y^{(i)}\sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right) + y^{(i)}\sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right) - \sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right) \right\rbrack\)</span>
+[Simplifying]</p>
+<p><span class="math notranslate nohighlight">\(= x_{j}^{(i)}\left( y^{(i)} - \sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right) \right)\)</span>
+[Simplifying]</p>
+<p>The derivative of the cost function with respect to the j-th parameter
+will hence be:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial J\left( \mathbf{\beta} \right)}{\partial\beta_{j}} = - \sum_{i = 1}^{N}{\frac{\partial}{\partial\beta_{j}}y^{(i)}\log{\sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right)} + \frac{\partial}{\partial\beta_{j}}{(1 - y}^{(i)})\log\left( 1 - \sigma\left( {\mathbf{\beta}^{T}\mathbf{x}}^{(i)} \right) \right)} = \sum_{i}^{N}{x_{j}^{(i)}\left( y^{(i)} - \sigma\left( \beta^{T}x^{(i)} \right) \right)}\]</div>
+<p>The gradient descent update rule for each parameter will be:</p>
+<div class="math notranslate nohighlight">
+\[\beta_{j}\mathbf{=}\beta_{j}\mathbf{-}\gamma\sum_{i = 1\ }^{N}{x_{j}^{(i)}\left( \sigma\left( \mathbf{\beta}^{T}\mathbf{x}^{(i)} \right) - y^{(i)} \right)}\]</div>
 </div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">breast</span><span class="o">.</span><span class="n">columns</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;radius1&#39;, &#39;texture1&#39;, &#39;perimeter1&#39;, &#39;area1&#39;, &#39;smoothness1&#39;,
-       &#39;compactness1&#39;, &#39;concavity1&#39;, &#39;concave_points1&#39;, &#39;symmetry1&#39;,
-       &#39;fractal_dimension1&#39;, &#39;radius2&#39;, &#39;texture2&#39;, &#39;perimeter2&#39;, &#39;area2&#39;,
-       &#39;smoothness2&#39;, &#39;compactness2&#39;, &#39;concavity2&#39;, &#39;concave_points2&#39;,
-       &#39;symmetry2&#39;, &#39;fractal_dimension2&#39;, &#39;radius3&#39;, &#39;texture3&#39;, &#39;perimeter3&#39;,
-       &#39;area3&#39;, &#39;smoothness3&#39;, &#39;compactness3&#39;, &#39;concavity3&#39;, &#39;concave_points3&#39;,
-       &#39;symmetry3&#39;, &#39;fractal_dimension3&#39;, &#39;Diagnosis&#39;],
-      dtype=&#39;object&#39;)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">breast</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
-    <span class="n">breast</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">c</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;Diagnosis&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/01c4ade5b8ed079a6870dd8aa880ae52836adc41ac16bc1091b40d66e4eecbbd.png" src="../_images/01c4ade5b8ed079a6870dd8aa880ae52836adc41ac16bc1091b40d66e4eecbbd.png" />
-<img alt="../_images/1645bf882bfb2e44cbaf182b7c01d3bbab26068473954d7d6742310a98d22a94.png" src="../_images/1645bf882bfb2e44cbaf182b7c01d3bbab26068473954d7d6742310a98d22a94.png" />
-<img alt="../_images/e8134ed4656abbb9deb92f87d0157c80c745e9bdc15810522440f83367033573.png" src="../_images/e8134ed4656abbb9deb92f87d0157c80c745e9bdc15810522440f83367033573.png" />
-<img alt="../_images/2317afa689cbd6b1200cf4475251943233e58027c362fb7d38b60439a0103f11.png" src="../_images/2317afa689cbd6b1200cf4475251943233e58027c362fb7d38b60439a0103f11.png" />
-<img alt="../_images/cd65bd5b239e6ec1c9d3caa4584899b41d3635b51d96f9687080c147d87ac0fe.png" src="../_images/cd65bd5b239e6ec1c9d3caa4584899b41d3635b51d96f9687080c147d87ac0fe.png" />
-<img alt="../_images/8cf3767360bd36356bc89eabb727a2a7480bfdec06b667209bb76c07e2812ebc.png" src="../_images/8cf3767360bd36356bc89eabb727a2a7480bfdec06b667209bb76c07e2812ebc.png" />
-<img alt="../_images/0bbdef8e2ab0138b34c1c36b36d6a7c748dbbb3ea23e41f6187b19ca47ec4f78.png" src="../_images/0bbdef8e2ab0138b34c1c36b36d6a7c748dbbb3ea23e41f6187b19ca47ec4f78.png" />
-<img alt="../_images/14655f35b0384ab1c932d5bed29f22d9e1326e2e25f458362bfed2a36259a265.png" src="../_images/14655f35b0384ab1c932d5bed29f22d9e1326e2e25f458362bfed2a36259a265.png" />
-<img alt="../_images/911a91c8047b02d08e0623adf97b83fe11b21f54f2d4b6d6d744acfba4d05318.png" src="../_images/911a91c8047b02d08e0623adf97b83fe11b21f54f2d4b6d6d744acfba4d05318.png" />
-<img alt="../_images/deaf72bf948c728376f18aa4b9d81b31723f04d1445b7b2066fbf0158a500546.png" src="../_images/deaf72bf948c728376f18aa4b9d81b31723f04d1445b7b2066fbf0158a500546.png" />
-<img alt="../_images/3d0ef29a51e09fcb17afef79057383c8ccb0e7a3b1d57d07cbec4b3fc3730318.png" src="../_images/3d0ef29a51e09fcb17afef79057383c8ccb0e7a3b1d57d07cbec4b3fc3730318.png" />
-<img alt="../_images/0aa2d13c4b91f6b7272d1b5cec97833dee1488ab7d259e533d99ee0ee1571f1c.png" src="../_images/0aa2d13c4b91f6b7272d1b5cec97833dee1488ab7d259e533d99ee0ee1571f1c.png" />
-<img alt="../_images/6781d098eee8cac01e09c738a6b12c5c0bd76ce5f401d97dff922158f9048a34.png" src="../_images/6781d098eee8cac01e09c738a6b12c5c0bd76ce5f401d97dff922158f9048a34.png" />
-<img alt="../_images/71959e4b26038cb7f5a0dcbe7b950d397ec220b6983a284f1b1a8435325e80c4.png" src="../_images/71959e4b26038cb7f5a0dcbe7b950d397ec220b6983a284f1b1a8435325e80c4.png" />
-<img alt="../_images/e5f0df67bd8e3c4ab1ebf8486cb6bca5c096b451ecae68e0b215d74555352796.png" src="../_images/e5f0df67bd8e3c4ab1ebf8486cb6bca5c096b451ecae68e0b215d74555352796.png" />
-<img alt="../_images/f401b749d3ef97c12c3e2377853f88ecf80b6bff17ba35f073ee19b6bc9ffc00.png" src="../_images/f401b749d3ef97c12c3e2377853f88ecf80b6bff17ba35f073ee19b6bc9ffc00.png" />
-<img alt="../_images/360125e4d9bfb0b1b06b49bdfd3e6e500e3958b8da721b8322150955fb11859b.png" src="../_images/360125e4d9bfb0b1b06b49bdfd3e6e500e3958b8da721b8322150955fb11859b.png" />
-<img alt="../_images/a711839df6b97f101a327d14f4cde8d12c3d0508193a85381e37d7170f80fee0.png" src="../_images/a711839df6b97f101a327d14f4cde8d12c3d0508193a85381e37d7170f80fee0.png" />
-<img alt="../_images/f788905cd1a96ee40e74c09a6723f781b27166a9b5471f0c476ecefadbc2190f.png" src="../_images/f788905cd1a96ee40e74c09a6723f781b27166a9b5471f0c476ecefadbc2190f.png" />
-<img alt="../_images/d307b26b5da3ea5b2d93541740a7af456751f95c436e354ffaac4b11f5a79f23.png" src="../_images/d307b26b5da3ea5b2d93541740a7af456751f95c436e354ffaac4b11f5a79f23.png" />
-<img alt="../_images/107741efe889a00a270a23424f87f55f9a09e0a043dd31d9c47f6edd7805e832.png" src="../_images/107741efe889a00a270a23424f87f55f9a09e0a043dd31d9c47f6edd7805e832.png" />
-<img alt="../_images/867a9dde16a786f6fdb39c546cac026cc9c14277e14581c3104c1cceafd74823.png" src="../_images/867a9dde16a786f6fdb39c546cac026cc9c14277e14581c3104c1cceafd74823.png" />
-<img alt="../_images/ccc2ed6dc4d659fa31f92defadabb247238868bfcfbc60c65c60f984805a6ee7.png" src="../_images/ccc2ed6dc4d659fa31f92defadabb247238868bfcfbc60c65c60f984805a6ee7.png" />
-<img alt="../_images/1b2bcb26b1668d2d656a9d71ad8c7940ecd9f6ce143b37d2dd105c5d489ff0b4.png" src="../_images/1b2bcb26b1668d2d656a9d71ad8c7940ecd9f6ce143b37d2dd105c5d489ff0b4.png" />
-<img alt="../_images/7bdaf14889ce3b807e3ad8cc5d9aff3bbf0c7abd4203c9fcd2ae43c283c9be7f.png" src="../_images/7bdaf14889ce3b807e3ad8cc5d9aff3bbf0c7abd4203c9fcd2ae43c283c9be7f.png" />
-<img alt="../_images/84cd0808bad63be390062a6f5799090da403b4f9c05137d8fdb45a7356d34f29.png" src="../_images/84cd0808bad63be390062a6f5799090da403b4f9c05137d8fdb45a7356d34f29.png" />
-<img alt="../_images/f1bf7fb754d2ad8afe3a2605eb4439931ce5e7b0d5cdb656230a4b862d778cfb.png" src="../_images/f1bf7fb754d2ad8afe3a2605eb4439931ce5e7b0d5cdb656230a4b862d778cfb.png" />
-<img alt="../_images/22d619759192074dc041feba74ef15ba79bed0bd569100cc19c0de24e04f9f7f.png" src="../_images/22d619759192074dc041feba74ef15ba79bed0bd569100cc19c0de24e04f9f7f.png" />
-<img alt="../_images/08c4460f5500bccab6a9f12254cb3b50e9856bb8cf394f4aaac376677f6dc0ba.png" src="../_images/08c4460f5500bccab6a9f12254cb3b50e9856bb8cf394f4aaac376677f6dc0ba.png" />
-<img alt="../_images/cb3fbcb4808e88e4ec8c3e7ef69ba754bc87a188acc64551daf998b9eb4905a3.png" src="../_images/cb3fbcb4808e88e4ec8c3e7ef69ba754bc87a188acc64551daf998b9eb4905a3.png" />
-<img alt="../_images/c008ad909de8c2e58d956ad659aba3227be62a50fbfba2a494faa9b172e86ce6.png" src="../_images/c008ad909de8c2e58d956ad659aba3227be62a50fbfba2a494faa9b172e86ce6.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ucimlrepo</span> <span class="kn">import</span> <span class="n">fetch_ucirepo</span> 
-  
-<span class="c1"># fetch dataset </span>
-<span class="n">adult</span> <span class="o">=</span> <span class="n">fetch_ucirepo</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> 
-  
-<span class="c1"># data (as pandas dataframes) </span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">adult</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span> 
-<span class="n">y</span> <span class="o">=</span> <span class="n">adult</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">targets</span> 
-
-<span class="n">adult</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">adult</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f94f202e5b0&gt;
-</pre></div>
-</div>
-<img alt="../_images/1decac372ff49f28ab9584fba07b07d1a87ed4fc5daf881a75a1427ee8ceac1f.png" src="../_images/1decac372ff49f28ab9584fba07b07d1a87ed4fc5daf881a75a1427ee8ceac1f.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adult</span><span class="p">[</span><span class="s1">&#39;income&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">adult</span><span class="p">[</span><span class="s1">&#39;income&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s1">&#39;&lt;=50K.&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;&lt;=50K&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;&gt;50K.&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;&gt;50K&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">})</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">adult</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f94d2509e20&gt;
-</pre></div>
-</div>
-<img alt="../_images/11cb4626e35ff6496f8c97d4f581af5ac20e9384b3b7492de881fa39e8de9e08.png" src="../_images/11cb4626e35ff6496f8c97d4f581af5ac20e9384b3b7492de881fa39e8de9e08.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ucimlrepo</span> <span class="kn">import</span> <span class="n">fetch_ucirepo</span> 
-  
-<span class="c1"># fetch dataset </span>
-<span class="n">wine</span> <span class="o">=</span> <span class="n">fetch_ucirepo</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">109</span><span class="p">)</span> 
-  
-<span class="c1"># data (as pandas dataframes) </span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">wine</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span> 
-<span class="n">y</span> <span class="o">=</span> <span class="n">wine</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">targets</span> 
-
-<span class="n">wine</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wine</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Alcohol</th>
-      <th>Malicacid</th>
-      <th>Ash</th>
-      <th>Alcalinity_of_ash</th>
-      <th>Magnesium</th>
-      <th>Total_phenols</th>
-      <th>Flavanoids</th>
-      <th>Nonflavanoid_phenols</th>
-      <th>Proanthocyanins</th>
-      <th>Color_intensity</th>
-      <th>Hue</th>
-      <th>0D280_0D315_of_diluted_wines</th>
-      <th>Proline</th>
-      <th>class</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>14.23</td>
-      <td>1.71</td>
-      <td>2.43</td>
-      <td>15.6</td>
-      <td>127</td>
-      <td>2.80</td>
-      <td>3.06</td>
-      <td>0.28</td>
-      <td>2.29</td>
-      <td>5.64</td>
-      <td>1.04</td>
-      <td>3.92</td>
-      <td>1065</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>13.20</td>
-      <td>1.78</td>
-      <td>2.14</td>
-      <td>11.2</td>
-      <td>100</td>
-      <td>2.65</td>
-      <td>2.76</td>
-      <td>0.26</td>
-      <td>1.28</td>
-      <td>4.38</td>
-      <td>1.05</td>
-      <td>3.40</td>
-      <td>1050</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>13.16</td>
-      <td>2.36</td>
-      <td>2.67</td>
-      <td>18.6</td>
-      <td>101</td>
-      <td>2.80</td>
-      <td>3.24</td>
-      <td>0.30</td>
-      <td>2.81</td>
-      <td>5.68</td>
-      <td>1.03</td>
-      <td>3.17</td>
-      <td>1185</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>14.37</td>
-      <td>1.95</td>
-      <td>2.50</td>
-      <td>16.8</td>
-      <td>113</td>
-      <td>3.85</td>
-      <td>3.49</td>
-      <td>0.24</td>
-      <td>2.18</td>
-      <td>7.80</td>
-      <td>0.86</td>
-      <td>3.45</td>
-      <td>1480</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>13.24</td>
-      <td>2.59</td>
-      <td>2.87</td>
-      <td>21.0</td>
-      <td>118</td>
-      <td>2.80</td>
-      <td>2.69</td>
-      <td>0.39</td>
-      <td>1.82</td>
-      <td>4.32</td>
-      <td>1.04</td>
-      <td>2.93</td>
-      <td>735</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>173</th>
-      <td>13.71</td>
-      <td>5.65</td>
-      <td>2.45</td>
-      <td>20.5</td>
-      <td>95</td>
-      <td>1.68</td>
-      <td>0.61</td>
-      <td>0.52</td>
-      <td>1.06</td>
-      <td>7.70</td>
-      <td>0.64</td>
-      <td>1.74</td>
-      <td>740</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>174</th>
-      <td>13.40</td>
-      <td>3.91</td>
-      <td>2.48</td>
-      <td>23.0</td>
-      <td>102</td>
-      <td>1.80</td>
-      <td>0.75</td>
-      <td>0.43</td>
-      <td>1.41</td>
-      <td>7.30</td>
-      <td>0.70</td>
-      <td>1.56</td>
-      <td>750</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>175</th>
-      <td>13.27</td>
-      <td>4.28</td>
-      <td>2.26</td>
-      <td>20.0</td>
-      <td>120</td>
-      <td>1.59</td>
-      <td>0.69</td>
-      <td>0.43</td>
-      <td>1.35</td>
-      <td>10.20</td>
-      <td>0.59</td>
-      <td>1.56</td>
-      <td>835</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>176</th>
-      <td>13.17</td>
-      <td>2.59</td>
-      <td>2.37</td>
-      <td>20.0</td>
-      <td>120</td>
-      <td>1.65</td>
-      <td>0.68</td>
-      <td>0.53</td>
-      <td>1.46</td>
-      <td>9.30</td>
-      <td>0.60</td>
-      <td>1.62</td>
-      <td>840</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>177</th>
-      <td>14.13</td>
-      <td>4.10</td>
-      <td>2.74</td>
-      <td>24.5</td>
-      <td>96</td>
-      <td>2.05</td>
-      <td>0.76</td>
-      <td>0.56</td>
-      <td>1.35</td>
-      <td>9.20</td>
-      <td>0.61</td>
-      <td>1.60</td>
-      <td>560</td>
-      <td>3</td>
-    </tr>
-  </tbody>
+</section>
+<section id="example-of-logistic-regression">
+<h2><span class="section-number">11.9. </span>Example of Logistic Regression<a class="headerlink" href="#example-of-logistic-regression" title="Permalink to this heading">#</a></h2>
+<p>Let us now apply logistic regression to a larger set of variables in our regression problem. We will consider the following independent variables:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">radius1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">texture1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">perimeter1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">area1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">smoothness1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">compactness1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">concavity1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">symmetry1</span></code></p></li>
+</ul>
+<p>The dependent variable is again <code class="docutils literal notranslate"><span class="pre">Diagnosis</span></code>.</p>
+<p>Once fit to the data, we will obtain the following parameters:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><span class="math notranslate nohighlight">\(R^2\)</span></p></th>
+<th class="head"><p>Adj. <span class="math notranslate nohighlight">\(R^2\)</span></p></th>
+<th class="head"><p>F-statistic</p></th>
+<th class="head"><p>Prob(F-statistic)</p></th>
+<th class="head"><p>Log-Likelihood</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0.670</p></td>
+<td><p>0.666</p></td>
+<td><p>142.4</p></td>
+<td><p>1.16e-129</p></td>
+<td><p>-78.055</p></td>
+</tr>
+</tbody>
 </table>
-<p>178 rows × 14 columns</p>
-</div></div></div>
+<p>All values have interpretations similar to the ones obtained in the case of linear regression. The Log-Likelihood reports the value of the logarithm of the likelihood which was used to train the data.</p>
+<p>The estimates for the coefficients are as follows:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<tr>
+        <td></td>          <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>    <td>   -2.6591</td> <td>    0.224</td> <td>  -11.896</td> <td> 0.000</td> <td>   -3.098</td> <td>   -2.220</td>
+</tr>
+<tr>
+  <th>radius1</th>      <td>    0.4688</td> <td>    0.133</td> <td>    3.532</td> <td> 0.000</td> <td>    0.208</td> <td>    0.730</td>
+</tr>
+<tr>
+  <th>texture1</th>     <td>    0.0219</td> <td>    0.003</td> <td>    7.376</td> <td> 0.000</td> <td>    0.016</td> <td>    0.028</td>
+</tr>
+<tr>
+  <th>perimeter1</th>   <td>   -0.0473</td> <td>    0.021</td> <td>   -2.272</td> <td> 0.023</td> <td>   -0.088</td> <td>   -0.006</td>
+</tr>
+<tr>
+  <th>area1</th>        <td>   -0.0009</td> <td>    0.000</td> <td>   -3.985</td> <td> 0.000</td> <td>   -0.001</td> <td>   -0.000</td>
+</tr>
+<tr>
+  <th>smoothness1</th>  <td>    5.1389</td> <td>    1.221</td> <td>    4.208</td> <td> 0.000</td> <td>    2.740</td> <td>    7.538</td>
+</tr>
+<tr>
+  <th>compactness1</th> <td>    0.3080</td> <td>    0.854</td> <td>    0.360</td> <td> 0.719</td> <td>   -1.370</td> <td>    1.986</td>
+</tr>
+<tr>
+  <th>concavity1</th>   <td>    2.0973</td> <td>    0.414</td> <td>    5.065</td> <td> 0.000</td> <td>    1.284</td> <td>    2.911</td>
+</tr>
+<tr>
+  <th>symmetry1</th>    <td>    1.2739</td> <td>    0.568</td> <td>    2.244</td> <td> 0.025</td> <td>    0.159</td> <td>    2.389</td>
+</tr>
+</table></div></div>
 </div>
+<p>We notice that not all variables have a statistically relevant relationship with the dependent variable. Applying backward elimination, we remove <code class="docutils literal notranslate"><span class="pre">compactness1</span></code> and obtain the following estimates:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">wine</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;Diagnosis ~ radius1 + texture1 + perimeter1 + area1 + smoothness1 + concavity1 + symmetry1&quot;</span><span class="p">,</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f952429f130&gt;
-</pre></div>
+<div class="output text_html"><table class="simpletable">
+<tr>
+       <td></td>          <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>   <td>   -2.6708</td> <td>    0.221</td> <td>  -12.086</td> <td> 0.000</td> <td>   -3.105</td> <td>   -2.237</td>
+</tr>
+<tr>
+  <th>radius1</th>     <td>    0.4360</td> <td>    0.097</td> <td>    4.517</td> <td> 0.000</td> <td>    0.246</td> <td>    0.626</td>
+</tr>
+<tr>
+  <th>texture1</th>    <td>    0.0219</td> <td>    0.003</td> <td>    7.405</td> <td> 0.000</td> <td>    0.016</td> <td>    0.028</td>
+</tr>
+<tr>
+  <th>perimeter1</th>  <td>   -0.0419</td> <td>    0.014</td> <td>   -2.915</td> <td> 0.004</td> <td>   -0.070</td> <td>   -0.014</td>
+</tr>
+<tr>
+  <th>area1</th>       <td>   -0.0010</td> <td>    0.000</td> <td>   -4.477</td> <td> 0.000</td> <td>   -0.001</td> <td>   -0.001</td>
+</tr>
+<tr>
+  <th>smoothness1</th> <td>    5.3093</td> <td>    1.125</td> <td>    4.719</td> <td> 0.000</td> <td>    3.099</td> <td>    7.519</td>
+</tr>
+<tr>
+  <th>concavity1</th>  <td>    2.1479</td> <td>    0.389</td> <td>    5.517</td> <td> 0.000</td> <td>    1.383</td> <td>    2.913</td>
+</tr>
+<tr>
+  <th>symmetry1</th>   <td>    1.3132</td> <td>    0.557</td> <td>    2.359</td> <td> 0.019</td> <td>    0.220</td> <td>    2.407</td>
+</tr>
+</table></div></div>
 </div>
-<img alt="../_images/f585f1bdb792e912d008209fad159fff3af44754c671563d5463d5bd943be90c.png" src="../_images/f585f1bdb792e912d008209fad159fff3af44754c671563d5463d5bd943be90c.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.formula.api</span> <span class="kn">import</span> <span class="n">logit</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="n">titanic</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/agconti/kaggle-titanic/master/data/train.csv&#39;</span><span class="p">,</span>
-                     <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;PassengerId&#39;</span><span class="p">)</span>
-<span class="n">titanic</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Survived</th>
-      <th>Pclass</th>
-      <th>Name</th>
-      <th>Sex</th>
-      <th>Age</th>
-      <th>SibSp</th>
-      <th>Parch</th>
-      <th>Ticket</th>
-      <th>Fare</th>
-      <th>Cabin</th>
-      <th>Embarked</th>
-    </tr>
-    <tr>
-      <th>PassengerId</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1</th>
-      <td>0</td>
-      <td>3</td>
-      <td>Braund, Mr. Owen Harris</td>
-      <td>male</td>
-      <td>22.0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>A/5 21171</td>
-      <td>7.2500</td>
-      <td>NaN</td>
-      <td>S</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1</td>
-      <td>1</td>
-      <td>Cumings, Mrs. John Bradley (Florence Briggs Th...</td>
-      <td>female</td>
-      <td>38.0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>PC 17599</td>
-      <td>71.2833</td>
-      <td>C85</td>
-      <td>C</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1</td>
-      <td>3</td>
-      <td>Heikkinen, Miss. Laina</td>
-      <td>female</td>
-      <td>26.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>STON/O2. 3101282</td>
-      <td>7.9250</td>
-      <td>NaN</td>
-      <td>S</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1</td>
-      <td>1</td>
-      <td>Futrelle, Mrs. Jacques Heath (Lily May Peel)</td>
-      <td>female</td>
-      <td>35.0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>113803</td>
-      <td>53.1000</td>
-      <td>C123</td>
-      <td>S</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>0</td>
-      <td>3</td>
-      <td>Allen, Mr. William Henry</td>
-      <td>male</td>
-      <td>35.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>373450</td>
-      <td>8.0500</td>
-      <td>NaN</td>
-      <td>S</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>887</th>
-      <td>0</td>
-      <td>2</td>
-      <td>Montvila, Rev. Juozas</td>
-      <td>male</td>
-      <td>27.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>211536</td>
-      <td>13.0000</td>
-      <td>NaN</td>
-      <td>S</td>
-    </tr>
-    <tr>
-      <th>888</th>
-      <td>1</td>
-      <td>1</td>
-      <td>Graham, Miss. Margaret Edith</td>
-      <td>female</td>
-      <td>19.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>112053</td>
-      <td>30.0000</td>
-      <td>B42</td>
-      <td>S</td>
-    </tr>
-    <tr>
-      <th>889</th>
-      <td>0</td>
-      <td>3</td>
-      <td>Johnston, Miss. Catherine Helen "Carrie"</td>
-      <td>female</td>
-      <td>NaN</td>
-      <td>1</td>
-      <td>2</td>
-      <td>W./C. 6607</td>
-      <td>23.4500</td>
-      <td>NaN</td>
-      <td>S</td>
-    </tr>
-    <tr>
-      <th>890</th>
-      <td>1</td>
-      <td>1</td>
-      <td>Behr, Mr. Karl Howell</td>
-      <td>male</td>
-      <td>26.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>111369</td>
-      <td>30.0000</td>
-      <td>C148</td>
-      <td>C</td>
-    </tr>
-    <tr>
-      <th>891</th>
-      <td>0</td>
-      <td>3</td>
-      <td>Dooley, Mr. Patrick</td>
-      <td>male</td>
-      <td>32.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>370376</td>
-      <td>7.7500</td>
-      <td>NaN</td>
-      <td>Q</td>
-    </tr>
-  </tbody>
-</table>
-<p>891 rows × 11 columns</p>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
-
-<span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;species&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span>
-<span class="n">iris</span> <span class="o">=</span> <span class="n">iris</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span>
-<span class="n">iris</span>
-</pre></div>
-</div>
-</div>
+<p>These are now all statistically relevant. For instance, we can see that:</p>
+<ul class="simple">
+<li><p>When all variables are set to zero, the odds of the benign tumor are <span class="math notranslate nohighlight">\(e^{-2.6708} \approx 0.07\)</span>, or <span class="math notranslate nohighlight">\(\frac{7}{100}\)</span>. This is a base value.</p></li>
+<li><p>An increment in one unit of <code class="docutils literal notranslate"><span class="pre">texture1</span></code> increments the odds of a benign tumor multiplicatively by a factor of <span class="math notranslate nohighlight">\(e^{0.0219} \approx 1.02\)</span> (a +<span class="math notranslate nohighlight">\(2\%\)</span>).</p></li>
+<li><p>An increment of one unit of <code class="docutils literal notranslate"><span class="pre">perimeter1</span></code> decrements the odds of benign tumor multiplicatively by a factor of <span class="math notranslate nohighlight">\(e^{-0.0419} \approx 0.96\)</span> (a -<span class="math notranslate nohighlight">\(4\%\)</span>).</p></li>
+</ul>
+</section>
+<section id="multinomial-logistic-regression">
+<h2><span class="section-number">11.10. </span>Multinomial Logistic Regression<a class="headerlink" href="#multinomial-logistic-regression" title="Permalink to this heading">#</a></h2>
+<p>In many cases, we want to study the relationship between a set of <strong>continuous or categorical independent variable and a non-binary categorical dependent variable</strong>.</p>
+<section id="the-iris-dataset">
+<h3><span class="section-number">11.10.1. </span>The Iris Dataset<a class="headerlink" href="#the-iris-dataset" title="Permalink to this heading">#</a></h3>
+<p>An example is given by Fisher’s Iris dataset.</p>
+<p>The dataset was introduced by Ronald Fisher in 1936 and contains observations related to 150 specimens of iris flowers belonging to 3 different species: “setosa”, “versicolor”, and “virginica”. Example images of the three flowers are given below:</p>
+<p><img alt="" src="_static/lecture_specific/iris/iris.png" /></p>
+<p>For each of the observations, the dataset provides measurements of 4 physical characteristics (length and width of sepals and petals), as illustrated in the image below:</p>
+<p><img alt="" src="_static/lecture_specific/iris/sepal_petal.png" /></p>
+<p>All the variables in the dataset are numeric, except for <code class="docutils literal notranslate"><span class="pre">species</span></code>, which is categorical. Here are some observations from the dataset:</p>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html"><div>
 <style scoped>
@@ -1636,10 +1401,10 @@ parameters as follows:</p>
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>sepal length (cm)</th>
-      <th>sepal width (cm)</th>
-      <th>petal length (cm)</th>
-      <th>petal width (cm)</th>
+      <th>sepal_length</th>
+      <th>sepal_width</th>
+      <th>petal_length</th>
+      <th>petal_width</th>
       <th>species</th>
     </tr>
   </thead>
@@ -1650,7 +1415,7 @@ parameters as follows:</p>
       <td>3.5</td>
       <td>1.4</td>
       <td>0.2</td>
-      <td>0</td>
+      <td>setosa</td>
     </tr>
     <tr>
       <th>1</th>
@@ -1658,7 +1423,7 @@ parameters as follows:</p>
       <td>3.0</td>
       <td>1.4</td>
       <td>0.2</td>
-      <td>0</td>
+      <td>setosa</td>
     </tr>
     <tr>
       <th>2</th>
@@ -1666,7 +1431,7 @@ parameters as follows:</p>
       <td>3.2</td>
       <td>1.3</td>
       <td>0.2</td>
-      <td>0</td>
+      <td>setosa</td>
     </tr>
     <tr>
       <th>3</th>
@@ -1674,7 +1439,7 @@ parameters as follows:</p>
       <td>3.1</td>
       <td>1.5</td>
       <td>0.2</td>
-      <td>0</td>
+      <td>setosa</td>
     </tr>
     <tr>
       <th>4</th>
@@ -1682,7 +1447,7 @@ parameters as follows:</p>
       <td>3.6</td>
       <td>1.4</td>
       <td>0.2</td>
-      <td>0</td>
+      <td>setosa</td>
     </tr>
     <tr>
       <th>...</th>
@@ -1698,7 +1463,7 @@ parameters as follows:</p>
       <td>3.0</td>
       <td>5.2</td>
       <td>2.3</td>
-      <td>2</td>
+      <td>virginica</td>
     </tr>
     <tr>
       <th>146</th>
@@ -1706,7 +1471,7 @@ parameters as follows:</p>
       <td>2.5</td>
       <td>5.0</td>
       <td>1.9</td>
-      <td>2</td>
+      <td>virginica</td>
     </tr>
     <tr>
       <th>147</th>
@@ -1714,7 +1479,7 @@ parameters as follows:</p>
       <td>3.0</td>
       <td>5.2</td>
       <td>2.0</td>
-      <td>2</td>
+      <td>virginica</td>
     </tr>
     <tr>
       <th>148</th>
@@ -1722,7 +1487,7 @@ parameters as follows:</p>
       <td>3.4</td>
       <td>5.4</td>
       <td>2.3</td>
-      <td>2</td>
+      <td>virginica</td>
     </tr>
     <tr>
       <th>149</th>
@@ -1730,107 +1495,162 @@ parameters as follows:</p>
       <td>3.0</td>
       <td>5.1</td>
       <td>1.8</td>
-      <td>2</td>
+      <td>virginica</td>
     </tr>
   </tbody>
 </table>
 <p>150 rows × 5 columns</p>
 </div></div></div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span><span class="o">=</span><span class="n">iris</span><span class="p">[</span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;species&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;petal length (cm)&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;species&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
+<p>Looking at the scatterplots we can see how the measurements have different ranges (same units, all centimeters):</p>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;petal length (cm)&#39;, ylabel=&#39;species&#39;&gt;
-</pre></div>
-</div>
-<img alt="../_images/d7444bba8bf27b4c3603c811aa011c309445ce57794009508f74d985d8574a79.png" src="../_images/d7444bba8bf27b4c3603c811aa011c309445ce57794009508f74d985d8574a79.png" />
+<img alt="../_images/a9889b3ca87b0828a39742ef9d9639169a3855d9e75338e5f277de0a9ae5d88d.png" src="../_images/a9889b3ca87b0828a39742ef9d9639169a3855d9e75338e5f277de0a9ae5d88d.png" />
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">iris</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
+<p>Let us observe the scatter matrix</p>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f956418da00&gt;
-</pre></div>
-</div>
-<img alt="../_images/de2e6b0e74403b595ee3a8c0ab4dd0da2fb53fb011665af05c16d63c015245be.png" src="../_images/de2e6b0e74403b595ee3a8c0ab4dd0da2fb53fb011665af05c16d63c015245be.png" />
+<img alt="../_images/d46123de31e58dfeb8edb21141cb1f953c65d24573a69c0853fcc211c8f60834.png" src="../_images/d46123de31e58dfeb8edb21141cb1f953c65d24573a69c0853fcc211c8f60834.png" />
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logit</span><span class="p">(</span><span class="s2">&quot;Survived ~ Pclass + Sex &quot;</span><span class="p">,</span><span class="n">titanic</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
-</pre></div>
+</section>
+<section id="additional-limitations-of-a-linear-regression-in-the-presence-of-more-than-two-classes">
+<h3><span class="section-number">11.10.2. </span>Additional Limitations of a Linear Regression in the Presence of More than Two Classes<a class="headerlink" href="#additional-limitations-of-a-linear-regression-in-the-presence-of-more-than-two-classes" title="Permalink to this heading">#</a></h3>
+<p>Let us consider again a case with a single independent feature. We will select <code class="docutils literal notranslate"><span class="pre">petal_length</span></code>. The following image plots it with respect to the three classes:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/f7d88680b9af0d55dae7bf8b3eabddaebbd9c5bb31e4705c4cba32f8c5e7bb6c.png" src="../_images/f7d88680b9af0d55dae7bf8b3eabddaebbd9c5bb31e4705c4cba32f8c5e7bb6c.png" />
 </div>
 </div>
+<p>From the figure above, one may think that a linear regressor, even if not perfect, could still be an option. However, <strong>to fit a linear regressor, we should first convert species values to numeric values</strong>. A possible outcome could be:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/71a8f8a8c549a685f461dd583e0107d992a711b5d9cad5d4fd824f20e2958a93.png" src="../_images/71a8f8a8c549a685f461dd583e0107d992a711b5d9cad5d4fd824f20e2958a93.png" />
+</div>
+</div>
+<p>However, also the following mapping would be valid:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/0c0257412e34ab0a51337949aa06858231fa01169437fb46e8eaa5572e167482.png" src="../_images/0c0257412e34ab0a51337949aa06858231fa01169437fb46e8eaa5572e167482.png" />
+</div>
+</div>
+<p>Even if the two mappings should be equivalent, we can see how a linear model would find very different results.</p>
+<p>This is an example of how the linear model is <strong>even more limited when more than two possible outcomes of the dependent variable are possible</strong>.</p>
+</section>
+<section id="the-multinomial-logistic-regression-model">
+<h3><span class="section-number">11.10.3. </span>The Multinomial Logistic Regression Model<a class="headerlink" href="#the-multinomial-logistic-regression-model" title="Permalink to this heading">#</a></h3>
+<p>When the dependent variable can assume more than two values, <strong>we can define the multinomial logistic regression model</strong>. In this case, we select one fo the values of the dependent variable <span class="math notranslate nohighlight">\(Y\)</span> as <strong>a baseline class</strong>. Without loss of generality, let <span class="math notranslate nohighlight">\(K\)</span> be the number of classes and let <span class="math notranslate nohighlight">\(Y=1\)</span> be the baseline class. Recall that in the case of the logistic regressor, we modeled the logarithm of the odd as our linear function:</p>
+<div class="math notranslate nohighlight">
+\[\log \left(\frac{P(y=1|\mathbf{x})}{1-P(y=1|\mathbf{x})}\right) = \beta_0 + \beta_1 x_1 + \ldots + \beta_n x_n\]</div>
+<p>Since we have more than one possible outcomes for the dependent variable, rather than modeling the odds, a multinomial logistic regressor models the logarithm of the ratio between a given class <span class="math notranslate nohighlight">\(k\)</span> and the baseline class <span class="math notranslate nohighlight">\(0\)</span> as follows:</p>
+<div class="math notranslate nohighlight">
+\[\log\left( \frac{P(Y=k|X=\mathbf{x})}{P(Y=1|X=\mathbf{x})} \right) = \beta_{k0} + \beta_{k1} x_1 + \ldots + \beta_{kn} x_n\]</div>
+<p>Note that, in practice, we need to define a different linear function for each class <span class="math notranslate nohighlight">\(k = 1 \ldots K\)</span>, hence we need <span class="math notranslate nohighlight">\((n+1) \times (k-1)\)</span> parameters.</p>
+<p>Let <span class="math notranslate nohighlight">\(P(k)=(Y=k|X=\mathcal{x})\)</span> for brevity, <span class="math notranslate nohighlight">\(\mathbf{\beta_k}=(\beta_0,\beta_1,\ldots,\beta_k)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{X}=(1,x_1,\ldots,x_n)\)</span>. We can see that:</p>
+<div class="math notranslate nohighlight">
+\[\log\left(\frac{P(k)}{P(1)}\right) = \mathbf{\beta_k}^T\mathbf{X} \Rightarrow P(k)= e^{\mathbf{\beta_k}^T\mathbf{X}} P(1) = \]</div>
+<p>We can divide the last term by <span class="math notranslate nohighlight">\(1=\sum_{l=1}^K P(l)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[ P(k) = \frac{e^{\mathbf{\beta_k}^T\mathbf{X}} P(1)}{\sum_{l=1}^K P(l)} = \frac{e^{\mathbf{\beta_k}^T\mathbf{X}}}{\sum_{l=1}^K \frac{P(l)}{P(1)}} = \frac{e^{\mathbf{\beta_k}^T\mathbf{X}}}{\frac{P(1)}{P(1)}+\sum_{l=2}^K \frac{P(l)}{P(1)}} = \frac{e^{\mathbf{\beta_k}^T\mathbf{X}}}{1+\sum_{l=2}^K \mathbf{\beta_l^T\mathbf{X}}} \text{   (A)}\]</div>
+<p>Note that the expression above can also be seen as:</p>
+<div class="math notranslate nohighlight">
+\[ P(k) = \frac{\log\left(\frac{P(k)}{P(1)}\right)}{1+\sum_{l=2}^K \mathbf{\beta_l^T\mathbf{X}}}\]</div>
+<p>Hence:</p>
+<div class="math notranslate nohighlight">
+\[ P(1) = \frac{1}{1+\sum_{l=2}^K \mathbf{\beta}_l^T\mathbf{X}} \text{   (B)}\]</div>
+<p>We can rewrite the results (A) and (B) in the full form:</p>
+<div class="math notranslate nohighlight">
+\[ P(Y=k|X=\mathbf{x}) = \frac{e^{\mathbf{\beta_k}^T\mathbf{X}}}{1+\sum_{l=2}^K \mathbf{\beta_l^T\mathbf{X}}}\]</div>
+<div class="math notranslate nohighlight">
+\[ P(Y=1|X=\mathbf{x}) = \frac{1}{1+\sum_{l=2}^K \mathbf{\beta_l^T\mathbf{X}}}\]</div>
+<p>These two expressions can be used to compute the probabilities of the classes once that the parameters have been estimated and <span class="math notranslate nohighlight">\(\mathcal{x}\)</span> is observed.</p>
+<section id="estimating-the-parameters-of-the-multinomial-logistic-regressor-model">
+<h4><span class="section-number">11.10.3.1. </span>Estimating the Parameters of the Multinomial Logistic Regressor Model<a class="headerlink" href="#estimating-the-parameters-of-the-multinomial-logistic-regressor-model" title="Permalink to this heading">#</a></h4>
+<p>We can estimate the paramters of the multinomial logistic regressor model again by maximizing the likelihood of the model on the data. Assuming that all observations are i.i.d., we can write:</p>
+<div class="math notranslate nohighlight">
+\[L(\mathbf{\beta}) = \prod_{i=1}^N P(Y=y^{(i)}|X=\mathbf{x}^{(i)};\mathbf{\beta})\]</div>
+<p>Again, we minimize the negative log likelihood:</p>
+<div class="math notranslate nohighlight">
+\[nll(\mathcal{\beta})=-\log L(\mathbf{\beta}) = -\sum_{i=1}^N \log P(Y=y^{(i)}|X=\mathbf{x}^{(i)};\mathbf{\beta}) = -\sum_{i=1}^N [y^{(i)} \neq 1](e^{-\mathbf{\beta}_k^T\mathbf{X}} - \log(1+\sum_{l=2}^K {\beta}_k^T\mathbf{X})) + [y^{(i)} = 1] (- \log(1+\sum_{l=2}^K {\beta}_k^T\mathbf{X}))\]</div>
+<p>Where <span class="math notranslate nohighlight">\([\cdot]\)</span> denotes the Iverson brackets:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}[x] = \begin{cases}1 &amp; \text{if } x \text{ is true} \\ 0 &amp; \text{otherwise}\end{cases}\end{split}\]</div>
+<p>Similarly to the logistic regressor, there is no close form for the estimation of the parameters, but iterative algorithms such as <strong>gradient descent</strong> are in general used for optimization.</p>
+</section>
+<section id="interpretation-of-the-parameters-of-a-multinomial-logistic-regressor">
+<h4><span class="section-number">11.10.3.2. </span>Interpretation of the Parameters of a Multinomial Logistic Regressor<a class="headerlink" href="#interpretation-of-the-parameters-of-a-multinomial-logistic-regressor" title="Permalink to this heading">#</a></h4>
+<p>The statistical interpretation of the parameters of a multinomial logistic regressor is similar to the one of a logistic regressor, but we should pay attention to the choice of the baseline.</p>
+<p>Let us consider our example of studying the relationship between <code class="docutils literal notranslate"><span class="pre">sepal_lenght</span></code> and <code class="docutils literal notranslate"><span class="pre">species</span></code>. We will map <code class="docutils literal notranslate"><span class="pre">virginica</span></code> to <span class="math notranslate nohighlight">\(0\)</span>, <code class="docutils literal notranslate"><span class="pre">versicolor</span></code> to <span class="math notranslate nohighlight">\(1\)</span> and <code class="docutils literal notranslate"><span class="pre">setosa</span></code> to <span class="math notranslate nohighlight">\(2\)</span>. Once the model is fit, we will find the following values:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Pseudo <span class="math notranslate nohighlight">\(R^2\)</span></p></th>
+<th class="head"><p>LogLikelihood</p></th>
+<th class="head"><p>LLR p-value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0.4476</p></td>
+<td><p>-91.034</p></td>
+<td><p>9.276e-33</p></td>
+</tr>
+</tbody>
+</table>
+<p>The value of LLR p-value is telling us that the model is statistically relevant, even if the pseudo <span class="math notranslate nohighlight">\(R^2\)</span> is not very high. The relationship is not completely explained by the multinomial logistic regressor.</p>
+<p>The coefficients will be as follows:</p>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
-         Current function value: 0.464195
-         Iterations 6
+         Current function value: 0.606893
+         Iterations 8
 </pre></div>
 </div>
 <div class="output text_html"><table class="simpletable">
-<caption>Logit Regression Results</caption>
 <tr>
-  <th>Dep. Variable:</th>       <td>Survived</td>     <th>  No. Observations:  </th>  <td>   891</td>  
+    <th>species=1</th>     <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
 </tr>
 <tr>
-  <th>Model:</th>                 <td>Logit</td>      <th>  Df Residuals:      </th>  <td>   888</td>  
+  <th>Intercept</th>    <td>   12.6771</td> <td>    2.906</td> <td>    4.362</td> <td> 0.000</td> <td>    6.981</td> <td>   18.373</td>
 </tr>
 <tr>
-  <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>     2</td>  
+  <th>sepal_length</th> <td>   -2.0307</td> <td>    0.466</td> <td>   -4.361</td> <td> 0.000</td> <td>   -2.943</td> <td>   -1.118</td>
 </tr>
 <tr>
-  <th>Date:</th>            <td>Sun, 29 Oct 2023</td> <th>  Pseudo R-squ.:     </th>  <td>0.3029</td>  
+    <th>species=2</th>     <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
 </tr>
 <tr>
-  <th>Time:</th>                <td>20:56:05</td>     <th>  Log-Likelihood:    </th> <td> -413.60</td> 
+  <th>Intercept</th>    <td>   38.7590</td> <td>    5.691</td> <td>    6.811</td> <td> 0.000</td> <td>   27.605</td> <td>   49.913</td>
 </tr>
 <tr>
-  <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -593.33</td> 
-</tr>
-<tr>
-  <th>Covariance Type:</th>     <td>nonrobust</td>    <th>  LLR p-value:       </th> <td>8.798e-79</td>
-</tr>
-</table>
-<table class="simpletable">
-<tr>
-       <td></td>          <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
-</tr>
-<tr>
-  <th>Intercept</th>   <td>    3.2946</td> <td>    0.297</td> <td>   11.077</td> <td> 0.000</td> <td>    2.712</td> <td>    3.878</td>
-</tr>
-<tr>
-  <th>Sex[T.male]</th> <td>   -2.6434</td> <td>    0.184</td> <td>  -14.380</td> <td> 0.000</td> <td>   -3.004</td> <td>   -2.283</td>
-</tr>
-<tr>
-  <th>Pclass</th>      <td>   -0.9606</td> <td>    0.106</td> <td>   -9.057</td> <td> 0.000</td> <td>   -1.168</td> <td>   -0.753</td>
+  <th>sepal_length</th> <td>   -6.8464</td> <td>    1.022</td> <td>   -6.698</td> <td> 0.000</td> <td>   -8.850</td> <td>   -4.843</td>
 </tr>
 </table></div></div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="n">titanic</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/agconti/kaggle-titanic/master/data/train.csv&#39;</span><span class="p">,</span>
-                     <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;PassengerId&#39;</span><span class="p">)</span>
-<span class="n">titanic</span>
-</pre></div>
-</div>
-</div>
-</div>
+<p>We can see that there are two sets of coefficients. One for <code class="docutils literal notranslate"><span class="pre">species=1</span></code> (versicolor) and one for <code class="docutils literal notranslate"><span class="pre">species=2</span></code> (setosa). No coefficients have been estimated for <code class="docutils literal notranslate"><span class="pre">virginica</span></code>, because it has been chosen as the baseline. We can see that all p-values are small, so we can keep all variables. Let us see how to interpret the coefficients:</p>
+<ul class="simple">
+<li><p>The intercept for <code class="docutils literal notranslate"><span class="pre">species=1</span></code> is <span class="math notranslate nohighlight">\(12.6771\)</span>. This indicates that the odd of <code class="docutils literal notranslate"><span class="pre">versicolor</span></code> versus <code class="docutils literal notranslate"><span class="pre">virginica</span></code> is <span class="math notranslate nohighlight">\(e^{12.6771}=320327.76\)</span>, when <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> is set to zero. This is a very large number, probably due to the fact that <code class="docutils literal notranslate"><span class="pre">sepal_lenght=0</span></code> is not a realistic observation.</p></li>
+<li><p>The intercept for <code class="docutils literal notranslate"><span class="pre">species=2</span></code> is <span class="math notranslate nohighlight">\(38.7590\)</span>. This indicates that the odd of <code class="docutils literal notranslate"><span class="pre">setosa</span></code> versus <code class="docutils literal notranslate"><span class="pre">virginica</span></code> is <span class="math notranslate nohighlight">\(e^{38.7590}=6.8e+16\)</span>, when <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> is set to zero. Also in this case, we obtain a very large number, probably due to the fact that <code class="docutils literal notranslate"><span class="pre">sepal_lenght=0</span></code> is not a realistic observation.</p></li>
+<li><p>The coefficient <span class="math notranslate nohighlight">\(-2.0307\)</span> of <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> for <code class="docutils literal notranslate"><span class="pre">species=1</span></code> indicates that when we observe an increase in one centimeter of <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code>, the odd of <code class="docutils literal notranslate"><span class="pre">versicolor</span></code> versus <code class="docutils literal notranslate"><span class="pre">virginica</span></code> decreases multiplicatively by <span class="math notranslate nohighlight">\(e^{-2.0307} = 0.13\)</span> (a large -$87%!).</p></li>
+<li><p>The coefficient <span class="math notranslate nohighlight">\(-6.8564\)</span> of <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> for <code class="docutils literal notranslate"><span class="pre">species=2</span></code> indicates that when we observe an increase in one centimeter of <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code>, the odd of <code class="docutils literal notranslate"><span class="pre">setosa</span></code> versus <code class="docutils literal notranslate"><span class="pre">virginica</span></code> decreases multiplicatively by <span class="math notranslate nohighlight">\(e^{-6.8464} = 0.001\)</span> (a large -$99.9%!).</p></li>
+</ul>
+</section>
+<section id="the-softmax-regressor">
+<h4><span class="section-number">11.10.3.3. </span>The Softmax Regressor<a class="headerlink" href="#the-softmax-regressor" title="Permalink to this heading">#</a></h4>
+<p>Softmax regression is an alternative formulation of multinomial logistic regression which is designed to avoid the definition of a baseline and it is hence symmetrical. In a softmax regressor, the probabilities are modeled as follows:</p>
+<div class="math notranslate nohighlight">
+\[ P(Y=k|X=\mathbf{x}) = \frac{e^{\mathbf{\beta_k}^T\mathbf{X}}}{1+\sum_{l=2}^K \mathbf{\beta_l^T\mathbf{X}}}, \ \ \ \forall k=1,\ldots,K\]</div>
+<p>So, rather than estimating <span class="math notranslate nohighlight">\(K-1\)</span> coefficients, we estimate <span class="math notranslate nohighlight">\(K\)</span> coefficients.</p>
+<p>The optimization of the model is performed defining a similar cost function and optimizing it with iterative methods.</p>
+<p>The softmax formulation is widely used in predictive analysis and machine learning, but less pervasive in statistics.</p>
+</section>
+</section>
+</section>
+<section id="references">
+<h2><span class="section-number">11.11. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Chapter <span class="math notranslate nohighlight">\(4\)</span> of [1]</p></li>
+</ul>
+<p>[1] James, Gareth Gareth Michael. An introduction to statistical learning: with applications in Python, 2023.<a class="reference external" href="https://www.statlearning.com">https://www.statlearning.com</a></p>
 </section>
 </section>
 
@@ -1864,6 +1684,24 @@ parameters as follows:</p>
                 <footer class="prev-next-footer">
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="11_linear_regression.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">10. </span>Linear Regression</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../laboratories/01_setup.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">12. </span>Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -1879,14 +1717,27 @@ parameters as follows:</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-data">Example Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limits-of-linear-regression">Limits of Linear Regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-binary-values-to-probabilities">From Binary Values to Probabilities</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-function">The Logistic Function</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-regression-model">The Logistic Regression Model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-interpretation-of-the-coefficients-of-a-linear-regressor">Statistical Interpretation of the Coefficients of a Linear Regressor</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geometrical-interpretation-of-the-coefficients-of-a-linear-regressor">Geometrical Interpretation of the Coefficients of a Linear Regressor</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimation-of-the-parameters-of-a-logistic-regressor">Estimation of the Parameters of a Logistic Regressor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-data">11.1. Example Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limits-of-linear-regression">11.2. Limits of Linear Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-binary-values-to-probabilities">11.3. From Binary Values to Probabilities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-function">11.4. The Logistic Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-regression-model">11.5. The Logistic Regression Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-interpretation-of-the-coefficients-of-a-linear-regressor">11.6. Statistical Interpretation of the Coefficients of a Linear Regressor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geometrical-interpretation-of-the-coefficients-of-a-linear-regressor">11.7. Geometrical Interpretation of the Coefficients of a Linear Regressor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimation-of-the-parameters-of-a-logistic-regressor">11.8. Estimation of the Parameters of a Logistic Regressor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-logistic-regression">11.9. Example of Logistic Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-logistic-regression">11.10. Multinomial Logistic Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-iris-dataset">11.10.1. The Iris Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-limitations-of-a-linear-regression-in-the-presence-of-more-than-two-classes">11.10.2. Additional Limitations of a Linear Regression in the Presence of More than Two Classes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-multinomial-logistic-regression-model">11.10.3. The Multinomial Logistic Regression Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-parameters-of-the-multinomial-logistic-regressor-model">11.10.3.1. Estimating the Parameters of the Multinomial Logistic Regressor Model</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-parameters-of-a-multinomial-logistic-regressor">11.10.3.2. Interpretation of the Parameters of a Multinomial Logistic Regressor</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-softmax-regressor">11.10.3.3. The Softmax Regressor</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">11.11. References</a></li>
 </ul>
   </nav></div>
 
@@ -1934,8 +1785,8 @@ By Antonino Furnari
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6"></script>
 
   <footer class="bd-footer">
   </footer>

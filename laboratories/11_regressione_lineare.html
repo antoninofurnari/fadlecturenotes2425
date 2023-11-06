@@ -1,0 +1,3470 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>22. Laboratorio su Regressione Lineare &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=365ca57ee442770a23c6"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'laboratories/11_regressione_lineare';</script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="23. Laboratorio su regressione logistica" href="12_regressione_logistica.html" />
+    <link rel="prev" title="21. Laboratory on Statistical Inference" href="10_statistical_inference.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../lectures/index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Lecture Notes on Fundamentals of Data Analysis - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Lecture Notes on Fundamentals of Data Analysis - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../lectures/index.html">
+                    Lecture Notes on Fundamental of Data Analysis
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lectures/01_intro_data_analysis.html">1. Introduction to Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/03_main_data_analysis_concepts.html">2. Main data analysis concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/04_misure_di_frequenze_e_rappresentazione_grafica_dei_dati.html">3. Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/05_misure_di_tendenza_centrale_dispersione_e_forma.html">4. Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/06_associazione_variabili.html">5. Associazione tra Variabili</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/07_probability.html">6. Probability for Data Manipulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/08_common_distributions.html">7. Common Probability Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/09_information_theory.html">8. Basic Elements of Information Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/10_statistical_inference.html">9. Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/11_linear_regression.html">10. Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/12_logistic_regression.html">11. Logistic Regression</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratories</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_setup.html">12. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_intro_python.html">13. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_intro_numpy.html">14. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_intro_matplotlib.html">15. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_intro_pandas.html">16. Introduzione a Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">17. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_misure_di_tendenza_centrale_dispersione_e_forma.html">18. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_associazione_variabili.html">19. Associazione tra Variabili</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_heart-disease-analysis.html">20. Exploratory Analysis on the Heart Disease Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_statistical_inference.html">21. Laboratory on Statistical Inference</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">22. Laboratorio su Regressione Lineare</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_regressione_logistica.html">23. Laboratorio su regressione logistica</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/antoninofurnari/fadlecturenotes/blob/master/lecturenotes/laboratories/11_regressione_lineare.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/antoninofurnari/fadlecturenotes" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/antoninofurnari/fadlecturenotes/issues/new?title=Issue%20on%20page%20%2Flaboratories/11_regressione_lineare.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/laboratories/11_regressione_lineare.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Laboratorio su Regressione Lineare</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regressione-lineare-semplice">22.1. Regressione Lineare Semplice</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisi-di-un-regressore-lineare-semplice">22.1.1. Analisi di un regressore lineare semplice</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regressione-lineare-multipla">22.2. Regressione Lineare Multipla</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boston-house-pricing-dataset">22.2.1. Boston House Pricing Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regressori-lineari-variabili-categoriche-e-variabili-dummy">22.2.2. Regressori lineari, variabili categoriche e variabili dummy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-elimination">22.2.3. Backward Elimination</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#residual-plots">22.3. Residual Plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estensioni-al-modello-lineare">22.4. Estensioni al Modello Lineare</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interaction-terms">22.4.1. Interaction terms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modello-quadratico">22.4.2. Modello Quadratico</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regressione-polinomiale">22.4.3. Regressione Polinomiale</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">22.5. Esercizi</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="laboratorio-su-regressione-lineare">
+<h1><span class="section-number">22. </span>Laboratorio su Regressione Lineare<a class="headerlink" href="#laboratorio-su-regressione-lineare" title="Permalink to this heading">#</a></h1>
+<p>La regressione lineare ci permette di modellare la relazione tra una <strong>variabile dipendente</strong> <span class="math notranslate nohighlight">\(y\)</span> e una o più <strong>variabili indipendenti</strong> (o regressori) <span class="math notranslate nohighlight">\(x_i\)</span>. Ciò avviene definendo il seguente modello parametrico:</p>
+<div class="math notranslate nohighlight">
+\[
+y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \ldots + \beta_n x_n + \epsilon
+\]</div>
+<p>dove:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\beta_0, \ldots, \beta_n\)</span> sono i parametri del modello;</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta_0\)</span> è l’intercetta;</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta_1, \ldots, \beta_n\)</span> sono detti <em>coefficienti di regressione</em>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(n\)</span> è il numero di variabili indipendenti <span class="math notranslate nohighlight">\(x_i\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(\epsilon\)</span> è il termine di errore (o rumore), ovvero la parte di <span class="math notranslate nohighlight">\(y\)</span> che la regressione “non riesce a spiegare”.</p></li>
+</ul>
+<p>Dato un insieme di dati, è possibile stimare i parametri ottimali <span class="math notranslate nohighlight">\(\beta_0\)</span> e <span class="math notranslate nohighlight">\(\mathbf{\beta}\)</span> del regressore lineare mediante una procedura di ottimizzazione. Il regressore calcolato fornisce un modello in grado di spiegare le relazioni (lineari) tra le variabili indipendenti e la variabile dipendente.</p>
+<p>Inizieremo considerando il solito <em>height-weight</em> dataset:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">data</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;http://antoninofurnari.it/downloads/height_weight.csv&#39;</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 4231 entries, 0 to 4230
+Data columns (total 4 columns):
+ #   Column  Non-Null Count  Dtype  
+---  ------  --------------  -----  
+ 0   sex     4231 non-null   object 
+ 1   BMI     4231 non-null   float64
+ 2   height  4231 non-null   float64
+ 3   weight  4231 non-null   float64
+dtypes: float64(3), object(1)
+memory usage: 132.3+ KB
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sex</th>
+      <th>BMI</th>
+      <th>height</th>
+      <th>weight</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>M</td>
+      <td>33.36</td>
+      <td>187.96</td>
+      <td>117.933920</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>M</td>
+      <td>26.54</td>
+      <td>177.80</td>
+      <td>83.914520</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>F</td>
+      <td>32.13</td>
+      <td>154.94</td>
+      <td>77.110640</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>M</td>
+      <td>26.62</td>
+      <td>172.72</td>
+      <td>79.378600</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>F</td>
+      <td>27.13</td>
+      <td>167.64</td>
+      <td>76.203456</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="regressione-lineare-semplice">
+<h2><span class="section-number">22.1. </span>Regressione Lineare Semplice<a class="headerlink" href="#regressione-lineare-semplice" title="Permalink to this heading">#</a></h2>
+<p>Vediamo un esempio di regressione semplice (ovvero rispetto a una sola variabile indipendente <span class="math notranslate nohighlight">\(x_1\)</span>). Consideriamo le variabili <code class="docutils literal notranslate"><span class="pre">weight</span></code> e <code class="docutils literal notranslate"><span class="pre">BMI</span></code>, cercando di prevedere i valori di <code class="docutils literal notranslate"><span class="pre">BMI</span></code> da <code class="docutils literal notranslate"><span class="pre">weight</span></code>. Costruiremo dunque un modello lineare di questo tipo:</p>
+<div class="math notranslate nohighlight">
+\[
+BMI = \beta_0 + \beta_1 \cdot weight
+\]</div>
+<p>dove:</p>
+<ul class="simple">
+<li><p><strong>weight</strong> è la variabile indipendente;</p></li>
+<li><p><strong>BMI</strong> è la variabile dipendente;</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta_1\)</span> è il coefficiente di <code class="docutils literal notranslate"><span class="pre">weight</span></code>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta_0\)</span> è l’intercetta.</p></li>
+</ul>
+<p>Per definire e calcolare il modello di regressione lineare, utilizzeremo il metodo dei minimi quadrati (Ordinary Least Squares - OLS), implementato dalla libreria <strong>statsmodels</strong>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.formula.api</span> <span class="kn">import</span> <span class="n">ols</span>
+<span class="c1">#la notazione y ~ x indica che y è la variabile</span>
+<span class="c1">#dipendente e x è la variabile indipendente</span>
+<span class="c1">#le altre variabili del dataframe saranno scartate</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">ols</span><span class="p">(</span><span class="s2">&quot;BMI ~ weight&quot;</span><span class="p">,</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1">#visualizziamo i parametri del modello</span>
+<span class="n">model</span><span class="o">.</span><span class="n">params</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Intercept    7.371959
+weight       0.252028
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Abbiamo calcolato il modello lineare:</p>
+<div class="math notranslate nohighlight">
+\[
+BMI = 0.25 \cdot weight + 7.37
+\]</div>
+<p>che ci permette di calcolare il valore di <code class="docutils literal notranslate"><span class="pre">BMI</span></code> dai valori di <code class="docutils literal notranslate"><span class="pre">weight</span></code>.</p>
+<blockquote>
+<div><p><strong>🙋‍♂️ Domanda 1</strong></p>
+<p>Secondo il modello lineare trovato, che valore di BMI ha un soggetto che pesa 69 Kg? E per un soggetto che pesa 90 Kg?</p>
+</div></blockquote>
+<p>Il modello mette a disposizione il metodo <strong>predict</strong> per effettuare questo tipo di calcoli. Il metodo però vuole che specifichiamo il nome delle variabili indipendenti per le quali stiamo fornendo i valori. Ciò si può fare definendo al volo un dizionario:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">({</span><span class="s1">&#39;weight&#39;</span><span class="p">:[</span><span class="mi">69</span><span class="p">,</span> <span class="mi">90</span><span class="p">]})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    24.761904
+1    30.054496
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Il modello calcolato non è altro che una retta che fa corrispondere valori di <code class="docutils literal notranslate"><span class="pre">weight</span></code> a valori di <code class="docutils literal notranslate"><span class="pre">BMI</span></code>. Possiamo facilmente visualizzare la retta utilizzando la libreria <code class="docutils literal notranslate"><span class="pre">seaborn</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;BMI&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;weight&#39;</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/d5da2571821c47800695b6260230723e1907fe9996b11e2a87f431249f360b58.png" src="../_images/d5da2571821c47800695b6260230723e1907fe9996b11e2a87f431249f360b58.png" />
+</div>
+</div>
+<blockquote>
+<div><p><strong>🙋‍♂️ Domanda 2</strong></p>
+<p>Cosa possiamo dire della retta visualizzata? Esistono valori per i quali l’errore commesso è maggiore? Qual è l’equazione della retta mostrata nel grafico?</p>
+</div></blockquote>
+<section id="analisi-di-un-regressore-lineare-semplice">
+<h3><span class="section-number">22.1.1. </span>Analisi di un regressore lineare semplice<a class="headerlink" href="#analisi-di-un-regressore-lineare-semplice" title="Permalink to this heading">#</a></h3>
+<p>Analizziamo adesso il regrssore ottenuto e vediamo che interpretazione hanno i parametri individuati. Possiamo visualizzare un sommario sul regressore mediante il metodo <code class="docutils literal notranslate"><span class="pre">summary</span></code> dell’oggetto <code class="docutils literal notranslate"><span class="pre">ols</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>           <td>BMI</td>       <th>  R-squared:         </th> <td>   0.704</td> 
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.704</td> 
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>1.006e+04</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Tue, 31 Oct 2023</td> <th>  Prob (F-statistic):</th>  <td>  0.00</td>  
+</tr>
+<tr>
+  <th>Time:</th>                 <td>06:41:15</td>     <th>  Log-Likelihood:    </th> <td> -10476.</td> 
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>  4231</td>      <th>  AIC:               </th> <td>2.096e+04</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>  4229</td>      <th>  BIC:               </th> <td>2.097e+04</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     1</td>      <th>                     </th>     <td> </td>    
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>    
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>    7.3720</td> <td>    0.203</td> <td>   36.253</td> <td> 0.000</td> <td>    6.973</td> <td>    7.771</td>
+</tr>
+<tr>
+  <th>weight</th>    <td>    0.2520</td> <td>    0.003</td> <td>  100.290</td> <td> 0.000</td> <td>    0.247</td> <td>    0.257</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>342.463</td> <th>  Durbin-Watson:     </th> <td>   2.007</td> 
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td>  <th>  Jarque-Bera (JB):  </th> <td> 467.107</td> 
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.679</td>  <th>  Prob(JB):          </th> <td>3.71e-102</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 3.896</td>  <th>  Cond. No.          </th> <td>    372.</td> 
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div></div>
+</div>
+<p>Il sommario presenta molte informazioni. Alcune di esse sono autoesplicative, come ad esempio “Dep. Variable”, “Model”, “Method”, “Date”, “Time”, “No. Observations”, “coef”. Altre sono invece molto specifiche. Tra tutti i valori mostrati, alcuni importanti sono:</p>
+<ul class="simple">
+<li><p>R-squared e Adjusted R-squared;</p></li>
+<li><p>F-statistic e prob(F-statistic);</p></li>
+<li><p>Valori <span class="math notranslate nohighlight">\(t\)</span> dei singoli parametri e relativi valori di <span class="math notranslate nohighlight">\(P&gt;|t|\)</span> (p-value);</p></li>
+<li><p>I valori trovati per i singoli parametri.
+Analizziamo il significato di ciascuno di questi valori:</p></li>
+</ul>
+<p>Il valore di <span class="math notranslate nohighlight">\(R^2\)</span> indica che la conoscenza di <code class="docutils literal notranslate"><span class="pre">weight</span></code> permette di ridurre l’errore sulle predizioni di <code class="docutils literal notranslate"><span class="pre">BMI</span></code> del <span class="math notranslate nohighlight">\(70\%\)</span>. Ciò vuol dire che, benché <code class="docutils literal notranslate"><span class="pre">weight</span></code> da sola non riesca a spiegare (linearmente) <code class="docutils literal notranslate"><span class="pre">BMI</span></code>, le due variabili sono piuttosto correlate. (Si noti che in realtà sappiamo che <code class="docutils literal notranslate"><span class="pre">BMI</span></code> si calcola a partire da <code class="docutils literal notranslate"><span class="pre">height</span></code> e <code class="docutils literal notranslate"><span class="pre">weight</span></code>, quindi questa non dovrebbe essere una scoperta sorprendente). Il valore della F-statistic è alto, mentre quello di Prob(F-statistic) è nullo. Possiamo concludere che il regressore è statisticamente significativo.</p>
+<p>I p-value relativi a entrambi i parametri sono nulli, pertanto entrambi i parametri sono statisticamente rilevanti. Il valore dell’intercetta è pari a <span class="math notranslate nohighlight">\(7.38\)</span>. Ciò indica che a un peso di <span class="math notranslate nohighlight">\(0\ Kg\)</span> corrisponde un BMI pari a <span class="math notranslate nohighlight">\(7.38\)</span> secondo il modello trovato. Il valore del coefficiente di <code class="docutils literal notranslate"><span class="pre">weight</span></code> è pari a <span class="math notranslate nohighlight">\(0.25\)</span>. Ciò significa che incrementando il peso di un kilogrammo, il BMI aumenta di <span class="math notranslate nohighlight">\(0.25\ Kg/m^2\)</span>.</p>
+</section>
+</section>
+<section id="regressione-lineare-multipla">
+<h2><span class="section-number">22.2. </span>Regressione Lineare Multipla<a class="headerlink" href="#regressione-lineare-multipla" title="Permalink to this heading">#</a></h2>
+<p>Vediamo adesso un esempio di regressione multipla. La regressione lineare multipla permette di studiare le relazioni tra una variabile dipendente e un insieme di variabili indipendenti. Calcoliamo un regressore lineare per predire i valori di <code class="docutils literal notranslate"><span class="pre">BMI</span></code> da quelli di <code class="docutils literal notranslate"><span class="pre">height</span></code> e <code class="docutils literal notranslate"><span class="pre">weight</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">ols</span><span class="p">(</span><span class="s1">&#39;BMI ~ height + weight&#39;</span><span class="p">,</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>           <td>BMI</td>       <th>  R-squared:         </th> <td>   0.986</td> 
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.986</td> 
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>1.513e+05</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Fri, 26 Oct 2018</td> <th>  Prob (F-statistic):</th>  <td>  0.00</td>  
+</tr>
+<tr>
+  <th>Time:</th>                 <td>19:48:28</td>     <th>  Log-Likelihood:    </th> <td> -3987.0</td> 
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>  4231</td>      <th>  AIC:               </th> <td>   7980.</td> 
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>  4228</td>      <th>  BIC:               </th> <td>   7999.</td> 
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     2</td>      <th>                     </th>     <td> </td>    
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>    
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>   55.8865</td> <td>    0.171</td> <td>  327.627</td> <td> 0.000</td> <td>   55.552</td> <td>   56.221</td>
+</tr>
+<tr>
+  <th>height</th>    <td>   -0.3310</td> <td>    0.001</td> <td> -294.311</td> <td> 0.000</td> <td>   -0.333</td> <td>   -0.329</td>
+</tr>
+<tr>
+  <th>weight</th>    <td>    0.3497</td> <td>    0.001</td> <td>  550.104</td> <td> 0.000</td> <td>    0.348</td> <td>    0.351</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>441.026</td> <th>  Durbin-Watson:     </th> <td>   1.980</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td>  <th>  Jarque-Bera (JB):  </th> <td>3489.395</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.132</td>  <th>  Prob(JB):          </th> <td>    0.00</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 7.441</td>  <th>  Cond. No.          </th> <td>3.36e+03</td>
+</tr>
+</table><br/><br/>Warnings:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br/>[2] The condition number is large, 3.36e+03. This might indicate that there are<br/>strong multicollinearity or other numerical problems.</div></div>
+</div>
+<p>Il regressore lineare trovato ha un valore di <span class="math notranslate nohighlight">\(R^2\)</span> molto alto (<span class="math notranslate nohighlight">\(0.986\)</span>), una F-statistic alta e un valore di Prob(F-statistic) nullo. Possiamo concludere che il regressore è significativo. I p-value dei parametri sono tutti nulli, il che significa che le variabili contribuiscono tutte significativamente alla regressione.</p>
+<p>L’intercetta ha un valore pari a <span class="math notranslate nohighlight">\(55.88\)</span>, il che indica che, idealmente, un soggetto di peso e altezza nulla avrebbe un <code class="docutils literal notranslate"><span class="pre">BMI</span></code> pari a <span class="math notranslate nohighlight">\(55.88\ Kg/m^2\)</span>. Il coefficiente di <code class="docutils literal notranslate"><span class="pre">height</span></code> indica che quando l’altezza viene incrementata di un metro, il BMI viene decrementato di <span class="math notranslate nohighlight">\(0.33\ Kg/m^2\)</span>. Analogamente, quando il peso viene incrementato di un kilogrammo, il BMI viene incrementato di <span class="math notranslate nohighlight">\(0.35\ Kg/m^2\)</span>.</p>
+<section id="boston-house-pricing-dataset">
+<h3><span class="section-number">22.2.1. </span>Boston House Pricing Dataset<a class="headerlink" href="#boston-house-pricing-dataset" title="Permalink to this heading">#</a></h3>
+<p>Vediamo adesso un esempio con un dataset più complesso. Utilizzeremo il dataset “Boston” che contiene osservazioni relativi ai prezzi di diverse case nei sobborghi di Boston. Carichiamo il dataset mediante la funzione <code class="docutils literal notranslate"><span class="pre">get_rdataset</span></code> di <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code>, che permette di caricare dataset contenuti nelle librerie del linguaggio R:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.datasets</span> <span class="kn">import</span> <span class="n">get_rdataset</span>
+<span class="n">boston</span> <span class="o">=</span> <span class="n">get_rdataset</span><span class="p">(</span><span class="s1">&#39;Boston&#39;</span><span class="p">,</span> <span class="n">package</span><span class="o">=</span><span class="s1">&#39;MASS&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>I dataset caricati mediante <code class="docutils literal notranslate"><span class="pre">get_rdataset</span></code> presentano la medesima struttura. Esiste una documentazione nella proprietà <code class="docutils literal notranslate"><span class="pre">__doc__</span></code>. Stampiamola per farci un’idea più precisa sul dataset:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">boston</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>.. container::
+
+   ====== ===============
+   Boston R Documentation
+   ====== ===============
+
+   .. rubric:: Housing Values in Suburbs of Boston
+      :name: Boston
+
+   .. rubric:: Description
+      :name: description
+
+   The ``Boston`` data frame has 506 rows and 14 columns.
+
+   .. rubric:: Usage
+      :name: usage
+
+   .. code:: R
+
+      Boston
+
+   .. rubric:: Format
+      :name: format
+
+   This data frame contains the following columns:
+
+   ``crim``
+      per capita crime rate by town.
+
+   ``zn``
+      proportion of residential land zoned for lots over 25,000 sq.ft.
+
+   ``indus``
+      proportion of non-retail business acres per town.
+
+   ``chas``
+      Charles River dummy variable (= 1 if tract bounds river; 0
+      otherwise).
+
+   ``nox``
+      nitrogen oxides concentration (parts per 10 million).
+
+   ``rm``
+      average number of rooms per dwelling.
+
+   ``age``
+      proportion of owner-occupied units built prior to 1940.
+
+   ``dis``
+      weighted mean of distances to five Boston employment centres.
+
+   ``rad``
+      index of accessibility to radial highways.
+
+   ``tax``
+      full-value property-tax rate per $10,000.
+
+   ``ptratio``
+      pupil-teacher ratio by town.
+
+   ``black``
+      ``1000(Bk - 0.63)^2`` where ``Bk`` is the proportion of blacks by
+      town.
+
+   ``lstat``
+      lower status of the population (percent).
+
+   ``medv``
+      median value of owner-occupied homes in $1000s.
+
+   .. rubric:: Source
+      :name: source
+
+   Harrison, D. and Rubinfeld, D.L. (1978) Hedonic prices and the demand
+   for clean air. *J. Environ. Economics and Management* **5**, 81–102.
+
+   Belsley D.A., Kuh, E. and Welsch, R.E. (1980) *Regression
+   Diagnostics. Identifying Influential Data and Sources of
+   Collinearity.* New York: Wiley.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Il dataframe contenente le osservazioni si trova all’interno della proprietà <code class="docutils literal notranslate"><span class="pre">data</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">boston</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>crim</th>
+      <th>zn</th>
+      <th>indus</th>
+      <th>chas</th>
+      <th>nox</th>
+      <th>rm</th>
+      <th>age</th>
+      <th>dis</th>
+      <th>rad</th>
+      <th>tax</th>
+      <th>ptratio</th>
+      <th>black</th>
+      <th>lstat</th>
+      <th>medv</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.00632</td>
+      <td>18.0</td>
+      <td>2.31</td>
+      <td>0</td>
+      <td>0.538</td>
+      <td>6.575</td>
+      <td>65.2</td>
+      <td>4.0900</td>
+      <td>1</td>
+      <td>296</td>
+      <td>15.3</td>
+      <td>396.90</td>
+      <td>4.98</td>
+      <td>24.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.02731</td>
+      <td>0.0</td>
+      <td>7.07</td>
+      <td>0</td>
+      <td>0.469</td>
+      <td>6.421</td>
+      <td>78.9</td>
+      <td>4.9671</td>
+      <td>2</td>
+      <td>242</td>
+      <td>17.8</td>
+      <td>396.90</td>
+      <td>9.14</td>
+      <td>21.6</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.02729</td>
+      <td>0.0</td>
+      <td>7.07</td>
+      <td>0</td>
+      <td>0.469</td>
+      <td>7.185</td>
+      <td>61.1</td>
+      <td>4.9671</td>
+      <td>2</td>
+      <td>242</td>
+      <td>17.8</td>
+      <td>392.83</td>
+      <td>4.03</td>
+      <td>34.7</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.03237</td>
+      <td>0.0</td>
+      <td>2.18</td>
+      <td>0</td>
+      <td>0.458</td>
+      <td>6.998</td>
+      <td>45.8</td>
+      <td>6.0622</td>
+      <td>3</td>
+      <td>222</td>
+      <td>18.7</td>
+      <td>394.63</td>
+      <td>2.94</td>
+      <td>33.4</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.06905</td>
+      <td>0.0</td>
+      <td>2.18</td>
+      <td>0</td>
+      <td>0.458</td>
+      <td>7.147</td>
+      <td>54.2</td>
+      <td>6.0622</td>
+      <td>3</td>
+      <td>222</td>
+      <td>18.7</td>
+      <td>396.90</td>
+      <td>5.33</td>
+      <td>36.2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Questo dataset è generalmente utilizzato come un dataset di regressione, nel quale l’obiettivo è quello di predire il valore di <code class="docutils literal notranslate"><span class="pre">medv</span></code> (prezzo medio delle case in migliaia di dollari) a partire dai valori delle altre variabili.</p>
+</section>
+<section id="regressori-lineari-variabili-categoriche-e-variabili-dummy">
+<h3><span class="section-number">22.2.2. </span>Regressori lineari, variabili categoriche e variabili dummy<a class="headerlink" href="#regressori-lineari-variabili-categoriche-e-variabili-dummy" title="Permalink to this heading">#</a></h3>
+<p>Notiamo che le variabili <code class="docutils literal notranslate"><span class="pre">rad</span></code> e <code class="docutils literal notranslate"><span class="pre">chas</span></code> sono categoriche. Quando si lavora con regressori lineari e variabili categoriche bisogna fare attenzione:</p>
+<ul class="simple">
+<li><p>Le variabili categoriche non vanno utilizzate come variabili dipendenti di un regressore lineare;</p></li>
+<li><p>Le variabili categoriche possono essere utilizzate invece come variabili indipendenti solo se binarie.
+<code class="docutils literal notranslate"><span class="pre">chas</span></code> è binaria, quindi possiamo includerla tra le variabili indipendenti. <code class="docutils literal notranslate"><span class="pre">rad</span></code> invece non è binaria, pertanto non può essere inclusa tra le variabili per la regressione.</p></li>
+</ul>
+<p>Se vogliamo includere <code class="docutils literal notranslate"><span class="pre">rad</span></code> tra le variabili per la regressione lineare, dobbiamo trasformarla in un insiem di variabili binarie “dummy”. Ogni variabile “dummy” indicherà per ogni osservazione, se essa appartiene a una specifica classe tra quelle della variabile categorica considerata.</p>
+<p>Vediamo un esempio:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;B&#39;</span><span class="p">,</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;B&#39;</span><span class="p">,</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;B&#39;</span><span class="p">])</span>
+<span class="n">var</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    A
+1    A
+2    B
+3    A
+4    C
+5    C
+6    B
+7    A
+8    C
+9    B
+dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p>Si consideri <code class="docutils literal notranslate"><span class="pre">var</span></code> come una variabile categorica che consta di <span class="math notranslate nohighlight">\(10\)</span> osservazioni e <span class="math notranslate nohighlight">\(3\)</span> classi. Possiamo sostituire la variabile <code class="docutils literal notranslate"><span class="pre">var</span></code> con tre variabili <code class="docutils literal notranslate"><span class="pre">A</span></code>,<code class="docutils literal notranslate"><span class="pre">B</span></code>,<code class="docutils literal notranslate"><span class="pre">C</span></code> tali che <code class="docutils literal notranslate"><span class="pre">A</span></code> sarà pari a <span class="math notranslate nohighlight">\(1\)</span> solo quando <code class="docutils literal notranslate"><span class="pre">var</span></code> è uguale ad <code class="docutils literal notranslate"><span class="pre">A</span></code>, <code class="docutils literal notranslate"><span class="pre">C</span></code> sarà pari a <span class="math notranslate nohighlight">\(1\)</span> solo quando <code class="docutils literal notranslate"><span class="pre">var</span></code> è uguale ad <code class="docutils literal notranslate"><span class="pre">C</span></code>. Possiamo ottenere queste tre variabili dummy mediante la funzione <code class="docutils literal notranslate"><span class="pre">get_dummies</span></code> di Pandas:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Confrontiamo ad esempio l’osservazione di indice <span class="math notranslate nohighlight">\(5\)</span> della serie e del DataFrame di variabili dummy:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">var</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">var</span><span class="p">)</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C 
+
+A    0
+B    0
+C    1
+Name: 5, dtype: uint8
+</pre></div>
+</div>
+</div>
+</div>
+<p>Il valore di <code class="docutils literal notranslate"><span class="pre">var</span></code> è <span class="math notranslate nohighlight">\(5\)</span>. In maniera corrispondente, la variabile dummy <code class="docutils literal notranslate"><span class="pre">C</span></code> è pari a <span class="math notranslate nohighlight">\(1\)</span>, mentre le altre sono pari a zero. Questo tipo di rappresentazione di <code class="docutils literal notranslate"><span class="pre">var</span></code> è tuttavia ridondante. Infatti, se sappiamo che <span class="math notranslate nohighlight">\(B=0\)</span> e <span class="math notranslate nohighlight">\(C=0\)</span>, possiamo facilmente dedurre che <span class="math notranslate nohighlight">\(A=1\)</span>. Questa semplice ridondanza può creare problemi di clacolo numerico nell’ottimizzazione del regressore lineare. Per evitarla, generalmente si esclude una delle variabili dummy. Possiamo ottenere questo risultato come segue:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">var</span><span class="p">,</span><span class="n">drop_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>B</th>
+      <th>C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Possiamo convertire la variabile categorica <code class="docutils literal notranslate"><span class="pre">rad</span></code> in un insieme di variabili dummy come segue:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">boston_mod</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">boston</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;rad&#39;</span><span class="p">],</span><span class="n">drop_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">boston_mod</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>crim</th>
+      <th>zn</th>
+      <th>indus</th>
+      <th>chas</th>
+      <th>nox</th>
+      <th>rm</th>
+      <th>age</th>
+      <th>dis</th>
+      <th>tax</th>
+      <th>ptratio</th>
+      <th>...</th>
+      <th>lstat</th>
+      <th>medv</th>
+      <th>rad_2</th>
+      <th>rad_3</th>
+      <th>rad_4</th>
+      <th>rad_5</th>
+      <th>rad_6</th>
+      <th>rad_7</th>
+      <th>rad_8</th>
+      <th>rad_24</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.00632</td>
+      <td>18.0</td>
+      <td>2.31</td>
+      <td>0</td>
+      <td>0.538</td>
+      <td>6.575</td>
+      <td>65.2</td>
+      <td>4.0900</td>
+      <td>296</td>
+      <td>15.3</td>
+      <td>...</td>
+      <td>4.98</td>
+      <td>24.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.02731</td>
+      <td>0.0</td>
+      <td>7.07</td>
+      <td>0</td>
+      <td>0.469</td>
+      <td>6.421</td>
+      <td>78.9</td>
+      <td>4.9671</td>
+      <td>242</td>
+      <td>17.8</td>
+      <td>...</td>
+      <td>9.14</td>
+      <td>21.6</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.02729</td>
+      <td>0.0</td>
+      <td>7.07</td>
+      <td>0</td>
+      <td>0.469</td>
+      <td>7.185</td>
+      <td>61.1</td>
+      <td>4.9671</td>
+      <td>242</td>
+      <td>17.8</td>
+      <td>...</td>
+      <td>4.03</td>
+      <td>34.7</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.03237</td>
+      <td>0.0</td>
+      <td>2.18</td>
+      <td>0</td>
+      <td>0.458</td>
+      <td>6.998</td>
+      <td>45.8</td>
+      <td>6.0622</td>
+      <td>222</td>
+      <td>18.7</td>
+      <td>...</td>
+      <td>2.94</td>
+      <td>33.4</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.06905</td>
+      <td>0.0</td>
+      <td>2.18</td>
+      <td>0</td>
+      <td>0.458</td>
+      <td>7.147</td>
+      <td>54.2</td>
+      <td>6.0622</td>
+      <td>222</td>
+      <td>18.7</td>
+      <td>...</td>
+      <td>5.33</td>
+      <td>36.2</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 21 columns</p>
+</div></div></div>
+</div>
+<p>Ispezioniamo i nomi delle colonne:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">boston_mod</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;crim&#39;, &#39;zn&#39;, &#39;indus&#39;, &#39;chas&#39;, &#39;nox&#39;, &#39;rm&#39;, &#39;age&#39;, &#39;dis&#39;, &#39;tax&#39;,
+       &#39;ptratio&#39;, &#39;black&#39;, &#39;lstat&#39;, &#39;medv&#39;, &#39;rad_2&#39;, &#39;rad_3&#39;, &#39;rad_4&#39;, &#39;rad_5&#39;,
+       &#39;rad_6&#39;, &#39;rad_7&#39;, &#39;rad_8&#39;, &#39;rad_24&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notiamo che <code class="docutils literal notranslate"><span class="pre">rad</span></code> è stata rimossa e sostituita da diverse variabili dummy, rappresentanti i vari valori assunti da <code class="docutils literal notranslate"><span class="pre">rad</span></code>. Possiamo adesso procedere al calcolo del regressore lineare multiplo:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">=</span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;medv ~ crim + zn + indus + chas + nox + rm +age + dis + tax + </span>
+<span class="s2">          ptratio + black + lstat + rad_2 + rad_3 + rad_4 + rad_5 + rad_6 + </span>
+<span class="s2">          rad_7 + rad_8 + rad_24&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">boston_mod</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>          <td>medv</td>       <th>  R-squared:         </th> <td>   0.750</td> 
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.740</td> 
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   72.70</td> 
+</tr>
+<tr>
+  <th>Date:</th>             <td>Tue, 31 Oct 2023</td> <th>  Prob (F-statistic):</th> <td>8.29e-132</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>06:43:47</td>     <th>  Log-Likelihood:    </th> <td> -1489.6</td> 
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   506</td>      <th>  AIC:               </th> <td>   3021.</td> 
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   485</td>      <th>  BIC:               </th> <td>   3110.</td> 
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>    20</td>      <th>                     </th>     <td> </td>    
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>    
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>   35.2596</td> <td>    5.434</td> <td>    6.489</td> <td> 0.000</td> <td>   24.583</td> <td>   45.936</td>
+</tr>
+<tr>
+  <th>crim</th>      <td>   -0.1088</td> <td>    0.033</td> <td>   -3.329</td> <td> 0.001</td> <td>   -0.173</td> <td>   -0.045</td>
+</tr>
+<tr>
+  <th>zn</th>        <td>    0.0549</td> <td>    0.014</td> <td>    3.880</td> <td> 0.000</td> <td>    0.027</td> <td>    0.083</td>
+</tr>
+<tr>
+  <th>indus</th>     <td>    0.0238</td> <td>    0.064</td> <td>    0.373</td> <td> 0.709</td> <td>   -0.101</td> <td>    0.149</td>
+</tr>
+<tr>
+  <th>chas</th>      <td>    2.5242</td> <td>    0.863</td> <td>    2.924</td> <td> 0.004</td> <td>    0.828</td> <td>    4.220</td>
+</tr>
+<tr>
+  <th>nox</th>       <td>  -17.5731</td> <td>    3.896</td> <td>   -4.510</td> <td> 0.000</td> <td>  -25.229</td> <td>   -9.917</td>
+</tr>
+<tr>
+  <th>rm</th>        <td>    3.6655</td> <td>    0.421</td> <td>    8.703</td> <td> 0.000</td> <td>    2.838</td> <td>    4.493</td>
+</tr>
+<tr>
+  <th>age</th>       <td>    0.0005</td> <td>    0.013</td> <td>    0.035</td> <td> 0.972</td> <td>   -0.026</td> <td>    0.026</td>
+</tr>
+<tr>
+  <th>dis</th>       <td>   -1.5545</td> <td>    0.202</td> <td>   -7.699</td> <td> 0.000</td> <td>   -1.951</td> <td>   -1.158</td>
+</tr>
+<tr>
+  <th>tax</th>       <td>   -0.0087</td> <td>    0.004</td> <td>   -2.246</td> <td> 0.025</td> <td>   -0.016</td> <td>   -0.001</td>
+</tr>
+<tr>
+  <th>ptratio</th>   <td>   -0.9724</td> <td>    0.144</td> <td>   -6.731</td> <td> 0.000</td> <td>   -1.256</td> <td>   -0.689</td>
+</tr>
+<tr>
+  <th>black</th>     <td>    0.0094</td> <td>    0.003</td> <td>    3.531</td> <td> 0.000</td> <td>    0.004</td> <td>    0.015</td>
+</tr>
+<tr>
+  <th>lstat</th>     <td>   -0.5292</td> <td>    0.051</td> <td>  -10.451</td> <td> 0.000</td> <td>   -0.629</td> <td>   -0.430</td>
+</tr>
+<tr>
+  <th>rad_2</th>     <td>    1.4889</td> <td>    1.478</td> <td>    1.008</td> <td> 0.314</td> <td>   -1.414</td> <td>    4.392</td>
+</tr>
+<tr>
+  <th>rad_3</th>     <td>    4.6813</td> <td>    1.335</td> <td>    3.506</td> <td> 0.000</td> <td>    2.058</td> <td>    7.305</td>
+</tr>
+<tr>
+  <th>rad_4</th>     <td>    2.5762</td> <td>    1.187</td> <td>    2.170</td> <td> 0.031</td> <td>    0.243</td> <td>    4.909</td>
+</tr>
+<tr>
+  <th>rad_5</th>     <td>    2.9185</td> <td>    1.208</td> <td>    2.417</td> <td> 0.016</td> <td>    0.546</td> <td>    5.291</td>
+</tr>
+<tr>
+  <th>rad_6</th>     <td>    1.1858</td> <td>    1.464</td> <td>    0.810</td> <td> 0.418</td> <td>   -1.691</td> <td>    4.062</td>
+</tr>
+<tr>
+  <th>rad_7</th>     <td>    4.8790</td> <td>    1.571</td> <td>    3.105</td> <td> 0.002</td> <td>    1.792</td> <td>    7.966</td>
+</tr>
+<tr>
+  <th>rad_8</th>     <td>    4.8398</td> <td>    1.492</td> <td>    3.245</td> <td> 0.001</td> <td>    1.909</td> <td>    7.771</td>
+</tr>
+<tr>
+  <th>rad_24</th>    <td>    7.4617</td> <td>    1.789</td> <td>    4.172</td> <td> 0.000</td> <td>    3.947</td> <td>   10.976</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>183.890</td> <th>  Durbin-Watson:     </th> <td>   1.089</td> 
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td>  <th>  Jarque-Bera (JB):  </th> <td> 858.805</td> 
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 1.554</td>  <th>  Prob(JB):          </th> <td>3.26e-187</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 8.575</td>  <th>  Cond. No.          </th> <td>1.60e+04</td> 
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br/>[2] The condition number is large, 1.6e+04. This might indicate that there are<br/>strong multicollinearity or other numerical problems.</div></div>
+</div>
+<p>Il regressore ottenuto presenta un valore di <span class="math notranslate nohighlight">\(R^2\)</span> piuttosto alto. Ciò vuol dire che, globalmente, le variabili indipendenti sono correlate con la variabile dipendente. La F-statistic è alta e il p-value corrispondente è molto basso. Il regressore è, globalmente, statisticamente significativo.</p>
+<p>Passiamo all’analisi dei p-value dei singoli parametri trovati. I p-value delle seguenti variabili sono più alti di <span class="math notranslate nohighlight">\(0.05\)</span>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">indus</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">age</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rad2</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rad6</span></code>.</p></li>
+</ul>
+<p>Queste variabili non contribuiscono significativamente alla regressione. Analizziamo i valori dei parametri relativi a varabili che contribuiscono statisticamente alla regressione:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">intercept</span></code>: quando tutte le altre variabili assumono valori nulli, <code class="docutils literal notranslate"><span class="pre">medv</span></code> assume il valore <span class="math notranslate nohighlight">\(35.26\)</span>. Ricordiamo che <code class="docutils literal notranslate"><span class="pre">medv</span></code> esprime il prezzo medio delle case in migliaia di dollari, per cui il “prezzo medio base” delle case è di circa <span class="math notranslate nohighlight">\(35260\)</span> dollari;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">crim</span></code>: l’incremento di una unità del tasso di criminalità pro-capite abbassa il valore delle case di cica <span class="math notranslate nohighlight">\(108\)</span> dollari;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">zn</span></code>: l’incremento di una unità della proporzione di terre destinate a uso residenziale aumenta il valore delle case di circa <span class="math notranslate nohighlight">\(54\)</span> dollari;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">chas</span></code>: quando la variabile è pari a <span class="math notranslate nohighlight">\(1\)</span> (ricordiamo che si tratta di una variabile categorica), il prezzo delle case sale di circa <span class="math notranslate nohighlight">\(2500\)</span> dollari. Possiamo dire che le case vicine al fiume tendono ad essere più care;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nox</span></code>: l’aumento di una unità della concentrazione di ossido di azoto abbassa i prezzi delle case di circa <span class="math notranslate nohighlight">\(17500\)</span> dollari. Questo può sembrare un numero altissimo, ma si noti che i valori di <code class="docutils literal notranslate"><span class="pre">nox</span></code> variano tra un minimo di <span class="math notranslate nohighlight">\(0.38\)</span> a un massimo di <span class="math notranslate nohighlight">\(0.87\)</span>, per cui non si verificheranno decrementi dei prezzi delle case così grandi;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rm</span></code>: l’incremento del numero di stanze di una unità incrementa il prezzo della casa di circa <span class="math notranslate nohighlight">\(3600\)</span> dollari;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dis</span></code>: l’incremento di una unità della distanza media dal centro diminuisce il prezzo delle case di circa <span class="math notranslate nohighlight">\(1500\)</span> dollari (le case più distanti dal centro valgono di meno);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tax</span></code>: l’aumento di un unità del tax-rate della proprietà ne diminuisce il valore di 8 dollari. Sembra un decremento trascurabile, tuttavia, si consideri che il range di <code class="docutils literal notranslate"><span class="pre">tax</span></code> è compreso tra <span class="math notranslate nohighlight">\(187\)</span> e <span class="math notranslate nohighlight">\(711\)</span>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ptratio</span></code>: l’aumento di una unità del rapporto insegnante-alunni diminuisce il valore della proprietà di circa <span class="math notranslate nohighlight">\(1000\)</span> dollari;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">black</span></code>: l’aumento di una unità del valore di <code class="docutils literal notranslate"><span class="pre">black</span></code> (una variabile dipendente dalla proporzione tra abitanti bianchi e neri) incrementa il valore delle case di pochi dollari. Si consideri che il range di <code class="docutils literal notranslate"><span class="pre">black</span></code> va da circa <span class="math notranslate nohighlight">\(0\)</span> a <span class="math notranslate nohighlight">\(396\)</span>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lstat</span></code>: l’aumento di una unità del valore di questa variabile (percenutale di abitanti meno abbienti) diminuisce il prezzo delle case di circa <span class="math notranslate nohighlight">\(500\)</span> dollari;</p></li>
+<li><p>I coefficienti appresi per le variabili dummy di <code class="docutils literal notranslate"><span class="pre">rad</span></code> indicano che quando <code class="docutils literal notranslate"><span class="pre">rad</span></code> assume il valore 24, il valore delle case aumenta di circa <span class="math notranslate nohighlight">\(7500\)</span> dollari. Altri valori di <code class="docutils literal notranslate"><span class="pre">rad</span></code> contribuiscono differentemente all’incremento del valore di <code class="docutils literal notranslate"><span class="pre">medv</span></code>;</p></li>
+</ul>
+<blockquote>
+<div><p><strong>🙋‍♂️ Domanda 3</strong></p>
+<p>Dati i risultati del regressore lineare, qual è la variabile più influente nella regressione?</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">=</span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;medv ~ crim + zn + indus + chas + nox + rm +age + dis + tax + </span>
+<span class="s2">          ptratio + black + lstat + rad&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="o">.</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>          <td>medv</td>       <th>  R-squared:         </th> <td>   0.741</td> 
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.734</td> 
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   108.1</td> 
+</tr>
+<tr>
+  <th>Date:</th>             <td>Tue, 31 Oct 2023</td> <th>  Prob (F-statistic):</th> <td>6.72e-135</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>06:48:40</td>     <th>  Log-Likelihood:    </th> <td> -1498.8</td> 
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   506</td>      <th>  AIC:               </th> <td>   3026.</td> 
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   492</td>      <th>  BIC:               </th> <td>   3085.</td> 
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>    13</td>      <th>                     </th>     <td> </td>    
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>    
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>   36.4595</td> <td>    5.103</td> <td>    7.144</td> <td> 0.000</td> <td>   26.432</td> <td>   46.487</td>
+</tr>
+<tr>
+  <th>crim</th>      <td>   -0.1080</td> <td>    0.033</td> <td>   -3.287</td> <td> 0.001</td> <td>   -0.173</td> <td>   -0.043</td>
+</tr>
+<tr>
+  <th>zn</th>        <td>    0.0464</td> <td>    0.014</td> <td>    3.382</td> <td> 0.001</td> <td>    0.019</td> <td>    0.073</td>
+</tr>
+<tr>
+  <th>indus</th>     <td>    0.0206</td> <td>    0.061</td> <td>    0.334</td> <td> 0.738</td> <td>   -0.100</td> <td>    0.141</td>
+</tr>
+<tr>
+  <th>chas</th>      <td>    2.6867</td> <td>    0.862</td> <td>    3.118</td> <td> 0.002</td> <td>    0.994</td> <td>    4.380</td>
+</tr>
+<tr>
+  <th>nox</th>       <td>  -17.7666</td> <td>    3.820</td> <td>   -4.651</td> <td> 0.000</td> <td>  -25.272</td> <td>  -10.262</td>
+</tr>
+<tr>
+  <th>rm</th>        <td>    3.8099</td> <td>    0.418</td> <td>    9.116</td> <td> 0.000</td> <td>    2.989</td> <td>    4.631</td>
+</tr>
+<tr>
+  <th>age</th>       <td>    0.0007</td> <td>    0.013</td> <td>    0.052</td> <td> 0.958</td> <td>   -0.025</td> <td>    0.027</td>
+</tr>
+<tr>
+  <th>dis</th>       <td>   -1.4756</td> <td>    0.199</td> <td>   -7.398</td> <td> 0.000</td> <td>   -1.867</td> <td>   -1.084</td>
+</tr>
+<tr>
+  <th>tax</th>       <td>   -0.0123</td> <td>    0.004</td> <td>   -3.280</td> <td> 0.001</td> <td>   -0.020</td> <td>   -0.005</td>
+</tr>
+<tr>
+  <th>ptratio</th>   <td>   -0.9527</td> <td>    0.131</td> <td>   -7.283</td> <td> 0.000</td> <td>   -1.210</td> <td>   -0.696</td>
+</tr>
+<tr>
+  <th>black</th>     <td>    0.0093</td> <td>    0.003</td> <td>    3.467</td> <td> 0.001</td> <td>    0.004</td> <td>    0.015</td>
+</tr>
+<tr>
+  <th>lstat</th>     <td>   -0.5248</td> <td>    0.051</td> <td>  -10.347</td> <td> 0.000</td> <td>   -0.624</td> <td>   -0.425</td>
+</tr>
+<tr>
+  <th>rad</th>       <td>    0.3060</td> <td>    0.066</td> <td>    4.613</td> <td> 0.000</td> <td>    0.176</td> <td>    0.436</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>178.041</td> <th>  Durbin-Watson:     </th> <td>   1.078</td> 
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td>  <th>  Jarque-Bera (JB):  </th> <td> 783.126</td> 
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 1.521</td>  <th>  Prob(JB):          </th> <td>8.84e-171</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 8.281</td>  <th>  Cond. No.          </th> <td>1.51e+04</td> 
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br/>[2] The condition number is large, 1.51e+04. This might indicate that there are<br/>strong multicollinearity or other numerical problems.</div></div>
+</div>
+<p>It should be noted that, when it is obvious that a variable is categorical, <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> automatically create dummy variables internally. For instance, let us modify the dataframe so that <code class="docutils literal notranslate"><span class="pre">rad</span></code> becomes text:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">boston2</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">boston2</span><span class="p">[</span><span class="s1">&#39;rad&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">boston2</span><span class="p">[</span><span class="s1">&#39;rad&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="n">boston2</span><span class="p">[</span><span class="s1">&#39;rad&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0      1
+1      2
+2      2
+3      3
+4      3
+      ..
+501    1
+502    1
+503    1
+504    1
+505    1
+Name: rad, Length: 506, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we fit a linear regressor model on the modified dataset, <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> will introduce different dummy variables for the different values of <code class="docutils literal notranslate"><span class="pre">rad</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">=</span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;medv ~ crim + zn + indus + chas + nox + rm +age + dis + tax + </span>
+<span class="s2">          ptratio + black + lstat + rad&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">boston2</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>          <td>medv</td>       <th>  R-squared:         </th> <td>   0.750</td> 
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.740</td> 
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   72.70</td> 
+</tr>
+<tr>
+  <th>Date:</th>             <td>Tue, 31 Oct 2023</td> <th>  Prob (F-statistic):</th> <td>8.29e-132</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>06:57:15</td>     <th>  Log-Likelihood:    </th> <td> -1489.6</td> 
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   506</td>      <th>  AIC:               </th> <td>   3021.</td> 
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   485</td>      <th>  BIC:               </th> <td>   3110.</td> 
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>    20</td>      <th>                     </th>     <td> </td>    
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>    
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>   35.2596</td> <td>    5.434</td> <td>    6.489</td> <td> 0.000</td> <td>   24.583</td> <td>   45.936</td>
+</tr>
+<tr>
+  <th>rad[T.2]</th>  <td>    1.4889</td> <td>    1.478</td> <td>    1.008</td> <td> 0.314</td> <td>   -1.414</td> <td>    4.392</td>
+</tr>
+<tr>
+  <th>rad[T.24]</th> <td>    7.4617</td> <td>    1.789</td> <td>    4.172</td> <td> 0.000</td> <td>    3.947</td> <td>   10.976</td>
+</tr>
+<tr>
+  <th>rad[T.3]</th>  <td>    4.6813</td> <td>    1.335</td> <td>    3.506</td> <td> 0.000</td> <td>    2.058</td> <td>    7.305</td>
+</tr>
+<tr>
+  <th>rad[T.4]</th>  <td>    2.5762</td> <td>    1.187</td> <td>    2.170</td> <td> 0.031</td> <td>    0.243</td> <td>    4.909</td>
+</tr>
+<tr>
+  <th>rad[T.5]</th>  <td>    2.9185</td> <td>    1.208</td> <td>    2.417</td> <td> 0.016</td> <td>    0.546</td> <td>    5.291</td>
+</tr>
+<tr>
+  <th>rad[T.6]</th>  <td>    1.1858</td> <td>    1.464</td> <td>    0.810</td> <td> 0.418</td> <td>   -1.691</td> <td>    4.062</td>
+</tr>
+<tr>
+  <th>rad[T.7]</th>  <td>    4.8790</td> <td>    1.571</td> <td>    3.105</td> <td> 0.002</td> <td>    1.792</td> <td>    7.966</td>
+</tr>
+<tr>
+  <th>rad[T.8]</th>  <td>    4.8398</td> <td>    1.492</td> <td>    3.245</td> <td> 0.001</td> <td>    1.909</td> <td>    7.771</td>
+</tr>
+<tr>
+  <th>crim</th>      <td>   -0.1088</td> <td>    0.033</td> <td>   -3.329</td> <td> 0.001</td> <td>   -0.173</td> <td>   -0.045</td>
+</tr>
+<tr>
+  <th>zn</th>        <td>    0.0549</td> <td>    0.014</td> <td>    3.880</td> <td> 0.000</td> <td>    0.027</td> <td>    0.083</td>
+</tr>
+<tr>
+  <th>indus</th>     <td>    0.0238</td> <td>    0.064</td> <td>    0.373</td> <td> 0.709</td> <td>   -0.101</td> <td>    0.149</td>
+</tr>
+<tr>
+  <th>chas</th>      <td>    2.5242</td> <td>    0.863</td> <td>    2.924</td> <td> 0.004</td> <td>    0.828</td> <td>    4.220</td>
+</tr>
+<tr>
+  <th>nox</th>       <td>  -17.5731</td> <td>    3.896</td> <td>   -4.510</td> <td> 0.000</td> <td>  -25.229</td> <td>   -9.917</td>
+</tr>
+<tr>
+  <th>rm</th>        <td>    3.6655</td> <td>    0.421</td> <td>    8.703</td> <td> 0.000</td> <td>    2.838</td> <td>    4.493</td>
+</tr>
+<tr>
+  <th>age</th>       <td>    0.0005</td> <td>    0.013</td> <td>    0.035</td> <td> 0.972</td> <td>   -0.026</td> <td>    0.026</td>
+</tr>
+<tr>
+  <th>dis</th>       <td>   -1.5545</td> <td>    0.202</td> <td>   -7.699</td> <td> 0.000</td> <td>   -1.951</td> <td>   -1.158</td>
+</tr>
+<tr>
+  <th>tax</th>       <td>   -0.0087</td> <td>    0.004</td> <td>   -2.246</td> <td> 0.025</td> <td>   -0.016</td> <td>   -0.001</td>
+</tr>
+<tr>
+  <th>ptratio</th>   <td>   -0.9724</td> <td>    0.144</td> <td>   -6.731</td> <td> 0.000</td> <td>   -1.256</td> <td>   -0.689</td>
+</tr>
+<tr>
+  <th>black</th>     <td>    0.0094</td> <td>    0.003</td> <td>    3.531</td> <td> 0.000</td> <td>    0.004</td> <td>    0.015</td>
+</tr>
+<tr>
+  <th>lstat</th>     <td>   -0.5292</td> <td>    0.051</td> <td>  -10.451</td> <td> 0.000</td> <td>   -0.629</td> <td>   -0.430</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>183.890</td> <th>  Durbin-Watson:     </th> <td>   1.089</td> 
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td>  <th>  Jarque-Bera (JB):  </th> <td> 858.805</td> 
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 1.554</td>  <th>  Prob(JB):          </th> <td>3.26e-187</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 8.575</td>  <th>  Cond. No.          </th> <td>1.60e+04</td> 
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br/>[2] The condition number is large, 1.6e+04. This might indicate that there are<br/>strong multicollinearity or other numerical problems.</div></div>
+</div>
+<p>Alternatively, we can instruct statsmodels to use a variable as a categorical one with the <code class="docutils literal notranslate"><span class="pre">C(variable)</span></code> tag:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">=</span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;medv ~ crim + zn + indus + chas + nox + rm +age + dis + tax + </span>
+<span class="s2">          ptratio + black + lstat + C(rad)&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="o">.</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>          <td>medv</td>       <th>  R-squared:         </th> <td>   0.750</td> 
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.740</td> 
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   72.70</td> 
+</tr>
+<tr>
+  <th>Date:</th>             <td>Tue, 31 Oct 2023</td> <th>  Prob (F-statistic):</th> <td>8.29e-132</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>07:05:32</td>     <th>  Log-Likelihood:    </th> <td> -1489.6</td> 
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   506</td>      <th>  AIC:               </th> <td>   3021.</td> 
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   485</td>      <th>  BIC:               </th> <td>   3110.</td> 
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>    20</td>      <th>                     </th>     <td> </td>    
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>    
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+        <td></td>          <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>    <td>   35.2596</td> <td>    5.434</td> <td>    6.489</td> <td> 0.000</td> <td>   24.583</td> <td>   45.936</td>
+</tr>
+<tr>
+  <th>C(rad)[T.2]</th>  <td>    1.4889</td> <td>    1.478</td> <td>    1.008</td> <td> 0.314</td> <td>   -1.414</td> <td>    4.392</td>
+</tr>
+<tr>
+  <th>C(rad)[T.3]</th>  <td>    4.6813</td> <td>    1.335</td> <td>    3.506</td> <td> 0.000</td> <td>    2.058</td> <td>    7.305</td>
+</tr>
+<tr>
+  <th>C(rad)[T.4]</th>  <td>    2.5762</td> <td>    1.187</td> <td>    2.170</td> <td> 0.031</td> <td>    0.243</td> <td>    4.909</td>
+</tr>
+<tr>
+  <th>C(rad)[T.5]</th>  <td>    2.9185</td> <td>    1.208</td> <td>    2.417</td> <td> 0.016</td> <td>    0.546</td> <td>    5.291</td>
+</tr>
+<tr>
+  <th>C(rad)[T.6]</th>  <td>    1.1858</td> <td>    1.464</td> <td>    0.810</td> <td> 0.418</td> <td>   -1.691</td> <td>    4.062</td>
+</tr>
+<tr>
+  <th>C(rad)[T.7]</th>  <td>    4.8790</td> <td>    1.571</td> <td>    3.105</td> <td> 0.002</td> <td>    1.792</td> <td>    7.966</td>
+</tr>
+<tr>
+  <th>C(rad)[T.8]</th>  <td>    4.8398</td> <td>    1.492</td> <td>    3.245</td> <td> 0.001</td> <td>    1.909</td> <td>    7.771</td>
+</tr>
+<tr>
+  <th>C(rad)[T.24]</th> <td>    7.4617</td> <td>    1.789</td> <td>    4.172</td> <td> 0.000</td> <td>    3.947</td> <td>   10.976</td>
+</tr>
+<tr>
+  <th>crim</th>         <td>   -0.1088</td> <td>    0.033</td> <td>   -3.329</td> <td> 0.001</td> <td>   -0.173</td> <td>   -0.045</td>
+</tr>
+<tr>
+  <th>zn</th>           <td>    0.0549</td> <td>    0.014</td> <td>    3.880</td> <td> 0.000</td> <td>    0.027</td> <td>    0.083</td>
+</tr>
+<tr>
+  <th>indus</th>        <td>    0.0238</td> <td>    0.064</td> <td>    0.373</td> <td> 0.709</td> <td>   -0.101</td> <td>    0.149</td>
+</tr>
+<tr>
+  <th>chas</th>         <td>    2.5242</td> <td>    0.863</td> <td>    2.924</td> <td> 0.004</td> <td>    0.828</td> <td>    4.220</td>
+</tr>
+<tr>
+  <th>nox</th>          <td>  -17.5731</td> <td>    3.896</td> <td>   -4.510</td> <td> 0.000</td> <td>  -25.229</td> <td>   -9.917</td>
+</tr>
+<tr>
+  <th>rm</th>           <td>    3.6655</td> <td>    0.421</td> <td>    8.703</td> <td> 0.000</td> <td>    2.838</td> <td>    4.493</td>
+</tr>
+<tr>
+  <th>age</th>          <td>    0.0005</td> <td>    0.013</td> <td>    0.035</td> <td> 0.972</td> <td>   -0.026</td> <td>    0.026</td>
+</tr>
+<tr>
+  <th>dis</th>          <td>   -1.5545</td> <td>    0.202</td> <td>   -7.699</td> <td> 0.000</td> <td>   -1.951</td> <td>   -1.158</td>
+</tr>
+<tr>
+  <th>tax</th>          <td>   -0.0087</td> <td>    0.004</td> <td>   -2.246</td> <td> 0.025</td> <td>   -0.016</td> <td>   -0.001</td>
+</tr>
+<tr>
+  <th>ptratio</th>      <td>   -0.9724</td> <td>    0.144</td> <td>   -6.731</td> <td> 0.000</td> <td>   -1.256</td> <td>   -0.689</td>
+</tr>
+<tr>
+  <th>black</th>        <td>    0.0094</td> <td>    0.003</td> <td>    3.531</td> <td> 0.000</td> <td>    0.004</td> <td>    0.015</td>
+</tr>
+<tr>
+  <th>lstat</th>        <td>   -0.5292</td> <td>    0.051</td> <td>  -10.451</td> <td> 0.000</td> <td>   -0.629</td> <td>   -0.430</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>183.890</td> <th>  Durbin-Watson:     </th> <td>   1.089</td> 
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td>  <th>  Jarque-Bera (JB):  </th> <td> 858.805</td> 
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 1.554</td>  <th>  Prob(JB):          </th> <td>3.26e-187</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 8.575</td>  <th>  Cond. No.          </th> <td>1.60e+04</td> 
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br/>[2] The condition number is large, 1.6e+04. This might indicate that there are<br/>strong multicollinearity or other numerical problems.</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;weight ~ BMI + height + sex&quot;</span><span class="p">,</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>         <td>weight</td>      <th>  R-squared:         </th> <td>   0.990</td> 
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.990</td> 
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>1.392e+05</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Tue, 31 Oct 2023</td> <th>  Prob (F-statistic):</th>  <td>  0.00</td>  
+</tr>
+<tr>
+  <th>Time:</th>                 <td>06:54:01</td>     <th>  Log-Likelihood:    </th> <td> -8403.1</td> 
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>  4231</td>      <th>  AIC:               </th> <td>1.681e+04</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>  4227</td>      <th>  BIC:               </th> <td>1.684e+04</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     3</td>      <th>                     </th>     <td> </td>    
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>    
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td> -158.3473</td> <td>    0.670</td> <td> -236.287</td> <td> 0.000</td> <td> -159.661</td> <td> -157.033</td>
+</tr>
+<tr>
+  <th>sex[T.M]</th>  <td>    0.0592</td> <td>    0.079</td> <td>    0.753</td> <td> 0.451</td> <td>   -0.095</td> <td>    0.213</td>
+</tr>
+<tr>
+  <th>BMI</th>       <td>    2.8199</td> <td>    0.005</td> <td>  546.155</td> <td> 0.000</td> <td>    2.810</td> <td>    2.830</td>
+</tr>
+<tr>
+  <th>height</th>    <td>    0.9440</td> <td>    0.004</td> <td>  240.347</td> <td> 0.000</td> <td>    0.936</td> <td>    0.952</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>412.503</td> <th>  Durbin-Watson:     </th> <td>   1.978</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td>  <th>  Jarque-Bera (JB):  </th> <td>2913.710</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.146</td>  <th>  Prob(JB):          </th> <td>    0.00</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 7.055</td>  <th>  Cond. No.          </th> <td>4.27e+03</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br/>[2] The condition number is large, 4.27e+03. This might indicate that there are<br/>strong multicollinearity or other numerical problems.</div></div>
+</div>
+<p>However, there is less control on which dummy variables to include or not in the model, as seen in the next section.</p>
+</section>
+<section id="backward-elimination">
+<h3><span class="section-number">22.2.3. </span>Backward Elimination<a class="headerlink" href="#backward-elimination" title="Permalink to this heading">#</a></h3>
+<p>Il modello di regressione lineare calcolato è in generale buono, ma include alcune variabili che non contribuiscono significativamente alla regressione. In pratica, queste variabili possono inficiare il calcolo del regressore lineare e quindi sarebbe ideale non averle dentro. Potremmo rimuoverle tutte, ma non siamo sicuri che, in assenza di alcune, le altre non acquisiscano una qualche significatività. Esistono diverse tecniche per eliminare tali variabili. Una delle possibilità consiste nell’usare il metodo della <strong>backward elimination</strong>, che è definito come segue:</p>
+<ol class="arabic simple">
+<li><p>Si calcola il regressore lineare considerando tutte le variabili dipendenti;</p></li>
+</ol>
+<ul class="simple">
+<li><p>Se tutte le variabili sono significative, il regressore trovato è quello finale;</p></li>
+<li><p>Se qualche variabile non è significativa, si rimuove la variabile con p-value più alto, si ricalcola il regressore lineare e si va al punto 2.</p></li>
+</ul>
+<p>Alla fine del processo, otterremo un regressore in cui tutte le variabili sono significative.</p>
+<p>Applichiamo il processo al nostro esempio. La variabile con p-value più alto è <code class="docutils literal notranslate"><span class="pre">age</span></code>. Riomuoviamola e ricalcoliamo il regressore:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">=</span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;medv ~ crim + zn + indus + chas + nox + rm + dis + tax + </span>
+<span class="s2">          ptratio + black + lstat + rad_2 + rad_3 + rad_4 + rad_5 + rad_6 + </span>
+<span class="s2">          rad_7 + rad_8 + rad_24&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">boston_mod</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>          <td>medv</td>       <th>  R-squared:         </th> <td>   0.750</td> 
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.740</td> 
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   76.68</td> 
+</tr>
+<tr>
+  <th>Date:</th>             <td>Tue, 31 Oct 2023</td> <th>  Prob (F-statistic):</th> <td>9.34e-133</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>06:44:13</td>     <th>  Log-Likelihood:    </th> <td> -1489.6</td> 
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   506</td>      <th>  AIC:               </th> <td>   3019.</td> 
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   486</td>      <th>  BIC:               </th> <td>   3104.</td> 
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>    19</td>      <th>                     </th>     <td> </td>    
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>    
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>   35.2429</td> <td>    5.407</td> <td>    6.518</td> <td> 0.000</td> <td>   24.619</td> <td>   45.867</td>
+</tr>
+<tr>
+  <th>crim</th>      <td>   -0.1088</td> <td>    0.033</td> <td>   -3.333</td> <td> 0.001</td> <td>   -0.173</td> <td>   -0.045</td>
+</tr>
+<tr>
+  <th>zn</th>        <td>    0.0548</td> <td>    0.014</td> <td>    3.900</td> <td> 0.000</td> <td>    0.027</td> <td>    0.082</td>
+</tr>
+<tr>
+  <th>indus</th>     <td>    0.0238</td> <td>    0.064</td> <td>    0.374</td> <td> 0.709</td> <td>   -0.101</td> <td>    0.149</td>
+</tr>
+<tr>
+  <th>chas</th>      <td>    2.5256</td> <td>    0.861</td> <td>    2.932</td> <td> 0.004</td> <td>    0.833</td> <td>    4.218</td>
+</tr>
+<tr>
+  <th>nox</th>       <td>  -17.5386</td> <td>    3.765</td> <td>   -4.659</td> <td> 0.000</td> <td>  -24.936</td> <td>  -10.142</td>
+</tr>
+<tr>
+  <th>rm</th>        <td>    3.6682</td> <td>    0.414</td> <td>    8.869</td> <td> 0.000</td> <td>    2.856</td> <td>    4.481</td>
+</tr>
+<tr>
+  <th>dis</th>       <td>   -1.5566</td> <td>    0.193</td> <td>   -8.058</td> <td> 0.000</td> <td>   -1.936</td> <td>   -1.177</td>
+</tr>
+<tr>
+  <th>tax</th>       <td>   -0.0087</td> <td>    0.004</td> <td>   -2.250</td> <td> 0.025</td> <td>   -0.016</td> <td>   -0.001</td>
+</tr>
+<tr>
+  <th>ptratio</th>   <td>   -0.9719</td> <td>    0.144</td> <td>   -6.769</td> <td> 0.000</td> <td>   -1.254</td> <td>   -0.690</td>
+</tr>
+<tr>
+  <th>black</th>     <td>    0.0094</td> <td>    0.003</td> <td>    3.544</td> <td> 0.000</td> <td>    0.004</td> <td>    0.015</td>
+</tr>
+<tr>
+  <th>lstat</th>     <td>   -0.5286</td> <td>    0.047</td> <td>  -11.130</td> <td> 0.000</td> <td>   -0.622</td> <td>   -0.435</td>
+</tr>
+<tr>
+  <th>rad_2</th>     <td>    1.4910</td> <td>    1.475</td> <td>    1.011</td> <td> 0.313</td> <td>   -1.407</td> <td>    4.389</td>
+</tr>
+<tr>
+  <th>rad_3</th>     <td>    4.6798</td> <td>    1.333</td> <td>    3.510</td> <td> 0.000</td> <td>    2.060</td> <td>    7.300</td>
+</tr>
+<tr>
+  <th>rad_4</th>     <td>    2.5748</td> <td>    1.185</td> <td>    2.172</td> <td> 0.030</td> <td>    0.246</td> <td>    4.904</td>
+</tr>
+<tr>
+  <th>rad_5</th>     <td>    2.9185</td> <td>    1.206</td> <td>    2.419</td> <td> 0.016</td> <td>    0.548</td> <td>    5.289</td>
+</tr>
+<tr>
+  <th>rad_6</th>     <td>    1.1833</td> <td>    1.461</td> <td>    0.810</td> <td> 0.418</td> <td>   -1.687</td> <td>    4.053</td>
+</tr>
+<tr>
+  <th>rad_7</th>     <td>    4.8767</td> <td>    1.568</td> <td>    3.110</td> <td> 0.002</td> <td>    1.795</td> <td>    7.958</td>
+</tr>
+<tr>
+  <th>rad_8</th>     <td>    4.8423</td> <td>    1.488</td> <td>    3.253</td> <td> 0.001</td> <td>    1.918</td> <td>    7.767</td>
+</tr>
+<tr>
+  <th>rad_24</th>    <td>    7.4563</td> <td>    1.780</td> <td>    4.188</td> <td> 0.000</td> <td>    3.958</td> <td>   10.954</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>184.084</td> <th>  Durbin-Watson:     </th> <td>   1.088</td> 
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td>  <th>  Jarque-Bera (JB):  </th> <td> 861.138</td> 
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 1.555</td>  <th>  Prob(JB):          </th> <td>1.01e-187</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 8.583</td>  <th>  Cond. No.          </th> <td>1.57e+04</td> 
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br/>[2] The condition number is large, 1.57e+04. This might indicate that there are<br/>strong multicollinearity or other numerical problems.</div></div>
+</div>
+<p>Notiamo che il valore di <span class="math notranslate nohighlight">\(R^2\)</span> è rimasto invariato. Esistono ancora variabili non statisticamente rilevanti. Rimuoviamo <code class="docutils literal notranslate"><span class="pre">indus</span></code>, che ha il p-value più alto:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">=</span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;medv ~ crim + zn + chas + nox + rm + dis + tax + </span>
+<span class="s2">          ptratio + black + lstat + rad_2 + rad_3 + rad_4 + rad_5 + rad_6 + </span>
+<span class="s2">          rad_7 + rad_8 + rad_24&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">boston_mod</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>          <td>medv</td>       <th>  R-squared:         </th> <td>   0.750</td> 
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.741</td> 
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   81.08</td> 
+</tr>
+<tr>
+  <th>Date:</th>             <td>Tue, 31 Oct 2023</td> <th>  Prob (F-statistic):</th> <td>1.10e-133</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>06:44:17</td>     <th>  Log-Likelihood:    </th> <td> -1489.7</td> 
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   506</td>      <th>  AIC:               </th> <td>   3017.</td> 
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   487</td>      <th>  BIC:               </th> <td>   3098.</td> 
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>    18</td>      <th>                     </th>     <td> </td>    
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>    
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>   35.1757</td> <td>    5.399</td> <td>    6.515</td> <td> 0.000</td> <td>   24.567</td> <td>   45.784</td>
+</tr>
+<tr>
+  <th>crim</th>      <td>   -0.1094</td> <td>    0.033</td> <td>   -3.355</td> <td> 0.001</td> <td>   -0.173</td> <td>   -0.045</td>
+</tr>
+<tr>
+  <th>zn</th>        <td>    0.0541</td> <td>    0.014</td> <td>    3.891</td> <td> 0.000</td> <td>    0.027</td> <td>    0.081</td>
+</tr>
+<tr>
+  <th>chas</th>      <td>    2.5593</td> <td>    0.856</td> <td>    2.990</td> <td> 0.003</td> <td>    0.878</td> <td>    4.241</td>
+</tr>
+<tr>
+  <th>nox</th>       <td>  -17.1366</td> <td>    3.605</td> <td>   -4.754</td> <td> 0.000</td> <td>  -24.219</td> <td>  -10.054</td>
+</tr>
+<tr>
+  <th>rm</th>        <td>    3.6519</td> <td>    0.411</td> <td>    8.887</td> <td> 0.000</td> <td>    2.845</td> <td>    4.459</td>
+</tr>
+<tr>
+  <th>dis</th>       <td>   -1.5711</td> <td>    0.189</td> <td>   -8.312</td> <td> 0.000</td> <td>   -1.943</td> <td>   -1.200</td>
+</tr>
+<tr>
+  <th>tax</th>       <td>   -0.0081</td> <td>    0.004</td> <td>   -2.312</td> <td> 0.021</td> <td>   -0.015</td> <td>   -0.001</td>
+</tr>
+<tr>
+  <th>ptratio</th>   <td>   -0.9691</td> <td>    0.143</td> <td>   -6.765</td> <td> 0.000</td> <td>   -1.251</td> <td>   -0.688</td>
+</tr>
+<tr>
+  <th>black</th>     <td>    0.0094</td> <td>    0.003</td> <td>    3.537</td> <td> 0.000</td> <td>    0.004</td> <td>    0.015</td>
+</tr>
+<tr>
+  <th>lstat</th>     <td>   -0.5275</td> <td>    0.047</td> <td>  -11.138</td> <td> 0.000</td> <td>   -0.621</td> <td>   -0.434</td>
+</tr>
+<tr>
+  <th>rad_2</th>     <td>    1.5671</td> <td>    1.459</td> <td>    1.074</td> <td> 0.283</td> <td>   -1.300</td> <td>    4.435</td>
+</tr>
+<tr>
+  <th>rad_3</th>     <td>    4.6605</td> <td>    1.331</td> <td>    3.501</td> <td> 0.001</td> <td>    2.045</td> <td>    7.276</td>
+</tr>
+<tr>
+  <th>rad_4</th>     <td>    2.6052</td> <td>    1.182</td> <td>    2.205</td> <td> 0.028</td> <td>    0.284</td> <td>    4.927</td>
+</tr>
+<tr>
+  <th>rad_5</th>     <td>    2.9000</td> <td>    1.204</td> <td>    2.408</td> <td> 0.016</td> <td>    0.534</td> <td>    5.266</td>
+</tr>
+<tr>
+  <th>rad_6</th>     <td>    1.1244</td> <td>    1.451</td> <td>    0.775</td> <td> 0.439</td> <td>   -1.726</td> <td>    3.975</td>
+</tr>
+<tr>
+  <th>rad_7</th>     <td>    4.8734</td> <td>    1.567</td> <td>    3.110</td> <td> 0.002</td> <td>    1.795</td> <td>    7.952</td>
+</tr>
+<tr>
+  <th>rad_8</th>     <td>    4.7944</td> <td>    1.482</td> <td>    3.236</td> <td> 0.001</td> <td>    1.883</td> <td>    7.706</td>
+</tr>
+<tr>
+  <th>rad_24</th>    <td>    7.3362</td> <td>    1.749</td> <td>    4.194</td> <td> 0.000</td> <td>    3.899</td> <td>   10.774</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>184.119</td> <th>  Durbin-Watson:     </th> <td>   1.089</td> 
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td>  <th>  Jarque-Bera (JB):  </th> <td> 861.392</td> 
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 1.555</td>  <th>  Prob(JB):          </th> <td>8.93e-188</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 8.584</td>  <th>  Cond. No.          </th> <td>1.56e+04</td> 
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br/>[2] The condition number is large, 1.56e+04. This might indicate that there are<br/>strong multicollinearity or other numerical problems.</div></div>
+</div>
+<p>Notiamo che l’adjusted <span class="math notranslate nohighlight">\(R^2\)</span> è leggermente salito. Ciò indica che il regressore trovato è leggermente migliore degli altri. Esistono ancora variabili non rilvanti statisticamente. Rimuoviamo <code class="docutils literal notranslate"><span class="pre">rad6</span></code> che ha il p-value più alto:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">=</span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;medv ~ crim + zn + chas + nox + rm + dis + tax + </span>
+<span class="s2">          ptratio + black + lstat + rad_2 + rad_3 + rad_4 + rad_5 + </span>
+<span class="s2">          rad_7 + rad_8 + rad_24&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">boston_mod</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>          <td>medv</td>       <th>  R-squared:         </th> <td>   0.749</td> 
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.741</td> 
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   85.88</td> 
+</tr>
+<tr>
+  <th>Date:</th>             <td>Tue, 31 Oct 2023</td> <th>  Prob (F-statistic):</th> <td>1.56e-134</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>06:44:22</td>     <th>  Log-Likelihood:    </th> <td> -1490.0</td> 
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   506</td>      <th>  AIC:               </th> <td>   3016.</td> 
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   488</td>      <th>  BIC:               </th> <td>   3092.</td> 
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>    17</td>      <th>                     </th>     <td> </td>    
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>    
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>   36.0716</td> <td>    5.272</td> <td>    6.842</td> <td> 0.000</td> <td>   25.713</td> <td>   46.430</td>
+</tr>
+<tr>
+  <th>crim</th>      <td>   -0.1099</td> <td>    0.033</td> <td>   -3.375</td> <td> 0.001</td> <td>   -0.174</td> <td>   -0.046</td>
+</tr>
+<tr>
+  <th>zn</th>        <td>    0.0529</td> <td>    0.014</td> <td>    3.830</td> <td> 0.000</td> <td>    0.026</td> <td>    0.080</td>
+</tr>
+<tr>
+  <th>chas</th>      <td>    2.5397</td> <td>    0.855</td> <td>    2.970</td> <td> 0.003</td> <td>    0.860</td> <td>    4.220</td>
+</tr>
+<tr>
+  <th>nox</th>       <td>  -17.4021</td> <td>    3.587</td> <td>   -4.852</td> <td> 0.000</td> <td>  -24.449</td> <td>  -10.355</td>
+</tr>
+<tr>
+  <th>rm</th>        <td>    3.6414</td> <td>    0.411</td> <td>    8.870</td> <td> 0.000</td> <td>    2.835</td> <td>    4.448</td>
+</tr>
+<tr>
+  <th>dis</th>       <td>   -1.5824</td> <td>    0.188</td> <td>   -8.400</td> <td> 0.000</td> <td>   -1.953</td> <td>   -1.212</td>
+</tr>
+<tr>
+  <th>tax</th>       <td>   -0.0077</td> <td>    0.003</td> <td>   -2.216</td> <td> 0.027</td> <td>   -0.014</td> <td>   -0.001</td>
+</tr>
+<tr>
+  <th>ptratio</th>   <td>   -0.9780</td> <td>    0.143</td> <td>   -6.851</td> <td> 0.000</td> <td>   -1.258</td> <td>   -0.698</td>
+</tr>
+<tr>
+  <th>black</th>     <td>    0.0094</td> <td>    0.003</td> <td>    3.554</td> <td> 0.000</td> <td>    0.004</td> <td>    0.015</td>
+</tr>
+<tr>
+  <th>lstat</th>     <td>   -0.5262</td> <td>    0.047</td> <td>  -11.123</td> <td> 0.000</td> <td>   -0.619</td> <td>   -0.433</td>
+</tr>
+<tr>
+  <th>rad_2</th>     <td>    0.9497</td> <td>    1.222</td> <td>    0.777</td> <td> 0.438</td> <td>   -1.452</td> <td>    3.351</td>
+</tr>
+<tr>
+  <th>rad_3</th>     <td>    4.0559</td> <td>    1.078</td> <td>    3.762</td> <td> 0.000</td> <td>    1.938</td> <td>    6.174</td>
+</tr>
+<tr>
+  <th>rad_4</th>     <td>    1.9660</td> <td>    0.846</td> <td>    2.324</td> <td> 0.021</td> <td>    0.304</td> <td>    3.628</td>
+</tr>
+<tr>
+  <th>rad_5</th>     <td>    2.2505</td> <td>    0.865</td> <td>    2.603</td> <td> 0.010</td> <td>    0.552</td> <td>    3.949</td>
+</tr>
+<tr>
+  <th>rad_7</th>     <td>    4.2718</td> <td>    1.360</td> <td>    3.140</td> <td> 0.002</td> <td>    1.599</td> <td>    6.945</td>
+</tr>
+<tr>
+  <th>rad_8</th>     <td>    4.1634</td> <td>    1.237</td> <td>    3.365</td> <td> 0.001</td> <td>    1.732</td> <td>    6.595</td>
+</tr>
+<tr>
+  <th>rad_24</th>    <td>    6.5600</td> <td>    1.434</td> <td>    4.575</td> <td> 0.000</td> <td>    3.743</td> <td>    9.377</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>183.149</td> <th>  Durbin-Watson:     </th> <td>   1.089</td> 
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td>  <th>  Jarque-Bera (JB):  </th> <td> 853.017</td> 
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 1.548</td>  <th>  Prob(JB):          </th> <td>5.89e-186</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 8.557</td>  <th>  Cond. No.          </th> <td>1.52e+04</td> 
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br/>[2] The condition number is large, 1.52e+04. This might indicate that there are<br/>strong multicollinearity or other numerical problems.</div></div>
+</div>
+<p>Proseguiamo rimuovendo <code class="docutils literal notranslate"><span class="pre">rad2</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">=</span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;medv ~ crim + zn + chas + nox + rm + dis + tax + </span>
+<span class="s2">          ptratio + black + lstat  + rad_3 + rad_4 + rad_5  + </span>
+<span class="s2">          rad_7 + rad_8 + rad_24&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">boston_mod</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>          <td>medv</td>       <th>  R-squared:         </th> <td>   0.749</td> 
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.741</td> 
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   91.29</td> 
+</tr>
+<tr>
+  <th>Date:</th>             <td>Tue, 31 Oct 2023</td> <th>  Prob (F-statistic):</th> <td>2.17e-135</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>06:44:23</td>     <th>  Log-Likelihood:    </th> <td> -1490.3</td> 
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   506</td>      <th>  AIC:               </th> <td>   3015.</td> 
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   489</td>      <th>  BIC:               </th> <td>   3087.</td> 
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>    16</td>      <th>                     </th>     <td> </td>    
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>    
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>   36.5878</td> <td>    5.228</td> <td>    6.999</td> <td> 0.000</td> <td>   26.316</td> <td>   46.859</td>
+</tr>
+<tr>
+  <th>crim</th>      <td>   -0.1104</td> <td>    0.033</td> <td>   -3.393</td> <td> 0.001</td> <td>   -0.174</td> <td>   -0.046</td>
+</tr>
+<tr>
+  <th>zn</th>        <td>    0.0528</td> <td>    0.014</td> <td>    3.829</td> <td> 0.000</td> <td>    0.026</td> <td>    0.080</td>
+</tr>
+<tr>
+  <th>chas</th>      <td>    2.5090</td> <td>    0.854</td> <td>    2.938</td> <td> 0.003</td> <td>    0.831</td> <td>    4.187</td>
+</tr>
+<tr>
+  <th>nox</th>       <td>  -17.5190</td> <td>    3.582</td> <td>   -4.891</td> <td> 0.000</td> <td>  -24.557</td> <td>  -10.481</td>
+</tr>
+<tr>
+  <th>rm</th>        <td>    3.6650</td> <td>    0.409</td> <td>    8.956</td> <td> 0.000</td> <td>    2.861</td> <td>    4.469</td>
+</tr>
+<tr>
+  <th>dis</th>       <td>   -1.5974</td> <td>    0.187</td> <td>   -8.527</td> <td> 0.000</td> <td>   -1.965</td> <td>   -1.229</td>
+</tr>
+<tr>
+  <th>tax</th>       <td>   -0.0082</td> <td>    0.003</td> <td>   -2.430</td> <td> 0.015</td> <td>   -0.015</td> <td>   -0.002</td>
+</tr>
+<tr>
+  <th>ptratio</th>   <td>   -0.9814</td> <td>    0.143</td> <td>   -6.881</td> <td> 0.000</td> <td>   -1.262</td> <td>   -0.701</td>
+</tr>
+<tr>
+  <th>black</th>     <td>    0.0094</td> <td>    0.003</td> <td>    3.551</td> <td> 0.000</td> <td>    0.004</td> <td>    0.015</td>
+</tr>
+<tr>
+  <th>lstat</th>     <td>   -0.5240</td> <td>    0.047</td> <td>  -11.100</td> <td> 0.000</td> <td>   -0.617</td> <td>   -0.431</td>
+</tr>
+<tr>
+  <th>rad_3</th>     <td>    3.7017</td> <td>    0.977</td> <td>    3.790</td> <td> 0.000</td> <td>    1.783</td> <td>    5.621</td>
+</tr>
+<tr>
+  <th>rad_4</th>     <td>    1.6623</td> <td>    0.750</td> <td>    2.217</td> <td> 0.027</td> <td>    0.189</td> <td>    3.135</td>
+</tr>
+<tr>
+  <th>rad_5</th>     <td>    1.9304</td> <td>    0.760</td> <td>    2.541</td> <td> 0.011</td> <td>    0.438</td> <td>    3.423</td>
+</tr>
+<tr>
+  <th>rad_7</th>     <td>    3.9667</td> <td>    1.302</td> <td>    3.047</td> <td> 0.002</td> <td>    1.408</td> <td>    6.525</td>
+</tr>
+<tr>
+  <th>rad_8</th>     <td>    3.8288</td> <td>    1.160</td> <td>    3.302</td> <td> 0.001</td> <td>    1.550</td> <td>    6.107</td>
+</tr>
+<tr>
+  <th>rad_24</th>    <td>    6.4209</td> <td>    1.422</td> <td>    4.515</td> <td> 0.000</td> <td>    3.627</td> <td>    9.215</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>182.880</td> <th>  Durbin-Watson:     </th> <td>   1.086</td> 
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td>  <th>  Jarque-Bera (JB):  </th> <td> 852.759</td> 
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 1.545</td>  <th>  Prob(JB):          </th> <td>6.69e-186</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 8.559</td>  <th>  Cond. No.          </th> <td>1.51e+04</td> 
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br/>[2] The condition number is large, 1.51e+04. This might indicate that there are<br/>strong multicollinearity or other numerical problems.</div></div>
+</div>
+<p>Non ci sono più variabili non significative. Il regressore trovato è quello finale. Va notato che i coefficienti delle variabili sono leggermente cambiati rispetto al regressore che conteneva tutte le variabili.</p>
+<blockquote>
+<div><p><strong>🙋‍♂️ Domanda 4</strong></p>
+<p>Si calcolino i valori MSE per il primo regressore trovato (quello contenente tutte le variabili) e l’ultimo (quello contenente solo variabili significative). Esistono differenze tra i due valori?</p>
+</div></blockquote>
+</section>
+</section>
+<section id="residual-plots">
+<h2><span class="section-number">22.3. </span>Residual Plots<a class="headerlink" href="#residual-plots" title="Permalink to this heading">#</a></h2>
+<p>Possiamo visualizzare i residual plots e i Q-Q plot dei residui di un regressore lineare mediante <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="n">model</span><span class="o">=</span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;medv ~ crim + zn + chas + nox + rm + dis + tax + </span>
+<span class="s2">          ptratio + black + lstat  + rad_3 + rad_4 + rad_5  + </span>
+<span class="s2">          rad_7 + rad_8 + rad_24&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">boston_mod</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1">#otteniamo i valori predetti dal modello:</span>
+<span class="n">fitted</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fittedvalues</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1">#rimpiazzo eventuali NaN con zero</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">22</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">residplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">fitted</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;medv&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">boston_mod</span><span class="o">.</span><span class="n">dropna</span><span class="p">(),</span><span class="n">lowess</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;lw&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">},</span> <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">421</span><span class="p">))</span>
+<span class="n">sm</span><span class="o">.</span><span class="n">qqplot</span><span class="p">(</span><span class="n">fitted</span><span class="o">-</span><span class="n">boston_mod</span><span class="o">.</span><span class="n">dropna</span><span class="p">()[</span><span class="s1">&#39;medv&#39;</span><span class="p">],</span> <span class="n">line</span><span class="o">=</span><span class="s1">&#39;45&#39;</span><span class="p">,</span><span class="n">fit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">422</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/7a851529652e8c157a5a1af5d1fc3ded0473c3075702649199a2a73dbf795c2b.png" src="../_images/7a851529652e8c157a5a1af5d1fc3ded0473c3075702649199a2a73dbf795c2b.png" />
+</div>
+</div>
+</section>
+<section id="estensioni-al-modello-lineare">
+<h2><span class="section-number">22.4. </span>Estensioni al Modello Lineare<a class="headerlink" href="#estensioni-al-modello-lineare" title="Permalink to this heading">#</a></h2>
+<p>La API <code class="docutils literal notranslate"><span class="pre">formula</span></code> di <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> rende semplice inserire deviazioni dal modello lineare. Vediamo degli esempi con il dataset <strong>Auto MPG</strong>. Carichiamo il dataset:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ucimlrepo</span> <span class="kn">import</span> <span class="n">fetch_ucirepo</span> 
+  
+<span class="c1"># fetch dataset </span>
+<span class="n">auto_mpg</span> <span class="o">=</span> <span class="n">fetch_ucirepo</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span> 
+  
+<span class="c1"># data (as pandas dataframes) </span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">auto_mpg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span> 
+<span class="n">y</span> <span class="o">=</span> <span class="n">auto_mpg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">targets</span> 
+  
+<span class="n">data</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>displacement</th>
+      <th>cylinders</th>
+      <th>horsepower</th>
+      <th>weight</th>
+      <th>acceleration</th>
+      <th>model_year</th>
+      <th>origin</th>
+      <th>mpg</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>307.0</td>
+      <td>8</td>
+      <td>130.0</td>
+      <td>3504</td>
+      <td>12.0</td>
+      <td>70</td>
+      <td>1</td>
+      <td>18.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>350.0</td>
+      <td>8</td>
+      <td>165.0</td>
+      <td>3693</td>
+      <td>11.5</td>
+      <td>70</td>
+      <td>1</td>
+      <td>15.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>318.0</td>
+      <td>8</td>
+      <td>150.0</td>
+      <td>3436</td>
+      <td>11.0</td>
+      <td>70</td>
+      <td>1</td>
+      <td>18.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>304.0</td>
+      <td>8</td>
+      <td>150.0</td>
+      <td>3433</td>
+      <td>12.0</td>
+      <td>70</td>
+      <td>1</td>
+      <td>16.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>302.0</td>
+      <td>8</td>
+      <td>140.0</td>
+      <td>3449</td>
+      <td>10.5</td>
+      <td>70</td>
+      <td>1</td>
+      <td>17.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>393</th>
+      <td>140.0</td>
+      <td>4</td>
+      <td>86.0</td>
+      <td>2790</td>
+      <td>15.6</td>
+      <td>82</td>
+      <td>1</td>
+      <td>27.0</td>
+    </tr>
+    <tr>
+      <th>394</th>
+      <td>97.0</td>
+      <td>4</td>
+      <td>52.0</td>
+      <td>2130</td>
+      <td>24.6</td>
+      <td>82</td>
+      <td>2</td>
+      <td>44.0</td>
+    </tr>
+    <tr>
+      <th>395</th>
+      <td>135.0</td>
+      <td>4</td>
+      <td>84.0</td>
+      <td>2295</td>
+      <td>11.6</td>
+      <td>82</td>
+      <td>1</td>
+      <td>32.0</td>
+    </tr>
+    <tr>
+      <th>396</th>
+      <td>120.0</td>
+      <td>4</td>
+      <td>79.0</td>
+      <td>2625</td>
+      <td>18.6</td>
+      <td>82</td>
+      <td>1</td>
+      <td>28.0</td>
+    </tr>
+    <tr>
+      <th>397</th>
+      <td>119.0</td>
+      <td>4</td>
+      <td>82.0</td>
+      <td>2720</td>
+      <td>19.4</td>
+      <td>82</td>
+      <td>1</td>
+      <td>31.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>398 rows × 8 columns</p>
+</div></div></div>
+</div>
+<p>Calcoliamo un semplice regressore lineare:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;mpg ~ horsepower + weight&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>           <td>mpg</td>       <th>  R-squared:         </th> <td>   0.706</td> 
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.705</td> 
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   467.9</td> 
+</tr>
+<tr>
+  <th>Date:</th>             <td>Tue, 31 Oct 2023</td> <th>  Prob (F-statistic):</th> <td>3.06e-104</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>07:08:31</td>     <th>  Log-Likelihood:    </th> <td> -1121.0</td> 
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   392</td>      <th>  AIC:               </th> <td>   2248.</td> 
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   389</td>      <th>  BIC:               </th> <td>   2260.</td> 
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     2</td>      <th>                     </th>     <td> </td>    
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>    
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+       <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>  <td>   45.6402</td> <td>    0.793</td> <td>   57.540</td> <td> 0.000</td> <td>   44.081</td> <td>   47.200</td>
+</tr>
+<tr>
+  <th>horsepower</th> <td>   -0.0473</td> <td>    0.011</td> <td>   -4.267</td> <td> 0.000</td> <td>   -0.069</td> <td>   -0.026</td>
+</tr>
+<tr>
+  <th>weight</th>     <td>   -0.0058</td> <td>    0.001</td> <td>  -11.535</td> <td> 0.000</td> <td>   -0.007</td> <td>   -0.005</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>35.336</td> <th>  Durbin-Watson:     </th> <td>   0.858</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td> <th>  Jarque-Bera (JB):  </th> <td>  45.973</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.683</td> <th>  Prob(JB):          </th> <td>1.04e-10</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 3.974</td> <th>  Cond. No.          </th> <td>1.15e+04</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br/>[2] The condition number is large, 1.15e+04. This might indicate that there are<br/>strong multicollinearity or other numerical problems.</div></div>
+</div>
+<p>Il regressore è statisticamente lineare e ha un <span class="math notranslate nohighlight">\(R^2=0.706\)</span>. Visualizziamo residual e Q-Q plot:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="n">model</span><span class="o">=</span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;mpg ~ horsepower + weight&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1">#otteniamo i valori predetti dal modello:</span>
+<span class="n">fitted</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fittedvalues</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1">#rimpiazzo eventuali NaN con zero</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">22</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">residplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">fitted</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;mpg&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">dropna</span><span class="p">(),</span><span class="n">lowess</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;lw&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">},</span> <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">421</span><span class="p">))</span>
+<span class="n">sm</span><span class="o">.</span><span class="n">qqplot</span><span class="p">(</span><span class="n">fitted</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">dropna</span><span class="p">()[</span><span class="s1">&#39;mpg&#39;</span><span class="p">],</span> <span class="n">line</span><span class="o">=</span><span class="s1">&#39;45&#39;</span><span class="p">,</span><span class="n">fit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">422</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/69e2d5c808a76cce3a54e9e82d4af7876687f8dd9601df83463f438094238f53.png" src="../_images/69e2d5c808a76cce3a54e9e82d4af7876687f8dd9601df83463f438094238f53.png" />
+</div>
+</div>
+<section id="interaction-terms">
+<h3><span class="section-number">22.4.1. </span>Interaction terms<a class="headerlink" href="#interaction-terms" title="Permalink to this heading">#</a></h3>
+<p>Aggiungiamo un termine di interazione tra “weight” e “horsepower”:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;mpg ~ horsepower + weight + weight*horsepower&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>           <td>mpg</td>       <th>  R-squared:         </th> <td>   0.748</td> 
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.746</td> 
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   384.8</td> 
+</tr>
+<tr>
+  <th>Date:</th>             <td>Tue, 31 Oct 2023</td> <th>  Prob (F-statistic):</th> <td>7.26e-116</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>07:17:40</td>     <th>  Log-Likelihood:    </th> <td> -1090.7</td> 
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   392</td>      <th>  AIC:               </th> <td>   2189.</td> 
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   388</td>      <th>  BIC:               </th> <td>   2205.</td> 
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     3</td>      <th>                     </th>     <td> </td>    
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>    
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+          <td></td>             <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>         <td>   63.5579</td> <td>    2.343</td> <td>   27.127</td> <td> 0.000</td> <td>   58.951</td> <td>   68.164</td>
+</tr>
+<tr>
+  <th>horsepower</th>        <td>   -0.2508</td> <td>    0.027</td> <td>   -9.195</td> <td> 0.000</td> <td>   -0.304</td> <td>   -0.197</td>
+</tr>
+<tr>
+  <th>weight</th>            <td>   -0.0108</td> <td>    0.001</td> <td>  -13.921</td> <td> 0.000</td> <td>   -0.012</td> <td>   -0.009</td>
+</tr>
+<tr>
+  <th>weight:horsepower</th> <td> 5.355e-05</td> <td> 6.65e-06</td> <td>    8.054</td> <td> 0.000</td> <td> 4.05e-05</td> <td> 6.66e-05</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>34.175</td> <th>  Durbin-Watson:     </th> <td>   0.904</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td> <th>  Jarque-Bera (JB):  </th> <td>  54.522</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.577</td> <th>  Prob(JB):          </th> <td>1.45e-12</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 4.417</td> <th>  Cond. No.          </th> <td>4.77e+06</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br/>[2] The condition number is large, 4.77e+06. This might indicate that there are<br/>strong multicollinearity or other numerical problems.</div></div>
+</div>
+<p>Il valore di <span class="math notranslate nohighlight">\(R^2\)</span> si è alzato di un po’ ed è ora <span class="math notranslate nohighlight">\(0.748\)</span>. La relazione introdotto è statisticamente rilevante. Visualizziamo i residual plot:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="n">model</span><span class="o">=</span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;mpg ~ horsepower + weight + horsepower*weight&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1">#otteniamo i valori predetti dal modello:</span>
+<span class="n">fitted</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fittedvalues</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1">#rimpiazzo eventuali NaN con zero</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">22</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">residplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">fitted</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;mpg&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">dropna</span><span class="p">(),</span><span class="n">lowess</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;lw&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">},</span> <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">421</span><span class="p">))</span>
+<span class="n">sm</span><span class="o">.</span><span class="n">qqplot</span><span class="p">(</span><span class="n">fitted</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">dropna</span><span class="p">()[</span><span class="s1">&#39;mpg&#39;</span><span class="p">],</span> <span class="n">line</span><span class="o">=</span><span class="s1">&#39;45&#39;</span><span class="p">,</span><span class="n">fit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">422</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/5ff046e1b21ab71d3e33391538ee704af2c69891bd2047a054ffef01786b2320.png" src="../_images/5ff046e1b21ab71d3e33391538ee704af2c69891bd2047a054ffef01786b2320.png" />
+</div>
+</div>
+<p>I residui sono meno correlati con la variabile predetta e il Q-Q plot mostra una deviazione minore dalla Gaussiana. Il modello “spiega” meglio i dati.</p>
+</section>
+<section id="modello-quadratico">
+<h3><span class="section-number">22.4.2. </span>Modello Quadratico<a class="headerlink" href="#modello-quadratico" title="Permalink to this heading">#</a></h3>
+<p>Proviamo a fare fit di un modello quadratico:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;mpg ~ horsepower + I(horsepower**2)&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>           <td>mpg</td>       <th>  R-squared:         </th> <td>   0.688</td>
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.686</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   428.0</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Tue, 31 Oct 2023</td> <th>  Prob (F-statistic):</th> <td>5.40e-99</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>07:25:55</td>     <th>  Log-Likelihood:    </th> <td> -1133.2</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   392</td>      <th>  AIC:               </th> <td>   2272.</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   389</td>      <th>  BIC:               </th> <td>   2284.</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     2</td>      <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+           <td></td>             <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>          <td>   56.9001</td> <td>    1.800</td> <td>   31.604</td> <td> 0.000</td> <td>   53.360</td> <td>   60.440</td>
+</tr>
+<tr>
+  <th>horsepower</th>         <td>   -0.4662</td> <td>    0.031</td> <td>  -14.978</td> <td> 0.000</td> <td>   -0.527</td> <td>   -0.405</td>
+</tr>
+<tr>
+  <th>I(horsepower ** 2)</th> <td>    0.0012</td> <td>    0.000</td> <td>   10.080</td> <td> 0.000</td> <td>    0.001</td> <td>    0.001</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>16.158</td> <th>  Durbin-Watson:     </th> <td>   1.078</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td> <th>  Jarque-Bera (JB):  </th> <td>  30.662</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.218</td> <th>  Prob(JB):          </th> <td>2.20e-07</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 4.299</td> <th>  Cond. No.          </th> <td>1.29e+05</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br/>[2] The condition number is large, 1.29e+05. This might indicate that there are<br/>strong multicollinearity or other numerical problems.</div></div>
+</div>
+<p>Da notare che è necessario specificare <code class="docutils literal notranslate"><span class="pre">I(horsepower**2)</span></code> per aggiungere il termine quadratico (semplicemente <code class="docutils literal notranslate"><span class="pre">horsepower**2</span></code> verrebbe ignorato). Il modello ha un <span class="math notranslate nohighlight">\(R^2\)</span> inferiore al modello con termine di interazione, ma comunque superiore al modello base:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;mpg ~ horsepower&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>           <td>mpg</td>       <th>  R-squared:         </th> <td>   0.606</td>
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.605</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   599.7</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Tue, 31 Oct 2023</td> <th>  Prob (F-statistic):</th> <td>7.03e-81</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>07:27:30</td>     <th>  Log-Likelihood:    </th> <td> -1178.7</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   392</td>      <th>  AIC:               </th> <td>   2361.</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   390</td>      <th>  BIC:               </th> <td>   2369.</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     1</td>      <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+       <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>  <td>   39.9359</td> <td>    0.717</td> <td>   55.660</td> <td> 0.000</td> <td>   38.525</td> <td>   41.347</td>
+</tr>
+<tr>
+  <th>horsepower</th> <td>   -0.1578</td> <td>    0.006</td> <td>  -24.489</td> <td> 0.000</td> <td>   -0.171</td> <td>   -0.145</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>16.432</td> <th>  Durbin-Watson:     </th> <td>   0.920</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td> <th>  Jarque-Bera (JB):  </th> <td>  17.305</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.492</td> <th>  Prob(JB):          </th> <td>0.000175</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 3.299</td> <th>  Cond. No.          </th> <td>    322.</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div></div>
+</div>
+<p>Vediamo i residual plot:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">model</span><span class="o">=</span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;mpg ~ horsepower + I(horsepower**2)&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1">#otteniamo i valori predetti dal modello:</span>
+<span class="n">fitted</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fittedvalues</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1">#rimpiazzo eventuali NaN con zero</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">22</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">residplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">fitted</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;mpg&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">dropna</span><span class="p">(),</span><span class="n">lowess</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;lw&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">},</span> <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">421</span><span class="p">))</span>
+<span class="n">sm</span><span class="o">.</span><span class="n">qqplot</span><span class="p">(</span><span class="n">fitted</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">dropna</span><span class="p">()[</span><span class="s1">&#39;mpg&#39;</span><span class="p">],</span> <span class="n">line</span><span class="o">=</span><span class="s1">&#39;45&#39;</span><span class="p">,</span><span class="n">fit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">422</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/6eea5677b16039f33c162a500bf7c6ca37ee5ff9f742214cd7d70ebad0e6643a.png" src="../_images/6eea5677b16039f33c162a500bf7c6ca37ee5ff9f742214cd7d70ebad0e6643a.png" />
+</div>
+</div>
+<p>Anche in questo caso, i residual plot sono “migliori” di quelli del modello base:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">model</span><span class="o">=</span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;mpg ~ horsepower&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1">#otteniamo i valori predetti dal modello:</span>
+<span class="n">fitted</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fittedvalues</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1">#rimpiazzo eventuali NaN con zero</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">22</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">residplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">fitted</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;mpg&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">dropna</span><span class="p">(),</span><span class="n">lowess</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;lw&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">},</span> <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">421</span><span class="p">))</span>
+<span class="n">sm</span><span class="o">.</span><span class="n">qqplot</span><span class="p">(</span><span class="n">fitted</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">dropna</span><span class="p">()[</span><span class="s1">&#39;mpg&#39;</span><span class="p">],</span> <span class="n">line</span><span class="o">=</span><span class="s1">&#39;45&#39;</span><span class="p">,</span><span class="n">fit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">422</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/43f89489fe82317010c9442f9853dad5b872ede58bac473088a25fc3696987fe.png" src="../_images/43f89489fe82317010c9442f9853dad5b872ede58bac473088a25fc3696987fe.png" />
+</div>
+</div>
+</section>
+<section id="regressione-polinomiale">
+<h3><span class="section-number">22.4.3. </span>Regressione Polinomiale<a class="headerlink" href="#regressione-polinomiale" title="Permalink to this heading">#</a></h3>
+<p>Sembra comunque che il modello con termini di interazione sia migliore di quello quadratico. Potremmo pensare di unire le due cose facendo fit di un regressore polinomiale:</p>
+<div class="math notranslate nohighlight">
+\[mpg = \beta_0 + \beta_1 horsepower^2 + \beta_2 weight^2 + \beta_3 horsepower\cdot weight + \beta_4 horsepower + \beta_5 weight\]</div>
+<p>Ciò si fa facilmente in statsmodels come segue:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;mpg ~ I(horsepower**2) + I(weight**2) + horsepower*weight + horsepower + weight&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>           <td>mpg</td>       <th>  R-squared:         </th> <td>   0.749</td> 
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.746</td> 
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   230.9</td> 
+</tr>
+<tr>
+  <th>Date:</th>             <td>Tue, 31 Oct 2023</td> <th>  Prob (F-statistic):</th> <td>1.30e-113</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>07:31:26</td>     <th>  Log-Likelihood:    </th> <td> -1089.9</td> 
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   392</td>      <th>  AIC:               </th> <td>   2192.</td> 
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   386</td>      <th>  BIC:               </th> <td>   2216.</td> 
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     5</td>      <th>                     </th>     <td> </td>    
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>    
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+           <td></td>             <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>          <td>   63.4053</td> <td>    2.939</td> <td>   21.572</td> <td> 0.000</td> <td>   57.626</td> <td>   69.184</td>
+</tr>
+<tr>
+  <th>I(horsepower ** 2)</th> <td>    0.0003</td> <td>    0.000</td> <td>    1.138</td> <td> 0.256</td> <td>   -0.000</td> <td>    0.001</td>
+</tr>
+<tr>
+  <th>I(weight ** 2)</th>     <td> 2.438e-07</td> <td> 7.94e-07</td> <td>    0.307</td> <td> 0.759</td> <td>-1.32e-06</td> <td>  1.8e-06</td>
+</tr>
+<tr>
+  <th>horsepower</th>         <td>   -0.2646</td> <td>    0.052</td> <td>   -5.093</td> <td> 0.000</td> <td>   -0.367</td> <td>   -0.162</td>
+</tr>
+<tr>
+  <th>weight</th>             <td>   -0.0102</td> <td>    0.003</td> <td>   -3.558</td> <td> 0.000</td> <td>   -0.016</td> <td>   -0.005</td>
+</tr>
+<tr>
+  <th>horsepower:weight</th>  <td> 3.594e-05</td> <td> 2.53e-05</td> <td>    1.421</td> <td> 0.156</td> <td>-1.38e-05</td> <td> 8.57e-05</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>31.272</td> <th>  Durbin-Watson:     </th> <td>   0.917</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td> <th>  Jarque-Bera (JB):  </th> <td>  50.516</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.531</td> <th>  Prob(JB):          </th> <td>1.07e-11</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 4.402</td> <th>  Cond. No.          </th> <td>1.63e+08</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br/>[2] The condition number is large, 1.63e+08. This might indicate that there are<br/>strong multicollinearity or other numerical problems.</div></div>
+</div>
+<p>Notiamo che i p-value dei termini quadratici e dell’interaction term sono alti. Applichiamo backward elimination e iniziamo rimuovendo il termine <span class="math notranslate nohighlight">\(horsepower^2\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;mpg ~ I(weight**2) + horsepower*weight + horsepower + weight&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>           <td>mpg</td>       <th>  R-squared:         </th> <td>   0.749</td> 
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.746</td> 
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   288.1</td> 
+</tr>
+<tr>
+  <th>Date:</th>             <td>Tue, 31 Oct 2023</td> <th>  Prob (F-statistic):</th> <td>1.37e-114</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>07:32:20</td>     <th>  Log-Likelihood:    </th> <td> -1090.6</td> 
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   392</td>      <th>  AIC:               </th> <td>   2191.</td> 
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   387</td>      <th>  BIC:               </th> <td>   2211.</td> 
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     4</td>      <th>                     </th>     <td> </td>    
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>    
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+          <td></td>             <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>         <td>   62.7418</td> <td>    2.882</td> <td>   21.771</td> <td> 0.000</td> <td>   57.076</td> <td>   68.408</td>
+</tr>
+<tr>
+  <th>I(weight ** 2)</th>    <td>-3.068e-07</td> <td>  6.3e-07</td> <td>   -0.487</td> <td> 0.626</td> <td>-1.54e-06</td> <td> 9.31e-07</td>
+</tr>
+<tr>
+  <th>horsepower</th>        <td>   -0.2721</td> <td>    0.052</td> <td>   -5.281</td> <td> 0.000</td> <td>   -0.373</td> <td>   -0.171</td>
+</tr>
+<tr>
+  <th>weight</th>            <td>   -0.0095</td> <td>    0.003</td> <td>   -3.388</td> <td> 0.001</td> <td>   -0.015</td> <td>   -0.004</td>
+</tr>
+<tr>
+  <th>horsepower:weight</th> <td> 5.971e-05</td> <td> 1.43e-05</td> <td>    4.183</td> <td> 0.000</td> <td> 3.16e-05</td> <td> 8.78e-05</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>32.870</td> <th>  Durbin-Watson:     </th> <td>   0.913</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td> <th>  Jarque-Bera (JB):  </th> <td>  52.237</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.560</td> <th>  Prob(JB):          </th> <td>4.54e-12</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 4.395</td> <th>  Cond. No.          </th> <td>1.60e+08</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br/>[2] The condition number is large, 1.6e+08. This might indicate that there are<br/>strong multicollinearity or other numerical problems.</div></div>
+</div>
+<p>Rimuoviamo ora <span class="math notranslate nohighlight">\(weight^2\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;mpg ~  horsepower*weight + horsepower + weight&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>           <td>mpg</td>       <th>  R-squared:         </th> <td>   0.748</td> 
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.746</td> 
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   384.8</td> 
+</tr>
+<tr>
+  <th>Date:</th>             <td>Tue, 31 Oct 2023</td> <th>  Prob (F-statistic):</th> <td>7.26e-116</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>07:32:46</td>     <th>  Log-Likelihood:    </th> <td> -1090.7</td> 
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   392</td>      <th>  AIC:               </th> <td>   2189.</td> 
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   388</td>      <th>  BIC:               </th> <td>   2205.</td> 
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     3</td>      <th>                     </th>     <td> </td>    
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>    
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+          <td></td>             <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>         <td>   63.5579</td> <td>    2.343</td> <td>   27.127</td> <td> 0.000</td> <td>   58.951</td> <td>   68.164</td>
+</tr>
+<tr>
+  <th>horsepower</th>        <td>   -0.2508</td> <td>    0.027</td> <td>   -9.195</td> <td> 0.000</td> <td>   -0.304</td> <td>   -0.197</td>
+</tr>
+<tr>
+  <th>weight</th>            <td>   -0.0108</td> <td>    0.001</td> <td>  -13.921</td> <td> 0.000</td> <td>   -0.012</td> <td>   -0.009</td>
+</tr>
+<tr>
+  <th>horsepower:weight</th> <td> 5.355e-05</td> <td> 6.65e-06</td> <td>    8.054</td> <td> 0.000</td> <td> 4.05e-05</td> <td> 6.66e-05</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>34.175</td> <th>  Durbin-Watson:     </th> <td>   0.904</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td> <th>  Jarque-Bera (JB):  </th> <td>  54.522</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.577</td> <th>  Prob(JB):          </th> <td>1.45e-12</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 4.417</td> <th>  Cond. No.          </th> <td>4.77e+06</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br/>[2] The condition number is large, 4.77e+06. This might indicate that there are<br/>strong multicollinearity or other numerical problems.</div></div>
+</div>
+<p>Ci siamo ricondotti al modello con interaction term. Da qui deduciamo che un modello polinomiale non modella i dati meglio del modello con termini di interazione.</p>
+</section>
+</section>
+<section id="esercizi">
+<h2><span class="section-number">22.5. </span>Esercizi<a class="headerlink" href="#esercizi" title="Permalink to this heading">#</a></h2>
+<blockquote>
+<div><p>🧑‍💻 Esercizio 1</p>
+<p>Si consideri il dataset delle iris di Fisher. Si effettui uno scatterplot per studiare le relazioni tra le variabili. Si calcoli la matrice di correlazione usando gli indici di correlazione di Pearson, Spearman e Kendall. Esistono correlazioni deboli, medie o forti? Si calcoli l’indice di correlazione di Pearson tra le due coppie di variabili che individuano le correlazioni più forti. Si tratta di correlazioni significative?</p>
+</div></blockquote>
+<blockquote>
+<div><p>🧑‍💻 Esercizio 2</p>
+<p>Si effettui la normalizzazione <strong>z-scoring</strong> su tutte le variabili del dataset delle iris di Fisher. Si calcoli la matrice di covarianza delle variabili normalizzate. Si confronti la matrice ottenuta con la matrice di correlazione calcolata mediante l’indice di Pearson. Ci sono differenze tra le due matrici? Perché?</p>
+</div></blockquote>
+<blockquote>
+<div><p>🧑‍💻 Esercizio 3</p>
+<p>Si consideri il dataset Titanic. Si calcoli un regressore lineare che predica i valori di <code class="docutils literal notranslate"><span class="pre">Fare</span></code> dai valori di <code class="docutils literal notranslate"><span class="pre">Survived</span></code>, <code class="docutils literal notranslate"><span class="pre">Pclass</span></code>, <code class="docutils literal notranslate"><span class="pre">Sex</span></code> e <code class="docutils literal notranslate"><span class="pre">Age</span></code>. Si inseriscano variabili dummy ove opportuno. Il regressore ottenuto è un buon regressore? Quali variabili contribuiscono significativamente alla regressione? Esistono variabili non rilevanti? Si eliminino tali variabili mediante la tecnica della backward elimination. Si discuta il significato dei coefficienti individuati.</p>
+</div></blockquote>
+<blockquote>
+<div><p>🧑‍💻 Esercizio 4</p>
+<p>Si consideri il dataset Titanic. Si calcoli un regressore lineare che predica i valori di <code class="docutils literal notranslate"><span class="pre">Age</span></code> dai valori di <code class="docutils literal notranslate"><span class="pre">Survived</span></code>, <code class="docutils literal notranslate"><span class="pre">Pclass</span></code>, <code class="docutils literal notranslate"><span class="pre">Sex</span></code> e <code class="docutils literal notranslate"><span class="pre">Fare</span></code>. Si inseriscano variabili dummy ove opportuno. Il regressore ottenuto è un buon regressore? Si tratta di un regressore migliore o peggiore del regressore calcolato nell’esercizio precedente? Quali variabili contribuiscono significativamente alla regressione? Esistono variabili non rilevanti? Si eliminino tali variabili mediante la tecnica della backward elimination. Si discuta il significato dei coefficienti individuati.</p>
+</div></blockquote>
+<blockquote>
+<div><p>🧑‍💻 Esercizio 5</p>
+<p>Si consideri il dataset Boston. Si calcoli un regressore lineare che predica i valori di <code class="docutils literal notranslate"><span class="pre">crim</span></code> dai valori delle altre variabili. Si inseriscano variabili dummy ove opportuno. Quali variabili contribuiscono significativamente alla regressione? Esistono variabili non rilevanti? Si eliminino tali variabili mediante la tecnica della backward elimination. Si discuta il significato dei coefficienti individuati.</p>
+</div></blockquote>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./laboratories"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="10_statistical_inference.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">21. </span>Laboratory on Statistical Inference</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="12_regressione_logistica.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">23. </span>Laboratorio su regressione logistica</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regressione-lineare-semplice">22.1. Regressione Lineare Semplice</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisi-di-un-regressore-lineare-semplice">22.1.1. Analisi di un regressore lineare semplice</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regressione-lineare-multipla">22.2. Regressione Lineare Multipla</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boston-house-pricing-dataset">22.2.1. Boston House Pricing Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regressori-lineari-variabili-categoriche-e-variabili-dummy">22.2.2. Regressori lineari, variabili categoriche e variabili dummy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-elimination">22.2.3. Backward Elimination</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#residual-plots">22.3. Residual Plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estensioni-al-modello-lineare">22.4. Estensioni al Modello Lineare</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interaction-terms">22.4.1. Interaction terms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modello-quadratico">22.4.2. Modello Quadratico</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regressione-polinomiale">22.4.3. Regressione Polinomiale</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">22.5. Esercizi</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Antonino Furnari
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

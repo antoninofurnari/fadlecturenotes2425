@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>14. Introduzione a Matplotlib &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+    <title>15. Introduzione a Matplotlib &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
   
   
   
@@ -19,12 +19,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=c5ced968eda925caa686" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
@@ -38,9 +38,9 @@
     <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686" />
-  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=c5ced968eda925caa686"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=365ca57ee442770a23c6"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -68,8 +68,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="15. Introduzione a Pandas" href="05_intro_pandas.html" />
-    <link rel="prev" title="13. Introduzione a Numpy" href="03_intro_numpy.html" />
+    <link rel="next" title="16. Introduzione a Pandas" href="05_intro_pandas.html" />
+    <link rel="prev" title="14. Introduzione a Numpy" href="03_intro_numpy.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -182,18 +182,22 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../lectures/09_information_theory.html">8. Basic Elements of Information Theory</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lectures/10_statistical_inference.html">9. Statistical Inference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lectures/11_linear_regression.html">10. Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/12_logistic_regression.html">11. Logistic Regression</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratories</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_setup.html">11. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_intro_python.html">12. Introduzione a Python</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_intro_numpy.html">13. Introduzione a Numpy</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">14. Introduzione a Matplotlib</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_intro_pandas.html">15. Introduzione a Pandas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">16. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="07_misure_di_tendenza_centrale_dispersione_e_forma.html">17. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
-<li class="toctree-l1"><a class="reference internal" href="08_associazione_variabili.html">18. Associazione tra Variabili</a></li>
-<li class="toctree-l1"><a class="reference internal" href="09_heart-disease-analysis.html">19. Exploratory Analysis on the Heart Disease Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_setup.html">12. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_intro_python.html">13. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_intro_numpy.html">14. Introduzione a Numpy</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">15. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_intro_pandas.html">16. Introduzione a Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">17. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_misure_di_tendenza_centrale_dispersione_e_forma.html">18. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_associazione_variabili.html">19. Associazione tra Variabili</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_heart-disease-analysis.html">20. Exploratory Analysis on the Heart Disease Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_statistical_inference.html">21. Laboratory on Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_regressione_lineare.html">22. Laboratorio su Regressione Lineare</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_regressione_logistica.html">23. Laboratorio su regressione logistica</a></li>
 </ul>
 
     </div>
@@ -418,12 +422,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-bidimensionale">14.1. Plot bidimensionale</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subplot">14.2. Subplot</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#colori-e-stili">14.3. Colori e stili</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sovrapposizione-di-linee-e-legenda">14.4. Sovrapposizione di linee e legenda</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#griglie">14.5. Griglie</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">14.6. Esercizi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-bidimensionale">15.1. Plot bidimensionale</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subplot">15.2. Subplot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#colori-e-stili">15.3. Colori e stili</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sovrapposizione-di-linee-e-legenda">15.4. Sovrapposizione di linee e legenda</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#griglie">15.5. Griglie</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">15.6. Esercizi</a></li>
 </ul>
             </nav>
         </div>
@@ -436,10 +440,10 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="introduzione-a-matplotlib">
-<h1><span class="section-number">14. </span>Introduzione a Matplotlib<a class="headerlink" href="#introduzione-a-matplotlib" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">15. </span>Introduzione a Matplotlib<a class="headerlink" href="#introduzione-a-matplotlib" title="Permalink to this heading">#</a></h1>
 <p><strong>Matplotlib</strong> è la libreria di riferimento per la creazione di grafici in Python. Si tratta di una libreria molto potente e ben documentata (<a class="reference external" href="https://matplotlib.org/">https://matplotlib.org/</a>). Vediamo alcuni esempi classici di utilizzo della libreria.</p>
 <section id="plot-bidimensionale">
-<h2><span class="section-number">14.1. </span>Plot bidimensionale<a class="headerlink" href="#plot-bidimensionale" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">15.1. </span>Plot bidimensionale<a class="headerlink" href="#plot-bidimensionale" title="Permalink to this heading">#</a></h2>
 <p>Vediamo come stampare la funzione:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -498,7 +502,7 @@ y = x^2.
 </div>
 </section>
 <section id="subplot">
-<h2><span class="section-number">14.2. </span>Subplot<a class="headerlink" href="#subplot" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">15.2. </span>Subplot<a class="headerlink" href="#subplot" title="Permalink to this heading">#</a></h2>
 <p>Spesso può essere utile confrontare diversi grafici. Per fare ciò, possiamo avvalerci della funzione subplot, che permette di costruire una “griglia di grafici”.</p>
 <p>Vediamo ad esempio come stampare le seguenti funzioni in una griglia 2 x 2:</p>
 <div class="math notranslate nohighlight">
@@ -538,7 +542,7 @@ y=x^2, \ \ \ y=log(x), \ \ \  y=x^2 \cdot log(x), \ \ \  y=log(x)/x
 </div>
 </section>
 <section id="colori-e-stili">
-<h2><span class="section-number">14.3. </span>Colori e stili<a class="headerlink" href="#colori-e-stili" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">15.3. </span>Colori e stili<a class="headerlink" href="#colori-e-stili" title="Permalink to this heading">#</a></h2>
 <p>E’ possibile utilizzare diversi colori e stili per i grafici. Sotto alcuni esempi:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -569,7 +573,7 @@ y=x^2, \ \ \ y=log(x), \ \ \  y=x^2 \cdot log(x), \ \ \  y=log(x)/x
 </div>
 </section>
 <section id="sovrapposizione-di-linee-e-legenda">
-<h2><span class="section-number">14.4. </span>Sovrapposizione di linee e legenda<a class="headerlink" href="#sovrapposizione-di-linee-e-legenda" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">15.4. </span>Sovrapposizione di linee e legenda<a class="headerlink" href="#sovrapposizione-di-linee-e-legenda" title="Permalink to this heading">#</a></h2>
 <p>E’ semplice sovrapporre più linee mediante <strong>matplotlib</strong>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -588,7 +592,7 @@ y=x^2, \ \ \ y=log(x), \ \ \  y=x^2 \cdot log(x), \ \ \  y=log(x)/x
 </div>
 </section>
 <section id="griglie">
-<h2><span class="section-number">14.5. </span>Griglie<a class="headerlink" href="#griglie" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">15.5. </span>Griglie<a class="headerlink" href="#griglie" title="Permalink to this heading">#</a></h2>
 <p>È spesso utile sovrapporre una griglia ai propri grafici. Ciò può essere fatto mediante <code class="docutils literal notranslate"><span class="pre">plt.grid()</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -609,7 +613,7 @@ y=x^2, \ \ \ y=log(x), \ \ \  y=x^2 \cdot log(x), \ \ \  y=log(x)/x
 <p>Matplotlib è una librerira molto versatile. Sul sito ufficiale di Matplotlib è presente una galleria di esempi di plot con relativo codice (<a class="reference external" href="https://matplotlib.org/stable/gallery/index.html">https://matplotlib.org/stable/gallery/index.html</a>). Vedremo più in dettaglio come ottenere visualizzazioni più complesse durante il corso.</p>
 </section>
 <section id="esercizi">
-<h2><span class="section-number">14.6. </span>Esercizi<a class="headerlink" href="#esercizi" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">15.6. </span>Esercizi<a class="headerlink" href="#esercizi" title="Permalink to this heading">#</a></h2>
 <blockquote>
 <div><p>🧑‍💻 Esercizio 1</p>
 <p>Si scriva il codice per ottenere il seguente grafico:</p>
@@ -654,7 +658,7 @@ y=x^2, \ \ \ y=log(x), \ \ \  y=x^2 \cdot log(x), \ \ \  y=log(x)/x
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">13. </span>Introduzione a Numpy</p>
+        <p class="prev-next-title"><span class="section-number">14. </span>Introduzione a Numpy</p>
       </div>
     </a>
     <a class="right-next"
@@ -662,7 +666,7 @@ y=x^2, \ \ \ y=log(x), \ \ \  y=x^2 \cdot log(x), \ \ \  y=log(x)/x
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">15. </span>Introduzione a Pandas</p>
+        <p class="prev-next-title"><span class="section-number">16. </span>Introduzione a Pandas</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -681,12 +685,12 @@ y=x^2, \ \ \ y=log(x), \ \ \  y=x^2 \cdot log(x), \ \ \  y=log(x)/x
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-bidimensionale">14.1. Plot bidimensionale</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subplot">14.2. Subplot</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#colori-e-stili">14.3. Colori e stili</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sovrapposizione-di-linee-e-legenda">14.4. Sovrapposizione di linee e legenda</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#griglie">14.5. Griglie</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">14.6. Esercizi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-bidimensionale">15.1. Plot bidimensionale</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subplot">15.2. Subplot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#colori-e-stili">15.3. Colori e stili</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sovrapposizione-di-linee-e-legenda">15.4. Sovrapposizione di linee e legenda</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#griglie">15.5. Griglie</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">15.6. Esercizi</a></li>
 </ul>
   </nav></div>
 
@@ -734,8 +738,8 @@ By Antonino Furnari
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6"></script>
 
   <footer class="bd-footer">
   </footer>
