@@ -579,18 +579,12 @@ three heads? We have:</p>
 <section id="id3">
 <h3><span class="section-number">7.4.1. </span>Example<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
 <p>During World War II Germans bombed the south of London many times. People started to believe that some areas were more targeted by the bombing and hence started moving from one part of a city to another in an attempt to avoid those areas.</p>
-<p>After the end of the war, R. D. Charles showed that the bombings were actually random and independent. To do so, he divided the interested area by <span class="math notranslate nohighlight">\(576\)</span> squares of <span class="math notranslate nohighlight">\(0.24 Km^2\)</span>. The number of total bombs was <span class="math notranslate nohighlight">\(537\)</span>, hence less than one per square (a rare event). Assuming that the bombing was uniform and casual, the probability of a square being bombed would be:</p>
+<p>After the end of the war, R. D. Charles showed that the bombings were actually random and independent. To do so, he divided the interested area in <span class="math notranslate nohighlight">\(576\)</span> squares of <span class="math notranslate nohighlight">\(0.24 Km^2\)</span>. The number of total bombs was <span class="math notranslate nohighlight">\(537\)</span>, hence less than one per square (a rare event). Assuming that the bombing was uniform and casual, the probability of a square being bombed would be:</p>
 <div class="math notranslate nohighlight">
 \[\lambda = \frac{537}{576}\]</div>
 <p>We can hence compute the expected probability that <span class="math notranslate nohighlight">\(x\)</span> squares were bombed as <span class="math notranslate nohighlight">\(P(X=x)\)</span>, where <span class="math notranslate nohighlight">\(P\)</span> is a Poisson function with <span class="math notranslate nohighlight">\(\lambda=\frac{537}{576}\)</span>. The expected number of areas being bombed <span class="math notranslate nohighlight">\(x\)</span> times will be: <span class="math notranslate nohighlight">\(P(X=x)\times576\)</span></p>
 <p>Comparing the expected numbers with the measured ones, we obtain the following table:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Expected&#39;</span><span class="p">:</span><span class="n">poisson</span><span class="o">.</span><span class="n">pmf</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="mi">537</span><span class="o">/</span><span class="mi">576</span><span class="p">)</span><span class="o">*</span><span class="mi">576</span><span class="p">,</span> <span class="s1">&#39;Real&#39;</span><span class="p">:[</span><span class="mi">229</span><span class="p">,</span><span class="mi">211</span><span class="p">,</span><span class="mi">93</span><span class="p">,</span><span class="mi">35</span><span class="p">,</span><span class="mi">8</span><span class="p">]})</span>
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html"><div>
 <style scoped>
@@ -654,11 +648,9 @@ a <em>single discrete variable with</em> <span class="math notranslate nohighlig
 finite.</p>
 <ul class="simple">
 <li><p>The distribution is parametrized by a vector
-<span class="math notranslate nohighlight">\(\mathbf{p} \in \lbrack 0,1\rbrack^{k - 1}\)</span>, where <span class="math notranslate nohighlight">\(p_{i}\)</span> gives the
+<span class="math notranslate nohighlight">\(\mathbf{p} \in \lbrack 0,1\rbrack^k\)</span>, where <span class="math notranslate nohighlight">\(p_{i}\)</span> gives the
 probability of the i^th^ state.</p></li>
-<li><p>The probability of the k^th^ state is given by
-<span class="math notranslate nohighlight">\(1 - \sum_{i = 1}^{k - 1}{p_{i}\ }\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\mathbf{p}\)</span> must be such that <span class="math notranslate nohighlight">\(\sum_{i = 1}^{k - 1}p_{i} \leq 1\)</span> to
+<li><p><span class="math notranslate nohighlight">\(\mathbf{p}\)</span> must be such that <span class="math notranslate nohighlight">\(\sum_{i = 1}^kp_{i} = 1\)</span> to
 obtain a valid probability distribution.</p></li>
 <li><p>The analytical form of the distribution is given by:
 <span class="math notranslate nohighlight">\(p(x = i) = p_{i}\)</span>;</p></li>
@@ -667,7 +659,7 @@ obtain a valid probability distribution.</p></li>
 to the case of multiple states</strong>.</p>
 <p><strong>Example:</strong></p>
 <p>Rolling a fair die. In this case, <span class="math notranslate nohighlight">\(k = 6\)</span> and
-<span class="math notranslate nohighlight">\(p_{i} = \frac{1}{k}\ ,\ i = 0,\ldots,k - 1\ \)</span>.</p>
+<span class="math notranslate nohighlight">\(p_{i} = \frac{1}{k}\ ,\ i = 0,\ldots,k \ \)</span>.</p>
 <section id="multinomial-distribution">
 <h3><span class="section-number">7.5.1. </span>Multinomial Distribution<a class="headerlink" href="#multinomial-distribution" title="Permalink to this heading">#</a></h3>
 <p>The multinomial distribution <strong>generalizes the binomial distribution to
