@@ -429,24 +429,24 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-size-and-standard-error">9.2. Sample Size and Standard Error</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-and-variance-of-estimators">9.3. Bias and Variance of Estimators</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-of-an-estimator">9.3.1. Bias of an Estimator</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#unbiased-estimators-for-sample-mean-and-variance">9.3.1.1. Unbiased Estimators for Sample Mean and Variance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals">9.3. Confidence Intervals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-and-variance-of-estimators">9.4. Bias and Variance of Estimators</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-of-an-estimator">9.4.1. Bias of an Estimator</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#unbiased-estimators-for-sample-mean-and-variance">9.4.1.1. Unbiased Estimators for Sample Mean and Variance</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-of-an-estimator">9.3.2. Variance of an Estimator</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-variance-tradeoff">9.3.3. Bias-Variance Tradeoff</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-of-an-estimator">9.4.2. Variance of an Estimator</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-variance-tradeoff">9.4.3. Bias-Variance Tradeoff</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-distribution-of-the-mean">9.4. Sampling Distribution of the Mean</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-sampling-distributions">9.5. Other Sampling Distributions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-2-distribution">9.5.1. <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-distribution">9.5.2. F-Distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-distribution-of-the-mean">9.5. Sampling Distribution of the Mean</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-for-the-mean">9.5.1. Confidence Intervals for the Mean</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-confidence-intervals-in-practice">9.5.2. Computing Confidence Intervals in Practice</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals">9.6. Confidence Intervals</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-for-the-mean">9.6.1. Confidence Intervals for the Mean</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-confidence-intervals-in-practice">9.6.2. Computing Confidence Intervals in Practice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-sampling-distributions">9.6. Other Sampling Distributions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-2-distribution">9.6.1. <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-distribution">9.6.2. F-Distribution</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing">9.7. Hypothesis Testing</a><ul class="nav section-nav flex-column">
@@ -618,166 +618,8 @@ document.write(`
 </div>
 <p>The distribution on the right is narrower, meaning that the probability of estimating a defect rate closer to the true value is higher.</p>
 </section>
-<section id="bias-and-variance-of-estimators">
-<h2><span class="section-number">9.3. </span>Bias and Variance of Estimators<a class="headerlink" href="#bias-and-variance-of-estimators" title="Permalink to this heading">#</a></h2>
-<p>In the example above, we have seen that we can use the formula</p>
-<div class="math notranslate nohighlight">
-\[\hat p = \frac{x}{n}\]</div>
-<p>as a way to estimate the true value of <span class="math notranslate nohighlight">\(p\)</span>. We will call the formula above an <strong>estimator</strong>, while its result <span class="math notranslate nohighlight">\(\hat p\)</span>, an <strong>estimate</strong>.</p>
-<p>Let again consider the random variable arising from multiple random samples:</p>
-<div class="math notranslate nohighlight">
-\[\hat P = \frac{X}{n}\]</div>
-<p>We expect that this estimator will give different results depending on sampling, leading to a distribution of values. In practice, it is important to measure two important aspects of an estimator, namely, its <strong>bias</strong> and its <strong>variance</strong>.</p>
-<section id="bias-of-an-estimator">
-<h3><span class="section-number">9.3.1. </span>Bias of an Estimator<a class="headerlink" href="#bias-of-an-estimator" title="Permalink to this heading">#</a></h3>
-<p>Let <span class="math notranslate nohighlight">\(X\)</span> be a random variable (e.g., the heights of all people in the world) and let <span class="math notranslate nohighlight">\(x=(x_1,x_2,\ldots,x_n)\)</span> be a realization of <span class="math notranslate nohighlight">\(X\)</span> (a sample from the population). Let <span class="math notranslate nohighlight">\(T(X)\)</span> be an estimator of the true value <span class="math notranslate nohighlight">\(\phi\)</span> depending on the variable <span class="math notranslate nohighlight">\(X\)</span>. For instance, <span class="math notranslate nohighlight">\(\phi\)</span> could be the mean value of all heights. <span class="math notranslate nohighlight">\(T(X)\)</span> is then an estimator of the mean and <span class="math notranslate nohighlight">\(\hat phi = T(x)\)</span> is the estimate we obtain considering the sample <span class="math notranslate nohighlight">\(x\)</span>, for instance:</p>
-<div class="math notranslate nohighlight">
-\[T(x) = \frac{\sum_{i=1}^n x_i}{n}\]</div>
-<p>Note that <strong><span class="math notranslate nohighlight">\(T(x)\)</span> is a random variable</strong>, while <span class="math notranslate nohighlight">\(T(x)\)</span> is the value we obtain when we consider the realization <span class="math notranslate nohighlight">\(x\)</span>.</p>
-<p>We will define the <strong>bias</strong> of the estimator as:</p>
-<div class="math notranslate nohighlight">
-\[Bias_\theta (T(X)) = E_\theta[T(X)] - \phi\]</div>
-<p>That is to say, the <strong>difference between the expected value of the estimate (under different samplings) minus the true value of the quantity we are trying to estimate</strong>.</p>
-<p>We will say that an estimator <span class="math notranslate nohighlight">\(T(X)\)</span> is an unbiased estimator of <span class="math notranslate nohighlight">\(\phi\)</span> if:</p>
-<div class="math notranslate nohighlight">
-\[E_\theta[T(X)] = \phi\]</div>
-<p>or equivalently:</p>
-<div class="math notranslate nohighlight">
-\[Bias_{\phi}(T(X)) = 0\]</div>
-<p>The bias indicates if the estimator <strong>systematically underestimate or overestimate the property of the population we are interested in</strong>. A bias equal to zero means that, <strong>on average</strong> our estimates will be close to true value. This means that, if we could perform sampling many times and take the average of the estimates, we would get a value close to the true one.</p>
-<section id="unbiased-estimators-for-sample-mean-and-variance">
-<h4><span class="section-number">9.3.1.1. </span>Unbiased Estimators for Sample Mean and Variance<a class="headerlink" href="#unbiased-estimators-for-sample-mean-and-variance" title="Permalink to this heading">#</a></h4>
-<p>Let us consider a univariate sample <span class="math notranslate nohighlight">\(\{X^{(i)}\}_{i=1}^n\)</span>. The mean estimator:</p>
-<div class="math notranslate nohighlight">
-\[
-\overline x = \frac{1}{n} \sum_{i=0}^{n} x^{(i)};
-\]</div>
-<p>is unbiased. This means that <strong>if we draw a large number of random sample, we compute their mean and then we compute the mean of their mean, this last value will converge to the population mean as the sample size <span class="math notranslate nohighlight">\(n\)</span> gets larger</strong>.</p>
-<p>The estimator for the variance:</p>
-<div class="math notranslate nohighlight">
-\[
-s_n^2=\frac{1}{n}\sum_{i=0}^{n}(x^{(i)}-\overline x)^2
-\]</div>
-<p>is shown to be <strong>biased</strong>. In practice, it can be shown that this estimator systematically underestimates the variance. In particular:</p>
-<div class="math notranslate nohighlight">
-\[
-\mathbf{E}[s_n^2]=\frac{n-1}{n}\sigma^2
-\]</div>
-<p>where <span class="math notranslate nohighlight">\(\sigma^2\)</span> is the variance of the population. An unbiased estimator for the variance is given by:</p>
-<div class="math notranslate nohighlight">
-\[
-s_{n-1}^2=\frac{1}{n-1}\sum_{i=0}^{n}(x_i-\overline x)^2
-\]</div>
-<p>Note that this approaches to <span class="math notranslate nohighlight">\(s_{n}^2\)</span> as <span class="math notranslate nohighlight">\(n \to \infty\)</span>. In practice:</p>
-<ul class="simple">
-<li><p>When <span class="math notranslate nohighlight">\(n\)</span> is small, it does make sense to use the unbiased estimator <span class="math notranslate nohighlight">\(s_{n-1}^2\)</span> if we want to estimate the variance of the population;</p></li>
-<li><p>When <span class="math notranslate nohighlight">\(n\)</span> is very large, the two estimates will be similar (often equivalent).</p></li>
-</ul>
-</section>
-</section>
-<section id="variance-of-an-estimator">
-<h3><span class="section-number">9.3.2. </span>Variance of an Estimator<a class="headerlink" href="#variance-of-an-estimator" title="Permalink to this heading">#</a></h3>
-<p>The variance of <span class="math notranslate nohighlight">\(T(X)\)</span> is defined as:</p>
-<div class="math notranslate nohighlight">
-\[Var_\phi(T(X)) = E[(T(X)-E(T(X)))^2]\]</div>
-<p>That is, the variance of the random variable T(X). The variance measures another characteristic of the estimator, telling us <strong>how disperse the different estimates will be</strong>. A low variance indicates that, if we perform sampling multiple times and take different estimates, we <strong>end up with similar values</strong>. A high variance indicates that different samplings will lead to drastically different estimates.</p>
-</section>
-<section id="bias-variance-tradeoff">
-<h3><span class="section-number">9.3.3. </span>Bias-Variance Tradeoff<a class="headerlink" href="#bias-variance-tradeoff" title="Permalink to this heading">#</a></h3>
-<p>Ideally, we would like our estimates to have <strong>low variance and low bias</strong>. Indeed, in this case we would be sure that each estimate will be close to the true value. Indeed, since we have <strong>low variance</strong> estimates will be close to each other, while, since we have <strong>low bias</strong> the average (and hence all estimates) will be close to the true value.</p>
-<p>In practice, we can distinguish four cases, described in the plot below. In the plot, the true value is the center of the circle, while each point is a different estimate. The circle represents a range of values which we may define as <strong>acceptable estimates</strong>. Alternatively, we can see the circe as a target and each estimate as a dart we are throwing at the target.</p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="../_images/02c559276766f7a717f8cb62072d5383c7d2707f34c41363214b17416c680e2f.png" src="../_images/02c559276766f7a717f8cb62072d5383c7d2707f34c41363214b17416c680e2f.png" />
-</div>
-</div>
-<p>The four cases are:</p>
-<ul class="simple">
-<li><p>Low bias, low variance: all estimates will be close to the true value;</p></li>
-<li><p>Low bias, high variance: in average, estimates will be close to the true value, but different estimates may greatly differ;</p></li>
-<li><p>High bias, low variance: while different estimates will be similar, they all are very far away from the true value;</p></li>
-<li><p>High bias, high variance: we don’t have many guarantees - estimates will all be different, but also far from the real value, even in average.</p></li>
-</ul>
-<p>It’s clear that having low bias and low variance is desirable, but, as we will see, this is not always easy to achieve. In practice, we’ll see that in many cases it there is a trade-off between bias and variance, meaning that <strong>we can tweak our estimator to find a balance between these two properties</strong>.</p>
-</section>
-</section>
-<section id="sampling-distribution-of-the-mean">
-<h2><span class="section-number">9.4. </span>Sampling Distribution of the Mean<a class="headerlink" href="#sampling-distribution-of-the-mean" title="Permalink to this heading">#</a></h2>
-<p>Let us now consider another example. Besides producing non-defective chips, our facility also manufactures specific electronic components which need to have a given diameter. The process requires high precision, so we need the diameters of these components all equal to the same value of <span class="math notranslate nohighlight">\(0.1nm\)</span> with very small deviations allowed.</p>
-<p>We sample <span class="math notranslate nohighlight">\(n=1000\)</span> of such components and measure their diameters <span class="math notranslate nohighlight">\(x_1,\ldots,x_n\)</span>. We then compute the mean, obtaining:</p>
-<div class="math notranslate nohighlight">
-\[\overline x = \frac{x_1+x_2+\ldots+x_n}{n} = 0.1001nm\]</div>
-<p>This value is close to <span class="math notranslate nohighlight">\(1.1nm\)</span>, so we could conclude that the quality of the production process is good enough. However, we can imagine how, if we drew another sample, we could obtain a slightly different result. The questions are <strong>“how close that result would be to the one we obtained”</strong> and <strong>“how close this result is to the population mean”</strong>.</p>
-<p>Similarly to what we observed in the case of the defect rate, we can see the diameter of a single component as a random variable <span class="math notranslate nohighlight">\(X_i\)</span>. We will have:</p>
-<div class="math notranslate nohighlight">
-\[E[X_i] = \mu\]</div>
-<div class="math notranslate nohighlight">
-\[Std[X_i] = \sigma\]</div>
-<p>Where <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> are the population mean and standard deviation. The average of the diameters of the components in our sample will be in turn a new random variable:</p>
-<div class="math notranslate nohighlight">
-\[\overline X = \frac{X_1+X_2+\ldots+X_n}{n}\]</div>
-<p>We will have:</p>
-<div class="math notranslate nohighlight">
-\[E[\overline X] = \mu\]</div>
-<div class="math notranslate nohighlight">
-\[Std[\overline X] = \frac{\sigma}{\sqrt{n}}\]</div>
-<p>Again, the standard deviation is proportional to <span class="math notranslate nohighlight">\(\frac{1}{\sqrt{n}}\)</span>.</p>
-<p>While in the previous case, the shape of each <span class="math notranslate nohighlight">\(X_i\)</span> variable was binomial (and hence similar to Gaussian), in this case, we cannot make any assumption on the shape of <span class="math notranslate nohighlight">\(X_i\)</span>. However, the <strong>central limit theorem</strong> guarantees that, when <span class="math notranslate nohighlight">\(n\)</span> is large, <span class="math notranslate nohighlight">\(\overline X\)</span> will indeed <strong>distribute according to a Gaussian distribution</strong>.</p>
-<p>This result allow us to characterize the distribution of the means, which is useful to understand if our production is high quality enough.</p>
-<p>However, we still have two problems:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\overline X\)</span> is Gaussian only for large values of <span class="math notranslate nohighlight">\(n\)</span>;</p></li>
-<li><p>We need the true standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span>.</p></li>
-</ul>
-<p>To overcome these problems, we will replace the true standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span> with the <strong>next best thing</strong>, the standard deviation of the sample:</p>
-<div class="math notranslate nohighlight">
-\[s_{n-1} = \frac{1}{n-1}\sum_{i=1}^n (x_i - \overline x)^2\]</div>
-<p>We hence define a new random variable:</p>
-<div class="math notranslate nohighlight">
-\[t = \frac{\overline X - \mu}{s_{n-1}/\sqrt{n}}\]</div>
-<p>We will say that this new <span class="math notranslate nohighlight">\(t\)</span> variable distributes according to a t-Student distribution with <span class="math notranslate nohighlight">\(n\)</span> degrees of freedom. The t-Student distribution looks like a Gaussian, but it is more uncertain than a Gaussian for small values of <span class="math notranslate nohighlight">\(n\)</span>, as shown in the following:</p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="../_images/74fb663fb4122c820977d8e96ac4aabd65caee8593a96357435edc6178bedaf8.png" src="../_images/74fb663fb4122c820977d8e96ac4aabd65caee8593a96357435edc6178bedaf8.png" />
-</div>
-</div>
-<p>As <span class="math notranslate nohighlight">\(n\)</span> gets larger, the t-Distribution approximates a Gaussian distribution.</p>
-<p>We can now characterize how the means will distribute. In particular, <strong>for large values of <span class="math notranslate nohighlight">\(n\)</span>, sample means will distribute according to a Gaussian distribution with standard deviation equal to the sample standard deviation</strong>.</p>
-<p>We will see how to use this result later.</p>
-</section>
-<section id="other-sampling-distributions">
-<h2><span class="section-number">9.5. </span>Other Sampling Distributions<a class="headerlink" href="#other-sampling-distributions" title="Permalink to this heading">#</a></h2>
-<p>We now briefly see two other important sampling distributions which will be useful for hypothesis tests.</p>
-<section id="chi-2-distribution">
-<h3><span class="section-number">9.5.1. </span><span class="math notranslate nohighlight">\(\chi^2\)</span> distribution<a class="headerlink" href="#chi-2-distribution" title="Permalink to this heading">#</a></h3>
-<p>Let <span class="math notranslate nohighlight">\(X_1\)</span>, <span class="math notranslate nohighlight">\(X_2\)</span>, <span class="math notranslate nohighlight">\(\ldots\)</span>, <span class="math notranslate nohighlight">\(X_n\)</span> be <span class="math notranslate nohighlight">\(n\)</span> independent and normally distributed (<span class="math notranslate nohighlight">\(X_i \sim N(0,1)\)</span> - Gaussian distributions with zero-mean and unit standard deviations) variables. The sum of their squares:</p>
-<div class="math notranslate nohighlight">
-\[\sum_{i=1}^n X_i^2\]</div>
-<p>Is <span class="math notranslate nohighlight">\(\chi_n^2\)</span>-distributed, where <span class="math notranslate nohighlight">\(n\)</span> is also called the “number of degrees of freedom”. We will not see the PDF of the distribution, but it’s shape for different values of <span class="math notranslate nohighlight">\(k\)</span> is shown in the following plot:</p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="../_images/c69d55ae262ab39851acf046a1009ed99d1c799e8d06d9b51bc6b807963c70ed.png" src="../_images/c69d55ae262ab39851acf046a1009ed99d1c799e8d06d9b51bc6b807963c70ed.png" />
-</div>
-</div>
-</section>
-<section id="f-distribution">
-<h3><span class="section-number">9.5.2. </span>F-Distribution<a class="headerlink" href="#f-distribution" title="Permalink to this heading">#</a></h3>
-<p>Let</p>
-<div class="math notranslate nohighlight">
-\[X \sim \chi_m^2 \text{ and } Y \sim \chi_n^2\]</div>
-<p>then the ratio between the two variables:</p>
-<div class="math notranslate nohighlight">
-\[\frac{Y/m}{Y/n} \sim F_{m,n}\]</div>
-<p>follows the Fisher F-distribution with degrees of freedom <span class="math notranslate nohighlight">\((m.n)\)</span>. The shape of the distribution is as follows:</p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="../_images/4b50d72fd59e01b3f501f4bdb8ababc5cb82b64057c10ddeb3f3e6aa2649247f.png" src="../_images/4b50d72fd59e01b3f501f4bdb8ababc5cb82b64057c10ddeb3f3e6aa2649247f.png" />
-</div>
-</div>
-</section>
-</section>
 <section id="confidence-intervals">
-<h2><span class="section-number">9.6. </span>Confidence Intervals<a class="headerlink" href="#confidence-intervals" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">9.3. </span>Confidence Intervals<a class="headerlink" href="#confidence-intervals" title="Permalink to this heading">#</a></h2>
 <p>Let’s get back to our example of defect rate estimation. We have seen that, if we try to estimate the true defect rate <span class="math notranslate nohighlight">\(p\)</span> from a sample of size <span class="math notranslate nohighlight">\(n\)</span>, then the estimated rate <span class="math notranslate nohighlight">\(\hat p\)</span> will be characterized by a standard error of:</p>
 <div class="math notranslate nohighlight">
 \[SE(\hat p) = \frac{\sqrt{\hat p(1-\hat p)}}{\sqrt{n}}\]</div>
@@ -845,37 +687,7 @@ s_{n-1}^2=\frac{1}{n-1}\sum_{i=0}^{n}(x_i-\overline x)^2
 <div class="math notranslate nohighlight">
 \[[\hat p-\alpha SE(\hat p), \hat p+\alpha SE(\hat p)]\]</div>
 <p>We will not see it into details, but for <span class="math notranslate nohighlight">\(99\%\)</span> we will get:</p>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
-
-<span class="n">defect</span> <span class="o">=</span> <span class="mi">82</span>
-<span class="nb">all</span> <span class="o">=</span> <span class="mi">2000</span>
-<span class="n">rate</span> <span class="o">=</span> <span class="n">defect</span><span class="o">/</span><span class="nb">all</span>
-<span class="n">se</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">rate</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">rate</span><span class="p">))</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">all</span><span class="p">)</span>
-
-<span class="c1"># Probability (percentile) at which you want to compute the quantile</span>
-<span class="n">probability</span> <span class="o">=</span> <span class="mf">0.99</span>
-
-<span class="n">alpha</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">probability</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="c1">#quantile_value = stats.norm.ppf((1-probability)/2, loc=0, scale=1)</span>
-<span class="c1">#quantile_value2 = stats.norm.ppf(1-(1-probability)/2, loc=0, scale=1)</span>
-
-<span class="c1">#print(f&quot;Quantile at {probability * 100}% percentile is {quantile_value:.4f}&quot;)</span>
-<span class="c1">#print(f&quot;Quantile at {probability * 100}% percentile is {quantile_value2:.4f}&quot;)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;alpha = </span><span class="si">{</span><span class="n">alpha</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Confidence interval: [</span><span class="si">{</span><span class="n">rate</span><span class="o">-</span><span class="n">alpha</span><span class="o">*</span><span class="n">se</span><span class="si">:</span><span class="s2">0.3f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">rate</span><span class="o">+</span><span class="n">alpha</span><span class="o">*</span><span class="n">se</span><span class="si">:</span><span class="s2">0.3f</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</details>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>alpha = 2.5758
 Confidence interval: [0.030, 0.052]
@@ -884,8 +696,135 @@ Confidence interval: [0.030, 0.052]
 </div>
 </div>
 <p>We’re not very happy about this result, the true defect rate could be larger than <span class="math notranslate nohighlight">\(5\%\)</span>. What can we do? Again, we could collect a larger sample to narrow down the confidence interval.</p>
+</section>
+<section id="bias-and-variance-of-estimators">
+<h2><span class="section-number">9.4. </span>Bias and Variance of Estimators<a class="headerlink" href="#bias-and-variance-of-estimators" title="Permalink to this heading">#</a></h2>
+<p>In the example above, we have seen that we can use the formula</p>
+<div class="math notranslate nohighlight">
+\[\hat p = \frac{x}{n}\]</div>
+<p>as a way to estimate the true value of <span class="math notranslate nohighlight">\(p\)</span>. We will call the formula above an <strong>estimator</strong>, while its result <span class="math notranslate nohighlight">\(\hat p\)</span>, an <strong>estimate</strong>.</p>
+<p>Let again consider the random variable arising from multiple random samples:</p>
+<div class="math notranslate nohighlight">
+\[\hat P = \frac{X}{n}\]</div>
+<p>We expect that this estimator will give different results depending on sampling, leading to a distribution of values. In practice, it is important to measure two important aspects of an estimator, namely, its <strong>bias</strong> and its <strong>variance</strong>.</p>
+<section id="bias-of-an-estimator">
+<h3><span class="section-number">9.4.1. </span>Bias of an Estimator<a class="headerlink" href="#bias-of-an-estimator" title="Permalink to this heading">#</a></h3>
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> be a random variable (e.g., the heights of all people in the world) and let <span class="math notranslate nohighlight">\(x=(x_1,x_2,\ldots,x_n)\)</span> be a realization of <span class="math notranslate nohighlight">\(X\)</span> (a sample from the population). Let <span class="math notranslate nohighlight">\(T(X)\)</span> be an estimator of the true value <span class="math notranslate nohighlight">\(\phi\)</span> depending on the variable <span class="math notranslate nohighlight">\(X\)</span>. For instance, <span class="math notranslate nohighlight">\(\phi\)</span> could be the mean value of all heights. <span class="math notranslate nohighlight">\(T(X)\)</span> is then an estimator of the mean and <span class="math notranslate nohighlight">\(\hat phi = T(x)\)</span> is the estimate we obtain considering the sample <span class="math notranslate nohighlight">\(x\)</span>, for instance:</p>
+<div class="math notranslate nohighlight">
+\[T(x) = \frac{\sum_{i=1}^n x_i}{n}\]</div>
+<p>Note that <strong><span class="math notranslate nohighlight">\(T(x)\)</span> is a random variable</strong>, while <span class="math notranslate nohighlight">\(T(x)\)</span> is the value we obtain when we consider the realization <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>We will define the <strong>bias</strong> of the estimator as:</p>
+<div class="math notranslate nohighlight">
+\[Bias_\theta (T(X)) = E_\theta[T(X)] - \phi\]</div>
+<p>That is to say, the <strong>difference between the expected value of the estimate (under different samplings) minus the true value of the quantity we are trying to estimate</strong>.</p>
+<p>We will say that an estimator <span class="math notranslate nohighlight">\(T(X)\)</span> is an unbiased estimator of <span class="math notranslate nohighlight">\(\phi\)</span> if:</p>
+<div class="math notranslate nohighlight">
+\[E_\theta[T(X)] = \phi\]</div>
+<p>or equivalently:</p>
+<div class="math notranslate nohighlight">
+\[Bias_{\phi}(T(X)) = 0\]</div>
+<p>The bias indicates if the estimator <strong>systematically underestimate or overestimate the property of the population we are interested in</strong>. A bias equal to zero means that, <strong>on average</strong> our estimates will be close to true value. This means that, if we could perform sampling many times and take the average of the estimates, we would get a value close to the true one.</p>
+<section id="unbiased-estimators-for-sample-mean-and-variance">
+<h4><span class="section-number">9.4.1.1. </span>Unbiased Estimators for Sample Mean and Variance<a class="headerlink" href="#unbiased-estimators-for-sample-mean-and-variance" title="Permalink to this heading">#</a></h4>
+<p>Let us consider a univariate sample <span class="math notranslate nohighlight">\(\{X^{(i)}\}_{i=1}^n\)</span>. The mean estimator:</p>
+<div class="math notranslate nohighlight">
+\[
+\overline x = \frac{1}{n} \sum_{i=0}^{n} x^{(i)};
+\]</div>
+<p>is unbiased. This means that <strong>if we draw a large number of random sample, we compute their mean and then we compute the mean of their mean, this last value will converge to the population mean as the sample size <span class="math notranslate nohighlight">\(n\)</span> gets larger</strong>.</p>
+<p>The estimator for the variance:</p>
+<div class="math notranslate nohighlight">
+\[
+s_n^2=\frac{1}{n}\sum_{i=0}^{n}(x^{(i)}-\overline x)^2
+\]</div>
+<p>is shown to be <strong>biased</strong>. In practice, it can be shown that this estimator systematically underestimates the variance. In particular:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{E}[s_n^2]=\frac{n-1}{n}\sigma^2
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\sigma^2\)</span> is the variance of the population. An unbiased estimator for the variance is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+s_{n-1}^2=\frac{1}{n-1}\sum_{i=0}^{n}(x_i-\overline x)^2
+\]</div>
+<p>Note that this approaches to <span class="math notranslate nohighlight">\(s_{n}^2\)</span> as <span class="math notranslate nohighlight">\(n \to \infty\)</span>. In practice:</p>
+<ul class="simple">
+<li><p>When <span class="math notranslate nohighlight">\(n\)</span> is small, it does make sense to use the unbiased estimator <span class="math notranslate nohighlight">\(s_{n-1}^2\)</span> if we want to estimate the variance of the population;</p></li>
+<li><p>When <span class="math notranslate nohighlight">\(n\)</span> is very large, the two estimates will be similar (often equivalent).</p></li>
+</ul>
+</section>
+</section>
+<section id="variance-of-an-estimator">
+<h3><span class="section-number">9.4.2. </span>Variance of an Estimator<a class="headerlink" href="#variance-of-an-estimator" title="Permalink to this heading">#</a></h3>
+<p>The variance of <span class="math notranslate nohighlight">\(T(X)\)</span> is defined as:</p>
+<div class="math notranslate nohighlight">
+\[Var_\phi(T(X)) = E[(T(X)-E(T(X)))^2]\]</div>
+<p>That is, the variance of the random variable T(X). The variance measures another characteristic of the estimator, telling us <strong>how disperse the different estimates will be</strong>. A low variance indicates that, if we perform sampling multiple times and take different estimates, we <strong>end up with similar values</strong>. A high variance indicates that different samplings will lead to drastically different estimates.</p>
+</section>
+<section id="bias-variance-tradeoff">
+<h3><span class="section-number">9.4.3. </span>Bias-Variance Tradeoff<a class="headerlink" href="#bias-variance-tradeoff" title="Permalink to this heading">#</a></h3>
+<p>Ideally, we would like our estimates to have <strong>low variance and low bias</strong>. Indeed, in this case we would be sure that each estimate will be close to the true value. Indeed, since we have <strong>low variance</strong> estimates will be close to each other, while, since we have <strong>low bias</strong> the average (and hence all estimates) will be close to the true value.</p>
+<p>In practice, we can distinguish four cases, described in the plot below. In the plot, the true value is the center of the circle, while each point is a different estimate. The circle represents a range of values which we may define as <strong>acceptable estimates</strong>. Alternatively, we can see the circe as a target and each estimate as a dart we are throwing at the target.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/02c559276766f7a717f8cb62072d5383c7d2707f34c41363214b17416c680e2f.png" src="../_images/02c559276766f7a717f8cb62072d5383c7d2707f34c41363214b17416c680e2f.png" />
+</div>
+</div>
+<p>The four cases are:</p>
+<ul class="simple">
+<li><p>Low bias, low variance: all estimates will be close to the true value;</p></li>
+<li><p>Low bias, high variance: in average, estimates will be close to the true value, but different estimates may greatly differ;</p></li>
+<li><p>High bias, low variance: while different estimates will be similar, they all are very far away from the true value;</p></li>
+<li><p>High bias, high variance: we don’t have many guarantees - estimates will all be different, but also far from the real value, even in average.</p></li>
+</ul>
+<p>It’s clear that having low bias and low variance is desirable, but, as we will see, this is not always easy to achieve. In practice, we’ll see that in many cases it there is a trade-off between bias and variance, meaning that <strong>we can tweak our estimator to find a balance between these two properties</strong>.</p>
+</section>
+</section>
+<section id="sampling-distribution-of-the-mean">
+<h2><span class="section-number">9.5. </span>Sampling Distribution of the Mean<a class="headerlink" href="#sampling-distribution-of-the-mean" title="Permalink to this heading">#</a></h2>
+<p>Let us now consider another example. Besides producing non-defective chips, our facility also manufactures specific electronic components which need to have a given diameter. The process requires high precision, so we need the diameters of these components all equal to the same value of <span class="math notranslate nohighlight">\(0.1nm\)</span> with very small deviations allowed.</p>
+<p>We sample <span class="math notranslate nohighlight">\(n=1000\)</span> of such components and measure their diameters <span class="math notranslate nohighlight">\(x_1,\ldots,x_n\)</span>. We then compute the mean, obtaining:</p>
+<div class="math notranslate nohighlight">
+\[\overline x = \frac{x_1+x_2+\ldots+x_n}{n} = 0.1001nm\]</div>
+<p>This value is close to <span class="math notranslate nohighlight">\(1.1nm\)</span>, so we could conclude that the quality of the production process is good enough. However, we can imagine how, if we drew another sample, we could obtain a slightly different result. The questions are <strong>“how close that result would be to the one we obtained”</strong> and <strong>“how close this result is to the population mean”</strong>.</p>
+<p>Similarly to what we observed in the case of the defect rate, we can see the diameter of a single component as a random variable <span class="math notranslate nohighlight">\(X_i\)</span>. We will have:</p>
+<div class="math notranslate nohighlight">
+\[E[X_i] = \mu\]</div>
+<div class="math notranslate nohighlight">
+\[Std[X_i] = \sigma\]</div>
+<p>Where <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> are the population mean and standard deviation. The average of the diameters of the components in our sample will be in turn a new random variable:</p>
+<div class="math notranslate nohighlight">
+\[\overline X = \frac{X_1+X_2+\ldots+X_n}{n}\]</div>
+<p>We will have:</p>
+<div class="math notranslate nohighlight">
+\[E[\overline X] = \mu\]</div>
+<div class="math notranslate nohighlight">
+\[Std[\overline X] = \frac{\sigma}{\sqrt{n}}\]</div>
+<p>Again, the standard deviation is proportional to <span class="math notranslate nohighlight">\(\frac{1}{\sqrt{n}}\)</span>.</p>
+<p>While in the previous case, the shape of each <span class="math notranslate nohighlight">\(X_i\)</span> variable was binomial (and hence similar to Gaussian), in this case, we cannot make any assumption on the shape of <span class="math notranslate nohighlight">\(X_i\)</span>. However, the <strong>central limit theorem</strong> guarantees that, when <span class="math notranslate nohighlight">\(n\)</span> is large, <span class="math notranslate nohighlight">\(\overline X\)</span> will indeed <strong>distribute according to a Gaussian distribution</strong>.</p>
+<p>This result allow us to characterize the distribution of the means, which is useful to understand if our production is high quality enough.</p>
+<p>However, we still have two problems:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\overline X\)</span> is Gaussian only for large values of <span class="math notranslate nohighlight">\(n\)</span>;</p></li>
+<li><p>We need the true standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span>.</p></li>
+</ul>
+<p>To overcome these problems, we will replace the true standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span> with the <strong>next best thing</strong>, the standard deviation of the sample:</p>
+<div class="math notranslate nohighlight">
+\[s_{n-1} = \frac{1}{n-1}\sum_{i=1}^n (x_i - \overline x)^2\]</div>
+<p>We hence define a new random variable:</p>
+<div class="math notranslate nohighlight">
+\[t = \frac{\overline X - \mu}{s_{n-1}/\sqrt{n}}\]</div>
+<p>We will say that this new <span class="math notranslate nohighlight">\(t\)</span> variable distributes according to a t-Student distribution with <span class="math notranslate nohighlight">\(n\)</span> degrees of freedom. The t-Student distribution looks like a Gaussian, but it is more uncertain than a Gaussian for small values of <span class="math notranslate nohighlight">\(n\)</span>, as shown in the following:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/74fb663fb4122c820977d8e96ac4aabd65caee8593a96357435edc6178bedaf8.png" src="../_images/74fb663fb4122c820977d8e96ac4aabd65caee8593a96357435edc6178bedaf8.png" />
+</div>
+</div>
+<p>As <span class="math notranslate nohighlight">\(n\)</span> gets larger, the t-Distribution approximates a Gaussian distribution.</p>
+<p>We can now characterize how the means will distribute. In particular, <strong>for large values of <span class="math notranslate nohighlight">\(n\)</span>, sample means will distribute according to a Gaussian distribution with standard deviation equal to the sample standard deviation</strong>.</p>
+<p>We will see how to use this result later.</p>
 <section id="confidence-intervals-for-the-mean">
-<h3><span class="section-number">9.6.1. </span>Confidence Intervals for the Mean<a class="headerlink" href="#confidence-intervals-for-the-mean" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">9.5.1. </span>Confidence Intervals for the Mean<a class="headerlink" href="#confidence-intervals-for-the-mean" title="Permalink to this heading">#</a></h3>
 <p>We can follow the same reasoning to compute the confidence intervals for the means. Let’s get back to our example in which wanted to assess the average diameter of our components. Suppose we measured:</p>
 <div class="math notranslate nohighlight">
 \[\overline x = 0.1001nm\]</div>
@@ -907,7 +846,7 @@ Confidence interval: [0.030, 0.052]
 <p>Since the deviations are small, we can say that the production process is good enough.</p>
 </section>
 <section id="computing-confidence-intervals-in-practice">
-<h3><span class="section-number">9.6.2. </span>Computing Confidence Intervals in Practice<a class="headerlink" href="#computing-confidence-intervals-in-practice" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">9.5.2. </span>Computing Confidence Intervals in Practice<a class="headerlink" href="#computing-confidence-intervals-in-practice" title="Permalink to this heading">#</a></h3>
 <p>We have seen how to compute confidence interval “by hand” in the case of the estimation of proportions (defect rate).In practice, depending on the quantities for which we want to estimate confidence bounds, we will need to use different distributions. For instance, when estimating means, we will have to use the t-Student distribution with <span class="math notranslate nohighlight">\(n-1\)</span> degrees of freedom. We will not see all methods in detail, but the main libraries implement all confidence bounds estimation procedure for us.</p>
 <p>The main estimation procedures are related to:</p>
 <ul class="simple">
@@ -916,6 +855,37 @@ Confidence interval: [0.030, 0.052]
 <li><p>Estimation of confidence bounds for proportions.</p></li>
 </ul>
 <p>We will see how to compute these practically in the laboratory sessions.</p>
+</section>
+</section>
+<section id="other-sampling-distributions">
+<h2><span class="section-number">9.6. </span>Other Sampling Distributions<a class="headerlink" href="#other-sampling-distributions" title="Permalink to this heading">#</a></h2>
+<p>We now briefly see two other important sampling distributions which will be useful for hypothesis tests.</p>
+<section id="chi-2-distribution">
+<h3><span class="section-number">9.6.1. </span><span class="math notranslate nohighlight">\(\chi^2\)</span> distribution<a class="headerlink" href="#chi-2-distribution" title="Permalink to this heading">#</a></h3>
+<p>Let <span class="math notranslate nohighlight">\(X_1\)</span>, <span class="math notranslate nohighlight">\(X_2\)</span>, <span class="math notranslate nohighlight">\(\ldots\)</span>, <span class="math notranslate nohighlight">\(X_n\)</span> be <span class="math notranslate nohighlight">\(n\)</span> independent and normally distributed (<span class="math notranslate nohighlight">\(X_i \sim N(0,1)\)</span> - Gaussian distributions with zero-mean and unit standard deviations) variables. The sum of their squares:</p>
+<div class="math notranslate nohighlight">
+\[\sum_{i=1}^n X_i^2\]</div>
+<p>Is <span class="math notranslate nohighlight">\(\chi_n^2\)</span>-distributed, where <span class="math notranslate nohighlight">\(n\)</span> is also called the “number of degrees of freedom”. We will not see the PDF of the distribution, but it’s shape for different values of <span class="math notranslate nohighlight">\(k\)</span> is shown in the following plot:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/c69d55ae262ab39851acf046a1009ed99d1c799e8d06d9b51bc6b807963c70ed.png" src="../_images/c69d55ae262ab39851acf046a1009ed99d1c799e8d06d9b51bc6b807963c70ed.png" />
+</div>
+</div>
+</section>
+<section id="f-distribution">
+<h3><span class="section-number">9.6.2. </span>F-Distribution<a class="headerlink" href="#f-distribution" title="Permalink to this heading">#</a></h3>
+<p>Let</p>
+<div class="math notranslate nohighlight">
+\[X \sim \chi_m^2 \text{ and } Y \sim \chi_n^2\]</div>
+<p>then the ratio between the two variables:</p>
+<div class="math notranslate nohighlight">
+\[\frac{Y/m}{Y/n} \sim F_{m,n}\]</div>
+<p>follows the Fisher F-distribution with degrees of freedom <span class="math notranslate nohighlight">\((m.n)\)</span>. The shape of the distribution is as follows:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/4b50d72fd59e01b3f501f4bdb8ababc5cb82b64057c10ddeb3f3e6aa2649247f.png" src="../_images/4b50d72fd59e01b3f501f4bdb8ababc5cb82b64057c10ddeb3f3e6aa2649247f.png" />
+</div>
+</div>
 </section>
 </section>
 <section id="hypothesis-testing">
@@ -1708,24 +1678,24 @@ Sample does not look Gaussian (reject H0)
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-size-and-standard-error">9.2. Sample Size and Standard Error</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-and-variance-of-estimators">9.3. Bias and Variance of Estimators</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-of-an-estimator">9.3.1. Bias of an Estimator</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#unbiased-estimators-for-sample-mean-and-variance">9.3.1.1. Unbiased Estimators for Sample Mean and Variance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals">9.3. Confidence Intervals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-and-variance-of-estimators">9.4. Bias and Variance of Estimators</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-of-an-estimator">9.4.1. Bias of an Estimator</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#unbiased-estimators-for-sample-mean-and-variance">9.4.1.1. Unbiased Estimators for Sample Mean and Variance</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-of-an-estimator">9.3.2. Variance of an Estimator</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-variance-tradeoff">9.3.3. Bias-Variance Tradeoff</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-of-an-estimator">9.4.2. Variance of an Estimator</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-variance-tradeoff">9.4.3. Bias-Variance Tradeoff</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-distribution-of-the-mean">9.4. Sampling Distribution of the Mean</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-sampling-distributions">9.5. Other Sampling Distributions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-2-distribution">9.5.1. <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-distribution">9.5.2. F-Distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-distribution-of-the-mean">9.5. Sampling Distribution of the Mean</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-for-the-mean">9.5.1. Confidence Intervals for the Mean</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-confidence-intervals-in-practice">9.5.2. Computing Confidence Intervals in Practice</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals">9.6. Confidence Intervals</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-for-the-mean">9.6.1. Confidence Intervals for the Mean</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-confidence-intervals-in-practice">9.6.2. Computing Confidence Intervals in Practice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-sampling-distributions">9.6. Other Sampling Distributions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-2-distribution">9.6.1. <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-distribution">9.6.2. F-Distribution</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing">9.7. Hypothesis Testing</a><ul class="nav section-nav flex-column">
