@@ -1061,11 +1061,11 @@ of a point</em> <span class="math notranslate nohighlight">\(\theta^{(0)}\)</spa
 goes from</em> <span class="math notranslate nohighlight">\(\theta^{(0)}\)</span> <em>towards the direction of the negative
 derivative of</em> <span class="math notranslate nohighlight">\(J\)</span> <em>computed in</em> <span class="math notranslate nohighlight">\(\theta^{(0)}\)</span><em>.</em> Consider the function
 <span class="math notranslate nohighlight">\(J(\theta)\)</span> shown in the plot below:</p>
-<p><img alt="" src="_static/lecture_specific/gradient_descent/gd1.png" /></p>
+<p><img alt="" src="../_images/gd1.png" /></p>
 <p>Let us assume that we are at the initial point <span class="math notranslate nohighlight">\(\theta^{(0)}\)</span>. From the
 plot, we can see that we should move to the right part of the x axis in
 order to reach the minimum of the function.</p>
-<p><img alt="" src="_static/lecture_specific/gradient_descent/gd2.png" /></p>
+<p><img alt="" src="../_images/gd2.png" /></p>
 <p>The first derivative of the function in that point <span class="math notranslate nohighlight">\(J'(\beta^{(0)})\)</span>
 will be equal to the angular coefficient of the tangent to the curve in
 the point <span class="math notranslate nohighlight">\((\theta^{(0)},J\left( \theta^{(0)} \right))\)</span>. Since the curve
@@ -1089,18 +1089,18 @@ factor <span class="math notranslate nohighlight">\(\gamma\)</span>, we will mov
 <span class="math notranslate nohighlight">\(\theta^{(1)} = 0.4 + 0.02 \cdot 1.8 = 0.436\)</span>. The procedure works
 iteratively until the derivative is so small that no movement is
 possible, as shown in the following figure:</p>
-<p><img alt="" src="_static/lecture_specific/gradient_descent/gd3.png" /></p>
+<p><img alt="" src="../_images/gd3.png" /></p>
 <p>In the next step, we compute the derivative of the function in the
 current point <span class="math notranslate nohighlight">\(J\left( \beta^{(1)} \right) = - 0.8\)</span> and move to point
 <span class="math notranslate nohighlight">\(\beta^{(2)} = \beta_{1} - \gamma J'(\beta^{(1)})\)</span>.</p>
-<p><img alt="" src="_static/lecture_specific/gradient_descent/gd4.png" /></p>
+<p><img alt="" src="../_images/gd4.png" /></p>
 <p>Next, we compute the derivative of the function in the current point
 <span class="math notranslate nohighlight">\(f\left( \theta^{(2)} \right) = - 0.4\)</span> and move to point
 <span class="math notranslate nohighlight">\(\theta^{(3)} = \theta^{(2)} - \gamma J'(\theta^{(2)})\)</span>:</p>
-<p><img alt="" src="_static/lecture_specific/gradient_descent/gd5.png" /></p>
+<p><img alt="" src="../_images/gd5.png" /></p>
 <p>We then compute the derivative of the current point
 <span class="math notranslate nohighlight">\(J\left( \theta^{(3)} \right) \approx 0\)</span>:</p>
-<p><img alt="" src="_static/lecture_specific/gradient_descent/gd6.png" /></p>
+<p><img alt="" src="../_images/gd6.png" /></p>
 <p>This derivative is so small that we cannot advance further. We are in a
 local minimum. The optimization terminates here. We have found the value
 <span class="math notranslate nohighlight">\(\theta^{(3)} = \arg_{\theta}\min{J(\theta)}\)</span>.</p>
@@ -1141,7 +1141,7 @@ function <span class="math notranslate nohighlight">\(J\)</span> to optimize dep
 the point with the minimum value (the ‘center’ of the two plots). Given
 a point <span class="math notranslate nohighlight">\(\mathbf{\theta} = (\theta_{1},\theta_{2})\)</span>, the direction of
 steepest descent is the <strong>gradient</strong> of the function in the point.</p>
-<p><img alt="" src="_static/lecture_specific/gradient_descent/gd7.png" /></p>
+<p><img alt="" src="../_images/gd7.png" /></p>
 <p>The gradient is a multi-variable generalization of the derivative. The
 gradient of a function of <span class="math notranslate nohighlight">\(n\)</span> variable computed in a point
 <span class="math notranslate nohighlight">\(\mathbf{\theta}\)</span> is a vector whose <span class="math notranslate nohighlight">\(i^{th}\)</span> variable is given by the
@@ -1162,7 +1162,7 @@ to optimize multi-variable functions, the algorithm is called ‘gradient
 descent’.</p>
 <p>The following figure shows an example of an optimization procedure to
 reach the center of the curve from a given starting point:</p>
-<p><img alt="" src="_static/lecture_specific/gradient_descent/gd8.png" /></p>
+<p><img alt="" src="../_images/gd8.png" /></p>
 <p>The pseudocode of the procedure, in the case of the multiple variables
 is as follows:</p>
 <ol class="arabic simple">
@@ -1377,9 +1377,9 @@ will hence be:</p>
 <h3><span class="section-number">11.10.1. </span>The Iris Dataset<a class="headerlink" href="#the-iris-dataset" title="Permalink to this heading">#</a></h3>
 <p>An example is given by Fisher’s Iris dataset.</p>
 <p>The dataset was introduced by Ronald Fisher in 1936 and contains observations related to 150 specimens of iris flowers belonging to 3 different species: “setosa”, “versicolor”, and “virginica”. Example images of the three flowers are given below:</p>
-<p><img alt="" src="_static/lecture_specific/iris/iris.png" /></p>
+<p><img alt="" src="../_images/iris.png" /></p>
 <p>For each of the observations, the dataset provides measurements of 4 physical characteristics (length and width of sepals and petals), as illustrated in the image below:</p>
-<p><img alt="" src="_static/lecture_specific/iris/sepal_petal.png" /></p>
+<p><img alt="" src="../_images/sepal_petal.png" /></p>
 <p>All the variables in the dataset are numeric, except for <code class="docutils literal notranslate"><span class="pre">species</span></code>, which is categorical. Here are some observations from the dataset:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
