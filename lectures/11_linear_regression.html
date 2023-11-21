@@ -787,7 +787,7 @@ beta_1: -0.16
 \[Y = \beta_0 + \beta_1X+\epsilon\]</div>
 <p>This means that, once we find appropriate values of <span class="math notranslate nohighlight">\(\beta_0\)</span> and <span class="math notranslate nohighlight">\(\beta_1\)</span>, we expect these to summarize the <strong>linear relationship in the population</strong> or the <strong>population regression line</strong>. Also, recall that these values are obtained using two formulas which are based on realizations of <span class="math notranslate nohighlight">\(X\)</span> of <span class="math notranslate nohighlight">\(Y\)</span> and can be hence seen as <strong>estimators</strong>:</p>
 <div class="math notranslate nohighlight">
-\[\hat \beta_1 = \frac{\sum_{i=1}^n(x_i - \overline x)(y_i - \overline y)}{\sum_{i=1}^n(x_i - \overline x)}\]</div>
+\[\hat \beta_1 = \frac{\sum_{i=1}^n(x_i - \overline x)(y_i - \overline y)}{\sum_{i=1}^n(x_i - \overline x)^2}\]</div>
 <div class="math notranslate nohighlight">
 \[\hat \beta_0 = \overline y - \hat \beta_1 \overline x\]</div>
 <p>We now recall that, being estimates, they provide values related to a given <strong>realization of the random variables</strong>.</p>
@@ -806,7 +806,7 @@ beta_1: -0.16
 <h4><span class="section-number">10.3.3.1. </span>Standard Errors of the Regression Coefficients<a class="headerlink" href="#standard-errors-of-the-regression-coefficients" title="Permalink to this heading">#</a></h4>
 <p>A natural question is hence <strong>“how do we assess how good our estimates of the regression coefficients are”</strong>. We resort here to <strong>statistical inference</strong>. It can be shown that the squared standard errors associated to the coefficient estimates are:</p>
 <div class="math notranslate nohighlight">
-\[SE(\hat \beta_0)^2 = \sigma^2 \left[\frac{1}{n} + \frac{\overline x^2}{\sum_{i=1}^{n}(x_i-\overline x)^2}\right], SE(\hat \beta_1)^2 = \frac{\sigma_2}{\sum_{i=1}^{n}(x_i-\overline x)^2}\]</div>
+\[SE(\hat \beta_0)^2 = \sigma^2 \left[\frac{1}{n} + \frac{\overline x^2}{\sum_{i=1}^{n}(x_i-\overline x)^2}\right], SE(\hat \beta_1)^2 = \frac{\sigma^2}{\sum_{i=1}^{n}(x_i-\overline x)^2}\]</div>
 <p>Where:</p>
 <div class="math notranslate nohighlight">
 \[\sigma^2 = Var(\epsilon)\]</div>
@@ -829,9 +829,9 @@ beta_1: -0.16
 <h4><span class="section-number">10.3.3.2. </span>Confidence Intervals of the Regression Coefficients<a class="headerlink" href="#confidence-intervals-of-the-regression-coefficients" title="Permalink to this heading">#</a></h4>
 <p>As we have seen, standard errors allow to compute confidence intervals. We will not see it into details, but it turns out that the true values will be in the following intervals with a <span class="math notranslate nohighlight">\(95\%\)</span> confidence:</p>
 <div class="math notranslate nohighlight">
-\[[\hat \beta_0 - 1.96 \cdot SE(\beta_0), \hat \beta_0 + 1.96 \cdot SE(\hat \beta_0)]\]</div>
+\[[\hat \beta_0 - 1.96 \cdot SE(\hat \beta_0), \hat \beta_0 + 1.96 \cdot SE(\hat \beta_0)]\]</div>
 <div class="math notranslate nohighlight">
-\[[\hat \beta_1 - 1.96 \cdot SE(\beta_1), \hat \beta_1 + 1.96 \cdot SE(\hat \beta_1)]\]</div>
+\[[\hat \beta_1 - 1.96 \cdot SE(\hat \beta_1), \hat \beta_1 + 1.96 \cdot SE(\hat \beta_1)]\]</div>
 <p>In practice, it is common to compute confidence intervals with a <span class="math notranslate nohighlight">\(95\%\)</span> confidence. In the case of our model:</p>
 <div class="math notranslate nohighlight">
 \[horsepower \approx = \beta_0 + mpg \cdot beta_1\]</div>
