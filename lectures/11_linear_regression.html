@@ -443,10 +443,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-linear-regression">10.4. Multiple Linear Regression</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geometrical-interpretation">10.4.1. Geometrical Interpretation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-interpretation">10.4.2. Statistical Interpretation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-regression-coefficients">10.4.3. Estimating the Regression Coefficients</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#collinearity">10.4.3.1. Collinearity</a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-regression-coefficients">10.4.3. Estimating the Regression Coefficients</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-f-test">10.4.4. The F-Test</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-selection">10.4.5. Variable Selection</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adjusted-r-2">10.4.6. Adjusted <span class="math notranslate nohighlight">\(R^2\)</span></a></li>
@@ -463,7 +460,13 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#residual-plots-and-residual-q-q-plots">10.7. Residual Plots and Residual Q-Q Plots</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">10.8. References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collinearity-and-ridge-regression">10.8. Collinearity and Ridge Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-regression">10.9. Ridge Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-ridge-regression-coefficients">10.9.1. Interpretation of the ridge regression coefficients</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lasso-regression">10.10. Lasso Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">10.11. References</a></li>
 </ul>
             </nav>
         </div>
@@ -482,22 +485,7 @@ document.write(`
 <section id="the-auto-mpg-dataset">
 <h2><span class="section-number">10.1. </span>The Auto MPG Dataset<a class="headerlink" href="#the-auto-mpg-dataset" title="Permalink to this heading">#</a></h2>
 <p>We will consider the <a class="reference external" href="https://archive.ics.uci.edu/dataset/9/auto+mpg">Auto MPG</a> dataset, which contains <span class="math notranslate nohighlight">\(398\)</span> measurements of <span class="math notranslate nohighlight">\(8\)</span> different properties of different cars:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ucimlrepo</span> <span class="kn">import</span> <span class="n">fetch_ucirepo</span> 
-  
-<span class="c1"># fetch dataset </span>
-<span class="n">auto_mpg</span> <span class="o">=</span> <span class="n">fetch_ucirepo</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span> 
-  
-<span class="c1"># data (as pandas dataframes) </span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">auto_mpg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span> 
-<span class="n">y</span> <span class="o">=</span> <span class="n">auto_mpg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">targets</span> 
-  
-<span class="n">data</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-<span class="n">data</span>
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html"><div>
 <style scoped>
@@ -753,7 +741,7 @@ Car Name: The name or identifier of the car model.</p></li>
 <p>This is also called a <strong>cost function</strong> or <strong>loss function</strong>.</p>
 <p>We aim to find:</p>
 <div class="math notranslate nohighlight">
-\[(\hat \beta_0, \hat \beta_1) = \argmin_{\beta_0, \beta_1} RSS(\beta_0, \beta_1)\]</div>
+\[(\hat \beta_0, \hat \beta_1) = \arg \min_{\beta_0, \beta_1} RSS(\beta_0, \beta_1)\]</div>
 <p>The minimum can be found setting:</p>
 <div class="math notranslate nohighlight">
 \[\frac{\partial RSS(\beta_0, \beta_1)}{\partial \beta_0} = 0\]</div>
@@ -828,7 +816,7 @@ beta_1: -0.16
 <p>In the formulas above, we see that:</p>
 <ul class="simple">
 <li><p>The standard errors are proportional to <span class="math notranslate nohighlight">\(\sigma^2\)</span>. This is expected, as we will have more uncertainty when the variance of the error term is high, hence when the points are more <strong>scattered around the population regression line</strong>.</p></li>
-<li><p>The standard errors depend inversely on the <span class="math notranslate nohighlight">\(n\sigma_x^2 = \sum_{i=1}^n(x_i-\overline x)\)</span> (the variance of <span class="math notranslate nohighlight">\(x\)</span> multiplied by the sample size). This means that we will have more uncertainty in the estimates if <span class="math notranslate nohighlight">\(x\)</span> concentrate in a narrow range.</p></li>
+<li><p>The standard errors depend inversely on <span class="math notranslate nohighlight">\(n\sigma_x^2 = \sum_{i=1}^n(x_i-\overline x)\)</span> (the variance of <span class="math notranslate nohighlight">\(x\)</span> multiplied by the sample size). This means that we will have more uncertainty in the estimates if <span class="math notranslate nohighlight">\(x\)</span> concentrate in a narrow range.</p></li>
 </ul>
 <p>The plot below shows some examples of fit for different values of <span class="math notranslate nohighlight">\(RSE\)</span> and <span class="math notranslate nohighlight">\(n\sigma_x^2\)</span>:</p>
 <div class="cell tag_remove-input docutils container">
@@ -841,9 +829,9 @@ beta_1: -0.16
 <h4><span class="section-number">10.3.3.2. </span>Confidence Intervals of the Regression Coefficients<a class="headerlink" href="#confidence-intervals-of-the-regression-coefficients" title="Permalink to this heading">#</a></h4>
 <p>As we have seen, standard errors allow to compute confidence intervals. We will not see it into details, but it turns out that the true values will be in the following intervals with a <span class="math notranslate nohighlight">\(95\%\)</span> confidence:</p>
 <div class="math notranslate nohighlight">
-\[[\hat \beta_0 - 1.96 \cdot SE(\beta_0)], \hat \beta_0 + 1.96 \cdot SE(\hat \beta_0)\]</div>
+\[[\hat \beta_0 - 1.96 \cdot SE(\beta_0), \hat \beta_0 + 1.96 \cdot SE(\hat \beta_0)]\]</div>
 <div class="math notranslate nohighlight">
-\[[\hat \beta_1 - 1.96 \cdot SE(\beta_1)], \hat \beta_1 + 1.96 \cdot SE(\hat \beta_1)\]</div>
+\[[\hat \beta_1 - 1.96 \cdot SE(\beta_1), \hat \beta_1 + 1.96 \cdot SE(\hat \beta_1)]\]</div>
 <p>In practice, it is common to compute confidence intervals with a <span class="math notranslate nohighlight">\(95\%\)</span> confidence. In the case of our model:</p>
 <div class="math notranslate nohighlight">
 \[horsepower \approx = \beta_0 + mpg \cdot beta_1\]</div>
@@ -875,14 +863,7 @@ beta_1: -0.16
 <li><p>An increase of <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> by one unit is associated to an decrease of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> between <span class="math notranslate nohighlight">\(-0.17\)</span> and <span class="math notranslate nohighlight">\(.015\)</span>.</p></li>
 </ul>
 <p>It is also common to see plots like the following one:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;horsepower&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;mpg&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <img alt="../_images/99a1dc89c41e1e1f1fe741d100d9b713250994651e2042407614d2a881468af8.png" src="../_images/99a1dc89c41e1e1f1fe741d100d9b713250994651e2042407614d2a881468af8.png" />
 </div>
@@ -1009,10 +990,10 @@ beta_1: -0.16
 <li><p>The relationship between <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> is far from linear, so we cannot predict <span class="math notranslate nohighlight">\(Y\)</span> accurately;</p></li>
 <li><p>The prediction of <span class="math notranslate nohighlight">\(Y\)</span> also depends on other variables.</p></li>
 </ul>
-<p>While in general the unexplained variance is due to a combinations of the aforementioned factors, the third one is often very common and relatively easy to fix. In our case, we are trying to predict <code class="docutils literal notranslate"><span class="pre">mpg</span></code> from <code class="docutils literal notranslate"><span class="pre">horsepower</span></code>. However, we can easily imagine how other variables may contribute to the estimation of <code class="docutils literal notranslate"><span class="pre">mpg</span></code>. For instance, two cars with the same <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> by different <code class="docutils literal notranslate"><span class="pre">weight</span></code> may have different values of <code class="docutils literal notranslate"><span class="pre">mpg</span></code>. We can hence try to find a model with <strong>also uses <code class="docutils literal notranslate"><span class="pre">weight</span></code> to predict <code class="docutils literal notranslate"><span class="pre">mpg</span></code></strong>. This is simply done by adding an additional coefficient for the new variable:</p>
+<p>While in general the unexplained variance is due to a combination of the aforementioned factors, the third one is often very common and relatively easy to fix. In our case, we are trying to predict <code class="docutils literal notranslate"><span class="pre">mpg</span></code> from <code class="docutils literal notranslate"><span class="pre">horsepower</span></code>. However, we can easily imagine how other variables may contribute to the estimation of <code class="docutils literal notranslate"><span class="pre">mpg</span></code>. For instance, two cars with the same <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> but different <code class="docutils literal notranslate"><span class="pre">weight</span></code> may have different values of <code class="docutils literal notranslate"><span class="pre">mpg</span></code>. We can hence try to find a model with <strong>also uses <code class="docutils literal notranslate"><span class="pre">weight</span></code> to predict <code class="docutils literal notranslate"><span class="pre">mpg</span></code></strong>. This is simply done by adding an additional coefficient for the new variable:</p>
 <div class="math notranslate nohighlight">
 \[mpg = \beta_0 + \beta_1 horsepower + \beta_2 weight\]</div>
-<p>The obtained model is called <strong>multiple linear regression</strong>. If I fit this model (we will see how to estimate coefficients in this case), we obtain the following <span class="math notranslate nohighlight">\(R^2\)</span> value:</p>
+<p>The obtained model is called <strong>multiple linear regression</strong>. If we fit this model (we will see how to estimate coefficients in this case), we obtain the following <span class="math notranslate nohighlight">\(R^2\)</span> value:</p>
 <div class="math notranslate nohighlight">
 \[R^2=0.71\]</div>
 <p>An increment of <span class="math notranslate nohighlight">\(+0.1\)</span>!</p>
@@ -1089,7 +1070,7 @@ beta_1: -0.16
 </tr>
 </tbody>
 </table>
-<p>We can note that the coefficients are different. This happens because, when we add more variables <strong>the model explain variance in a different way</strong>. If we think more about it, this is coherent with the interpretation of the coefficients. Indeed:</p>
+<p>We can note that the coefficients are different. This happens because, when we add more variables, <strong>the model explains variance in a different way</strong>. If we think more about it, this is coherent with the interpretation of the coefficients. Indeed:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(39.94\)</span> is the expected value of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> when <code class="docutils literal notranslate"><span class="pre">horsepower=0</span></code>, but all other variables have unknown values. <span class="math notranslate nohighlight">\(45.64\)</span> is the expected value of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> when <code class="docutils literal notranslate"><span class="pre">horsepower=0</span></code> and <code class="docutils literal notranslate"><span class="pre">weight=0</span></code>. This is different, as in the second case we are (virtually) looking at a subset of data for which both horsepower and weight are zero, while in the first case, we are only looking at data for which <code class="docutils literal notranslate"><span class="pre">horsepower=0</span></code>, but <code class="docutils literal notranslate"><span class="pre">weight</span></code> can be any value. In some sense, we can see <span class="math notranslate nohighlight">\(39.94\)</span> as an average value for different values of <code class="docutils literal notranslate"><span class="pre">weight</span></code> (and all other unobserved variables).</p></li>
 <li><p><span class="math notranslate nohighlight">\(-0.16\)</span> is the expected increment of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> when we observe an increment of one unit of <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> and we don’t know anything about the values of the other variables. <span class="math notranslate nohighlight">\(-0.05\)</span> is the expected increment of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> when <code class="docutils literal notranslate"><span class="pre">horsepower=0</span></code> and <code class="docutils literal notranslate"><span class="pre">weight=0</span></code>, so, again, we are (virtually) looking at a different subset of the data in which the relationship between <code class="docutils literal notranslate"><span class="pre">mpg</span></code> and <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> may be a bit different.</p></li>
@@ -1186,12 +1167,6 @@ e^{(m)}
 <p>It can be shown that, by the <strong>least squares method</strong>, the RSS is minimized by the estimate:</p>
 <div class="math notranslate nohighlight">
 \[\mathbf{\hat \beta} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y}\]</div>
-<section id="collinearity">
-<h4><span class="section-number">10.4.3.1. </span>Collinearity<a class="headerlink" href="#collinearity" title="Permalink to this heading">#</a></h4>
-<p>When fitting multiple linear regressor, we should bear in mind that having two very correlated variables can lead to a poor model. For instance, in the case of perfectly correlated variables, two rows of the <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> matrix will be linearly dependent (one can be computed as a linear function of the other), hence the determinant of <span class="math notranslate nohighlight">\(\mathbf{X}^T\mathbf{X}\)</span> will be zero, the matrix cannot be inverted, and the coefficients cannot be estimated.</p>
-<p>Even if two variables are near collinear (strongly correlated), the <span class="math notranslate nohighlight">\(\mathbf{X}^T\mathbf{X}\)</span> matrix will be ill conditioned and the parameters will be estimated with high numerical imprecision.</p>
-<p>In general, when there is collinearity between two variables, <strong>the results of the multiple linear regressor cannot be trusted</strong>. In such cases, we can try to remove the correlated variables (we can identify correlated variables with the correlation matrix), apply regularization techniques (discussed later) or perform Principal Component Analysis (PCA), which aims to provide a set of decorrelated features from <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>. The PCA method will be presented later.</p>
-</section>
 </section>
 <section id="the-f-test">
 <h3><span class="section-number">10.4.4. </span>The F-Test<a class="headerlink" href="#the-f-test" title="Permalink to this heading">#</a></h3>
@@ -1204,6 +1179,7 @@ e^{(m)}
 <p>The test is performed by computing the following F-statistic:</p>
 <div class="math notranslate nohighlight">
 \[F=\frac{(TSS-RSS)/n}{RSS(m-n-1)}\]</div>
+<p>Where recall that <span class="math notranslate nohighlight">\(n\)</span> is the number of variables and <span class="math notranslate nohighlight">\(m\)</span> is the number of observations.</p>
 <p>In practice, the F-statistic will be:</p>
 <ul class="simple">
 <li><p>Close to <span class="math notranslate nohighlight">\(1\)</span> if there is no relationship between the response and the predictors (<span class="math notranslate nohighlight">\(H_0\)</span> is true);</p></li>
@@ -1301,12 +1277,7 @@ e^{(m)}
 <p>Even if the model is statistically significant, it does make sense to get rid of the variables with poor relationships with <code class="docutils literal notranslate"><span class="pre">mpg</span></code>. After all, if we remove a variable, the estimates of the other coefficients may change.</p>
 <p>A common way to remove these variables is by <strong>backward selection</strong> or <strong>backward elimination</strong>. This consists in iteratively removing the variable with the largest p-value. We remove one variable at a time and re-compute the results, iterating until all variables have a small p-value.</p>
 <p>let’s start by removing <code class="docutils literal notranslate"><span class="pre">acceleration</span></code>. This is the result:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;mpg ~ horsepower + weight + displacement + cylinders + model_year + origin&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html"><table class="simpletable">
 <tr>
@@ -1336,12 +1307,7 @@ e^{(m)}
 </table></div></div>
 </div>
 <p>Note that the coefficients have changed. We now remove <code class="docutils literal notranslate"><span class="pre">cylinders</span></code>, which has the largest p-value of <span class="math notranslate nohighlight">\(0.117\)</span>:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;mpg ~ horsepower + weight + displacement  + model_year + origin&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html"><table class="simpletable">
 <tr>
@@ -1763,8 +1729,127 @@ Fuel Type: [&#39;gas&#39; &#39;diesel&#39;]
 </div>
 <p>From the plot, we can see that some models have residuals less correlated with the predicted variable and quantiles closer to the normal distribution. This happens when the model explains better the variance of the predicted variable. In particular, we can note that the quadratic model (second row) and the one with the interaction term (last row) are a much better fit than the purely linear models (other two rows).</p>
 </section>
+<section id="collinearity-and-ridge-regression">
+<h2><span class="section-number">10.8. </span>Collinearity and Ridge Regression<a class="headerlink" href="#collinearity-and-ridge-regression" title="Permalink to this heading">#</a></h2>
+<p>When fitting a multiple linear regressor, we should bear in mind that having two very correlated variables can lead to a poor model. For instance, in the case of perfectly correlated variables, two rows of the <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> matrix will be linearly dependent (one can be computed as a linear function of the other), hence the determinant of <span class="math notranslate nohighlight">\(\mathbf{X}^T\mathbf{X}\)</span> will be zero, the matrix cannot be inverted, and the coefficients cannot be estimated.</p>
+<p>Even if two variables are nearly collinear (strongly correlated), the <span class="math notranslate nohighlight">\(\mathbf{X}^T\mathbf{X}\)</span> matrix will be ill conditioned and the parameters will be estimated with high numerical imprecision.</p>
+<p>In general, when there is collinearity between two variables (or even <strong>multicollinearity</strong>, involving more than two variables), <strong>the results of the multiple linear regressor cannot be trusted</strong>. In such cases, we can try to remove the correlated variables (we can identify correlated variables with the correlation matrix), apply regularization techniques (discussed later) or perform Principal Component Analysis (PCA), which aims to provide a set of decorrelated features from <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>. The PCA method will be presented later.</p>
+</section>
+<section id="ridge-regression">
+<h2><span class="section-number">10.9. </span>Ridge Regression<a class="headerlink" href="#ridge-regression" title="Permalink to this heading">#</a></h2>
+<p>One way to remove collinearity is to <strong>remove those variables which are highly correlated with other variables</strong>. This will effectively remove collinearity and solve the instability issues of linear regression. However, when there is a large number of predictors, this approach may not be very convenient. Also, it is not always clear which predictors to remove and which ones to keep, especially in the case of <strong>multicollinearity</strong> (sets of more than two variables which are highly correlated).</p>
+<p>A “<strong>soft approach</strong>” would be to feed all variables to the model and <strong>encourage it to set some of the coefficients to zero</strong>. If we could do this, the model would <strong>effectively select which variables to exclude from the model</strong>, hence releasing us from making a hard decision.</p>
+<p>This can be done by changing our cost function, the RSS. Recall that the RSS of linear regression (Ordinary Least Squares) can be written as:</p>
+<div class="math notranslate nohighlight">
+\[RSS = \sum_{i=1}^m (y_i - \beta_0 - \sum_{j=1}^n \beta_j x_{ij})^2\]</div>
+<p>where <span class="math notranslate nohighlight">\(x_{ij}\)</span> is the value of the <span class="math notranslate nohighlight">\(x_j\)</span> variable in the <span class="math notranslate nohighlight">\(i^{th}\)</span> observation.</p>
+<p>We can write the cost function as follows:</p>
+<div class="math notranslate nohighlight">
+\[\sum_{i=1}^m (y_i - \beta_0 - \sum_{j=1}^n \beta_j x_{ij})^2 + \lambda \sum_{j=1}^n \beta_j^2 = RSS + \lambda \sum_{j=1}^n \beta_j^2\]</div>
+<p>In practice, we are adding the following term:</p>
+<p><span class="math notranslate nohighlight">\(\sum_{j=1}^n \beta_j^2\)</span></p>
+<p>weighted by a parameter <span class="math notranslate nohighlight">\(\lambda\)</span>. The term above <strong>penalizes solutions with large values for the coefficients <span class="math notranslate nohighlight">\(\beta_j\)</span>, hence encouraging the model to put some of the variables to zero, or close to zero</strong>. This term is called “regularization term” and a linear regressor fit by minimizing this new cost function is called a <strong>ridge regressor</strong>.</p>
+<p>The cost function has a parameter <span class="math notranslate nohighlight">\(\lambda\)</span> which must be set as a constant. These kinds of parameters which we need to specify manually and are not computed from the data, are called <strong>hyperparameters</strong>. In practice, <span class="math notranslate nohighlight">\(\lambda\)</span> controls <strong>how much we want to regularize the linear regressor</strong>. The higher the value of <span class="math notranslate nohighlight">\(\lambda\)</span>, the stronger the regularization will be, hence encouraging the model to select small values of <span class="math notranslate nohighlight">\(\beta_j\)</span> or set some of them to zero.</p>
+<p>To avoid <span class="math notranslate nohighlight">\(\lambda\)</span> having different effects depending on the unit measures of the given variables, it is common to <strong>z-score all variables before computing a ridge regressor</strong>.</p>
+<p>This is shown in the following plot, which shows the values of the parameters <span class="math notranslate nohighlight">\(\beta_j\)</span> when a ridge regression model is fit with different values of <span class="math notranslate nohighlight">\(\lambda\)</span>:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/fd3880ceafc33f42cf09494bcb5ed81c6e71e85916ac64e3be39f6dea62356e3.png" src="../_images/fd3880ceafc33f42cf09494bcb5ed81c6e71e85916ac64e3be39f6dea62356e3.png" />
+</div>
+</div>
+<p>As can be seen, the coefficient values are gradually shrunk towards zero as the value of <span class="math notranslate nohighlight">\(\lambda\)</span> increases. Interestingly, the model <strong>“decides”</strong> which coefficients to shrink. For instance, for low values of <span class="math notranslate nohighlight">\(\lambda\)</span>, <code class="docutils literal notranslate"><span class="pre">weight</span></code> is shrunk, while <code class="docutils literal notranslate"><span class="pre">acceleration</span></code> is first shrunk, then allowed to be larger than zero. This is due to the fact that, the regularization term acts as a sort of “soft constraint” encouraging the model to find smaller weights, while still finding a good solution.</p>
+<p>It can be shown (but we will not see it formally), that ridge regression <strong>reduces the variance of coefficient estimates</strong>. At the same time, <strong>the bias is increased</strong>. So, finding a good value of <span class="math notranslate nohighlight">\(\lambda\)</span> allows to <strong>control the bias-variance trade-off</strong>.</p>
+<section id="interpretation-of-the-ridge-regression-coefficients">
+<h3><span class="section-number">10.9.1. </span>Interpretation of the ridge regression coefficients<a class="headerlink" href="#interpretation-of-the-ridge-regression-coefficients" title="Permalink to this heading">#</a></h3>
+<p>Let us compare the parameters obtained through a ridge regressor with those obtained with a linear regressor (OLS):</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ridge_params</th>
+      <th>ols_params</th>
+    </tr>
+    <tr>
+      <th>variables</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>displacement</th>
+      <td>-0.998445</td>
+      <td>2.079303</td>
+    </tr>
+    <tr>
+      <th>cylinders</th>
+      <td>-0.969852</td>
+      <td>-0.840519</td>
+    </tr>
+    <tr>
+      <th>horsepower</th>
+      <td>-1.027231</td>
+      <td>-0.651636</td>
+    </tr>
+    <tr>
+      <th>weight</th>
+      <td>-1.401530</td>
+      <td>-5.492050</td>
+    </tr>
+    <tr>
+      <th>acceleration</th>
+      <td>0.199621</td>
+      <td>0.222014</td>
+    </tr>
+    <tr>
+      <th>model_year</th>
+      <td>1.375600</td>
+      <td>2.762119</td>
+    </tr>
+    <tr>
+      <th>origin</th>
+      <td>0.830411</td>
+      <td>1.147316</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>As we can see, the ridge parameters has a smaller scale. This is due to the regularization term. As a result, the parameters <strong>cannot be interpreted statistically as the ones of a linear regressor</strong>. Instead, we can interpret them as denoting the relative importance of the variable to the prediction.</p>
+</section>
+</section>
+<section id="lasso-regression">
+<h2><span class="section-number">10.10. </span>Lasso Regression<a class="headerlink" href="#lasso-regression" title="Permalink to this heading">#</a></h2>
+<p>The ridge regressor will in general set coefficients exactly to zero only for very large values of <span class="math notranslate nohighlight">\(\lambda\)</span>. An alternative model which has been shown to set coefficients more likely to zero is the <strong>lasso regressor</strong>. The main difference with ridge regression is in the regularization term. The new cost function of a lasso regressor is as follows:</p>
+<div class="math notranslate nohighlight">
+\[\sum_{i=1}^m (y_i - \beta_0 - \sum_{j=1}^n \beta_j x_{ij})^2 + \lambda \sum_{j=1}^n |\beta_j| = RSS + \lambda \sum_{j=1}^n |\beta_j|\]</div>
+<p>We basically replaced the norm of the coefficients with the absolute values (this is called an L1 norm), which has the effect to encourage the model to set values to zero.</p>
+<p>The figure below shows how the coefficient estimates change for different values of <span class="math notranslate nohighlight">\(\lambda\)</span>:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/1de2a52c820bc6c4b1de5bd7c81ccce61b4e45a2ff1d88ceff546b121bee77db.png" src="../_images/1de2a52c820bc6c4b1de5bd7c81ccce61b4e45a2ff1d88ceff546b121bee77db.png" />
+</div>
+</div>
+<p>As can be seen, the model now makes “hard choices” on whether a value should be set to zero or not, thus performing variable selection.</p>
+</section>
 <section id="references">
-<h2><span class="section-number">10.8. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">10.11. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Chapter 3 of [1]</p></li>
 <li><p>Parts of chapter 11 of [2]</p></li>
@@ -1858,10 +1943,7 @@ Fuel Type: [&#39;gas&#39; &#39;diesel&#39;]
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-linear-regression">10.4. Multiple Linear Regression</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geometrical-interpretation">10.4.1. Geometrical Interpretation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-interpretation">10.4.2. Statistical Interpretation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-regression-coefficients">10.4.3. Estimating the Regression Coefficients</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#collinearity">10.4.3.1. Collinearity</a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-regression-coefficients">10.4.3. Estimating the Regression Coefficients</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-f-test">10.4.4. The F-Test</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-selection">10.4.5. Variable Selection</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adjusted-r-2">10.4.6. Adjusted <span class="math notranslate nohighlight">\(R^2\)</span></a></li>
@@ -1878,7 +1960,13 @@ Fuel Type: [&#39;gas&#39; &#39;diesel&#39;]
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#residual-plots-and-residual-q-q-plots">10.7. Residual Plots and Residual Q-Q Plots</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">10.8. References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collinearity-and-ridge-regression">10.8. Collinearity and Ridge Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-regression">10.9. Ridge Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-ridge-regression-coefficients">10.9.1. Interpretation of the ridge regression coefficients</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lasso-regression">10.10. Lasso Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">10.11. References</a></li>
 </ul>
   </nav></div>
 

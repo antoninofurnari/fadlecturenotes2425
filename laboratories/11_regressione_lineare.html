@@ -439,7 +439,8 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regressione-polinomiale">22.4.3. Regressione Polinomiale</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">22.5. Esercizi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-e-lasso-regression">22.5. Ridge e Lasso Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">22.6. Esercizi</a></li>
 </ul>
             </nav>
         </div>
@@ -3308,8 +3309,176 @@ Name: rad, Length: 506, dtype: object
 <p>Ci siamo ricondotti al modello con interaction term. Da qui deduciamo che un modello polinomiale non modella i dati meglio del modello con termini di interazione.</p>
 </section>
 </section>
+<section id="ridge-e-lasso-regression">
+<h2><span class="section-number">22.5. </span>Ridge e Lasso Regression<a class="headerlink" href="#ridge-e-lasso-regression" title="Permalink to this heading">#</a></h2>
+<p>È possibile eseguire la Ridge regression in <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> come segue:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">zscore</span>
+<span class="kn">from</span> <span class="nn">ucimlrepo</span> <span class="kn">import</span> <span class="n">fetch_ucirepo</span> 
+<span class="kn">from</span> <span class="nn">statsmodels.formula.api</span> <span class="kn">import</span> <span class="n">ols</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+  
+<span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="c1"># fetch dataset </span>
+<span class="n">auto_mpg</span> <span class="o">=</span> <span class="n">fetch_ucirepo</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span> 
+  
+<span class="c1"># data (as pandas dataframes) </span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">auto_mpg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span> 
+<span class="n">y</span> <span class="o">=</span> <span class="n">auto_mpg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">targets</span> 
+  
+<span class="n">data</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># Apply z-scoring and drop NA</span>
+<span class="n">data2</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;mpg&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">zscore</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">dropna</span><span class="p">()[</span><span class="s1">&#39;mpg&#39;</span><span class="p">])</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">ols</span><span class="p">(</span><span class="s2">&quot;mpg ~ displacement + cylinders + horsepower + weight + acceleration + model_year + origin&quot;</span><span class="p">,</span> <span class="n">data2</span><span class="p">)</span><span class="o">.</span><span class="n">fit_regularized</span><span class="p">(</span><span class="n">L1_wt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
+
+<span class="n">params</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;variables&#39;</span><span class="p">:[</span><span class="s1">&#39;Intercept&#39;</span><span class="p">,</span><span class="s1">&#39;displacement&#39;</span><span class="p">,</span><span class="s1">&#39;cylinders&#39;</span> <span class="p">,</span> <span class="s1">&#39;horsepower&#39;</span> <span class="p">,</span> <span class="s1">&#39;weight&#39;</span> <span class="p">,</span> <span class="s1">&#39;acceleration&#39;</span> <span class="p">,</span> <span class="s1">&#39;model_year&#39;</span> <span class="p">,</span> <span class="s1">&#39;origin&#39;</span><span class="p">],</span> <span class="s1">&#39;params&#39;</span><span class="p">:</span><span class="n">model</span><span class="o">.</span><span class="n">params</span><span class="p">})</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;variables&#39;</span><span class="p">)</span>
+<span class="n">params</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>params</th>
+    </tr>
+    <tr>
+      <th>variables</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Intercept</th>
+      <td>21.314471</td>
+    </tr>
+    <tr>
+      <th>displacement</th>
+      <td>-0.363361</td>
+    </tr>
+    <tr>
+      <th>cylinders</th>
+      <td>-0.698638</td>
+    </tr>
+    <tr>
+      <th>horsepower</th>
+      <td>-1.090416</td>
+    </tr>
+    <tr>
+      <th>weight</th>
+      <td>-3.001519</td>
+    </tr>
+    <tr>
+      <th>acceleration</th>
+      <td>-0.149495</td>
+    </tr>
+    <tr>
+      <th>model_year</th>
+      <td>2.385728</td>
+    </tr>
+    <tr>
+      <th>origin</th>
+      <td>1.028683</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Si può ottenere un ridge regressor ponendo il parametro <code class="docutils literal notranslate"><span class="pre">L1_wt</span></code> a <span class="math notranslate nohighlight">\(1\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">ols</span><span class="p">(</span><span class="s2">&quot;mpg ~ displacement + cylinders + horsepower + weight + acceleration + model_year + origin&quot;</span><span class="p">,</span> <span class="n">data2</span><span class="p">)</span><span class="o">.</span><span class="n">fit_regularized</span><span class="p">(</span><span class="n">L1_wt</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
+
+<span class="n">params</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;variables&#39;</span><span class="p">:[</span><span class="s1">&#39;Intercept&#39;</span><span class="p">,</span><span class="s1">&#39;displacement&#39;</span><span class="p">,</span><span class="s1">&#39;cylinders&#39;</span> <span class="p">,</span> <span class="s1">&#39;horsepower&#39;</span> <span class="p">,</span> <span class="s1">&#39;weight&#39;</span> <span class="p">,</span> <span class="s1">&#39;acceleration&#39;</span> <span class="p">,</span> <span class="s1">&#39;model_year&#39;</span> <span class="p">,</span> <span class="s1">&#39;origin&#39;</span><span class="p">],</span> <span class="s1">&#39;params&#39;</span><span class="p">:</span><span class="n">model</span><span class="o">.</span><span class="n">params</span><span class="p">})</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;variables&#39;</span><span class="p">)</span>
+<span class="n">params</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>params</th>
+    </tr>
+    <tr>
+      <th>variables</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Intercept</th>
+      <td>23.345918</td>
+    </tr>
+    <tr>
+      <th>displacement</th>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>cylinders</th>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>horsepower</th>
+      <td>-0.381223</td>
+    </tr>
+    <tr>
+      <th>weight</th>
+      <td>-4.718045</td>
+    </tr>
+    <tr>
+      <th>acceleration</th>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>model_year</th>
+      <td>2.646279</td>
+    </tr>
+    <tr>
+      <th>origin</th>
+      <td>0.891852</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Come si può vedere il lasso regressor ha impostato dei pesi esattamente a zero.</p>
+</section>
 <section id="esercizi">
-<h2><span class="section-number">22.5. </span>Esercizi<a class="headerlink" href="#esercizi" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">22.6. </span>Esercizi<a class="headerlink" href="#esercizi" title="Permalink to this heading">#</a></h2>
 <blockquote>
 <div><p>🧑‍💻 Esercizio 1</p>
 <p>Si consideri il dataset delle iris di Fisher. Si effettui uno scatterplot per studiare le relazioni tra le variabili. Si calcoli la matrice di correlazione usando gli indici di correlazione di Pearson, Spearman e Kendall. Esistono correlazioni deboli, medie o forti? Si calcoli l’indice di correlazione di Pearson tra le due coppie di variabili che individuano le correlazioni più forti. Si tratta di correlazioni significative?</p>
@@ -3413,7 +3582,8 @@ Name: rad, Length: 506, dtype: object
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regressione-polinomiale">22.4.3. Regressione Polinomiale</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">22.5. Esercizi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-e-lasso-regression">22.5. Ridge e Lasso Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">22.6. Esercizi</a></li>
 </ul>
   </nav></div>
 
