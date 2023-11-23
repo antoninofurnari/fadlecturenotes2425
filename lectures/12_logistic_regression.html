@@ -888,7 +888,13 @@ document.write(`
 <p>To have a clearer picture, we can exponentiate both sides of the equation and write:</p>
 <div class="math notranslate nohighlight">
 \[x=0 \Rightarrow \frac{p}{1-p}=e^{\beta_0}\]</div>
-<p>Remember that <span class="math notranslate nohighlight">\(\frac{p}{1-p}\)</span> is the odds that the dependent variable is equal to 1 when observing <span class="math notranslate nohighlight">\(x\)</span> and, as such, it has a clear interpretation. For example, if the odds of an event are \frac{3}{1}, then it is <span class="math notranslate nohighlight">\(3\)</span> times more likely to occur than not to occur. So, <strong>for <span class="math notranslate nohighlight">\(x=0\)</span>, it is <span class="math notranslate nohighlight">\(e^{\beta_0}\)</span> times more likely that the dependent variable is equal to 1, rather than being equal to 0</strong>.</p>
+<p>Remember that <span class="math notranslate nohighlight">\(\frac{p}{1-p}\)</span> is the odds that the dependent variable is equal to 1 when observing <span class="math notranslate nohighlight">\(x\)</span> and, as such, it has a clear interpretation. For example, if the odds of an event are <span class="math notranslate nohighlight">\(\frac{3}{1}\)</span>, then it is <span class="math notranslate nohighlight">\(3\)</span> times more likely to occur than not to occur. So, <strong>for <span class="math notranslate nohighlight">\(x=0\)</span>, it is <span class="math notranslate nohighlight">\(e^{\beta_0}\)</span> times more likely that the dependent variable is equal to 1, rather than being equal to 0</strong>.</p>
+<p>It can be seen that:</p>
+<div class="math notranslate nohighlight">
+\[p=\frac{odds}{1+odds}\]</div>
+<p>Hence, the probability of the event being true when all variables are zero is given by:</p>
+<div class="math notranslate nohighlight">
+\[p(Disease=1|radius1=0) = \frac{e^\beta_0}{1+e^\beta_0}\]</div>
 <p>How can we interpret the <strong>coefficient values</strong>?</p>
 <p>Let us define:</p>
 <div class="math notranslate nohighlight">
@@ -898,14 +904,12 @@ document.write(`
 \[
 \log odds(p|x) = \beta_0 + \beta_1 x
 \]</div>
-<p>We can write:
-$<span class="math notranslate nohighlight">\(
-\log odds(p|x+1) - \log odds(p|x) = \beta_0 + \beta_1 (x+1) - \beta_0 - \beta_1 x = \beta_1 (x+1) - \beta_1 x = \beta_1
-\)</span>$</p>
-<p>Exponentiating both sides, we get:
-$<span class="math notranslate nohighlight">\(
-e^{\log odds(p|x+1) - \log odds(p|x)} = e^{\beta_1} \Rightarrow \frac{e^{\log odds(p|x+1)}}{e^{\log odds(p|x)}} = e^{\beta_1} \Rightarrow \frac{odds(p|x+1)}{odds(p|x)} = e^{\beta_1} \Rightarrow odds(p|x+1) = e^{\beta_1}odds(p|x)
-\)</span>$</p>
+<p>We can write:</p>
+<div class="math notranslate nohighlight">
+\[\log odds(p|x+1) - \log odds(p|x) = \beta_0 + \beta_1 (x+1) - \beta_0 - \beta_1 x = \beta_1 (x+1) - \beta_1 x = \beta_1\]</div>
+<p>Exponentiating both sides, we get:</p>
+<div class="math notranslate nohighlight">
+\[e^{\log odds(p|x+1) - \log odds(p|x)} = e^{\beta_1} \Rightarrow \frac{e^{\log odds(p|x+1)}}{e^{\log odds(p|x)}} = e^{\beta_1} \Rightarrow \frac{odds(p|x+1)}{odds(p|x)} = e^{\beta_1} \Rightarrow odds(p|x+1) = e^{\beta_1}odds(p|x)\]</div>
 <p>We can thus say that <strong>increasing the variable <span class="math notranslate nohighlight">\(x\)</span> by one unit corresponds to a multiplicative increase in odds by <span class="math notranslate nohighlight">\(e^{\beta_1}\)</span></strong>.</p>
 <p>This analysis can be easily extended to the case of a multiple logistic regressor. Hence in general, given the model:</p>
 <div class="math notranslate nohighlight">
