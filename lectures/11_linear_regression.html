@@ -460,13 +460,15 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#residual-plots-and-residual-q-q-plots">10.7. Residual Plots and Residual Q-Q Plots</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collinearity-and-ridge-regression">10.8. Collinearity and Ridge Regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-regression">10.9. Ridge Regression</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-ridge-regression-coefficients">10.9.1. Interpretation of the ridge regression coefficients</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collinearity-and-regularization-techniques">10.8. Collinearity and Regularization Techniques</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-regression">10.8.1. Ridge Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-ridge-regression-coefficients">10.8.1.1. Interpretation of the ridge regression coefficients</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lasso-regression">10.10. Lasso Regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">10.11. References</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lasso-regression">10.8.2. Lasso Regression</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">10.9. References</a></li>
 </ul>
             </nav>
         </div>
@@ -1612,6 +1614,20 @@ Fuel Type: [&#39;gas&#39; &#39;diesel&#39;]
 <p>Note that the model above is nonlinear in <span class="math notranslate nohighlight">\(horsepower\)</span> and <span class="math notranslate nohighlight">\(weight\)</span>, but it is still linear if we introduce a variable <span class="math notranslate nohighlight">\(hw = horsepower \times weight\)</span>. We can easily do this by adding a new column to our design matrix computed as the product of the two variables. Then we can fit the model using the same exact estimators seen before.</p>
 <p>This new regressor obtained <span class="math notranslate nohighlight">\(R^2=0.748\)</span>, which is larger as compared to <span class="math notranslate nohighlight">\(R^2=0.706\)</span> obtained for the <span class="math notranslate nohighlight">\(mpg = \beta_0 + \beta_1 horsepower + \beta_2 weight\)</span> regressor. Both regressor have a large F-statistic and an associated p-value close to zero. The new regressor explains more variance than the previous one.</p>
 <p>The estimated coefficients are:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;displacement&#39;, &#39;cylinders&#39;, &#39;horsepower&#39;, &#39;weight&#39;, &#39;acceleration&#39;,
+       &#39;model_year&#39;, &#39;origin&#39;, &#39;mpg&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html"><table class="simpletable">
@@ -1653,9 +1669,15 @@ Fuel Type: [&#39;gas&#39; &#39;diesel&#39;]
 <p>We can note that:</p>
 <ul class="simple">
 <li><p>The p-value of the product <span class="math notranslate nohighlight">\(horsepower \times weight\)</span> is almost zero. This is a strong evidence that the true relationship is not merely additive, but an interaction between the two variables actually happens.</p></li>
-<li><p>The coefficient for the product <span class="math notranslate nohighlight">\(horsepower \times weight\)</span> is almost zero. This is to be expected: if the values of horsepower and weight are constant, their product will not change, so it is not influential on the final result.</p></li>
 <li><p>The coefficients of <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> and <code class="docutils literal notranslate"><span class="pre">weight</span></code> have changed. This makes sense, also their interpretation has changed. For instance, in the new regressor an increase of one unit of <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> is associated to an decrease of <span class="math notranslate nohighlight">\(0.2508\)</span> units of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> if <strong>the product between <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> and <code class="docutils literal notranslate"><span class="pre">weight</span></code> does not change</strong>, i.e., if the way the two quantities interact does not change.</p></li>
 </ul>
+<p>How should we interpret the coefficient <span class="math notranslate nohighlight">\(\beta_3\)</span>? Let’s rewrite our model:</p>
+<div class="math notranslate nohighlight">
+\[mpg = \beta_0 + \beta_1 horsepower + \beta_2 weight + \beta_3 horsepower \times weight\]</div>
+<p>as follows:</p>
+<div class="math notranslate nohighlight">
+\[mpg = \beta_0 + horsepower (\beta_1 + \beta_3 weight) + \beta_2 weight \]</div>
+<p>Hence we can see <span class="math notranslate nohighlight">\(\beta_3\)</span> as the increase in the coefficient of <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> when <code class="docutils literal notranslate"><span class="pre">weight</span></code> increases by one unit. In the example above <span class="math notranslate nohighlight">\(\beta_3\)</span> is very small, this is due to the fact that weight is measured in pounds, so increasing the weight by one pound has a very small effect. It easy to see that, <strong>an increase in <code class="docutils literal notranslate"><span class="pre">weight</span></code> by <span class="math notranslate nohighlight">\(1000\)</span> pounds increases the coefficient of <span class="math notranslate nohighlight">\(horsepower\)</span> by <span class="math notranslate nohighlight">\(1000 \beta_3 \approx = 0.05\)</span></strong>. This is a relevant increase, considering that the coefficient of <span class="math notranslate nohighlight">\(horsepower\)</span> is <span class="math notranslate nohighlight">\(-0.2508\)</span>. Hence, when we see an increase in <code class="docutils literal notranslate"><span class="pre">weight</span></code> of <span class="math notranslate nohighlight">\(1000\)</span> units, the coefficient of <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> will be larger, meaning that <strong>in heavier cars, large <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> will let <code class="docutils literal notranslate"><span class="pre">mpg</span></code> decrease more gently</strong>.</p>
 </section>
 <section id="non-linear-relationships-quadratic-and-polynomial-regression">
 <h3><span class="section-number">10.6.2. </span>Non-linear Relationships: Quadratic and Polynomial Regression<a class="headerlink" href="#non-linear-relationships-quadratic-and-polynomial-regression" title="Permalink to this heading">#</a></h3>
@@ -1729,14 +1751,13 @@ Fuel Type: [&#39;gas&#39; &#39;diesel&#39;]
 </div>
 <p>From the plot, we can see that some models have residuals less correlated with the predicted variable and quantiles closer to the normal distribution. This happens when the model explains better the variance of the predicted variable. In particular, we can note that the quadratic model (second row) and the one with the interaction term (last row) are a much better fit than the purely linear models (other two rows).</p>
 </section>
-<section id="collinearity-and-ridge-regression">
-<h2><span class="section-number">10.8. </span>Collinearity and Ridge Regression<a class="headerlink" href="#collinearity-and-ridge-regression" title="Permalink to this heading">#</a></h2>
+<section id="collinearity-and-regularization-techniques">
+<h2><span class="section-number">10.8. </span>Collinearity and Regularization Techniques<a class="headerlink" href="#collinearity-and-regularization-techniques" title="Permalink to this heading">#</a></h2>
 <p>When fitting a multiple linear regressor, we should bear in mind that having two very correlated variables can lead to a poor model. For instance, in the case of perfectly correlated variables, two rows of the <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> matrix will be linearly dependent (one can be computed as a linear function of the other), hence the determinant of <span class="math notranslate nohighlight">\(\mathbf{X}^T\mathbf{X}\)</span> will be zero, the matrix cannot be inverted, and the coefficients cannot be estimated.</p>
 <p>Even if two variables are nearly collinear (strongly correlated), the <span class="math notranslate nohighlight">\(\mathbf{X}^T\mathbf{X}\)</span> matrix will be ill conditioned and the parameters will be estimated with high numerical imprecision.</p>
 <p>In general, when there is collinearity between two variables (or even <strong>multicollinearity</strong>, involving more than two variables), <strong>the results of the multiple linear regressor cannot be trusted</strong>. In such cases, we can try to remove the correlated variables (we can identify correlated variables with the correlation matrix), apply regularization techniques (discussed later) or perform Principal Component Analysis (PCA), which aims to provide a set of decorrelated features from <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>. The PCA method will be presented later.</p>
-</section>
 <section id="ridge-regression">
-<h2><span class="section-number">10.9. </span>Ridge Regression<a class="headerlink" href="#ridge-regression" title="Permalink to this heading">#</a></h2>
+<h3><span class="section-number">10.8.1. </span>Ridge Regression<a class="headerlink" href="#ridge-regression" title="Permalink to this heading">#</a></h3>
 <p>One way to remove collinearity is to <strong>remove those variables which are highly correlated with other variables</strong>. This will effectively remove collinearity and solve the instability issues of linear regression. However, when there is a large number of predictors, this approach may not be very convenient. Also, it is not always clear which predictors to remove and which ones to keep, especially in the case of <strong>multicollinearity</strong> (sets of more than two variables which are highly correlated).</p>
 <p>A “<strong>soft approach</strong>” would be to feed all variables to the model and <strong>encourage it to set some of the coefficients to zero</strong>. If we could do this, the model would <strong>effectively select which variables to exclude from the model</strong>, hence releasing us from making a hard decision.</p>
 <p>This can be done by changing our cost function, the RSS. Recall that the RSS of linear regression (Ordinary Least Squares) can be written as:</p>
@@ -1760,7 +1781,7 @@ Fuel Type: [&#39;gas&#39; &#39;diesel&#39;]
 <p>As can be seen, the coefficient values are gradually shrunk towards zero as the value of <span class="math notranslate nohighlight">\(\lambda\)</span> increases. Interestingly, the model <strong>“decides”</strong> which coefficients to shrink. For instance, for low values of <span class="math notranslate nohighlight">\(\lambda\)</span>, <code class="docutils literal notranslate"><span class="pre">weight</span></code> is shrunk, while <code class="docutils literal notranslate"><span class="pre">acceleration</span></code> is first shrunk, then allowed to be larger than zero. This is due to the fact that, the regularization term acts as a sort of “soft constraint” encouraging the model to find smaller weights, while still finding a good solution.</p>
 <p>It can be shown (but we will not see it formally), that ridge regression <strong>reduces the variance of coefficient estimates</strong>. At the same time, <strong>the bias is increased</strong>. So, finding a good value of <span class="math notranslate nohighlight">\(\lambda\)</span> allows to <strong>control the bias-variance trade-off</strong>.</p>
 <section id="interpretation-of-the-ridge-regression-coefficients">
-<h3><span class="section-number">10.9.1. </span>Interpretation of the ridge regression coefficients<a class="headerlink" href="#interpretation-of-the-ridge-regression-coefficients" title="Permalink to this heading">#</a></h3>
+<h4><span class="section-number">10.8.1.1. </span>Interpretation of the ridge regression coefficients<a class="headerlink" href="#interpretation-of-the-ridge-regression-coefficients" title="Permalink to this heading">#</a></h4>
 <p>Let us compare the parameters obtained through a ridge regressor with those obtained with a linear regressor (OLS):</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -1835,7 +1856,7 @@ Fuel Type: [&#39;gas&#39; &#39;diesel&#39;]
 </section>
 </section>
 <section id="lasso-regression">
-<h2><span class="section-number">10.10. </span>Lasso Regression<a class="headerlink" href="#lasso-regression" title="Permalink to this heading">#</a></h2>
+<h3><span class="section-number">10.8.2. </span>Lasso Regression<a class="headerlink" href="#lasso-regression" title="Permalink to this heading">#</a></h3>
 <p>The ridge regressor will in general set coefficients exactly to zero only for very large values of <span class="math notranslate nohighlight">\(\lambda\)</span>. An alternative model which has been shown to set coefficients more likely to zero is the <strong>lasso regressor</strong>. The main difference with ridge regression is in the regularization term. The new cost function of a lasso regressor is as follows:</p>
 <div class="math notranslate nohighlight">
 \[\sum_{i=1}^m (y_i - \beta_0 - \sum_{j=1}^n \beta_j x_{ij})^2 + \lambda \sum_{j=1}^n |\beta_j| = RSS + \lambda \sum_{j=1}^n |\beta_j|\]</div>
@@ -1848,8 +1869,9 @@ Fuel Type: [&#39;gas&#39; &#39;diesel&#39;]
 </div>
 <p>As can be seen, the model now makes “hard choices” on whether a value should be set to zero or not, thus performing variable selection.</p>
 </section>
+</section>
 <section id="references">
-<h2><span class="section-number">10.11. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">10.9. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Chapter 3 of [1]</p></li>
 <li><p>Parts of chapter 11 of [2]</p></li>
@@ -1960,13 +1982,15 @@ Fuel Type: [&#39;gas&#39; &#39;diesel&#39;]
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#residual-plots-and-residual-q-q-plots">10.7. Residual Plots and Residual Q-Q Plots</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collinearity-and-ridge-regression">10.8. Collinearity and Ridge Regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-regression">10.9. Ridge Regression</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-ridge-regression-coefficients">10.9.1. Interpretation of the ridge regression coefficients</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collinearity-and-regularization-techniques">10.8. Collinearity and Regularization Techniques</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-regression">10.8.1. Ridge Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-ridge-regression-coefficients">10.8.1.1. Interpretation of the ridge regression coefficients</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lasso-regression">10.10. Lasso Regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">10.11. References</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lasso-regression">10.8.2. Lasso Regression</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">10.9. References</a></li>
 </ul>
   </nav></div>
 

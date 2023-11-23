@@ -1,0 +1,2015 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Causal Data Analysis &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=365ca57ee442770a23c6"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures/13_causal_analysis';</script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Lecture Notes on Fundamentals of Data Analysis - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Lecture Notes on Fundamentals of Data Analysis - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Lecture Notes on Fundamental of Data Analysis
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_intro_data_analysis.html">1. Introduction to Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_main_data_analysis_concepts.html">2. Main data analysis concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_misure_di_frequenze_e_rappresentazione_grafica_dei_dati.html">3. Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_misure_di_tendenza_centrale_dispersione_e_forma.html">4. Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_associazione_variabili.html">5. Associazione tra Variabili</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_probability.html">6. Probability for Data Manipulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_common_distributions.html">7. Common Probability Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_information_theory.html">8. Basic Elements of Information Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_statistical_inference.html">9. Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_linear_regression.html">10. Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_logistic_regression.html">11. Logistic Regression</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratories</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/01_setup.html">12. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/02_intro_python.html">13. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/03_intro_numpy.html">14. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/04_intro_matplotlib.html">15. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/05_intro_pandas.html">16. Introduzione a Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">17. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/07_misure_di_tendenza_centrale_dispersione_e_forma.html">18. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/08_associazione_variabili.html">19. Associazione tra Variabili</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/09_heart-disease-analysis.html">20. Exploratory Analysis on the Heart Disease Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/10_statistical_inference.html">21. Laboratory on Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/11_regressione_lineare.html">22. Laboratorio su Regressione Lineare</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/12_regressione_logistica.html">23. Laboratorio su regressione logistica</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/antoninofurnari/fadlecturenotes/blob/master/lecturenotes/lectures/13_causal_analysis.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/antoninofurnari/fadlecturenotes" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/antoninofurnari/fadlecturenotes/issues/new?title=Issue%20on%20page%20%2Flectures/13_causal_analysis.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/lectures/13_causal_analysis.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Causal Data Analysis</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sleep-vs-exam-performance">Sleep vs Exam Performance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-causation-potential-outcomes-counterfactuals">Measuring Causation - Potential Outcomes (Counterfactuals)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bias-arising-from-correlation">The Bias Arising from Correlation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#randomized-controlled-trials-rct">Randomized Controlled Trials (RCT)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#causal-effect-and-observational-studies">Causal Effect and Observational Studies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-for-interest">Controlling for <code class="docutils literal notranslate"><span class="pre">interest</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-causal-models">Graphical Causal Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#main-structures-of-causal-graphical-models">Main Structures of Causal Graphical Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#chains">Chains</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forks">Forks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#colliders">Colliders</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dependence-flow-rules">Dependence Flow Rules</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-1-is-d-perp-c">Question 1: is <span class="math notranslate nohighlight">\(D \perp C\)</span>?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-2-is-d-perp-c-a">Question 2: is <span class="math notranslate nohighlight">\(D \perp C | A\)</span>?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-3-is-d-perp-c-g">Question 3: is <span class="math notranslate nohighlight">\(D \perp C | G\)</span>?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-4-is-a-perp-f">Question 4: is <span class="math notranslate nohighlight">\(A \perp F\)</span>?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-5-is-a-perp-f-e">Question 5: is <span class="math notranslate nohighlight">\(A \perp F | E\)</span>?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-6-is-a-perp-f-e-c">Question 6: is <span class="math notranslate nohighlight">\(A \perp F | E, C\)</span>?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-graphical-causal-models-to-diagnose-bias">Using Graphical Causal Models to Diagnose Bias</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confounding-bias">Confounding Bias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-bias">Selection Bias</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-for-causal-analysis">Linear Regression for Causal Analysis</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="causal-data-analysis">
+<h1>Causal Data Analysis<a class="headerlink" href="#causal-data-analysis" title="Permalink to this heading">#</a></h1>
+<p>We have seen how to characterize the relationship between two or more variables with correlation and linear regression. We also said that <strong>correlation is not causation</strong>, meaning that, if we observe a correlation between two variables, that does not necessarily imply a cause-effect relationship between them. However, in many cases, it is still useful (or better required!) to establish a cause-effect relationship (or lack thereof) between two variables. Consider the following examples:</p>
+<ul class="simple">
+<li><p>We assess that <strong>a given disease is more frequent among smokers</strong>. Is this just a correlation or is there a cause-effect relationship? If a smoker stops smoking, will their risk to get the disease be reduced?</p></li>
+<li><p><strong>We develop a new drug</strong> and assess that people taking this drug are less likely to get disease X. Is this just a correlation or is there a cause-effect relationship? This is important, as people should take the drug only if benefits are clear.</p></li>
+<li><p><strong>A large company founds that product sites located in the geographical areas close to the sea are more productive than the others</strong>. Is this just a correlation or is it a cause-effect relationship? Shall we move all sites closer to the sea?</p></li>
+</ul>
+<p>Luckily, the field of <strong>causal analysis</strong> has, over the years, developed a set of tools which allow to answer those questions.</p>
+<p>The goal of this lecture is to provide a primer of causal analysis, introducing the main concepts and discussing some techniques which can be applied in some simple cases.</p>
+<section id="sleep-vs-exam-performance">
+<h2>Sleep vs Exam Performance<a class="headerlink" href="#sleep-vs-exam-performance" title="Permalink to this heading">#</a></h2>
+<p>We will consider a simple example which will guide us through the understanding of the main concepts of causal analysis. The data is made up and showing somewhat extreme correlations, but it should serve the purpose of illustrating the main concepts.</p>
+<p>We want to study the relationship between sleep and exam performance (in a <span class="math notranslate nohighlight">\(0-100\)</span> scale), so we asked <span class="math notranslate nohighlight">\(50\)</span> students to tell us about their sleeping habits (in particular, we asked if they sleep, in average, 8 hours of more, the recommended number of hours for their age). We put these numbers together with the average exam performance of the students, obtaining the following data:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Average Exam Performance</th>
+      <th>Sleep 8 Hours or More</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>77.472070</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>72.081839</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>69.676638</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>87.552836</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>70.589191</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>60.515116</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>100.000000</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>82.412677</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>53.392221</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>81.991137</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>55.619006</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>73.213549</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>84.005579</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>42.660374</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>62.384583</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>68.504934</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>68.092290</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>92.110403</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>58.465878</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>48.339601</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>75.761343</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>59.584134</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>69.904265</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>59.164038</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>67.323081</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>79.381058</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>58.620083</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>88.292321</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>61.347045</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>94.284754</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>70.239607</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>79.951206</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>59.156103</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>64.247615</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>75.990821</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>64.931568</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>76.821012</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>49.675010</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>48.250202</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>56.820140</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>72.919516</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>80.277671</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>70.984455</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>54.531575</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>56.946589</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>66.654732</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>56.555038</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>82.108473</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>74.018270</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>40.939895</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We want to understand if sleep has an effect on exam performance. Let us show some boxplots:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/ac500a01e4a11e6984f0a0386f62a5959be1d7feb65b735c9adaab18ce28f18c.png" src="../_images/ac500a01e4a11e6984f0a0386f62a5959be1d7feb65b735c9adaab18ce28f18c.png" />
+</div>
+</div>
+<p>We got a surprising picture! Sleeping <span class="math notranslate nohighlight">\(8\)</span> hours or more, actually affects negatively the average exam performance! To check if everything is fine, we can add some “notch” to the boxplots. The notch will highlight the confidence intervals for the estimation of the median value:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/55b85999a7a8431ef6dd6d909a2bdcd7beb95b8d41834dbf382996012fa34e7e.png" src="../_images/55b85999a7a8431ef6dd6d909a2bdcd7beb95b8d41834dbf382996012fa34e7e.png" />
+</div>
+</div>
+<p>Since the notches do not intersect, there is no overlap between the confidence interval for a C.L. of <span class="math notranslate nohighlight">\(95\)</span>, hence it is very unlikely that the two median values are very close to each other. The difference seem to be statistically relevant. If we want to be very sure we can <strong>compute a two-sample t-Test</strong> to ensure that the mean values of the two samples actually are distinct. The null hypothesis will be that the two samples have the same mean. If we reject this hypothesis, then the two means are distinct. We obtain the following test statistic and p-value:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test statistic: -2.5330249947772807
+P-value: 0.014630790631265746
+</pre></div>
+</div>
+</div>
+</div>
+<p>Also in this case, the difference seems to be statistically significant.</p>
+</section>
+<section id="measuring-causation-potential-outcomes-counterfactuals">
+<h2>Measuring Causation - Potential Outcomes (Counterfactuals)<a class="headerlink" href="#measuring-causation-potential-outcomes-counterfactuals" title="Permalink to this heading">#</a></h2>
+<p>We now start formulating hypotheses and theories: it looks counter-intuitive, but this is what the data is telling us. Isn’t it? It might be that sleeping too much make you less reactive in the morning, so you cannot properly focus and this make you a worse student.</p>
+<p>If this is true, than we could “prescribe” students to sleep less than <span class="math notranslate nohighlight">\(8\)</span> hours to obtain gains in performance. But we also know that… <strong>correlation is not (necessarily) causation!</strong>. We are seeing a correlation here - is it also causation? Of course, we want to be able to tell our students whether to sleep less or not!</p>
+<p>To be able to truly assess a causal relationship between the two variables, ideally, we would like to <strong>take the same student and ask them to sleep more than <span class="math notranslate nohighlight">\(8\)</span> hours for one year, than less than <span class="math notranslate nohighlight">\(8\)</span> hours for another years, then compare performance</strong>. This is of course unethical and impractical. And even if we could do so, between the two years, different other factors may change, so the two values will never be fully comparable.</p>
+<p>We will now <strong>enter the real of potential outcomes</strong>. In practice, we as ourselves questions such as <strong>“what if this student slept less than <span class="math notranslate nohighlight">\(8\)</span> hours?”</strong>. Let’s see some notation first. We will define two variables:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(T_i\)</span>: a “treatment” value indicating whether the observation <span class="math notranslate nohighlight">\(i\)</span> (student <span class="math notranslate nohighlight">\(i\)</span>) took the treatment (i.e., slept more than <span class="math notranslate nohighlight">\(8\)</span> hours) or not. Here we use the standard terminology of causal inference which uses the word “treatment” as in health-related sciences. We will assume this variable to be binary: <span class="math notranslate nohighlight">\(T_i=1\)</span> means “took the treatment”, while <span class="math notranslate nohighlight">\(T_i=0\)</span> means “didn’t take the treatment”.</p></li>
+<li><p><span class="math notranslate nohighlight">\(Y_i\)</span>: the “outcome” of observation <span class="math notranslate nohighlight">\(i\)</span>. In our case, this is the average performance of student <span class="math notranslate nohighlight">\(i\)</span>.</p></li>
+</ul>
+<p>If for a unit <span class="math notranslate nohighlight">\(i\)</span>, the treatment value is <span class="math notranslate nohighlight">\(T_i=t\)</span>, we will denote the related observation <span class="math notranslate nohighlight">\(Y_i\)</span> as <span class="math notranslate nohighlight">\(Y_i(t)\)</span>. We note that, for a given unit <span class="math notranslate nohighlight">\(i\)</span>, we will <strong>either observe <span class="math notranslate nohighlight">\(Y_i(0)\)</span> or <span class="math notranslate nohighlight">\(Y_i(1)\)</span>, but never both!</strong>.</p>
+<p>Nevertheless, we will introduce the concept of <strong>potential outcome</strong> as the <strong>value we would observe if we were able to intervene on the treatment variable <span class="math notranslate nohighlight">\(T_i\)</span> and change it</strong>. If for a unit <span class="math notranslate nohighlight">\(i\)</span> we have <span class="math notranslate nohighlight">\(T_i=0\)</span>, we will directly observe the outcome <span class="math notranslate nohighlight">\(Y_i(0)\)</span>, but we will also <strong>theoretically define</strong> the potential outcome <span class="math notranslate nohighlight">\(Y_i(1)\)</span>. This <strong>is not real and cannot be observed</strong> but it will serve as a useful theoretical concept.</p>
+<p>Potential outcomes are also known as <strong>counterfactuals</strong> because they answer to the question “what if…”.</p>
+<p>If we had potential outcomes, for each unit <span class="math notranslate nohighlight">\(i\)</span> we could compute the <strong>individual treatment effect</strong> (the effect of taking the treatment) as:</p>
+<div class="math notranslate nohighlight">
+\[Y_i(1) - Y_i(0)\]</div>
+<p>This is the effect of sleeping less than <span class="math notranslate nohighlight">\(8\)</span> hours. If we average this over the distribution of observations, we obtain the <strong>average treatment effect</strong>:</p>
+<div class="math notranslate nohighlight">
+\[ATE = E[Y(1) - Y(0)]\]</div>
+<p>This value will tell us <strong>how the exam performance varies in average if the same subjects sleep less or more than <span class="math notranslate nohighlight">\(8\)</span> hours</strong>. As such, it would indicate <strong>the causal effect of sleep on examination performance</strong>.</p>
+<p>Alternatively, we can compute the <strong>average treatment effect on the treated</strong>:</p>
+<div class="math notranslate nohighlight">
+\[ATT = E[Y(1) - Y(0)|T=1]\]</div>
+<p>This simply restrict the computation to the treated subjects, and <strong>also establishes a causal effect</strong>.</p>
+</section>
+<section id="the-bias-arising-from-correlation">
+<h2>The Bias Arising from Correlation<a class="headerlink" href="#the-bias-arising-from-correlation" title="Permalink to this heading">#</a></h2>
+<p>Without potential outcomes, we cannot compute the <span class="math notranslate nohighlight">\(ATE\)</span> or <span class="math notranslate nohighlight">\(ATT\)</span> scores. Indeed, we have <strong>two distinct groups</strong>, the <strong>treated</strong> (i.e., those observations <span class="math notranslate nohighlight">\(i\)</span> such that <span class="math notranslate nohighlight">\(T_i=1\)</span>) and the <strong>untreated</strong>, also known as <strong>control group</strong> (i.e., those observations <span class="math notranslate nohighlight">\(i\)</span> such that <span class="math notranslate nohighlight">\(T_i=0\)</span>).</p>
+<p>We could think to replace that calculation with the only data we can observe:</p>
+<div class="math notranslate nohighlight">
+\[E[Y(1)|T=1] - E[Y(0)|T=0]\]</div>
+<p>This is what <strong>a correlation can measure</strong>: the change in average value of <span class="math notranslate nohighlight">\(Y\)</span> in two distinct groups with different characteristics.</p>
+<p>Note that there are no potential outcome in the expression above as we directly observe <span class="math notranslate nohighlight">\(Y_i(1)\)</span> when <span class="math notranslate nohighlight">\(T_i=1\)</span> and we directly observe <span class="math notranslate nohighlight">\(Y_i(0)\)</span> when <span class="math notranslate nohighlight">\(T_i=0\)</span>. However, the expression above is now <strong>comparing different groups</strong>. Indeed, the subjects who took the treatment are different from the ones who did not take the treatment, and we do not know if their exam performance scores are really comparable. <strong>Imagine that, for some reason, students in group 0 are, by chance, better students, then the difference we measure is going to be biased and will not reveal a cause-effect relationship</strong>.</p>
+<p>We can show this in formulas. Let’s add and subtract the counterfactual term <span class="math notranslate nohighlight">\(E[Y(0)|T=1]\)</span> to the expression above:</p>
+<div class="math notranslate nohighlight">
+\[E[Y(1)|T=1] - E[Y(0)|T=0] = E[Y(1)|T=1] - E[Y(0)|T=0] - E[Y(0)|T=1] + E[Y(0)|T=1]\]</div>
+<p>We note that:</p>
+<div class="math notranslate nohighlight">
+\[ATT = E[Y(1) - Y(0)|T=1] = E[Y(1)|T=1] - E[Y(0)|T=1]\]</div>
+<p>Hence, we can see the expression above as follows:</p>
+<div class="math notranslate nohighlight">
+\[E[Y(1)|T=1] - E[Y(0)|T=0] = E[Y(1)|T=1] - E[Y(0)|T=1] + E[Y(0)|T=1] - E[Y(0)|T=0] = ATT + E[Y(0)|T=1] - E[Y(0)|T=0]\]</div>
+<p>We will call the last term the bias:</p>
+<div class="math notranslate nohighlight">
+\[BIAS = E[Y(0)|T=1] - E[Y(0)|T=0]\]</div>
+<p>So the whole expression can be seen as:</p>
+<div class="math notranslate nohighlight">
+\[E[Y(1)|T=1] - E[Y(0)|T=0] = ATT + BIAS\]</div>
+<p>which shows that the effect given by the correlation (left term) is <strong>biased</strong>. Note that the bias cannot be computed (it contains a counterfactual term), but we can interpret it as follows:</p>
+<blockquote>
+<div><p>The bias measures how the treated (<span class="math notranslate nohighlight">\(T=1\)</span>) and control (<span class="math notranslate nohighlight">\(T=0\)</span>) groups would differ if no one had taken the treatment.</p>
+</div></blockquote>
+<p>In practice:</p>
+<ul class="simple">
+<li><p>If the groups are similar to each other (e.g., treated and control group are mixed students with similar abilities), then the bias will be small or zero. Indeed, in this case, the difference in exam performance among the two groups if everybody sleeps less than <span class="math notranslate nohighlight">\(8\)</span> hours should be same, as students have similar abilities.</p></li>
+<li><p>If the groups are dissimilar (e.g., control students are all better students), then the bias will be different from zero. Indeed, if students in the control group are “better students”, if all sleep less than <span class="math notranslate nohighlight">\(8\)</span> hours, students in the control group will perform better in average, but this has nothing to do with sleeping less or more or with cause-effect relationships among the observed variables.</p></li>
+</ul>
+<p>Note that, given the observations above, we now know <strong>when association allows to establish a cause-effect mechanism</strong>. This happens when the bias is zero:</p>
+<div class="math notranslate nohighlight">
+\[BIAS = E[Y(0)|T=1] - E[Y(0)|T=0] = 0\]</div>
+<p>That is to say, when the difference between treated and untreated is zero (or at least very small).</p>
+<p>Given this intuition, we now try to estimate the students’ abilities by asking how many hours they study per day. We get the following data:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Average Study Time</th>
+      <th>Average Exam Performance</th>
+      <th>Sleep 8 Hours or More</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>6.993428</td>
+      <td>77.472070</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>5.723471</td>
+      <td>72.081839</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>7.295377</td>
+      <td>69.676638</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>9.046060</td>
+      <td>87.552836</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.531693</td>
+      <td>70.589191</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>5.531726</td>
+      <td>60.515116</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>9.158426</td>
+      <td>100.000000</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>7.534869</td>
+      <td>82.412677</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>5.061051</td>
+      <td>53.392221</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>7.085120</td>
+      <td>81.991137</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>5.073165</td>
+      <td>55.619006</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>5.068540</td>
+      <td>73.213549</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>6.483925</td>
+      <td>84.005579</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2.173440</td>
+      <td>42.660374</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>2.550164</td>
+      <td>62.384583</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>4.875425</td>
+      <td>68.504934</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>3.974338</td>
+      <td>68.092290</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>6.628495</td>
+      <td>92.110403</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>4.183952</td>
+      <td>58.465878</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>3.175393</td>
+      <td>48.339601</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>8.931298</td>
+      <td>75.761343</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>5.548447</td>
+      <td>59.584134</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>6.135056</td>
+      <td>69.904265</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>3.150504</td>
+      <td>59.164038</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>4.911235</td>
+      <td>67.323081</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>6.221845</td>
+      <td>79.381058</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>3.698013</td>
+      <td>58.620083</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>6.751396</td>
+      <td>88.292321</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>4.798723</td>
+      <td>61.347045</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>5.416613</td>
+      <td>94.284754</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>4.796587</td>
+      <td>70.239607</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>9.704556</td>
+      <td>79.951206</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>5.973006</td>
+      <td>59.156103</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>3.884578</td>
+      <td>64.247615</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>7.645090</td>
+      <td>75.990821</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>3.558313</td>
+      <td>64.931568</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>6.417727</td>
+      <td>76.821012</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>2.080660</td>
+      <td>49.675010</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>3.343628</td>
+      <td>48.250202</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>6.393722</td>
+      <td>56.820140</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>7.476933</td>
+      <td>72.919516</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>6.342737</td>
+      <td>80.277671</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>5.768703</td>
+      <td>70.984455</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>5.397793</td>
+      <td>54.531575</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>3.042956</td>
+      <td>56.946589</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>4.560312</td>
+      <td>66.654732</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>5.078722</td>
+      <td>56.555038</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>8.114244</td>
+      <td>82.108473</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>6.687237</td>
+      <td>74.018270</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>2.473920</td>
+      <td>40.939895</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>We cannot measure bias from this data because we do not have access to counterfactual observations</strong>, but we, now that we have access to a proxy for students’ abilities, we ca try to see if, in the two groups, abilities are equally distributed. Let’s see this with a scatterplot:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/440c017958f84c511c14e5aa47dabb1274fed8cb6932be69e350cc043b57fc40.png" src="../_images/440c017958f84c511c14e5aa47dabb1274fed8cb6932be69e350cc043b57fc40.png" />
+</div>
+</div>
+<p>From the picture above, we see that students’ skills are not equally distributed in the two groups. This is not enough to say that the bias is different from zero, as we are not observing counterfactuals, but we now see that the difference in outcomes could be due to two different causes:</p>
+<ul class="simple">
+<li><p>Sleeping less than <span class="math notranslate nohighlight">\(8\)</span> hours improves exam performance.</p></li>
+<li><p>Some of the difference may be due to the fact that students sleeping less than <span class="math notranslate nohighlight">\(8\)</span> hours, incidentally, study more. This might be a sampling problem (we were lucky/unlucky) or an experiment design problem: students who sleep less have more time to study, so they have higher performance. If this is the case, it is not meaningful to look at hours of sleep to establish a cause-effect relationship.</p></li>
+</ul>
+<p>Now that we have an intuition into what may make correlation be not indicative of causation, let’s see how to reduce bias to establish cause-effect relationships.</p>
+</section>
+<section id="randomized-controlled-trials-rct">
+<h2>Randomized Controlled Trials (RCT)<a class="headerlink" href="#randomized-controlled-trials-rct" title="Permalink to this heading">#</a></h2>
+<p>We have seen that correlation is causation when the treated and control groups are comparable for everything except the treatment. The most robust method to remove this bias is via <strong>randomized experiments</strong>, or <strong>Randomized Controlled Trials</strong> (RCT).</p>
+<p>A randomized experiment <strong>randomly assigns individuals in a population to a treatment or a control group</strong>. By performing a random assignment, we wish to make the two groups indistinguishable. Of course <strong>one of the two groups will take the treatment and this will likely make the two group distinguishable</strong>, but we wish to make sure that, <strong>apart from the treatment, the two groups are indeed indistinguishable</strong>.</p>
+<p>It can be shown random assignment makes sure that the potential outcomes are conditionally independent given the treatment:</p>
+<div class="math notranslate nohighlight">
+\[Y(0) \perp Y(1) | T\]</div>
+<p>So, if the treatment <span class="math notranslate nohighlight">\(T\)</span> is fixed, the potential outcomes are independent. For instance, if we fix <span class="math notranslate nohighlight">\(T=1\)</span> (so we are taking subjects who sleep <span class="math notranslate nohighlight">\(8\)</span> hours or more), then knowing the observed value <span class="math notranslate nohighlight">\(Y_i(1)\)</span> (i.e., the observed exam performance of student <span class="math notranslate nohighlight">\(i\)</span>), does not tell me anything about the potential outcome <span class="math notranslate nohighlight">\(Y_i(1)\)</span> (the exam performance that the same student would obtain if they slept less than <span class="math notranslate nohighlight">\(8\)</span> hours).</p>
+<p>If this conditional independence is valid, then:</p>
+<div class="math notranslate nohighlight">
+\[E[Y(0)|T=0] = E[Y(0)|T=1] = E[Y(0)]\]</div>
+<p>and:</p>
+<div class="math notranslate nohighlight">
+\[E[Y(1)|T=0] = E[Y(1)|T=1] = E[Y(1)]\]</div>
+<p>Which leads to:</p>
+<div class="math notranslate nohighlight">
+\[E[Y(1)|T=1] - E[Y(0)|T=0] = E[Y(1)] - E[Y(0)] = E[Y(1)-Y(10)] = ATE\]</div>
+<p>Hence, in this case, <strong>correlation would be causation</strong>.</p>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h3>
+<p>Let us now consider an example. A school wants to see if a new teaching method is effective. To do so, they ask <span class="math notranslate nohighlight">\(50\)</span> students if they want to voluntarily enroll a tutoring program. After one year, they measure the average performance of students who participated in the programme and compare it to those of students who did not participate in the programme. We obtain the following data:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tutoring</th>
+      <th>performance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>76.432447</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>91.550461</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>85.107378</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>69.981030</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>70.111151</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>195</th>
+      <td>0</td>
+      <td>68.477160</td>
+    </tr>
+    <tr>
+      <th>196</th>
+      <td>0</td>
+      <td>87.783594</td>
+    </tr>
+    <tr>
+      <th>197</th>
+      <td>1</td>
+      <td>88.220111</td>
+    </tr>
+    <tr>
+      <th>198</th>
+      <td>1</td>
+      <td>93.399423</td>
+    </tr>
+    <tr>
+      <th>199</th>
+      <td>1</td>
+      <td>84.082421</td>
+    </tr>
+  </tbody>
+</table>
+<p>200 rows × 2 columns</p>
+</div></div></div>
+</div>
+<p>Let us visualize two boxplots:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/890f83b31343a35e1ad12191bf5482f508ad9201cf8bcfbd9f6334feeb04ae19.png" src="../_images/890f83b31343a35e1ad12191bf5482f508ad9201cf8bcfbd9f6334feeb04ae19.png" />
+</div>
+</div>
+<p>It looks like a significant improvement. Let’s check if this is statistically relevant with a two-sample t-test:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>T-test results - T-statistic: 4.086568160195115, p-value: 6.358186591194311e-05
+</pre></div>
+</div>
+</div>
+</div>
+<p>It looks like the tutoring program is a great success!</p>
+<p>But, is it true? Well, we know that what we see is correlation, not necessarily causation. <strong>What if there is some bias</strong>?</p>
+<p>We quickly realize that we did not perform a randomized experiment, because we did not randomly assigned students to one of the two groups. <strong>What if only motivated students decided to enroll in the program and what if those students were the same who tend to study more than others?</strong></p>
+<p>Let’s say we could repeat the experiment, now with random assignment. <strong>Word of caution</strong>: this is not always possible. For instance, in this case, it would not be very polite to “force” students to enroll programs, so we may not be able to carry out this experiment, but let us assume for a moment that we can.</p>
+<p>We repeat the experiment and obtain these results:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tutoring</th>
+      <th>performance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>76.432447</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>91.550461</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>85.107378</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>69.981030</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>70.111151</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>195</th>
+      <td>0</td>
+      <td>68.477160</td>
+    </tr>
+    <tr>
+      <th>196</th>
+      <td>0</td>
+      <td>87.783594</td>
+    </tr>
+    <tr>
+      <th>197</th>
+      <td>0</td>
+      <td>87.970111</td>
+    </tr>
+    <tr>
+      <th>198</th>
+      <td>1</td>
+      <td>93.399423</td>
+    </tr>
+    <tr>
+      <th>199</th>
+      <td>1</td>
+      <td>84.082421</td>
+    </tr>
+  </tbody>
+</table>
+<p>200 rows × 2 columns</p>
+</div></div></div>
+</div>
+<p>Let’s visualize the boxplots:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/0be487a0ed78ae7e81c373a331e51ccd87c1281854bf9fe75925d99d07130af4.png" src="../_images/0be487a0ed78ae7e81c373a331e51ccd87c1281854bf9fe75925d99d07130af4.png" />
+</div>
+</div>
+<p>We now see a less dramatic improvement. What happened?</p>
+<p>By performing a random assignment, we got rid of selection bias. Students voluntarily choosing to enroll in the programme were probably more motivated and keen to study. We now see that the impact of tutoring is very small. We can perform a t-test to assess if this is statistically significant:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>T-test results - T-statistic: -1.1327518742165317, p-value: 0.2586882978200426
+</pre></div>
+</div>
+</div>
+</div>
+<p>We got a large p-value, the difference is not statistically significant.</p>
+</section>
+</section>
+<section id="causal-effect-and-observational-studies">
+<h2>Causal Effect and Observational Studies<a class="headerlink" href="#causal-effect-and-observational-studies" title="Permalink to this heading">#</a></h2>
+<p>We have seen how to interpret an observed association as a cause-effect relationship we need to reduce bias. The gold standard is to use randomized controlled trials, however <strong>this is not always feasible or ethical</strong>. Consider for instance <strong>the problem of estimating the effect of smoking on the development of a given disease</strong>. To perform a randomized experiment, we should select subjects randomly in two groups and ask people in one of the two groups to smoke. <strong>This is of course unethical, considering that we suspect that smoking has a bad effect on health</strong>.</p>
+<p>In these cases, we can only resort to <strong>observational data</strong>: we collect data of smokers and non-smokers and observe association in the data. However, we know that this process is <strong>subject to bias</strong>. How do we deal with it? In this part of the lecture, we will see that <strong>graphical causal models</strong> give us a framework to <strong>set our believes on where bias come from</strong>. If we can accurately model the source of bias, we can remove it by <strong>controlling</strong> on the variable “causing” the bias.</p>
+<p>Let us consider our past example: students and tutoring. Let us assume that we cannot perform the random assignment (again, it’s unethical!). Since we imagine that <strong>the interest of students towards study can be a source of bias</strong>, we now ask students to also tell us how interested they are in studying in general in a scale from <span class="math notranslate nohighlight">\(1\)</span> to <span class="math notranslate nohighlight">\(5\)</span>. We obtain the following observations:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tutoring</th>
+      <th>performance</th>
+      <th>interest</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>76.432447</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>91.550461</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>85.107378</td>
+      <td>4.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>69.981030</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>70.111151</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>195</th>
+      <td>0</td>
+      <td>68.477160</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>196</th>
+      <td>0</td>
+      <td>87.783594</td>
+      <td>4.0</td>
+    </tr>
+    <tr>
+      <th>197</th>
+      <td>1</td>
+      <td>88.220111</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <th>198</th>
+      <td>1</td>
+      <td>93.399423</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <th>199</th>
+      <td>1</td>
+      <td>84.082421</td>
+      <td>4.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>200 rows × 3 columns</p>
+</div></div></div>
+</div>
+<p>These are the same observations as the first case (before random assignment), but with an additional variable. We suspected that <strong>interested students have an average higher performance and that interested students are more likely to enroll in the tutoring program</strong>. Let us see graphically if this is true. If we split the data by interest and compute the boxplots of performance, we get the following graph:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/9c56bc1136c715fd41ce8f119360cb407b392d6b2409d9e6ebc9b6603ff4b081.png" src="../_images/9c56bc1136c715fd41ce8f119360cb407b392d6b2409d9e6ebc9b6603ff4b081.png" />
+</div>
+</div>
+<p>We were right! (ok, this is an exaggerated picture, but this example is made up…)</p>
+<p>Let us check how correlated are <code class="docutils literal notranslate"><span class="pre">interest</span></code> and <code class="docutils literal notranslate"><span class="pre">tutoring</span></code> with a barplot:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/b7124a48522020a45648ff9ea071f4085cebc5c74042d55346c140b591d466e2.png" src="../_images/b7124a48522020a45648ff9ea071f4085cebc5c74042d55346c140b591d466e2.png" />
+</div>
+</div>
+<p>We can also check the distribution of interest in the two groups:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/b9a337b36c0dd5c7c9ee809b23c183fbf3272c8e05ffe62e0ddec6f0abd05e68.png" src="../_images/b9a337b36c0dd5c7c9ee809b23c183fbf3272c8e05ffe62e0ddec6f0abd05e68.png" />
+</div>
+</div>
+<p>We can go ahead and compute a <span class="math notranslate nohighlight">\(\Chi^2\)</span> test of independence to check if the association between the two variables is statistically significant:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chi-square statistic: 31.22
+Cramer V statistic: 0.40
+Chi-square p-value: 2.761663e-06
+</pre></div>
+</div>
+</div>
+</div>
+<p>We were right also in this case! Interest affects tutoring, hence interest is our source of bias!</p>
+<p>The correlation between the <code class="docutils literal notranslate"><span class="pre">interest</span></code> variable and <code class="docutils literal notranslate"><span class="pre">tutoring</span></code> is making the “treated” (<code class="docutils literal notranslate"><span class="pre">tutoring=1</span></code>) and the “control” (<code class="docutils literal notranslate"><span class="pre">tutoring=0</span></code>) groups not comparable. Indeed, if people in the treated group have more chances of getting a higher response value (performance), then no wonder that we observe such dramatic differences among the two groups! In other words, <strong>the effect we observe may be due to the bias introduced by <code class="docutils literal notranslate"><span class="pre">interest</span></code>, the effect of <code class="docutils literal notranslate"><span class="pre">tutoring</span></code>, or a combination of both</strong>.</p>
+<section id="controlling-for-interest">
+<h3>Controlling for <code class="docutils literal notranslate"><span class="pre">interest</span></code><a class="headerlink" href="#controlling-for-interest" title="Permalink to this heading">#</a></h3>
+<p>How do we make the groups more comparable? Recall that we want:</p>
+<div class="math notranslate nohighlight">
+\[Y(0) \perp Y(1) | T\]</div>
+<p>We have seen that this is not true because of <code class="docutils literal notranslate"><span class="pre">interest</span></code>. Indeed, if we pick a person in the group <span class="math notranslate nohighlight">\(T=0\)</span> with a high <span class="math notranslate nohighlight">\(Y(0)\)</span>, we can imagine this is due to a large value of <code class="docutils literal notranslate"><span class="pre">interest</span></code>, so we can easily predict that <span class="math notranslate nohighlight">\(Y(1)\)</span> will also be large. <strong>If we can predict <span class="math notranslate nohighlight">\(Y(1)\)</span> from <span class="math notranslate nohighlight">\(Y(0)\)</span>, then they are not independent (conditioned on <span class="math notranslate nohighlight">\(T=1\)</span> in this case)</strong>.</p>
+<p>To obtain the statement above, we should <strong>perform a random assignment</strong>, which we cannot do. However, we know what that <code class="docutils literal notranslate"><span class="pre">interest</span></code> is the source of bias. Let us assume that it is the <strong>only source of bias</strong>. Then, if <span class="math notranslate nohighlight">\(X\)</span> represents <code class="docutils literal notranslate"><span class="pre">interest</span></code>, we can say that:</p>
+<div class="math notranslate nohighlight">
+\[Y(0) \perp Y(1) | T, X\]</div>
+<p><strong>Indeed, if we pick a person from a group <span class="math notranslate nohighlight">\(T=0\)</span> and with a given interest value <span class="math notranslate nohighlight">\(X=4\)</span>, then, given a large <span class="math notranslate nohighlight">\(Y(0)\)</span> we cannot really say anything about <span class="math notranslate nohighlight">\(Y(1)\)</span>. Indeed, if <span class="math notranslate nohighlight">\(X=4\)</span> and <span class="math notranslate nohighlight">\(Y(0)=80\)</span>, we have a student with great interest and high performance. What can we say about <span class="math notranslate nohighlight">\(Y(1)\)</span>? We could say that it will be high (the student has high interest), but any other student in this group will probably have a high score, so we cannot predict anything which will be significantly different from random (i.e., from the score of another random student within this group)</strong>.</p>
+<p>But, how do we condition on <span class="math notranslate nohighlight">\(X\)</span>? Well, the easiest way to do it, is to <strong>divide the data into different groups based on the values of <span class="math notranslate nohighlight">\(X\)</span> and assess any association within the groups</strong>. Let us do it:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/ab3b8967b0b1b26f4e1da66d9068ad2811a34c939e1e6da81dc132958a800b85.png" src="../_images/ab3b8967b0b1b26f4e1da66d9068ad2811a34c939e1e6da81dc132958a800b85.png" />
+</div>
+</div>
+<p>In the plot above, we compare the effect of tutoring in the different <code class="docutils literal notranslate"><span class="pre">interest</span></code> groups. As we can see, the association between <code class="docutils literal notranslate"><span class="pre">tutoring</span></code> and <code class="docutils literal notranslate"><span class="pre">performance</span></code> vanishes within the groups. This is shown by the fact that the notches (confidence intervals) tend to intersect. We can get a clearer picture by performing <span class="math notranslate nohighlight">\(5\)</span> different two-sample statistical tests assessing whether the means of <code class="docutils literal notranslate"><span class="pre">performance</span></code> in the two groups differ in a statistically significant way:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>t_statistic</th>
+      <th>p_value</th>
+    </tr>
+    <tr>
+      <th>interest</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1.0</th>
+      <td>0.934780</td>
+      <td>0.358187</td>
+    </tr>
+    <tr>
+      <th>2.0</th>
+      <td>-0.781177</td>
+      <td>0.437931</td>
+    </tr>
+    <tr>
+      <th>3.0</th>
+      <td>-0.867406</td>
+      <td>0.391310</td>
+    </tr>
+    <tr>
+      <th>4.0</th>
+      <td>0.164684</td>
+      <td>0.869947</td>
+    </tr>
+    <tr>
+      <th>5.0</th>
+      <td>-1.383074</td>
+      <td>0.178871</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>As we can see, there is no significant association between <code class="docutils literal notranslate"><span class="pre">performance</span></code> and <code class="docutils literal notranslate"><span class="pre">tutoring</span></code>, which suggests the lack of a causal effect.</p>
+<p><strong>The act of conditioning on <span class="math notranslate nohighlight">\(X\)</span> (e.g., by dividing into groups) is called “controlling for <span class="math notranslate nohighlight">\(X\)</span>”</strong>.</p>
+</section>
+</section>
+<section id="graphical-causal-models">
+<h2>Graphical Causal Models<a class="headerlink" href="#graphical-causal-models" title="Permalink to this heading">#</a></h2>
+<p>We have seen a simple case in which we could identify the main source of bias which was leading to an observed association not implying a cause-effect mechanism. However, not all cases are so simple and <strong>more than one variable may be responsible for bias</strong>. The question now is</p>
+<blockquote>
+<div><p>How do we identify the variables we should control for?</p>
+</div></blockquote>
+<p>To help us in this quest, we can use graphical causal models. A graphical causal model is a <strong>directed acyclic graph</strong> formalizing cause-effect relationships between variables. <strong>Each node is a random variable, while a directed edge <span class="math notranslate nohighlight">\(A \to B\)</span> indicates that <span class="math notranslate nohighlight">\(A\)</span> causes <span class="math notranslate nohighlight">\(B\)</span>.</strong></p>
+<p>The causal graph describing the hypotheses we made in this example will look like this:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/c0f0676ae3848f94da0595140cc691d000b02b3d478eef1d5605558840fa1bd0.svg" src="../_images/c0f0676ae3848f94da0595140cc691d000b02b3d478eef1d5605558840fa1bd0.svg" /></div>
+</div>
+<p>Indeed, we expect <code class="docutils literal notranslate"><span class="pre">interest</span></code> (<span class="math notranslate nohighlight">\(X\)</span>) to influence both <code class="docutils literal notranslate"><span class="pre">performance</span></code> (<span class="math notranslate nohighlight">\(Y\)</span>) and whether a subject belong to the treated or control group, i.e., the <code class="docutils literal notranslate"><span class="pre">tutoring</span></code> variable (<span class="math notranslate nohighlight">\(T\)</span>). From the model above, we can identify <code class="docutils literal notranslate"><span class="pre">interest</span></code> as a source of bias, but <strong>as we will see shortly, we can use a set of rules to identify which variables we should control for or not control for from a graphical model</strong>.</p>
+<p>Before proceeding, a short note on <strong>how graphical models are created</strong>: these are generally designed by the data analyst who encodes their own <strong>beliefs</strong> on how the world works. These come from a “Bayesian” view of the world in which we first establish our beliefs and then use a theoretical framework to draw conclusions from them.</p>
+<section id="main-structures-of-causal-graphical-models">
+<h3>Main Structures of Causal Graphical Models<a class="headerlink" href="#main-structures-of-causal-graphical-models" title="Permalink to this heading">#</a></h3>
+<p>Once we form a graphical model, we can identify a set of standard structures which will allow us to choose which variables to control for. We will see the main structures, but others beside the ones discussed here may exist.</p>
+<section id="chains">
+<h4>Chains<a class="headerlink" href="#chains" title="Permalink to this heading">#</a></h4>
+<p>The most straightforward structure is a chain of this kind:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/66b4423940c3ae52ca69b36ac4741314c80a66bb1c519f79e625c207361f5cbf.svg" src="../_images/66b4423940c3ae52ca69b36ac4741314c80a66bb1c519f79e625c207361f5cbf.svg" /></div>
+</div>
+<p>The example above, <code class="docutils literal notranslate"><span class="pre">interest</span></code> in studying causes the number of <code class="docutils literal notranslate"><span class="pre">study</span> <span class="pre">hours</span></code>, which in turn causes <code class="docutils literal notranslate"><span class="pre">performance</span></code>. Let us imagine no other variable is involved (i.e., <code class="docutils literal notranslate"><span class="pre">interest</span></code> is the only variable causing <code class="docutils literal notranslate"><span class="pre">study</span> <span class="pre">hours</span></code> and <code class="docutils literal notranslate"><span class="pre">performance</span></code> is only caused by <code class="docutils literal notranslate"><span class="pre">study</span> <span class="pre">hours</span></code>). Then we will easily find that:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">interest</span></code> and <code class="docutils literal notranslate"><span class="pre">study</span> <span class="pre">hours</span></code> will be associated;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">study</span> <span class="pre">hours</span></code> and <code class="docutils literal notranslate"><span class="pre">performance</span></code> will be associated.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">interest</span></code> and <code class="docutils literal notranslate"><span class="pre">performance</span></code> will be associated.</p></li>
+</ul>
+<p>Indeed, for instance:</p>
+<ul class="simple">
+<li><p>If a person has a great interest, then they will study a lot and have good performance;</p></li>
+<li><p>If a person has good performance, we can infer that it studies a lot and hence has great interest;</p></li>
+<li><p>If a person studies a lot, we infer that it has great interest and good performance;</p></li>
+</ul>
+<p>Let say we <strong>control for <span class="math notranslate nohighlight">\(B\)</span>, <code class="docutils literal notranslate"><span class="pre">study</span> <span class="pre">hours</span></code></strong>. We will denote the graph as follows (variable we are controlling for is in gray):</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/f24e3c66a6515d6d5aa0f2a2ef515029bdcb0c8803875f3994c025dd64adc212.svg" src="../_images/f24e3c66a6515d6d5aa0f2a2ef515029bdcb0c8803875f3994c025dd64adc212.svg" /></div>
+</div>
+<p>If we <strong>control for <span class="math notranslate nohighlight">\(B\)</span>, <code class="docutils literal notranslate"><span class="pre">study</span> <span class="pre">hours</span></code>, we will find that <code class="docutils literal notranslate"><span class="pre">interest</span></code> and <code class="docutils literal notranslate"><span class="pre">performance</span></code> are not associated anymore</strong>. Indeed:</p>
+<blockquote>
+<div><p>If we consider a group of people who study the same amount of hours and I take a person with good performance, then I don’t know if they have great interest or not. Or better, I cannot distinguish a person with great interest from a person with little interest as they all study the same amount of hours.</p>
+</div></blockquote>
+<p>In mathematical terms, we know that in general:</p>
+<div class="math notranslate nohighlight">
+\[A \not\perp C\]</div>
+<p>but, by controlling for <span class="math notranslate nohighlight">\(B\)</span>, we obtain:</p>
+<div class="math notranslate nohighlight">
+\[A \perp C | B\]</div>
+<p>Hence, in groups with the same value of <span class="math notranslate nohighlight">\(B\)</span>, we will see an independence between <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>.</p>
+<p>In general, we say that <strong>conditioning on <span class="math notranslate nohighlight">\(B\)</span> blocks the dependency between <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(C\)</span></strong>, hence **while there is a causal effect between <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(C\)</span>, we cannot see it anymore when we condition on <span class="math notranslate nohighlight">\(B\)</span>.</p>
+<p>The graph below shows two identical graphs, except that we are conditioning on <span class="math notranslate nohighlight">\(B\)</span> in the version on the right. Besides solid black arrows denoting cause-effect relationships, we also show <strong>in red how dependency flows</strong>.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/8c3e9dcfe93bd5579ea47c455b1e672e451c757abcdadb20f3ef7811ad218265.svg" src="../_images/8c3e9dcfe93bd5579ea47c455b1e672e451c757abcdadb20f3ef7811ad218265.svg" /></div>
+</div>
+<ul class="simple">
+<li><p>In the graph on the left, dependency flows in a bidirectional way <strong>through variable <span class="math notranslate nohighlight">\(B\)</span></strong>. This means that <span class="math notranslate nohighlight">\(A\)</span> depends on <span class="math notranslate nohighlight">\(B\)</span> and <span class="math notranslate nohighlight">\(C\)</span> and similarly <span class="math notranslate nohighlight">\(C\)</span> depends on <span class="math notranslate nohighlight">\(B\)</span> and <span class="math notranslate nohighlight">\(A\)</span>;</p></li>
+<li><p>In the graph on the right, conditioning on <span class="math notranslate nohighlight">\(B\)</span> “stops” the dependency. Now:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(A\)</span> are independent of <span class="math notranslate nohighlight">\(B\)</span>. This makes sense because conditioning on <span class="math notranslate nohighlight">\(B\)</span> means fixing a value for <span class="math notranslate nohighlight">\(B\)</span>, so <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(C\)</span> will be independent of the constant;</p></li>
+<li><p><span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(C\)</span> are independent (we are conditioning on <span class="math notranslate nohighlight">\(B\)</span>, so we have <span class="math notranslate nohighlight">\(A \perp C | B\)</span>).</p></li>
+</ul>
+</li>
+</ul>
+<p>As a result, if we want to study the relation between <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(C\)</span>, we <strong>should not condition on B</strong>, as this conditioning will make the association between <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(C\)</span> vanish, even if there is a causal effect between these variables.</p>
+<p>We are encountering an important concept:</p>
+<blockquote>
+<div><p>Conditioning on <strong>any</strong> variable is not a good way to remove bias. If we condition on the “wrong” variable, we may introduce some bias which was not there in the first place and estimate the lack of a causal effect even in cases in which the causal effect is there.</p>
+</div></blockquote>
+</section>
+</section>
+<section id="forks">
+<h3>Forks<a class="headerlink" href="#forks" title="Permalink to this heading">#</a></h3>
+<p>We have a fork structure when a variable causes two other variables. Let us see an example:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/d93ca26577b479e82e93cd6fcd61b382ba6bf70572ac42f708138c4617e78138.svg" src="../_images/d93ca26577b479e82e93cd6fcd61b382ba6bf70572ac42f708138c4617e78138.svg" /></div>
+</div>
+<p>In this case <span class="math notranslate nohighlight">\(B\)</span> (<code class="docutils literal notranslate"><span class="pre">interest</span></code>) is causing both <span class="math notranslate nohighlight">\(A\)</span> (<code class="docutils literal notranslate"><span class="pre">performance</span></code>) and <span class="math notranslate nohighlight">\(C\)</span> (<code class="docutils literal notranslate"><span class="pre">tutoring</span></code>). This is the example we have seen before. In this case, as we have seen, we may see a correlation between <code class="docutils literal notranslate"><span class="pre">tutoring</span></code> and <code class="docutils literal notranslate"><span class="pre">performance</span></code>. Indeed, a large value of <code class="docutils literal notranslate"><span class="pre">performance</span></code> will probably mean that <code class="docutils literal notranslate"><span class="pre">interest</span></code> is high, hence <code class="docutils literal notranslate"><span class="pre">tutoring</span></code> will probably be equal to <span class="math notranslate nohighlight">\(1\)</span>.</p>
+<blockquote>
+<div><p>We will call <span class="math notranslate nohighlight">\(B\)</span> (or <code class="docutils literal notranslate"><span class="pre">interest</span></code>) the <strong>common cause</strong>.</p>
+</div></blockquote>
+<p>Although we will likely observe correlation between any pair of the <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(B\)</span>, and <span class="math notranslate nohighlight">\(C\)</span> variables, we know from the graph that there is no cause-effect relationship between <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(C\)</span>.</p>
+<p>We say that the fork structure <strong>creates a backdoor path such that dependence (or association) flows through <span class="math notranslate nohighlight">\(B\)</span> (the backdoor) to go from <span class="math notranslate nohighlight">\(A\)</span> to <span class="math notranslate nohighlight">\(C\)</span></strong>.</p>
+<p>As we noted in the previous example, conditioning on <span class="math notranslate nohighlight">\(B\)</span> (<code class="docutils literal notranslate"><span class="pre">interest</span></code>) makes the association between <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(C\)</span> vanish:</p>
+<div class="math notranslate nohighlight">
+\[A \perp C | B\]</div>
+<p>Hence in the following graph, we will observe no association between <code class="docutils literal notranslate"><span class="pre">performance</span></code> and <code class="docutils literal notranslate"><span class="pre">tutoring</span></code>, hence confirming the lack of a causal effect:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/5eeefb9c698acd89a99324f996f4d2ddd3399c87dc71ebf89a799b407085977b.svg" src="../_images/5eeefb9c698acd89a99324f996f4d2ddd3399c87dc71ebf89a799b407085977b.svg" /></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/69e77494a9d890a12aad00bd754b6f3ffae8fca89f873a47bc34b7babc4712a3.svg" src="../_images/69e77494a9d890a12aad00bd754b6f3ffae8fca89f873a47bc34b7babc4712a3.svg" /></div>
+</div>
+<p>When we do not condition on <span class="math notranslate nohighlight">\(B\)</span>, dependency (hence association) flows from <span class="math notranslate nohighlight">\(A\)</span> to <span class="math notranslate nohighlight">\(C\)</span> through <span class="math notranslate nohighlight">\(B\)</span>. Hence, <strong>we observe an association which is not due to a causal effect</strong>.</p>
+<p>When we condition on <span class="math notranslate nohighlight">\(B\)</span>, dependency (hence association) does not flow through <span class="math notranslate nohighlight">\(B\)</span>, so <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(C\)</span> will be independent and we will measure no association, as it should be.</p>
+</section>
+<section id="colliders">
+<h3>Colliders<a class="headerlink" href="#colliders" title="Permalink to this heading">#</a></h3>
+<p>The last, important structure, is a collider. This is in some sense the opposite of a fork: a variable is caused by two different variables. Let us see this with an example:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/d155cb2a4c49a483683c74f0375da2af78d08a9e1bfc621d0b68fc5f62c722fb.svg" src="../_images/d155cb2a4c49a483683c74f0375da2af78d08a9e1bfc621d0b68fc5f62c722fb.svg" /></div>
+</div>
+<p>The graph above tells us that performance is caused by <code class="docutils literal notranslate"><span class="pre">study</span> <span class="pre">hours</span></code> and <code class="docutils literal notranslate"><span class="pre">intuitive</span> <span class="pre">intelligence</span></code>. We are making the assumption here that <code class="docutils literal notranslate"><span class="pre">intuitive</span> <span class="pre">intelligence</span></code> does not affect <code class="docutils literal notranslate"><span class="pre">study</span> <span class="pre">hours</span></code> in any way. This might be inaccurate, but we will anyway assume so for the sake of a simple example.</p>
+<p>This structure is called a <strong>collider</strong>, because two arrows (from <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(C\)</span>) collide on a single node (<span class="math notranslate nohighlight">\(B\)</span>).</p>
+<p>A collider <strong>blocks dependency</strong>. This means that by default, if we do not condition on <code class="docutils literal notranslate"><span class="pre">performance</span></code>, we will observe no association between <code class="docutils literal notranslate"><span class="pre">study</span> <span class="pre">hours</span></code> and <code class="docutils literal notranslate"><span class="pre">intuitive</span> <span class="pre">intelligence</span></code>. Indeed:</p>
+<ul class="simple">
+<li><p>If we know that a person studies a lot, we cannot really say anything about their intuitive intelligence;</p></li>
+<li><p>If we know that a person has intuitive intelligence, we cannot say how much they study.</p></li>
+</ul>
+<p>So, in the graph above:</p>
+<div class="math notranslate nohighlight">
+\[A \perp C\]</div>
+<p>Let us not consider a case in which we condition on <span class="math notranslate nohighlight">\(B\)</span> (<code class="docutils literal notranslate"><span class="pre">performance</span></code>), as shown in the following graph:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/3add8a639f83fa7b7c31cbe3633e8161f6b33a4eaea2fb5824dd79af994fa43b.svg" src="../_images/3add8a639f83fa7b7c31cbe3633e8161f6b33a4eaea2fb5824dd79af994fa43b.svg" /></div>
+</div>
+<p>Conditioning on <code class="docutils literal notranslate"><span class="pre">performance</span></code> changes things. Indeed:</p>
+<ul class="simple">
+<li><p>If we know that a student has a <strong>good performance</strong> (i.e., we consider the group of good performing students when controlling), then <strong>knowing that they do not study a lot, will tell us that they probably have good intuitive intelligence</strong>. Indeed, if the fixed performance cannot be explained by the large number of study hours, it must be due to good intuitive intelligence;</p></li>
+<li><p>Conversely, if we know that a good performing student has bad intuitive intelligence, then their performance is probably due to a large number of study hours.</p></li>
+</ul>
+<p>In practice, conditioning on <code class="docutils literal notranslate"><span class="pre">performance</span></code> make <code class="docutils literal notranslate"><span class="pre">study</span> <span class="pre">hours</span></code> and <code class="docutils literal notranslate"><span class="pre">intuitive</span> <span class="pre">intelligence</span></code> dependent:</p>
+<div class="math notranslate nohighlight">
+\[A \not\perp C | B\]</div>
+<p>This phenomenon is called <strong>explaining away</strong>, because, one we fix <span class="math notranslate nohighlight">\(B\)</span> (<code class="docutils literal notranslate"><span class="pre">performance</span></code>), knowing <span class="math notranslate nohighlight">\(A\)</span> (<code class="docutils literal notranslate"><span class="pre">study</span> <span class="pre">hours</span></code>) already explains <span class="math notranslate nohighlight">\(B\)</span>, hence making <span class="math notranslate nohighlight">\(C\)</span> less likely.</p>
+<p>In general, <strong>a collider blocks dependency, while conditioning on it unblocks a dependency path</strong>. We can use the same conventions as before to illustrate this effect:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/b36774b5fa62943cf4979df850ea360f4d9a9822cac3a3cd555eeb9c7c1044c3.svg" src="../_images/b36774b5fa62943cf4979df850ea360f4d9a9822cac3a3cd555eeb9c7c1044c3.svg" /></div>
+</div>
+</section>
+<section id="dependence-flow-rules">
+<h3>Dependence Flow Rules<a class="headerlink" href="#dependence-flow-rules" title="Permalink to this heading">#</a></h3>
+<p>Using these structures, we can deem if two nodes <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are dependent by checking <strong>if an unblocked path exists between <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span></strong>. This can be done by combining the rules we have seen above, which are also summarized in the following figure:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/394f7d08578be94d6671cded9c65e4c4c6d58963e18504d51a966916bf4711c2.svg" src="../_images/394f7d08578be94d6671cded9c65e4c4c6d58963e18504d51a966916bf4711c2.svg" /></div>
+</div>
+<p>The cheat sheet above is replicated from <a class="reference external" href="http://ai.stanford.edu/~paskin/gm-short-course/lec2.pdf">here</a> and <a class="reference external" href="https://matheusfacure.github.io/python-causality-handbook/04-Graphical-Causal-Models.html">here</a>. You can find more information at those URLs.</p>
+<p>We will say that a path between <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> is blocked if:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>It contains a non-collider that <strong>has been conditioned on</strong>;</p></li>
+<li><p>It contains a collider that <strong>has not been conditioned on</strong> and has no descendants that have been conditioned on.</p></li>
+</ul>
+</div></blockquote>
+<p>Let us see an example from <a class="reference external" href="https://matheusfacure.github.io/python-causality-handbook/04-Graphical-Causal-Models.html">here</a> and let us try to answer some questions:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/0ecd28dbf877f34d3029eb955565bed27d2d27e91fbf2ca75d1da128e49192e5.svg" src="../_images/0ecd28dbf877f34d3029eb955565bed27d2d27e91fbf2ca75d1da128e49192e5.svg" /></div>
+</div>
+<section id="question-1-is-d-perp-c">
+<h4>Question 1: is <span class="math notranslate nohighlight">\(D \perp C\)</span>?<a class="headerlink" href="#question-1-is-d-perp-c" title="Permalink to this heading">#</a></h4>
+<p>The <span class="math notranslate nohighlight">\(D \to A \leftarrow C\)</span> structure is a <strong>collider</strong>. We know that, when we do not condition on the collider, the collider blocks dependence, so we can say that:</p>
+<div class="math notranslate nohighlight">
+\[D \perp C\]</div>
+</section>
+<section id="question-2-is-d-perp-c-a">
+<h4>Question 2: is <span class="math notranslate nohighlight">\(D \perp C | A\)</span>?<a class="headerlink" href="#question-2-is-d-perp-c-a" title="Permalink to this heading">#</a></h4>
+<p>We have the following graph:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/e31ed900fd14bb984389a24df9c6b9eeb2b6ceeaa799b53405c43084bcf7bb3a.svg" src="../_images/e31ed900fd14bb984389a24df9c6b9eeb2b6ceeaa799b53405c43084bcf7bb3a.svg" /></div>
+</div>
+<p>We are conditioning on the collider, hence unblocking the dependence, so we can say:</p>
+<div class="math notranslate nohighlight">
+\[D \not\perp C | A \]</div>
+</section>
+<section id="question-3-is-d-perp-c-g">
+<h4>Question 3: is <span class="math notranslate nohighlight">\(D \perp C | G\)</span>?<a class="headerlink" href="#question-3-is-d-perp-c-g" title="Permalink to this heading">#</a></h4>
+<p>We now have this graph:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/eacad1f586eb9c60f41f9879e5c38625832cbd389140897269528fa4cfb1ce35.svg" src="../_images/eacad1f586eb9c60f41f9879e5c38625832cbd389140897269528fa4cfb1ce35.svg" /></div>
+</div>
+<p>We are not conditioning on the collider <span class="math notranslate nohighlight">\(A\)</span>, but we are conditioning on a descendant of the collider <span class="math notranslate nohighlight">\(A\)</span>. We can see this descendant as <strong>a proxy for <span class="math notranslate nohighlight">\(A\)</span></strong>, so conditioning on it is similar to conditioning on <span class="math notranslate nohighlight">\(A\)</span>. For instance, consider this graph:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/895d16b9a238e18511fb51175efeca01d5d2ad616d5c24308e225d9214be2325.svg" src="../_images/895d16b9a238e18511fb51175efeca01d5d2ad616d5c24308e225d9214be2325.svg" /></div>
+</div>
+<p>In the example above, <code class="docutils literal notranslate"><span class="pre">competence</span></code> indicates how competent the student is in the considered subjects. If the student is highly competent, we expect them to achieve good performance, hence the cause-effect relationship.</p>
+<p>Even if we are not conditioning on <code class="docutils literal notranslate"><span class="pre">competence</span></code>, we are conditioning on a proxy for competence, i.e., <code class="docutils literal notranslate"><span class="pre">performance</span></code>. When we condition on this node, <code class="docutils literal notranslate"><span class="pre">study</span> <span class="pre">hours</span></code> and <code class="docutils literal notranslate"><span class="pre">intuitive</span></code> intelligence will appear as dependent for the “explaining away” effect.</p>
+<p>Also, recall that we said that a path between <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> is blocked if:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>It contains a non-collider that <strong>has been conditioned on</strong>;</p></li>
+<li><p>It contains a collider that <strong>has not been conditioned on</strong> and has no descendants that have been conditioned on.</p></li>
+</ul>
+</div></blockquote>
+<p>In our case, we are conditioning on a descendant of the collider, hence <code class="docutils literal notranslate"><span class="pre">study</span> <span class="pre">hours</span></code> and <code class="docutils literal notranslate"><span class="pre">intuitive</span> <span class="pre">intelligence</span></code> will be dependent. In our general graph, we can say that:</p>
+<div class="math notranslate nohighlight">
+\[D \not\perp C | G\]</div>
+</section>
+<section id="question-4-is-a-perp-f">
+<h4>Question 4: is <span class="math notranslate nohighlight">\(A \perp F\)</span>?<a class="headerlink" href="#question-4-is-a-perp-f" title="Permalink to this heading">#</a></h4>
+<p>We can illustrate the dependence flow with red dashed arrows as follows:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/804c4199aca7f2ffbf1e8f6fe2f31a7edc472e6c4c4461b664d647fbc10497df.svg" src="../_images/804c4199aca7f2ffbf1e8f6fe2f31a7edc472e6c4c4461b664d647fbc10497df.svg" /></div>
+</div>
+<p>As we can see, <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are dependent, but, due to the collider <span class="math notranslate nohighlight">\(E\)</span>, <span class="math notranslate nohighlight">\(B\)</span> is independent from <span class="math notranslate nohighlight">\(F\)</span>, so, the path between <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(F\)</span> is blocked by the collider <span class="math notranslate nohighlight">\(E\)</span> which has not been conditioned on. We can say:</p>
+<div class="math notranslate nohighlight">
+\[A \perp F\]</div>
+</section>
+<section id="question-5-is-a-perp-f-e">
+<h4>Question 5: is <span class="math notranslate nohighlight">\(A \perp F | E\)</span>?<a class="headerlink" href="#question-5-is-a-perp-f-e" title="Permalink to this heading">#</a></h4>
+<p>We now have this dependence flow:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/2c3a4b0fe48dd9ebcf299cb38febcb5f6a838f646d67fe46ff3afc7e4df5eb19.svg" src="../_images/2c3a4b0fe48dd9ebcf299cb38febcb5f6a838f646d67fe46ff3afc7e4df5eb19.svg" /></div>
+</div>
+<p>Conditioning on <span class="math notranslate nohighlight">\(E\)</span> has opened the path between <span class="math notranslate nohighlight">\(B\)</span> and <span class="math notranslate nohighlight">\(F\)</span> and now the path between <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(F\)</span> is unblocked. In other words, <strong>the path between <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(F\)</span> contains a collider which has been conditioned on</strong>, to the path is unblocked. Since the path is unblocked, the two variables are not independent:</p>
+<div class="math notranslate nohighlight">
+\[A \not\perp F | E\]</div>
+</section>
+<section id="question-6-is-a-perp-f-e-c">
+<h4>Question 6: is <span class="math notranslate nohighlight">\(A \perp F | E, C\)</span>?<a class="headerlink" href="#question-6-is-a-perp-f-e-c" title="Permalink to this heading">#</a></h4>
+<p>Let us see the dependence flow in this case:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/7714d4bbd099f17313e0930cb6d5aaf6dff3a6b6bdf26e703356ac2b729be55d.svg" src="../_images/7714d4bbd099f17313e0930cb6d5aaf6dff3a6b6bdf26e703356ac2b729be55d.svg" /></div>
+</div>
+<p>Since <span class="math notranslate nohighlight">\(C\)</span> is a non collider node, conditioning on it blocks the path between <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>. Conditioning on <span class="math notranslate nohighlight">\(E\)</span> unblocks the path between <span class="math notranslate nohighlight">\(B\)</span> and <span class="math notranslate nohighlight">\(F\)</span>, but a block remains in the path between <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(F\)</span>, hence the two variables are independent:</p>
+<div class="math notranslate nohighlight">
+\[A \perp F | E, C\]</div>
+</section>
+</section>
+</section>
+<section id="using-graphical-causal-models-to-diagnose-bias">
+<h2>Using Graphical Causal Models to Diagnose Bias<a class="headerlink" href="#using-graphical-causal-models-to-diagnose-bias" title="Permalink to this heading">#</a></h2>
+<p>We will now see how using graphical causal models allows to diagnose bias and understand which variables we should condition on and which we should not when trying to measure a causal effect through correlation. We will see that we have two main sources of bias: <strong>confounding bias</strong> and <strong>selection bias</strong>.</p>
+<section id="confounding-bias">
+<h3>Confounding Bias<a class="headerlink" href="#confounding-bias" title="Permalink to this heading">#</a></h3>
+</section>
+<section id="selection-bias">
+<h3>Selection Bias<a class="headerlink" href="#selection-bias" title="Permalink to this heading">#</a></h3>
+</section>
+</section>
+<section id="linear-regression-for-causal-analysis">
+<h2>Linear Regression for Causal Analysis<a class="headerlink" href="#linear-regression-for-causal-analysis" title="Permalink to this heading">#</a></h2>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lectures"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sleep-vs-exam-performance">Sleep vs Exam Performance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-causation-potential-outcomes-counterfactuals">Measuring Causation - Potential Outcomes (Counterfactuals)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bias-arising-from-correlation">The Bias Arising from Correlation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#randomized-controlled-trials-rct">Randomized Controlled Trials (RCT)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#causal-effect-and-observational-studies">Causal Effect and Observational Studies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-for-interest">Controlling for <code class="docutils literal notranslate"><span class="pre">interest</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-causal-models">Graphical Causal Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#main-structures-of-causal-graphical-models">Main Structures of Causal Graphical Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#chains">Chains</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forks">Forks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#colliders">Colliders</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dependence-flow-rules">Dependence Flow Rules</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-1-is-d-perp-c">Question 1: is <span class="math notranslate nohighlight">\(D \perp C\)</span>?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-2-is-d-perp-c-a">Question 2: is <span class="math notranslate nohighlight">\(D \perp C | A\)</span>?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-3-is-d-perp-c-g">Question 3: is <span class="math notranslate nohighlight">\(D \perp C | G\)</span>?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-4-is-a-perp-f">Question 4: is <span class="math notranslate nohighlight">\(A \perp F\)</span>?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-5-is-a-perp-f-e">Question 5: is <span class="math notranslate nohighlight">\(A \perp F | E\)</span>?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-6-is-a-perp-f-e-c">Question 6: is <span class="math notranslate nohighlight">\(A \perp F | E, C\)</span>?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-graphical-causal-models-to-diagnose-bias">Using Graphical Causal Models to Diagnose Bias</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confounding-bias">Confounding Bias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-bias">Selection Bias</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-for-causal-analysis">Linear Regression for Causal Analysis</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Antonino Furnari
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
