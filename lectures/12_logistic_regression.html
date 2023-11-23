@@ -894,9 +894,9 @@ document.write(`
 \[p=\frac{odds}{1+odds}\]</div>
 <p>Hence, the probability of the event being true when all variables are zero is given by:</p>
 <div class="math notranslate nohighlight">
-\[p(Disease=1|radius1=0) = \frac{e^\beta_0}{1+e^\beta_0}\]</div>
+\[p(y=1|x) = \frac{e^\beta_0}{1+e^\beta_0}\]</div>
 <p>How can we interpret the <strong>coefficient values</strong>?</p>
-<p>Let us define:</p>
+<p>We know that:</p>
 <div class="math notranslate nohighlight">
 \[odds(p|x) = \frac{P(y=1|x)}{1-P(y=1|x)}\]</div>
 <p>We can write:</p>
@@ -904,7 +904,7 @@ document.write(`
 \[
 \log odds(p|x) = \beta_0 + \beta_1 x
 \]</div>
-<p>We can write:</p>
+<p>Hence:</p>
 <div class="math notranslate nohighlight">
 \[\log odds(p|x+1) - \log odds(p|x) = \beta_0 + \beta_1 (x+1) - \beta_0 - \beta_1 x = \beta_1 (x+1) - \beta_1 x = \beta_1\]</div>
 <p>Exponentiating both sides, we get:</p>
@@ -983,7 +983,7 @@ done in the case of linear regression.</p>
 regression problem as the linear regression problem of fitting the
 <span class="math notranslate nohighlight">\(logit(p) = \mathbf{\beta}^{T}\mathbf{x}\)</span> function, differently from
 linear regression, <strong>we should note that we do not have the ground truth probabilities p</strong>.
-Indeed, our observations only provides input examples
+Indeed, our observations only provide input examples
 <span class="math notranslate nohighlight">\(\mathbf{x}^{(i)}\)</span> and the corresponding labels <span class="math notranslate nohighlight">\(y^{(i)}\)</span>.</p>
 <p>Starting from the definition:</p>
 <div class="math notranslate nohighlight">
@@ -1330,12 +1330,7 @@ will hence be:</p>
 </table></div></div>
 </div>
 <p>We notice that not all variables have a statistically relevant relationship with the dependent variable. Applying backward elimination, we remove <code class="docutils literal notranslate"><span class="pre">compactness1</span></code> and obtain the following estimates:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;Diagnosis ~ radius1 + texture1 + perimeter1 + area1 + smoothness1 + concavity1 + symmetry1&quot;</span><span class="p">,</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html"><table class="simpletable">
 <tr>
