@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
@@ -19,12 +19,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
@@ -38,9 +38,9 @@
     <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6" />
-  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=365ca57ee442770a23c6"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -142,6 +142,7 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="index.html">
@@ -382,6 +383,7 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -391,6 +393,7 @@ document.write(`
   </button>
 `);
 </script>
+
 
 <script>
 document.write(`
@@ -1075,7 +1078,7 @@ beta_1: -0.16
 <p>We can note that the coefficients are different. This happens because, when we add more variables, <strong>the model explains variance in a different way</strong>. If we think more about it, this is coherent with the interpretation of the coefficients. Indeed:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(39.94\)</span> is the expected value of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> when <code class="docutils literal notranslate"><span class="pre">horsepower=0</span></code>, but all other variables have unknown values. <span class="math notranslate nohighlight">\(45.64\)</span> is the expected value of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> when <code class="docutils literal notranslate"><span class="pre">horsepower=0</span></code> and <code class="docutils literal notranslate"><span class="pre">weight=0</span></code>. This is different, as in the second case we are (virtually) looking at a subset of data for which both horsepower and weight are zero, while in the first case, we are only looking at data for which <code class="docutils literal notranslate"><span class="pre">horsepower=0</span></code>, but <code class="docutils literal notranslate"><span class="pre">weight</span></code> can be any value. In some sense, we can see <span class="math notranslate nohighlight">\(39.94\)</span> as an average value for different values of <code class="docutils literal notranslate"><span class="pre">weight</span></code> (and all other unobserved variables).</p></li>
-<li><p><span class="math notranslate nohighlight">\(-0.16\)</span> is the expected increment of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> when we observe an increment of one unit of <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> and we don’t know anything about the values of the other variables. <span class="math notranslate nohighlight">\(-0.05\)</span> is the expected increment of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> when <code class="docutils literal notranslate"><span class="pre">horsepower=0</span></code> and <code class="docutils literal notranslate"><span class="pre">weight=0</span></code>, so, again, we are (virtually) looking at a different subset of the data in which the relationship between <code class="docutils literal notranslate"><span class="pre">mpg</span></code> and <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> may be a bit different.</p></li>
+<li><p><span class="math notranslate nohighlight">\(-0.16\)</span> is the expected increment of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> when we observe an increment of one unit of <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> and we don’t know anything about the values of the other variables. <span class="math notranslate nohighlight">\(-0.05\)</span> is the expected increment of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> when <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> and <code class="docutils literal notranslate"><span class="pre">weight</span></code> are held constant, so, again, we are (virtually) looking at a different subset of the data in which the relationship between <code class="docutils literal notranslate"><span class="pre">mpg</span></code> and <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> may be a bit different.</p></li>
 </ul>
 <p>Note that, also in the case of multiple regression, we can estimate confidence intervals and perform statistical tests. In our example, we will get this table:</p>
 <table class="table">
@@ -1678,6 +1681,34 @@ Fuel Type: [&#39;gas&#39; &#39;diesel&#39;]
 <div class="math notranslate nohighlight">
 \[mpg = \beta_0 + horsepower (\beta_1 + \beta_3 weight) + \beta_2 weight \]</div>
 <p>Hence we can see <span class="math notranslate nohighlight">\(\beta_3\)</span> as the increase in the coefficient of <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> when <code class="docutils literal notranslate"><span class="pre">weight</span></code> increases by one unit. In the example above <span class="math notranslate nohighlight">\(\beta_3\)</span> is very small, this is due to the fact that weight is measured in pounds, so increasing the weight by one pound has a very small effect. It easy to see that, <strong>an increase in <code class="docutils literal notranslate"><span class="pre">weight</span></code> by <span class="math notranslate nohighlight">\(1000\)</span> pounds increases the coefficient of <span class="math notranslate nohighlight">\(horsepower\)</span> by <span class="math notranslate nohighlight">\(1000 \beta_3 \approx = 0.05\)</span></strong>. This is a relevant increase, considering that the coefficient of <span class="math notranslate nohighlight">\(horsepower\)</span> is <span class="math notranslate nohighlight">\(-0.2508\)</span>. Hence, when we see an increase in <code class="docutils literal notranslate"><span class="pre">weight</span></code> of <span class="math notranslate nohighlight">\(1000\)</span> units, the coefficient of <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> will be larger, meaning that <strong>in heavier cars, large <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> will let <code class="docutils literal notranslate"><span class="pre">mpg</span></code> decrease more gently</strong>.</p>
+<p>Let us consider the computed coefficients again:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<tr>
+          <td></td>             <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>         <td>   63.5579</td> <td>    2.343</td> <td>   27.127</td> <td> 0.000</td> <td>   58.951</td> <td>   68.164</td>
+</tr>
+<tr>
+  <th>horsepower</th>        <td>   -0.2508</td> <td>    0.027</td> <td>   -9.195</td> <td> 0.000</td> <td>   -0.304</td> <td>   -0.197</td>
+</tr>
+<tr>
+  <th>weight</th>            <td>   -0.0108</td> <td>    0.001</td> <td>  -13.921</td> <td> 0.000</td> <td>   -0.012</td> <td>   -0.009</td>
+</tr>
+<tr>
+  <th>horsepower:weight</th> <td> 5.355e-05</td> <td> 6.65e-06</td> <td>    8.054</td> <td> 0.000</td> <td> 4.05e-05</td> <td> 6.66e-05</td>
+</tr>
+</table></div></div>
+</div>
+<p>We can interpret the results as follows:</p>
+<ul class="simple">
+<li><p><strong>Intercept</strong>: the value of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> is <span class="math notranslate nohighlight">\(63.5579\)</span> when <code class="docutils literal notranslate"><span class="pre">horsepower=0</span></code> and <code class="docutils literal notranslate"><span class="pre">weight=0</span></code> (also their product will be zero);</p></li>
+<li><p><strong>horsepower</strong>: an increase of one unit corresponds to a decrement of <span class="math notranslate nohighlight">\(-0.2508\)</span> in <code class="docutils literal notranslate"><span class="pre">mpg</span></code> provided that <code class="docutils literal notranslate"><span class="pre">weight</span></code> is held constant and the way <code class="docutils literal notranslate"><span class="pre">weight</span></code> influences <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> does not change. Note that, if we change the value of <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> and keep <code class="docutils literal notranslate"><span class="pre">weight</span></code> constant, the interaction term will change. Here we assume that, even if the ratio change, we assume that the way <code class="docutils literal notranslate"><span class="pre">weight</span></code> affects <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> does not change.</p></li>
+<li><p><strong>weight</strong>: an increase of one unit corresponds to a decrement of <span class="math notranslate nohighlight">\(-0.0108\)</span> in <code class="docutils literal notranslate"><span class="pre">mpg</span></code> provided that <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> is held constant and the way <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> affects <code class="docutils literal notranslate"><span class="pre">weight</span></code> does not change.</p></li>
+<li><p><strong>horsepower:weight</strong>: an increase in one unit of <code class="docutils literal notranslate"><span class="pre">weight</span></code> increases the coefficient regulating the effect of <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> on <code class="docutils literal notranslate"><span class="pre">mpg</span></code> by <span class="math notranslate nohighlight">\(5.05e-5\)</span>.</p></li>
+</ul>
 </section>
 <section id="non-linear-relationships-quadratic-and-polynomial-regression">
 <h3><span class="section-number">10.6.2. </span>Non-linear Relationships: Quadratic and Polynomial Regression<a class="headerlink" href="#non-linear-relationships-quadratic-and-polynomial-regression" title="Permalink to this heading">#</a></h3>
@@ -1909,7 +1940,7 @@ Fuel Type: [&#39;gas&#39; &#39;diesel&#39;]
               
               
                 <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                  
 <div class="prev-next-area">
     <a class="left-prev"
        href="10_statistical_inference.html"
@@ -2012,6 +2043,7 @@ By Antonino Furnari
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2022.
@@ -2038,8 +2070,8 @@ By Antonino Furnari
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
   <footer class="bd-footer">
   </footer>
