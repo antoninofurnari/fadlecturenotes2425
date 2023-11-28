@@ -454,7 +454,16 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-graphical-causal-models-to-diagnose-bias">Using Graphical Causal Models to Diagnose Bias</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confounding-bias">Confounding Bias</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-bias">Selection Bias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-common-causes-and-unmeasurable-variables">Multiple Common Causes and Unmeasurable Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#surrogate-confounders">Surrogate Confounders</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-bias">Selection Bias</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-for-a-common-effect">Controlling For a Common Effect</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-on-a-mediator">Controlling on a Mediator</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#main-sources-of-bias">Main Sources of Bias</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-for-causal-analysis">Linear Regression for Causal Analysis</a></li>
@@ -1872,13 +1881,1923 @@ Chi-square p-value: 2.761663e-06
 <p>We will now see how using graphical causal models allows to diagnose bias and understand which variables we should condition on and which we should not when trying to measure a causal effect through correlation. We will see that we have two main sources of bias: <strong>confounding bias</strong> and <strong>selection bias</strong>.</p>
 <section id="confounding-bias">
 <h3>Confounding Bias<a class="headerlink" href="#confounding-bias" title="Permalink to this heading">#</a></h3>
+<p>Confounding bias happens when <strong>the treatment and the effect have a common cause</strong>. Let us consider the following example, which we already saw previously:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/c0f0676ae3848f94da0595140cc691d000b02b3d478eef1d5605558840fa1bd0.svg" src="../_images/c0f0676ae3848f94da0595140cc691d000b02b3d478eef1d5605558840fa1bd0.svg" /></div>
+</div>
+<p>Here, the outcome <span class="math notranslate nohighlight">\(Y\)</span> is <code class="docutils literal notranslate"><span class="pre">performance</span></code>, which is caused by both the treatment <span class="math notranslate nohighlight">\(T\)</span> (<code class="docutils literal notranslate"><span class="pre">tutoring</span></code>) and another common cause <span class="math notranslate nohighlight">\(X\)</span> (<code class="docutils literal notranslate"><span class="pre">interest</span></code>). The common cause <span class="math notranslate nohighlight">\(X\)</span> is called <strong>a counfounder</strong> because it mixes ups the effects of <code class="docutils literal notranslate"><span class="pre">tutoring</span></code> on <code class="docutils literal notranslate"><span class="pre">performance</span></code> and <code class="docutils literal notranslate"><span class="pre">interest</span></code> on <code class="docutils literal notranslate"><span class="pre">performance</span></code>. Indeed, if we measure the correlation between <code class="docutils literal notranslate"><span class="pre">tutoring</span></code> and <code class="docutils literal notranslate"><span class="pre">performance</span></code>, we obtain a large number, but we do not know if this is due to the common cause <code class="docutils literal notranslate"><span class="pre">interest</span></code>. Maybe, people choose tutoring because they are interested and obtain good performance because they are interested as well.</p>
+<p>If we want to be able to measure the <strong>direct effect between the treatment and the outcome</strong>, we need to <strong>close the backdoor path between <span class="math notranslate nohighlight">\(Y\)</span> and <span class="math notranslate nohighlight">\(T\)</span></strong>. This is done by <strong>conditioning on the common cause</strong>:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/0070078ec220dc5506f863188ec961b13c6dcdc42e856d817c9f6f3ce99aae53.svg" src="../_images/0070078ec220dc5506f863188ec961b13c6dcdc42e856d817c9f6f3ce99aae53.svg" /></div>
+</div>
+<p>Note that this corresponds to comparing subjects with the same level of interest. In this case, we will observe the direct effect of <code class="docutils literal notranslate"><span class="pre">tutoring</span></code> on <code class="docutils literal notranslate"><span class="pre">performance</span></code>, since all students in the considered ground have the same level of <code class="docutils literal notranslate"><span class="pre">interest</span></code> (so any association between <code class="docutils literal notranslate"><span class="pre">tutoring</span></code> and <code class="docutils literal notranslate"><span class="pre">performance</span></code> is given by the  causal effect). By conditioning on <span class="math notranslate nohighlight">\(X\)</span>, we obtain:</p>
+<div class="math notranslate nohighlight">
+\[Y(0) \perp Y(1) | T, X\]</div>
+</section>
+<section id="multiple-common-causes-and-unmeasurable-variables">
+<h3>Multiple Common Causes and Unmeasurable Variables<a class="headerlink" href="#multiple-common-causes-and-unmeasurable-variables" title="Permalink to this heading">#</a></h3>
+<p>Note that we can also have multiple common causes. Let us consider the following example:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/bbf74ef1946cafb8b824223e755ff88e0d0b07207116b1ebd889a3b48349da0b.svg" src="../_images/bbf74ef1946cafb8b824223e755ff88e0d0b07207116b1ebd889a3b48349da0b.svg" /></div>
+</div>
+<p>We added a new variable <code class="docutils literal notranslate"><span class="pre">parents</span></code>, because we assume that parents may motivate their kids to study more and obtain good performance and to choose tutoring programs to improve their grades. <strong>This is another confounder</strong>, which is going to affect the correlation between <code class="docutils literal notranslate"><span class="pre">tutoring</span></code> and <code class="docutils literal notranslate"><span class="pre">performance</span></code>. Ideally, we wound need to <strong>condition on both <code class="docutils literal notranslate"><span class="pre">parents</span></code> and <code class="docutils literal notranslate"><span class="pre">interest</span></code> to close all backdoor paths between <code class="docutils literal notranslate"><span class="pre">tutoring</span></code> and <code class="docutils literal notranslate"><span class="pre">performance</span></code></strong>. We denoted <code class="docutils literal notranslate"><span class="pre">parents</span></code> as <span class="math notranslate nohighlight">\(U\)</span>, because, as we defined it, this variable is <strong>unmeasurable</strong>. We are hypothesizing that parents will influence students, but we do not have a direct way to check this. Something we can do is to measure <strong>how many hours parents dedicate to their kids in a one-to-one study sessions</strong>. We can do so by introducing a new variable:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/bce0d7e9543456e47a1d09369e2b9be46af9e3b3e43bb279be58a7b2a060d830.svg" src="../_images/bce0d7e9543456e47a1d09369e2b9be46af9e3b3e43bb279be58a7b2a060d830.svg" /></div>
+</div>
+<p>While we cannot not directly condition on <code class="docutils literal notranslate"><span class="pre">parents</span></code> (<span class="math notranslate nohighlight">\(U\)</span>), we can now condition on the direct effect of <code class="docutils literal notranslate"><span class="pre">parents</span></code>, <code class="docutils literal notranslate"><span class="pre">one-to-one</span></code>, which is measurable (<span class="math notranslate nohighlight">\(X1\)</span>). We now have to condition on all common causes, <span class="math notranslate nohighlight">\(X1\)</span> and <span class="math notranslate nohighlight">\(X2\)</span>, to obtain:</p>
+<div class="math notranslate nohighlight">
+\[Y(0) \perp Y(1) | T, X1, X2\]</div>
+<section id="surrogate-confounders">
+<h4>Surrogate Confounders<a class="headerlink" href="#surrogate-confounders" title="Permalink to this heading">#</a></h4>
+<p>In some cases, unmeasurable variables do not have a measurable direct effect. Let us consider the following example:</p>
+<blockquote>
+<div><p>We are interested in studying if a given habit (e.g., smoking) can have a causal effect on the development of a given disease. We observe a strong correlation, i.e., subject how have the habit develop the disease more likely. However, someone argues that a gene may exists that causes both the habit and the disease. For instance, people may have the “smoking gene” which “makes them like smoking” and at the same time makes it more likely for them to get the disease.</p>
+</div></blockquote>
+<p>The assumption will lead us to the following causal graph:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/1e5cc1ec1f7635ec8621010c95d0394e33e710b8d2bed630f7f21d731bc58535.svg" src="../_images/1e5cc1ec1f7635ec8621010c95d0394e33e710b8d2bed630f7f21d731bc58535.svg" /></div>
+</div>
+<p>We have confounding bias and we should condition on <code class="docutils literal notranslate"><span class="pre">gene</span></code> to remove bias. However, we are not sure if the gene actually exists and we only have a theory that the presence of the gene causes some symptoms <code class="docutils literal notranslate"><span class="pre">symptom1</span></code> and <code class="docutils literal notranslate"><span class="pre">symptom2</span></code>. We may also expect that if a subject has the “smoking gene”, then also their relatives do so. We hence introduce a proxy variable <code class="docutils literal notranslate"><span class="pre">familiarity</span></code> which counts the number of relatives that we expect to have the gene (because we measured the symptoms or the likelihood of the disease). We obtain the following graph:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/3e90a8011890dd69729988871ac2125d137acdfb99104122fd21b67a881b67fa.svg" src="../_images/3e90a8011890dd69729988871ac2125d137acdfb99104122fd21b67a881b67fa.svg" /></div>
+</div>
+<p><strong>We should close all backdoor paths between <span class="math notranslate nohighlight">\(T\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> by conditioning on <span class="math notranslate nohighlight">\(U\)</span></strong>, but since we cannot condition on the unobserved variable <code class="docutils literal notranslate"><span class="pre">gene</span></code>, <strong>the best we can do is to condition on the surrogate confounders <span class="math notranslate nohighlight">\(X1\)</span>, <span class="math notranslate nohighlight">\(X2\)</span>, and <span class="math notranslate nohighlight">\(X3\)</span></strong>:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/4ad6877bb34ceacd100ebca11209ef1e14cfacf493722e6ac32c305297b07220.svg" src="../_images/4ad6877bb34ceacd100ebca11209ef1e14cfacf493722e6ac32c305297b07220.svg" /></div>
+</div>
+<p><strong>This will not close the backdoor path between <span class="math notranslate nohighlight">\(T\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>, as these variables are not in the backdoor path, but it will help reducing the bias</strong>.</p>
+</section>
 </section>
 <section id="selection-bias">
 <h3>Selection Bias<a class="headerlink" href="#selection-bias" title="Permalink to this heading">#</a></h3>
+<p>While confounding bias happens when we do not condition on a common cause, selection bias happens when <strong>we control for too many variables</strong>. While one may think that it is a good idea to control on any variable “just in case”, this is not true in general and can lead to <strong>selection bias</strong>.</p>
+<section id="controlling-for-a-common-effect">
+<h4>Controlling For a Common Effect<a class="headerlink" href="#controlling-for-a-common-effect" title="Permalink to this heading">#</a></h4>
+<p>Let us consider the following example in which we want to measure the causal effect of <code class="docutils literal notranslate"><span class="pre">intuitive</span> <span class="pre">intelligence</span></code> on <code class="docutils literal notranslate"><span class="pre">performance</span></code>:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/79477daa51d7df1c58db321a8ffb91229da76d06746ec4f874a97e1b414872d1.svg" src="../_images/79477daa51d7df1c58db321a8ffb91229da76d06746ec4f874a97e1b414872d1.svg" /></div>
+</div>
+<p>In our data, we also have a score of a test on problem solving. <strong>“Just to be sure”, we condition on <code class="docutils literal notranslate"><span class="pre">problem</span> <span class="pre">solving</span></code></strong>:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/5862bbfe62fb11b2e6e2806eee31b9bd40a16ef19e8771ec4a1308b67f89fa35.svg" src="../_images/5862bbfe62fb11b2e6e2806eee31b9bd40a16ef19e8771ec4a1308b67f89fa35.svg" /></div>
+</div>
+<p>The problem is that <code class="docutils literal notranslate"><span class="pre">problem</span> <span class="pre">solving</span></code> is a common effect of <code class="docutils literal notranslate"><span class="pre">performance</span></code> and <code class="docutils literal notranslate"><span class="pre">intuitive</span> <span class="pre">intelligence</span></code>. By conditioning on the common effect, we are introducing a form of bias. Indeed, <strong>if we look at people with good problem solving abilities, we are probably looking at people with either good performance or good intuitive intelligence</strong>. Indeed, knowing that the person has good performance <strong>explains away whether they have intuitive intelligence</strong>, hence showing a correlation which does not represent a causal effect. <strong>By conditioning on the common cause, we opened a backdoor path between <span class="math notranslate nohighlight">\(Y\)</span> and <span class="math notranslate nohighlight">\(T\)</span> which affects the perceived association between treatment and outcome</strong>.</p>
+<p>Note that the same is true if we condition on a descendant of the common cause. For instance:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/3fad489fe2ff96bbee72e0ec3c524aefc1e17a7f4bc5b1623522bd61747929c4.svg" src="../_images/3fad489fe2ff96bbee72e0ec3c524aefc1e17a7f4bc5b1623522bd61747929c4.svg" /></div>
+</div>
+</section>
+<section id="controlling-on-a-mediator">
+<h4>Controlling on a Mediator<a class="headerlink" href="#controlling-on-a-mediator" title="Permalink to this heading">#</a></h4>
+<p>Another case of selection bias, arising from cases in which we control for variables we should not control on, is given by the case in which we control on a mediator of the treatment and the outcome. Let us consider this example:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/e6e5fb55c810b850a99d107500d8b6b169f8b76335322fc2d2ad0f85d730c755.svg" src="../_images/e6e5fb55c810b850a99d107500d8b6b169f8b76335322fc2d2ad0f85d730c755.svg" /></div>
+</div>
+<p>We want to assess the effect of <code class="docutils literal notranslate"><span class="pre">interest</span></code> on performance. Let’s say we could randomize interest (for instance, we selected students with different levels of interest randomly across different schools). <strong>“Just to be sure”, we condition on <code class="docutils literal notranslate"><span class="pre">study</span> <span class="pre">hours</span></code></strong>. Conditioning on the mediator closes a path between <code class="docutils literal notranslate"><span class="pre">interest</span></code> and <code class="docutils literal notranslate"><span class="pre">performance</span></code>, hence reducing the measured effect between <code class="docutils literal notranslate"><span class="pre">interest</span></code> and <code class="docutils literal notranslate"><span class="pre">performance</span></code>.</p>
+<p><strong>Indeed, while we expect that interested students will study more and obtain better performance, by observing only people who study a lot, <code class="docutils literal notranslate"><span class="pre">interest</span></code> and <code class="docutils literal notranslate"><span class="pre">performance</span></code> may seem to be little correlated. Indeed, even people with little interest will obtain good performance if they study for long hours.</strong></p>
+</section>
+<section id="main-sources-of-bias">
+<h4>Main Sources of Bias<a class="headerlink" href="#main-sources-of-bias" title="Permalink to this heading">#</a></h4>
+<p>To summarize, the main sources of bias are three:</p>
+<ul class="simple">
+<li><p><strong>Confounders</strong>: we should control on the common cause;</p></li>
+<li><p><strong>Selection Bias - Common Effect</strong>: we should not control on the common effect;</p></li>
+<li><p><strong>Selection Bias - Mediator</strong>: we should not control on the mediator.</p></li>
+</ul>
+<p>These are shown in the graph below:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/118e6de3d46d0872e9c687d02c4a4860aa9adcdaa55009c55f7e86093451000d.svg" src="../_images/118e6de3d46d0872e9c687d02c4a4860aa9adcdaa55009c55f7e86093451000d.svg" /></div>
+</div>
+<p>In the figure above, we mark in red the nodes that are not conditioned on, but should be conditioned on, and the nodes that are conditioned on, but should not be conditioned on.</p>
+</section>
 </section>
 </section>
 <section id="linear-regression-for-causal-analysis">
 <h2>Linear Regression for Causal Analysis<a class="headerlink" href="#linear-regression-for-causal-analysis" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">graphviz</span> <span class="k">as</span> <span class="nn">gr</span>
+
+<span class="n">g</span> <span class="o">=</span> <span class="n">gr</span><span class="o">.</span><span class="n">Digraph</span><span class="p">()</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;interest&quot;</span><span class="p">,</span> <span class="s2">&quot;tutoring&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;interest&quot;</span><span class="p">,</span> <span class="s2">&quot;performance&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;tutoring&quot;</span><span class="p">,</span> <span class="s2">&quot;performance&quot;</span><span class="p">)</span>
+
+<span class="n">g</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/0dffd0d63cb95a58b30594ef012d7494878da59b8b188f667572f70441777e49.svg" src="../_images/0dffd0d63cb95a58b30594ef012d7494878da59b8b188f667572f70441777e49.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;performance ~ tutoring &quot;</span><span class="p">,</span> <span class="n">students3</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>       <td>performance</td>   <th>  R-squared:         </th> <td>   0.078</td>
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.073</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   16.70</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Tue, 28 Nov 2023</td> <th>  Prob (F-statistic):</th> <td>6.36e-05</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>14:30:11</td>     <th>  Log-Likelihood:    </th> <td> -776.53</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   200</td>      <th>  AIC:               </th> <td>   1557.</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   198</td>      <th>  BIC:               </th> <td>   1564.</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     1</td>      <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>   72.9291</td> <td>    1.199</td> <td>   60.832</td> <td> 0.000</td> <td>   70.565</td> <td>   75.293</td>
+</tr>
+<tr>
+  <th>tutoring</th>  <td>    6.8269</td> <td>    1.671</td> <td>    4.087</td> <td> 0.000</td> <td>    3.533</td> <td>   10.121</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td> 8.981</td> <th>  Durbin-Watson:     </th> <td>   1.958</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.011</td> <th>  Jarque-Bera (JB):  </th> <td>   4.184</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td>-0.019</td> <th>  Prob(JB):          </th> <td>   0.123</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 2.292</td> <th>  Cond. No.          </th> <td>    2.65</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">students3</span><span class="p">[</span><span class="n">students3</span><span class="p">[</span><span class="s1">&#39;tutoring&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;performance&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>72.92912990981884
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">students3</span><span class="p">[</span><span class="n">students3</span><span class="p">[</span><span class="s1">&#39;tutoring&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;performance&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">-</span><span class="n">students3</span><span class="p">[</span><span class="n">students3</span><span class="p">[</span><span class="s1">&#39;tutoring&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;performance&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.826889013112677
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;performance ~ tutoring +interest&quot;</span><span class="p">,</span> <span class="n">students3</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>       <td>performance</td>   <th>  R-squared:         </th> <td>   0.644</td>
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.641</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   178.4</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Tue, 28 Nov 2023</td> <th>  Prob (F-statistic):</th> <td>6.14e-45</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>14:32:24</td>     <th>  Log-Likelihood:    </th> <td> -681.27</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   200</td>      <th>  AIC:               </th> <td>   1369.</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   197</td>      <th>  BIC:               </th> <td>   1378.</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     2</td>      <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>   54.1697</td> <td>    1.296</td> <td>   41.804</td> <td> 0.000</td> <td>   51.614</td> <td>   56.725</td>
+</tr>
+<tr>
+  <th>tutoring</th>  <td>   -0.9516</td> <td>    1.129</td> <td>   -0.843</td> <td> 0.400</td> <td>   -3.178</td> <td>    1.275</td>
+</tr>
+<tr>
+  <th>interest</th>  <td>    7.8097</td> <td>    0.441</td> <td>   17.711</td> <td> 0.000</td> <td>    6.940</td> <td>    8.679</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td> 1.141</td> <th>  Durbin-Watson:     </th> <td>   1.916</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.565</td> <th>  Jarque-Bera (JB):  </th> <td>   1.142</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.075</td> <th>  Prob(JB):          </th> <td>   0.565</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 2.661</td> <th>  Cond. No.          </th> <td>    8.71</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">l</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">n</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">students3</span><span class="p">[</span><span class="s1">&#39;interest&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span>
+    <span class="n">sub</span> <span class="o">=</span> <span class="n">students3</span><span class="p">[</span><span class="n">students3</span><span class="p">[</span><span class="s1">&#39;interest&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sub</span><span class="p">[</span><span class="n">sub</span><span class="p">[</span><span class="s1">&#39;tutoring&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;performance&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">-</span><span class="n">sub</span><span class="p">[</span><span class="n">sub</span><span class="p">[</span><span class="s1">&#39;tutoring&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;performance&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+    <span class="n">n</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sub</span><span class="p">))</span>
+<span class="n">l</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+<span class="n">n</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="p">(</span><span class="n">l</span><span class="o">*</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">n</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.9316416043470785
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">students3</span><span class="p">[</span><span class="s1">&#39;interest&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([2., 5., 4., 3., 1.])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">gr</span><span class="o">.</span><span class="n">Digraph</span><span class="p">()</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Anxiety&quot;</span><span class="p">,</span> <span class="s2">&quot;Smoking&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Peer Pressure&quot;</span><span class="p">,</span> <span class="s2">&quot;Smoking&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Smoking&quot;</span><span class="p">,</span> <span class="s2">&quot;Yellow Fingers&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Smoking&quot;</span><span class="p">,</span> <span class="s2">&quot;Lung Cancer&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Genetics&quot;</span><span class="p">,</span> <span class="s2">&quot;Lung Cancer&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Genetics&quot;</span><span class="p">,</span> <span class="s2">&quot;Attention Disorder&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Allergy&quot;</span><span class="p">,</span> <span class="s2">&quot;Coughing&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Coughing&quot;</span><span class="p">,</span> <span class="s2">&quot;Fatigue&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Lung Cancer&quot;</span><span class="p">,</span> <span class="s2">&quot;Coughing&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Lung Cancer&quot;</span><span class="p">,</span> <span class="s2">&quot;Fatigue&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Attention Disorder&quot;</span><span class="p">,</span> <span class="s2">&quot;Car Accident&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Fatigue&quot;</span><span class="p">,</span> <span class="s2">&quot;Car Accident&quot;</span><span class="p">)</span>
+
+<span class="n">g</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/c6acbcbcf75dd2090a321ea89f6292afe2988db08120e552b4c4a48638307c50.svg" src="../_images/c6acbcbcf75dd2090a321ea89f6292afe2988db08120e552b4c4a48638307c50.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">gr</span><span class="o">.</span><span class="n">Digraph</span><span class="p">()</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Anxiety&quot;</span><span class="p">,</span> <span class="s2">&quot;Smoking&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Peer Pressure&quot;</span><span class="p">,</span> <span class="s2">&quot;Smoking&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Smoking&quot;</span><span class="p">,</span> <span class="s2">&quot;Yellow Fingers&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Smoking&quot;</span><span class="p">,</span> <span class="s2">&quot;Lung Cancer&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Genetics&quot;</span><span class="p">,</span> <span class="s2">&quot;Lung Cancer&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Genetics&quot;</span><span class="p">,</span> <span class="s2">&quot;Attention Disorder&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Allergy&quot;</span><span class="p">,</span> <span class="s2">&quot;Coughing&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Coughing&quot;</span><span class="p">,</span> <span class="s2">&quot;Fatigue&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Lung Cancer&quot;</span><span class="p">,</span> <span class="s2">&quot;Coughing&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Lung Cancer&quot;</span><span class="p">,</span> <span class="s2">&quot;Fatigue&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Attention Disorder&quot;</span><span class="p">,</span> <span class="s2">&quot;Car Accident&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Fatigue&quot;</span><span class="p">,</span> <span class="s2">&quot;Car Accident&quot;</span><span class="p">)</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s2">&quot;Smoking&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;Blue&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s2">&quot;Car Accident&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;Blue&#39;</span><span class="p">)</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Smoking&quot;</span><span class="p">,</span> <span class="s2">&quot;Lung Cancer&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">arrowhead</span><span class="o">=</span><span class="s1">&#39;tee&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Lung Cancer&quot;</span><span class="p">,</span> <span class="s2">&quot;Genetics&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">arrowtail</span><span class="o">=</span><span class="s1">&#39;tee&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Genetics&quot;</span><span class="p">,</span> <span class="s2">&quot;Attention Disorder&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Attention Disorder&quot;</span><span class="p">,</span> <span class="s2">&quot;Car Accident&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Smoking&quot;</span><span class="p">,</span> <span class="s2">&quot;Lung Cancer&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Lung Cancer&quot;</span><span class="p">,</span> <span class="s2">&quot;Fatigue&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Fatigue&quot;</span><span class="p">,</span> <span class="s2">&quot;Car Accident&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+
+
+
+
+
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Smoking&quot;</span><span class="p">,</span> <span class="s2">&quot;Lung Cancer&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Lung Cancer&quot;</span><span class="p">,</span> <span class="s2">&quot;Coughing&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Coughing&quot;</span><span class="p">,</span> <span class="s2">&quot;Fatigue&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Fatigue&quot;</span><span class="p">,</span> <span class="s2">&quot;Car Accident&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+
+
+
+<span class="n">g</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/acf8ba3afa4a7da9e25af4c41738d34927fa6e91202cac39acd671edb617720b.svg" src="../_images/acf8ba3afa4a7da9e25af4c41738d34927fa6e91202cac39acd671edb617720b.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">gr</span><span class="o">.</span><span class="n">Digraph</span><span class="p">()</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Anxiety&quot;</span><span class="p">,</span> <span class="s2">&quot;Smoking&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Peer Pressure&quot;</span><span class="p">,</span> <span class="s2">&quot;Smoking&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Smoking&quot;</span><span class="p">,</span> <span class="s2">&quot;Yellow Fingers&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Smoking&quot;</span><span class="p">,</span> <span class="s2">&quot;Lung Cancer&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Genetics&quot;</span><span class="p">,</span> <span class="s2">&quot;Lung Cancer&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Genetics&quot;</span><span class="p">,</span> <span class="s2">&quot;Attention Disorder&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Allergy&quot;</span><span class="p">,</span> <span class="s2">&quot;Coughing&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Coughing&quot;</span><span class="p">,</span> <span class="s2">&quot;Fatigue&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Lung Cancer&quot;</span><span class="p">,</span> <span class="s2">&quot;Coughing&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Lung Cancer&quot;</span><span class="p">,</span> <span class="s2">&quot;Fatigue&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Attention Disorder&quot;</span><span class="p">,</span> <span class="s2">&quot;Car Accident&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Fatigue&quot;</span><span class="p">,</span> <span class="s2">&quot;Car Accident&quot;</span><span class="p">)</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s2">&quot;Smoking&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;Blue&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s2">&quot;Car Accident&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;Blue&#39;</span><span class="p">)</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Smoking&quot;</span><span class="p">,</span> <span class="s2">&quot;Lung Cancer&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">arrowhead</span><span class="o">=</span><span class="s1">&#39;tee&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Lung Cancer&quot;</span><span class="p">,</span> <span class="s2">&quot;Genetics&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">arrowtail</span><span class="o">=</span><span class="s1">&#39;tee&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Genetics&quot;</span><span class="p">,</span> <span class="s2">&quot;Attention Disorder&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Attention Disorder&quot;</span><span class="p">,</span> <span class="s2">&quot;Car Accident&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Smoking&quot;</span><span class="p">,</span> <span class="s2">&quot;Lung Cancer&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Lung Cancer&quot;</span><span class="p">,</span> <span class="s2">&quot;Fatigue&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Fatigue&quot;</span><span class="p">,</span> <span class="s2">&quot;Car Accident&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Smoking&quot;</span><span class="p">,</span> <span class="s2">&quot;Lung Cancer&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Lung Cancer&quot;</span><span class="p">,</span> <span class="s2">&quot;Coughing&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">arrowhead</span><span class="o">=</span><span class="s1">&#39;tee&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Coughing&quot;</span><span class="p">,</span> <span class="s2">&quot;Fatigue&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">arrowtail</span><span class="o">=</span><span class="s1">&#39;tee&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Fatigue&quot;</span><span class="p">,</span> <span class="s2">&quot;Car Accident&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s2">&quot;Coughing&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;filled&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+
+<span class="n">g</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/df605c5184f1b73efe3b36a635fb560fefc5ca6fa88fb0d6162e6e9420da80f2.svg" src="../_images/df605c5184f1b73efe3b36a635fb560fefc5ca6fa88fb0d6162e6e9420da80f2.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">gr</span><span class="o">.</span><span class="n">Digraph</span><span class="p">()</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Anxiety&quot;</span><span class="p">,</span> <span class="s2">&quot;Smoking&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Peer Pressure&quot;</span><span class="p">,</span> <span class="s2">&quot;Smoking&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Smoking&quot;</span><span class="p">,</span> <span class="s2">&quot;Yellow Fingers&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Smoking&quot;</span><span class="p">,</span> <span class="s2">&quot;Lung Cancer&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Genetics&quot;</span><span class="p">,</span> <span class="s2">&quot;Lung Cancer&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Genetics&quot;</span><span class="p">,</span> <span class="s2">&quot;Attention Disorder&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Allergy&quot;</span><span class="p">,</span> <span class="s2">&quot;Coughing&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Coughing&quot;</span><span class="p">,</span> <span class="s2">&quot;Fatigue&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Lung Cancer&quot;</span><span class="p">,</span> <span class="s2">&quot;Coughing&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Lung Cancer&quot;</span><span class="p">,</span> <span class="s2">&quot;Fatigue&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Attention Disorder&quot;</span><span class="p">,</span> <span class="s2">&quot;Car Accident&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Fatigue&quot;</span><span class="p">,</span> <span class="s2">&quot;Car Accident&quot;</span><span class="p">)</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s2">&quot;Lung Cancer&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s2">&quot;Car Accident&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Lung Cancer&quot;</span><span class="p">,</span> <span class="s2">&quot;Genetics&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Genetics&quot;</span><span class="p">,</span> <span class="s2">&quot;Attention Disorder&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Attention Disorder&quot;</span><span class="p">,</span> <span class="s2">&quot;Car Accident&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Lung Cancer&quot;</span><span class="p">,</span> <span class="s2">&quot;Coughing&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Coughing&quot;</span><span class="p">,</span> <span class="s2">&quot;Fatigue&quot;</span> <span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Fatigue&quot;</span> <span class="p">,</span> <span class="s2">&quot;Car Accident&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Lung Cancer&quot;</span> <span class="p">,</span> <span class="s2">&quot;Fatigue&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Fatigue&quot;</span> <span class="p">,</span> <span class="s2">&quot;Car Accident&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+
+<span class="n">g</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/d2b7f0cf588f9a056c97336014f95508f57ca477be74758c3b24cd185fda231b.svg" src="../_images/d2b7f0cf588f9a056c97336014f95508f57ca477be74758c3b24cd185fda231b.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">gr</span><span class="o">.</span><span class="n">Digraph</span><span class="p">()</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Anxiety&quot;</span><span class="p">,</span> <span class="s2">&quot;Smoking&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Peer Pressure&quot;</span><span class="p">,</span> <span class="s2">&quot;Smoking&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Smoking&quot;</span><span class="p">,</span> <span class="s2">&quot;Yellow Fingers&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Smoking&quot;</span><span class="p">,</span> <span class="s2">&quot;Lung Cancer&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Genetics&quot;</span><span class="p">,</span> <span class="s2">&quot;Lung Cancer&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Genetics&quot;</span><span class="p">,</span> <span class="s2">&quot;Attention Disorder&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Allergy&quot;</span><span class="p">,</span> <span class="s2">&quot;Coughing&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Coughing&quot;</span><span class="p">,</span> <span class="s2">&quot;Fatigue&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Lung Cancer&quot;</span><span class="p">,</span> <span class="s2">&quot;Coughing&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Lung Cancer&quot;</span><span class="p">,</span> <span class="s2">&quot;Fatigue&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Attention Disorder&quot;</span><span class="p">,</span> <span class="s2">&quot;Car Accident&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Fatigue&quot;</span><span class="p">,</span> <span class="s2">&quot;Car Accident&quot;</span><span class="p">)</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s2">&quot;Lung Cancer&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s2">&quot;Car Accident&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Lung Cancer&quot;</span><span class="p">,</span> <span class="s2">&quot;Genetics&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">arrowhead</span><span class="o">=</span><span class="s1">&#39;tee&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Genetics&quot;</span><span class="p">,</span> <span class="s2">&quot;Attention Disorder&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">arrowtail</span><span class="o">=</span><span class="s1">&#39;tee&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Attention Disorder&quot;</span><span class="p">,</span> <span class="s2">&quot;Car Accident&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Lung Cancer&quot;</span><span class="p">,</span> <span class="s2">&quot;Coughing&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">arrowhead</span><span class="o">=</span><span class="s1">&#39;tee&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Coughing&quot;</span><span class="p">,</span> <span class="s2">&quot;Fatigue&quot;</span> <span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">arrowtail</span><span class="o">=</span><span class="s1">&#39;tee&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Fatigue&quot;</span> <span class="p">,</span> <span class="s2">&quot;Car Accident&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Lung Cancer&quot;</span> <span class="p">,</span> <span class="s2">&quot;Fatigue&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;Fatigue&quot;</span> <span class="p">,</span> <span class="s2">&quot;Car Accident&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s2">&quot;Coughing&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;filled&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s2">&quot;Genetics&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;filled&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+
+<span class="n">g</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/3b449866753551e1e6f5fb991ad5715745bdcd52c88d729bcdda79d85a9638fc.svg" src="../_images/3b449866753551e1e6f5fb991ad5715745bdcd52c88d729bcdda79d85a9638fc.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logit</span><span class="p">(</span><span class="s1">&#39;Car_Accident ~ Lung_cancer + Coughing + Genetics&#39;</span><span class="p">,</span> <span class="n">lucas</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
+         Current function value: 0.559864
+         Iterations 6
+</pre></div>
+</div>
+<div class="output text_html"><table class="simpletable">
+<caption>Logit Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>     <td>Car_Accident</td>   <th>  No. Observations:  </th>  <td>  2000</td>  
+</tr>
+<tr>
+  <th>Model:</th>                 <td>Logit</td>      <th>  Df Residuals:      </th>  <td>  1996</td>  
+</tr>
+<tr>
+  <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>     3</td>  
+</tr>
+<tr>
+  <th>Date:</th>            <td>Tue, 28 Nov 2023</td> <th>  Pseudo R-squ.:     </th>  <td>0.05123</td> 
+</tr>
+<tr>
+  <th>Time:</th>                <td>11:17:49</td>     <th>  Log-Likelihood:    </th> <td> -1119.7</td> 
+</tr>
+<tr>
+  <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -1180.2</td> 
+</tr>
+<tr>
+  <th>Covariance Type:</th>     <td>nonrobust</td>    <th>  LLR p-value:       </th> <td>4.859e-26</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+       <td></td>          <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>   <td>    0.1794</td> <td>    0.094</td> <td>    1.903</td> <td> 0.057</td> <td>   -0.005</td> <td>    0.364</td>
+</tr>
+<tr>
+  <th>Lung_cancer</th> <td>    0.2743</td> <td>    0.128</td> <td>    2.145</td> <td> 0.032</td> <td>    0.024</td> <td>    0.525</td>
+</tr>
+<tr>
+  <th>Coughing</th>    <td>    0.7385</td> <td>    0.124</td> <td>    5.974</td> <td> 0.000</td> <td>    0.496</td> <td>    0.981</td>
+</tr>
+<tr>
+  <th>Genetics</th>    <td>    0.9947</td> <td>    0.200</td> <td>    4.980</td> <td> 0.000</td> <td>    0.603</td> <td>    1.386</td>
+</tr>
+</table></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logit</span><span class="p">(</span><span class="s1">&#39;Car_Accident ~ Lung_cancer + Genetics + Coughing&#39;</span><span class="p">,</span> <span class="n">lucas</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
+         Current function value: 0.559864
+         Iterations 6
+</pre></div>
+</div>
+<div class="output text_html"><table class="simpletable">
+<caption>Logit Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>     <td>Car_Accident</td>   <th>  No. Observations:  </th>  <td>  2000</td>  
+</tr>
+<tr>
+  <th>Model:</th>                 <td>Logit</td>      <th>  Df Residuals:      </th>  <td>  1996</td>  
+</tr>
+<tr>
+  <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>     3</td>  
+</tr>
+<tr>
+  <th>Date:</th>            <td>Tue, 28 Nov 2023</td> <th>  Pseudo R-squ.:     </th>  <td>0.05123</td> 
+</tr>
+<tr>
+  <th>Time:</th>                <td>11:09:03</td>     <th>  Log-Likelihood:    </th> <td> -1119.7</td> 
+</tr>
+<tr>
+  <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -1180.2</td> 
+</tr>
+<tr>
+  <th>Covariance Type:</th>     <td>nonrobust</td>    <th>  LLR p-value:       </th> <td>4.859e-26</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+       <td></td>          <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>   <td>    0.1794</td> <td>    0.094</td> <td>    1.903</td> <td> 0.057</td> <td>   -0.005</td> <td>    0.364</td>
+</tr>
+<tr>
+  <th>Lung_cancer</th> <td>    0.2743</td> <td>    0.128</td> <td>    2.145</td> <td> 0.032</td> <td>    0.024</td> <td>    0.525</td>
+</tr>
+<tr>
+  <th>Genetics</th>    <td>    0.9947</td> <td>    0.200</td> <td>    4.980</td> <td> 0.000</td> <td>    0.603</td> <td>    1.386</td>
+</tr>
+<tr>
+  <th>Coughing</th>    <td>    0.7385</td> <td>    0.124</td> <td>    5.974</td> <td> 0.000</td> <td>    0.496</td> <td>    0.981</td>
+</tr>
+</table></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lucas</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Smoking</th>
+      <th>Yellow_Fingers</th>
+      <th>Anxiety</th>
+      <th>Peer_Pressure</th>
+      <th>Genetics</th>
+      <th>Attention_Disorder</th>
+      <th>Born_an_Even_Day</th>
+      <th>Car_Accident</th>
+      <th>Fatigue</th>
+      <th>Allergy</th>
+      <th>Coughing</th>
+      <th>Lung_cancer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Smoking</th>
+      <td>1.000000</td>
+      <td>0.774726</td>
+      <td>0.401097</td>
+      <td>0.149138</td>
+      <td>0.010208</td>
+      <td>0.004059</td>
+      <td>-0.022476</td>
+      <td>0.051481</td>
+      <td>0.162671</td>
+      <td>0.036085</td>
+      <td>0.262424</td>
+      <td>0.491448</td>
+    </tr>
+    <tr>
+      <th>Yellow_Fingers</th>
+      <td>0.774726</td>
+      <td>1.000000</td>
+      <td>0.308343</td>
+      <td>0.114645</td>
+      <td>-0.004117</td>
+      <td>0.006762</td>
+      <td>-0.006245</td>
+      <td>0.049325</td>
+      <td>0.124690</td>
+      <td>0.047316</td>
+      <td>0.207325</td>
+      <td>0.377061</td>
+    </tr>
+    <tr>
+      <th>Anxiety</th>
+      <td>0.401097</td>
+      <td>0.308343</td>
+      <td>1.000000</td>
+      <td>0.002989</td>
+      <td>0.006250</td>
+      <td>-0.014787</td>
+      <td>-0.037839</td>
+      <td>0.030780</td>
+      <td>0.050924</td>
+      <td>0.018498</td>
+      <td>0.137211</td>
+      <td>0.189933</td>
+    </tr>
+    <tr>
+      <th>Peer_Pressure</th>
+      <td>0.149138</td>
+      <td>0.114645</td>
+      <td>0.002989</td>
+      <td>1.000000</td>
+      <td>0.020455</td>
+      <td>0.015186</td>
+      <td>-0.007021</td>
+      <td>0.024011</td>
+      <td>0.027850</td>
+      <td>-0.005040</td>
+      <td>0.049626</td>
+      <td>0.056959</td>
+    </tr>
+    <tr>
+      <th>Genetics</th>
+      <td>0.010208</td>
+      <td>-0.004117</td>
+      <td>0.006250</td>
+      <td>0.020455</td>
+      <td>1.000000</td>
+      <td>0.268670</td>
+      <td>-0.021855</td>
+      <td>0.146027</td>
+      <td>0.099573</td>
+      <td>-0.008199</td>
+      <td>0.137245</td>
+      <td>0.227617</td>
+    </tr>
+    <tr>
+      <th>Attention_Disorder</th>
+      <td>0.004059</td>
+      <td>0.006762</td>
+      <td>-0.014787</td>
+      <td>0.015186</td>
+      <td>0.268670</td>
+      <td>1.000000</td>
+      <td>-0.020815</td>
+      <td>0.302760</td>
+      <td>0.033128</td>
+      <td>0.019750</td>
+      <td>0.054127</td>
+      <td>0.068325</td>
+    </tr>
+    <tr>
+      <th>Born_an_Even_Day</th>
+      <td>-0.022476</td>
+      <td>-0.006245</td>
+      <td>-0.037839</td>
+      <td>-0.007021</td>
+      <td>-0.021855</td>
+      <td>-0.020815</td>
+      <td>1.000000</td>
+      <td>-0.030882</td>
+      <td>-0.028451</td>
+      <td>-0.033284</td>
+      <td>-0.027928</td>
+      <td>-0.011934</td>
+    </tr>
+    <tr>
+      <th>Car_Accident</th>
+      <td>0.051481</td>
+      <td>0.049325</td>
+      <td>0.030780</td>
+      <td>0.024011</td>
+      <td>0.146027</td>
+      <td>0.302760</td>
+      <td>-0.030882</td>
+      <td>1.000000</td>
+      <td>0.462627</td>
+      <td>0.037709</td>
+      <td>0.205086</td>
+      <td>0.168768</td>
+    </tr>
+    <tr>
+      <th>Fatigue</th>
+      <td>0.162671</td>
+      <td>0.124690</td>
+      <td>0.050924</td>
+      <td>0.027850</td>
+      <td>0.099573</td>
+      <td>0.033128</td>
+      <td>-0.028451</td>
+      <td>0.462627</td>
+      <td>1.000000</td>
+      <td>0.094303</td>
+      <td>0.459847</td>
+      <td>0.368653</td>
+    </tr>
+    <tr>
+      <th>Allergy</th>
+      <td>0.036085</td>
+      <td>0.047316</td>
+      <td>0.018498</td>
+      <td>-0.005040</td>
+      <td>-0.008199</td>
+      <td>0.019750</td>
+      <td>-0.033284</td>
+      <td>0.037709</td>
+      <td>0.094303</td>
+      <td>1.000000</td>
+      <td>0.306887</td>
+      <td>-0.025727</td>
+    </tr>
+    <tr>
+      <th>Coughing</th>
+      <td>0.262424</td>
+      <td>0.207325</td>
+      <td>0.137211</td>
+      <td>0.049626</td>
+      <td>0.137245</td>
+      <td>0.054127</td>
+      <td>-0.027928</td>
+      <td>0.205086</td>
+      <td>0.459847</td>
+      <td>0.306887</td>
+      <td>1.000000</td>
+      <td>0.516700</td>
+    </tr>
+    <tr>
+      <th>Lung_cancer</th>
+      <td>0.491448</td>
+      <td>0.377061</td>
+      <td>0.189933</td>
+      <td>0.056959</td>
+      <td>0.227617</td>
+      <td>0.068325</td>
+      <td>-0.011934</td>
+      <td>0.168768</td>
+      <td>0.368653</td>
+      <td>-0.025727</td>
+      <td>0.516700</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.formula.api</span> <span class="kn">import</span> <span class="n">ols</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;performance ~ tutoring&quot;</span><span class="p">,</span> <span class="n">students3</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>       <td>performance</td>   <th>  R-squared:         </th> <td>   0.078</td>
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.073</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   16.70</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Tue, 28 Nov 2023</td> <th>  Prob (F-statistic):</th> <td>6.36e-05</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>07:50:44</td>     <th>  Log-Likelihood:    </th> <td> -776.53</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   200</td>      <th>  AIC:               </th> <td>   1557.</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   198</td>      <th>  BIC:               </th> <td>   1564.</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     1</td>      <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>   72.9291</td> <td>    1.199</td> <td>   60.832</td> <td> 0.000</td> <td>   70.565</td> <td>   75.293</td>
+</tr>
+<tr>
+  <th>tutoring</th>  <td>    6.8269</td> <td>    1.671</td> <td>    4.087</td> <td> 0.000</td> <td>    3.533</td> <td>   10.121</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td> 8.981</td> <th>  Durbin-Watson:     </th> <td>   1.958</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.011</td> <th>  Jarque-Bera (JB):  </th> <td>   4.184</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td>-0.019</td> <th>  Prob(JB):          </th> <td>   0.123</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 2.292</td> <th>  Cond. No.          </th> <td>    2.65</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;performance ~ tutoring + interest&quot;</span><span class="p">,</span> <span class="n">students3</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>       <td>performance</td>   <th>  R-squared:         </th> <td>   0.644</td>
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.641</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   178.4</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Tue, 28 Nov 2023</td> <th>  Prob (F-statistic):</th> <td>6.14e-45</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>07:55:05</td>     <th>  Log-Likelihood:    </th> <td> -681.27</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   200</td>      <th>  AIC:               </th> <td>   1369.</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   197</td>      <th>  BIC:               </th> <td>   1378.</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     2</td>      <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>   54.1697</td> <td>    1.296</td> <td>   41.804</td> <td> 0.000</td> <td>   51.614</td> <td>   56.725</td>
+</tr>
+<tr>
+  <th>tutoring</th>  <td>   -0.9516</td> <td>    1.129</td> <td>   -0.843</td> <td> 0.400</td> <td>   -3.178</td> <td>    1.275</td>
+</tr>
+<tr>
+  <th>interest</th>  <td>    7.8097</td> <td>    0.441</td> <td>   17.711</td> <td> 0.000</td> <td>    6.940</td> <td>    8.679</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td> 1.141</td> <th>  Durbin-Watson:     </th> <td>   1.916</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.565</td> <th>  Jarque-Bera (JB):  </th> <td>   1.142</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.075</td> <th>  Prob(JB):          </th> <td>   0.565</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 2.661</td> <th>  Cond. No.          </th> <td>    8.71</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;performance ~ more_than_8&quot;</span><span class="p">,</span> <span class="n">students_all2</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>       <td>performance</td>   <th>  R-squared:         </th> <td>   0.118</td>
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.100</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   6.416</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Tue, 28 Nov 2023</td> <th>  Prob (F-statistic):</th>  <td>0.0146</td> 
+</tr>
+<tr>
+  <th>Time:</th>                 <td>07:55:29</td>     <th>  Log-Likelihood:    </th> <td> -196.96</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>    50</td>      <th>  AIC:               </th> <td>   397.9</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>    48</td>      <th>  BIC:               </th> <td>   401.7</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     1</td>      <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+           <td></td>              <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>           <td>   73.2258</td> <td>    2.590</td> <td>   28.274</td> <td> 0.000</td> <td>   68.019</td> <td>   78.433</td>
+</tr>
+<tr>
+  <th>more_than_8[T.True]</th> <td>   -9.0972</td> <td>    3.591</td> <td>   -2.533</td> <td> 0.015</td> <td>  -16.318</td> <td>   -1.876</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td> 2.934</td> <th>  Durbin-Watson:     </th> <td>   2.231</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.231</td> <th>  Jarque-Bera (JB):  </th> <td>   2.029</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.462</td> <th>  Prob(JB):          </th> <td>   0.363</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 3.346</td> <th>  Cond. No.          </th> <td>    2.67</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;performance ~ more_than_8 + sleep_hours&quot;</span><span class="p">,</span> <span class="n">students_all2</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>       <td>performance</td>   <th>  R-squared:         </th> <td>   0.327</td>
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.298</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   11.41</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Tue, 28 Nov 2023</td> <th>  Prob (F-statistic):</th> <td>9.14e-05</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>07:55:46</td>     <th>  Log-Likelihood:    </th> <td> -190.20</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>    50</td>      <th>  AIC:               </th> <td>   386.4</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>    47</td>      <th>  BIC:               </th> <td>   392.1</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     2</td>      <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+           <td></td>              <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>           <td>   98.0302</td> <td>    6.885</td> <td>   14.238</td> <td> 0.000</td> <td>   84.179</td> <td>  111.882</td>
+</tr>
+<tr>
+  <th>more_than_8[T.True]</th> <td>    7.2019</td> <td>    5.317</td> <td>    1.355</td> <td> 0.182</td> <td>   -3.494</td> <td>   17.897</td>
+</tr>
+<tr>
+  <th>sleep_hours</th>         <td>   -3.9824</td> <td>    1.043</td> <td>   -3.819</td> <td> 0.000</td> <td>   -6.080</td> <td>   -1.885</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td> 2.716</td> <th>  Durbin-Watson:     </th> <td>   2.181</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.257</td> <th>  Jarque-Bera (JB):  </th> <td>   1.933</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.467</td> <th>  Prob(JB):          </th> <td>   0.380</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 3.233</td> <th>  Cond. No.          </th> <td>    44.3</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">students_all2</span> <span class="o">=</span> <span class="n">students_all</span><span class="o">.</span><span class="n">rename</span><span class="p">({</span>
+    <span class="s1">&#39;Average Study Time&#39;</span><span class="p">:</span> <span class="s1">&#39;study_hours&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Average Sleep Duration&#39;</span><span class="p">:</span> <span class="s1">&#39;sleep_hours&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Average Exam Performance&#39;</span><span class="p">:</span> <span class="s1">&#39;performance&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Sleep 8 Hours or More&#39;</span><span class="p">:</span> <span class="s1">&#39;more_than_8&#39;</span><span class="p">,</span>
+<span class="p">},</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">students_all2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>study_hours</th>
+      <th>sleep_hours</th>
+      <th>performance</th>
+      <th>8_or_more</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>6.993428</td>
+      <td>5.137909</td>
+      <td>77.472070</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>5.723471</td>
+      <td>8.296685</td>
+      <td>72.081839</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>7.295377</td>
+      <td>7.349589</td>
+      <td>69.676638</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>9.046060</td>
+      <td>3.045011</td>
+      <td>87.552836</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.531693</td>
+      <td>7.166386</td>
+      <td>70.589191</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>5.531726</td>
+      <td>7.842007</td>
+      <td>60.515116</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>9.158426</td>
+      <td>8.264943</td>
+      <td>100.000000</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>7.534869</td>
+      <td>7.105683</td>
+      <td>82.412677</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>5.061051</td>
+      <td>8.861191</td>
+      <td>53.392221</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>7.085120</td>
+      <td>5.458063</td>
+      <td>81.991137</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>5.073165</td>
+      <td>7.494250</td>
+      <td>55.619006</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>5.068540</td>
+      <td>9.093150</td>
+      <td>73.213549</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>6.483925</td>
+      <td>9.010984</td>
+      <td>84.005579</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2.173440</td>
+      <td>14.809779</td>
+      <td>42.660374</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>2.550164</td>
+      <td>10.843060</td>
+      <td>62.384583</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>4.875425</td>
+      <td>8.103673</td>
+      <td>68.504934</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>3.974338</td>
+      <td>10.048189</td>
+      <td>68.092290</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>6.628495</td>
+      <td>4.872445</td>
+      <td>92.110403</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>4.183952</td>
+      <td>10.656257</td>
+      <td>58.465878</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>3.175393</td>
+      <td>11.986242</td>
+      <td>48.339601</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>8.931298</td>
+      <td>5.214188</td>
+      <td>75.761343</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>5.548447</td>
+      <td>5.835422</td>
+      <td>59.584134</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>6.135056</td>
+      <td>9.311697</td>
+      <td>69.904265</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>3.150504</td>
+      <td>8.461762</td>
+      <td>59.164038</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>4.911235</td>
+      <td>12.248859</td>
+      <td>67.323081</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>6.221845</td>
+      <td>8.945860</td>
+      <td>79.381058</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>3.698013</td>
+      <td>9.247071</td>
+      <td>58.620083</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>6.751396</td>
+      <td>7.086050</td>
+      <td>88.292321</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>4.798723</td>
+      <td>9.212862</td>
+      <td>61.347045</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>5.416613</td>
+      <td>10.233090</td>
+      <td>94.284754</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>4.796587</td>
+      <td>7.863485</td>
+      <td>70.239607</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>9.704556</td>
+      <td>3.670883</td>
+      <td>79.951206</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>5.973006</td>
+      <td>5.199197</td>
+      <td>59.156103</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>3.884578</td>
+      <td>10.991667</td>
+      <td>64.247615</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>7.645090</td>
+      <td>6.671687</td>
+      <td>75.990821</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>3.558313</td>
+      <td>12.348703</td>
+      <td>64.931568</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>6.417727</td>
+      <td>5.624059</td>
+      <td>76.821012</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>2.080660</td>
+      <td>11.460475</td>
+      <td>49.675010</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>3.343628</td>
+      <td>11.824154</td>
+      <td>48.250202</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>6.393722</td>
+      <td>5.719075</td>
+      <td>56.820140</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>7.476933</td>
+      <td>6.605358</td>
+      <td>72.919516</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>6.342737</td>
+      <td>7.735634</td>
+      <td>80.277671</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>5.768703</td>
+      <td>7.433801</td>
+      <td>70.984455</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>5.397793</td>
+      <td>9.140572</td>
+      <td>54.531575</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>3.042956</td>
+      <td>11.455560</td>
+      <td>56.946589</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>4.560312</td>
+      <td>11.556328</td>
+      <td>66.654732</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>5.078722</td>
+      <td>7.383544</td>
+      <td>56.555038</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>8.114244</td>
+      <td>4.141646</td>
+      <td>82.108473</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>6.687237</td>
+      <td>7.827866</td>
+      <td>74.018270</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>2.473920</td>
+      <td>11.939135</td>
+      <td>40.939895</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lucas</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;http://www.causality.inf.ethz.ch/data/lucas0_train.csv&#39;</span><span class="p">)</span>
+<span class="n">lucas</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Smoking</th>
+      <th>Yellow_Fingers</th>
+      <th>Anxiety</th>
+      <th>Peer_Pressure</th>
+      <th>Genetics</th>
+      <th>Attention_Disorder</th>
+      <th>Born_an_Even_Day</th>
+      <th>Car_Accident</th>
+      <th>Fatigue</th>
+      <th>Allergy</th>
+      <th>Coughing</th>
+      <th>Lung_cancer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1995</th>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1996</th>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1997</th>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1998</th>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1999</th>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<p>2000 rows × 12 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ols</span><span class="p">(</span><span class="s1">&#39;Car_Accident ~ Smoking + Coughing+ Genetics&#39;</span><span class="p">,</span> <span class="n">lucas</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>      <td>Car_Accident</td>   <th>  R-squared:         </th> <td>   0.056</td>
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.055</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   39.64</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Tue, 28 Nov 2023</td> <th>  Prob (F-statistic):</th> <td>7.08e-25</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>08:16:24</td>     <th>  Log-Likelihood:    </th> <td> -1171.9</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>  2000</td>      <th>  AIC:               </th> <td>   2352.</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>  1996</td>      <th>  BIC:               </th> <td>   2374.</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     3</td>      <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>    0.5718</td> <td>    0.022</td> <td>   25.456</td> <td> 0.000</td> <td>    0.528</td> <td>    0.616</td>
+</tr>
+<tr>
+  <th>Smoking</th>   <td>    0.0008</td> <td>    0.023</td> <td>    0.036</td> <td> 0.971</td> <td>   -0.045</td> <td>    0.047</td>
+</tr>
+<tr>
+  <th>Coughing</th>  <td>    0.1841</td> <td>    0.022</td> <td>    8.278</td> <td> 0.000</td> <td>    0.140</td> <td>    0.228</td>
+</tr>
+<tr>
+  <th>Genetics</th>  <td>    0.1552</td> <td>    0.028</td> <td>    5.472</td> <td> 0.000</td> <td>    0.100</td> <td>    0.211</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>473.080</td> <th>  Durbin-Watson:     </th> <td>   1.993</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td>  <th>  Jarque-Bera (JB):  </th> <td> 342.159</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td>-0.908</td>  <th>  Prob(JB):          </th> <td>5.02e-75</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 2.100</td>  <th>  Cond. No.          </th> <td>    4.55</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.formula.api</span> <span class="kn">import</span> <span class="n">logit</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logit</span><span class="p">(</span><span class="s1">&#39;Car_Accident ~ Anxiety + Attention_Disorder&#39;</span><span class="p">,</span> <span class="n">lucas</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
+         Current function value: 0.536323
+         Iterations 6
+</pre></div>
+</div>
+<div class="output text_html"><table class="simpletable">
+<caption>Logit Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>     <td>Car_Accident</td>   <th>  No. Observations:  </th>  <td>  2000</td>  
+</tr>
+<tr>
+  <th>Model:</th>                 <td>Logit</td>      <th>  Df Residuals:      </th>  <td>  1997</td>  
+</tr>
+<tr>
+  <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>     2</td>  
+</tr>
+<tr>
+  <th>Date:</th>            <td>Tue, 28 Nov 2023</td> <th>  Pseudo R-squ.:     </th>  <td>0.09113</td> 
+</tr>
+<tr>
+  <th>Time:</th>                <td>08:07:42</td>     <th>  Log-Likelihood:    </th> <td> -1072.6</td> 
+</tr>
+<tr>
+  <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -1180.2</td> 
+</tr>
+<tr>
+  <th>Covariance Type:</th>     <td>nonrobust</td>    <th>  LLR p-value:       </th> <td>1.957e-47</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+           <td></td>             <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>          <td>    0.4173</td> <td>    0.088</td> <td>    4.744</td> <td> 0.000</td> <td>    0.245</td> <td>    0.590</td>
+</tr>
+<tr>
+  <th>Anxiety</th>            <td>    0.1791</td> <td>    0.108</td> <td>    1.656</td> <td> 0.098</td> <td>   -0.033</td> <td>    0.391</td>
+</tr>
+<tr>
+  <th>Attention_Disorder</th> <td>    1.9088</td> <td>    0.155</td> <td>   12.291</td> <td> 0.000</td> <td>    1.604</td> <td>    2.213</td>
+</tr>
+</table></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install causalinference</span>
+<span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>causalinference
+
+<span class="kn">import</span> <span class="nn">causalinference</span>
+<span class="kn">from</span> <span class="nn">causalinference</span> <span class="kn">import</span> <span class="n">CausalModel</span>
+
+<span class="c1"># Load the Lalonde dataset</span>
+<span class="n">lalonde_data</span> <span class="o">=</span> <span class="n">causalinference</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">lalonde</span>
+
+<span class="c1"># Display the first few rows of the dataset</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lalonde_data</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting causalinference
+  Downloading CausalInference-0.1.3-py3-none-any.whl (51 kB)
+     |████████████████████████████████| 51 kB 2.6 MB/s eta 0:00:01
+?25hInstalling collected packages: causalinference
+Successfully installed causalinference-0.1.3
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">furnari</span><span class="o">/</span><span class="n">Library</span><span class="o">/</span><span class="n">CloudStorage</span><span class="o">/</span><span class="n">OneDrive</span><span class="o">-</span><span class="n">UniversitàdegliStudidiCatania</span><span class="o">/</span><span class="n">PARA</span><span class="o">/</span><span class="mi">1</span> <span class="n">Projects</span><span class="o">/</span><span class="mi">23</span><span class="o">-</span><span class="mi">24</span> <span class="n">Fondamenti</span> <span class="n">di</span> <span class="n">Analisi</span> <span class="n">dei</span> <span class="n">Dati</span><span class="o">/</span><span class="n">fadlecturenotes</span><span class="o">/</span><span class="n">lecturenotes</span><span class="o">/</span><span class="n">lectures</span><span class="o">/</span><span class="mi">13</span><span class="n">_causal_analysis</span><span class="o">.</span><span class="n">ipynb</span> <span class="n">Cella</span> <span class="mi">131</span> <span class="n">line</span> <span class="o">&lt;</span><span class="n">cell</span> <span class="n">line</span><span class="p">:</span> <span class="mi">8</span><span class="o">&gt;</span><span class="p">()</span>
+      <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/furnari/Library/CloudStorage/OneDrive-Universit%C3%A0degliStudidiCatania/PARA/1%20Projects/23-24</span><span class="si">%20F</span><span class="s1">ondamenti</span><span class="si">%20d</span><span class="s1">i%20Analisi</span><span class="si">%20d</span><span class="s1">ei%20Dati/fadlecturenotes/lecturenotes/lectures/13_causal_analysis.ipynb#Y251sZmlsZQ%3D%3D?line=4&#39;</span><span class="o">&gt;</span><span class="mi">5</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="kn">from</span> <span class="nn">causalinference</span> <span class="kn">import</span> <span class="n">CausalModel</span>
+      <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/furnari/Library/CloudStorage/OneDrive-Universit%C3%A0degliStudidiCatania/PARA/1%20Projects/23-24</span><span class="si">%20F</span><span class="s1">ondamenti</span><span class="si">%20d</span><span class="s1">i%20Analisi</span><span class="si">%20d</span><span class="s1">ei%20Dati/fadlecturenotes/lecturenotes/lectures/13_causal_analysis.ipynb#Y251sZmlsZQ%3D%3D?line=6&#39;</span><span class="o">&gt;</span><span class="mi">7</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="c1"># Load the Lalonde dataset</span>
+<span class="o">----&gt;</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/furnari/Library/CloudStorage/OneDrive-Universit%C3%A0degliStudidiCatania/PARA/1%20Projects/23-24</span><span class="si">%20F</span><span class="s1">ondamenti</span><span class="si">%20d</span><span class="s1">i%20Analisi</span><span class="si">%20d</span><span class="s1">ei%20Dati/fadlecturenotes/lecturenotes/lectures/13_causal_analysis.ipynb#Y251sZmlsZQ%3D%3D?line=7&#39;</span><span class="o">&gt;</span><span class="mi">8</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">lalonde_data</span> <span class="o">=</span> <span class="n">causalinference</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">lalonde</span>
+     <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/furnari/Library/CloudStorage/OneDrive-Universit%C3%A0degliStudidiCatania/PARA/1%20Projects/23-24</span><span class="si">%20F</span><span class="s1">ondamenti</span><span class="si">%20d</span><span class="s1">i%20Analisi</span><span class="si">%20d</span><span class="s1">ei%20Dati/fadlecturenotes/lecturenotes/lectures/13_causal_analysis.ipynb#Y251sZmlsZQ%3D%3D?line=9&#39;</span><span class="o">&gt;</span><span class="mi">10</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="c1"># Display the first few rows of the dataset</span>
+     <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/furnari/Library/CloudStorage/OneDrive-Universit%C3%A0degliStudidiCatania/PARA/1%20Projects/23-24</span><span class="si">%20F</span><span class="s1">ondamenti</span><span class="si">%20d</span><span class="s1">i%20Analisi</span><span class="si">%20d</span><span class="s1">ei%20Dati/fadlecturenotes/lecturenotes/lectures/13_causal_analysis.ipynb#Y251sZmlsZQ%3D%3D?line=10&#39;</span><span class="o">&gt;</span><span class="mi">11</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">lalonde_data</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+
+<span class="ne">AttributeError</span>: module &#39;causalinference&#39; has no attribute &#39;data&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logit</span><span class="p">(</span><span class="s1">&#39;Car_Accident ~ Smoking + Coughing&#39;</span><span class="p">,</span> <span class="n">lucas</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
+         Current function value: 0.569895
+         Iterations 5
+</pre></div>
+</div>
+<div class="output text_html"><table class="simpletable">
+<caption>Logit Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>     <td>Car_Accident</td>   <th>  No. Observations:  </th>  <td>  2000</td>  
+</tr>
+<tr>
+  <th>Model:</th>                 <td>Logit</td>      <th>  Df Residuals:      </th>  <td>  1997</td>  
+</tr>
+<tr>
+  <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>     2</td>  
+</tr>
+<tr>
+  <th>Date:</th>            <td>Tue, 28 Nov 2023</td> <th>  Pseudo R-squ.:     </th>  <td>0.03424</td> 
+</tr>
+<tr>
+  <th>Time:</th>                <td>10:24:41</td>     <th>  Log-Likelihood:    </th> <td> -1139.8</td> 
+</tr>
+<tr>
+  <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -1180.2</td> 
+</tr>
+<tr>
+  <th>Covariance Type:</th>     <td>nonrobust</td>    <th>  LLR p-value:       </th> <td>2.834e-18</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>    0.3411</td> <td>    0.108</td> <td>    3.153</td> <td> 0.002</td> <td>    0.129</td> <td>    0.553</td>
+</tr>
+<tr>
+  <th>Smoking</th>   <td>   -0.0130</td> <td>    0.120</td> <td>   -0.108</td> <td> 0.914</td> <td>   -0.248</td> <td>    0.222</td>
+</tr>
+<tr>
+  <th>Coughing</th>  <td>    0.9529</td> <td>    0.109</td> <td>    8.717</td> <td> 0.000</td> <td>    0.739</td> <td>    1.167</td>
+</tr>
+</table></div></div>
+</div>
 </section>
 </section>
 
@@ -1958,7 +3877,16 @@ Chi-square p-value: 2.761663e-06
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-graphical-causal-models-to-diagnose-bias">Using Graphical Causal Models to Diagnose Bias</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confounding-bias">Confounding Bias</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-bias">Selection Bias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-common-causes-and-unmeasurable-variables">Multiple Common Causes and Unmeasurable Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#surrogate-confounders">Surrogate Confounders</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-bias">Selection Bias</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-for-a-common-effect">Controlling For a Common Effect</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-on-a-mediator">Controlling on a Mediator</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#main-sources-of-bias">Main Sources of Bias</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-for-causal-analysis">Linear Regression for Causal Analysis</a></li>
