@@ -1554,18 +1554,18 @@ will hence be:</p>
 \[\log\left(\frac{P(k)}{P(1)}\right) = \mathbf{\beta_k}^T\mathbf{X} \Rightarrow P(k)= e^{\mathbf{\beta_k}^T\mathbf{X}} P(1)\]</div>
 <p>We can divide the last term by <span class="math notranslate nohighlight">\(1=\sum_{l=1}^K P(l)\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[ P(k) = \frac{e^{\mathbf{\beta_k}^T\mathbf{X}} P(1)}{\sum_{l=1}^K P(l)} = \frac{e^{\mathbf{\beta_k}^T\mathbf{X}}}{\sum_{l=1}^K \frac{P(l)}{P(1)}} = \frac{e^{\mathbf{\beta_k}^T\mathbf{X}}}{\frac{P(1)}{P(1)}+\sum_{l=2}^K \frac{P(l)}{P(1)}} = \frac{e^{\mathbf{\beta_k}^T\mathbf{X}}}{1+\sum_{l=2}^K \mathbf{\beta_l^T\mathbf{X}}} \text{   (A)}\]</div>
+\[ P(k) = \frac{e^{\mathbf{\beta_k}^T\mathbf{X}} P(1)}{\sum_{l=1}^K P(l)} = \frac{e^{\mathbf{\beta_k}^T\mathbf{X}}}{\sum_{l=1}^K \frac{P(l)}{P(1)}} = \frac{e^{\mathbf{\beta_k}^T\mathbf{X}}}{\frac{P(1)}{P(1)}+\sum_{l=2}^K \frac{P(l)}{P(1)}} = \frac{e^{\mathbf{\beta_k}^T\mathbf{X}}}{1+\sum_{l=2}^K \mathbf{e^{\beta_l^T\mathbf{X}}}} \text{   (A)}\]</div>
 <p>Note that the expression above can also be seen as:</p>
 <div class="math notranslate nohighlight">
-\[ P(k) = \frac{\log\left(\frac{P(k)}{P(1)}\right)}{1+\sum_{l=2}^K \mathbf{\beta_l^T\mathbf{X}}}\]</div>
+\[ P(k) = \frac{\log\left(\frac{P(k)}{P(1)}\right)}{1+\sum_{l=2}^K \mathbf{e^{\beta_l^T\mathbf{X}}}}\]</div>
 <p>Hence:</p>
 <div class="math notranslate nohighlight">
-\[ P(1) = \frac{1}{1+\sum_{l=2}^K \mathbf{\beta}_l^T\mathbf{X}} \text{   (B)}\]</div>
+\[ P(1) = \frac{1}{1+\sum_{l=2}^K e^{\mathbf{\beta}_l^T\mathbf{X}}} \text{   (B)}\]</div>
 <p>We can rewrite the results (A) and (B) in the full form:</p>
 <div class="math notranslate nohighlight">
-\[ P(Y=k|X=\mathbf{x}) = \frac{e^{\mathbf{\beta_k}^T\mathbf{X}}}{1+\sum_{l=2}^K \mathbf{\beta_l^T\mathbf{X}}}\]</div>
+\[ P(Y=k|X=\mathbf{x}) = \frac{e^{\mathbf{\beta_k}^T\mathbf{X}}}{1+\sum_{l=2}^K \mathbf{e^{\beta_l^T\mathbf{X}}}}\]</div>
 <div class="math notranslate nohighlight">
-\[ P(Y=1|X=\mathbf{x}) = \frac{1}{1+\sum_{l=2}^K \mathbf{\beta_l^T\mathbf{X}}}\]</div>
+\[ P(Y=1|X=\mathbf{x}) = \frac{1}{1+\sum_{l=2}^K \mathbf{e^{\beta_l^T\mathbf{X}}}}\]</div>
 <p>These two expressions can be used to compute the probabilities of the classes once that the parameters have been estimated and <span class="math notranslate nohighlight">\(\mathcal{x}\)</span> is observed.</p>
 <section id="estimating-the-parameters-of-the-multinomial-logistic-regressor-model">
 <h4><span class="section-number">11.10.3.1. </span>Estimating the Parameters of the Multinomial Logistic Regressor Model<a class="headerlink" href="#estimating-the-parameters-of-the-multinomial-logistic-regressor-model" title="Permalink to this heading">#</a></h4>
@@ -1640,7 +1640,7 @@ will hence be:</p>
 <h4><span class="section-number">11.10.3.3. </span>The Softmax Regressor<a class="headerlink" href="#the-softmax-regressor" title="Permalink to this heading">#</a></h4>
 <p>Softmax regression is an alternative formulation of multinomial logistic regression which is designed to avoid the definition of a baseline and it is hence symmetrical. In a softmax regressor, the probabilities are modeled as follows:</p>
 <div class="math notranslate nohighlight">
-\[ P(Y=k|X=\mathbf{x}) = \frac{e^{\mathbf{\beta_k}^T\mathbf{X}}}{1+\sum_{l=2}^K \mathbf{\beta_l^T\mathbf{X}}}, \ \ \ \forall k=1,\ldots,K\]</div>
+\[ P(Y=k|X=\mathbf{x}) = \frac{e^{\mathbf{\beta_k}^T\mathbf{X}}}{\sum_{l=1}^K \mathbf{e^{\beta_l^T\mathbf{X}}}}, \ \ \ \forall k=1,\ldots,K\]</div>
 <p>So, rather than estimating <span class="math notranslate nohighlight">\(K-1\)</span> coefficients, we estimate <span class="math notranslate nohighlight">\(K\)</span> coefficients.</p>
 <p>The optimization of the model is performed defining a similar cost function and optimizing it with iterative methods.</p>
 <p>The softmax formulation is widely used in predictive analysis and machine learning, but less pervasive in statistics.</p>
