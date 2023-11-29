@@ -21,6 +21,7 @@ parts:
   - file: lectures/10_statistical_inference
   - file: lectures/11_linear_regression
   - file: lectures/12_logistic_regression
+  - file: lectures/13_causal_analysis
 - caption: Laboratories
   numbered: True
   chapters:
@@ -36,6 +37,7 @@ parts:
   - file: laboratories/10_statistical_inference
   - file: laboratories/11_regressione_lineare
   - file: laboratories/12_regressione_logistica
+  
   
 
   
