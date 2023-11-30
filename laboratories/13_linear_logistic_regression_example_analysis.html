@@ -1,0 +1,3667 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>25. Linear and Logistic Regression Laboratory &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'laboratories/13_linear_logistic_regression_example_analysis';</script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="24. Laboratorio su regressione logistica" href="12_regressione_logistica.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../lectures/index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Lecture Notes on Fundamentals of Data Analysis - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Lecture Notes on Fundamentals of Data Analysis - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../lectures/index.html">
+                    Lecture Notes on Fundamental of Data Analysis
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lectures/01_intro_data_analysis.html">1. Introduction to Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/03_main_data_analysis_concepts.html">2. Main data analysis concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/04_misure_di_frequenze_e_rappresentazione_grafica_dei_dati.html">3. Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/05_misure_di_tendenza_centrale_dispersione_e_forma.html">4. Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/06_associazione_variabili.html">5. Associazione tra Variabili</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/07_probability.html">6. Probability for Data Manipulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/08_common_distributions.html">7. Common Probability Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/09_information_theory.html">8. Basic Elements of Information Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/10_statistical_inference.html">9. Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/11_linear_regression.html">10. Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/12_logistic_regression.html">11. Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/13_causal_analysis.html">12. Causal Data Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratories</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_setup.html">13. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_intro_python.html">14. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_intro_numpy.html">15. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_intro_matplotlib.html">16. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_intro_pandas.html">17. Introduzione a Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">18. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_misure_di_tendenza_centrale_dispersione_e_forma.html">19. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_associazione_variabili.html">20. Associazione tra Variabili</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_heart-disease-analysis.html">21. Exploratory Analysis on the Heart Disease Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_statistical_inference.html">22. Laboratory on Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_regressione_lineare.html">23. Laboratorio su Regressione Lineare</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_regressione_logistica.html">24. Laboratorio su regressione logistica</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">25. Linear and Logistic Regression Laboratory</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/antoninofurnari/fadlecturenotes/blob/master/lecturenotes/laboratories/13_linear_logistic_regression_example_analysis.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/antoninofurnari/fadlecturenotes" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/antoninofurnari/fadlecturenotes/issues/new?title=Issue%20on%20page%20%2Flaboratories/13_linear_logistic_regression_example_analysis.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/laboratories/13_linear_logistic_regression_example_analysis.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Linear and Logistic Regression Laboratory</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">25. Linear and Logistic Regression Laboratory</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">25.1. Linear Regression</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-vs-mean-values">26. Linear Regression vs Mean Values</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression">26.1. Logistic regression</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="linear-and-logistic-regression-laboratory">
+<h1><span class="section-number">25. </span>Linear and Logistic Regression Laboratory<a class="headerlink" href="#linear-and-logistic-regression-laboratory" title="Permalink to this heading">#</a></h1>
+<section id="linear-regression">
+<h2><span class="section-number">25.1. </span>Linear Regression<a class="headerlink" href="#linear-regression" title="Permalink to this heading">#</a></h2>
+<p>We will use the datatset available at this URL:</p>
+<p><a class="reference external" href="https://www.kaggle.com/datasets/yasserh/advertising-sales-dataset">https://www.kaggle.com/datasets/yasserh/advertising-sales-dataset</a></p>
+<p>Let us load the dataset:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">advertising</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;Advertising Budget and Sales.csv&#39;</span><span class="p">)</span>
+<span class="n">advertising</span><span class="o">=</span><span class="n">advertising</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span>
+    <span class="s1">&#39;Unnamed: 0&#39;</span><span class="p">:</span><span class="s1">&#39;Index&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;TV Ad Budget ($)&#39;</span><span class="p">:</span> <span class="s1">&#39;tv&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Radio Ad Budget ($)&#39;</span><span class="p">:</span> <span class="s1">&#39;radio&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Newspaper Ad Budget ($)&#39;</span><span class="p">:</span> <span class="s1">&#39;newspaper&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Sales ($)&#39;</span><span class="p">:</span> <span class="s1">&#39;sales&#39;</span>
+    <span class="p">})</span>
+<span class="n">advertising</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Index&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-189f7dd2-a721-4f33-84da-3175b5a90382" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tv</th>
+      <th>radio</th>
+      <th>newspaper</th>
+      <th>sales</th>
+    </tr>
+    <tr>
+      <th>Index</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>230.1</td>
+      <td>37.8</td>
+      <td>69.2</td>
+      <td>22.1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>44.5</td>
+      <td>39.3</td>
+      <td>45.1</td>
+      <td>10.4</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>17.2</td>
+      <td>45.9</td>
+      <td>69.3</td>
+      <td>9.3</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>151.5</td>
+      <td>41.3</td>
+      <td>58.5</td>
+      <td>18.5</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>180.8</td>
+      <td>10.8</td>
+      <td>58.4</td>
+      <td>12.9</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>196</th>
+      <td>38.2</td>
+      <td>3.7</td>
+      <td>13.8</td>
+      <td>7.6</td>
+    </tr>
+    <tr>
+      <th>197</th>
+      <td>94.2</td>
+      <td>4.9</td>
+      <td>8.1</td>
+      <td>9.7</td>
+    </tr>
+    <tr>
+      <th>198</th>
+      <td>177.0</td>
+      <td>9.3</td>
+      <td>6.4</td>
+      <td>12.8</td>
+    </tr>
+    <tr>
+      <th>199</th>
+      <td>283.6</td>
+      <td>42.0</td>
+      <td>66.2</td>
+      <td>25.5</td>
+    </tr>
+    <tr>
+      <th>200</th>
+      <td>232.1</td>
+      <td>8.6</td>
+      <td>8.7</td>
+      <td>13.4</td>
+    </tr>
+  </tbody>
+</table>
+<p>200 rows × 4 columns</p>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-189f7dd2-a721-4f33-84da-3175b5a90382')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-189f7dd2-a721-4f33-84da-3175b5a90382 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-189f7dd2-a721-4f33-84da-3175b5a90382');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-b43c24d2-dc89-49dd-b83c-58836ce54240">
+  <button class="colab-df-quickchart" onclick="quickchart('df-b43c24d2-dc89-49dd-b83c-58836ce54240')"
+            title="Suggest charts"
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-b43c24d2-dc89-49dd-b83c-58836ce54240 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">advertising</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 200 entries, 0 to 199
+Data columns (total 5 columns):
+ #   Column     Non-Null Count  Dtype  
+---  ------     --------------  -----  
+ 0   Index      200 non-null    int64  
+ 1   tv         200 non-null    float64
+ 2   radio      200 non-null    float64
+ 3   newspaper  200 non-null    float64
+ 4   sales      200 non-null    float64
+dtypes: float64(4), int64(1)
+memory usage: 7.9 KB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">advertising</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Index&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7b57ba39b460&gt;
+</pre></div>
+</div>
+<img alt="../_images/980f2b129fbff1b6cbae22e4c90892b69c290d5f33f88d7ce4b3146547fd6903.png" src="../_images/980f2b129fbff1b6cbae22e4c90892b69c290d5f33f88d7ce4b3146547fd6903.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">advertising</span><span class="o">.</span><span class="n">corr</span><span class="p">(),</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+</pre></div>
+</div>
+<img alt="../_images/20c6958139b10f4a6e7ff8d4b53f0ff8ef16f8ec965ff73dbd2178b0761f024f.png" src="../_images/20c6958139b10f4a6e7ff8d4b53f0ff8ef16f8ec965ff73dbd2178b0761f024f.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">pearsonr</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pearsonr</span><span class="p">(</span><span class="n">advertising</span><span class="p">[</span><span class="s1">&#39;tv&#39;</span><span class="p">],</span><span class="n">advertising</span><span class="p">[</span><span class="s1">&#39;radio&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PearsonRResult(statistic=0.05480866446583009, pvalue=0.440806063788431)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The correlation between <code class="docutils literal notranslate"><span class="pre">tv</span></code> and <code class="docutils literal notranslate"><span class="pre">radio</span></code> is not statistically significant.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pearsonr</span><span class="p">(</span><span class="n">advertising</span><span class="p">[</span><span class="s1">&#39;newspaper&#39;</span><span class="p">],</span><span class="n">advertising</span><span class="p">[</span><span class="s1">&#39;radio&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PearsonRResult(statistic=0.35410375076117534, pvalue=2.688835078719109e-07)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.formula.api</span> <span class="kn">import</span> <span class="n">ols</span>
+<span class="n">ols</span><span class="p">(</span><span class="s2">&quot;newspaper ~ radio&quot;</span><span class="p">,</span> <span class="n">advertising</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>   18.4700</td> <td>    2.689</td> <td>    6.870</td> <td> 0.000</td> <td>   13.168</td> <td>   23.772</td>
+</tr>
+<tr>
+  <th>radio</th>     <td>    0.5194</td> <td>    0.097</td> <td>    5.328</td> <td> 0.000</td> <td>    0.327</td> <td>    0.712</td>
+</tr>
+</table></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;radio ~ newspaper&quot;</span><span class="p">,</span> <span class="n">advertising</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>   15.8883</td> <td>    1.699</td> <td>    9.354</td> <td> 0.000</td> <td>   12.539</td> <td>   19.238</td>
+</tr>
+<tr>
+  <th>newspaper</th> <td>    0.2414</td> <td>    0.045</td> <td>    5.328</td> <td> 0.000</td> <td>    0.152</td> <td>    0.331</td>
+</tr>
+</table></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;radio&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;newspaper&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">advertising</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;radio&#39;, ylabel=&#39;newspaper&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/a7e28d74b207684d5cc8d900f00fbb617e9520ae39dcfda48f7349b1872b43bf.png" src="../_images/a7e28d74b207684d5cc8d900f00fbb617e9520ae39dcfda48f7349b1872b43bf.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;sales ~ tv&quot;</span><span class="p">,</span> <span class="n">advertising</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>          <td>sales</td>      <th>  R-squared:         </th> <td>   0.612</td>
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.610</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   312.1</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Thu, 30 Nov 2023</td> <th>  Prob (F-statistic):</th> <td>1.47e-42</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>19:48:09</td>     <th>  Log-Likelihood:    </th> <td> -519.05</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   200</td>      <th>  AIC:               </th> <td>   1042.</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   198</td>      <th>  BIC:               </th> <td>   1049.</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     1</td>      <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>    7.0326</td> <td>    0.458</td> <td>   15.360</td> <td> 0.000</td> <td>    6.130</td> <td>    7.935</td>
+</tr>
+<tr>
+  <th>tv</th>        <td>    0.0475</td> <td>    0.003</td> <td>   17.668</td> <td> 0.000</td> <td>    0.042</td> <td>    0.053</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td> 0.531</td> <th>  Durbin-Watson:     </th> <td>   1.935</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.767</td> <th>  Jarque-Bera (JB):  </th> <td>   0.669</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td>-0.089</td> <th>  Prob(JB):          </th> <td>   0.716</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 2.779</td> <th>  Cond. No.          </th> <td>    338.</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;tv&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;sales&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">advertising</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;tv&#39;, ylabel=&#39;sales&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/8f34a70be102736c36d55fbe07ab370fd479f365d2b562973a978a685df6f1ec.png" src="../_images/8f34a70be102736c36d55fbe07ab370fd479f365d2b562973a978a685df6f1ec.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="n">model</span><span class="o">=</span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;sales ~ tv&quot;</span><span class="p">,</span> <span class="n">advertising</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1">#otteniamo i valori predetti dal modello:</span>
+<span class="n">fitted</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fittedvalues</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1">#rimpiazzo eventuali NaN con zero</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">22</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">residplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">fitted</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;sales&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">advertising</span><span class="o">.</span><span class="n">dropna</span><span class="p">(),</span><span class="n">lowess</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;lw&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">},</span> <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">421</span><span class="p">))</span>
+<span class="n">sm</span><span class="o">.</span><span class="n">qqplot</span><span class="p">(</span><span class="n">fitted</span><span class="o">-</span><span class="n">advertising</span><span class="o">.</span><span class="n">dropna</span><span class="p">()[</span><span class="s1">&#39;sales&#39;</span><span class="p">],</span> <span class="n">line</span><span class="o">=</span><span class="s1">&#39;45&#39;</span><span class="p">,</span><span class="n">fit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">422</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/58d525f55548a58a65e88b26e2631c29b0abe98db849974e2dc5fbc76aeac828.png" src="../_images/58d525f55548a58a65e88b26e2631c29b0abe98db849974e2dc5fbc76aeac828.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;sales ~ tv + radio&quot;</span><span class="p">,</span> <span class="n">advertising</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>          <td>sales</td>      <th>  R-squared:         </th> <td>   0.897</td>
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.896</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   859.6</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Thu, 30 Nov 2023</td> <th>  Prob (F-statistic):</th> <td>4.83e-98</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>19:48:42</td>     <th>  Log-Likelihood:    </th> <td> -386.20</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   200</td>      <th>  AIC:               </th> <td>   778.4</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   197</td>      <th>  BIC:               </th> <td>   788.3</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     2</td>      <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>    2.9211</td> <td>    0.294</td> <td>    9.919</td> <td> 0.000</td> <td>    2.340</td> <td>    3.502</td>
+</tr>
+<tr>
+  <th>tv</th>        <td>    0.0458</td> <td>    0.001</td> <td>   32.909</td> <td> 0.000</td> <td>    0.043</td> <td>    0.048</td>
+</tr>
+<tr>
+  <th>radio</th>     <td>    0.1880</td> <td>    0.008</td> <td>   23.382</td> <td> 0.000</td> <td>    0.172</td> <td>    0.204</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>60.022</td> <th>  Durbin-Watson:     </th> <td>   2.081</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td> <th>  Jarque-Bera (JB):  </th> <td> 148.679</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td>-1.323</td> <th>  Prob(JB):          </th> <td>5.19e-33</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 6.292</td> <th>  Cond. No.          </th> <td>    425.</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="n">model</span><span class="o">=</span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;sales ~ tv + radio&quot;</span><span class="p">,</span> <span class="n">advertising</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1">#otteniamo i valori predetti dal modello:</span>
+<span class="n">fitted</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fittedvalues</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1">#rimpiazzo eventuali NaN con zero</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">22</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">residplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">fitted</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;sales&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">advertising</span><span class="o">.</span><span class="n">dropna</span><span class="p">(),</span><span class="n">lowess</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;lw&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">},</span> <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">421</span><span class="p">))</span>
+<span class="n">sm</span><span class="o">.</span><span class="n">qqplot</span><span class="p">(</span><span class="n">fitted</span><span class="o">-</span><span class="n">advertising</span><span class="o">.</span><span class="n">dropna</span><span class="p">()[</span><span class="s1">&#39;sales&#39;</span><span class="p">],</span> <span class="n">line</span><span class="o">=</span><span class="s1">&#39;45&#39;</span><span class="p">,</span><span class="n">fit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">422</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/a0a71e9f0c8838637734188a3698ff325569adb187a91b423c1fea45bd04c279.png" src="../_images/a0a71e9f0c8838637734188a3698ff325569adb187a91b423c1fea45bd04c279.png" />
+</div>
+</div>
+<p>Let us add an interaction term:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;sales ~ tv   + radio + radio*tv&quot;</span><span class="p">,</span> <span class="n">advertising</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>          <td>sales</td>      <th>  R-squared:         </th> <td>   0.968</td> 
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.967</td> 
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   1963.</td> 
+</tr>
+<tr>
+  <th>Date:</th>             <td>Thu, 30 Nov 2023</td> <th>  Prob (F-statistic):</th> <td>6.68e-146</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>19:49:14</td>     <th>  Log-Likelihood:    </th> <td> -270.14</td> 
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   200</td>      <th>  AIC:               </th> <td>   548.3</td> 
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   196</td>      <th>  BIC:               </th> <td>   561.5</td> 
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     3</td>      <th>                     </th>     <td> </td>    
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>    
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>    6.7502</td> <td>    0.248</td> <td>   27.233</td> <td> 0.000</td> <td>    6.261</td> <td>    7.239</td>
+</tr>
+<tr>
+  <th>tv</th>        <td>    0.0191</td> <td>    0.002</td> <td>   12.699</td> <td> 0.000</td> <td>    0.016</td> <td>    0.022</td>
+</tr>
+<tr>
+  <th>radio</th>     <td>    0.0289</td> <td>    0.009</td> <td>    3.241</td> <td> 0.001</td> <td>    0.011</td> <td>    0.046</td>
+</tr>
+<tr>
+  <th>radio:tv</th>  <td>    0.0011</td> <td> 5.24e-05</td> <td>   20.727</td> <td> 0.000</td> <td>    0.001</td> <td>    0.001</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>128.132</td> <th>  Durbin-Watson:     </th> <td>   2.224</td> 
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td>  <th>  Jarque-Bera (JB):  </th> <td>1183.719</td> 
+</tr>
+<tr>
+  <th>Skew:</th>          <td>-2.323</td>  <th>  Prob(JB):          </th> <td>9.09e-258</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td>13.975</td>  <th>  Cond. No.          </th> <td>1.80e+04</td> 
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br/>[2] The condition number is large, 1.8e+04. This might indicate that there are<br/>strong multicollinearity or other numerical problems.</div></div>
+</div>
+<p>The regressor with interaction terms can be interpreted as follows:</p>
+<div class="math notranslate nohighlight">
+\[sales = \beta_0 + \beta_1 tv + \beta_2 radio + \beta_3 radio \times tv\]</div>
+<div class="math notranslate nohighlight">
+\[sales = \beta_0 + tv(\beta_1 + \beta_3 radio) + \beta_2 radio\]</div>
+<div class="math notranslate nohighlight">
+\[sales = \beta_0 + \beta_1 tv + radio(\beta_2 + tv \beta_3)\]</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="linear-regression-vs-mean-values">
+<h1><span class="section-number">26. </span>Linear Regression vs Mean Values<a class="headerlink" href="#linear-regression-vs-mean-values" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span>
+<span class="n">d</span><span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y</span><span class="p">,</span>
+    <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x</span>
+<span class="p">})</span>
+<span class="n">d</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">d</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-b778ebe7-ec16-4ae3-ba23-2bac6fe95eb2" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>y</th>
+      <th>x</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>10.091945</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>8.620043</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>14.530024</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>16.894454</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>10.864606</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>8.241021</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>7.561387</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>6.688701</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>12.406282</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>8.094310</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>100 rows × 2 columns</p>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-b778ebe7-ec16-4ae3-ba23-2bac6fe95eb2')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-b778ebe7-ec16-4ae3-ba23-2bac6fe95eb2 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-b778ebe7-ec16-4ae3-ba23-2bac6fe95eb2');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-d3587f8f-b867-4cf9-8c49-a4183c146587">
+  <button class="colab-df-quickchart" onclick="quickchart('df-d3587f8f-b867-4cf9-8c49-a4183c146587')"
+            title="Suggest charts"
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-d3587f8f-b867-4cf9-8c49-a4183c146587 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-50f922d9-b340-4779-98d2-46a0c7e0d1b3" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>y</th>
+      <th>x</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>100.000000</td>
+      <td>100.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>11.124978</td>
+      <td>0.490000</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>2.509474</td>
+      <td>0.502418</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>5.701657</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>9.310256</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>10.770151</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>12.717417</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>17.218798</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-50f922d9-b340-4779-98d2-46a0c7e0d1b3')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-50f922d9-b340-4779-98d2-46a0c7e0d1b3 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-50f922d9-b340-4779-98d2-46a0c7e0d1b3');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-0612cfd0-12cc-414b-a8dc-8af693aba83c">
+  <button class="colab-df-quickchart" onclick="quickchart('df-0612cfd0-12cc-414b-a8dc-8af693aba83c')"
+            title="Suggest charts"
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-0612cfd0-12cc-414b-a8dc-8af693aba83c button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;y&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10.18727989115969
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;y&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12.100950474439491
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;y&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">+</span> <span class="mf">2.2391</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12.42637989115969
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ols</span><span class="p">(</span><span class="s1">&#39;y ~ x&#39;</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>            <td>y</td>        <th>  R-squared:         </th> <td>   0.147</td>
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.138</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   16.86</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Thu, 30 Nov 2023</td> <th>  Prob (F-statistic):</th> <td>8.34e-05</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>19:50:08</td>     <th>  Log-Likelihood:    </th> <td> -225.46</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   100</td>      <th>  AIC:               </th> <td>   454.9</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>    98</td>      <th>  BIC:               </th> <td>   460.1</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     1</td>      <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>   10.1873</td> <td>    0.326</td> <td>   31.227</td> <td> 0.000</td> <td>    9.540</td> <td>   10.835</td>
+</tr>
+<tr>
+  <th>x</th>         <td>    1.9137</td> <td>    0.466</td> <td>    4.106</td> <td> 0.000</td> <td>    0.989</td> <td>    2.839</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td> 3.658</td> <th>  Durbin-Watson:     </th> <td>   2.063</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.161</td> <th>  Jarque-Bera (JB):  </th> <td>   3.568</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.458</td> <th>  Prob(JB):          </th> <td>   0.168</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 2.863</td> <th>  Cond. No.          </th> <td>    2.60</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;x&#39;, ylabel=&#39;y&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/fb5fd231d8924b4f76a6b4a65b20b406e211157c25b6dd827cfaef0551c69ac4.png" src="../_images/fb5fd231d8924b4f76a6b4a65b20b406e211157c25b6dd827cfaef0551c69ac4.png" />
+</div>
+</div>
+<section id="logistic-regression">
+<h2><span class="section-number">26.1. </span>Logistic regression<a class="headerlink" href="#logistic-regression" title="Permalink to this heading">#</a></h2>
+<p>We will consider this dataset:</p>
+<p><a class="reference external" href="https://www.kaggle.com/datasets/redwankarimsony/heart-disease-data">https://www.kaggle.com/datasets/redwankarimsony/heart-disease-data</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;heart_disease_uci.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-712de7b9-93fc-4cb0-8227-25d08885ea84" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>age</th>
+      <th>sex</th>
+      <th>dataset</th>
+      <th>cp</th>
+      <th>trestbps</th>
+      <th>chol</th>
+      <th>fbs</th>
+      <th>restecg</th>
+      <th>thalch</th>
+      <th>exang</th>
+      <th>oldpeak</th>
+      <th>slope</th>
+      <th>ca</th>
+      <th>thal</th>
+      <th>num</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>63</td>
+      <td>Male</td>
+      <td>Cleveland</td>
+      <td>typical angina</td>
+      <td>145.0</td>
+      <td>233.0</td>
+      <td>True</td>
+      <td>lv hypertrophy</td>
+      <td>150.0</td>
+      <td>False</td>
+      <td>2.3</td>
+      <td>downsloping</td>
+      <td>0.0</td>
+      <td>fixed defect</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>67</td>
+      <td>Male</td>
+      <td>Cleveland</td>
+      <td>asymptomatic</td>
+      <td>160.0</td>
+      <td>286.0</td>
+      <td>False</td>
+      <td>lv hypertrophy</td>
+      <td>108.0</td>
+      <td>True</td>
+      <td>1.5</td>
+      <td>flat</td>
+      <td>3.0</td>
+      <td>normal</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>67</td>
+      <td>Male</td>
+      <td>Cleveland</td>
+      <td>asymptomatic</td>
+      <td>120.0</td>
+      <td>229.0</td>
+      <td>False</td>
+      <td>lv hypertrophy</td>
+      <td>129.0</td>
+      <td>True</td>
+      <td>2.6</td>
+      <td>flat</td>
+      <td>2.0</td>
+      <td>reversable defect</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>37</td>
+      <td>Male</td>
+      <td>Cleveland</td>
+      <td>non-anginal</td>
+      <td>130.0</td>
+      <td>250.0</td>
+      <td>False</td>
+      <td>normal</td>
+      <td>187.0</td>
+      <td>False</td>
+      <td>3.5</td>
+      <td>downsloping</td>
+      <td>0.0</td>
+      <td>normal</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>41</td>
+      <td>Female</td>
+      <td>Cleveland</td>
+      <td>atypical angina</td>
+      <td>130.0</td>
+      <td>204.0</td>
+      <td>False</td>
+      <td>lv hypertrophy</td>
+      <td>172.0</td>
+      <td>False</td>
+      <td>1.4</td>
+      <td>upsloping</td>
+      <td>0.0</td>
+      <td>normal</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-712de7b9-93fc-4cb0-8227-25d08885ea84')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-712de7b9-93fc-4cb0-8227-25d08885ea84 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-712de7b9-93fc-4cb0-8227-25d08885ea84');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-93ad365c-acd7-4b59-bc19-c61e09188503">
+  <button class="colab-df-quickchart" onclick="quickchart('df-93ad365c-acd7-4b59-bc19-c61e09188503')"
+            title="Suggest charts"
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-93ad365c-acd7-4b59-bc19-c61e09188503 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;attack&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;num&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-1fb289a6-cd3a-4eec-add3-8773ebe819f6" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>age</th>
+      <th>trestbps</th>
+      <th>chol</th>
+      <th>thalch</th>
+      <th>oldpeak</th>
+      <th>ca</th>
+      <th>num</th>
+      <th>attack</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>920.000000</td>
+      <td>920.000000</td>
+      <td>861.000000</td>
+      <td>890.000000</td>
+      <td>865.000000</td>
+      <td>858.000000</td>
+      <td>309.000000</td>
+      <td>920.000000</td>
+      <td>920.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>460.500000</td>
+      <td>53.510870</td>
+      <td>132.132404</td>
+      <td>199.130337</td>
+      <td>137.545665</td>
+      <td>0.878788</td>
+      <td>0.676375</td>
+      <td>0.995652</td>
+      <td>0.553261</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>265.725422</td>
+      <td>9.424685</td>
+      <td>19.066070</td>
+      <td>110.780810</td>
+      <td>25.926276</td>
+      <td>1.091226</td>
+      <td>0.935653</td>
+      <td>1.142693</td>
+      <td>0.497426</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>1.000000</td>
+      <td>28.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>60.000000</td>
+      <td>-2.600000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>230.750000</td>
+      <td>47.000000</td>
+      <td>120.000000</td>
+      <td>175.000000</td>
+      <td>120.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>460.500000</td>
+      <td>54.000000</td>
+      <td>130.000000</td>
+      <td>223.000000</td>
+      <td>140.000000</td>
+      <td>0.500000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>690.250000</td>
+      <td>60.000000</td>
+      <td>140.000000</td>
+      <td>268.000000</td>
+      <td>157.000000</td>
+      <td>1.500000</td>
+      <td>1.000000</td>
+      <td>2.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>920.000000</td>
+      <td>77.000000</td>
+      <td>200.000000</td>
+      <td>603.000000</td>
+      <td>202.000000</td>
+      <td>6.200000</td>
+      <td>3.000000</td>
+      <td>4.000000</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-1fb289a6-cd3a-4eec-add3-8773ebe819f6')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-1fb289a6-cd3a-4eec-add3-8773ebe819f6 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-1fb289a6-cd3a-4eec-add3-8773ebe819f6');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-f1f5513b-455d-4d30-b34d-76e1f3a4515c">
+  <button class="colab-df-quickchart" onclick="quickchart('df-f1f5513b-455d-4d30-b34d-76e1f3a4515c')"
+            title="Suggest charts"
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-f1f5513b-455d-4d30-b34d-76e1f3a4515c button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.formula.api</span> <span class="kn">import</span> <span class="n">logit</span>
+<span class="n">logit</span><span class="p">(</span><span class="s2">&quot;attack ~ sex&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
+         Current function value: 0.639394
+         Iterations 5
+</pre></div>
+</div>
+<div class="output text_html"><table class="simpletable">
+<caption>Logit Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>        <td>attack</td>      <th>  No. Observations:  </th>  <td>   920</td>  
+</tr>
+<tr>
+  <th>Model:</th>                 <td>Logit</td>      <th>  Df Residuals:      </th>  <td>   918</td>  
+</tr>
+<tr>
+  <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>     1</td>  
+</tr>
+<tr>
+  <th>Date:</th>            <td>Thu, 30 Nov 2023</td> <th>  Pseudo R-squ.:     </th>  <td>0.06992</td> 
+</tr>
+<tr>
+  <th>Time:</th>                <td>19:51:22</td>     <th>  Log-Likelihood:    </th> <td> -588.24</td> 
+</tr>
+<tr>
+  <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -632.47</td> 
+</tr>
+<tr>
+  <th>Covariance Type:</th>     <td>nonrobust</td>    <th>  LLR p-value:       </th> <td>5.220e-21</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+       <td></td>          <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>   <td>   -1.0578</td> <td>    0.164</td> <td>   -6.444</td> <td> 0.000</td> <td>   -1.380</td> <td>   -0.736</td>
+</tr>
+<tr>
+  <th>sex[T.Male]</th> <td>    1.5996</td> <td>    0.181</td> <td>    8.823</td> <td> 0.000</td> <td>    1.244</td> <td>    1.955</td>
+</tr>
+</table></div></div>
+</div>
+<p>The coefficient of <code class="docutils literal notranslate"><span class="pre">sex[T.Male]</span></code> is telling us that males have a risk of heart attack <span class="math notranslate nohighlight">\(e^{1.5996} \approx 4.95\)</span> times higher than females.</p>
+<p>To compute a multiple logistic regressor, let us first extend the dataset with dummy variables:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">dropna</span><span class="p">(),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;sex&quot;</span><span class="p">,</span> <span class="s2">&quot;dataset&quot;</span><span class="p">,</span> <span class="s2">&quot;cp&quot;</span><span class="p">,</span> <span class="s2">&quot;fbs&quot;</span><span class="p">,</span> <span class="s2">&quot;restecg&quot;</span><span class="p">,</span> <span class="s2">&quot;exang&quot;</span><span class="p">,</span> <span class="s2">&quot;slope&quot;</span><span class="p">,</span> <span class="s2">&quot;thal&quot;</span><span class="p">],</span> <span class="n">drop_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will use the non-forumla API:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.api</span> <span class="kn">import</span> <span class="n">Logit</span>
+<span class="n">data2</span><span class="p">[</span><span class="s1">&#39;Intercept&#39;</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span> <span class="c1"># we need to add the intercept manually when using this API</span>
+<span class="n">Logit</span><span class="p">(</span><span class="n">data2</span><span class="p">[</span><span class="s1">&#39;attack&#39;</span><span class="p">],</span> <span class="n">data2</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;dataset&#39;</span><span class="p">,</span><span class="s1">&#39;attack&#39;</span><span class="p">,</span><span class="s1">&#39;num&#39;</span><span class="p">,</span><span class="s1">&#39;id&#39;</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
+         Current function value: 0.321016
+         Iterations 8
+</pre></div>
+</div>
+<div class="output text_html"><table class="simpletable">
+<caption>Logit Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>        <td>attack</td>      <th>  No. Observations:  </th>  <td>   299</td>  
+</tr>
+<tr>
+  <th>Model:</th>                 <td>Logit</td>      <th>  Df Residuals:      </th>  <td>   280</td>  
+</tr>
+<tr>
+  <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>    18</td>  
+</tr>
+<tr>
+  <th>Date:</th>            <td>Thu, 30 Nov 2023</td> <th>  Pseudo R-squ.:     </th>  <td>0.5352</td>  
+</tr>
+<tr>
+  <th>Time:</th>                <td>20:04:07</td>     <th>  Log-Likelihood:    </th> <td> -95.984</td> 
+</tr>
+<tr>
+  <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -206.51</td> 
+</tr>
+<tr>
+  <th>Covariance Type:</th>     <td>nonrobust</td>    <th>  LLR p-value:       </th> <td>5.920e-37</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+              <td></td>                <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>age</th>                      <td>   -0.0137</td> <td>    0.025</td> <td>   -0.554</td> <td> 0.579</td> <td>   -0.062</td> <td>    0.035</td>
+</tr>
+<tr>
+  <th>trestbps</th>                 <td>    0.0244</td> <td>    0.011</td> <td>    2.170</td> <td> 0.030</td> <td>    0.002</td> <td>    0.046</td>
+</tr>
+<tr>
+  <th>chol</th>                     <td>    0.0042</td> <td>    0.004</td> <td>    1.064</td> <td> 0.287</td> <td>   -0.004</td> <td>    0.012</td>
+</tr>
+<tr>
+  <th>thalch</th>                   <td>   -0.0180</td> <td>    0.011</td> <td>   -1.625</td> <td> 0.104</td> <td>   -0.040</td> <td>    0.004</td>
+</tr>
+<tr>
+  <th>oldpeak</th>                  <td>    0.3610</td> <td>    0.231</td> <td>    1.566</td> <td> 0.117</td> <td>   -0.091</td> <td>    0.813</td>
+</tr>
+<tr>
+  <th>ca</th>                       <td>    1.3099</td> <td>    0.280</td> <td>    4.682</td> <td> 0.000</td> <td>    0.762</td> <td>    1.858</td>
+</tr>
+<tr>
+  <th>sex_Male</th>                 <td>    1.5500</td> <td>    0.531</td> <td>    2.920</td> <td> 0.003</td> <td>    0.510</td> <td>    2.590</td>
+</tr>
+<tr>
+  <th>cp_atypical angina</th>       <td>   -0.8454</td> <td>    0.561</td> <td>   -1.508</td> <td> 0.132</td> <td>   -1.944</td> <td>    0.253</td>
+</tr>
+<tr>
+  <th>cp_non-anginal</th>           <td>   -1.8501</td> <td>    0.501</td> <td>   -3.690</td> <td> 0.000</td> <td>   -2.833</td> <td>   -0.867</td>
+</tr>
+<tr>
+  <th>cp_typical angina</th>        <td>   -2.1010</td> <td>    0.667</td> <td>   -3.151</td> <td> 0.002</td> <td>   -3.408</td> <td>   -0.794</td>
+</tr>
+<tr>
+  <th>fbs_True</th>                 <td>   -0.5952</td> <td>    0.609</td> <td>   -0.977</td> <td> 0.329</td> <td>   -1.789</td> <td>    0.599</td>
+</tr>
+<tr>
+  <th>restecg_normal</th>           <td>   -0.4695</td> <td>    0.384</td> <td>   -1.222</td> <td> 0.222</td> <td>   -1.222</td> <td>    0.283</td>
+</tr>
+<tr>
+  <th>restecg_st-t abnormality</th> <td>    0.3128</td> <td>    2.439</td> <td>    0.128</td> <td> 0.898</td> <td>   -4.467</td> <td>    5.092</td>
+</tr>
+<tr>
+  <th>exang_True</th>               <td>    0.7190</td> <td>    0.440</td> <td>    1.634</td> <td> 0.102</td> <td>   -0.143</td> <td>    1.581</td>
+</tr>
+<tr>
+  <th>slope_flat</th>               <td>    0.6474</td> <td>    0.851</td> <td>    0.761</td> <td> 0.447</td> <td>   -1.020</td> <td>    2.315</td>
+</tr>
+<tr>
+  <th>slope_upsloping</th>          <td>   -0.5167</td> <td>    0.922</td> <td>   -0.560</td> <td> 0.575</td> <td>   -2.325</td> <td>    1.291</td>
+</tr>
+<tr>
+  <th>thal_normal</th>              <td>    0.0313</td> <td>    0.790</td> <td>    0.040</td> <td> 0.968</td> <td>   -1.517</td> <td>    1.579</td>
+</tr>
+<tr>
+  <th>thal_reversable defect</th>   <td>    1.4329</td> <td>    0.775</td> <td>    1.850</td> <td> 0.064</td> <td>   -0.085</td> <td>    2.951</td>
+</tr>
+<tr>
+  <th>Intercept</th>                <td>   -2.8907</td> <td>    2.847</td> <td>   -1.015</td> <td> 0.310</td> <td>   -8.472</td> <td>    2.690</td>
+</tr>
+</table></div></div>
+</div>
+<p>Let us proceed removing the variables with largest p-values wih backward elimination. We’ll drop <code class="docutils literal notranslate"><span class="pre">thal_normal</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Logit</span><span class="p">(</span><span class="n">data2</span><span class="p">[</span><span class="s1">&#39;attack&#39;</span><span class="p">],</span> <span class="n">data2</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;dataset&#39;</span><span class="p">,</span><span class="s1">&#39;attack&#39;</span><span class="p">,</span><span class="s1">&#39;num&#39;</span><span class="p">,</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="s1">&#39;thal_normal&#39;</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
+         Current function value: 0.321018
+         Iterations 8
+</pre></div>
+</div>
+<div class="output text_html"><table class="simpletable">
+<caption>Logit Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>        <td>attack</td>      <th>  No. Observations:  </th>  <td>   299</td>  
+</tr>
+<tr>
+  <th>Model:</th>                 <td>Logit</td>      <th>  Df Residuals:      </th>  <td>   281</td>  
+</tr>
+<tr>
+  <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>    17</td>  
+</tr>
+<tr>
+  <th>Date:</th>            <td>Thu, 30 Nov 2023</td> <th>  Pseudo R-squ.:     </th>  <td>0.5352</td>  
+</tr>
+<tr>
+  <th>Time:</th>                <td>20:05:21</td>     <th>  Log-Likelihood:    </th> <td> -95.984</td> 
+</tr>
+<tr>
+  <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -206.51</td> 
+</tr>
+<tr>
+  <th>Covariance Type:</th>     <td>nonrobust</td>    <th>  LLR p-value:       </th> <td>1.611e-37</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+              <td></td>                <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>age</th>                      <td>   -0.0137</td> <td>    0.025</td> <td>   -0.555</td> <td> 0.579</td> <td>   -0.062</td> <td>    0.035</td>
+</tr>
+<tr>
+  <th>trestbps</th>                 <td>    0.0244</td> <td>    0.011</td> <td>    2.171</td> <td> 0.030</td> <td>    0.002</td> <td>    0.046</td>
+</tr>
+<tr>
+  <th>chol</th>                     <td>    0.0042</td> <td>    0.004</td> <td>    1.067</td> <td> 0.286</td> <td>   -0.004</td> <td>    0.012</td>
+</tr>
+<tr>
+  <th>thalch</th>                   <td>   -0.0180</td> <td>    0.011</td> <td>   -1.636</td> <td> 0.102</td> <td>   -0.040</td> <td>    0.004</td>
+</tr>
+<tr>
+  <th>oldpeak</th>                  <td>    0.3604</td> <td>    0.230</td> <td>    1.567</td> <td> 0.117</td> <td>   -0.090</td> <td>    0.811</td>
+</tr>
+<tr>
+  <th>ca</th>                       <td>    1.3098</td> <td>    0.280</td> <td>    4.682</td> <td> 0.000</td> <td>    0.761</td> <td>    1.858</td>
+</tr>
+<tr>
+  <th>sex_Male</th>                 <td>    1.5445</td> <td>    0.512</td> <td>    3.016</td> <td> 0.003</td> <td>    0.541</td> <td>    2.548</td>
+</tr>
+<tr>
+  <th>cp_atypical angina</th>       <td>   -0.8443</td> <td>    0.560</td> <td>   -1.508</td> <td> 0.132</td> <td>   -1.942</td> <td>    0.253</td>
+</tr>
+<tr>
+  <th>cp_non-anginal</th>           <td>   -1.8479</td> <td>    0.498</td> <td>   -3.709</td> <td> 0.000</td> <td>   -2.824</td> <td>   -0.871</td>
+</tr>
+<tr>
+  <th>cp_typical angina</th>        <td>   -2.0968</td> <td>    0.658</td> <td>   -3.186</td> <td> 0.001</td> <td>   -3.387</td> <td>   -0.807</td>
+</tr>
+<tr>
+  <th>fbs_True</th>                 <td>   -0.5979</td> <td>    0.605</td> <td>   -0.988</td> <td> 0.323</td> <td>   -1.784</td> <td>    0.589</td>
+</tr>
+<tr>
+  <th>restecg_normal</th>           <td>   -0.4707</td> <td>    0.383</td> <td>   -1.229</td> <td> 0.219</td> <td>   -1.221</td> <td>    0.280</td>
+</tr>
+<tr>
+  <th>restecg_st-t abnormality</th> <td>    0.3147</td> <td>    2.439</td> <td>    0.129</td> <td> 0.897</td> <td>   -4.465</td> <td>    5.094</td>
+</tr>
+<tr>
+  <th>exang_True</th>               <td>    0.7186</td> <td>    0.440</td> <td>    1.634</td> <td> 0.102</td> <td>   -0.143</td> <td>    1.581</td>
+</tr>
+<tr>
+  <th>slope_flat</th>               <td>    0.6484</td> <td>    0.850</td> <td>    0.763</td> <td> 0.446</td> <td>   -1.018</td> <td>    2.314</td>
+</tr>
+<tr>
+  <th>slope_upsloping</th>          <td>   -0.5133</td> <td>    0.919</td> <td>   -0.559</td> <td> 0.576</td> <td>   -2.314</td> <td>    1.287</td>
+</tr>
+<tr>
+  <th>thal_reversable defect</th>   <td>    1.4068</td> <td>    0.405</td> <td>    3.471</td> <td> 0.001</td> <td>    0.612</td> <td>    2.201</td>
+</tr>
+<tr>
+  <th>Intercept</th>                <td>   -2.8676</td> <td>    2.786</td> <td>   -1.029</td> <td> 0.303</td> <td>   -8.329</td> <td>    2.593</td>
+</tr>
+</table></div></div>
+</div>
+<p>Let us remove <code class="docutils literal notranslate"><span class="pre">restecg_st-t</span> <span class="pre">abnormality</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Logit</span><span class="p">(</span><span class="n">data2</span><span class="p">[</span><span class="s1">&#39;attack&#39;</span><span class="p">],</span> <span class="n">data2</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;dataset&#39;</span><span class="p">,</span><span class="s1">&#39;attack&#39;</span><span class="p">,</span><span class="s1">&#39;num&#39;</span><span class="p">,</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="s1">&#39;restecg_st-t abnormality&#39;</span><span class="p">,</span><span class="s1">&#39;thal_normal&#39;</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
+         Current function value: 0.321046
+         Iterations 7
+</pre></div>
+</div>
+<div class="output text_html"><table class="simpletable">
+<caption>Logit Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>        <td>attack</td>      <th>  No. Observations:  </th>  <td>   299</td>  
+</tr>
+<tr>
+  <th>Model:</th>                 <td>Logit</td>      <th>  Df Residuals:      </th>  <td>   282</td>  
+</tr>
+<tr>
+  <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>    16</td>  
+</tr>
+<tr>
+  <th>Date:</th>            <td>Thu, 30 Nov 2023</td> <th>  Pseudo R-squ.:     </th>  <td>0.5352</td>  
+</tr>
+<tr>
+  <th>Time:</th>                <td>20:05:33</td>     <th>  Log-Likelihood:    </th> <td> -95.993</td> 
+</tr>
+<tr>
+  <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -206.51</td> 
+</tr>
+<tr>
+  <th>Covariance Type:</th>     <td>nonrobust</td>    <th>  LLR p-value:       </th> <td>4.281e-38</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+             <td></td>               <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>age</th>                    <td>   -0.0137</td> <td>    0.025</td> <td>   -0.553</td> <td> 0.581</td> <td>   -0.062</td> <td>    0.035</td>
+</tr>
+<tr>
+  <th>trestbps</th>               <td>    0.0245</td> <td>    0.011</td> <td>    2.187</td> <td> 0.029</td> <td>    0.003</td> <td>    0.046</td>
+</tr>
+<tr>
+  <th>chol</th>                   <td>    0.0042</td> <td>    0.004</td> <td>    1.061</td> <td> 0.289</td> <td>   -0.004</td> <td>    0.012</td>
+</tr>
+<tr>
+  <th>thalch</th>                 <td>   -0.0181</td> <td>    0.011</td> <td>   -1.650</td> <td> 0.099</td> <td>   -0.040</td> <td>    0.003</td>
+</tr>
+<tr>
+  <th>oldpeak</th>                <td>    0.3633</td> <td>    0.229</td> <td>    1.588</td> <td> 0.112</td> <td>   -0.085</td> <td>    0.812</td>
+</tr>
+<tr>
+  <th>ca</th>                     <td>    1.3091</td> <td>    0.280</td> <td>    4.680</td> <td> 0.000</td> <td>    0.761</td> <td>    1.857</td>
+</tr>
+<tr>
+  <th>sex_Male</th>               <td>    1.5371</td> <td>    0.508</td> <td>    3.023</td> <td> 0.003</td> <td>    0.541</td> <td>    2.534</td>
+</tr>
+<tr>
+  <th>cp_atypical angina</th>     <td>   -0.8440</td> <td>    0.560</td> <td>   -1.507</td> <td> 0.132</td> <td>   -1.942</td> <td>    0.254</td>
+</tr>
+<tr>
+  <th>cp_non-anginal</th>         <td>   -1.8463</td> <td>    0.498</td> <td>   -3.705</td> <td> 0.000</td> <td>   -2.823</td> <td>   -0.870</td>
+</tr>
+<tr>
+  <th>cp_typical angina</th>      <td>   -2.0996</td> <td>    0.658</td> <td>   -3.192</td> <td> 0.001</td> <td>   -3.389</td> <td>   -0.810</td>
+</tr>
+<tr>
+  <th>fbs_True</th>               <td>   -0.6002</td> <td>    0.605</td> <td>   -0.991</td> <td> 0.321</td> <td>   -1.787</td> <td>    0.586</td>
+</tr>
+<tr>
+  <th>restecg_normal</th>         <td>   -0.4752</td> <td>    0.381</td> <td>   -1.246</td> <td> 0.213</td> <td>   -1.223</td> <td>    0.272</td>
+</tr>
+<tr>
+  <th>exang_True</th>             <td>    0.7188</td> <td>    0.440</td> <td>    1.634</td> <td> 0.102</td> <td>   -0.143</td> <td>    1.581</td>
+</tr>
+<tr>
+  <th>slope_flat</th>             <td>    0.6525</td> <td>    0.850</td> <td>    0.768</td> <td> 0.443</td> <td>   -1.014</td> <td>    2.319</td>
+</tr>
+<tr>
+  <th>slope_upsloping</th>        <td>   -0.5079</td> <td>    0.918</td> <td>   -0.553</td> <td> 0.580</td> <td>   -2.308</td> <td>    1.292</td>
+</tr>
+<tr>
+  <th>thal_reversable defect</th> <td>    1.4075</td> <td>    0.405</td> <td>    3.474</td> <td> 0.001</td> <td>    0.614</td> <td>    2.202</td>
+</tr>
+<tr>
+  <th>Intercept</th>              <td>   -2.8552</td> <td>    2.784</td> <td>   -1.025</td> <td> 0.305</td> <td>   -8.312</td> <td>    2.602</td>
+</tr>
+</table></div></div>
+</div>
+<p>We now remove <code class="docutils literal notranslate"><span class="pre">age</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Logit</span><span class="p">(</span><span class="n">data2</span><span class="p">[</span><span class="s1">&#39;attack&#39;</span><span class="p">],</span> <span class="n">data2</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;dataset&#39;</span><span class="p">,</span><span class="s1">&#39;attack&#39;</span><span class="p">,</span><span class="s1">&#39;num&#39;</span><span class="p">,</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="s1">&#39;restecg_st-t abnormality&#39;</span><span class="p">,</span><span class="s1">&#39;thal_normal&#39;</span><span class="p">,</span><span class="s1">&#39;age&#39;</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
+         Current function value: 0.321559
+         Iterations 7
+</pre></div>
+</div>
+<div class="output text_html"><table class="simpletable">
+<caption>Logit Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>        <td>attack</td>      <th>  No. Observations:  </th>  <td>   299</td>  
+</tr>
+<tr>
+  <th>Model:</th>                 <td>Logit</td>      <th>  Df Residuals:      </th>  <td>   283</td>  
+</tr>
+<tr>
+  <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>    15</td>  
+</tr>
+<tr>
+  <th>Date:</th>            <td>Thu, 30 Nov 2023</td> <th>  Pseudo R-squ.:     </th>  <td>0.5344</td>  
+</tr>
+<tr>
+  <th>Time:</th>                <td>20:05:46</td>     <th>  Log-Likelihood:    </th> <td> -96.146</td> 
+</tr>
+<tr>
+  <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -206.51</td> 
+</tr>
+<tr>
+  <th>Covariance Type:</th>     <td>nonrobust</td>    <th>  LLR p-value:       </th> <td>1.261e-38</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+             <td></td>               <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>trestbps</th>               <td>    0.0228</td> <td>    0.011</td> <td>    2.126</td> <td> 0.034</td> <td>    0.002</td> <td>    0.044</td>
+</tr>
+<tr>
+  <th>chol</th>                   <td>    0.0039</td> <td>    0.004</td> <td>    1.002</td> <td> 0.316</td> <td>   -0.004</td> <td>    0.011</td>
+</tr>
+<tr>
+  <th>thalch</th>                 <td>   -0.0159</td> <td>    0.010</td> <td>   -1.561</td> <td> 0.119</td> <td>   -0.036</td> <td>    0.004</td>
+</tr>
+<tr>
+  <th>oldpeak</th>                <td>    0.3710</td> <td>    0.228</td> <td>    1.626</td> <td> 0.104</td> <td>   -0.076</td> <td>    0.818</td>
+</tr>
+<tr>
+  <th>ca</th>                     <td>    1.2705</td> <td>    0.269</td> <td>    4.718</td> <td> 0.000</td> <td>    0.743</td> <td>    1.798</td>
+</tr>
+<tr>
+  <th>sex_Male</th>               <td>    1.5667</td> <td>    0.504</td> <td>    3.106</td> <td> 0.002</td> <td>    0.578</td> <td>    2.555</td>
+</tr>
+<tr>
+  <th>cp_atypical angina</th>     <td>   -0.8593</td> <td>    0.560</td> <td>   -1.536</td> <td> 0.125</td> <td>   -1.956</td> <td>    0.237</td>
+</tr>
+<tr>
+  <th>cp_non-anginal</th>         <td>   -1.8614</td> <td>    0.498</td> <td>   -3.738</td> <td> 0.000</td> <td>   -2.837</td> <td>   -0.885</td>
+</tr>
+<tr>
+  <th>cp_typical angina</th>      <td>   -2.1148</td> <td>    0.656</td> <td>   -3.224</td> <td> 0.001</td> <td>   -3.400</td> <td>   -0.829</td>
+</tr>
+<tr>
+  <th>fbs_True</th>               <td>   -0.6053</td> <td>    0.602</td> <td>   -1.006</td> <td> 0.315</td> <td>   -1.785</td> <td>    0.574</td>
+</tr>
+<tr>
+  <th>restecg_normal</th>         <td>   -0.4670</td> <td>    0.381</td> <td>   -1.227</td> <td> 0.220</td> <td>   -1.213</td> <td>    0.279</td>
+</tr>
+<tr>
+  <th>exang_True</th>             <td>    0.7299</td> <td>    0.438</td> <td>    1.666</td> <td> 0.096</td> <td>   -0.129</td> <td>    1.589</td>
+</tr>
+<tr>
+  <th>slope_flat</th>             <td>    0.6455</td> <td>    0.851</td> <td>    0.758</td> <td> 0.448</td> <td>   -1.023</td> <td>    2.314</td>
+</tr>
+<tr>
+  <th>slope_upsloping</th>        <td>   -0.5038</td> <td>    0.920</td> <td>   -0.548</td> <td> 0.584</td> <td>   -2.307</td> <td>    1.299</td>
+</tr>
+<tr>
+  <th>thal_reversable defect</th> <td>    1.3990</td> <td>    0.404</td> <td>    3.466</td> <td> 0.001</td> <td>    0.608</td> <td>    2.190</td>
+</tr>
+<tr>
+  <th>Intercept</th>              <td>   -3.6527</td> <td>    2.381</td> <td>   -1.534</td> <td> 0.125</td> <td>   -8.319</td> <td>    1.013</td>
+</tr>
+</table></div></div>
+</div>
+<p>It’s now the turn of <code class="docutils literal notranslate"><span class="pre">slope_upsloping</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Logit</span><span class="p">(</span><span class="n">data2</span><span class="p">[</span><span class="s1">&#39;attack&#39;</span><span class="p">],</span> <span class="n">data2</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;dataset&#39;</span><span class="p">,</span><span class="s1">&#39;attack&#39;</span><span class="p">,</span><span class="s1">&#39;num&#39;</span><span class="p">,</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="s1">&#39;restecg_st-t abnormality&#39;</span><span class="p">,</span><span class="s1">&#39;thal_normal&#39;</span><span class="p">,</span><span class="s1">&#39;age&#39;</span><span class="p">,</span><span class="s1">&#39;slope_upsloping&#39;</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
+         Current function value: 0.322049
+         Iterations 7
+</pre></div>
+</div>
+<div class="output text_html"><table class="simpletable">
+<caption>Logit Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>        <td>attack</td>      <th>  No. Observations:  </th>  <td>   299</td>  
+</tr>
+<tr>
+  <th>Model:</th>                 <td>Logit</td>      <th>  Df Residuals:      </th>  <td>   284</td>  
+</tr>
+<tr>
+  <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>    14</td>  
+</tr>
+<tr>
+  <th>Date:</th>            <td>Thu, 30 Nov 2023</td> <th>  Pseudo R-squ.:     </th>  <td>0.5337</td>  
+</tr>
+<tr>
+  <th>Time:</th>                <td>20:05:54</td>     <th>  Log-Likelihood:    </th> <td> -96.293</td> 
+</tr>
+<tr>
+  <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -206.51</td> 
+</tr>
+<tr>
+  <th>Covariance Type:</th>     <td>nonrobust</td>    <th>  LLR p-value:       </th> <td>3.566e-39</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+             <td></td>               <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>trestbps</th>               <td>    0.0227</td> <td>    0.011</td> <td>    2.116</td> <td> 0.034</td> <td>    0.002</td> <td>    0.044</td>
+</tr>
+<tr>
+  <th>chol</th>                   <td>    0.0037</td> <td>    0.004</td> <td>    0.970</td> <td> 0.332</td> <td>   -0.004</td> <td>    0.011</td>
+</tr>
+<tr>
+  <th>thalch</th>                 <td>   -0.0164</td> <td>    0.010</td> <td>   -1.619</td> <td> 0.105</td> <td>   -0.036</td> <td>    0.003</td>
+</tr>
+<tr>
+  <th>oldpeak</th>                <td>    0.4256</td> <td>    0.205</td> <td>    2.078</td> <td> 0.038</td> <td>    0.024</td> <td>    0.827</td>
+</tr>
+<tr>
+  <th>ca</th>                     <td>    1.2458</td> <td>    0.264</td> <td>    4.715</td> <td> 0.000</td> <td>    0.728</td> <td>    1.764</td>
+</tr>
+<tr>
+  <th>sex_Male</th>               <td>    1.5501</td> <td>    0.502</td> <td>    3.087</td> <td> 0.002</td> <td>    0.566</td> <td>    2.534</td>
+</tr>
+<tr>
+  <th>cp_atypical angina</th>     <td>   -0.8492</td> <td>    0.558</td> <td>   -1.521</td> <td> 0.128</td> <td>   -1.943</td> <td>    0.245</td>
+</tr>
+<tr>
+  <th>cp_non-anginal</th>         <td>   -1.8661</td> <td>    0.498</td> <td>   -3.744</td> <td> 0.000</td> <td>   -2.843</td> <td>   -0.889</td>
+</tr>
+<tr>
+  <th>cp_typical angina</th>      <td>   -2.1161</td> <td>    0.654</td> <td>   -3.235</td> <td> 0.001</td> <td>   -3.398</td> <td>   -0.834</td>
+</tr>
+<tr>
+  <th>fbs_True</th>               <td>   -0.5632</td> <td>    0.594</td> <td>   -0.947</td> <td> 0.343</td> <td>   -1.728</td> <td>    0.602</td>
+</tr>
+<tr>
+  <th>restecg_normal</th>         <td>   -0.4814</td> <td>    0.379</td> <td>   -1.269</td> <td> 0.205</td> <td>   -1.225</td> <td>    0.262</td>
+</tr>
+<tr>
+  <th>exang_True</th>             <td>    0.7304</td> <td>    0.438</td> <td>    1.669</td> <td> 0.095</td> <td>   -0.127</td> <td>    1.588</td>
+</tr>
+<tr>
+  <th>slope_flat</th>             <td>    1.0485</td> <td>    0.429</td> <td>    2.442</td> <td> 0.015</td> <td>    0.207</td> <td>    1.890</td>
+</tr>
+<tr>
+  <th>thal_reversable defect</th> <td>    1.4014</td> <td>    0.404</td> <td>    3.472</td> <td> 0.001</td> <td>    0.610</td> <td>    2.193</td>
+</tr>
+<tr>
+  <th>Intercept</th>              <td>   -3.9750</td> <td>    2.302</td> <td>   -1.727</td> <td> 0.084</td> <td>   -8.487</td> <td>    0.537</td>
+</tr>
+</table></div></div>
+</div>
+<p>Let’s remove <code class="docutils literal notranslate"><span class="pre">fbs_True</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Logit</span><span class="p">(</span><span class="n">data2</span><span class="p">[</span><span class="s1">&#39;attack&#39;</span><span class="p">],</span> <span class="n">data2</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;dataset&#39;</span><span class="p">,</span><span class="s1">&#39;attack&#39;</span><span class="p">,</span><span class="s1">&#39;num&#39;</span><span class="p">,</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="s1">&#39;restecg_st-t abnormality&#39;</span><span class="p">,</span><span class="s1">&#39;thal_normal&#39;</span><span class="p">,</span><span class="s1">&#39;age&#39;</span><span class="p">,</span><span class="s1">&#39;slope_upsloping&#39;</span><span class="p">,</span><span class="s1">&#39;fbs_True&#39;</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
+         Current function value: 0.323582
+         Iterations 7
+</pre></div>
+</div>
+<div class="output text_html"><table class="simpletable">
+<caption>Logit Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>        <td>attack</td>      <th>  No. Observations:  </th>  <td>   299</td>  
+</tr>
+<tr>
+  <th>Model:</th>                 <td>Logit</td>      <th>  Df Residuals:      </th>  <td>   285</td>  
+</tr>
+<tr>
+  <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>    13</td>  
+</tr>
+<tr>
+  <th>Date:</th>            <td>Thu, 30 Nov 2023</td> <th>  Pseudo R-squ.:     </th>  <td>0.5315</td>  
+</tr>
+<tr>
+  <th>Time:</th>                <td>20:06:06</td>     <th>  Log-Likelihood:    </th> <td> -96.751</td> 
+</tr>
+<tr>
+  <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -206.51</td> 
+</tr>
+<tr>
+  <th>Covariance Type:</th>     <td>nonrobust</td>    <th>  LLR p-value:       </th> <td>1.307e-39</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+             <td></td>               <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>trestbps</th>               <td>    0.0210</td> <td>    0.011</td> <td>    1.998</td> <td> 0.046</td> <td>    0.000</td> <td>    0.042</td>
+</tr>
+<tr>
+  <th>chol</th>                   <td>    0.0036</td> <td>    0.004</td> <td>    0.936</td> <td> 0.349</td> <td>   -0.004</td> <td>    0.011</td>
+</tr>
+<tr>
+  <th>thalch</th>                 <td>   -0.0164</td> <td>    0.010</td> <td>   -1.628</td> <td> 0.103</td> <td>   -0.036</td> <td>    0.003</td>
+</tr>
+<tr>
+  <th>oldpeak</th>                <td>    0.4380</td> <td>    0.205</td> <td>    2.135</td> <td> 0.033</td> <td>    0.036</td> <td>    0.840</td>
+</tr>
+<tr>
+  <th>ca</th>                     <td>    1.1942</td> <td>    0.256</td> <td>    4.664</td> <td> 0.000</td> <td>    0.692</td> <td>    1.696</td>
+</tr>
+<tr>
+  <th>sex_Male</th>               <td>    1.4928</td> <td>    0.498</td> <td>    3.000</td> <td> 0.003</td> <td>    0.518</td> <td>    2.468</td>
+</tr>
+<tr>
+  <th>cp_atypical angina</th>     <td>   -0.8841</td> <td>    0.554</td> <td>   -1.596</td> <td> 0.110</td> <td>   -1.970</td> <td>    0.201</td>
+</tr>
+<tr>
+  <th>cp_non-anginal</th>         <td>   -1.9746</td> <td>    0.489</td> <td>   -4.039</td> <td> 0.000</td> <td>   -2.933</td> <td>   -1.016</td>
+</tr>
+<tr>
+  <th>cp_typical angina</th>      <td>   -2.1802</td> <td>    0.653</td> <td>   -3.340</td> <td> 0.001</td> <td>   -3.460</td> <td>   -0.901</td>
+</tr>
+<tr>
+  <th>restecg_normal</th>         <td>   -0.4735</td> <td>    0.379</td> <td>   -1.250</td> <td> 0.211</td> <td>   -1.216</td> <td>    0.269</td>
+</tr>
+<tr>
+  <th>exang_True</th>             <td>    0.6861</td> <td>    0.435</td> <td>    1.578</td> <td> 0.115</td> <td>   -0.166</td> <td>    1.539</td>
+</tr>
+<tr>
+  <th>slope_flat</th>             <td>    1.0228</td> <td>    0.428</td> <td>    2.391</td> <td> 0.017</td> <td>    0.184</td> <td>    1.861</td>
+</tr>
+<tr>
+  <th>thal_reversable defect</th> <td>    1.4331</td> <td>    0.402</td> <td>    3.564</td> <td> 0.000</td> <td>    0.645</td> <td>    2.221</td>
+</tr>
+<tr>
+  <th>Intercept</th>              <td>   -3.6750</td> <td>    2.257</td> <td>   -1.628</td> <td> 0.104</td> <td>   -8.099</td> <td>    0.749</td>
+</tr>
+</table></div></div>
+</div>
+<p>Let’s remove <code class="docutils literal notranslate"><span class="pre">chol</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Logit</span><span class="p">(</span><span class="n">data2</span><span class="p">[</span><span class="s1">&#39;attack&#39;</span><span class="p">],</span> <span class="n">data2</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;dataset&#39;</span><span class="p">,</span><span class="s1">&#39;attack&#39;</span><span class="p">,</span><span class="s1">&#39;num&#39;</span><span class="p">,</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="s1">&#39;restecg_st-t abnormality&#39;</span><span class="p">,</span><span class="s1">&#39;thal_normal&#39;</span><span class="p">,</span><span class="s1">&#39;age&#39;</span><span class="p">,</span><span class="s1">&#39;slope_upsloping&#39;</span><span class="p">,</span><span class="s1">&#39;fbs_True&#39;</span><span class="p">,</span><span class="s1">&#39;chol&#39;</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
+         Current function value: 0.325012
+         Iterations 7
+</pre></div>
+</div>
+<div class="output text_html"><table class="simpletable">
+<caption>Logit Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>        <td>attack</td>      <th>  No. Observations:  </th>  <td>   299</td>  
+</tr>
+<tr>
+  <th>Model:</th>                 <td>Logit</td>      <th>  Df Residuals:      </th>  <td>   286</td>  
+</tr>
+<tr>
+  <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>    12</td>  
+</tr>
+<tr>
+  <th>Date:</th>            <td>Thu, 30 Nov 2023</td> <th>  Pseudo R-squ.:     </th>  <td>0.5294</td>  
+</tr>
+<tr>
+  <th>Time:</th>                <td>20:06:19</td>     <th>  Log-Likelihood:    </th> <td> -97.179</td> 
+</tr>
+<tr>
+  <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -206.51</td> 
+</tr>
+<tr>
+  <th>Covariance Type:</th>     <td>nonrobust</td>    <th>  LLR p-value:       </th> <td>4.481e-40</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+             <td></td>               <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>trestbps</th>               <td>    0.0215</td> <td>    0.010</td> <td>    2.045</td> <td> 0.041</td> <td>    0.001</td> <td>    0.042</td>
+</tr>
+<tr>
+  <th>thalch</th>                 <td>   -0.0152</td> <td>    0.010</td> <td>   -1.538</td> <td> 0.124</td> <td>   -0.035</td> <td>    0.004</td>
+</tr>
+<tr>
+  <th>oldpeak</th>                <td>    0.4460</td> <td>    0.205</td> <td>    2.174</td> <td> 0.030</td> <td>    0.044</td> <td>    0.848</td>
+</tr>
+<tr>
+  <th>ca</th>                     <td>    1.1928</td> <td>    0.255</td> <td>    4.686</td> <td> 0.000</td> <td>    0.694</td> <td>    1.692</td>
+</tr>
+<tr>
+  <th>sex_Male</th>               <td>    1.3485</td> <td>    0.467</td> <td>    2.889</td> <td> 0.004</td> <td>    0.434</td> <td>    2.263</td>
+</tr>
+<tr>
+  <th>cp_atypical angina</th>     <td>   -0.8627</td> <td>    0.551</td> <td>   -1.565</td> <td> 0.118</td> <td>   -1.943</td> <td>    0.218</td>
+</tr>
+<tr>
+  <th>cp_non-anginal</th>         <td>   -1.9666</td> <td>    0.488</td> <td>   -4.026</td> <td> 0.000</td> <td>   -2.924</td> <td>   -1.009</td>
+</tr>
+<tr>
+  <th>cp_typical angina</th>      <td>   -2.1905</td> <td>    0.651</td> <td>   -3.365</td> <td> 0.001</td> <td>   -3.466</td> <td>   -0.915</td>
+</tr>
+<tr>
+  <th>restecg_normal</th>         <td>   -0.5380</td> <td>    0.371</td> <td>   -1.448</td> <td> 0.147</td> <td>   -1.266</td> <td>    0.190</td>
+</tr>
+<tr>
+  <th>exang_True</th>             <td>    0.6821</td> <td>    0.432</td> <td>    1.579</td> <td> 0.114</td> <td>   -0.164</td> <td>    1.529</td>
+</tr>
+<tr>
+  <th>slope_flat</th>             <td>    1.0435</td> <td>    0.427</td> <td>    2.446</td> <td> 0.014</td> <td>    0.207</td> <td>    1.880</td>
+</tr>
+<tr>
+  <th>thal_reversable defect</th> <td>    1.4706</td> <td>    0.402</td> <td>    3.659</td> <td> 0.000</td> <td>    0.683</td> <td>    2.258</td>
+</tr>
+<tr>
+  <th>Intercept</th>              <td>   -2.9396</td> <td>    2.092</td> <td>   -1.405</td> <td> 0.160</td> <td>   -7.039</td> <td>    1.160</td>
+</tr>
+</table></div></div>
+</div>
+<p>Let’s remove <code class="docutils literal notranslate"><span class="pre">restecg_normal</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Logit</span><span class="p">(</span><span class="n">data2</span><span class="p">[</span><span class="s1">&#39;attack&#39;</span><span class="p">],</span> <span class="n">data2</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;dataset&#39;</span><span class="p">,</span><span class="s1">&#39;attack&#39;</span><span class="p">,</span><span class="s1">&#39;num&#39;</span><span class="p">,</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="s1">&#39;restecg_st-t abnormality&#39;</span><span class="p">,</span><span class="s1">&#39;thal_normal&#39;</span><span class="p">,</span><span class="s1">&#39;age&#39;</span><span class="p">,</span><span class="s1">&#39;slope_upsloping&#39;</span><span class="p">,</span><span class="s1">&#39;fbs_True&#39;</span><span class="p">,</span><span class="s1">&#39;chol&#39;</span><span class="p">,</span><span class="s1">&#39;restecg_normal&#39;</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
+         Current function value: 0.328559
+         Iterations 7
+</pre></div>
+</div>
+<div class="output text_html"><table class="simpletable">
+<caption>Logit Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>        <td>attack</td>      <th>  No. Observations:  </th>  <td>   299</td>  
+</tr>
+<tr>
+  <th>Model:</th>                 <td>Logit</td>      <th>  Df Residuals:      </th>  <td>   287</td>  
+</tr>
+<tr>
+  <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>    11</td>  
+</tr>
+<tr>
+  <th>Date:</th>            <td>Thu, 30 Nov 2023</td> <th>  Pseudo R-squ.:     </th>  <td>0.5243</td>  
+</tr>
+<tr>
+  <th>Time:</th>                <td>20:06:47</td>     <th>  Log-Likelihood:    </th> <td> -98.239</td> 
+</tr>
+<tr>
+  <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -206.51</td> 
+</tr>
+<tr>
+  <th>Covariance Type:</th>     <td>nonrobust</td>    <th>  LLR p-value:       </th> <td>2.704e-40</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+             <td></td>               <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>trestbps</th>               <td>    0.0225</td> <td>    0.010</td> <td>    2.196</td> <td> 0.028</td> <td>    0.002</td> <td>    0.043</td>
+</tr>
+<tr>
+  <th>thalch</th>                 <td>   -0.0152</td> <td>    0.010</td> <td>   -1.530</td> <td> 0.126</td> <td>   -0.035</td> <td>    0.004</td>
+</tr>
+<tr>
+  <th>oldpeak</th>                <td>    0.4357</td> <td>    0.200</td> <td>    2.183</td> <td> 0.029</td> <td>    0.045</td> <td>    0.827</td>
+</tr>
+<tr>
+  <th>ca</th>                     <td>    1.2152</td> <td>    0.253</td> <td>    4.806</td> <td> 0.000</td> <td>    0.720</td> <td>    1.711</td>
+</tr>
+<tr>
+  <th>sex_Male</th>               <td>    1.3796</td> <td>    0.466</td> <td>    2.961</td> <td> 0.003</td> <td>    0.466</td> <td>    2.293</td>
+</tr>
+<tr>
+  <th>cp_atypical angina</th>     <td>   -0.8622</td> <td>    0.550</td> <td>   -1.567</td> <td> 0.117</td> <td>   -1.940</td> <td>    0.216</td>
+</tr>
+<tr>
+  <th>cp_non-anginal</th>         <td>   -1.9589</td> <td>    0.485</td> <td>   -4.038</td> <td> 0.000</td> <td>   -2.910</td> <td>   -1.008</td>
+</tr>
+<tr>
+  <th>cp_typical angina</th>      <td>   -2.1394</td> <td>    0.646</td> <td>   -3.313</td> <td> 0.001</td> <td>   -3.405</td> <td>   -0.874</td>
+</tr>
+<tr>
+  <th>exang_True</th>             <td>    0.6737</td> <td>    0.432</td> <td>    1.560</td> <td> 0.119</td> <td>   -0.173</td> <td>    1.520</td>
+</tr>
+<tr>
+  <th>slope_flat</th>             <td>    1.1014</td> <td>    0.422</td> <td>    2.608</td> <td> 0.009</td> <td>    0.274</td> <td>    1.929</td>
+</tr>
+<tr>
+  <th>thal_reversable defect</th> <td>    1.4078</td> <td>    0.395</td> <td>    3.567</td> <td> 0.000</td> <td>    0.634</td> <td>    2.181</td>
+</tr>
+<tr>
+  <th>Intercept</th>              <td>   -3.3894</td> <td>    2.056</td> <td>   -1.648</td> <td> 0.099</td> <td>   -7.420</td> <td>    0.641</td>
+</tr>
+</table></div></div>
+</div>
+<p>Let us now remove <code class="docutils literal notranslate"><span class="pre">exang_True</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Logit</span><span class="p">(</span><span class="n">data2</span><span class="p">[</span><span class="s1">&#39;attack&#39;</span><span class="p">],</span> <span class="n">data2</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;dataset&#39;</span><span class="p">,</span><span class="s1">&#39;attack&#39;</span><span class="p">,</span><span class="s1">&#39;num&#39;</span><span class="p">,</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="s1">&#39;restecg_st-t abnormality&#39;</span><span class="p">,</span><span class="s1">&#39;thal_normal&#39;</span><span class="p">,</span><span class="s1">&#39;age&#39;</span><span class="p">,</span><span class="s1">&#39;slope_upsloping&#39;</span><span class="p">,</span><span class="s1">&#39;fbs_True&#39;</span><span class="p">,</span><span class="s1">&#39;chol&#39;</span><span class="p">,</span><span class="s1">&#39;restecg_normal&#39;</span><span class="p">,</span><span class="s1">&#39;exang_True&#39;</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
+         Current function value: 0.332571
+         Iterations 7
+</pre></div>
+</div>
+<div class="output text_html"><table class="simpletable">
+<caption>Logit Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>        <td>attack</td>      <th>  No. Observations:  </th>  <td>   299</td>  
+</tr>
+<tr>
+  <th>Model:</th>                 <td>Logit</td>      <th>  Df Residuals:      </th>  <td>   288</td>  
+</tr>
+<tr>
+  <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>    10</td>  
+</tr>
+<tr>
+  <th>Date:</th>            <td>Thu, 30 Nov 2023</td> <th>  Pseudo R-squ.:     </th>  <td>0.5185</td>  
+</tr>
+<tr>
+  <th>Time:</th>                <td>20:07:11</td>     <th>  Log-Likelihood:    </th> <td> -99.439</td> 
+</tr>
+<tr>
+  <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -206.51</td> 
+</tr>
+<tr>
+  <th>Covariance Type:</th>     <td>nonrobust</td>    <th>  LLR p-value:       </th> <td>1.791e-40</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+             <td></td>               <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>trestbps</th>               <td>    0.0233</td> <td>    0.010</td> <td>    2.278</td> <td> 0.023</td> <td>    0.003</td> <td>    0.043</td>
+</tr>
+<tr>
+  <th>thalch</th>                 <td>   -0.0180</td> <td>    0.010</td> <td>   -1.845</td> <td> 0.065</td> <td>   -0.037</td> <td>    0.001</td>
+</tr>
+<tr>
+  <th>oldpeak</th>                <td>    0.4647</td> <td>    0.197</td> <td>    2.354</td> <td> 0.019</td> <td>    0.078</td> <td>    0.852</td>
+</tr>
+<tr>
+  <th>ca</th>                     <td>    1.2033</td> <td>    0.252</td> <td>    4.781</td> <td> 0.000</td> <td>    0.710</td> <td>    1.697</td>
+</tr>
+<tr>
+  <th>sex_Male</th>               <td>    1.3780</td> <td>    0.458</td> <td>    3.006</td> <td> 0.003</td> <td>    0.480</td> <td>    2.276</td>
+</tr>
+<tr>
+  <th>cp_atypical angina</th>     <td>   -1.0592</td> <td>    0.537</td> <td>   -1.973</td> <td> 0.048</td> <td>   -2.111</td> <td>   -0.007</td>
+</tr>
+<tr>
+  <th>cp_non-anginal</th>         <td>   -2.1451</td> <td>    0.472</td> <td>   -4.549</td> <td> 0.000</td> <td>   -3.069</td> <td>   -1.221</td>
+</tr>
+<tr>
+  <th>cp_typical angina</th>      <td>   -2.3297</td> <td>    0.642</td> <td>   -3.626</td> <td> 0.000</td> <td>   -3.589</td> <td>   -1.071</td>
+</tr>
+<tr>
+  <th>slope_flat</th>             <td>    1.1436</td> <td>    0.420</td> <td>    2.724</td> <td> 0.006</td> <td>    0.321</td> <td>    1.966</td>
+</tr>
+<tr>
+  <th>thal_reversable defect</th> <td>    1.4692</td> <td>    0.391</td> <td>    3.758</td> <td> 0.000</td> <td>    0.703</td> <td>    2.235</td>
+</tr>
+<tr>
+  <th>Intercept</th>              <td>   -2.8221</td> <td>    2.011</td> <td>   -1.404</td> <td> 0.160</td> <td>   -6.763</td> <td>    1.119</td>
+</tr>
+</table></div></div>
+</div>
+<p>Let us now remove <code class="docutils literal notranslate"><span class="pre">thalch</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Logit</span><span class="p">(</span><span class="n">data2</span><span class="p">[</span><span class="s1">&#39;attack&#39;</span><span class="p">],</span> <span class="n">data2</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;dataset&#39;</span><span class="p">,</span><span class="s1">&#39;attack&#39;</span><span class="p">,</span><span class="s1">&#39;num&#39;</span><span class="p">,</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="s1">&#39;restecg_st-t abnormality&#39;</span><span class="p">,</span><span class="s1">&#39;thal_normal&#39;</span><span class="p">,</span><span class="s1">&#39;age&#39;</span><span class="p">,</span><span class="s1">&#39;slope_upsloping&#39;</span><span class="p">,</span><span class="s1">&#39;fbs_True&#39;</span><span class="p">,</span><span class="s1">&#39;chol&#39;</span><span class="p">,</span><span class="s1">&#39;restecg_normal&#39;</span><span class="p">,</span><span class="s1">&#39;exang_True&#39;</span><span class="p">,</span><span class="s1">&#39;thalch&#39;</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
+         Current function value: 0.338536
+         Iterations 7
+</pre></div>
+</div>
+<div class="output text_html"><table class="simpletable">
+<caption>Logit Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>        <td>attack</td>      <th>  No. Observations:  </th>  <td>   299</td>  
+</tr>
+<tr>
+  <th>Model:</th>                 <td>Logit</td>      <th>  Df Residuals:      </th>  <td>   289</td>  
+</tr>
+<tr>
+  <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>     9</td>  
+</tr>
+<tr>
+  <th>Date:</th>            <td>Thu, 30 Nov 2023</td> <th>  Pseudo R-squ.:     </th>  <td>0.5099</td>  
+</tr>
+<tr>
+  <th>Time:</th>                <td>20:07:42</td>     <th>  Log-Likelihood:    </th> <td> -101.22</td> 
+</tr>
+<tr>
+  <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -206.51</td> 
+</tr>
+<tr>
+  <th>Covariance Type:</th>     <td>nonrobust</td>    <th>  LLR p-value:       </th> <td>1.996e-40</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+             <td></td>               <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>trestbps</th>               <td>    0.0220</td> <td>    0.010</td> <td>    2.145</td> <td> 0.032</td> <td>    0.002</td> <td>    0.042</td>
+</tr>
+<tr>
+  <th>oldpeak</th>                <td>    0.5145</td> <td>    0.194</td> <td>    2.659</td> <td> 0.008</td> <td>    0.135</td> <td>    0.894</td>
+</tr>
+<tr>
+  <th>ca</th>                     <td>    1.2539</td> <td>    0.252</td> <td>    4.985</td> <td> 0.000</td> <td>    0.761</td> <td>    1.747</td>
+</tr>
+<tr>
+  <th>sex_Male</th>               <td>    1.3382</td> <td>    0.455</td> <td>    2.942</td> <td> 0.003</td> <td>    0.447</td> <td>    2.230</td>
+</tr>
+<tr>
+  <th>cp_atypical angina</th>     <td>   -1.2521</td> <td>    0.521</td> <td>   -2.403</td> <td> 0.016</td> <td>   -2.274</td> <td>   -0.231</td>
+</tr>
+<tr>
+  <th>cp_non-anginal</th>         <td>   -2.3023</td> <td>    0.464</td> <td>   -4.966</td> <td> 0.000</td> <td>   -3.211</td> <td>   -1.394</td>
+</tr>
+<tr>
+  <th>cp_typical angina</th>      <td>   -2.5791</td> <td>    0.644</td> <td>   -4.004</td> <td> 0.000</td> <td>   -3.842</td> <td>   -1.317</td>
+</tr>
+<tr>
+  <th>slope_flat</th>             <td>    1.3792</td> <td>    0.397</td> <td>    3.470</td> <td> 0.001</td> <td>    0.600</td> <td>    2.158</td>
+</tr>
+<tr>
+  <th>thal_reversable defect</th> <td>    1.5143</td> <td>    0.388</td> <td>    3.907</td> <td> 0.000</td> <td>    0.755</td> <td>    2.274</td>
+</tr>
+<tr>
+  <th>Intercept</th>              <td>   -5.4495</td> <td>    1.485</td> <td>   -3.669</td> <td> 0.000</td> <td>   -8.361</td> <td>   -2.538</td>
+</tr>
+</table></div></div>
+</div>
+<p>Al p-values are now below the significance level <span class="math notranslate nohighlight">\(\alpha=0.05\)</span>. We can now proceed interpreting the result.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./laboratories"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="12_regressione_logistica.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">24. </span>Laboratorio su regressione logistica</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">25. Linear and Logistic Regression Laboratory</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">25.1. Linear Regression</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-vs-mean-values">26. Linear Regression vs Mean Values</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression">26.1. Logistic regression</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Antonino Furnari
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
