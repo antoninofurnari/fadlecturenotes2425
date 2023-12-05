@@ -1,0 +1,1500 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Principal Component Analysis &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures/14_principal_component_analysis';</script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Lecture Notes on Fundamentals of Data Analysis - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Lecture Notes on Fundamentals of Data Analysis - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Lecture Notes on Fundamental of Data Analysis
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_intro_data_analysis.html">1. Introduction to Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_main_data_analysis_concepts.html">2. Main data analysis concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_misure_di_frequenze_e_rappresentazione_grafica_dei_dati.html">3. Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_misure_di_tendenza_centrale_dispersione_e_forma.html">4. Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_associazione_variabili.html">5. Associazione tra Variabili</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_probability.html">6. Probability for Data Manipulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_common_distributions.html">7. Common Probability Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_information_theory.html">8. Basic Elements of Information Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_statistical_inference.html">9. Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_linear_regression.html">10. Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_logistic_regression.html">11. Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_causal_analysis.html">12. Causal Data Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratories</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/01_setup.html">13. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/02_intro_python.html">14. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/03_intro_numpy.html">15. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/04_intro_matplotlib.html">16. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/05_intro_pandas.html">17. Introduzione a Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">18. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/07_misure_di_tendenza_centrale_dispersione_e_forma.html">19. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/08_associazione_variabili.html">20. Associazione tra Variabili</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/09_heart-disease-analysis.html">21. Exploratory Analysis on the Heart Disease Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/10_statistical_inference.html">22. Laboratory on Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/11_regressione_lineare.html">23. Laboratorio su Regressione Lineare</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/12_regressione_logistica.html">24. Laboratorio su regressione logistica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/13_linear_logistic_regression_example_analysis.html">25. Linear and Logistic Regression Laboratory</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/antoninofurnari/fadlecturenotes/blob/master/lecturenotes/lectures/14_principal_component_analysis.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/antoninofurnari/fadlecturenotes" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/antoninofurnari/fadlecturenotes/issues/new?title=Issue%20on%20page%20%2Flectures/14_principal_component_analysis.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/lectures/14_principal_component_analysis.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Principal Component Analysis</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-as-n-dimensional-points-and-features">Data as N-Dimensional Points and Features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-selection-vs-feature-reduction">Feature Selection vs Feature Reduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-reduction-example">Feature Reduction Example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rotating-around-the-origin">Rotating Around the Origin</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#amount-of-information-reconstruction-error-and-variance">Amount of Information, Reconstruction Error and Variance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#projection-along-a-direction">Projection Along a Direction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-index-to-rule-them-all">An Index to Rule them All</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-formulation">General Formulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#back-to-our-example">Back to Our Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-an-appropriate-number-of-components">Choosing an Appropriate Number of Components</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-principal-components-load-plots">Interpretation of the Principal Components - Load Plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-of-pca">Applications of PCA</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensionality-reduction-and-visualization">Dimensionality Reduction and Visualization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-decorrelation-principal-component-regression">Data Decorrelation - Principal Component Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-compression">Data Compression</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="principal-component-analysis">
+<h1>Principal Component Analysis<a class="headerlink" href="#principal-component-analysis" title="Permalink to this heading">#</a></h1>
+<p>So far, we have worked with relatively small datasets, with a limited set of interpretable variables. We have seen how models such as linear and logistic regression can help in understanding and interpret the relationships between variables.</p>
+<p>In practice, in many cases, we will work with larger sets of data, where individual variables are not always interpretable. <strong>Consider for instance a dataset of medical images with a resolution of <span class="math notranslate nohighlight">\(600 \times 600\)</span> pixels. We may want to be able to apply data analysis to such images, for instance, for automated diagnosis, but, if we think about it, we obtain a set of <span class="math notranslate nohighlight">\(360000\)</span> individual columns. Moreover, such columns are not directly interpretable (each one represent the gray value of a specific pixel in the image).</strong></p>
+<p>In most of these cases, <strong>the data will be highly redundant, with different variables being dependent or reporting similar data in different form</strong>. Think about it: if there is a large number of variables, it is more probable that some of them capture the same phenomenon from different points of view.</p>
+<section id="data-as-n-dimensional-points-and-features">
+<h2>Data as N-Dimensional Points and Features<a class="headerlink" href="#data-as-n-dimensional-points-and-features" title="Permalink to this heading">#</a></h2>
+<p>Before going further, we need to clarify some terminology. When many variables are available, we usually refer to the observations as <strong>n-dimensional data points</strong>. Consider the following data:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Subject</p></th>
+<th class="head"><p>Height (cm)</p></th>
+<th class="head"><p>Weight (Kg)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>175</p></td>
+<td><p>70</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>160</p></td>
+<td><p>60</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>180</p></td>
+<td><p>78</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>160</p></td>
+<td><p>75</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>155</p></td>
+<td><p>58</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>190</p></td>
+<td><p>110</p></td>
+</tr>
+</tbody>
+</table>
+<p>We can see each of these observations (the rows of the matrix) as a data point. Further, we can geometrically represent such points as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">175</span><span class="p">,</span><span class="mi">160</span><span class="p">,</span><span class="mi">180</span><span class="p">,</span><span class="mi">160</span><span class="p">,</span><span class="mi">155</span><span class="p">,</span><span class="mi">190</span><span class="p">],</span> <span class="p">[</span><span class="mi">70</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="mi">78</span><span class="p">,</span><span class="mi">75</span><span class="p">,</span><span class="mi">58</span><span class="p">,</span><span class="mi">110</span><span class="p">],</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Height (cm)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Height (cm)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4cb91a1123c70ff8b38008ef6e3493c1ed0b1b641f1085218de518d93a9cd672.png" src="../_images/4cb91a1123c70ff8b38008ef6e3493c1ed0b1b641f1085218de518d93a9cd672.png" />
+</div>
+</div>
+<p>Each observation is a 2D point in the Cartesian space. This geometrical interpretation of data is central to data analysis and very convenient <strong>when many different variables are available</strong>.</p>
+<p>Each of the variables, we also be referred to as <strong>a feature of the data</strong>. This is also very convenient when multiple variables are available and in particular when they are not directly interpretable. For instance, a dataset of images of <span class="math notranslate nohighlight">\(100x100 pixels\)</span> can be seen as a collection of <span class="math notranslate nohighlight">\(10000\)</span>-dimensional vectors, where each vector’s dimension is a “feature”, i.e., the value of a specific pixel of the image.</p>
+<p>Throughout this lecture and from now on, we will ofter refer to data as <strong>collections of n-dimensional points or observations of n different features</strong>.</p>
+</section>
+<section id="feature-selection-vs-feature-reduction">
+<h2>Feature Selection vs Feature Reduction<a class="headerlink" href="#feature-selection-vs-feature-reduction" title="Permalink to this heading">#</a></h2>
+<p>We have seen how, when many variables are available, it makes sense to select a subset of such variables. In regression analysis, in particular, we have seen how, when features are highly correlated, we should <strong>discard some of them to reduce collinearity</strong>. Indeed, if two variables <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are highly correlated, one of the two is redundant to a given extent, and we can ignore it.</p>
+<p>We have seen how variables can be selected in different ways:</p>
+<ul class="simple">
+<li><p>By looking at the correlation matrix, we can directly find those pairs of variables which are highly correlated;</p></li>
+<li><p>When defining a linear or logistic regressor, we can remove those variables with a high p-value. We have seen that these are variables which do not contribute significantly to the prediction of the dependent variable, given all other variables present in the regressor;</p></li>
+<li><p>Techniques such as <strong>Ridge and Lasso regression</strong> allow to perform some form of variable (or feature) selection, setting very low or zero coefficients for variables which do not contribute significantly to regression.</p></li>
+</ul>
+<p><strong>In general, however, when we discard a set of variable, we throw away some informative content, unless the variables we are removing can be perfectly reconstructed from the variables we are keeping, e.g., because they are linear combinations of other variables.</strong></p>
+<p>Instead of selecting a subset of features to work with, <strong>feature reduction techniques</strong> aim to <strong>find a new set of features which summarize the original set of features losing a small amount of information, while maintaining a limited number of dimensions</strong>.</p>
+</section>
+<section id="feature-reduction-example">
+<h2>Feature Reduction Example<a class="headerlink" href="#feature-reduction-example" title="Permalink to this heading">#</a></h2>
+<p>Let us consider the Iris dataset. In particular, we will consider two features: <code class="docutils literal notranslate"><span class="pre">sepal</span> <span class="pre">length</span></code> and <code class="docutils literal notranslate"><span class="pre">petal</span> <span class="pre">length</span></code>:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/ab7ccb1ca2c1eb8019b9acba5338ad4ed43cdfc230445dec8a04879aeacedfdf.png" src="../_images/ab7ccb1ca2c1eb8019b9acba5338ad4ed43cdfc230445dec8a04879aeacedfdf.png" />
+</div>
+</div>
+<p>We can see from the plot above that the two features are highly correlated. Let us compute the Pearson coefficient and the related p-value:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PearsonRResult(statistic=0.8717537758865831, pvalue=1.0386674194498827e-47)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Both features represent the length of two physical characteristics of the flowers, hence <strong>it is no wonder that they are correlated!</strong>. It would be useful to find a transformation of the data <span class="math notranslate nohighlight">\((x_1,x_2)\)</span> into a new set of features <span class="math notranslate nohighlight">\((z_1,z_2)\)</span> such that:</p>
+<ul class="simple">
+<li><p>Both <span class="math notranslate nohighlight">\(z_1\)</span> and <span class="math notranslate nohighlight">\(z_2\)</span> are computed from <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span>, and hence each individual new variable can “summarize” the informative content of both variables;</p></li>
+<li><p><span class="math notranslate nohighlight">\(z_1\)</span> and <span class="math notranslate nohighlight">\(z_2\)</span> are sorted by the amount of informative content that they carry about the original variables <span class="math notranslate nohighlight">\((x_1,x_2)\)</span>. If this condition is satisfied, then we can select <span class="math notranslate nohighlight">\(z_1\)</span> and discard <span class="math notranslate nohighlight">\(z_2\)</span> to reduce the dimensionality of the original data (from <span class="math notranslate nohighlight">\(2\)</span> to <span class="math notranslate nohighlight">\(1\)</span> variable) while retaining the largest amount of information.</p></li>
+</ul>
+<p>We also note that, ideally, we expect the <strong>new variables <span class="math notranslate nohighlight">\(z_1\)</span> and <span class="math notranslate nohighlight">\(z_2\)</span> to be decorrelated</strong>. Indeed, if <span class="math notranslate nohighlight">\(z_1\)</span> and <span class="math notranslate nohighlight">\(z_2\)</span> are decorrelated, adding <span class="math notranslate nohighlight">\(z_2\)</span> to the picture only brings additional informative content about the original data, avoiding “repeating” information which is already summarized in <span class="math notranslate nohighlight">\(z_1\)</span>.</p>
+<section id="rotating-around-the-origin">
+<h3>Rotating Around the Origin<a class="headerlink" href="#rotating-around-the-origin" title="Permalink to this heading">#</a></h3>
+<p>In our example, we note that a specific rotation of the data around the central point</p>
+<div class="math notranslate nohighlight">
+\[(\overline x, \overline y) = \big(\frac{1}{N}\sum_{i=1}^N x_1^{(i)}, \frac{1}{N}\sum_{i=1}^N x_2^{(i)}\big)\]</div>
+<p>brings the characteristics highlighted above:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/94727eda0e681ca5ce837d31a345bb8c7b5b7ee064a3118a69fa24365bbcfeba.png" src="../_images/94727eda0e681ca5ce837d31a345bb8c7b5b7ee064a3118a69fa24365bbcfeba.png" />
+</div>
+</div>
+<p>As we can see, this specific rotation (we will see later how to compute the optimal one) has produced a version of the data which is uncorrelated. Note that the rotation around the mean point is a rigid and invertible transformation, hence there is no loss of information.</p>
+</section>
+<section id="amount-of-information-reconstruction-error-and-variance">
+<h3>Amount of Information, Reconstruction Error and Variance<a class="headerlink" href="#amount-of-information-reconstruction-error-and-variance" title="Permalink to this heading">#</a></h3>
+<p>Without loss of generality, let us now consider the two variables:</p>
+<div class="math notranslate nohighlight">
+\[h_1 = x_1 - \overline x_1, h_2 = x_2 - \overline x_2 \]</div>
+<p>These have been obtained by shifting the data to the mean point. Note that this shift has not changed in any way the informative content of the variables.</p>
+<p>Since the data has been rotated, we can see the computation of <span class="math notranslate nohighlight">\(z_1\)</span> and <span class="math notranslate nohighlight">\(z_2\)</span> as follows:</p>
+<div class="math notranslate nohighlight">
+\[z_1 = h_1 \cos(\theta)  - h_2 \sin(\theta)\]</div>
+<div class="math notranslate nohighlight">
+\[z_2 = h_1 \sin(\theta) + h_2 \cos(\theta)\]</div>
+<p>Where <span class="math notranslate nohighlight">\(\theta\)</span> is the optimal angle. We will see how to compute the optimal rotation later. For now let us assume that <span class="math notranslate nohighlight">\(\theta=-1.17 rad\)</span> (this is indeed the rotation that has been applied to make the considered set of data uncorrelated).</p>
+<p>We can invert the transformation as follows:</p>
+<div class="math notranslate nohighlight">
+\[h_1 = z_1 \cos(-\theta)  - z_2 \sin(-\theta)\]</div>
+<div class="math notranslate nohighlight">
+\[h_2 = z_1 \sin(-\theta) + z_2 \cos(-\theta)\]</div>
+<p>If we want to reduce the number of variables, we could either discard <span class="math notranslate nohighlight">\(z_1\)</span> or <span class="math notranslate nohighlight">\(z_2\)</span>. If we discard <span class="math notranslate nohighlight">\(z_2\)</span>, hence setting it to zero, we can reconstruct the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> values as follows:</p>
+<div class="math notranslate nohighlight">
+\[\hat h_1' = z_1 \cos(-\theta)\]</div>
+<div class="math notranslate nohighlight">
+\[\hat h_2' = z_1 \sin(-\theta)\]</div>
+<p>If we discard <span class="math notranslate nohighlight">\(z_1\)</span>, we obtain:</p>
+<div class="math notranslate nohighlight">
+\[\hat h_1'' = - z_2 \sin(-\theta)\]</div>
+<div class="math notranslate nohighlight">
+\[\hat h_2'' = z_2 \cos(-\theta)\]</div>
+<p>To have an idea of how much information we lose by discarding one fo the two variables, we can compute the reconstruction error, i.e., the MSE between the predicted and original values. We have:</p>
+<div class="math notranslate nohighlight">
+\[MSE' = \frac{1}{N}\sum_{i=1}^N (\hat h_1' - h_1)^2 + (\hat h_2' - h_2)^2, MSE'' = \frac{1}{N} \sum_{i=1}^N (\hat h_1'' - h_1)^2 + (\hat h_2'' - h_2)^2\]</div>
+<p>Another strategy, would be to avoid the transformation altogether and set either <span class="math notranslate nohighlight">\(x=0\)</span> and <span class="math notranslate nohighlight">\(y=0\)</span>. We can hence consider other two MSE errors:</p>
+<div class="math notranslate nohighlight">
+\[MSE_1 = \frac{1}{N}\sum_{i=1}^N (h_1 - h_1)^2 + (0 - h_2)^2, MSE_2 = \frac{1}{N} \sum_{i=1}^N (0 - h_1)^2 + (h_2 - h_2)^2\]</div>
+<p>In practice, these MSE values will be as follows:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    MSE&#39;    MSE&#39;&#39;     MSEx     MSEy
+0.139139 3.637486 3.095503 0.681122
+</pre></div>
+</div>
+</div>
+</div>
+<p>As can be seen, reconstructing the data using only <span class="math notranslate nohighlight">\(z_1\)</span> has the least MSE score, suggesting a higher informative content about the original data.</p>
+<p>Note that the MSE can also be seen as the sum of the squares of the dashed lines in the following plots:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/48fa3410a139f91c1dc7778af915a00bfc4be31e677b305feb5bf245d98d0ca6.png" src="../_images/48fa3410a139f91c1dc7778af915a00bfc4be31e677b305feb5bf245d98d0ca6.png" />
+</div>
+</div>
+<p>As can be seen, reconstructing the data with the <span class="math notranslate nohighlight">\(z_1\)</span> variable, corresponds to projecting it to the <span class="math notranslate nohighlight">\(z_1\)</span> axis, after the data has been appropriately rotated. This has the lowest error, indicating that <span class="math notranslate nohighlight">\(z_1\)</span> is the most informative single direction.</p>
+<p>We can also see that <strong>the <span class="math notranslate nohighlight">\(z_1\)</span> variable is the one with the largest variance</strong>:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variance of z1: 3.64
+Variance of z2: 0.14
+Variance of h1: 0.68
+Variance of h2: 3.10
+</pre></div>
+</div>
+</div>
+</div>
+<p>Intuitively, <strong>larger variance lends to a larger informative content, and hence to a smaller reconstruction error</strong>. Indeed, in variables exhibiting low variance, points tend to be less distinguishable, hence making it harder to reconstruct the original data.</p>
+</section>
+<section id="projection-along-a-direction">
+<h3>Projection Along a Direction<a class="headerlink" href="#projection-along-a-direction" title="Permalink to this heading">#</a></h3>
+<p>Note that we can see the transformation:</p>
+<div class="math notranslate nohighlight">
+\[z_1 = h_1 \cos(\theta)  - h_2 \sin(\theta)\]</div>
+<p>As follows:</p>
+<div class="math notranslate nohighlight">
+\[z_1 = h_1 w_1  - h_2 w_2\]</div>
+<p>If we set <span class="math notranslate nohighlight">\(\mathbf{w} = (w_1,w_2)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{h}=(h_1,h_2)\)</span>, and <span class="math notranslate nohighlight">\(\mathbf{z} = (z_1,z_2)\)</span>, we can write:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{z} = \mathbf{w}^T \mathbf{h}\]</div>
+<p>We also note that <span class="math notranslate nohighlight">\(||\mathbf{w}|| = \sqrt{w_1^2 + w_2^2} = \sqrt{\sin^2\theta + \cos^2 \theta}= 1\)</span>.</p>
+<p>We recall that <strong>the product <span class="math notranslate nohighlight">\(\mathbf{w}^T\mathbf{x}\)</span> corresponds to projecting the point <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> to the unit vector <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> indicating the axis of a new coordinate system</strong>.</p>
+<p>Indeed:</p>
+<div class="math notranslate nohighlight">
+\[ \cos \theta = \frac{\mathbf{w}^T\mathbf{x}}{||\mathbf{w}|| \cdot ||\mathbf{x}||}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\theta\)</span> is the angle between the <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> unit vector and the <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> vector. Since <span class="math notranslate nohighlight">\(||\mathbf{w}|| = 1\)</span>, we obtain:</p>
+<div class="math notranslate nohighlight">
+\[ ||\mathbf{x}|| \cos \theta = \mathbf{w}^T\mathbf{x}\]</div>
+<p>This is graphically shown as follows:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/dc6bde27c6e1a904303414e0c7c15fe3327183f54a396f19e4d6dc5df6e59878.png" src="../_images/dc6bde27c6e1a904303414e0c7c15fe3327183f54a396f19e4d6dc5df6e59878.png" />
+</div>
+</div>
+<p><strong>A given choice of a rotation angle <span class="math notranslate nohighlight">\(\theta\)</span> or a vector <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> will hence identify a new direction along which to project all points to obtain the feature <span class="math notranslate nohighlight">\(z_1\)</span></strong>, as shown in the following plot:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/bb0614a45f23c7476c136e3ca41e91ca3b325ea195857883645aa292f284c09b.png" src="../_images/bb0614a45f23c7476c136e3ca41e91ca3b325ea195857883645aa292f284c09b.png" />
+</div>
+</div>
+<p>The plots above show how multiplying all points by a vector <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> is <strong>equivalent to rotating the data by a given angle, and then projecting the data to the new <span class="math notranslate nohighlight">\(x\)</span> axis</strong>. We also note that good projections are the ones that:</p>
+<ul class="simple">
+<li><p>Maximize the variance along the <span class="math notranslate nohighlight">\(z_1\)</span> axis;</p></li>
+<li><p>Minimize the MSE, i.e., the length of the dashed black lines.</p></li>
+</ul>
+</section>
+<section id="an-index-to-rule-them-all">
+<h3>An Index to Rule them All<a class="headerlink" href="#an-index-to-rule-them-all" title="Permalink to this heading">#</a></h3>
+<p>We can see the variable <span class="math notranslate nohighlight">\(z_1\)</span> found by rotating the data as <strong>a single index summarizing the original data</strong>. Since it is the single dimension which leads to the smallest reconstruction error, <strong>if we have a computational budget of a single variable</strong>, it does make sense to represent the data using this value.</p>
+<p>Recall that, in the end, <span class="math notranslate nohighlight">\(z_1\)</span> is a linear combination of <span class="math notranslate nohighlight">\(h_1\)</span> and <span class="math notranslate nohighlight">\(h_2\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[z_1 = h_1 w_1 + h_2 w_2\]</div>
+<p>We can see <span class="math notranslate nohighlight">\(w_1\)</span> and <span class="math notranslate nohighlight">\(w_2\)</span> as two weights denoting the relative importance of the original variables. If <span class="math notranslate nohighlight">\(h_1\)</span> and <span class="math notranslate nohighlight">\(h_2\)</span> are <code class="docutils literal notranslate"><span class="pre">sepal</span> <span class="pre">length</span></code> and <code class="docutils literal notranslate"><span class="pre">petal</span> <span class="pre">length</span></code> as in our example, <span class="math notranslate nohighlight">\(z_1\)</span> can be seen as a new “<strong>largeness</strong>” feature and, in this simple example, we may even see it as a way to sort our observations from smaller to larger.</p>
+</section>
+</section>
+<section id="general-formulation">
+<h2>General Formulation<a class="headerlink" href="#general-formulation" title="Permalink to this heading">#</a></h2>
+<p>We have seen a simple example in the case of two variables. Let us now discuss the general formulation in the case of <span class="math notranslate nohighlight">\(D\)</span>-dimensional variables.</p>
+<p>Let <span class="math notranslate nohighlight">\(\{\mathbf{x}_n\}\)</span> be a set of <span class="math notranslate nohighlight">\(N\)</span> observations, where <span class="math notranslate nohighlight">\(n=1,\ldots,N\)</span>, and <span class="math notranslate nohighlight">\(\mathbf{x}_n\)</span> is a vector of dimensionality <span class="math notranslate nohighlight">\(D\)</span>. We will define Principal Component Analysis as a projection of the data to <span class="math notranslate nohighlight">\(M \lt D\)</span> dimensions such that the variance of the projected data is maximized.</p>
+<p>We will first consider the case in which <span class="math notranslate nohighlight">\(M=1\)</span>. In this case, we want to find a D-dimensional vector <span class="math notranslate nohighlight">\(\mathbf{u}_1\)</span> such that, projecting the data to this vector, variance is maximized. Without loss of generality, we will choose <span class="math notranslate nohighlight">\(\mathbf{u}_1\)</span> such that <span class="math notranslate nohighlight">\(\mathbf{u}_1^T\mathbf{u}=1\)</span>. This corresponds to choosing <span class="math notranslate nohighlight">\(\mathbf{u}_1\)</span> as a <strong>unit vector</strong>, which makes sense, as we are interested in the direction of the projection. We will find this assumption useful later.</p>
+<p>Let <span class="math notranslate nohighlight">\(\overline{\mathbf{x}}\)</span> be the sample mean:</p>
+<div class="math notranslate nohighlight">
+\[\overline{\mathbf{x}} = \sum_{n=1}^N x_n\]</div>
+<p>The data covariance matrix <span class="math notranslate nohighlight">\(\mathbf{S}\)</span> can be defined as follows:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{S} = \frac{1}{N} \sum_{n=1}^N (\mathbf{x}_n - \overline{\mathbf{x}}) (\mathbf{x}_n - \overline{\mathbf{x}})^T\]</div>
+<p>To see why the definition above is correct, let us consider a set of 2D points <span class="math notranslate nohighlight">\(\mathbf{x}_n=(x_n^{(1)},x_n^{(2)})\)</span> and the mean value <span class="math notranslate nohighlight">\(\overline{\mathbf{x}} = (\overline{x}^{(1)},\overline{x}^{(2)})\)</span>. We have:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{S} =  \frac{1}{N} \sum_{n=1}^N (\mathbf{x}_n - \overline{\mathbf{x}}) (\mathbf{x}_n - \overline{\mathbf{x}})^T = \frac{1}{N} \sum_{n=1}^N \left(\begin{matrix} x_n^{(1)} - \overline{x}^{(1)} \\ x_n^{(1)} - \overline{x}^{(2)} \end{matrix}\right) (x_n^{(1)} - \overline{x}^{(1)}, x_n^{(1)} - \overline{x}^{(2)})=\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}=\frac{1}{N} \sum_{n=1}^N \left(\begin{matrix} (x_n^{(1)}-\overline{x}^{(1)})^2 &amp; (x_n^{(1)}-\overline{x}^{(1)})(x_n^{(2)}-\overline{x}^{(2)}) \\ (x_n^{(1)}-\overline{x}^{(1)})(x_n^{(2)}-\overline{x}^{(2)}) &amp; (x_n^{(2)}-\overline{x}^{(2)})^2\end{matrix}\right) = \end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}= \left(\begin{matrix} \frac{1}{N} \sum_{n=1}^N(x_n^{(1)}-\overline{x}^{(1)})^2 &amp; \frac{1}{N} \sum_{n=1}^N(x_n^{(1)}-\overline{x}^{(1)})(x_n^{(2)}-\overline{x}^{(2)}) \\ \frac{1}{N} \sum_{n=1}^N(x_n^{(1)}-\overline{x}^{(1)})(x_n^{(2)}-\overline{x}^{(2)}) &amp; \frac{1}{N} \sum_{n=1}^N(x_n^{(2)}-\overline{x}^{(2)})^2\end{matrix}\right)\end{split}\]</div>
+<p>We know that projecting a data point to <span class="math notranslate nohighlight">\(\mathbf{u}_1\)</span> is done simply by the dot product:</p>
+<div class="math notranslate nohighlight">
+\[ \mathbf{u}_1^T \mathbf{x} \]</div>
+<p>The mean of the projected data is hence <span class="math notranslate nohighlight">\(\mathbf{u}_1^T \overline{\mathbf{x}}\)</span>, and its variance is:</p>
+<div class="math notranslate nohighlight">
+\[\frac{1}{N} \sum_{n=1}^N (\mathbf{u}_1^T \mathbf{x}_n - \mathbf{u}_1^T \overline{\mathbf{x}}) (\mathbf{u}_1^T \mathbf{x}_n - \mathbf{u}_1^T \overline{\mathbf{x}})^T = \mathbf{u}_1^T \frac{1}{N} \sum_{n=1}^N (\mathbf{x}_n -  \overline{\mathbf{x}}) ( \mathbf{x}_n - \overline{\mathbf{x}})^T \mathbf{u}_1 = \mathbf{u}_1^T \mathbf{S}\mathbf{u}_1 \]</div>
+<p>To find an appropriate <span class="math notranslate nohighlight">\(\mathbf{u}_1\)</span>, we need to maximize the variance of the projected data with respect to <span class="math notranslate nohighlight">\(\mathbf{u}_1\)</span>. The optimization problem can be formalized as follows:</p>
+<div class="math notranslate nohighlight">
+\[\arg\max \{\mathbf{u}_1^T\mathbf{S}\mathbf{u_1}\} \text{ subject to } \mathbf{u}_1^T\mathbf{u}_1=1\]</div>
+<p>Note that the constraint <span class="math notranslate nohighlight">\(\mathbf{u}_1^T\mathbf{u}_1=1\)</span> is necessary. Without it, we could arbitrarily increase the variance by choosing vectors <span class="math notranslate nohighlight">\(\mathbf{u}_1\)</span> with large modules, hence <span class="math notranslate nohighlight">\(\mathbf{u}_1^T\mathbf{u}_1 \to +\infty\)</span>.</p>
+<p>We will not see how this optimization problem is solved in details, but it can be shown that the variance is maximized when:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{u}_1^T \mathbf{S} \mathbf{u}_1 = \lambda_1\]</div>
+<p>From the result above, we find out that:</p>
+<ul class="simple">
+<li><p>The solution <span class="math notranslate nohighlight">\(\mathbf{u}_1\)</span> is an eigenvector of <span class="math notranslate nohighlight">\(\mathbf{S}\)</span>. The related eigenvalue  <span class="math notranslate nohighlight">\(\lambda_1\)</span> is the variance along that dimension;</p></li>
+<li><p>Since we want to maximize the variance, among all eigenvectors, we should choose the one with the <strong>largest eigenvalue <span class="math notranslate nohighlight">\(\lambda_1\)</span></strong>.</p></li>
+</ul>
+<p>The vector <span class="math notranslate nohighlight">\(\mathbf{u}_1\)</span> will be <strong>the first principal component</strong> of the data.</p>
+<p><strong>We can proceed in an iterative fashion to find the other components</strong>. In practice, it can be shown that, to obtain uncorrelated variables, it is convenient to choose the next component <span class="math notranslate nohighlight">\(\mathbf{u}_2\)</span> such that <span class="math notranslate nohighlight">\(\mathbf{u}_2 \perp \mathbf{u}_1\)</span>. Doing so, we will form an <strong>orthonormal base</strong> of the data. We can hence identify the second principal component by choosing the vector <span class="math notranslate nohighlight">\(\mathbf{u}_2\)</span> with maximizes the variance <strong>among all vectors which are orthogonal to <span class="math notranslate nohighlight">\(\mathbf{u}_1\)</span></strong>.</p>
+<p>In practice, it can be shown that the <span class="math notranslate nohighlight">\(M\)</span> principal components can be found by choosing the <span class="math notranslate nohighlight">\(M\)</span> eigenvectors <span class="math notranslate nohighlight">\(\mathbf{u}_1, \ldots, \mathbf{u}_M\)</span> of the covariance matrix <span class="math notranslate nohighlight">\(\mathbf{S}\)</span> corresponding to the largest eigenvectors <span class="math notranslate nohighlight">\(\lambda_1, \ldots, \lambda_M\)</span>.</p>
+<p>Let us define the matrix <span class="math notranslate nohighlight">\(W\)</span> as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{W} = \left(\begin{matrix}
+\mathbf{u}_1 \\
+\mathbf{u}_2 \\
+\ldots \\
+\mathbf{u}_M \\
+\end{matrix}\right) = \left(\begin{matrix}
+u_{11} &amp; u_{12} &amp; \ldots &amp; u_{1D} \\
+u_{21} &amp; u_{22} &amp; \ldots &amp; u_{2D} \\
+\ldots \\
+u_{M1} &amp; u_{M2} &amp; \ldots &amp; u_{MD} \\
+\end{matrix}\right)\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(u_{ij}\)</span> is the <span class="math notranslate nohighlight">\(j^{th}\)</span> component of the vector <span class="math notranslate nohighlight">\(\mathbf{u}_i\)</span>.</p>
+<p>Note that, given the way we constructed this matrix, it will be <strong>a unit orthonormal matrix</strong>. Indeed:</p>
+<ul class="simple">
+<li><p>All rows are perpendicular, hence the dot product of any row with any other will be <span class="math notranslate nohighlight">\(\mathbf{u}_i^T \mathbf{u}_j=1\)</span>;</p></li>
+<li><p>The scalar product of any row with itself will be: <span class="math notranslate nohighlight">\(\mathbf{u}_i^T \mathbf{u}_i\)</span>=1;</p></li>
+<li><p>As a consequence the two conditions above will be valid also for columns;</p></li>
+<li><p>The determinant of <span class="math notranslate nohighlight">\(\mathbf{W}\)</span> will be 1.</p></li>
+</ul>
+<p>If we choose <span class="math notranslate nohighlight">\(M=D\)</span>, we can hence see <strong><span class="math notranslate nohighlight">\(\mathbf{W}\)</span> as a rotation matrix, coherently with our previous interpretation of the PCA</strong>. If <span class="math notranslate nohighlight">\(M \lt D\)</span>, the matrix <span class="math notranslate nohighlight">\(\mathbf{W}\)</span> identifies a <strong>new basis for the data</strong>.</p>
+<p>Let:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{X} = \left(\begin{matrix}
+\mathbf{x}_1 \\
+\mathbf{x}_2 \\
+\ldots \\
+\mathbf{x}_N \\
+\end{matrix}\right) = \left(\begin{matrix}
+x_{11} &amp; x_{12} &amp; \ldots &amp; x_{1D} \\
+x_{21} &amp; x_{22} &amp; \ldots &amp; x_{2D} \\
+\ldots \\
+x_{N1} &amp; x_{N2} &amp; \ldots &amp; x_{ND} \\
+\end{matrix}\right)\end{split}\]</div>
+<p>be the <span class="math notranslate nohighlight">\([N \times D]\)</span> data matrix.</p>
+<p>We can project the data matrix <span class="math notranslate nohighlight">\(X\)</span> to the principal components with the following formula:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{Z} = \mathbf{X} \mathbf{W}^T\]</div>
+<p><span class="math notranslate nohighlight">\(\mathbf{Z}\)</span> will be an <span class="math notranslate nohighlight">\([N \times M]\)</span> matrix in which the <span class="math notranslate nohighlight">\(n^{th}\)</span> row denotes the <span class="math notranslate nohighlight">\(n^{th}\)</span> element of the dataset projected to the PCA space.</p>
+<p>In geometrical terms, the PCA <strong>performs a rotation of the D-dimensional data around the center of the data</strong> in a way that:</p>
+<ul class="simple">
+<li><p>The new axes are sorted by variance;</p></li>
+<li><p>The projected data is uncorrelated.</p></li>
+</ul>
+</section>
+<section id="back-to-our-example">
+<h2>Back to Our Example<a class="headerlink" href="#back-to-our-example" title="Permalink to this heading">#</a></h2>
+<p>We now have the computational tools to fully understand our example. Let us plot the data again. We will consider the mean-centered data:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/0240b679d238c4eb92c70dee536f41d067311ea77a4ff91312ae23ecf2ef2178.png" src="../_images/0240b679d238c4eb92c70dee536f41d067311ea77a4ff91312ae23ecf2ef2178.png" />
+</div>
+</div>
+<p>We have seen that the covariance matrix plays a central role in PCA. The covariance matrix will be as follows in our case:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.68569351, 1.27431544],
+       [1.27431544, 3.11627785]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>The eigvenvalues and eigenvectors will be as follows:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Eigenvalues: [0.1400726  3.66189877]
+
+Eigenvectors:
+ [[-0.9192793   0.39360585]
+ [-0.39360585 -0.9192793 ]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The rows of the eigenvector matrix identify two principal components. The first one is associated to a variance of about <span class="math notranslate nohighlight">\(0.14\)</span> (the first eigvenvalue), while the second component is associated to a variance of <span class="math notranslate nohighlight">\(3.66\)</span>. Let us re-order the principal components so that eigenvalues are descending (we want the first principal component to have the largest value):</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Eigenvalues: [3.66189877 0.1400726 ]
+
+Eigenvectors:
+ [[-0.39360585 -0.9192793 ]
+ [-0.9192793   0.39360585]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The two components identify two directions along which we can project our data, as shown in the following plot:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/21c336e006d0d9be86e9cc96b6590d64e937159d875ec84f0dc0f4ff027fb005.png" src="../_images/21c336e006d0d9be86e9cc96b6590d64e937159d875ec84f0dc0f4ff027fb005.png" />
+</div>
+</div>
+<p>As we can see, the two directions are orthogonal. We can also project the data maintaining the original dimensionality with:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{Z} = \mathbf{X}\mathbf{W}^T\]</div>
+<p>The plot below compares the original and rotated data:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/72a6b60cb6723437193d56e12198673f7e2d4038bc4b32fc26af15e78b08b376.png" src="../_images/72a6b60cb6723437193d56e12198673f7e2d4038bc4b32fc26af15e78b08b376.png" />
+</div>
+</div>
+<p>The eigenvectors can also be interpreted as vectors in the original space. Let us show them:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/4010c0a68e1f423811cad62dde16688303835a44f5ddae2903b6b668e5e0f206.png" src="../_images/4010c0a68e1f423811cad62dde16688303835a44f5ddae2903b6b668e5e0f206.png" />
+</div>
+</div>
+<p>The two principal components denote the <strong>main directions of variation within the data</strong>. In the plot above, the vector sizes are proportional to the related eigenvalues (hence the variance).</p>
+</section>
+<section id="choosing-an-appropriate-number-of-components">
+<h2>Choosing an Appropriate Number of Components<a class="headerlink" href="#choosing-an-appropriate-number-of-components" title="Permalink to this heading">#</a></h2>
+<p>We have seen how PCA allows to reduce the dimensionality of the data. In short, this can be done by computing the first <span class="math notranslate nohighlight">\(M\)</span> eigenvalues and the associated eigenvectors.</p>
+<p>In some cases, it is clear what is the value of <span class="math notranslate nohighlight">\(M\)</span> we need to set. For example, in the case of sorting Fisher’s Iris, we set <span class="math notranslate nohighlight">\(M=1\)</span> because we needed a scalar number. In other cases, we would like to reduce the dimensionality of the data, <strong>while keeping a reasonable amount of information about the original data</strong>.</p>
+<p>We have seen that the variance is related to the MSE reprojection error and hence to the informative content. We can measure <strong>how much information we are retaining by selecting <span class="math notranslate nohighlight">\(M\)</span> components by measuring the cumulative variance of the first M components</strong>.</p>
+<p>We will now consider as an example the whole Fisher Iris dataset, which has four features. The four Principal Components will be as follows:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sepal length (cm)</th>
+      <th>sepal width (cm)</th>
+      <th>petal length (cm)</th>
+      <th>petal width (cm)</th>
+    </tr>
+    <tr>
+      <th>components</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>z1</th>
+      <td>0.361387</td>
+      <td>0.656589</td>
+      <td>-0.582030</td>
+      <td>-0.315487</td>
+    </tr>
+    <tr>
+      <th>z2</th>
+      <td>-0.084523</td>
+      <td>0.730161</td>
+      <td>0.597911</td>
+      <td>0.319723</td>
+    </tr>
+    <tr>
+      <th>z3</th>
+      <td>0.856671</td>
+      <td>-0.173373</td>
+      <td>0.076236</td>
+      <td>0.479839</td>
+    </tr>
+    <tr>
+      <th>z4</th>
+      <td>0.358289</td>
+      <td>-0.075481</td>
+      <td>0.545831</td>
+      <td>-0.753657</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>The covariance matrix of the transformed data will be as follows:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><style type="text/css">
+</style>
+<table id="T_011c6">
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_011c6_level0_col0" class="col_heading level0 col0" >z1</th>
+      <th id="T_011c6_level0_col1" class="col_heading level0 col1" >z2</th>
+      <th id="T_011c6_level0_col2" class="col_heading level0 col2" >z3</th>
+      <th id="T_011c6_level0_col3" class="col_heading level0 col3" >z4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_011c6_level0_row0" class="row_heading level0 row0" >z1</th>
+      <td id="T_011c6_row0_col0" class="data row0 col0" >4.23</td>
+      <td id="T_011c6_row0_col1" class="data row0 col1" >0.00</td>
+      <td id="T_011c6_row0_col2" class="data row0 col2" >-0.00</td>
+      <td id="T_011c6_row0_col3" class="data row0 col3" >0.00</td>
+    </tr>
+    <tr>
+      <th id="T_011c6_level0_row1" class="row_heading level0 row1" >z2</th>
+      <td id="T_011c6_row1_col0" class="data row1 col0" >0.00</td>
+      <td id="T_011c6_row1_col1" class="data row1 col1" >0.24</td>
+      <td id="T_011c6_row1_col2" class="data row1 col2" >-0.00</td>
+      <td id="T_011c6_row1_col3" class="data row1 col3" >-0.00</td>
+    </tr>
+    <tr>
+      <th id="T_011c6_level0_row2" class="row_heading level0 row2" >z3</th>
+      <td id="T_011c6_row2_col0" class="data row2 col0" >-0.00</td>
+      <td id="T_011c6_row2_col1" class="data row2 col1" >-0.00</td>
+      <td id="T_011c6_row2_col2" class="data row2 col2" >0.08</td>
+      <td id="T_011c6_row2_col3" class="data row2 col3" >0.00</td>
+    </tr>
+    <tr>
+      <th id="T_011c6_level0_row3" class="row_heading level0 row3" >z4</th>
+      <td id="T_011c6_row3_col0" class="data row3 col0" >0.00</td>
+      <td id="T_011c6_row3_col1" class="data row3 col1" >-0.00</td>
+      <td id="T_011c6_row3_col2" class="data row3 col2" >0.00</td>
+      <td id="T_011c6_row3_col3" class="data row3 col3" >0.02</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>As we could expect, the covariance matrix is diagonal because the new features are decorrelated. We also note that the principal components are sorted by variance. We will define the variance of the data along the <span class="math notranslate nohighlight">\(z_i\)</span> component as:</p>
+<div class="math notranslate nohighlight">
+\[var(z_i)\]</div>
+<p>The total variance is given by the sum of the variances:</p>
+<div class="math notranslate nohighlight">
+\[V = var(z_1) + var(z_2) + \ldots + var(z_D)\]</div>
+<p>More in general, we will define:</p>
+<div class="math notranslate nohighlight">
+\[V(n) = var(z_1) + var(z_2) + \ldots + var(z_n)\]</div>
+<p>Hence <span class="math notranslate nohighlight">\(V=V(D)\)</span>.</p>
+<p>In our example, the total variance <span class="math notranslate nohighlight">\(V\)</span> will be:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.57
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can quantify the fraction of variance explained by each component <span class="math notranslate nohighlight">\(n\)</span> as follows:</p>
+<div class="math notranslate nohighlight">
+\[\frac{var(n)}{V(N)}\]</div>
+<p>If we compute such value for all <span class="math notranslate nohighlight">\(n\)</span>, we obtain the following vector in our example:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.92461872, 0.05306648, 0.01710261, 0.00521218])
+</pre></div>
+</div>
+</div>
+</div>
+<p>As we can see, the first component retains <span class="math notranslate nohighlight">\(92.46\%\)</span> of the variance, while the second one retains only <span class="math notranslate nohighlight">\(5.3\%\)</span> of the variance. It is common to also look at the cumulative variance ratio, defined as:</p>
+<div class="math notranslate nohighlight">
+\[\frac{V(n)}{V(N)}\]</div>
+<p>In our case:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.92461872, 0.97768521, 0.99478782, 1.        ])
+</pre></div>
+</div>
+</div>
+</div>
+<p>The vector above tell us that considering the first two components accounts for about <span class="math notranslate nohighlight">\(97.77\%\)</span> of the variance.</p>
+<p>This approach can guide us in choosing the right number of dimensions to keep, selecting a budget of the variance we wish to be able to retain.</p>
+</section>
+<section id="interpretation-of-the-principal-components-load-plots">
+<h2>Interpretation of the Principal Components - Load Plots<a class="headerlink" href="#interpretation-of-the-principal-components-load-plots" title="Permalink to this heading">#</a></h2>
+<p>When we transform data with PCA, the new variables have a less direct interpretation. Indeed, if a given variable is a linear combination of other variables, it is not straightforward to assign a meaning to each component.</p>
+<p>However, we know that the first components are the ones which contain most of the variance. Hence, inspecting the weights that each of these components given to the original features can give some insights into which of the original features are more relevant. In this context, <strong>the weights of the principal components are also called loadings</strong>. Loadings with <strong>large absolute values are more influential in determining the value of the principal components</strong>.</p>
+<p>In practice, we can assess the relevance of features with a <strong>load plot</strong>, which represents each original variable as a 2D point of coordinates given by the loadings corresponding to the first two principal components. Let us show the load plot for our example:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/b0d4a732f3c4290d568daa9b219d8923342a54335498241602d0ca692ec029bd.png" src="../_images/b0d4a732f3c4290d568daa9b219d8923342a54335498241602d0ca692ec029bd.png" />
+</div>
+</div>
+<p>In a load plot:</p>
+<ul class="simple">
+<li><p>variables that cluster together are positively correlated, while variables on opposite sides may be negatively correlated;</p></li>
+<li><p>variables which are further from the origin have higher loadings, so they are more influential in the computation of the PCA.</p></li>
+</ul>
+<p>A loading plot can also be useful to perform feature selection. For instance, from the plot above all variables seem to be influential, but <code class="docutils literal notranslate"><span class="pre">petal</span> <span class="pre">width</span></code> and <code class="docutils literal notranslate"><span class="pre">petal</span> <span class="pre">length</span></code> are correlated. We could think of using as a subset of variables <code class="docutils literal notranslate"><span class="pre">sepal</span> <span class="pre">width</span></code>, <code class="docutils literal notranslate"><span class="pre">sepal</span> <span class="pre">length</span></code> and one of the other two (e.g., <code class="docutils literal notranslate"><span class="pre">petal</span> <span class="pre">length</span></code>).</p>
+</section>
+<section id="applications-of-pca">
+<h2>Applications of PCA<a class="headerlink" href="#applications-of-pca" title="Permalink to this heading">#</a></h2>
+<p>PCA has several applications in data analysis. We will summarize the main ones in the following.</p>
+<section id="dimensionality-reduction-and-visualization">
+<h3>Dimensionality Reduction and Visualization<a class="headerlink" href="#dimensionality-reduction-and-visualization" title="Permalink to this heading">#</a></h3>
+<p>We have seen that data can be interpreted as a set of D-dimensional points. When <span class="math notranslate nohighlight">\(D=2\)</span>, it is often useful to visualize the data through a scatterplot. This allows us to see how the data distributes in the space. When <span class="math notranslate nohighlight">\(D&gt;2\)</span>, we can show a series a scatterplot (a pairplot or scattermatrix). However, when <span class="math notranslate nohighlight">\(D\)</span> is very large, it is usually unfeasible to visualize data with all possible scatterplots.</p>
+<p>In these cases, it can be useful to transform the data with PCA and then visualize the data points as 2D points in the space identified by the first two principal components.</p>
+<p>We will show an example on the multidimensional dataset <strong>DIGITS</strong>. The dataset contains small images of resolution <span class="math notranslate nohighlight">\(8 \times 8 pixels\)</span> representing handwritten digits from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(9\)</span>. We can see the dataset as containing <span class="math notranslate nohighlight">\(64\)</span> variables. Each variable indicates the pixel value at a specific location.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/7fa83c4651307a7b1a39cee4c5a164ff6a1480d6b8797e1f8f0e416ef98b591f.png" src="../_images/7fa83c4651307a7b1a39cee4c5a164ff6a1480d6b8797e1f8f0e416ef98b591f.png" />
+</div>
+</div>
+<p>We can visualize the data with PCA by first projecting the data to <span class="math notranslate nohighlight">\(M=2\)</span> principal components, then plotting the transformed data as 2D points.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/bf14fd7d56c2e85b1b880667fa182a77e1e2ff92e5f54ba4eacb1df26a11564f.png" src="../_images/bf14fd7d56c2e85b1b880667fa182a77e1e2ff92e5f54ba4eacb1df26a11564f.png" />
+</div>
+</div>
+</section>
+<section id="data-decorrelation-principal-component-regression">
+<h3>Data Decorrelation - Principal Component Regression<a class="headerlink" href="#data-decorrelation-principal-component-regression" title="Permalink to this heading">#</a></h3>
+<p>PCA is also useful when we need to fit a linear regressor and we are in the presence of a dataset with multi-collinearity.</p>
+<p>Let us consider the <code class="docutils literal notranslate"><span class="pre">auto_mpg</span></code> dataset:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>displacement</th>
+      <th>cylinders</th>
+      <th>horsepower</th>
+      <th>weight</th>
+      <th>acceleration</th>
+      <th>model_year</th>
+      <th>origin</th>
+      <th>mpg</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>307.0</td>
+      <td>8</td>
+      <td>130.0</td>
+      <td>3504</td>
+      <td>12.0</td>
+      <td>70</td>
+      <td>1</td>
+      <td>18.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>350.0</td>
+      <td>8</td>
+      <td>165.0</td>
+      <td>3693</td>
+      <td>11.5</td>
+      <td>70</td>
+      <td>1</td>
+      <td>15.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>318.0</td>
+      <td>8</td>
+      <td>150.0</td>
+      <td>3436</td>
+      <td>11.0</td>
+      <td>70</td>
+      <td>1</td>
+      <td>18.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>304.0</td>
+      <td>8</td>
+      <td>150.0</td>
+      <td>3433</td>
+      <td>12.0</td>
+      <td>70</td>
+      <td>1</td>
+      <td>16.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>302.0</td>
+      <td>8</td>
+      <td>140.0</td>
+      <td>3449</td>
+      <td>10.5</td>
+      <td>70</td>
+      <td>1</td>
+      <td>17.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>393</th>
+      <td>140.0</td>
+      <td>4</td>
+      <td>86.0</td>
+      <td>2790</td>
+      <td>15.6</td>
+      <td>82</td>
+      <td>1</td>
+      <td>27.0</td>
+    </tr>
+    <tr>
+      <th>394</th>
+      <td>97.0</td>
+      <td>4</td>
+      <td>52.0</td>
+      <td>2130</td>
+      <td>24.6</td>
+      <td>82</td>
+      <td>2</td>
+      <td>44.0</td>
+    </tr>
+    <tr>
+      <th>395</th>
+      <td>135.0</td>
+      <td>4</td>
+      <td>84.0</td>
+      <td>2295</td>
+      <td>11.6</td>
+      <td>82</td>
+      <td>1</td>
+      <td>32.0</td>
+    </tr>
+    <tr>
+      <th>396</th>
+      <td>120.0</td>
+      <td>4</td>
+      <td>79.0</td>
+      <td>2625</td>
+      <td>18.6</td>
+      <td>82</td>
+      <td>1</td>
+      <td>28.0</td>
+    </tr>
+    <tr>
+      <th>397</th>
+      <td>119.0</td>
+      <td>4</td>
+      <td>82.0</td>
+      <td>2720</td>
+      <td>19.4</td>
+      <td>82</td>
+      <td>1</td>
+      <td>31.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>398 rows × 8 columns</p>
+</div></div></div>
+</div>
+<p>If we try to fit a linear regressor with all variables, we will find multicollinearity:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<tr>
+        <td></td>          <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>    <td>  -17.2184</td> <td>    4.644</td> <td>   -3.707</td> <td> 0.000</td> <td>  -26.350</td> <td>   -8.087</td>
+</tr>
+<tr>
+  <th>displacement</th> <td>    0.0199</td> <td>    0.008</td> <td>    2.647</td> <td> 0.008</td> <td>    0.005</td> <td>    0.035</td>
+</tr>
+<tr>
+  <th>cylinders</th>    <td>   -0.4934</td> <td>    0.323</td> <td>   -1.526</td> <td> 0.128</td> <td>   -1.129</td> <td>    0.142</td>
+</tr>
+<tr>
+  <th>horsepower</th>   <td>   -0.0170</td> <td>    0.014</td> <td>   -1.230</td> <td> 0.220</td> <td>   -0.044</td> <td>    0.010</td>
+</tr>
+<tr>
+  <th>weight</th>       <td>   -0.0065</td> <td>    0.001</td> <td>   -9.929</td> <td> 0.000</td> <td>   -0.008</td> <td>   -0.005</td>
+</tr>
+<tr>
+  <th>acceleration</th> <td>    0.0806</td> <td>    0.099</td> <td>    0.815</td> <td> 0.415</td> <td>   -0.114</td> <td>    0.275</td>
+</tr>
+<tr>
+  <th>model_year</th>   <td>    0.7508</td> <td>    0.051</td> <td>   14.729</td> <td> 0.000</td> <td>    0.651</td> <td>    0.851</td>
+</tr>
+<tr>
+  <th>origin</th>       <td>    1.4261</td> <td>    0.278</td> <td>    5.127</td> <td> 0.000</td> <td>    0.879</td> <td>    1.973</td>
+</tr>
+</table></div></div>
+</div>
+<p>Indeed, some variables have a large p-value, probably because they are correlated with the others.</p>
+<p>To perform Principal Component Regression, we can first compute PCA <strong>on the independent variables</strong>, then fit a linear regressor. We will choose <span class="math notranslate nohighlight">\(M=4\)</span> principal components:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cumulative explained variance: [0.99756151 0.9996243  0.99998025 0.9999952 ]
+</pre></div>
+</div>
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>           <td>mpg</td>       <th>  R-squared:         </th> <td>   0.492</td>
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.487</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   92.20</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Tue, 05 Dec 2023</td> <th>  Prob (F-statistic):</th> <td>9.24e-55</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>12:53:09</td>     <th>  Log-Likelihood:    </th> <td> -1207.7</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   386</td>      <th>  AIC:               </th> <td>   2425.</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   381</td>      <th>  BIC:               </th> <td>   2445.</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     4</td>      <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>   23.3607</td> <td>    0.283</td> <td>   82.480</td> <td> 0.000</td> <td>   22.804</td> <td>   23.918</td>
+</tr>
+<tr>
+  <th>z1</th>        <td>   -0.0051</td> <td>    0.000</td> <td>  -15.346</td> <td> 0.000</td> <td>   -0.006</td> <td>   -0.004</td>
+</tr>
+<tr>
+  <th>z2</th>        <td>   -0.0320</td> <td>    0.007</td> <td>   -4.373</td> <td> 0.000</td> <td>   -0.046</td> <td>   -0.018</td>
+</tr>
+<tr>
+  <th>z3</th>        <td>   -0.0552</td> <td>    0.018</td> <td>   -3.138</td> <td> 0.002</td> <td>   -0.090</td> <td>   -0.021</td>
+</tr>
+<tr>
+  <th>z4</th>        <td>   -0.8815</td> <td>    0.086</td> <td>  -10.234</td> <td> 0.000</td> <td>   -1.051</td> <td>   -0.712</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td> 3.702</td> <th>  Durbin-Watson:     </th> <td>   1.125</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.157</td> <th>  Jarque-Bera (JB):  </th> <td>   3.435</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.214</td> <th>  Prob(JB):          </th> <td>   0.179</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 3.174</td> <th>  Cond. No.          </th> <td>    860.</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div></div>
+</div>
+<p>While the result is not as interpretable as it was before, this technique may be useful in the case of predictive analysis.</p>
+</section>
+<section id="data-compression">
+<h3>Data Compression<a class="headerlink" href="#data-compression" title="Permalink to this heading">#</a></h3>
+<p>Now let’s see a simple example of data compression using PCA. In particular, we will consider the case of compressing images. An image can be seen as high-dimensional data, where the number of dimensions is equal to the number of pixels. For example, an RGB image of size <span class="math notranslate nohighlight">\(640 \times 480\)</span> pixels has <span class="math notranslate nohighlight">\(3 \cdot 640 \cdot 480=921600\)</span> dimensions.</p>
+<p>We expect that there will be redundant information in all these dimensions. One method to compress images is to divide them into fixed-size blocks (e.g., <span class="math notranslate nohighlight">\(8 \times 8\)</span>). Each of these blocks will be an element belonging to a population (the population of <span class="math notranslate nohighlight">\(8 \times 8\)</span> blocks of the image).</p>
+<p>Assuming that the information in the blocks is highly correlated, we can try to compress it by applying PCA to the sample of blocks extracted from our image and choosing only a few principal components to represent the content of the blocks.</p>
+<p>We will consider the following example image:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Image Size: (427, 640, 3)
+Number of dimensions: 819840
+</pre></div>
+</div>
+<img alt="../_images/43ea5685c00917a41d0d26f7633cd991ec238b2015e71fe2ac4628ed48c82581.png" src="../_images/43ea5685c00917a41d0d26f7633cd991ec238b2015e71fe2ac4628ed48c82581.png" />
+</div>
+</div>
+<p>We will divide the image into RGB blocks of size <span class="math notranslate nohighlight">\(8 \times 8 \times 3\)</span> (these are <span class="math notranslate nohighlight">\(8 \times 8\)</span> RGB images). These will look as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tiles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">flower</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span><span class="mi">4270</span><span class="p">)</span>
+<span class="n">tiles</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">tiles</span><span class="p">)</span>
+<span class="n">tiles</span><span class="o">.</span><span class="n">shape</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">141</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">tiles</span><span class="p">[</span><span class="mi">1855</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">142</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">tiles</span><span class="p">[</span><span class="mi">2900</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">143</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">tiles</span><span class="p">[</span><span class="mi">1856</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">144</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">tiles</span><span class="p">[</span><span class="mi">960</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/385115d390dfb52aaffac60ab237330e7f48e6e2c9a963c37779e772e0ccc4dd.png" src="../_images/385115d390dfb52aaffac60ab237330e7f48e6e2c9a963c37779e772e0ccc4dd.png" />
+</div>
+</div>
+<p>If we compute the PCA of all blocks, we will obtain the following cumulative variance ratio vector:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.72033322, 0.8054948 , 0.88473857, 0.91106289, 0.92773705,
+       0.94002709, 0.94742984, 0.95262262, 0.95724086, 0.96138203,
+       0.96493482, 0.96813026, 0.97074765, 0.97304417, 0.97502487,
+       0.97676849, 0.97827393, 0.97961611, 0.98080084, 0.98195037,
+       0.98298693, 0.98399279, 0.98491245, 0.98570784, 0.98649079,
+       0.98719466, 0.98779928, 0.98835152, 0.98888528, 0.98937606,
+       0.98983658, 0.99027875])
+</pre></div>
+</div>
+</div>
+</div>
+<p>As we can see, truncating at the first component allows us to retain about <span class="math notranslate nohighlight">\(72%\)</span> of the information, truncating at the second allows us to retain about <span class="math notranslate nohighlight">\(80%\)</span>, and so on, up to <span class="math notranslate nohighlight">\(32\)</span> components, which allow us to retain about <span class="math notranslate nohighlight">\(99%\)</span> of the information. Now let’s see how to compress and reconstruct the image. We will choose the first <span class="math notranslate nohighlight">\(32\)</span> components, preserving <span class="math notranslate nohighlight">\(99%\)</span> of the information.</p>
+<p>If we do so, and then project the tiles to the compressed space each tile will be represented by only <span class="math notranslate nohighlight">\(32\)</span> numbers. This will lead to the following savings in space:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Space saved in the compression: 83.33%
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can reconstruct the original image by applying the inverse PCA transformation to the compressed patches. The result will be as follows:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/e987571bbeaef48bfb8df7986ca617bfebf01f45ec1b7087a5e8f84fae956832.png" src="../_images/e987571bbeaef48bfb8df7986ca617bfebf01f45ec1b7087a5e8f84fae956832.png" />
+</div>
+</div>
+<p>The plot below shows how the reconstruction quality increases when more components are used:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/493ba064aa5904dcb214be0ef37650f837dd30ef9d42fe7a4cfe06be8efa5df6.png" src="../_images/493ba064aa5904dcb214be0ef37650f837dd30ef9d42fe7a4cfe06be8efa5df6.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<p>[1] Parts of Chapter 12 of Bishop, Christopher M., and Nasser M. Nasrabadi. Pattern recognition and machine learning. Vol. 4. No. 4. New York: springer, 2006.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lectures"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-as-n-dimensional-points-and-features">Data as N-Dimensional Points and Features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-selection-vs-feature-reduction">Feature Selection vs Feature Reduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-reduction-example">Feature Reduction Example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rotating-around-the-origin">Rotating Around the Origin</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#amount-of-information-reconstruction-error-and-variance">Amount of Information, Reconstruction Error and Variance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#projection-along-a-direction">Projection Along a Direction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-index-to-rule-them-all">An Index to Rule them All</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-formulation">General Formulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#back-to-our-example">Back to Our Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-an-appropriate-number-of-components">Choosing an Appropriate Number of Components</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-principal-components-load-plots">Interpretation of the Principal Components - Load Plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-of-pca">Applications of PCA</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensionality-reduction-and-visualization">Dimensionality Reduction and Visualization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-decorrelation-principal-component-regression">Data Decorrelation - Principal Component Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-compression">Data Compression</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Antonino Furnari
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
