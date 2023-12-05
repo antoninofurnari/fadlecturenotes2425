@@ -38,6 +38,7 @@ parts:
   - file: laboratories/11_regressione_lineare
   - file: laboratories/12_regressione_logistica
   - file: laboratories/13_linear_logistic_regression_example_analysis
+  - file: laboratories/14_principal_component_analysis
   
   
 
