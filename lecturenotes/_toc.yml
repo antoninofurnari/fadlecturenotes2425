@@ -22,6 +22,8 @@ parts:
   - file: lectures/11_linear_regression
   - file: lectures/12_logistic_regression
   - file: lectures/13_causal_analysis
+  - file: lectures/14_principal_component_analysis
+  - file: lectures/15_clustering_and_density_estimation
 - caption: Laboratories
   numbered: True
   chapters:
@@ -38,7 +40,6 @@ parts:
   - file: laboratories/11_regressione_lineare
   - file: laboratories/12_regressione_logistica
   - file: laboratories/13_linear_logistic_regression_example_analysis
-  - file: laboratories/14_principal_component_analysis
   
   
 
