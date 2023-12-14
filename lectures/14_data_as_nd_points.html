@@ -1,0 +1,764 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>13. Data as N-Dimensional Points &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures/14_data_as_nd_points';</script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="14. Clustering" href="15_clustering.html" />
+    <link rel="prev" title="12. Causal Data Analysis" href="13_causal_analysis.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Lecture Notes on Fundamentals of Data Analysis - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Lecture Notes on Fundamentals of Data Analysis - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Lecture Notes on Fundamental of Data Analysis
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_intro_data_analysis.html">1. Introduction to Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_main_data_analysis_concepts.html">2. Main data analysis concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_misure_di_frequenze_e_rappresentazione_grafica_dei_dati.html">3. Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_misure_di_tendenza_centrale_dispersione_e_forma.html">4. Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_associazione_variabili.html">5. Associazione tra Variabili</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_probability.html">6. Probability for Data Manipulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_common_distributions.html">7. Common Probability Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_information_theory.html">8. Basic Elements of Information Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_statistical_inference.html">9. Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_linear_regression.html">10. Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_logistic_regression.html">11. Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_causal_analysis.html">12. Causal Data Analysis</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">13. Data as N-Dimensional Points</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_clustering.html">14. Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_density_estimation.html">15. Density Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_principal_component_analysis.html">16. Principal Component Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratories</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/01_setup.html">17. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/02_intro_python.html">18. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/03_intro_numpy.html">19. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/04_intro_matplotlib.html">20. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/05_intro_pandas.html">21. Introduzione a Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">22. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/07_misure_di_tendenza_centrale_dispersione_e_forma.html">23. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/08_associazione_variabili.html">24. Associazione tra Variabili</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/09_heart-disease-analysis.html">25. Exploratory Analysis on the Heart Disease Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/10_statistical_inference.html">26. Laboratory on Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/11_regressione_lineare.html">27. Laboratorio su Regressione Lineare</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/12_regressione_logistica.html">28. Laboratorio su regressione logistica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/13_linear_logistic_regression_example_analysis.html">29. Linear and Logistic Regression Laboratory</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/antoninofurnari/fadlecturenotes/blob/master/lecturenotes/lectures/14_data_as_nd_points.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/antoninofurnari/fadlecturenotes" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/antoninofurnari/fadlecturenotes/issues/new?title=Issue%20on%20page%20%2Flectures/14_data_as_nd_points.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/lectures/14_data_as_nd_points.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Data as N-Dimensional Points</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#features-and-representation-functions">13.1. Features and Representation Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#important-properties-of-feature-spaces">13.2. Important Properties of Feature Spaces</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#norms">13.2.1. Norms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metrics">13.2.2. Metrics</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#l-p-metrics">13.2.2.1. L-p Metrics</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cosine-distance">13.2.2.2. Cosine Distance</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">13.3. References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="data-as-n-dimensional-points">
+<h1><span class="section-number">13. </span>Data as N-Dimensional Points<a class="headerlink" href="#data-as-n-dimensional-points" title="Permalink to this heading">#</a></h1>
+<p>So far, we have seen data as a collection of observations of multiple variables. We have often represented a dataset as a table or a data matrix. In all previous analyses, we have focused on the interpretation of the values of each variable.</p>
+<p>However, in many cases (and especially when variables are many), it is useful to given a geometric interpretation of data and see observation as <strong>d-dimensional data points</strong>, where <span class="math notranslate nohighlight">\(d\)</span> is the number of variables in the dataset. Consider the following data:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Subject</p></th>
+<th class="head"><p>Height (cm)</p></th>
+<th class="head"><p>Weight (Kg)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>175</p></td>
+<td><p>70</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>160</p></td>
+<td><p>60</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>180</p></td>
+<td><p>78</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>160</p></td>
+<td><p>75</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>155</p></td>
+<td><p>58</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>190</p></td>
+<td><p>110</p></td>
+</tr>
+</tbody>
+</table>
+<p>We can see each of these observations (the rows of the matrix) as a data point. Further, we can geometrically represent such points as follows:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/4cb91a1123c70ff8b38008ef6e3493c1ed0b1b641f1085218de518d93a9cd672.png" src="../_images/4cb91a1123c70ff8b38008ef6e3493c1ed0b1b641f1085218de518d93a9cd672.png" />
+</div>
+</div>
+<p>Each observation, is a 2D point in the Cartesian space. This geometrical interpretation of data is central to data analysis and very convenient in particular <strong>when many different variables are available</strong>.</p>
+<section id="features-and-representation-functions">
+<h2><span class="section-number">13.1. </span>Features and Representation Functions<a class="headerlink" href="#features-and-representation-functions" title="Permalink to this heading">#</a></h2>
+<p>In this context in which we are not always <strong>explicitly giving names or interpretation to the variables</strong>, each of the variables will also be referred to as <strong>a feature of the data</strong>. For instance, a dataset of images of <span class="math notranslate nohighlight">\(100x100 pixels\)</span> can be seen as a collection of <span class="math notranslate nohighlight">\(10000\)</span>-dimensional vectors, where each vector’s dimension is a “feature”, i.e., the value of a specific pixel of the image.</p>
+<p>Given this interpretation of variables as features, it is often common to talk about <strong>feature extraction</strong>, in the case of any process transforming the data <span class="math notranslate nohighlight">\(\mathbf{x} \in \Re^d\)</span> to another form <span class="math notranslate nohighlight">\(\mathbf{y} \in \Re^m\)</span>. In this context, a function:</p>
+<div class="math notranslate nohighlight">
+\[f : \Re^d \to \Re^m\]</div>
+<p>will be often referred to as a “<strong>feature extraction</strong>” or a “<strong>representation function</strong>”. We will recall these terms going further in the course.</p>
+<p>We will also refer to <span class="math notranslate nohighlight">\(\Re^d\)</span> and <span class="math notranslate nohighlight">\(\Re^m\)</span> as “<strong>feature spaces</strong>” or “<strong>representation spaces</strong>” as they will be <strong>vector spaces</strong> in which data points (also called <strong>feature vectors</strong>) “live”.</p>
+</section>
+<section id="important-properties-of-feature-spaces">
+<h2><span class="section-number">13.2. </span>Important Properties of Feature Spaces<a class="headerlink" href="#important-properties-of-feature-spaces" title="Permalink to this heading">#</a></h2>
+<p>Since observations <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> are vectors living in some vector spaces, all <strong>basic properties of vectors and vector spaces introduced in linear algebra will apply here as well</strong>. We’ll recall the most important concepts as we need them in the course, but, for the moment, it is useful to summarize the main important properties.</p>
+<section id="norms">
+<h3><span class="section-number">13.2.1. </span>Norms<a class="headerlink" href="#norms" title="Permalink to this heading">#</a></h3>
+<p>Given a vector space <span class="math notranslate nohighlight">\(S\)</span>, a norm <span class="math notranslate nohighlight">\(p\)</span> is a function from <span class="math notranslate nohighlight">\(S\)</span> to a non negative real number:</p>
+<div class="math notranslate nohighlight">
+\[p \in S \to \Re^+_0\]</div>
+<p>A commonly used family of norms is the one of the L-p norms:</p>
+<div class="math notranslate nohighlight">
+\[||\mathbf{x}||_p = \left( \sum_{i=1}^{d} |x_i|^p \right)^{1/p}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> is d-dimensional, <span class="math notranslate nohighlight">\(x_i\)</span> is the i-th component of <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, and <span class="math notranslate nohighlight">\(p\)</span> is a parameter defining the behavior of the norm.</p>
+<p>Note that a norm computes some kind of measure of distance of the vector from the origin of the space. In practice, the following norms are commonly used:</p>
+<p><strong>L-2 Norm</strong></p>
+<div class="math notranslate nohighlight">
+\[||\mathbf{x}||_2 = \sqrt{\sum_{i=1}^{d} x_i^2}\]</div>
+<p>This is what we know as “computing the magnitude (or modulus) of the vector”. It is the Euclidean distance between the origin and the vector.</p>
+<p>When we use the L2 norm, we can omit the <span class="math notranslate nohighlight">\(p=2\)</span> subscript:</p>
+<div class="math notranslate nohighlight">
+\[||\mathbf{x}||_2 = ||\mathbf{x}||\]</div>
+<p>Another commonly used notation is the one for the squared L2 norm:</p>
+<div class="math notranslate nohighlight">
+\[||\mathbf{x}||_2^2 = ||\mathbf{x}||^2 = \sum_{i=1}^{d} x_i^2\]</div>
+<p><strong>L-1 Norm</strong></p>
+<div class="math notranslate nohighlight">
+\[||\mathbf{x}||_1 = \sum_{i=1}^{d} |x_i|\]</div>
+<p>This is the sum of the absolute values of the components of the vector.</p>
+<p><strong>L-<span class="math notranslate nohighlight">\(\infty\)</span> Norm</strong></p>
+<div class="math notranslate nohighlight">
+\[||\mathbf{x}||_\infty = \max\{|x_i|\}_{i=1}^{d}\]</div>
+<p>This is the maximum absolute value of the components of the vector.</p>
+<p>To visualize the difference between the different norms, it often common to display the <strong>unit circles according to the different norms</strong>. Each of the shape contains <strong>all vectors with unit norm</strong>:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/708b4a81262ac6a6763a5ecfef4762de94f1da07c6bd5062b1999408b7c1e758.png" src="../_images/708b4a81262ac6a6763a5ecfef4762de94f1da07c6bd5062b1999408b7c1e758.png" />
+</div>
+</div>
+</section>
+<section id="metrics">
+<h3><span class="section-number">13.2.2. </span>Metrics<a class="headerlink" href="#metrics" title="Permalink to this heading">#</a></h3>
+<p>Given a space <span class="math notranslate nohighlight">\(S\)</span>, a function</p>
+<p><span class="math notranslate nohighlight">\(m : S \times S \to \Re\)</span></p>
+<p>is <strong>a metric</strong> if:</p>
+<ol class="arabic simple">
+<li><p>The distance of a point from itself is zero: <span class="math notranslate nohighlight">\(m(\mathbf{x}, \mathbf{x}) = 0\)</span>;</p></li>
+<li><p>The distance between two distinct points is always positive (positivity): <span class="math notranslate nohighlight">\(m(\mathbf{x},\mathbf{y}) \leq 0, \forall \mathbf{x}, \mathbf{y} \in S\)</span>;</p></li>
+<li><p>The distance between <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> is the same as the distance between <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(x\)</span> (symmetry): <span class="math notranslate nohighlight">\(m(\mathbf{x}, \mathbf{y}) = m(\mathbf{y}, \mathbf{x})\)</span>.</p></li>
+<li><p>Triangle inequality: <span class="math notranslate nohighlight">\(m(\mathbf{x},\mathbf{y}) \leq m(\mathbf{x},\mathbf{z}) + m(\mathbf{z},\mathbf{y}), \forall \mathbf{x}, \mathbf{y}, \mathbf{z} \in S\)</span></p></li>
+</ol>
+<section id="l-p-metrics">
+<h4><span class="section-number">13.2.2.1. </span>L-p Metrics<a class="headerlink" href="#l-p-metrics" title="Permalink to this heading">#</a></h4>
+<p>From the L-p norms, we can derive <strong>a family of metrics</strong> as follows:</p>
+<div class="math notranslate nohighlight">
+\[L_p(\mathbf{x},\mathbf{y}) = ||\mathbf{x} - \mathbf{y}||_p = \left( \sum_{i=1}^{d} |x_i - y_i|^p \right)^{1/p}\]</div>
+<p><strong>L2 Distance</strong></p>
+<p>Note that with <span class="math notranslate nohighlight">\(p=2\)</span> we have the Euclidean (or L-2) distance:</p>
+<div class="math notranslate nohighlight">
+\[L_2(\mathbf{x},\mathbf{y}) = ||\mathbf{x} - \mathbf{y}||_2 = \sqrt{\sum_{i=1}^{d} (x_i - y_i)^2}\]</div>
+<p><strong>L1 Distance</strong></p>
+<p>With <span class="math notranslate nohighlight">\(p=1\)</span>, we obtain the L1 distance, which is also known as the <strong>Manhattan distance</strong>:</p>
+<div class="math notranslate nohighlight">
+\[L_1(\mathbf{x},\mathbf{y}) = ||\mathbf{x} - \mathbf{y}||_1 = \sum_{i=1}^{d} |x_i - y_i|\]</div>
+<p><strong>L-<span class="math notranslate nohighlight">\(\infty\)</span> Distance</strong></p>
+<p>With <span class="math notranslate nohighlight">\(p=\inf\)</span>, we obtain the L-<span class="math notranslate nohighlight">\(\infty\)</span> distance:</p>
+<div class="math notranslate nohighlight">
+\[L_\infty(\mathbf{x},\mathbf{y}) = ||\mathbf{x} - \mathbf{y}||_\infty = \max_{i=1}^d\{|x_i - y_i|\}\]</div>
+<p>The difference between the L1 and L2 distances is notable, as shown in the figure blow:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/22ef48150f1ca97ba13275571d1f012711e255fd3a58a62e38f1913aedd39d28.png" src="../_images/22ef48150f1ca97ba13275571d1f012711e255fd3a58a62e38f1913aedd39d28.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Manhattan (L1) Distance: 7.00
+Euclidean (L2) Distance: 5.00
+</pre></div>
+</div>
+</div>
+</div>
+<p>While the Euclidean distance measures the length of the straight segment connecting the two points, the Manhattan distance is the one in grey (dashed), which measures the distance that a taxi driver should drive in Manhattan (or any other square-block based city) to reach the destination.</p>
+</section>
+<section id="cosine-distance">
+<h4><span class="section-number">13.2.2.2. </span>Cosine Distance<a class="headerlink" href="#cosine-distance" title="Permalink to this heading">#</a></h4>
+<p>The cosine distance is useful when we need to compare two vectors but we do not care about differences arising from scaling factors. Note that the euclidean distance of two proportional vectors is in general non-zero:</p>
+<div class="math notranslate nohighlight">
+\[||\mathbf{x} - \alpha \mathbf{x}||^2 &gt; 0, \alpha \neq 1\]</div>
+<p>Nevertheless, <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and <span class="math notranslate nohighlight">\(\alpha \mathbf{x}\)</span> are very similar. If we want to compare two vectors considering only <strong>the relationships between their coordinates, rather than their values</strong>, we can use the cosine similarity, which is defined as follows:</p>
+<div class="math notranslate nohighlight">
+\[S_C (\mathbf{x}, \mathbf{y}) = \frac{\mathbf{x} \cdot \mathbf{y}}{||\mathbf{x}|| ||\mathbf{y}||}\]</div>
+<p>The cosine similarity computes the cosine of the angle <span class="math notranslate nohighlight">\(\theta\)</span> comprised between two vectors, as shown in the plot below:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/cd3f5d238713e91dfbedf0438effa99419b0dddfb6e53456a5f6526f308ebb7d.png" src="../_images/cd3f5d238713e91dfbedf0438effa99419b0dddfb6e53456a5f6526f308ebb7d.png" />
+</div>
+</div>
+<p>Note that the cosine similarity would be the same if the two vectors had different scales (i.e., if they were longer but they would have the same orientation).</p>
+<p>This kind of similarity measure is useful when the scale of the vector is not important. For instance, if the vectors <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> are vectors of word counts of two documents of different lengths, we care about the <strong>proportions of words in each document, while longer document will have vectors with larger L2 norms</strong>.</p>
+<p>The cosine similarity is a normalized number between <span class="math notranslate nohighlight">\(-1\)</span> and <span class="math notranslate nohighlight">\(1\)</span>, where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(+1\)</span> means maximum alignment (similarity) between the two vectors;</p></li>
+<li><p><span class="math notranslate nohighlight">\(-1\)</span> means that the two vectors are dissimilar - they are indeed opposite.</p></li>
+<li><p><span class="math notranslate nohighlight">\(0\)</span> means that the two vectors are orthogonal.</p></li>
+</ul>
+<p>The plot below shows different examples of cosine similarity of vector pairs:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/196b6c029f390b83b1d4259ea91b0c7b50c7948d8ad6313018d8c3c8bbcbad9e.png" src="../_images/196b6c029f390b83b1d4259ea91b0c7b50c7948d8ad6313018d8c3c8bbcbad9e.png" />
+</div>
+</div>
+<p>The cosine distance is defined from the cosine similarity as:</p>
+<div class="math notranslate nohighlight">
+\[D_C = 1- S_C = 1- \frac{\mathbf{x} \cdot \mathbf{y}}{||\mathbf{x}|| \cdot ||\mathbf{x}||}\]</div>
+<p>It should be noted that the cosine similarity is not a metric as it does not satisfy the triangular inequality.</p>
+</section>
+</section>
+</section>
+<section id="references">
+<h2><span class="section-number">13.3. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Norm_(mathematics)">https://en.wikipedia.org/wiki/Norm_(mathematics)</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Lp_space">https://en.wikipedia.org/wiki/Lp_space</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Metric_space">https://en.wikipedia.org/wiki/Metric_space</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Cosine_similarity">https://en.wikipedia.org/wiki/Cosine_similarity</a></p></li>
+<li><p>Parts of Chapter 2 of [1]</p></li>
+</ul>
+<p>[1] Goodfellow, Ian, Yoshua Bengio, and Aaron Courville. Deep learning. MIT press, 2016.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lectures"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="13_causal_analysis.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">12. </span>Causal Data Analysis</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="15_clustering.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">14. </span>Clustering</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#features-and-representation-functions">13.1. Features and Representation Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#important-properties-of-feature-spaces">13.2. Important Properties of Feature Spaces</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#norms">13.2.1. Norms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metrics">13.2.2. Metrics</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#l-p-metrics">13.2.2.1. L-p Metrics</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cosine-distance">13.2.2.2. Cosine Distance</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">13.3. References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Antonino Furnari
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

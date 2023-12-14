@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>25. Linear and Logistic Regression Laboratory &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+    <title>29. Linear and Logistic Regression Laboratory &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
   
   
   
@@ -68,7 +68,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="24. Laboratorio su regressione logistica" href="12_regressione_logistica.html" />
+    <link rel="prev" title="28. Laboratorio su regressione logistica" href="12_regressione_logistica.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -184,22 +184,26 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../lectures/11_linear_regression.html">10. Linear Regression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lectures/12_logistic_regression.html">11. Logistic Regression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lectures/13_causal_analysis.html">12. Causal Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/14_data_as_nd_points.html">13. Data as N-Dimensional Points</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/15_clustering.html">14. Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/16_density_estimation.html">15. Density Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/17_principal_component_analysis.html">16. Principal Component Analysis</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratories</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_setup.html">13. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_intro_python.html">14. Introduzione a Python</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_intro_numpy.html">15. Introduzione a Numpy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_intro_matplotlib.html">16. Introduzione a Matplotlib</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_intro_pandas.html">17. Introduzione a Pandas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">18. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="07_misure_di_tendenza_centrale_dispersione_e_forma.html">19. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
-<li class="toctree-l1"><a class="reference internal" href="08_associazione_variabili.html">20. Associazione tra Variabili</a></li>
-<li class="toctree-l1"><a class="reference internal" href="09_heart-disease-analysis.html">21. Exploratory Analysis on the Heart Disease Dataset</a></li>
-<li class="toctree-l1"><a class="reference internal" href="10_statistical_inference.html">22. Laboratory on Statistical Inference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="11_regressione_lineare.html">23. Laboratorio su Regressione Lineare</a></li>
-<li class="toctree-l1"><a class="reference internal" href="12_regressione_logistica.html">24. Laboratorio su regressione logistica</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">25. Linear and Logistic Regression Laboratory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_setup.html">17. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_intro_python.html">18. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_intro_numpy.html">19. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_intro_matplotlib.html">20. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_intro_pandas.html">21. Introduzione a Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">22. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_misure_di_tendenza_centrale_dispersione_e_forma.html">23. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_associazione_variabili.html">24. Associazione tra Variabili</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_heart-disease-analysis.html">25. Exploratory Analysis on the Heart Disease Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_statistical_inference.html">26. Laboratory on Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_regressione_lineare.html">27. Laboratorio su Regressione Lineare</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_regressione_logistica.html">28. Laboratorio su regressione logistica</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">29. Linear and Logistic Regression Laboratory</a></li>
 </ul>
 
     </div>
@@ -426,9 +430,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">25.1. Linear Regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-vs-mean-values">25.2. Linear Regression vs Mean Values</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression">25.3. Logistic regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">29.1. Linear Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-vs-mean-values">29.2. Linear Regression vs Mean Values</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression">29.3. Logistic regression</a></li>
 </ul>
             </nav>
         </div>
@@ -441,9 +445,9 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="linear-and-logistic-regression-laboratory">
-<h1><span class="section-number">25. </span>Linear and Logistic Regression Laboratory<a class="headerlink" href="#linear-and-logistic-regression-laboratory" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">29. </span>Linear and Logistic Regression Laboratory<a class="headerlink" href="#linear-and-logistic-regression-laboratory" title="Permalink to this heading">#</a></h1>
 <section id="linear-regression">
-<h2><span class="section-number">25.1. </span>Linear Regression<a class="headerlink" href="#linear-regression" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">29.1. </span>Linear Regression<a class="headerlink" href="#linear-regression" title="Permalink to this heading">#</a></h2>
 <p>We will use the datatset available at this URL:</p>
 <p><a class="reference external" href="https://www.kaggle.com/datasets/yasserh/advertising-sales-dataset">https://www.kaggle.com/datasets/yasserh/advertising-sales-dataset</a></p>
 <p>Let us load the dataset:</p>
@@ -1183,7 +1187,7 @@ memory usage: 7.9 KB
 \[sales = \beta_0 + \beta_1 tv + radio(\beta_2 + tv \beta_3)\]</div>
 </section>
 <section id="linear-regression-vs-mean-values">
-<h2><span class="section-number">25.2. </span>Linear Regression vs Mean Values<a class="headerlink" href="#linear-regression-vs-mean-values" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">29.2. </span>Linear Regression vs Mean Values<a class="headerlink" href="#linear-regression-vs-mean-values" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -1892,7 +1896,7 @@ memory usage: 7.9 KB
 </div>
 </section>
 <section id="logistic-regression">
-<h2><span class="section-number">25.3. </span>Logistic regression<a class="headerlink" href="#logistic-regression" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">29.3. </span>Logistic regression<a class="headerlink" href="#logistic-regression" title="Permalink to this heading">#</a></h2>
 <p>We will consider this dataset:</p>
 <p><a class="reference external" href="https://www.kaggle.com/datasets/redwankarimsony/heart-disease-data">https://www.kaggle.com/datasets/redwankarimsony/heart-disease-data</a></p>
 <div class="cell docutils container">
@@ -3576,7 +3580,7 @@ memory usage: 7.9 KB
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">24. </span>Laboratorio su regressione logistica</p>
+        <p class="prev-next-title"><span class="section-number">28. </span>Laboratorio su regressione logistica</p>
       </div>
     </a>
 </div>
@@ -3594,9 +3598,9 @@ memory usage: 7.9 KB
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">25.1. Linear Regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-vs-mean-values">25.2. Linear Regression vs Mean Values</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression">25.3. Logistic regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">29.1. Linear Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-vs-mean-values">29.2. Linear Regression vs Mean Values</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression">29.3. Logistic regression</a></li>
 </ul>
   </nav></div>
 

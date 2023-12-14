@@ -68,7 +68,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="13. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro" href="../laboratories/01_setup.html" />
+    <link rel="next" title="13. Data as N-Dimensional Points" href="14_data_as_nd_points.html" />
     <link rel="prev" title="11. Logistic Regression" href="12_logistic_regression.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -185,22 +185,26 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="11_linear_regression.html">10. Linear Regression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="12_logistic_regression.html">11. Logistic Regression</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">12. Causal Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_data_as_nd_points.html">13. Data as N-Dimensional Points</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_clustering.html">14. Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_density_estimation.html">15. Density Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_principal_component_analysis.html">16. Principal Component Analysis</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratories</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/01_setup.html">13. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/02_intro_python.html">14. Introduzione a Python</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/03_intro_numpy.html">15. Introduzione a Numpy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/04_intro_matplotlib.html">16. Introduzione a Matplotlib</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/05_intro_pandas.html">17. Introduzione a Pandas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">18. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/07_misure_di_tendenza_centrale_dispersione_e_forma.html">19. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/08_associazione_variabili.html">20. Associazione tra Variabili</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/09_heart-disease-analysis.html">21. Exploratory Analysis on the Heart Disease Dataset</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/10_statistical_inference.html">22. Laboratory on Statistical Inference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/11_regressione_lineare.html">23. Laboratorio su Regressione Lineare</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/12_regressione_logistica.html">24. Laboratorio su regressione logistica</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/13_linear_logistic_regression_example_analysis.html">25. Linear and Logistic Regression Laboratory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/01_setup.html">17. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/02_intro_python.html">18. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/03_intro_numpy.html">19. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/04_intro_matplotlib.html">20. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/05_intro_pandas.html">21. Introduzione a Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">22. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/07_misure_di_tendenza_centrale_dispersione_e_forma.html">23. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/08_associazione_variabili.html">24. Associazione tra Variabili</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/09_heart-disease-analysis.html">25. Exploratory Analysis on the Heart Disease Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/10_statistical_inference.html">26. Laboratory on Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/11_regressione_lineare.html">27. Laboratorio su Regressione Lineare</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/12_regressione_logistica.html">28. Laboratorio su regressione logistica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/13_linear_logistic_regression_example_analysis.html">29. Linear and Logistic Regression Laboratory</a></li>
 </ul>
 
     </div>
@@ -491,7 +495,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="causal-data-analysis">
 <h1><span class="section-number">12. </span>Causal Data Analysis<a class="headerlink" href="#causal-data-analysis" title="Permalink to this heading">#</a></h1>
-<p>We have seen how to characterize the relationship between two or more variables with correlation and linear regression. We also said that <strong>correlation is not causation</strong>, meaning that, if we observe a correlation between two variables, that does not necessarily imply a cause-effect relationship between them. However, in many cases, it is still useful (or better required!) to establish a cause-effect relationship (or lack thereof) between two variables. Consider the following examples:</p>
+<p>We have seen how to characterize the relationship between two or more variables with correlation and linear regression. We also said that <strong>correlation is not causation</strong>, meaning that, if we observe a correlation between two variables, that does not necessarily implies a cause-effect relationship between them. However, in many cases, it is still useful (or required!) to establish a cause-effect relationship (or lack thereof) between two variables. Consider the following examples:</p>
 <ul class="simple">
 <li><p>We assess that <strong>a given disease is more frequent among smokers</strong>. Is this just a correlation or is there a cause-effect relationship? If a smoker stops smoking, will their risk to get the disease be reduced?</p></li>
 <li><p><strong>We develop a new drug</strong> and assess that people taking this drug are less likely to get disease X. Is this just a correlation or is there a cause-effect relationship? This is important, as people should take the drug only if benefits are clear.</p></li>
@@ -807,10 +811,10 @@ P-value: 0.014630790631265746
 </section>
 <section id="measuring-causation-potential-outcomes-counterfactuals">
 <h2><span class="section-number">12.2. </span>Measuring Causation - Potential Outcomes (Counterfactuals)<a class="headerlink" href="#measuring-causation-potential-outcomes-counterfactuals" title="Permalink to this heading">#</a></h2>
-<p>We now start formulating hypotheses and theories: it looks counter-intuitive, but this is what the data is telling us. Isn’t it? It might be that sleeping too much make you less reactive in the morning, so you cannot properly focus and this make you a worse student.</p>
-<p>If this is true, than we could “prescribe” students to sleep less than <span class="math notranslate nohighlight">\(8\)</span> hours to obtain gains in performance. But we also know that… <strong>correlation is not (necessarily) causation!</strong>. We are seeing a correlation here - is it also causation? Of course, we want to be able to tell our students whether to sleep less or not!</p>
+<p>We now start formulating hypotheses and theories: it looks counter-intuitive, but this is what the data is telling us. Isn’t it? It might be that sleeping too much makes you less reactive in the morning, so you cannot properly focus and this makes you a worse student.</p>
+<p>If this is true, than we could “<strong>prescribe</strong>” students to sleep less than <span class="math notranslate nohighlight">\(8\)</span> hours to obtain gains in performance. But we also know that… <strong>correlation is not (necessarily) causation!</strong>. We are seeing a correlation here - is it also causation? Of course, we want to be able to tell our students whether to sleep less or not!</p>
 <p>To be able to truly assess a causal relationship between the two variables, ideally, we would like to <strong>take the same student and ask them to sleep more than <span class="math notranslate nohighlight">\(8\)</span> hours for one year, than less than <span class="math notranslate nohighlight">\(8\)</span> hours for another years, then compare performance</strong>. This is of course unethical and impractical. And even if we could do so, between the two years, different other factors may change, so the two values will never be fully comparable.</p>
-<p>We will now <strong>enter the real of potential outcomes</strong>. In practice, we as ourselves questions such as <strong>“what if this student slept less than <span class="math notranslate nohighlight">\(8\)</span> hours?”</strong>. Let’s see some notation first. We will define two variables:</p>
+<p>We will now <strong>enter the realm of potential outcomes</strong>. In practice, we ask ourselves questions such as <strong>“what if this student slept less than <span class="math notranslate nohighlight">\(8\)</span> hours?”</strong>. Let’s see some notation first. We will define two variables:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(T_i\)</span>: a “treatment” value indicating whether the observation <span class="math notranslate nohighlight">\(i\)</span> (student <span class="math notranslate nohighlight">\(i\)</span>) took the treatment (i.e., slept more than <span class="math notranslate nohighlight">\(8\)</span> hours) or not. Here we use the standard terminology of causal inference which uses the word “treatment” as in health-related sciences. We will assume this variable to be binary: <span class="math notranslate nohighlight">\(T_i=1\)</span> means “took the treatment”, while <span class="math notranslate nohighlight">\(T_i=0\)</span> means “didn’t take the treatment”.</p></li>
 <li><p><span class="math notranslate nohighlight">\(Y_i\)</span>: the “outcome” of observation <span class="math notranslate nohighlight">\(i\)</span>. In our case, this is the average performance of student <span class="math notranslate nohighlight">\(i\)</span>.</p></li>
@@ -828,7 +832,7 @@ P-value: 0.014630790631265746
 <p>Alternatively, we can compute the <strong>average treatment effect on the treated</strong>:</p>
 <div class="math notranslate nohighlight">
 \[ATT = E[Y(1) - Y(0)|T=1]\]</div>
-<p>This simply restrict the computation to the treated subjects, and <strong>also establishes a causal effect</strong>.</p>
+<p>This simply restricts the computation to the treated subjects, and <strong>also establishes a causal effect</strong>.</p>
 </section>
 <section id="the-bias-arising-from-correlation">
 <h2><span class="section-number">12.3. </span>The Bias Arising from Correlation<a class="headerlink" href="#the-bias-arising-from-correlation" title="Permalink to this heading">#</a></h2>
@@ -846,7 +850,9 @@ P-value: 0.014630790631265746
 \[ATT = E[Y(1) - Y(0)|T=1] = E[Y(1)|T=1] - E[Y(0)|T=1]\]</div>
 <p>Hence, we can see the expression above as follows:</p>
 <div class="math notranslate nohighlight">
-\[E[Y(1)|T=1] - E[Y(0)|T=0] = E[Y(1)|T=1] - E[Y(0)|T=1] + E[Y(0)|T=1] - E[Y(0)|T=0] = ATT + E[Y(0)|T=1] - E[Y(0)|T=0]\]</div>
+\[E[Y(1)|T=1] - E[Y(0)|T=0] = E[Y(1)|T=1] - E[Y(0)|T=1] + E[Y(0)|T=1] - E[Y(0)|T=0] = \]</div>
+<div class="math notranslate nohighlight">
+\[= ATT + E[Y(0)|T=1] - E[Y(0)|T=0]\]</div>
 <p>We will call the last term the bias:</p>
 <div class="math notranslate nohighlight">
 \[BIAS = E[Y(0)|T=1] - E[Y(0)|T=0]\]</div>
@@ -1214,7 +1220,7 @@ P-value: 0.014630790631265746
 <h2><span class="section-number">12.4. </span>Randomized Controlled Trials (RCT)<a class="headerlink" href="#randomized-controlled-trials-rct" title="Permalink to this heading">#</a></h2>
 <p>We have seen that correlation is causation when the treated and control groups are comparable for everything except the treatment. The most robust method to remove this bias is via <strong>randomized experiments</strong>, or <strong>Randomized Controlled Trials</strong> (RCT).</p>
 <p>A randomized experiment <strong>randomly assigns individuals in a population to a treatment or a control group</strong>. By performing a random assignment, we wish to make the two groups indistinguishable. Of course <strong>one of the two groups will take the treatment and this will likely make the two group distinguishable</strong>, but we wish to make sure that, <strong>apart from the treatment, the two groups are indeed indistinguishable</strong>.</p>
-<p>It can be shown random assignment makes sure that the potential outcomes are conditionally independent given the treatment:</p>
+<p>It can be shown that random assignment makes sure that the potential outcomes are conditionally independent given the treatment:</p>
 <div class="math notranslate nohighlight">
 \[Y(0) \perp Y(1) | T\]</div>
 <p>So, if the treatment <span class="math notranslate nohighlight">\(T\)</span> is fixed, the potential outcomes are independent. For instance, if we fix <span class="math notranslate nohighlight">\(T=1\)</span> (so we are taking subjects who sleep <span class="math notranslate nohighlight">\(8\)</span> hours or more), then knowing the observed value <span class="math notranslate nohighlight">\(Y_i(1)\)</span> (i.e., the observed exam performance of student <span class="math notranslate nohighlight">\(i\)</span>), does not tell me anything about the potential outcome <span class="math notranslate nohighlight">\(Y_i(1)\)</span> (the exam performance that the same student would obtain if they slept less than <span class="math notranslate nohighlight">\(8\)</span> hours).</p>
@@ -1230,7 +1236,7 @@ P-value: 0.014630790631265746
 <p>Hence, in this case, <strong>correlation would be causation</strong>.</p>
 <section id="example">
 <h3><span class="section-number">12.4.1. </span>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h3>
-<p>Let us now consider an example. A school wants to see if a new teaching method is effective. To do so, they ask <span class="math notranslate nohighlight">\(50\)</span> students if they want to voluntarily enroll a tutoring program. After one year, they measure the average performance of students who participated in the programme and compare it to those of students who did not participate in the programme. We obtain the following data:</p>
+<p>Let us now consider an example. A school wants to see if a new teaching method is effective. To do so, they ask <span class="math notranslate nohighlight">\(50\)</span> students if they want to <strong>voluntarily enroll a tutoring program</strong>. After one year, they measure the average performance of students who participated in the programme and compare it to those of students who did not participate in the programme. We obtain the following data:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html"><div>
@@ -1559,7 +1565,7 @@ P-value: 0.014630790631265746
 <img alt="../_images/b9a337b36c0dd5c7c9ee809b23c183fbf3272c8e05ffe62e0ddec6f0abd05e68.png" src="../_images/b9a337b36c0dd5c7c9ee809b23c183fbf3272c8e05ffe62e0ddec6f0abd05e68.png" />
 </div>
 </div>
-<p>We can go ahead and compute a <span class="math notranslate nohighlight">\(\Chi^2\)</span> test of independence to check if the association between the two variables is statistically significant:</p>
+<p>We can go ahead and compute a <span class="math notranslate nohighlight">\(\chi^2\)</span> test of independence to check if the association between the two variables is statistically significant:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chi-square statistic: 31.22
@@ -1577,7 +1583,7 @@ Chi-square p-value: 2.761663e-06
 <div class="math notranslate nohighlight">
 \[Y(0) \perp Y(1) | T\]</div>
 <p>We have seen that this is not true because of <code class="docutils literal notranslate"><span class="pre">interest</span></code>. Indeed, if we pick a person in the group <span class="math notranslate nohighlight">\(T=0\)</span> with a high <span class="math notranslate nohighlight">\(Y(0)\)</span>, we can imagine this is due to a large value of <code class="docutils literal notranslate"><span class="pre">interest</span></code>, so we can easily predict that <span class="math notranslate nohighlight">\(Y(1)\)</span> will also be large. <strong>If we can predict <span class="math notranslate nohighlight">\(Y(1)\)</span> from <span class="math notranslate nohighlight">\(Y(0)\)</span>, then they are not independent (conditioned on <span class="math notranslate nohighlight">\(T=1\)</span> in this case)</strong>.</p>
-<p>To obtain the statement above, we should <strong>perform a random assignment</strong>, which we cannot do. However, we know what that <code class="docutils literal notranslate"><span class="pre">interest</span></code> is the source of bias. Let us assume that it is the <strong>only source of bias</strong>. Then, if <span class="math notranslate nohighlight">\(X\)</span> represents <code class="docutils literal notranslate"><span class="pre">interest</span></code>, we can say that:</p>
+<p>To obtain the statement above, we should <strong>perform a random assignment</strong>, which we cannot do. However, we know that <code class="docutils literal notranslate"><span class="pre">interest</span></code> is the source of bias. Let us assume that it is the <strong>only source of bias</strong>. Then, if <span class="math notranslate nohighlight">\(X\)</span> represents <code class="docutils literal notranslate"><span class="pre">interest</span></code>, we can say that:</p>
 <div class="math notranslate nohighlight">
 \[Y(0) \perp Y(1) | T, X\]</div>
 <p><strong>Indeed, if we pick a person from a group <span class="math notranslate nohighlight">\(T=0\)</span> and with a given interest value <span class="math notranslate nohighlight">\(X=4\)</span>, then, given a large <span class="math notranslate nohighlight">\(Y(0)\)</span> we cannot really say anything about <span class="math notranslate nohighlight">\(Y(1)\)</span>. Indeed, if <span class="math notranslate nohighlight">\(X=4\)</span> and <span class="math notranslate nohighlight">\(Y(0)=80\)</span>, we have a student with great interest and high performance. What can we say about <span class="math notranslate nohighlight">\(Y(1)\)</span>? We could say that it will be high (the student has high interest), but any other student in this group will probably have a high score, so we cannot predict anything which will be significantly different from random (i.e., from the score of another random student within this group)</strong>.</p>
@@ -1703,7 +1709,7 @@ Chi-square p-value: 2.761663e-06
 <div class="math notranslate nohighlight">
 \[A \perp C | B\]</div>
 <p>Hence, in groups with the same value of <span class="math notranslate nohighlight">\(B\)</span>, we will see an independence between <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>.</p>
-<p>In general, we say that <strong>conditioning on <span class="math notranslate nohighlight">\(B\)</span> blocks the dependency between <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(C\)</span></strong>, hence **while there is a causal effect between <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(C\)</span>, we cannot see it anymore when we condition on <span class="math notranslate nohighlight">\(B\)</span>.</p>
+<p>In general, we say that <strong>conditioning on <span class="math notranslate nohighlight">\(B\)</span> blocks the dependency between <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(C\)</span></strong>, hence <strong>while there is a causal effect between <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(C\)</span>, we cannot see it anymore when we condition on <span class="math notranslate nohighlight">\(B\)</span></strong>.</p>
 <p>The graph below shows two identical graphs, except that we are conditioning on <span class="math notranslate nohighlight">\(B\)</span> in the version on the right. Besides solid black arrows denoting cause-effect relationships, we also show <strong>in red how dependency flows</strong>.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -1736,7 +1742,7 @@ Chi-square p-value: 2.761663e-06
 <blockquote>
 <div><p>We will call <span class="math notranslate nohighlight">\(B\)</span> (or <code class="docutils literal notranslate"><span class="pre">interest</span></code>) the <strong>common cause</strong>.</p>
 </div></blockquote>
-<p>Although we will likely observe correlation between any pair of the <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(B\)</span>, and <span class="math notranslate nohighlight">\(C\)</span> variables, we know from the graph that there is no cause-effect relationship between <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(C\)</span>.</p>
+<p>Although we will likely observe correlations between any pair of the <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(B\)</span>, and <span class="math notranslate nohighlight">\(C\)</span> variables, we know from the graph that there is no cause-effect relationship between <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(C\)</span>.</p>
 <p>We say that the fork structure <strong>creates a backdoor path such that dependence (or association) flows through <span class="math notranslate nohighlight">\(B\)</span> (the backdoor) to go from <span class="math notranslate nohighlight">\(A\)</span> to <span class="math notranslate nohighlight">\(C\)</span></strong>.</p>
 <p>As we noted in the previous example, conditioning on <span class="math notranslate nohighlight">\(B\)</span> (<code class="docutils literal notranslate"><span class="pre">interest</span></code>) makes the association between <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(C\)</span> vanish:</p>
 <div class="math notranslate nohighlight">
@@ -1780,7 +1786,7 @@ Chi-square p-value: 2.761663e-06
 <li><p>If we know that a student has a <strong>good performance</strong> (i.e., we consider the group of good performing students when controlling), then <strong>knowing that they do not study a lot, will tell us that they probably have good intuitive intelligence</strong>. Indeed, if the fixed performance cannot be explained by the large number of study hours, it must be due to good intuitive intelligence;</p></li>
 <li><p>Conversely, if we know that a good performing student has bad intuitive intelligence, then their performance is probably due to a large number of study hours.</p></li>
 </ul>
-<p>In practice, conditioning on <code class="docutils literal notranslate"><span class="pre">performance</span></code> make <code class="docutils literal notranslate"><span class="pre">study</span> <span class="pre">hours</span></code> and <code class="docutils literal notranslate"><span class="pre">intuitive</span> <span class="pre">intelligence</span></code> dependent:</p>
+<p>In practice, conditioning on <code class="docutils literal notranslate"><span class="pre">performance</span></code> makes <code class="docutils literal notranslate"><span class="pre">study</span> <span class="pre">hours</span></code> and <code class="docutils literal notranslate"><span class="pre">intuitive</span> <span class="pre">intelligence</span></code> dependent:</p>
 <div class="math notranslate nohighlight">
 \[A \not\perp C | B\]</div>
 <p>This phenomenon is called <strong>explaining away</strong>, because, one we fix <span class="math notranslate nohighlight">\(B\)</span> (<code class="docutils literal notranslate"><span class="pre">performance</span></code>), knowing <span class="math notranslate nohighlight">\(A\)</span> (<code class="docutils literal notranslate"><span class="pre">study</span> <span class="pre">hours</span></code>) already explains <span class="math notranslate nohighlight">\(B\)</span>, hence making <span class="math notranslate nohighlight">\(C\)</span> less likely.</p>
@@ -2539,11 +2545,11 @@ Chi-square p-value: 2.761663e-06
       </div>
     </a>
     <a class="right-next"
-       href="../laboratories/01_setup.html"
+       href="14_data_as_nd_points.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">13. </span>Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</p>
+        <p class="prev-next-title"><span class="section-number">13. </span>Data as N-Dimensional Points</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

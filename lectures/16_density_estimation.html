@@ -1,0 +1,1101 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>15. Density Estimation &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures/16_density_estimation';</script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="16. Principal Component Analysis" href="17_principal_component_analysis.html" />
+    <link rel="prev" title="14. Clustering" href="15_clustering.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Lecture Notes on Fundamentals of Data Analysis - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Lecture Notes on Fundamentals of Data Analysis - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Lecture Notes on Fundamental of Data Analysis
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_intro_data_analysis.html">1. Introduction to Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_main_data_analysis_concepts.html">2. Main data analysis concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_misure_di_frequenze_e_rappresentazione_grafica_dei_dati.html">3. Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_misure_di_tendenza_centrale_dispersione_e_forma.html">4. Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_associazione_variabili.html">5. Associazione tra Variabili</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_probability.html">6. Probability for Data Manipulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_common_distributions.html">7. Common Probability Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_information_theory.html">8. Basic Elements of Information Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_statistical_inference.html">9. Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_linear_regression.html">10. Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_logistic_regression.html">11. Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_causal_analysis.html">12. Causal Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_data_as_nd_points.html">13. Data as N-Dimensional Points</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_clustering.html">14. Clustering</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">15. Density Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_principal_component_analysis.html">16. Principal Component Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratories</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/01_setup.html">17. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/02_intro_python.html">18. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/03_intro_numpy.html">19. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/04_intro_matplotlib.html">20. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/05_intro_pandas.html">21. Introduzione a Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">22. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/07_misure_di_tendenza_centrale_dispersione_e_forma.html">23. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/08_associazione_variabili.html">24. Associazione tra Variabili</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/09_heart-disease-analysis.html">25. Exploratory Analysis on the Heart Disease Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/10_statistical_inference.html">26. Laboratory on Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/11_regressione_lineare.html">27. Laboratorio su Regressione Lineare</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/12_regressione_logistica.html">28. Laboratorio su regressione logistica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/13_linear_logistic_regression_example_analysis.html">29. Linear and Logistic Regression Laboratory</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/antoninofurnari/fadlecturenotes/blob/master/lecturenotes/lectures/16_density_estimation.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/antoninofurnari/fadlecturenotes" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/antoninofurnari/fadlecturenotes/issues/new?title=Issue%20on%20page%20%2Flectures/16_density_estimation.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/lectures/16_density_estimation.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Density Estimation</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#non-parametric-density-estimation-techniques">15.1. Non-parametric Density Estimation Techniques</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fixed-windows-d-dimensional-histograms">15.1.1. Fixed Windows - D-Dimensional Histograms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mobile-windows-parzen-window-kernel-density-estimation">15.1.2. Mobile Windows - Parzen Window / Kernel Density Estimation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fixed-samples-k-nearest-neighbor">15.1.3. Fixed Samples - K-Nearest Neighbor</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parametric-density-estimation">15.2. Parametric Density Estimation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-a-gaussian-to-the-data">15.2.1. Fitting a Gaussian to the Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-mixture-models-gmm">15.2.2. Gaussian Mixture Models (GMM)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-by-maximum-likelihood">15.2.2.1. Optimization by Maximum Likelihood</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilistic-formulation-of-gmm-with-latent-variables">15.2.3. Probabilistic Formulation of GMM with Latent Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#inferring-values-for-the-latent-variable-mathbf-z">15.2.3.1. Inferring Values for the Latent Variable <span class="math notranslate nohighlight">\(\mathbf{Z}\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-from-a-gmm">15.2.3.2. Sampling from a GMM</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-expectation-maximization-algorithm-for-gmm">15.2.4. The Expectation-Maximization Algorithm for GMM</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pseudocode">15.2.4.1. Pseudocode</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-execution">15.2.4.2. Example Execution</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation-maximization-in-general">15.2.4.3. Expectation Maximization in General</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gmm-vs-k-means">15.2.5. GMM vs K-Means</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">15.3. References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="density-estimation">
+<h1><span class="section-number">15. </span>Density Estimation<a class="headerlink" href="#density-estimation" title="Permalink to this heading">#</a></h1>
+<p>We have seen that clustering algorithms aim to mine the underlying structure of data by breaking it into coherent groups. For example k-means clustering <strong>allows to identify parts of the feature space with high density (i.e., a large number of observations)</strong> by partitioning all observations into a <strong>a discrete sets of <span class="math notranslate nohighlight">\(K\)</span> data groups distributed around centroids</strong>.</p>
+<p>An alternative <strong>smoother</strong> approach would be to study the probability <span class="math notranslate nohighlight">\(P(X)\)</span>, where <span class="math notranslate nohighlight">\(X\)</span> is the data. Indeed, if we could determine the probability value of an given point in space <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, we could naturally discover clusters in the data (<strong>zones with high probability values</strong>). Knowing the distribution of the data is also useful for a number of things:</p>
+<ul class="simple">
+<li><p>Similar to clustering, if <span class="math notranslate nohighlight">\(X\)</span> is a series of observations of customers in a bank (e.g., age, sex, balance, salary, etc.), we may want to know <span class="math notranslate nohighlight">\(P(X)\)</span> to understand which types of customers are more frequent (those that have large <span class="math notranslate nohighlight">\(P(X)\)</span> values), or if there are different distinct groups of customers (e.g., if <span class="math notranslate nohighlight">\(P(X)\)</span> has more than one mode);</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(X\)</span> is a set of images of faces, knowing <span class="math notranslate nohighlight">\(P(X)\)</span> would allow us to understand if an image <span class="math notranslate nohighlight">\(x\)</span> looks like an image of a face or not, which faces are more frequent, if there are more than one “groups” of faces, etc. If we could draw <span class="math notranslate nohighlight">\(x \sim P\)</span>, we could even generate new images of faces! (<strong>by the way, this is what Generative Adversarial Networks do</strong>);</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(X\)</span> is a series of observations of bank transactions, by modeling <span class="math notranslate nohighlight">\(P(X)\)</span> we can infer if a given observation <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> is a typical transaction (high <span class="math notranslate nohighlight">\(P(\mathbf{x}\)</span>)) or whether it is an anomaly (low <span class="math notranslate nohighlight">\(P(X)\)</span>). If we can make assumptions on the nature of <span class="math notranslate nohighlight">\(P(X)\)</span>,, we can even make inference on the properties of a given data point <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>. For instance, if <span class="math notranslate nohighlight">\(P\)</span> is Gaussian, then datapoints which are further from the center are atypical and they can hence identify anomalous transactions.</p></li>
+</ul>
+<p>A probability density is <strong>a continuous function</strong>, so estimating it is not as straightforward as estimating a <strong>probability mass function</strong>. There are two main classes of methods for density estimation:</p>
+<ul class="simple">
+<li><p><strong>Non-parametric methods</strong>: these methods aim to estimate the density <strong>directly from the data, without strong assumptions on the source distribution</strong>. The main advantage of these methods is that they generally have few hyper-parameters to tune and can be used when no assumption can be made on the source of the data. A disadvantage is that, while we can numerically compute <span class="math notranslate nohighlight">\(f(\mathbf{x})\)</span> with these methods (where <span class="math notranslate nohighlight">\(f\)</span> is the density function), we do not know the analytical form or property of <span class="math notranslate nohighlight">\(f\)</span>;</p></li>
+<li><p><strong>Parametric methods</strong>: these methods aim to <strong>fit a known distribution to the data</strong>. An example of this approach is <strong>fitting a Gaussian to the data</strong>. The main advantage of these methods is that they provide an analytical form for the density <span class="math notranslate nohighlight">\(f\)</span>, which can be useful in a number of contexts (for instance, the density may be part of a cost function we want to optimize). The downside is that these methods make strong assumptions on the nature of the data.</p></li>
+</ul>
+<p>In the following, we will see the main representatives of these two classes of methods.</p>
+<section id="non-parametric-density-estimation-techniques">
+<h2><span class="section-number">15.1. </span>Non-parametric Density Estimation Techniques<a class="headerlink" href="#non-parametric-density-estimation-techniques" title="Permalink to this heading">#</a></h2>
+<p>We hence usually resort to different approaches, the main of which are:</p>
+<ul class="simple">
+<li><p><strong>Fixed windows</strong>: this consists in “discretizing” the range of the the variable <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> in “bins” of size <span class="math notranslate nohighlight">\(r\)</span> and counting how many values fall within each window. <strong>Histogram</strong> belong to this class of methods for density estimation. Note that histograms can also be <strong>extended to multiple dimensions</strong> by considering d-dimensional tiles (e.g., square tiles in <span class="math notranslate nohighlight">\(\Re^2\)</span>);</p></li>
+<li><p><strong>Mobile windows</strong>: as in histograms, the range of <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> the density estimation is performed by dividing the space into d-dimensional windows. However, in this case, the windows are not fixed, but mobile and overlapping, meaning that, given a point <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, we can estimate the density at <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> by centering a window around <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>. <strong>Kernel density estimation methods</strong> as the one we saw at the beginning of the course fall in this category. This is also known as <strong>Parzen window</strong>.</p></li>
+<li><p><strong>Fixed samples</strong>: rather than discretizing the range of <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>, at any given point <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, we estimate the density <span class="math notranslate nohighlight">\(f(\mathbf{x})\)</span> by looking at the <span class="math notranslate nohighlight">\(K\)</span> closest point in space, where <span class="math notranslate nohighlight">\(K\)</span> is fixed and comparing them to the size of a neighborhood containing all of them. We will see that this strategy is used to define the K-NN classification algorithm.</p></li>
+</ul>
+<p>The figure below illustrates three examples of density estimation using the three approaches above for an example dataset.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/05cab637d4c7f9dcb00ff41ba658e4bf44547fea4c64521b19a244c1ed341ed5.png" src="../_images/05cab637d4c7f9dcb00ff41ba658e4bf44547fea4c64521b19a244c1ed341ed5.png" />
+</div>
+</div>
+<p>(a) The space is divided into non-overlapping square tiles (other shapes could be used as long as they’ll cover the whole space), then the density for each square is computed by considering the number of examples falling into each square. (b) Given an arbitrary point <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> in the n-dimensional space, a neighborhood of a given radius <span class="math notranslate nohighlight">\(r\)</span> is considered and the density for that point is estimated by considering the number of examples falling in the neighborhood. (c) Given an arbitrary point <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> in the n-dimensional space, we consider a neighborhood centered at <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and radius <span class="math notranslate nohighlight">\(R_k(\mathbf{x})\)</span> large enough to contain <span class="math notranslate nohighlight">\(K\)</span> points. The density at <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> is computed by considering the size <span class="math notranslate nohighlight">\(R_k(\mathbf{x})\)</span> (the smaller, the denser).</p>
+<section id="fixed-windows-d-dimensional-histograms">
+<h3><span class="section-number">15.1.1. </span>Fixed Windows - D-Dimensional Histograms<a class="headerlink" href="#fixed-windows-d-dimensional-histograms" title="Permalink to this heading">#</a></h3>
+<p>Density estimation can be easily performed using D-Dimensional histograms. This method is the same as the one we saw in the case of 1-d histograms, but in general, <strong>we will divide the D-Dimensional space into D-Dimensional regions (typically hypercubes)</strong>. In the 2D case, these will simply be square tiles. The algorithm hence assigns a uniform density value to each region.</p>
+<p>Let <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> be our set of observations and let <span class="math notranslate nohighlight">\(R_i\)</span> be the <span class="math notranslate nohighlight">\(i^{th}\)</span> region of a set of <span class="math notranslate nohighlight">\(\mathcal{R}=\{R_i\}_i\)</span> regions in which we divided the space. We will assign the following density value to the <span class="math notranslate nohighlight">\(R_i\)</span> region:</p>
+<div class="math notranslate nohighlight">
+\[f(R_i) = \frac{|\{\mathbf{x} \in \mathbf{X} \cup R_i\}|}{|\mathbf{X}| \cdot V(R_i)}\]</div>
+<p>where <span class="math notranslate nohighlight">\(V(R_i)\)</span> is the volume of <span class="math notranslate nohighlight">\(R_i\)</span>. If <span class="math notranslate nohighlight">\(R_i\)</span> is 1-dimensional (hence a segment), this will be its length, if <span class="math notranslate nohighlight">\(R_i\)</span> is 2D, then it will be its area.</p>
+<p>Recall that the probability of finding a value <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> in a given region <span class="math notranslate nohighlight">\(R\)</span> is in general given by:</p>
+<div class="math notranslate nohighlight">
+\[P(\mathcal{x} \in R_i)=\int_{R_i} f(\mathbf{x}) d\mathbf{x} = V(R_i) \cdot f(R_i)\]</div>
+<p>The last part of the equality is true because we assigned uniform density values to each region.</p>
+<p>We hence obtain that:</p>
+<div class="math notranslate nohighlight">
+\[P(\mathcal{x} \in \mathcal{X}) = \sum_i P(R_i) = \sum_i V(R_i) \cdot f(R_i) = \sum_i V(R_i) \frac{|\{\mathbf{x} \in \mathbf{X} \cup R_i\}|}{|\mathbf{X}| \cdot V(R_i)} = \]</div>
+<div class="math notranslate nohighlight">
+\[= \frac{V(R_i)}{V(R_i) |\mathbf{X}|}  \sum_i |\{\mathbf{x} \in \mathbf{X} \cup R_i\}| = \frac{V(R_i) |\mathbf{X}|}{V(R_i) |\mathbf{X}|} = 1\]</div>
+<p><strong>Hence we can treat the density estimate as a valid probability density function.</strong></p>
+<p>The plot below shows an example density estimation for a set of data. Note that <strong>this approach has a few hyper-parameters which determine the size and position of the regions</strong>.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/7fa3d3e9166f08b6b53f45510cc166bf6a8c7370069508ef9e6542d0d85c07b4.png" src="../_images/7fa3d3e9166f08b6b53f45510cc166bf6a8c7370069508ef9e6542d0d85c07b4.png" />
+</div>
+</div>
+</section>
+<section id="mobile-windows-parzen-window-kernel-density-estimation">
+<h3><span class="section-number">15.1.2. </span>Mobile Windows - Parzen Window / Kernel Density Estimation<a class="headerlink" href="#mobile-windows-parzen-window-kernel-density-estimation" title="Permalink to this heading">#</a></h3>
+<p>While histograms allow to estimate density by placing a fixed grid on the data, the Parzen window approach, also known as kernel density estimation, places <strong>a window, or region, around each arbitrary point in space <span class="math notranslate nohighlight">\(\mathbf{x}\)</span></strong>. This has the big advantage to allow us to estimate density values at arbitrary points <strong>rather than setting fixed density over all points in a region</strong>.</p>
+<p>A naive approach to density estimation through Parzen Window would assign a point <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> a density by simply computing the fraction of points of <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> which fall between a neighborhood of size <span class="math notranslate nohighlight">\(r\)</span> (where <span class="math notranslate nohighlight">\(r\)</span> is a hyper-parameter) of <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, as follows:</p>
+<div class="math notranslate nohighlight">
+\[f(\mathbf{x}) = \frac{|N(\mathbf{x},h)\}|}{\alpha|\mathbf{X}|}\]</div>
+<p>where $<span class="math notranslate nohighlight">\(N(\mathbf{x},h) = \{\mathbf{y} \in \mathbf{X}\ s.t.\ ||\mathbf{y} - \mathbf{x}||_2 &lt; h \}\)</span>$</p>
+<p>is a neighborhood of <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> centered at <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and of radius <span class="math notranslate nohighlight">\(h\)</span>, and <span class="math notranslate nohighlight">\(\alpha\)</span> is a constant introduced to make sure that the density integrates to <span class="math notranslate nohighlight">\(1\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\int_{\mathbf{x} \in \Re^d} f(\mathbf{x}) d\mathbf{x}= 1\]</div>
+<p>The plot below shows some density estimates using this method:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/57b11433ef6e9a04081dddc9d16e3c45746e8d46240d6b6ebc4c31c9d3e9787e.png" src="../_images/57b11433ef6e9a04081dddc9d16e3c45746e8d46240d6b6ebc4c31c9d3e9787e.png" />
+</div>
+</div>
+<p>We can also write the expression above as:</p>
+<div class="math notranslate nohighlight">
+\[f(\mathbf{x}) = \frac{1}{|\mathbf{X}|} \sum_{i=1}^{|\mathbf{X}|} K_h\left(\mathbf{x}_i - \mathbf{x}\right) \]</div>
+<p>where <span class="math notranslate nohighlight">\(K_h\)</span> is defined as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}K_h\left(\mathbf{x}_i - \mathbf{x}\right) = \begin{cases} \frac{1}{\pi h^2} &amp; \text{if } ||\frac{\mathbf{x}_i - \mathbf{x}}{h}||_2 \leq 1 \\ 0 &amp; \text{otherwise} \end{cases}\end{split}\]</div>
+<p>We will call <span class="math notranslate nohighlight">\(K_h\)</span> <strong>a kernel function</strong> depending on the bandwidth parameter <span class="math notranslate nohighlight">\(h\)</span>. This is a function which assigns a weight to a point <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> depending on its distance from <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>. In the example above, we chose <span class="math notranslate nohighlight">\(K_h\)</span> as <strong>a circular (or radial) kernel</strong> which assigns a uniform score to all points falling in a circle of radius <span class="math notranslate nohighlight">\(h\)</span> centered at <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>. The score of <span class="math notranslate nohighlight">\(\frac{1}{\pi h^2}\)</span> is chosen so that the density <span class="math notranslate nohighlight">\(f\)</span> integrates to <span class="math notranslate nohighlight">\(1\)</span>.</p>
+<p>A main problem with this density estimation approach is that <strong>it can be very sensitive on the location at which we are computing the density</strong>. Indeed, we can find cases in which we obtain very different density when we move the circle by a little bit.</p>
+<p>We can note that <strong>this is due by the kernel <span class="math notranslate nohighlight">\(K\)</span> making “hard decisions” on which elements to assign a non-zero score and which ones to assign a zero score</strong>. Indeed, if we plot the kernel as a function of the distance between <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span>, rescaled by <span class="math notranslate nohighlight">\(h\)</span>, we obtain the following picture:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/fa189b60eb318237b16c05d68c7b7c43eed81bea0f37bcef64eb1fadeeb965a6.png" src="../_images/fa189b60eb318237b16c05d68c7b7c43eed81bea0f37bcef64eb1fadeeb965a6.png" />
+</div>
+</div>
+<p>The plot also plots points putting their distance from <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> in the x axis and the assigned weight in the y axis. As can be noted, even very close points in the x axis (e.g., the last of the green ones and the first of the red ones) get assigned very different weights, which makes the overall process sensitive to small shifts.</p>
+<p>To reduce this effect, it is common to use a smoother kernel which assigns a decreasing weight to points as their distance from <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> grows. Common choices for kernels are the Epanechnikov kernel and the Gaussian Kernel, which are defined as follows:</p>
+<p><strong>Epanechnikov Kernel</strong>
+$<span class="math notranslate nohighlight">\(K_h(\mathbf{u}) = \frac{3}{4h^2} \left(1 - \frac{\|\mathbf{u}\|^2}{h^2}\right) \mathbb{I}(\|\mathbf{u}\| \leq h)\)</span>$</p>
+<p><strong>Gaussian Kernel</strong>
+$<span class="math notranslate nohighlight">\(K_h(\mathbf{x}) = \frac{1}{(2\pi h^2)^{d/2}} \exp\left(-\frac{\|\mathbf{x}\|^2}{2h^2}\right)\)</span>$</p>
+<p>where <span class="math notranslate nohighlight">\(d\)</span> is the dimensionality of the data (<span class="math notranslate nohighlight">\(2\)</span> in our examples).</p>
+<p>The plot below compares the scores assigned to points depending on their distance from <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> according to the three kernels seen so far:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/7b0e06ed984539fe4f73b68c0dc37fcab0b209f481fd024d7157b081525663eb.png" src="../_images/7b0e06ed984539fe4f73b68c0dc37fcab0b209f481fd024d7157b081525663eb.png" />
+</div>
+</div>
+<p>This can be seen in 2D as follows:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/58971024f148c6f1a6b6ee3cdac7cabbfb7328ad7dd9187e45f459bdefceddf2.png" src="../_images/58971024f148c6f1a6b6ee3cdac7cabbfb7328ad7dd9187e45f459bdefceddf2.png" />
+</div>
+</div>
+<p>The following plot shows an example of Kernel Density estimation on a sample dataset:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/35edf73387256a910cb25fe9174df70d4018bce353bce3b68c54593cc6b924e8.png" src="../_images/35edf73387256a910cb25fe9174df70d4018bce353bce3b68c54593cc6b924e8.png" />
+</div>
+</div>
+<p>Note that the bandwidth changes the sensitivity of the algorithm. Low bandwidth values (small circles), will make the estimation more sensitive to shifts. Large bandwidth values (large circles) will make the estimation more stable, but the final density may not capture all details of the distribution.</p>
+<p><strong>Also in this case, the bandwidth regulates the trade-off between variance and bias.</strong></p>
+<p>The plot below shows density estimations for different bandwidth values:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/2cfd3a37707825ba68befd8a36e56a5ebbb8db0ef44f591c502cd97d2276d425.png" src="../_images/2cfd3a37707825ba68befd8a36e56a5ebbb8db0ef44f591c502cd97d2276d425.png" />
+</div>
+</div>
+</section>
+<section id="fixed-samples-k-nearest-neighbor">
+<h3><span class="section-number">15.1.3. </span>Fixed Samples - K-Nearest Neighbor<a class="headerlink" href="#fixed-samples-k-nearest-neighbor" title="Permalink to this heading">#</a></h3>
+<p>With either histograms or mobile windows, we have considered regions with a fixed size (e.g., the bandwidth <span class="math notranslate nohighlight">\(h\)</span>). In practice, this will lead to regions with very few or zero examples and regions with many examples. This can lead to some limitations as density estimates relying on fewer points will be more unstable (they will have a higher variance) and we will not be able to reliably estimate a density in areas where there are fewer points.</p>
+<p>While one way to mitigate this is to use smoother kernels (e.g., the Gaussian one) assigning a non-zero weight to each example, another approach is to choose a neighborhood of <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> such that the number of elements in the neighborhood, besides <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> is exactly equal to <span class="math notranslate nohighlight">\(K\)</span>, where <span class="math notranslate nohighlight">\(K\)</span> is an hyper-parameter. The advantage of this approach is to always rely on the same sample sample size when estimating the density.</p>
+<p>Let <span class="math notranslate nohighlight">\(N(\mathbf(x),r)\)</span> be a neighborhood centered at <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> with radius <span class="math notranslate nohighlight">\(r\)</span>. We will define <span class="math notranslate nohighlight">\(R_K\)</span> as the <strong>radius of the largest neighborhood centered at <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> containing at most <span class="math notranslate nohighlight">\(K\)</span> examples, besides <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> (if it is included in <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>)</strong>:</p>
+<div class="math notranslate nohighlight">
+\[R_K(\mathbf{x}) = \sup \{r | N(\mathbf{x},r) \setminus \{\mathbf{x}\}| \leq K\}\]</div>
+<p>We will also define <span class="math notranslate nohighlight">\(N_K(\mathbf{x})\)</span> as the largest neighborhood of <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> containing at most <span class="math notranslate nohighlight">\(K\)</span> elements:</p>
+<div class="math notranslate nohighlight">
+\[N_K(\mathbf{x}) = N(\mathbf{x},R_K)\]</div>
+<p>K-NN density estimation will assign point <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> the following density estimate:</p>
+<div class="math notranslate nohighlight">
+\[f(\mathbf{x}) = \frac{K}{|\mathbf{X}|} \cdot \frac{1}{V_d \cdot R_k(\mathbf{x})}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(V_d\)</span> is the <strong>volume of the unit d-dimensional ball</strong> and <span class="math notranslate nohighlight">\(V_d \cdot R_k^d(\mathbf{x})\)</span> is hence the volume of the d-dimensional ball of radius <span class="math notranslate nohighlight">\(R_K(\mathbf{x})\)</span>. Intuitively, if <span class="math notranslate nohighlight">\(R_k(\mathbf{x})\)</span> is large, then we are in an area which is not very dense, so we will assign a small density value.</p>
+<p>The figure below exemplifies the computation in 2D:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/5eb8879f1ad77d00b4c14ae92345c8dd680f875e8ebd42935463dcffb14137bf.png" src="../_images/5eb8879f1ad77d00b4c14ae92345c8dd680f875e8ebd42935463dcffb14137bf.png" />
+</div>
+</div>
+<p>The plot below shows density estimates for different values of <span class="math notranslate nohighlight">\(K\)</span>:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/157a691f2386b76dc1de8dc7e44db4b80918bc7dbc418c5c7860c9bb9de0ac6a.png" src="../_images/157a691f2386b76dc1de8dc7e44db4b80918bc7dbc418c5c7860c9bb9de0ac6a.png" />
+</div>
+</div>
+<p>As we can see, <span class="math notranslate nohighlight">\(K\)</span> acts as the bandwidth in the previous case, effectively determining the size of the neighborhoods in an adaptive way.</p>
+<p>We will not see more details on this method, as kernel Density Estimation is in practice the most used <strong>non-parametric density estimation method</strong>. However, we will see how this approach will turn useful and practical to define classification algorithms.</p>
+</section>
+</section>
+<section id="parametric-density-estimation">
+<h2><span class="section-number">15.2. </span>Parametric Density Estimation<a class="headerlink" href="#parametric-density-estimation" title="Permalink to this heading">#</a></h2>
+<p>Parametric methods aim to estimate density by <strong>fitting a parametric model to the data</strong>. This has some advantages over non-parametric density estimation:</p>
+<ul class="simple">
+<li><p>The chosen model has in general a known analytical formulation which we can reason on, or that we can even plug into a cost function and differentiate to pursue some optimization objective;</p></li>
+<li><p>The chosen model is compact. While non-parametric models need to keep in memory the whole dataset to make density estimations at given points, once fitted, parametric models can be used to predict density values using the analytical formulation of the model;</p></li>
+<li><p>If we choose an interpretable model, we can reason on the model to derive properties of the data. For instance, if we fit a Gaussian on the data, then we know that the mean is the point with highest density. We also know that when we go further from the mean, the density values decrease.</p></li>
+</ul>
+<p>Nevertheless, these methods also have disadvantages:</p>
+<ul class="simple">
+<li><p>An optimization process is required to fit the model to the data, i.e., find appropriate values which make the model “explain well the data”. This can be a time-consuming process.</p></li>
+<li><p>Parametric models make <strong>strong assumption on the data</strong>. For instance, if we fit a Gaussian to the data, we assume that the data is distributed in a Gaussian way. If this is not true, then the model will not be very accurate. This is a relevant point, as in many cases we cannot make strong assumptions on the data.</p></li>
+</ul>
+<p>For the reasons above, it is common to use non-parametric density estimations for visualizations (e.g., the density plots we have seen and used in many cases), especially for exploration, when we do not know much about the data, and to use parametric model when we need to create efficient models able to make predictions (as we will see later in the course).</p>
+<section id="fitting-a-gaussian-to-the-data">
+<h3><span class="section-number">15.2.1. </span>Fitting a Gaussian to the Data<a class="headerlink" href="#fitting-a-gaussian-to-the-data" title="Permalink to this heading">#</a></h3>
+<p>Recall the PDF of a multivariate Gaussian distribution with <span class="math notranslate nohighlight">\(n\)</span> dimensions:</p>
+<div class="math notranslate nohighlight">
+\[N\left( \mathbf{x;\mu,}\mathbf{\Sigma} \right) = \sqrt{\frac{1}{(2\pi)^{n}\det(\Sigma)}}e^{( - \frac{1}{2}\left( \mathbf{x} - \mathbf{\mu} \right)^{T}\Sigma^{- 1}\left( \mathbf{x} - \mathbf{\mu} \right))}\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\mathbf{X} = \{\mathbf{x}_1, \ldots, \mathbf{x}_N\}\)</span> be a set of observations which we will assume to be <strong>independent and drawn from a multivariate Gaussian distribution of unknown parameters</strong>. We would like to find the parameters <span class="math notranslate nohighlight">\(\mathbf{\mu}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{\Sigma}\)</span> that identify the <strong>most likely Gaussian distribution that may have generated the data</strong>. To do so, we can use the Maximum Likelihood (ML) principle, which consists in finding the parameters which maximize the probability values that the Gaussian distribution would compute for the given data. The likelihood is defined as</p>
+<div class="math notranslate nohighlight">
+\[P(\mathbf{X}|\mathbf{\mu},\mathbf{\Sigma}) = \mathcal{N}(\mathbf{X}|\mathbf{\mu}, \mathbf{\Sigma})\]</div>
+<p>Intuitively, we want to find <span class="math notranslate nohighlight">\(\mathbf{\mu}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{\Sigma}\)</span> parameters such that the Gaussian distribution will assign high probability values to the observed points <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, i.e., such that <strong>observing our dataset is highly probable under the given model</strong>.</p>
+<p>Let us consider a simple example in which we want to fit a Gaussian to a set of 1D data. The plot below shows the log likelihood for Gaussians with different means and standard deviations.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/bb98b8d96435dace0ca22dca57c8c7c3f45890d7a4be2621e7b780d6e0820e67.png" src="../_images/bb98b8d96435dace0ca22dca57c8c7c3f45890d7a4be2621e7b780d6e0820e67.png" />
+</div>
+</div>
+<p>In the top plots, the standard deviation is fixed to <span class="math notranslate nohighlight">\(1\)</span>, while the mean of the Gaussian is changed. The log likelihood is shown in the legend. As can be seen, the mean in the center plot leads to larger log likelihood. <strong>Intuitively, this happens when we choose a mean such that the majority of points fall in the central part of the Gaussian distribution</strong>.</p>
+<p>The plots in the bottom show a similar example in which the mean is fixed to <span class="math notranslate nohighlight">\(0\)</span> and the standard deviation is varied. As can be noted, when the standard deviation is too low (left) or to high (right), we obtain smaller log likelihoods.</p>
+<p>The plots below show the log likelihood (first two plots) or the likelihood (last plot) as a function of different values of means and standard deviations.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/ce61f5c244ed55dd6ba1080f27e84b28502fc7e18ec1383ea644a7085236e239.png" src="../_images/ce61f5c244ed55dd6ba1080f27e84b28502fc7e18ec1383ea644a7085236e239.png" />
+</div>
+</div>
+<p>The first two plots show how the log likelihood changes when <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> change, keeping the data fixed (same data as the previous plot). The last plot shows how the likelihood changes as a function of both <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>. As we can see, we have a maximum for <span class="math notranslate nohighlight">\(\mu=0\)</span> and <span class="math notranslate nohighlight">\(\sigma=0\)</span>, which are the true parameters of the distribution which generated the data.</p>
+<p>It can be shown that a close form solution exist for the estimation of the parameters of the N-Dimensional Gaussian. These are obtained by computing the derivatives of the log likelihood with respect to <span class="math notranslate nohighlight">\(\mathbf{\mu}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{\Sigma}\)</span> and setting them to zero. We will not see the mathematical details, but the Maximul Likelihood estimates of the parameters for the n-dimensional Gaussian are:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{\mu}_{ML} = \frac{1}{N} \sum_{i=1}^N \mathbf{x}_i\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{\Sigma}_{ML} = \frac{1}{N} \sum_{i=1}^N (\mathbf{x}_i - \mathbf{\mu}_{ML})(\mathbf{x}_i - \mathbf{\mu}_{ML})^T\]</div>
+<p>We are very familiar with the first expression - it is simply the mean of the data. The second expression is the data covariance matrix.</p>
+<p>To see why the expression above denotes the covariance matrix, let us consider a set of 2D points <span class="math notranslate nohighlight">\(\mathbf{x}_i=(x_{i1},x_{i2})\)</span> and the mean value <span class="math notranslate nohighlight">\(\mathbf{\mu}_{ML} = (\overline{x}_1,\overline{x}_2)\)</span>. We have:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{\Sigma}_{ML} =  \frac{1}{N} \sum_{i=1}^N (\mathbf{x}_i - \overline{\mathbf{x}}) (\mathbf{x}_i - \overline{\mathbf{x}})^T = \frac{1}{N} \sum_{i=1}^N \left(\begin{matrix} x_{i1} - \overline{x}_1 \\ x_{i2} - \overline{x}_2 \end{matrix}\right) (x_{i1} - \overline{x}_1, x_{i2} - \overline{x}_2)=\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}=\frac{1}{N} \sum_{i=1}^N \left(\begin{matrix} (x_{i1}-\overline{x}_1)^2 &amp; (x_{i1}-\overline{x}_1)(x_{i2}-\overline{x}_2) \\ (x_{i1}-\overline{x}_1)(x_{i2}-\overline{x}_2) &amp; (x_{i2}-\overline{x}_2)^2\end{matrix}\right) = \end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}= \left(\begin{matrix} \frac{1}{N} \sum_{i=1}^N(x_{i1}-\overline{x}_1)^2 &amp; \frac{1}{N} \sum_{i=1}^N(x_{i1}-\overline{x}_1)(x_{i2}-\overline{x}_2) \\ \frac{1}{N} \sum_{i=1}^N(x_{i1}-\overline{x}_1)(x_{i2}-\overline{x}_2) &amp; \frac{1}{N} \sum_{i=1}^N(x_{i2}-\overline{x}_2)^2\end{matrix}\right)\end{split}\]</div>
+<p>Which is the definition we have seen in the past for the covariance matrix.</p>
+</section>
+<section id="gaussian-mixture-models-gmm">
+<h3><span class="section-number">15.2.2. </span>Gaussian Mixture Models (GMM)<a class="headerlink" href="#gaussian-mixture-models-gmm" title="Permalink to this heading">#</a></h3>
+<p>We have seen that, when we can assume that the data follows a Gaussian distribution, it can be convenient to fit a D-dimensional Gaussian to the data and <strong>summarize the data with distribution</strong>. In practice, this consists in estimating a D-dimensional mean vector <span class="math notranslate nohighlight">\(\mathbf{\mu}\)</span> and a <span class="math notranslate nohighlight">\(D \times D\)</span> covariance matrix <span class="math notranslate nohighlight">\(\mathbf{\Sigma}\)</span>.</p>
+<p>In practice, however <strong>data is not always Gaussian</strong>. As we have seen in the case of clustering, we can expect that our data is actually grouped under different clusters. Think about the Old Faithful dataset. Since the data <strong>has two modes</strong>, a Guassian model would lead to a poor fit.</p>
+<p>The plot below compares a Guassian fit with a Kernel Density Estimation form the same data. The data has been standardized.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/3f45a0e317ab5d5ffbd2af77a08a3399ad5f55e8e0b9890f5655650e9525fb15.png" src="../_images/3f45a0e317ab5d5ffbd2af77a08a3399ad5f55e8e0b9890f5655650e9525fb15.png" />
+</div>
+</div>
+<p>As can be seen, the unimodal Guassian distribution is not a good fit. Indeed, the center of the Gaussian lies in an area with low density, as shown by the density estimation on the right.</p>
+<p>An alternative approach would consist in fitting two separate Gaussian distributions to the two clusters of data, as shown in the following:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/8245597e8d582a7ac1781156c79ec7f203f0893965c1c77f0b53b6d69d4b06ec.png" src="../_images/8245597e8d582a7ac1781156c79ec7f203f0893965c1c77f0b53b6d69d4b06ec.png" />
+</div>
+</div>
+<p>We could then define a unified probability distribution averaging the two distributions:</p>
+<div class="math notranslate nohighlight">
+\[p(\mathbf{x}) = \frac{1}{2} \mathcal{N}(\mathbf{x}|\mathbf{x}_1, \mathbf{\Sigma}_1) + \frac{1}{2} \mathcal{N}(\mathbf{x}|\mathbf{x}_2, \mathbf{\Sigma}_2)\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathcal{N}(\mathbf{x}|\mathbf{\mu}_k, \mathbf{\Sigma}_k)\)</span> is the normal distribution of mean <span class="math notranslate nohighlight">\(\mathbf{\mu}_k\)</span> and covariance matrix <span class="math notranslate nohighlight">\(\mathbf{\Sigma}_k\)</span> computed at point <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>.</p>
+<p>More in general, we may want to weigh more one distribution over the others. We can hence define the following general model:</p>
+<div class="math notranslate nohighlight">
+\[p(\mathbf{x}) = \sum_{k=1}^{K} \pi_k \mathcal{N}(\mathbf{x}|\mathbf{\mu}_i, \mathbf{\Sigma}_i)\]</div>
+<p>This model is known as a <strong>Gaussian Mixture Model (GMM)</strong>. Each Gaussian <span class="math notranslate nohighlight">\(\mathcal{N}(\mathbf{x}|\mathbf{\mu}_i, \mathbf{\Sigma}_i)\)</span> is called <strong>a component of the GMM</strong>. The parameters <span class="math notranslate nohighlight">\(\pi_k\)</span> are called <strong>mixing coefficients</strong> and are defined such that:</p>
+<div class="math notranslate nohighlight">
+\[0 \leq \pi_k \leq 1, \ k=1,\ldots,K\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[\sum_{k=1}^K \pi_k = 1\]</div>
+<p>The following plot illustrates an example of a 1D Gaussian Mixture Model with three components:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/30ce6f467820297bfe782f055d0e1a5f89780bcee161ba21be6d0dbfcd824274.png" src="../_images/30ce6f467820297bfe782f055d0e1a5f89780bcee161ba21be6d0dbfcd824274.png" />
+</div>
+</div>
+<p>A similar plot in 2D is shown below:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/b44110bf16028d591f993edcc84143095bbc214c14d885757b421ec1d4cd9793.png" src="../_images/b44110bf16028d591f993edcc84143095bbc214c14d885757b421ec1d4cd9793.png" />
+</div>
+</div>
+<section id="optimization-by-maximum-likelihood">
+<h4><span class="section-number">15.2.2.1. </span>Optimization by Maximum Likelihood<a class="headerlink" href="#optimization-by-maximum-likelihood" title="Permalink to this heading">#</a></h4>
+<p>The Gaussian Mixture Model depends on the following parameters:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{\pi} = \{\pi_1, \pi_2, \ldots, \pi_K\} \text{,   } \mathbf{\mu}=\{\mathbf{\mu}_1, \mathbf{\mu}_2, \ldots, \mathbf{\mu}_K\}, \mathbf{\Sigma} = \{\mathbf{\Sigma}_1,\mathbf{\Sigma}_2, \ldots, \mathbf{\Sigma}_K\}\]</div>
+<p>Similarly to what seen for Gaussian models, we can optimize Gaussian Mixture Models with Maximum Likelihood. Assuming that the observations <span class="math notranslate nohighlight">\(\mathbf{x}_i \in \mathbf{X}\)</span> are <strong>independent and identically distributed</strong>, we can define the likelihood of the data, given the model as follows:</p>
+<div class="math notranslate nohighlight">
+\[P(\mathbf{X}|\mathbf{\pi}, \mathbf{\mu}, \mathbf{\Sigma}) = \prod_{i=1}^N \sum_{k=1}^K \pi_k \mathcal{N}(\mathbf{x_i}|\mathbf{\mu}_k, \mathbf{\Sigma}_k)\]</div>
+<p>Rather than maximizing the likelihood above, we can maximize the logarithm of the likelihood:</p>
+<div class="math notranslate nohighlight">
+\[\log P(\mathbf{X}|\mathbf{\pi}, \mathbf{\mu}, \mathbf{\Sigma}) = \sum_{i=1}^N \log\left[\sum_{k=1}^K \pi_k \mathcal{N}(\mathbf{x_i}|\mathbf{\mu}_k, \mathbf{\Sigma}_k)\right]\]</div>
+<p>This optimization process is not straightforward and <strong>there is no closed form solution</strong>. Instead, it can be optimized through iterative numerical methods or with a powerful algorithm called <strong>Expectation-Maximization</strong>. Before delving into that, it is useful to see the GMM from a probabilistic perspective.</p>
+</section>
+</section>
+<section id="probabilistic-formulation-of-gmm-with-latent-variables">
+<h3><span class="section-number">15.2.3. </span>Probabilistic Formulation of GMM with Latent Variables<a class="headerlink" href="#probabilistic-formulation-of-gmm-with-latent-variables" title="Permalink to this heading">#</a></h3>
+<p>We will now give a more probabilistic treatment to the GMM. This will lead us to the interpretation of the model as one with latent variables and to the illustration of the Expectation-Maximization (E-M) algorithm for maximum likelihood optimization.</p>
+<p>We will start by introducing a <span class="math notranslate nohighlight">\(K-dimensional\)</span> random variable <span class="math notranslate nohighlight">\(\mathbf{Z}\)</span>. The values <span class="math notranslate nohighlight">\(\mathbf{z}=(z_1,\ldots,z_K)\)</span> assumed by <span class="math notranslate nohighlight">\(\mathbf{Z}\)</span> will be such that:</p>
+<div class="math notranslate nohighlight">
+\[z_k \in \{0,1\}, \text{   and   } \sum_{k=1}^K z_k = 1 \]</div>
+<p>In practice, <span class="math notranslate nohighlight">\(\mathbf{Z}\)</span> has a <strong>one-hot representation</strong>, with only one of its components <span class="math notranslate nohighlight">\(z_k\)</span> being equal to <span class="math notranslate nohighlight">\(1\)</span> at a given time and the others being equal to <span class="math notranslate nohighlight">\(0\)</span>.</p>
+<p>We can also see <span class="math notranslate nohighlight">\(Z\)</span> as a <strong>categorical variable</strong> assuming values going from <span class="math notranslate nohighlight">\(1\)</span> to <span class="math notranslate nohighlight">\(K\)</span>, with value <span class="math notranslate nohighlight">\(k\)</span> being represented by the vector <span class="math notranslate nohighlight">\(\mathbf{z} = (z_1=0, z_2=0, \ldots, z_k=1, \ldots, z_K=0)\)</span>. If <strong>we denote such vector</strong> as</p>
+<div class="math notranslate nohighlight">
+\[H_k^K = (z_1=0, z_2=0, \ldots, z_k=1, \ldots, z_K=0)\]</div>
+<p>then we can also write <span class="math notranslate nohighlight">\(\mathbf{Z} = H_k^K\)</span> to denote that variable <span class="math notranslate nohighlight">\(\mathbf{Z}\)</span> assumes value <span class="math notranslate nohighlight">\(k\)</span>.</p>
+<p>We will assume that <span class="math notranslate nohighlight">\(\mathbf{Z}=H_k^K\)</span> encodes the event <strong><span class="math notranslate nohighlight">\(\mathbf{X}\)</span> belongs to component <span class="math notranslate nohighlight">\(k\)</span> of the GMM</strong>. This means that any example <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> will be associated to a related value <span class="math notranslate nohighlight">\(\mathbf{z}_i\)</span> of the introduced variable <span class="math notranslate nohighlight">\(\mathbf{Z}\)</span>, which will effectively assign <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> to one of the <span class="math notranslate nohighlight">\(K\)</span> components of the GMM.</p>
+<blockquote>
+<div><p><strong>Latent Variables</strong></p>
+<p>We will call the newly introduced variable <span class="math notranslate nohighlight">\(\mathbf{Z}\)</span> a <strong>latent variable</strong>. Indeed, while <span class="math notranslate nohighlight">\(\mathbf{Z}\)</span> has a clear semantic, this stems from <strong>an assumption made at the model-level</strong>. Hence, we cannot directly observe the values of <span class="math notranslate nohighlight">\(\mathbf{Z}\)</span> as we can instead do for <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>, which will be called an <strong>observed variables</strong> (most of the variables we have seen so far in the course are observed variables). Nevertheless, being able to determine the values of <span class="math notranslate nohighlight">\(\mathbf{Z}\)</span> has a <strong>very practical implication</strong>, as these values can be used, for instance, to cluster the data, or to find the best parameters of each of the components.</p>
+</div></blockquote>
+<p>We’ll assume that <span class="math notranslate nohighlight">\(\mathbf{Z}\)</span> <strong>follows a categorical distribution</strong> with probability vector <span class="math notranslate nohighlight">\(\mathbf{\pi}=(\pi_1, \pi_2, \ldots, \pi_K)\)</span>, hence:</p>
+<div class="math notranslate nohighlight">
+\[P(z_k=1)=\pi_k\]</div>
+<p>with:</p>
+<div class="math notranslate nohighlight">
+\[0 \leq \pi_k \leq 1,  \sum_{k=}^K \pi_k = 1\]</div>
+<p>Note that since <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> is encoded as a one-hot vector, we can write more compactly:</p>
+<div class="math notranslate nohighlight">
+\[P(\mathbf{z}) = \prod_{k=1}^K \pi_k^{z_k}\]</div>
+<p>Once we fix a value <span class="math notranslate nohighlight">\(z_k=1\)</span> for the latent variable <span class="math notranslate nohighlight">\(\mathbf{Z}\)</span>, we will express the probability of <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, conditioned on <span class="math notranslate nohighlight">\(z_k=1\)</span> with a Gaussian of appropriate parameters <span class="math notranslate nohighlight">\(\mathbf{\mu}_k\)</span> and <span class="math notranslate nohighlight">\(\mathbf{\Sigma}_k\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[P(\mathbf{x}|z_k=1) = \mathcal{N}(\mathbf{x}|\mathbf{\mu}_k, \mathbf{\Sigma}_k)\]</div>
+<p>Following the notation above, we can also write:</p>
+<div class="math notranslate nohighlight">
+\[P(\mathbf{x}|\mathbf{z}) = \prod_{k=1}^K \mathcal{N}(\mathbf{x}|\mathbf{\mu}_k, \mathbf{\Sigma}_k)^{z_k}\]</div>
+<p>Note that, since we want to estimate the density of <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>, we wish to find values for <span class="math notranslate nohighlight">\(P(\mathbf{x})\)</span>. Applying the <strong>product rule</strong> and the <strong>sum rule</strong>, we obtain the following marginal probability:</p>
+<div class="math notranslate nohighlight">
+\[P(\mathbf{x}) = \sum_{\mathbf{z}} P(\mathbf{x},\mathbf{z}) = \sum_{\mathbf{z}} P(\mathbf{z}) P(\mathbf{x}|\mathbf{z}) = \]</div>
+<div class="math notranslate nohighlight">
+\[= \sum_{k=1}^K P(z_k=1) P(\mathbf{x}|z_k=1) = \sum_{k=1}^K \pi_k \mathcal{N}(\mathbf{x}|\mathbf{\mu}_k, \mathbf{\Sigma}_k)\]</div>
+<p>This leads us to <strong>the same exact definition of the GMM seen previously</strong>, but within a probabilistic framework where we also have access to the joint distribution <span class="math notranslate nohighlight">\(p(\mathbf{x,z})\)</span>, which will be useful when we’ll introduce the Expectation Maximization algorithm to maximize the likelihood and hence optimize the model.</p>
+<section id="inferring-values-for-the-latent-variable-mathbf-z">
+<h4><span class="section-number">15.2.3.1. </span>Inferring Values for the Latent Variable <span class="math notranslate nohighlight">\(\mathbf{Z}\)</span><a class="headerlink" href="#inferring-values-for-the-latent-variable-mathbf-z" title="Permalink to this heading">#</a></h4>
+<p>Another interesting interpretation is that, to each <strong>observed <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> value</strong>, we will implicitly <strong>assign a corresponding <span class="math notranslate nohighlight">\(\mathbf{z}_i\)</span> value</strong> indicating to which component of the Gaussian Mixture Model the observation belongs. This is useful, as it will allow us to use the GMM model as a <strong>clustering algorithm</strong> in which we can determine to which cluster each data point belongs.</p>
+<p>In practice, this can be done by finding the <span class="math notranslate nohighlight">\(z_k\)</span> value for which the following quantity is maximized:</p>
+<div class="math notranslate nohighlight">
+\[\gamma(z_k) = P(z_k=1|\mathbf{x})\]</div>
+<p>Since there are only <span class="math notranslate nohighlight">\(K\)</span> possible <span class="math notranslate nohighlight">\(z_k\)</span>, maximizing the expression above is trivial: <strong>we just compute it for all values of <span class="math notranslate nohighlight">\(k\)</span> and select the <span class="math notranslate nohighlight">\(k\)</span> value which maximizes the conditional probability above</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\hat k = \arg_{k}\max \{P(z_k=1|\mathbf{x}), k=1,\ldots,K\}\]</div>
+<p>Using Bayes’ theorem, we obtain:</p>
+<div class="math notranslate nohighlight">
+\[\gamma(z_k) = P(z_k=1|\mathbf{x}) = \frac{P(z_k=1) P(\mathbf{x}|z_k=1)}{P(\mathbf{x})} = \frac{P(z_k=1) P(\mathbf{x}|z_k=1)}{\sum_{j=1}^K P(z_j=1)P(\mathbf{x}|z_j=1)} = \frac{\pi_k \mathcal{N}(\mathbf{x}|\mathbf{\mu}_k \mathbf{\Sigma}_k)}{\sum_{j=1}^K \pi_j \mathcal{N}(\mathbf{x}|\mathbf{\mu}_j \mathbf{\Sigma}_j)}\]</div>
+<p>where we noted that:</p>
+<div class="math notranslate nohighlight">
+\[P(\mathbf{x}) = \sum_{j=1}^K P(z_j=1) P(\mathbf{x}|z_j=1)\]</div>
+<p>In Bayesian terms, we can see <span class="math notranslate nohighlight">\(\pi_k\)</span> as <strong>the prior probability that <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> belongs to component <span class="math notranslate nohighlight">\(k\)</span></strong>, while <span class="math notranslate nohighlight">\(\gamma(z_k)\)</span> is the <strong>posterior probability, after we have observed <span class="math notranslate nohighlight">\(\mathbf{x}\)</span></strong>. The term <span class="math notranslate nohighlight">\(\gamma(z_k)\)</span> is also called <strong>the responsibility that component <span class="math notranslate nohighlight">\(k\)</span> takes for “explaining” the observation <span class="math notranslate nohighlight">\(\mathbf{x}\)</span></strong>.</p>
+<p>Given this interpretation, we can see a GMM as a <strong>probabilistic version of K-Means clustering, in which each example is associated to a probability of belonging to a given cluster (or component)</strong>. The plot below illustrates this by showing a GMM with 2 components fitted to a 2D dataset. Data points are colored according the predicted probability of belonging to first component.</p>
+<p>As can be noted, points in between the two clusters are assigned “uncertain” probability values.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/04968cfc2ca8724431e9b28a078eb9e98cc52cdfcadfee3a5383b3bf092a9e2f.png" src="../_images/04968cfc2ca8724431e9b28a078eb9e98cc52cdfcadfee3a5383b3bf092a9e2f.png" />
+</div>
+</div>
+</section>
+<section id="sampling-from-a-gmm">
+<h4><span class="section-number">15.2.3.2. </span>Sampling from a GMM<a class="headerlink" href="#sampling-from-a-gmm" title="Permalink to this heading">#</a></h4>
+<p>Note that this formulation of the GMM allows us to <strong>generate data new points <span class="math notranslate nohighlight">\(\hat{\mathbf{x}}\)</span> which would follow the distribution of the original data</strong>. This is done by following a techniques such as the following one, which is also known as <strong>ancestral sampling</strong>:</p>
+<ul class="simple">
+<li><p>We first sample a variable <span class="math notranslate nohighlight">\(\hat{\mathbf{z}}\)</span> from the marginal distribution <span class="math notranslate nohighlight">\(P(\mathbf{z})\)</span>. Note that this distribution is a categorical one;</p></li>
+<li><p>We then sample <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> from the conditional probability <span class="math notranslate nohighlight">\(P(\mathbf{x}|\hat{\mathbf{z}})\)</span>. Note that, once <span class="math notranslate nohighlight">\(\hat{\mathbf{z}}\)</span> is fixed, the conditional distribution will simply be a Gaussian distribution with a given mean <span class="math notranslate nohighlight">\(\mathbf{\mu}_k\)</span> and covariance matrix <span class="math notranslate nohighlight">\(\mathbf{\Sigma}_k\)</span>.</p></li>
+</ul>
+<p>Standard methods exist for sampling from categorical and Gaussian distributions, but we will not see them in details.</p>
+<p>The plot below shows a set of data together with another set of data generated from a GMM fit to the original data. As can be seen, the data follows a similar distribution.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/66471af605f39d8c032088bbc627b90e948ee584a637e973ef0ef13798adf272.png" src="../_images/66471af605f39d8c032088bbc627b90e948ee584a637e973ef0ef13798adf272.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="the-expectation-maximization-algorithm-for-gmm">
+<h3><span class="section-number">15.2.4. </span>The Expectation-Maximization Algorithm for GMM<a class="headerlink" href="#the-expectation-maximization-algorithm-for-gmm" title="Permalink to this heading">#</a></h3>
+<p>As discussed earlier, we wish to maximize the logarithm of the likelihood, which we have seen assumes the following form:</p>
+<div class="math notranslate nohighlight">
+\[\log P(\mathbf{X}|\mathbf{\pi}, \mathbf{\mu}, \mathbf{\Sigma}) = \sum_{i=1}^N \log\left[\sum_{k=1}^K \pi_k \mathcal{N}(\mathbf{x_i}|\mathbf{\mu}_k, \mathbf{\Sigma}_k)\right]\]</div>
+<p>We will not see all mathematical steps, but if we <strong>derive the expression above with respect to the means <span class="math notranslate nohighlight">\(\mathbf{\mu}_k\)</span> of the Gaussian components and set them to zero</strong>, we obtain that optimal means can be obtained by the following expressions:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{\mu}_k = \frac{1}{N_k} \sum_{i=1}^N \gamma(z_{ik})\mathbf{x}_i \ \ \ \ \ \text{(A)}\]</div>
+<p>where <span class="math notranslate nohighlight">\(z_{ik}\)</span> is the k-th component of the <span class="math notranslate nohighlight">\(\mathbf{z}_i\)</span> value associated to the observation <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[N_k = \sum_{i=1}^N \gamma(z_{ik})\]</div>
+<p>Recall that <span class="math notranslate nohighlight">\(\gamma(z_{ik}) = P(\mathbf{z}_i = H_k^K|\mathbf{x}_i)\)</span>, hence we can see <span class="math notranslate nohighlight">\(N_k\)</span> as a <strong>“soft count”</strong> of the number of elements belonging to each component (or alternatively, in each cluster). The count is “soft” because the <span class="math notranslate nohighlight">\(\gamma(z_{ik})\)</span> are probability values. If <span class="math notranslate nohighlight">\(\gamma(z_{ik})\)</span> were extreme probabilities (either <span class="math notranslate nohighlight">\(0\)</span> or <span class="math notranslate nohighlight">\(1\)</span>), <span class="math notranslate nohighlight">\(N_k\)</span> would be the actual of elements in each cluster.</p>
+<p>We can see the expression above for the estimation of the optimal mean for the k-th component <span class="math notranslate nohighlight">\(\mathbf{\mu}_k\)</span> as the average of all data points <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span>, weighted by the probabilities <span class="math notranslate nohighlight">\(\gamma(z_{ik})\)</span> that each of these data points belong to the k-th components, rescaled by the soft count of the number of elements assigned to the k-th components. Note that if probabilities <span class="math notranslate nohighlight">\(\gamma(z_{ik})\)</span> were again binary (either <span class="math notranslate nohighlight">\(0\)</span> or <span class="math notranslate nohighlight">\(1\)</span>), the estimation above <strong>would become identical to the update step of K-Means</strong>, so in some sense, we can see it as a “soft”, probabilistic version of it.</p>
+<p>If we set the derivative of <span class="math notranslate nohighlight">\(\log P(\mathbf{x}|\mathbf{\pi}, \mathbf{\mu}, \mathbf{\Sigma})\)</span> with respect to <span class="math notranslate nohighlight">\(\mathbf{\Sigma}_k\)</span> to zero, we obtain the following expression for the optimal covariance matrix:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{\Sigma}_k = \frac{1}{N_k} \sum_{i=1}^N \gamma(z_{ik}) (\mathbf{x}_i - \mathbf{\mu}_k) (\mathbf{x}_i - \mathbf{\mu}_k)^T \ \ \ \ \ \text{(B)}\]</div>
+<p>Recall that the ML estimation of the covariance matrix for fitting a D-dimensional Gaussian to the data is:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{\Sigma}_{ML} = \frac{1}{N} \sum_{i=1}^N (\mathbf{x}_i - \mathbf{\mu}_{ML})(\mathbf{x}_i - \mathbf{\mu}_{ML})^T\]</div>
+<p>The two expressions are similar, but in the case of GMMs, we are weighing each data point <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> by the responsibility <span class="math notranslate nohighlight">\(\gamma(z_{ik})\)</span> and the denominator is given by the “soft count” of points assigned to component <span class="math notranslate nohighlight">\(k\)</span>.</p>
+<p>We finally set to zero the derivative of the log likelihood with respect to the mixing coefficients <span class="math notranslate nohighlight">\(\pi_k\)</span> and obtain the following expression for the estimation of the optimal values:</p>
+<div class="math notranslate nohighlight">
+\[\pi_k = \frac{N_k}{N} \ \ \ \ \ \text{(C)}\]</div>
+<p>Hence, the mixing coefficient for component <span class="math notranslate nohighlight">\(k\)</span> is given by the soft count <span class="math notranslate nohighlight">\(N_k\)</span> of points assigned to component <span class="math notranslate nohighlight">\(k\)</span> divided by the total number of points <span class="math notranslate nohighlight">\(N\)</span>.</p>
+<p>We shall note that results (A), (B) and (C) <strong>do not constitute a close from solution</strong> to find the parameters of the mixture model. Indeed, they depend on the responsibilities <span class="math notranslate nohighlight">\(\gamma(z_{ik})\)</span> in a complex way. Moreover, we have a <strong>chicken and egg problem</strong>. Indeed:</p>
+<blockquote>
+<div><p>To estimate (A), (B) and (C) we need to be able to compute the responsibilities <span class="math notranslate nohighlight">\(\gamma(z_{ik})\)</span>, but to compute these values, we first need to have estimates for <span class="math notranslate nohighlight">\(\mathbf{mu}_k\)</span> (A), <span class="math notranslate nohighlight">\(\mathbf{\Sigma}_k\)</span> (B), and <span class="math notranslate nohighlight">\(\pi_k\)</span> (C).</p>
+</div></blockquote>
+<p>While we do not have a close-form solution for the estimation of the parameters, we can apply a <strong>simple iterative scheme, which is an instance of the Expectation Maximization (EM) algorithm applied to the specific case of the Gaussian mixture model</strong>.</p>
+<p>The iterative scheme works as follows:</p>
+<ul class="simple">
+<li><p>We choose some initial values for <span class="math notranslate nohighlight">\(\mathbf{\mu}_k\)</span>, <span class="math notranslate nohighlight">\(\mathbf{\Sigma}_k\)</span> and <span class="math notranslate nohighlight">\(\pi_k\)</span>. A common initialization scheme consists in <strong>running a K-Means clustering</strong> and then fitting K Gaussian distributions, one for each cluster. We compute the initial value of the log likelihood.</p></li>
+<li><p>We alternate through two steps:</p>
+<ul>
+<li><p>Expectation (or E step): we use the current estimates of the parameters to find the responsibilities - these are the <strong>posterior probabilities of assigning a given data point <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> to a given component <span class="math notranslate nohighlight">\(k\)</span>, after seeing the data point <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> and given the model parameters</strong>. It’s called “expectation” step as we will compute the expected assignment of points to components given the data points and the fixed parameters.</p></li>
+<li><p>Maximization (or M step): we now assume that the assignment given by the responsibilities is correct and use the <span class="math notranslate nohighlight">\(\gamma(z_{ik})\)</span> values to <strong>re-estimate the parameters of the model</strong> through the equations (A), (B), and (C). <strong>We update the value of the log likelihood</strong>.</p></li>
+</ul>
+</li>
+<li><p>We stop iterating when a given maximum number of iterations has been reached or when the difference between new log likelihood value and the old one is very small (below a given threshold).</p></li>
+</ul>
+<p>It can be shown (but we will not formally see it) that each E step followed by an M step is guaranteed to increase the log likelihood (and hence the likelihood). Hence the algorithm will converge sooner or later.</p>
+<section id="pseudocode">
+<h4><span class="section-number">15.2.4.1. </span>Pseudocode<a class="headerlink" href="#pseudocode" title="Permalink to this heading">#</a></h4>
+<p>The box below summarizes the algorithm in pseudocode:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>Initialize the means <span class="math notranslate nohighlight">\(\mathbf{\mu}_k\)</span>, covariances <span class="math notranslate nohighlight">\(\mathbf{\Sigma}_k\)</span> and mixing coefficients <span class="math notranslate nohighlight">\(\pi_k\)</span>. A possible initialization is to run a K-Means with <span class="math notranslate nohighlight">\(k\)</span> clusters and fit <span class="math notranslate nohighlight">\(K\)</span> Gaussian distributions, each on each cluster. Initial mixing coefficients can be chosen as the fractions of data points assigned to each cluster. Compute an initial value for the log likelihood using the formula:</p>
+<div class="math notranslate nohighlight">
+\[\log P(\mathbf{X}|\mathbf{\pi}, \mathbf{\mu}, \mathbf{\Sigma}) = \sum_{i=1}^N \log\left[\sum_{k=1}^K \pi_k \mathcal{N}(\mathbf{x_i}|\mathbf{\mu}_k, \mathbf{\Sigma}_k)\right]\]</div>
+</li>
+<li><p>Repeat until termination criterion is reached {</p>
+<ul>
+<li><p><strong>E Step</strong>: Compute responsibilities using the current parameter values using the formula:
+$<span class="math notranslate nohighlight">\(\gamma(z_k) = \frac{\pi_k \mathcal{N}(\mathbf{x}|\mathbf{\mu}_k \mathbf{\Sigma}_k)}{\sum_{j=1}^K \pi_j \mathcal{N}(\mathbf{x}|\mathbf{\mu}_j \mathbf{\Sigma}_j)}\)</span>$</p></li>
+<li><p><strong>M Step</strong>: Estimate the parameter values using the current estimate for the responsibilities using the following formulas:
+$<span class="math notranslate nohighlight">\(\mathbf{\mu}_k = \frac{1}{N_k} \sum_{i=1}^N \gamma(z_{ik})\mathbf{x}_i \ \ \ \ \ \text{(A)}\)</span>$</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{\Sigma}_k = \frac{1}{N_k} \sum_{i=1}^N \gamma(z_{ik}) (\mathbf{x}_i - \mathbf{\mu}_k) (\mathbf{x}_i - \mathbf{\mu}_k)^T \ \ \ \ \ \text{(B)}\]</div>
+<div class="math notranslate nohighlight">
+\[\pi_k = \frac{N_k}{N} \ \ \ \ \ \text{(C)}\]</div>
+<p>with</p>
+<div class="math notranslate nohighlight">
+\[N_k = \sum_{i=1}^N \gamma(z_{ik})\]</div>
+</li>
+<li><p>Re-evaluate the log likelihood using the formula:</p>
+<div class="math notranslate nohighlight">
+\[\log P(\mathbf{X}|\mathbf{\pi}, \mathbf{\mu}, \mathbf{\Sigma}) = \sum_{i=1}^N \log\left[\sum_{k=1}^K \pi_k \mathcal{N}(\mathbf{x_i}|\mathbf{\mu}_k, \mathbf{\Sigma}_k)\right]\]</div>
+</li>
+</ul>
+</li>
+</ol>
+<p>}</p>
+</div></blockquote>
+</section>
+<section id="example-execution">
+<h4><span class="section-number">15.2.4.2. </span>Example Execution<a class="headerlink" href="#example-execution" title="Permalink to this heading">#</a></h4>
+<p>Similarly to K-Means clustering, we will now see an example execution of the E-M algorithm. We will consider a GMM with 2 components. Since the EM algorithm is slower than K-Means, we will not show all iterations.</p>
+<p>We will consider the following synthetic dataset:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/86b504aafdb2e96cdc04b82aae678f912ef548587346c662bccf25c8a869fc70.png" src="../_images/86b504aafdb2e96cdc04b82aae678f912ef548587346c662bccf25c8a869fc70.png" />
+</div>
+</div>
+<p>Rather than initializing with K-Means, we consider an ad-hoc initialization (imagine this to be random) to illustrate the process.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/3174065604fa9056def8a7493319139c56ddb1edb6aed01ade27e0721a67d5b0.png" src="../_images/3174065604fa9056def8a7493319139c56ddb1edb6aed01ade27e0721a67d5b0.png" />
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/97f7b21246db3a74d032bb3d9224dc15037313c7addfbc4d3fdbab9358d11815.png" src="../_images/97f7b21246db3a74d032bb3d9224dc15037313c7addfbc4d3fdbab9358d11815.png" />
+<img alt="../_images/65464e876fab11f674c7604b0c144b18af3e0bccbe2a972f135b884c3e0ddc37.png" src="../_images/65464e876fab11f674c7604b0c144b18af3e0bccbe2a972f135b884c3e0ddc37.png" />
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/27c11199c7ba8fa81a55dec0f49dd9f6bad77b72f6f6a6a1e92a9f2d4173827b.png" src="../_images/27c11199c7ba8fa81a55dec0f49dd9f6bad77b72f6f6a6a1e92a9f2d4173827b.png" />
+<img alt="../_images/17e7c41efe10f572e37d5df424c8c49462be86c68ecb971b38ea8100b1d63bc2.png" src="../_images/17e7c41efe10f572e37d5df424c8c49462be86c68ecb971b38ea8100b1d63bc2.png" />
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/3053012f7cfd49b339cad432f4d50fa1cdcb4f825380a5a4d36b6bf2326a76c4.png" src="../_images/3053012f7cfd49b339cad432f4d50fa1cdcb4f825380a5a4d36b6bf2326a76c4.png" />
+<img alt="../_images/bf7d345fafdb8d41aa2dbf4a0e2dee1a4f0c99580717ded03259365cf1d79e69.png" src="../_images/bf7d345fafdb8d41aa2dbf4a0e2dee1a4f0c99580717ded03259365cf1d79e69.png" />
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/82ca2e3908d755ad23c20d2d4bbca8ecadde11f4592f79f2c78eb986d681d29e.png" src="../_images/82ca2e3908d755ad23c20d2d4bbca8ecadde11f4592f79f2c78eb986d681d29e.png" />
+<img alt="../_images/e99998f10723d1a5468e0f518de2ed4795be0dd1c7561270cba13c4366b3204e.png" src="../_images/e99998f10723d1a5468e0f518de2ed4795be0dd1c7561270cba13c4366b3204e.png" />
+</div>
+</div>
+</section>
+<section id="expectation-maximization-in-general">
+<h4><span class="section-number">15.2.4.3. </span>Expectation Maximization in General<a class="headerlink" href="#expectation-maximization-in-general" title="Permalink to this heading">#</a></h4>
+<p>We have seen the EM algorithm instantiated to the optimization of GMMs. However, the EM algorithm is <strong>a general framework for finding maximum likelihood estimates of parameters in models with latent variables</strong>. As such, it can be applied also in other contexts in which the Maximum Likelihood estimates lead to a “<strong>chicken and egg</strong>” problem, in which we need to be able to estimate the probability of latent variables to fit a model to the observed data, but, at the same time, we need to fit the model to the data to model latent variables.</p>
+</section>
+</section>
+<section id="gmm-vs-k-means">
+<h3><span class="section-number">15.2.5. </span>GMM vs K-Means<a class="headerlink" href="#gmm-vs-k-means" title="Permalink to this heading">#</a></h3>
+<p>The EM algorithm is very similar to the optimization algorithm of K-Means. It can be shown that K-Means can be seen as a particular case of Gaussian Mixture Models in which:</p>
+<ul class="simple">
+<li><p>Points are assigned to clusters in a “<em>hard</em>” way, as compared to the <strong>soft assignment</strong> made by the responsibilities <span class="math notranslate nohighlight">\(\gamma(z_{ik})\)</span> in Gaussian Mixture Models;</p></li>
+<li><p>Clusters are assumed to have diagonal covariance matrices <span class="math notranslate nohighlight">\(\epsilon \mathbf{I}\)</span> where <span class="math notranslate nohighlight">\(\mathbf{I}\)</span> is the <span class="math notranslate nohighlight">\(D \times D\)</span> identity matrix and <span class="math notranslate nohighlight">\(\epsilon\)</span> is a variance parameter which is <strong>shared by all components</strong>. This means that the clusters are assumed to be all <strong>symmetrical and with the same shape</strong>.</p></li>
+</ul>
+<p>Despite these differences highlight the limitations of K-Means, it should be considered that K-Means is a significantly faster algorithm than GMM. Hence, if studying the probability density <span class="math notranslate nohighlight">\(P(\mathbf{X})\)</span> is not needed and we can assume symmetrical clusters with similar shapes, K-Means is in practice a more popular choice, due to its faster convergence.</p>
+<p>The plot below illustrate such differences:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/976da06fdfe07c65cb7712afc9a9fe82859380437f7cf303d88421194ad90fc4.png" src="../_images/976da06fdfe07c65cb7712afc9a9fe82859380437f7cf303d88421194ad90fc4.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="references">
+<h2><span class="section-number">15.3. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Metric_space">https://en.wikipedia.org/wiki/Metric_space</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Measure_(mathematics)">https://en.wikipedia.org/wiki/Measure_(mathematics)</a></p></li>
+<li><p>Section 19 of notes of the course “Fondamenti di Analisi dei Dati” 2022/2023 - Prof. Giovanni Gallo</p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Multivariate_kernel_density_estimation">https://en.wikipedia.org/wiki/Multivariate_kernel_density_estimation</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Kernel_density_estimation">https://en.wikipedia.org/wiki/Kernel_density_estimation</a></p></li>
+<li><p><a class="reference external" href="http://faculty.washington.edu/yenchic/18W_425/Lec7_knn_basis.pdf">http://faculty.washington.edu/yenchic/18W_425/Lec7_knn_basis.pdf</a></p></li>
+<li><p>Section 9.2 of [1]</p></li>
+</ul>
+<p>[1] Bishop, Christopher M., and Nasser M. Nasrabadi. Pattern recognition and machine learning. Vol. 4. No. 4. New York: springer, 2006.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lectures"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="15_clustering.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">14. </span>Clustering</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="17_principal_component_analysis.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">16. </span>Principal Component Analysis</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#non-parametric-density-estimation-techniques">15.1. Non-parametric Density Estimation Techniques</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fixed-windows-d-dimensional-histograms">15.1.1. Fixed Windows - D-Dimensional Histograms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mobile-windows-parzen-window-kernel-density-estimation">15.1.2. Mobile Windows - Parzen Window / Kernel Density Estimation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fixed-samples-k-nearest-neighbor">15.1.3. Fixed Samples - K-Nearest Neighbor</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parametric-density-estimation">15.2. Parametric Density Estimation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-a-gaussian-to-the-data">15.2.1. Fitting a Gaussian to the Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-mixture-models-gmm">15.2.2. Gaussian Mixture Models (GMM)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-by-maximum-likelihood">15.2.2.1. Optimization by Maximum Likelihood</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilistic-formulation-of-gmm-with-latent-variables">15.2.3. Probabilistic Formulation of GMM with Latent Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#inferring-values-for-the-latent-variable-mathbf-z">15.2.3.1. Inferring Values for the Latent Variable <span class="math notranslate nohighlight">\(\mathbf{Z}\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-from-a-gmm">15.2.3.2. Sampling from a GMM</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-expectation-maximization-algorithm-for-gmm">15.2.4. The Expectation-Maximization Algorithm for GMM</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pseudocode">15.2.4.1. Pseudocode</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-execution">15.2.4.2. Example Execution</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation-maximization-in-general">15.2.4.3. Expectation Maximization in General</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gmm-vs-k-means">15.2.5. GMM vs K-Means</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">15.3. References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Antonino Furnari
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

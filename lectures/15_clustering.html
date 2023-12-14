@@ -1,0 +1,921 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>14. Clustering &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures/15_clustering';</script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="15. Density Estimation" href="16_density_estimation.html" />
+    <link rel="prev" title="13. Data as N-Dimensional Points" href="14_data_as_nd_points.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Lecture Notes on Fundamentals of Data Analysis - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Lecture Notes on Fundamentals of Data Analysis - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Lecture Notes on Fundamental of Data Analysis
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_intro_data_analysis.html">1. Introduction to Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_main_data_analysis_concepts.html">2. Main data analysis concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_misure_di_frequenze_e_rappresentazione_grafica_dei_dati.html">3. Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_misure_di_tendenza_centrale_dispersione_e_forma.html">4. Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_associazione_variabili.html">5. Associazione tra Variabili</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_probability.html">6. Probability for Data Manipulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_common_distributions.html">7. Common Probability Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_information_theory.html">8. Basic Elements of Information Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_statistical_inference.html">9. Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_linear_regression.html">10. Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_logistic_regression.html">11. Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_causal_analysis.html">12. Causal Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_data_as_nd_points.html">13. Data as N-Dimensional Points</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">14. Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_density_estimation.html">15. Density Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_principal_component_analysis.html">16. Principal Component Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratories</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/01_setup.html">17. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/02_intro_python.html">18. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/03_intro_numpy.html">19. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/04_intro_matplotlib.html">20. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/05_intro_pandas.html">21. Introduzione a Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">22. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/07_misure_di_tendenza_centrale_dispersione_e_forma.html">23. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/08_associazione_variabili.html">24. Associazione tra Variabili</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/09_heart-disease-analysis.html">25. Exploratory Analysis on the Heart Disease Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/10_statistical_inference.html">26. Laboratory on Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/11_regressione_lineare.html">27. Laboratorio su Regressione Lineare</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/12_regressione_logistica.html">28. Laboratorio su regressione logistica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/13_linear_logistic_regression_example_analysis.html">29. Linear and Logistic Regression Laboratory</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/antoninofurnari/fadlecturenotes/blob/master/lecturenotes/lectures/15_clustering.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/antoninofurnari/fadlecturenotes" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/antoninofurnari/fadlecturenotes/issues/new?title=Issue%20on%20page%20%2Flectures/15_clustering.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/lectures/15_clustering.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Clustering</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-definition">14.1. Problem Definition</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-example">14.1.1. Graphical Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-means-clustering">14.2. K-Means Clustering</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization">14.2.1. Optimization</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pseudocode">14.2.1.1. Pseudocode</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-execution">14.2.2. Example Execution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-right-value-for-k">14.2.3. Choosing the Right Value for K</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#elbow-method">14.2.3.1. Elbow Method</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#silhouette-method">14.2.3.2. Silhouette Method</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-clustering-algorithms">14.3. Other Clustering Algorithms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">14.4. References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="clustering">
+<h1><span class="section-number">14. </span>Clustering<a class="headerlink" href="#clustering" title="Permalink to this heading">#</a></h1>
+<p>When we deal with complex datasets of multiple observations and variables, it can be useful to be able to understand the underlying structure of the data.</p>
+<p>One approach to do so is to determine whether the data can be grouped into <strong>clusters containing points with similar characteristics</strong>. This can be useful in different application scenarios in data analysis:</p>
+<ol class="arabic simple">
+<li><p><strong>Customer Segmentation:</strong></p>
+<ul class="simple">
+<li><p>Grouping customers based on their purchasing behavior, preferences, or demographics for targeted marketing strategies.</p></li>
+</ul>
+</li>
+<li><p><strong>Image Segmentation:</strong></p>
+<ul class="simple">
+<li><p>Dividing an image into meaningful segments or regions based on similarity, aiding in object recognition and computer vision tasks.</p></li>
+</ul>
+</li>
+<li><p><strong>Text Document Clustering:</strong></p>
+<ul class="simple">
+<li><p>Grouping similar documents together based on their content for tasks such as topic modeling, document organization, and information retrieval.</p></li>
+</ul>
+</li>
+<li><p><strong>Speech and Audio Processing:</strong></p>
+<ul class="simple">
+<li><p>Clustering <strong>audio data for tasks such as speaker identification, music genre classification, and speech analysis</strong>.</p></li>
+</ul>
+</li>
+<li><p><strong>E-commerce:</strong></p>
+<ul class="simple">
+<li><p>Grouping products or users based on purchasing patterns to optimize inventory management and improve the user experience.</p></li>
+</ul>
+</li>
+</ol>
+<section id="problem-definition">
+<h2><span class="section-number">14.1. </span>Problem Definition<a class="headerlink" href="#problem-definition" title="Permalink to this heading">#</a></h2>
+<p>Clustering aims to break the data into distinct group with similar properties. Let us consider the “Old Faithful” dataset, which comprises <span class="math notranslate nohighlight">\(272\)</span> observations of the eruption of the Old Faithful geyser at the Yellowstone National Park in USA. Each observation includes two variables:</p>
+<ul class="simple">
+<li><p>The <strong>duration</strong> of the eruption in minutes;</p></li>
+<li><p>The time in minutes to the <strong>next eruption</strong>.</p></li>
+</ul>
+<p>We can see each observation as 2D vector which can be plotted in a Cartesian coordinate system:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/63f4f700550e363e8b81b830177a04567dddfa9f9834e064179f3c3189299fd0.png" src="../_images/63f4f700550e363e8b81b830177a04567dddfa9f9834e064179f3c3189299fd0.png" />
+</div>
+</div>
+<p>We can see how we clearly have two kinds of eruptions:</p>
+<ul class="simple">
+<li><p>Short eruptions followed by other short eruptions in a short time (bottom left);</p></li>
+<li><p>Long eruptions followed by other long eruptions in a long time (upper right).</p></li>
+</ul>
+<p>A clustering algorithm aims to automatically find the two groups and assign each data point to the most likely group. Note that the two groups will be referred generically as “cluster <span class="math notranslate nohighlight">\(i\)</span>”, meaning that the algorithm will not assign any semantic to the clusters, but it will aim to put “similar” data points in the same cluster.</p>
+<p>Let</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{X} = \left\{ \mathbf{x}^{(i)} \right\}_{i = 1}^{N},\ \mathbf{x}^{(i)} \in \mathfrak{R}^{n}\]</div>
+<p>be a set of observations. The goal of clustering is to split <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> into <span class="math notranslate nohighlight">\(K\)</span> groups (called clusters):</p>
+<div class="math notranslate nohighlight">
+\[S = \{ S_{1},S_{2},\ldots,S_{K}\}\]</div>
+<p>Such that:</p>
+<div class="math notranslate nohighlight">
+\[\forall\ \mathbf{x}^{(i)} \in \mathbf{X}\ \exists!S_{j} \in S\ :\mathbf{x}^{(i)} \in S_{j}\]</div>
+<p>The clusters are expected to be such that elements within a group are
+<strong>similar to each other</strong>, whereas elements belonging to different groups are
+different from each other.</p>
+<p><strong>The number of clusters</strong> <span class="math notranslate nohighlight">\(\mathbf{K}\)</span> <strong>is often a hyper-parameter of
+the algorithm.</strong></p>
+<section id="graphical-example">
+<h3><span class="section-number">14.1.1. </span>Graphical Example<a class="headerlink" href="#graphical-example" title="Permalink to this heading">#</a></h3>
+<p>For instance, consider the following 2D points:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/360dcb37a7439df52d0567866db050cca20c3ba8cb039ac6ad087f80703d6479.png" src="../_images/360dcb37a7439df52d0567866db050cca20c3ba8cb039ac6ad087f80703d6479.png" />
+</div>
+</div>
+<p>Even if we the points are not explicitly assigned to given groups (i.e., we are not observing any discrete variable <span class="math notranslate nohighlight">\(y\)</span> indicating the group to which each point belong), we can clearly
+see that there are two distinct groups (the one in the top-left part of
+the plot, and the one in bottom-right). The goal of clustering is to
+split the data into two groups, as it is shown below:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/3773291814ab9f16067daf3ec5a7ea4a4261daefff1192518c8055512b9de37d.png" src="../_images/3773291814ab9f16067daf3ec5a7ea4a4261daefff1192518c8055512b9de37d.png" />
+</div>
+</div>
+<p>Also note that, while different possible partitions of the
+2D points are possible, the one outlined in the plot guarantees that points within
+the same group are similar to one another (i.e., their Euclidean
+distance is small), whereas points from different groups have are
+dissimilar (i.e., their Euclidean distance is large).</p>
+</section>
+</section>
+<section id="k-means-clustering">
+<h2><span class="section-number">14.2. </span>K-Means Clustering<a class="headerlink" href="#k-means-clustering" title="Permalink to this heading">#</a></h2>
+<p>K-Means is the most popular clustering algorithm. As in the definition we just gave of clustering, the goal of K-Means is to break the data</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{X} = \left\{ \mathbf{x}^{(i)} \right\}_{i = 1}^{N},\ \mathbf{x}^{(i)} \in \mathfrak{R}^{n}\]</div>
+<p>into <span class="math notranslate nohighlight">\(K\)</span> clusters</p>
+<div class="math notranslate nohighlight">
+\[S = \{ S_{1},S_{2},\ldots,S_{K}\}\]</div>
+<p>such that:</p>
+<div class="math notranslate nohighlight">
+\[\forall\ \mathbf{x}^{(i)} \in \mathbf{X}\ \exists!S_{j} \in S\ :\mathbf{x}^{(i)} \in S_{j}\]</div>
+<p>More specifically, K-Means attempts to create <span class="math notranslate nohighlight">\(K\)</span> clusters which are <strong>as compact as possible</strong>, where <span class="math notranslate nohighlight">\(K\)</span> is
+a parameter specified by the user (its application may depend on the application).</p>
+<p>We will start by defining <span class="math notranslate nohighlight">\(K\)</span> different vectors <span class="math notranslate nohighlight">\(\mathbf{\mu}_k \in \Re^n\)</span> which will act as prototypes for the our clusters. We will shortly see that these vectors will be the cluster’s centers.</p>
+<p>Hence, we define <span class="math notranslate nohighlight">\(N \times K\)</span> binary variables <span class="math notranslate nohighlight">\(r_{ij}\)</span> which will allow us to establish a mapping between data points <span class="math notranslate nohighlight">\(\mathbf{x}^{(i)}\)</span> and clusters <span class="math notranslate nohighlight">\(S_j\)</span>. In particular, we will define:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}r_{ij} = \begin{cases}1 &amp; \text{ if } \mathbf{x}^{(i)} \in S_j \\ 0 &amp; \text{ otherwise} \end{cases} \end{split}\]</div>
+<p>The notion that <strong>clusters should be as compact as possible</strong> is formalized by defining the following <strong>cost function</strong>, which is sometimes called also <strong>distortion function</strong>:</p>
+<div class="math notranslate nohighlight">
+\[J = \sum_{i=1}^N \sum_{j=1}^K r_{ij} ||\mathbf{x}_i-\mathbf{\mu}_j||^2\]</div>
+<p>Note that this function accumulates <strong>the sum of square distances between each data point and the prototype of the assigned cluster</strong>. This is possible because <span class="math notranslate nohighlight">\(r_{ij}\)</span> will be one only in the if data point <span class="math notranslate nohighlight">\(i\)</span> is in cluster <span class="math notranslate nohighlight">\(j\)</span> (so many terms in the internal sum will be zero).</p>
+<p>We can also note that the variance of cluster <span class="math notranslate nohighlight">\(j\)</span> can be defined as:</p>
+<div class="math notranslate nohighlight">
+\[\sigma_j^2 = \frac{1}{\sum_{i}^N{r_{ij}}}\sum_{i=1}^N r_{ij} ||\mathbf{x}_i-\mathbf{\mu}_j||^2 = \frac{1}{|S_j|}\sum_{i=1}^N r_{ij} ||\mathbf{x}_i-\mathbf{\mu}_j||^2\]</div>
+<p>We can hence see the cost function also as:</p>
+<div class="math notranslate nohighlight">
+\[J = \sum_{j=1}^K |S_j|\sigma_j^2\]</div>
+<p>Hence, minimizing <span class="math notranslate nohighlight">\(J\)</span> will effectively minimize the variances <span class="math notranslate nohighlight">\(\sigma_j^2\)</span> and the number of of elements in each cluster <span class="math notranslate nohighlight">\(|S_j|\)</span>, which will hence be encouraged to have similar numbers of elements.</p>
+<p>The K-Means problem is solved by finding a partition  <span class="math notranslate nohighlight">\(\widehat{S}\)</span> minimizing the cost function:</p>
+<div class="math notranslate nohighlight">
+\[\{\hat r_{ij}\}_{ij}, \{ \hat{\mathbf{\mu}_j} \}_j = \arg{\min{\sum_{j = 1}^{K}{\sum_{i = 1}^{N}{r_{ij}\left\| \mathbf{x}^{(i)} - \mathbf{\mu}_{i} \right\|^{2}}}}}\]</div>
+<section id="optimization">
+<h3><span class="section-number">14.2.1. </span>Optimization<a class="headerlink" href="#optimization" title="Permalink to this heading">#</a></h3>
+<p>The minimization above can be performed using an iterative algorithm.
+The first step of the algorithm is to choose <span class="math notranslate nohighlight">\(K\)</span> random centroids
+<span class="math notranslate nohighlight">\(\mathbf{\mu}_{i}\)</span>. After this initialization, the algorithm iterates
+the following two steps:</p>
+<blockquote>
+<div><p><strong>Assignment</strong></p>
+<p>Eeach element <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> is assigned to the set
+with the closest centroid</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}r_{ij} = \begin{cases}1 &amp; \text{ if } j=\arg_k\min ||\mathbf{x}^{(i)}-\mathbf{\mu}_j||^2 \\ 0 &amp; \text{otherwise} \end{cases}, \forall i,j\end{split}\]</div>
+<p>Which will lead to the partition:</p>
+<div class="math notranslate nohighlight">
+\[S_{i} = \left\{ \mathbf{x} \in \mathbf{X} :\ \left\| \mathbf{x} - \mathbf{\mu}_{i} \right\|^{2} \leq \left\| \mathbf{x} - \mathbf{\mu}_{j} \right\|^{2}\ \ \forall\ j \in \left\{ 1,\ldots K \right\} \right\}\]</div>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Update</strong></p>
+<p>The centroids <span class="math notranslate nohighlight">\(\mathbf{\mu}_{i}\)</span> are re-computed from
+the assigned sets</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{\mu}_{j} = \frac{1}{|S_{j}|}\sum_{\mathbf{x} \in S_{j}}^{}\mathbf{x} = \frac{\sum_{i = 1}^{N}{r_{ij}\mathbf{x}^{(i)}}}{\sum_{i = 1}^{N}{r_{ij}}}\]</div>
+</div></blockquote>
+<p>The algorithm converges when the update does not change any centroid. In
+some cases, the algorithms may never actually converge, hence it is
+often common to introduce as a termination criterion a maximum number of
+iterations.</p>
+<p><em>The algorithm is not guaranteed to find the global optimum and the
+solution reached may depend on the random initialization. However, in
+practice it usually leads to a suitable solution.</em></p>
+<section id="pseudocode">
+<h4><span class="section-number">14.2.1.1. </span>Pseudocode<a class="headerlink" href="#pseudocode" title="Permalink to this heading">#</a></h4>
+<p>We can see the optimization algorithm in pseudo-code as follows:</p>
+<blockquote>
+<div><p>Randomly initialize <span class="math notranslate nohighlight">\(K\)</span> cluster centroids <span class="math notranslate nohighlight">\(\mu_{1},\mu_{2},\ldots,\mu_{K} \in \mathfrak{R}^{n}\)</span></p>
+<p>Repeat until termination criterion is reached {</p>
+<p>         for i = 1 to N</p>
+<p>                 <span class="math notranslate nohighlight">\(r_{ij} = \begin{cases}1 &amp; \text{ if } j=\arg_k\min ||\mathbf{x}^{(i)}-\mathbf{\mu}_j||^2 \\ 0 &amp; \text{otherwise} \end{cases}, \forall i,j\)</span> //assignment</p>
+<p>         for j = 1 to K</p>
+<p>                 <span class="math notranslate nohighlight">\(\mathbf{\mu}_{j} = \frac{\sum_{i = 1}^{N}{r_{ij}\mathbf{x}^{(i)}}}{\sum_{i = 1}^{N}{r_{ij}}}\)</span> //update</p>
+<p>}</p>
+</div></blockquote>
+</section>
+</section>
+<section id="example-execution">
+<h3><span class="section-number">14.2.2. </span>Example Execution<a class="headerlink" href="#example-execution" title="Permalink to this heading">#</a></h3>
+<p>Let us see a graphical example of the process.</p>
+<p><strong>Dataset</strong></p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/0e6ee79ba9995a7f99a7d42318ab054565b3b4c386eb0844fcb619377ba7e4de.png" src="../_images/0e6ee79ba9995a7f99a7d42318ab054565b3b4c386eb0844fcb619377ba7e4de.png" />
+</div>
+</div>
+<p><strong>Initialization (Random)</strong></p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/4d1fb98072edc5b14f1b9ed4b6bfaa182bed43d9ccde3dad139e4398728e74a9.png" src="../_images/4d1fb98072edc5b14f1b9ed4b6bfaa182bed43d9ccde3dad139e4398728e74a9.png" />
+</div>
+</div>
+<p><strong>Assignment (1)</strong></p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/99c387f5f21ee8e5a9804138d58cc348fd7242f2ab878e245c86d6bd57750129.png" src="../_images/99c387f5f21ee8e5a9804138d58cc348fd7242f2ab878e245c86d6bd57750129.png" />
+</div>
+</div>
+<p><strong>Update (1)</strong></p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/36e1c90ebc5bcfc520ce481efc45034f2c5e20046dd2a895aed3ea36825e49fb.png" src="../_images/36e1c90ebc5bcfc520ce481efc45034f2c5e20046dd2a895aed3ea36825e49fb.png" />
+</div>
+</div>
+<p><strong>Assignment (2)</strong></p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/4bc56fc212456df58d1de947a5a290f5e8aa8e14f5996c6d4bf0fbf7c03dda94.png" src="../_images/4bc56fc212456df58d1de947a5a290f5e8aa8e14f5996c6d4bf0fbf7c03dda94.png" />
+</div>
+</div>
+<p><strong>Update (2)</strong></p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/f1271611d0fa2ce218ce866265a36f3e38edead921def7186dfe97179c4296b4.png" src="../_images/f1271611d0fa2ce218ce866265a36f3e38edead921def7186dfe97179c4296b4.png" />
+</div>
+</div>
+<p><strong>Assignment (3)</strong></p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/20aeadd9bf300693e6b010914d5a74d5c7941761918018079342fc8913bb8059.png" src="../_images/20aeadd9bf300693e6b010914d5a74d5c7941761918018079342fc8913bb8059.png" />
+</div>
+</div>
+<p><strong>Update (3)</strong></p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/9880baa80546e7243adb633ba2a3f0dffcda330919e706ebd361f0cb61d9c4d8.png" src="../_images/9880baa80546e7243adb633ba2a3f0dffcda330919e706ebd361f0cb61d9c4d8.png" />
+</div>
+</div>
+<p><strong>Assignment (4)</strong></p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/75b13263fb63875972f94039764f3cba63085bb43f6ae0f678fbcd898677db0d.png" src="../_images/75b13263fb63875972f94039764f3cba63085bb43f6ae0f678fbcd898677db0d.png" />
+</div>
+</div>
+<p><strong>Update (4)</strong></p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/ccc4efb1512ab07339a128d1a9ea519287b5614aa2e115bf36f6cfb4423a7e02.png" src="../_images/ccc4efb1512ab07339a128d1a9ea519287b5614aa2e115bf36f6cfb4423a7e02.png" />
+</div>
+</div>
+<p>The optimization procedure terminates here as the centroids did not move in the last update step. The data is now clustered in two groups.</p>
+<p>The plot below shows the value of the cost function at the end of each iteration:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/b2accded7842cdfbb330249ed6b47961f1a41d846b22523a11ca017f2e1ed554.png" src="../_images/b2accded7842cdfbb330249ed6b47961f1a41d846b22523a11ca017f2e1ed554.png" />
+</div>
+</div>
+</section>
+<section id="choosing-the-right-value-for-k">
+<h3><span class="section-number">14.2.3. </span>Choosing the Right Value for K<a class="headerlink" href="#choosing-the-right-value-for-k" title="Permalink to this heading">#</a></h3>
+<p>In the K-Means clustering algorithm, <span class="math notranslate nohighlight">\(K\)</span> is a <strong>hyper-parameter</strong>. This means that, <strong>it is a parameter of the method, affecting the final model we obtain after the optimization procedure</strong>, but <strong>its value is not automatically determined by the optimization procedure</strong>.</p>
+<p>One common approach to determine the values of hyper-parameters is to make some guesses and fit different models with the guessed values of the hyper-parameters. We can then choose the model which has the “best value” of the considered hyper-parameters.</p>
+<p>When it turns to determining the optimal <span class="math notranslate nohighlight">\(K\)</span> value for K-Means clustering, there are two main techniques which are commonly used: <strong>the elbow method</strong> and <strong>the silhouette method</strong>, which are discussed in the following.</p>
+<p>Note that these are bot <strong>heuristic methods not giving many guarantees on the final selection of <span class="math notranslate nohighlight">\(K\)</span></strong>, but they can still help decide on the number of clusters, in particular if guided by an intuition of what a good value of <span class="math notranslate nohighlight">\(K\)</span> would look like.</p>
+<section id="elbow-method">
+<h4><span class="section-number">14.2.3.1. </span>Elbow Method<a class="headerlink" href="#elbow-method" title="Permalink to this heading">#</a></h4>
+<p>The elbow method consists in fitting K-Means models for different values of <span class="math notranslate nohighlight">\(K\)</span>. For each <span class="math notranslate nohighlight">\(K\)</span>, we then plot the final value of the cost function. We expect that <strong>as <span class="math notranslate nohighlight">\(K\)</span> increases, the cost will decrease</strong>. Indeed, if <span class="math notranslate nohighlight">\(K\)</span> is very large (even larger than it should be), we will anyway get a smaller cost due to the fact that the presence of more clusters will inevitably lower their individual variances.</p>
+<p>However, we expect the cost function to <strong>slow the speed of decrease in the presence of the optimal (or a good) <span class="math notranslate nohighlight">\(K\)</span></strong>. This is called the “elbow point” as the curve should look like an elbow. We can see it in the example below:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/f1d5a00e177d743540c151cfdbeb5dcfe56534cf266cd62719872f6a6b7d8c25.png" src="../_images/f1d5a00e177d743540c151cfdbeb5dcfe56534cf266cd62719872f6a6b7d8c25.png" />
+</div>
+</div>
+</section>
+<section id="silhouette-method">
+<h4><span class="section-number">14.2.3.2. </span>Silhouette Method<a class="headerlink" href="#silhouette-method" title="Permalink to this heading">#</a></h4>
+<p>The silhouette method tries to assess how good a given clustering model is by measuring <strong>how well the data is grouped in the identified clusters</strong>. This is done by computing, <strong>for each data point</strong> a score indicating whether <strong>how well the data point fits the assigned cluster with respect to all others</strong>.</p>
+<p>If the model is a good one (hence a good <span class="math notranslate nohighlight">\(K\)</span> value), we would expect each data point to fit well its assigned cluster and not to fit well any other cluster. If this does not happen, it means that the clusters are not very well separated and we <strong>either have more or less clusters</strong>.</p>
+<p>To do so, for a given data point <span class="math notranslate nohighlight">\(i\)</span> assigned to cluster <span class="math notranslate nohighlight">\(C_I\)</span>, the silhouette method computes the following score:</p>
+<div class="math notranslate nohighlight">
+\[a(i) = \frac{1}{|C_I|-1} \sum_{j \in C_i, i \neq j} d(i,j)\]</div>
+<p>where <span class="math notranslate nohighlight">\(d(i,j)\)</span> is the Euclidean distance between data point <span class="math notranslate nohighlight">\(i\)</span> and data point <span class="math notranslate nohighlight">\(j\)</span>. In practice, the score <span class="math notranslate nohighlight">\(a(i)\)</span> is the <strong>average distance of data point <span class="math notranslate nohighlight">\(i\)</span> with any other data point assigned to the same cluster</strong>. We expect this number to be small if the cluster has a low variance.</p>
+<p>We now want to compare this number to the value we would have <strong>if <span class="math notranslate nohighlight">\(i\)</span> were to be assigned to another cluster <span class="math notranslate nohighlight">\(J\)</span></strong>. In particular, we will choose the cluster <span class="math notranslate nohighlight">\(J\)</span> which minimizes the average distance. This is done by computing the following score:</p>
+<div class="math notranslate nohighlight">
+\[b(i) = \min_{J \neq I} \frac{1}{|C_J|} \sum_{j \in C_J} d(i,j)\]</div>
+<p>Now we compare <span class="math notranslate nohighlight">\(a(i)\)</span> with <span class="math notranslate nohighlight">\(b(i)\)</span>. Ideally, <span class="math notranslate nohighlight">\(a(i)\)</span> should be much smaller than <span class="math notranslate nohighlight">\(b(i)\)</span>. If this happens, this means that the data point <span class="math notranslate nohighlight">\(i\)</span> fits in the cluster <span class="math notranslate nohighlight">\(C_I\)</span> much better than it would in any other cluster. To do so, we compute the <strong>silhouette score</strong> of data point <span class="math notranslate nohighlight">\(i\)</span> as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}s(i) = \begin{cases}\frac{b(i)-a(i)}{\max\{a(i),b(i)\}} &amp; \text{ if } |C_I|&gt;1\\0 &amp; \text{ otherwise}\end{cases}\end{split}\]</div>
+<p>The obtained score is such that:</p>
+<div class="math notranslate nohighlight">
+\[-1 \leq s(i) \leq 1\]</div>
+<p>In practice:</p>
+<ul class="simple">
+<li><p>A value of <span class="math notranslate nohighlight">\(s(i)\)</span> close to <span class="math notranslate nohighlight">\(1\)</span> is obtained when <span class="math notranslate nohighlight">\(a(i) &gt;&gt; b(i)\)</span>, meaning that <span class="math notranslate nohighlight">\(i\)</span> fits in <span class="math notranslate nohighlight">\(C_I\)</span> much better than it would fit in any other cluster;</p></li>
+<li><p>A value of <span class="math notranslate nohighlight">\(s(i)\)</span> close to <span class="math notranslate nohighlight">\(-1\)</span> is obtained when <span class="math notranslate nohighlight">\(a(i) &lt;&lt; b(i)\)</span>, meaning that another cluster <span class="math notranslate nohighlight">\(C_J\)</span> exists in which <span class="math notranslate nohighlight">\(a(i)\)</span> fits better.</p></li>
+<li><p>A value of <span class="math notranslate nohighlight">\(s(i)\)</span> close to <span class="math notranslate nohighlight">\(0\)</span> indicates that the data point is close to the <strong>border between two natural clusters</strong>.</p></li>
+</ul>
+<p>The score above is arbitrarily set to <span class="math notranslate nohighlight">\(0\)</span> if <span class="math notranslate nohighlight">\(|C_I|=1\)</span> as in that case, the cluster would only contain the data point <span class="math notranslate nohighlight">\(i\)</span>. Note that this is <strong>an assumption of neutrality</strong>.</p>
+<p>The correct number of clusters is usually chosen by showing the silhouette plot, which displays all the silhouette scores of data points within each clusters, arranged from largest to smallest. The plots below are taken from the <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/cluster/plot_kmeans_silhouette_analysis.html">scikit-learn documentation</a> and show examples of silhouette plots for different choices of <span class="math notranslate nohighlight">\(K\)</span> in an example datest:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/d4905a3611e95874e694a173b13817bed5320bc3147546c6e13620df3e6148cc.png" src="../_images/d4905a3611e95874e694a173b13817bed5320bc3147546c6e13620df3e6148cc.png" />
+<img alt="../_images/c9ae75e6ae7b88460d3d78bd6a33c015f463f84d701da4532fc311f370bcc668.png" src="../_images/c9ae75e6ae7b88460d3d78bd6a33c015f463f84d701da4532fc311f370bcc668.png" />
+<img alt="../_images/0957f560e99936f0acb8677364364e972cd4b436a4e90a243c03582652e58b8f.png" src="../_images/0957f560e99936f0acb8677364364e972cd4b436a4e90a243c03582652e58b8f.png" />
+<img alt="../_images/6299d0de1b96682a227bce45dd6e8109b4098acd017b7b1a8e5725d7523d15ec.png" src="../_images/6299d0de1b96682a227bce45dd6e8109b4098acd017b7b1a8e5725d7523d15ec.png" />
+<img alt="../_images/a9dd38401a6443e27071ebe180da299e4e174c68ac8f6ae8cdbce16ba40d83ac.png" src="../_images/a9dd38401a6443e27071ebe180da299e4e174c68ac8f6ae8cdbce16ba40d83ac.png" />
+</div>
+</div>
+<p>The vertical line in red displays the average silhouette score. Good choices of cluster numbers will have silhouette plots which achieve values similar to each other and close to the average one. For example <span class="math notranslate nohighlight">\(n=2\)</span> and <span class="math notranslate nohighlight">\(n=4\)</span> seem to be the best pick.</p>
+<p>In practice, it is also useful to plot the average silhouette score versus the number of clusters and choose value of <span class="math notranslate nohighlight">\(K\)</span> which maximize the average score.</p>
+<p>Such plot would be as follows for the previous example:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/dc460bed0fff84bbf845fc6dd12524459a19b2145767d993f73739c3e44aa1c1.png" src="../_images/dc460bed0fff84bbf845fc6dd12524459a19b2145767d993f73739c3e44aa1c1.png" />
+</div>
+</div>
+<p>The plot below shows another example of such plot for a different dataset:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/3b9e151b3bc1e3d663f656139d2f01f71f844194eac631bbd3f4e3cb9173870f.png" src="../_images/3b9e151b3bc1e3d663f656139d2f01f71f844194eac631bbd3f4e3cb9173870f.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="other-clustering-algorithms">
+<h2><span class="section-number">14.3. </span>Other Clustering Algorithms<a class="headerlink" href="#other-clustering-algorithms" title="Permalink to this heading">#</a></h2>
+<p>It is important to note that various clustering algorithms exist beyond the commonly discussed k-means method. While k-means is a popular and widely used algorithm for partitioning data into distinct groups based on similarity, it is one approach among many. Numerous other clustering algorithms offer different perspectives and address specific challenges. Some examples include <strong>hierarchical clustering</strong>, <strong>DBSCAN</strong> (Density-Based Spatial Clustering of Applications with Noise), and <strong>spectral clustering</strong>. These alternatives provide unique strengths and are tailored to different types of data and scenarios. While our focus has been on understanding clustering in general and the k-means algorithm in particular, it is important to know that other approaches may be more suitable depending on the specific problem at hand. In the next lectures, we will see <strong>Gaussian Mixture Models (GMMs)</strong>, a probabilistic model for density estimation which can also be interpreted as a clustering algorithm.</p>
+</section>
+<section id="references">
+<h2><span class="section-number">14.4. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Section 10.3.1 of [1]</p></li>
+<li><p>Section 2.3.9 of [2]</p></li>
+<li><p>Section 9.2 of [2]</p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Silhouette_(clustering)">https://en.wikipedia.org/wiki/Silhouette_(clustering)</a></p></li>
+</ul>
+<p>[1] James, G., Witten, D., Hastie, T., &amp; Tibshirani, R. (2013). <a class="reference external" href="http://faculty.marshall.usc.edu/gareth-james/ISL/">An
+introduction to statistical
+learning</a>. New York:
+springer.</p>
+<p>[2] Bishop, Christopher M., and Nasser M. Nasrabadi. Pattern recognition and machine learning. Vol. 4. No. 4. New York: springer, 2006.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lectures"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="14_data_as_nd_points.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">13. </span>Data as N-Dimensional Points</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="16_density_estimation.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">15. </span>Density Estimation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-definition">14.1. Problem Definition</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-example">14.1.1. Graphical Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-means-clustering">14.2. K-Means Clustering</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization">14.2.1. Optimization</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pseudocode">14.2.1.1. Pseudocode</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-execution">14.2.2. Example Execution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-right-value-for-k">14.2.3. Choosing the Right Value for K</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#elbow-method">14.2.3.1. Elbow Method</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#silhouette-method">14.2.3.2. Silhouette Method</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-clustering-algorithms">14.3. Other Clustering Algorithms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">14.4. References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Antonino Furnari
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
