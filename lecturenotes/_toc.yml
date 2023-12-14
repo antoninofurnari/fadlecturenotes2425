@@ -22,8 +22,10 @@ parts:
   - file: lectures/11_linear_regression
   - file: lectures/12_logistic_regression
   - file: lectures/13_causal_analysis
-  - file: lectures/14_principal_component_analysis
-  - file: lectures/15_clustering_and_density_estimation
+  - file: lectures/14_data_as_nd_points
+  - file: lectures/15_clustering
+  - file: lectures/16_density_estimation
+  - file: lectures/17_principal_component_analysis
 - caption: Laboratories
   numbered: True
   chapters:
