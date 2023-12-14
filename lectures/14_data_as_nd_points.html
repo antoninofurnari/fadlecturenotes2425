@@ -500,12 +500,12 @@ document.write(`
 <p>Each observation, is a 2D point in the Cartesian space. This geometrical interpretation of data is central to data analysis and very convenient in particular <strong>when many different variables are available</strong>.</p>
 <section id="features-and-representation-functions">
 <h2><span class="section-number">13.1. </span>Features and Representation Functions<a class="headerlink" href="#features-and-representation-functions" title="Permalink to this heading">#</a></h2>
-<p>In this context in which we are not always <strong>explicitly giving names or interpretation to the variables</strong>, each of the variables will also be referred to as <strong>a feature of the data</strong>. For instance, a dataset of images of <span class="math notranslate nohighlight">\(100x100 pixels\)</span> can be seen as a collection of <span class="math notranslate nohighlight">\(10000\)</span>-dimensional vectors, where each vector’s dimension is a “feature”, i.e., the value of a specific pixel of the image.</p>
+<p>In this context in which we are not always <strong>explicitly giving names or interpretation to the variables</strong>, each of the variables will also be referred to as <strong>a feature of the data</strong>. For instance, <strong>a dataset of images of <span class="math notranslate nohighlight">\(100 \times 100\)</span> pixels can be seen as a collection of <span class="math notranslate nohighlight">\(10000\)</span>-dimensional vectors</strong>, where each vector’s dimension is a “feature”, i.e., the value of a specific pixel of the image.</p>
 <p>Given this interpretation of variables as features, it is often common to talk about <strong>feature extraction</strong>, in the case of any process transforming the data <span class="math notranslate nohighlight">\(\mathbf{x} \in \Re^d\)</span> to another form <span class="math notranslate nohighlight">\(\mathbf{y} \in \Re^m\)</span>. In this context, a function:</p>
 <div class="math notranslate nohighlight">
 \[f : \Re^d \to \Re^m\]</div>
-<p>will be often referred to as a “<strong>feature extraction</strong>” or a “<strong>representation function</strong>”. We will recall these terms going further in the course.</p>
-<p>We will also refer to <span class="math notranslate nohighlight">\(\Re^d\)</span> and <span class="math notranslate nohighlight">\(\Re^m\)</span> as “<strong>feature spaces</strong>” or “<strong>representation spaces</strong>” as they will be <strong>vector spaces</strong> in which data points (also called <strong>feature vectors</strong>) “live”.</p>
+<p>will be often referred to as a “<strong>feature extraction function</strong>” (of feature extractor) or a “<strong>representation function</strong>”. We will recall these terms going further in the course.</p>
+<p>We will also refer to <span class="math notranslate nohighlight">\(\Re^d\)</span> and <span class="math notranslate nohighlight">\(\Re^m\)</span> as “<strong>feature spaces</strong>” or “<strong>representation spaces</strong>” as they will be <strong>vector spaces</strong> to which data points (also called <strong>feature vectors</strong>) belong.</p>
 </section>
 <section id="important-properties-of-feature-spaces">
 <h2><span class="section-number">13.2. </span>Important Properties of Feature Spaces<a class="headerlink" href="#important-properties-of-feature-spaces" title="Permalink to this heading">#</a></h2>
@@ -549,10 +549,10 @@ document.write(`
 <h3><span class="section-number">13.2.2. </span>Metrics<a class="headerlink" href="#metrics" title="Permalink to this heading">#</a></h3>
 <p>Given a space <span class="math notranslate nohighlight">\(S\)</span>, a function</p>
 <p><span class="math notranslate nohighlight">\(m : S \times S \to \Re\)</span></p>
-<p>is <strong>a metric</strong> if:</p>
+<p>is <strong>a metric</strong> if the following properties are satisfied:</p>
 <ol class="arabic simple">
 <li><p>The distance of a point from itself is zero: <span class="math notranslate nohighlight">\(m(\mathbf{x}, \mathbf{x}) = 0\)</span>;</p></li>
-<li><p>The distance between two distinct points is always positive (positivity): <span class="math notranslate nohighlight">\(m(\mathbf{x},\mathbf{y}) \leq 0, \forall \mathbf{x}, \mathbf{y} \in S\)</span>;</p></li>
+<li><p>The distance between two distinct points is always positive (positivity): <span class="math notranslate nohighlight">\(m(\mathbf{x},\mathbf{y}) \geq 0, \forall \mathbf{x}, \mathbf{y} \in S\)</span>;</p></li>
 <li><p>The distance between <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> is the same as the distance between <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(x\)</span> (symmetry): <span class="math notranslate nohighlight">\(m(\mathbf{x}, \mathbf{y}) = m(\mathbf{y}, \mathbf{x})\)</span>.</p></li>
 <li><p>Triangle inequality: <span class="math notranslate nohighlight">\(m(\mathbf{x},\mathbf{y}) \leq m(\mathbf{x},\mathbf{z}) + m(\mathbf{z},\mathbf{y}), \forall \mathbf{x}, \mathbf{y}, \mathbf{z} \in S\)</span></p></li>
 </ol>
@@ -576,9 +576,10 @@ document.write(`
 <p>The difference between the L1 and L2 distances is notable, as shown in the figure blow:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/22ef48150f1ca97ba13275571d1f012711e255fd3a58a62e38f1913aedd39d28.png" src="../_images/22ef48150f1ca97ba13275571d1f012711e255fd3a58a62e38f1913aedd39d28.png" />
+<img alt="../_images/9875267b3656cd73af5b63e55da1108a69cf4731c852cea3aae17b670605f9ba.png" src="../_images/9875267b3656cd73af5b63e55da1108a69cf4731c852cea3aae17b670605f9ba.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Manhattan (L1) Distance: 7.00
 Euclidean (L2) Distance: 5.00
+L-Inf Distance: 4.00
 </pre></div>
 </div>
 </div>
@@ -596,7 +597,7 @@ Euclidean (L2) Distance: 5.00
 <p>The cosine similarity computes the cosine of the angle <span class="math notranslate nohighlight">\(\theta\)</span> comprised between two vectors, as shown in the plot below:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/cd3f5d238713e91dfbedf0438effa99419b0dddfb6e53456a5f6526f308ebb7d.png" src="../_images/cd3f5d238713e91dfbedf0438effa99419b0dddfb6e53456a5f6526f308ebb7d.png" />
+<img alt="../_images/e64e2c520cf9e4504e6b8df2037730c271b45a5bcfec47f00c3f284020ab8af2.png" src="../_images/e64e2c520cf9e4504e6b8df2037730c271b45a5bcfec47f00c3f284020ab8af2.png" />
 </div>
 </div>
 <p>Note that the cosine similarity would be the same if the two vectors had different scales (i.e., if they were longer but they would have the same orientation).</p>

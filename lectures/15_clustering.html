@@ -568,7 +568,7 @@ a parameter specified by the user (its application may depend on the application
 \[\begin{split}r_{ij} = \begin{cases}1 &amp; \text{ if } \mathbf{x}^{(i)} \in S_j \\ 0 &amp; \text{ otherwise} \end{cases} \end{split}\]</div>
 <p>The notion that <strong>clusters should be as compact as possible</strong> is formalized by defining the following <strong>cost function</strong>, which is sometimes called also <strong>distortion function</strong>:</p>
 <div class="math notranslate nohighlight">
-\[J = \sum_{i=1}^N \sum_{j=1}^K r_{ij} ||\mathbf{x}_i-\mathbf{\mu}_j||^2\]</div>
+\[J = \sum_{j=1}^K \sum_{i=1}^N r_{ij} ||\mathbf{x}_i-\mathbf{\mu}_j||^2\]</div>
 <p>Note that this function accumulates <strong>the sum of square distances between each data point and the prototype of the assigned cluster</strong>. This is possible because <span class="math notranslate nohighlight">\(r_{ij}\)</span> will be one only in the if data point <span class="math notranslate nohighlight">\(i\)</span> is in cluster <span class="math notranslate nohighlight">\(j\)</span> (so many terms in the internal sum will be zero).</p>
 <p>We can also note that the variance of cluster <span class="math notranslate nohighlight">\(j\)</span> can be defined as:</p>
 <div class="math notranslate nohighlight">
@@ -576,7 +576,7 @@ a parameter specified by the user (its application may depend on the application
 <p>We can hence see the cost function also as:</p>
 <div class="math notranslate nohighlight">
 \[J = \sum_{j=1}^K |S_j|\sigma_j^2\]</div>
-<p>Hence, minimizing <span class="math notranslate nohighlight">\(J\)</span> will effectively minimize the variances <span class="math notranslate nohighlight">\(\sigma_j^2\)</span> and the number of of elements in each cluster <span class="math notranslate nohighlight">\(|S_j|\)</span>, which will hence be encouraged to have similar numbers of elements.</p>
+<p>Hence, minimizing <span class="math notranslate nohighlight">\(J\)</span> will effectively minimize the variances <span class="math notranslate nohighlight">\(\sigma_j^2\)</span> and the number of elements in each cluster <span class="math notranslate nohighlight">\(|S_j|\)</span>, which will hence be encouraged to have similar numbers of elements.</p>
 <p>The K-Means problem is solved by finding a partition  <span class="math notranslate nohighlight">\(\widehat{S}\)</span> minimizing the cost function:</p>
 <div class="math notranslate nohighlight">
 \[\{\hat r_{ij}\}_{ij}, \{ \hat{\mathbf{\mu}_j} \}_j = \arg{\min{\sum_{j = 1}^{K}{\sum_{i = 1}^{N}{r_{ij}\left\| \mathbf{x}^{(i)} - \mathbf{\mu}_{i} \right\|^{2}}}}}\]</div>
@@ -609,7 +609,7 @@ often common to introduce as a termination criterion a maximum number of
 iterations.</p>
 <p><em>The algorithm is not guaranteed to find the global optimum and the
 solution reached may depend on the random initialization. However, in
-practice it usually leads to a suitable solution.</em></p>
+practice it usually leads to a reasonable solution.</em></p>
 <section id="pseudocode">
 <h4><span class="section-number">14.2.1.1. </span>Pseudocode<a class="headerlink" href="#pseudocode" title="Permalink to this heading">#</a></h4>
 <p>We can see the optimization algorithm in pseudo-code as follows:</p>
@@ -719,7 +719,7 @@ practice it usually leads to a suitable solution.</em></p>
 <div class="math notranslate nohighlight">
 \[a(i) = \frac{1}{|C_I|-1} \sum_{j \in C_i, i \neq j} d(i,j)\]</div>
 <p>where <span class="math notranslate nohighlight">\(d(i,j)\)</span> is the Euclidean distance between data point <span class="math notranslate nohighlight">\(i\)</span> and data point <span class="math notranslate nohighlight">\(j\)</span>. In practice, the score <span class="math notranslate nohighlight">\(a(i)\)</span> is the <strong>average distance of data point <span class="math notranslate nohighlight">\(i\)</span> with any other data point assigned to the same cluster</strong>. We expect this number to be small if the cluster has a low variance.</p>
-<p>We now want to compare this number to the value we would have <strong>if <span class="math notranslate nohighlight">\(i\)</span> were to be assigned to another cluster <span class="math notranslate nohighlight">\(J\)</span></strong>. In particular, we will choose the cluster <span class="math notranslate nohighlight">\(J\)</span> which minimizes the average distance. This is done by computing the following score:</p>
+<p>We now want to compare this number to the value we would have <strong>if <span class="math notranslate nohighlight">\(i\)</span> were to be assigned to another cluster <span class="math notranslate nohighlight">\(C_J\)</span></strong>. In particular, we will choose the cluster <span class="math notranslate nohighlight">\(C_J\)</span> which minimizes the average distance. This is done by computing the following score:</p>
 <div class="math notranslate nohighlight">
 \[b(i) = \min_{J \neq I} \frac{1}{|C_J|} \sum_{j \in C_J} d(i,j)\]</div>
 <p>Now we compare <span class="math notranslate nohighlight">\(a(i)\)</span> with <span class="math notranslate nohighlight">\(b(i)\)</span>. Ideally, <span class="math notranslate nohighlight">\(a(i)\)</span> should be much smaller than <span class="math notranslate nohighlight">\(b(i)\)</span>. If this happens, this means that the data point <span class="math notranslate nohighlight">\(i\)</span> fits in the cluster <span class="math notranslate nohighlight">\(C_I\)</span> much better than it would in any other cluster. To do so, we compute the <strong>silhouette score</strong> of data point <span class="math notranslate nohighlight">\(i\)</span> as follows:</p>
@@ -730,8 +730,8 @@ practice it usually leads to a suitable solution.</em></p>
 \[-1 \leq s(i) \leq 1\]</div>
 <p>In practice:</p>
 <ul class="simple">
-<li><p>A value of <span class="math notranslate nohighlight">\(s(i)\)</span> close to <span class="math notranslate nohighlight">\(1\)</span> is obtained when <span class="math notranslate nohighlight">\(a(i) &gt;&gt; b(i)\)</span>, meaning that <span class="math notranslate nohighlight">\(i\)</span> fits in <span class="math notranslate nohighlight">\(C_I\)</span> much better than it would fit in any other cluster;</p></li>
-<li><p>A value of <span class="math notranslate nohighlight">\(s(i)\)</span> close to <span class="math notranslate nohighlight">\(-1\)</span> is obtained when <span class="math notranslate nohighlight">\(a(i) &lt;&lt; b(i)\)</span>, meaning that another cluster <span class="math notranslate nohighlight">\(C_J\)</span> exists in which <span class="math notranslate nohighlight">\(a(i)\)</span> fits better.</p></li>
+<li><p>A value of <span class="math notranslate nohighlight">\(s(i)\)</span> close to <span class="math notranslate nohighlight">\(1\)</span> is obtained when <span class="math notranslate nohighlight">\(a(i) &lt;&lt; b(i)\)</span>, meaning that <span class="math notranslate nohighlight">\(i\)</span> fits in <span class="math notranslate nohighlight">\(C_I\)</span> much better than it would fit in any other cluster;</p></li>
+<li><p>A value of <span class="math notranslate nohighlight">\(s(i)\)</span> close to <span class="math notranslate nohighlight">\(-1\)</span> is obtained when <span class="math notranslate nohighlight">\(a(i) &gt;&gt; b(i)\)</span>, meaning that another cluster <span class="math notranslate nohighlight">\(C_J\)</span> exists in which <span class="math notranslate nohighlight">\(a(i)\)</span> fits better.</p></li>
 <li><p>A value of <span class="math notranslate nohighlight">\(s(i)\)</span> close to <span class="math notranslate nohighlight">\(0\)</span> indicates that the data point is close to the <strong>border between two natural clusters</strong>.</p></li>
 </ul>
 <p>The score above is arbitrarily set to <span class="math notranslate nohighlight">\(0\)</span> if <span class="math notranslate nohighlight">\(|C_I|=1\)</span> as in that case, the cluster would only contain the data point <span class="math notranslate nohighlight">\(i\)</span>. Note that this is <strong>an assumption of neutrality</strong>.</p>
