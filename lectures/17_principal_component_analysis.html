@@ -205,6 +205,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../laboratories/11_regressione_lineare.html">27. Laboratorio su Regressione Lineare</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../laboratories/12_regressione_logistica.html">28. Laboratorio su regressione logistica</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../laboratories/13_linear_logistic_regression_example_analysis.html">29. Linear and Logistic Regression Laboratory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/14_clustering_density_estimation_pca.html">30. Clustering, Density Estimation, and Principal Component Analysis</a></li>
 </ul>
 
     </div>
@@ -463,9 +464,9 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="principal-component-analysis">
 <h1><span class="section-number">16. </span>Principal Component Analysis<a class="headerlink" href="#principal-component-analysis" title="Permalink to this heading">#</a></h1>
-<p>So far, we have worked with relatively small datasets, with a limited set of interpretable variables. We have seen how models such as linear and logistic regression can help in understanding and interpret the relationships between variables.</p>
+<p>So far, we have worked with relatively small datasets, with a limited set of interpretable variables. We have seen how models such as linear and logistic regression can help in understanding and interpreting the relationships between variables.</p>
 <p>In practice, in many cases, we will work with larger sets of data, where individual variables are not always interpretable. <strong>Consider for instance a dataset of medical images with a resolution of <span class="math notranslate nohighlight">\(600 \times 600\)</span> pixels. We may want to be able to apply data analysis to such images, for instance, for automated diagnosis, but, if we think about it, we obtain a set of <span class="math notranslate nohighlight">\(360000\)</span> individual columns. Moreover, such columns are not directly interpretable (each one represent the gray value of a specific pixel in the image).</strong></p>
-<p>In most of these cases, <strong>the data will be highly redundant, with different variables being dependent or reporting similar data in different form</strong>. Think about it: if there is a large number of variables, it is more probable that some of them capture the same phenomenon from different points of view.</p>
+<p>In most of these cases, <strong>the data will be highly redundant, with different variables being dependent or reporting similar data in different forms</strong>. Think about it: if there is a large number of variables, it is more likely that some of them capture the same phenomenon from different points of view.</p>
 <section id="feature-selection-vs-feature-reduction">
 <h2><span class="section-number">16.1. </span>Feature Selection vs Feature Reduction<a class="headerlink" href="#feature-selection-vs-feature-reduction" title="Permalink to this heading">#</a></h2>
 <p>We have seen how, when many variables are available, it makes sense to select a subset of such variables. In regression analysis, in particular, we have seen how, when features are highly correlated, we should <strong>discard some of them to reduce collinearity</strong>. Indeed, if two variables <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are highly correlated, one of the two is redundant to a given extent, and we can ignore it.</p>
@@ -475,7 +476,7 @@ document.write(`
 <li><p>When defining a linear or logistic regressor, we can remove those variables with a high p-value. We have seen that these are variables which do not contribute significantly to the prediction of the dependent variable, given all other variables present in the regressor;</p></li>
 <li><p>Techniques such as <strong>Ridge and Lasso regression</strong> allow to perform some form of variable (or feature) selection, setting very low or zero coefficients for variables which do not contribute significantly to regression.</p></li>
 </ul>
-<p><strong>In general, however, when we discard a set of variable, we throw away some informative content, unless the variables we are removing can be perfectly reconstructed from the variables we are keeping, e.g., because they are linear combinations of other variables.</strong></p>
+<p><strong>In general, however, when we discard a set of variables, we throw away some informative content, unless the variables we are removing can be perfectly reconstructed from the variables we are keeping, e.g., because they are linear combinations of other variables.</strong></p>
 <p>Instead of selecting a subset of features to work with, <strong>feature reduction techniques</strong> aim to <strong>find a new set of features which summarize the original set of features losing a small amount of information, while maintaining a limited number of dimensions</strong>.</p>
 </section>
 <section id="feature-reduction-example">
@@ -630,16 +631,9 @@ Variance of h2: 3.10
 <p>Let <span class="math notranslate nohighlight">\(\overline{\mathbf{x}}\)</span> be the sample mean:</p>
 <div class="math notranslate nohighlight">
 \[\overline{\mathbf{x}} = \sum_{n=1}^N x_n\]</div>
-<p>The data covariance matrix <span class="math notranslate nohighlight">\(\mathbf{S}\)</span> can be defined as follows:</p>
+<p>The data covariance matrix <span class="math notranslate nohighlight">\(\mathbf{S}\)</span> will be:</p>
 <div class="math notranslate nohighlight">
 \[\mathbf{S} = \frac{1}{N} \sum_{n=1}^N (\mathbf{x}_n - \overline{\mathbf{x}}) (\mathbf{x}_n - \overline{\mathbf{x}})^T\]</div>
-<p>To see why the definition above is correct, let us consider a set of 2D points <span class="math notranslate nohighlight">\(\mathbf{x}_n=(x_n^{(1)},x_n^{(2)})\)</span> and the mean value <span class="math notranslate nohighlight">\(\overline{\mathbf{x}} = (\overline{x}^{(1)},\overline{x}^{(2)})\)</span>. We have:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\mathbf{S} =  \frac{1}{N} \sum_{n=1}^N (\mathbf{x}_n - \overline{\mathbf{x}}) (\mathbf{x}_n - \overline{\mathbf{x}})^T = \frac{1}{N} \sum_{n=1}^N \left(\begin{matrix} x_n^{(1)} - \overline{x}^{(1)} \\ x_n^{(1)} - \overline{x}^{(2)} \end{matrix}\right) (x_n^{(1)} - \overline{x}^{(1)}, x_n^{(1)} - \overline{x}^{(2)})=\end{split}\]</div>
-<div class="math notranslate nohighlight">
-\[\begin{split}=\frac{1}{N} \sum_{n=1}^N \left(\begin{matrix} (x_n^{(1)}-\overline{x}^{(1)})^2 &amp; (x_n^{(1)}-\overline{x}^{(1)})(x_n^{(2)}-\overline{x}^{(2)}) \\ (x_n^{(1)}-\overline{x}^{(1)})(x_n^{(2)}-\overline{x}^{(2)}) &amp; (x_n^{(2)}-\overline{x}^{(2)})^2\end{matrix}\right) = \end{split}\]</div>
-<div class="math notranslate nohighlight">
-\[\begin{split}= \left(\begin{matrix} \frac{1}{N} \sum_{n=1}^N(x_n^{(1)}-\overline{x}^{(1)})^2 &amp; \frac{1}{N} \sum_{n=1}^N(x_n^{(1)}-\overline{x}^{(1)})(x_n^{(2)}-\overline{x}^{(2)}) \\ \frac{1}{N} \sum_{n=1}^N(x_n^{(1)}-\overline{x}^{(1)})(x_n^{(2)}-\overline{x}^{(2)}) &amp; \frac{1}{N} \sum_{n=1}^N(x_n^{(2)}-\overline{x}^{(2)})^2\end{matrix}\right)\end{split}\]</div>
 <p>We know that projecting a data point to <span class="math notranslate nohighlight">\(\mathbf{u}_1\)</span> is done simply by the dot product:</p>
 <div class="math notranslate nohighlight">
 \[ \mathbf{u}_1^T \mathbf{x} \]</div>
@@ -677,7 +671,7 @@ u_{21} &amp; u_{22} &amp; \ldots &amp; u_{2D} \\
 \ldots \\
 u_{M1} &amp; u_{M2} &amp; \ldots &amp; u_{MD} \\
 \end{matrix}\right)\end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(u_{ij}\)</span> is the <span class="math notranslate nohighlight">\(j^{th}\)</span> component of the vector <span class="math notranslate nohighlight">\(\mathbf{u}_i\)</span>.</p>
+<p>where <span class="math notranslate nohighlight">\(u_{ij}\)</span> is the <span class="math notranslate nohighlight">\(j^{th}\)</span> component of vector <span class="math notranslate nohighlight">\(\mathbf{u}_i\)</span>.</p>
 <p>Note that, given the way we constructed this matrix, it will be <strong>a unit orthonormal matrix</strong>. Indeed:</p>
 <ul class="simple">
 <li><p>All rows are perpendicular, hence the dot product of any row with any other will be <span class="math notranslate nohighlight">\(\mathbf{u}_i^T \mathbf{u}_j=1\)</span>;</p></li>
@@ -703,7 +697,7 @@ x_{N1} &amp; x_{N2} &amp; \ldots &amp; x_{ND} \\
 <p>We can project the data matrix <span class="math notranslate nohighlight">\(X\)</span> to the principal components with the following formula:</p>
 <div class="math notranslate nohighlight">
 \[\mathbf{Z} = \mathbf{X} \mathbf{W}^T\]</div>
-<p><span class="math notranslate nohighlight">\(\mathbf{Z}\)</span> will be an <span class="math notranslate nohighlight">\([N \times M]\)</span> matrix in which the <span class="math notranslate nohighlight">\(n^{th}\)</span> row denotes the <span class="math notranslate nohighlight">\(n^{th}\)</span> element of the dataset projected to the PCA space.</p>
+<p><span class="math notranslate nohighlight">\(\mathbf{Z}\)</span> will be an <span class="math notranslate nohighlight">\([N \times M]\)</span> matrix in which the <span class="math notranslate nohighlight">\(i^{th}\)</span> row denotes the <span class="math notranslate nohighlight">\(i^{th}\)</span> element of the dataset projected to the PCA space.</p>
 <p>In geometrical terms, the PCA <strong>performs a rotation of the D-dimensional data around the center of the data</strong> in a way that:</p>
 <ul class="simple">
 <li><p>The new axes are sorted by variance;</p></li>
@@ -851,44 +845,44 @@ Eigenvectors:
 <div class="cell_output docutils container">
 <div class="output text_html"><style type="text/css">
 </style>
-<table id="T_011c6">
+<table id="T_533ec">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_011c6_level0_col0" class="col_heading level0 col0" >z1</th>
-      <th id="T_011c6_level0_col1" class="col_heading level0 col1" >z2</th>
-      <th id="T_011c6_level0_col2" class="col_heading level0 col2" >z3</th>
-      <th id="T_011c6_level0_col3" class="col_heading level0 col3" >z4</th>
+      <th id="T_533ec_level0_col0" class="col_heading level0 col0" >z1</th>
+      <th id="T_533ec_level0_col1" class="col_heading level0 col1" >z2</th>
+      <th id="T_533ec_level0_col2" class="col_heading level0 col2" >z3</th>
+      <th id="T_533ec_level0_col3" class="col_heading level0 col3" >z4</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th id="T_011c6_level0_row0" class="row_heading level0 row0" >z1</th>
-      <td id="T_011c6_row0_col0" class="data row0 col0" >4.23</td>
-      <td id="T_011c6_row0_col1" class="data row0 col1" >0.00</td>
-      <td id="T_011c6_row0_col2" class="data row0 col2" >-0.00</td>
-      <td id="T_011c6_row0_col3" class="data row0 col3" >0.00</td>
+      <th id="T_533ec_level0_row0" class="row_heading level0 row0" >z1</th>
+      <td id="T_533ec_row0_col0" class="data row0 col0" >4.23</td>
+      <td id="T_533ec_row0_col1" class="data row0 col1" >0.00</td>
+      <td id="T_533ec_row0_col2" class="data row0 col2" >-0.00</td>
+      <td id="T_533ec_row0_col3" class="data row0 col3" >0.00</td>
     </tr>
     <tr>
-      <th id="T_011c6_level0_row1" class="row_heading level0 row1" >z2</th>
-      <td id="T_011c6_row1_col0" class="data row1 col0" >0.00</td>
-      <td id="T_011c6_row1_col1" class="data row1 col1" >0.24</td>
-      <td id="T_011c6_row1_col2" class="data row1 col2" >-0.00</td>
-      <td id="T_011c6_row1_col3" class="data row1 col3" >-0.00</td>
+      <th id="T_533ec_level0_row1" class="row_heading level0 row1" >z2</th>
+      <td id="T_533ec_row1_col0" class="data row1 col0" >0.00</td>
+      <td id="T_533ec_row1_col1" class="data row1 col1" >0.24</td>
+      <td id="T_533ec_row1_col2" class="data row1 col2" >-0.00</td>
+      <td id="T_533ec_row1_col3" class="data row1 col3" >-0.00</td>
     </tr>
     <tr>
-      <th id="T_011c6_level0_row2" class="row_heading level0 row2" >z3</th>
-      <td id="T_011c6_row2_col0" class="data row2 col0" >-0.00</td>
-      <td id="T_011c6_row2_col1" class="data row2 col1" >-0.00</td>
-      <td id="T_011c6_row2_col2" class="data row2 col2" >0.08</td>
-      <td id="T_011c6_row2_col3" class="data row2 col3" >0.00</td>
+      <th id="T_533ec_level0_row2" class="row_heading level0 row2" >z3</th>
+      <td id="T_533ec_row2_col0" class="data row2 col0" >-0.00</td>
+      <td id="T_533ec_row2_col1" class="data row2 col1" >-0.00</td>
+      <td id="T_533ec_row2_col2" class="data row2 col2" >0.08</td>
+      <td id="T_533ec_row2_col3" class="data row2 col3" >0.00</td>
     </tr>
     <tr>
-      <th id="T_011c6_level0_row3" class="row_heading level0 row3" >z4</th>
-      <td id="T_011c6_row3_col0" class="data row3 col0" >0.00</td>
-      <td id="T_011c6_row3_col1" class="data row3 col1" >-0.00</td>
-      <td id="T_011c6_row3_col2" class="data row3 col2" >0.00</td>
-      <td id="T_011c6_row3_col3" class="data row3 col3" >0.02</td>
+      <th id="T_533ec_level0_row3" class="row_heading level0 row3" >z4</th>
+      <td id="T_533ec_row3_col0" class="data row3 col0" >0.00</td>
+      <td id="T_533ec_row3_col1" class="data row3 col1" >-0.00</td>
+      <td id="T_533ec_row3_col2" class="data row3 col2" >0.00</td>
+      <td id="T_533ec_row3_col3" class="data row3 col3" >0.02</td>
     </tr>
   </tbody>
 </table>
@@ -921,6 +915,12 @@ Eigenvectors:
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.92461872, 0.05306648, 0.01710261, 0.00521218])
 </pre></div>
 </div>
+</div>
+</div>
+<p>In practice, it is common to visualize the explained variance ratio in a <strong>scree plot</strong>:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/24627c6defc30a31ec65a3f6561fc2b9e391204c18b353b2a6161bc75690f785.png" src="../_images/24627c6defc30a31ec65a3f6561fc2b9e391204c18b353b2a6161bc75690f785.png" />
 </div>
 </div>
 <p>As we can see, the first component retains <span class="math notranslate nohighlight">\(92.46\%\)</span> of the variance, while the second one retains only <span class="math notranslate nohighlight">\(5.3\%\)</span> of the variance. It is common to also look at the cumulative variance ratio, defined as:</p>
@@ -1172,9 +1172,7 @@ Eigenvectors:
 <p>To perform Principal Component Regression, we can first compute PCA <strong>on the independent variables</strong>, then fit a linear regressor. We will choose <span class="math notranslate nohighlight">\(M=4\)</span> principal components:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cumulative explained variance: [0.99756151 0.9996243  0.99998025 0.9999952 ]
-</pre></div>
-</div>
+<img alt="../_images/6f5d6b7f98c17dba153fbbb86ba4a6907980465977828212c83a3cf85ec6a978.png" src="../_images/6f5d6b7f98c17dba153fbbb86ba4a6907980465977828212c83a3cf85ec6a978.png" />
 <div class="output text_html"><table class="simpletable">
 <caption>OLS Regression Results</caption>
 <tr>
@@ -1187,10 +1185,10 @@ Eigenvectors:
   <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   92.20</td>
 </tr>
 <tr>
-  <th>Date:</th>             <td>Tue, 05 Dec 2023</td> <th>  Prob (F-statistic):</th> <td>9.24e-55</td>
+  <th>Date:</th>             <td>Thu, 14 Dec 2023</td> <th>  Prob (F-statistic):</th> <td>9.24e-55</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>12:53:09</td>     <th>  Log-Likelihood:    </th> <td> -1207.7</td>
+  <th>Time:</th>                 <td>21:38:13</td>     <th>  Log-Likelihood:    </th> <td> -1207.7</td>
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>   386</td>      <th>  AIC:               </th> <td>   2425.</td>
@@ -1258,29 +1256,7 @@ Number of dimensions: 819840
 </div>
 </div>
 <p>We will divide the image into RGB blocks of size <span class="math notranslate nohighlight">\(8 \times 8 \times 3\)</span> (these are <span class="math notranslate nohighlight">\(8 \times 8\)</span> RGB images). These will look as follows:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tiles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">flower</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span><span class="mi">4270</span><span class="p">)</span>
-<span class="n">tiles</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">tiles</span><span class="p">)</span>
-<span class="n">tiles</span><span class="o">.</span><span class="n">shape</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">141</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">tiles</span><span class="p">[</span><span class="mi">1855</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">142</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">tiles</span><span class="p">[</span><span class="mi">2900</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">143</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">tiles</span><span class="p">[</span><span class="mi">1856</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">144</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">tiles</span><span class="p">[</span><span class="mi">960</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <img alt="../_images/385115d390dfb52aaffac60ab237330e7f48e6e2c9a963c37779e772e0ccc4dd.png" src="../_images/385115d390dfb52aaffac60ab237330e7f48e6e2c9a963c37779e772e0ccc4dd.png" />
 </div>
@@ -1297,6 +1273,11 @@ Number of dimensions: 819840
        0.98983658, 0.99027875])
 </pre></div>
 </div>
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/a46dcc263e4e417cdad0e9c38f72e9d1f2cd074717504160eb500ff01641b03b.png" src="../_images/a46dcc263e4e417cdad0e9c38f72e9d1f2cd074717504160eb500ff01641b03b.png" />
 </div>
 </div>
 <p>As we can see, truncating at the first component allows us to retain about <span class="math notranslate nohighlight">\(72%\)</span> of the information, truncating at the second allows us to retain about <span class="math notranslate nohighlight">\(80%\)</span>, and so on, up to <span class="math notranslate nohighlight">\(32\)</span> components, which allow us to retain about <span class="math notranslate nohighlight">\(99%\)</span> of the information. Now let’s see how to compress and reconstruct the image. We will choose the first <span class="math notranslate nohighlight">\(32\)</span> components, preserving <span class="math notranslate nohighlight">\(99%\)</span> of the information.</p>

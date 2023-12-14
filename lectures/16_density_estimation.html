@@ -205,6 +205,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../laboratories/11_regressione_lineare.html">27. Laboratorio su Regressione Lineare</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../laboratories/12_regressione_logistica.html">28. Laboratorio su regressione logistica</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../laboratories/13_linear_logistic_regression_example_analysis.html">29. Linear and Logistic Regression Laboratory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/14_clustering_density_estimation_pca.html">30. Clustering, Density Estimation, and Principal Component Analysis</a></li>
 </ul>
 
     </div>
@@ -508,11 +509,11 @@ document.write(`
 <p>where <span class="math notranslate nohighlight">\(V(R_i)\)</span> is the volume of <span class="math notranslate nohighlight">\(R_i\)</span>. If <span class="math notranslate nohighlight">\(R_i\)</span> is 1-dimensional (hence a segment), this will be its length, if <span class="math notranslate nohighlight">\(R_i\)</span> is 2D, then it will be its area.</p>
 <p>Recall that the probability of finding a value <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> in a given region <span class="math notranslate nohighlight">\(R\)</span> is in general given by:</p>
 <div class="math notranslate nohighlight">
-\[P(\mathcal{x} \in R_i)=\int_{R_i} f(\mathbf{x}) d\mathbf{x} = V(R_i) \cdot f(R_i)\]</div>
+\[P(\mathbf{x} \in R_i)=\int_{R_i} f(\mathbf{x}) d\mathbf{x} = V(R_i) \cdot f(R_i)\]</div>
 <p>The last part of the equality is true because we assigned uniform density values to each region.</p>
 <p>We hence obtain that:</p>
 <div class="math notranslate nohighlight">
-\[P(\mathcal{x} \in \mathcal{X}) = \sum_i P(R_i) = \sum_i V(R_i) \cdot f(R_i) = \sum_i V(R_i) \frac{|\{\mathbf{x} \in \mathbf{X} \cup R_i\}|}{|\mathbf{X}| \cdot V(R_i)} = \]</div>
+\[P(\mathbf{x} \in \mathbf{X}) = \sum_i P(R_i) = \sum_i V(R_i) \cdot f(R_i) = \sum_i V(R_i) \frac{|\{\mathbf{x} \in \mathbf{X} \cup R_i\}|}{|\mathbf{X}| \cdot V(R_i)} = \]</div>
 <div class="math notranslate nohighlight">
 \[= \frac{V(R_i)}{V(R_i) |\mathbf{X}|}  \sum_i |\{\mathbf{x} \in \mathbf{X} \cup R_i\}| = \frac{V(R_i) |\mathbf{X}|}{V(R_i) |\mathbf{X}|} = 1\]</div>
 <p><strong>Hence we can treat the density estimate as a valid probability density function.</strong></p>
@@ -522,6 +523,13 @@ document.write(`
 <img alt="../_images/7fa3d3e9166f08b6b53f45510cc166bf6a8c7370069508ef9e6542d0d85c07b4.png" src="../_images/7fa3d3e9166f08b6b53f45510cc166bf6a8c7370069508ef9e6542d0d85c07b4.png" />
 </div>
 </div>
+<p>Very closely related to the use of histograms for density estimation is the <strong>hexplot</strong>, a popular visualization techniques in which bins have an hexagonal shape to better approximate more symmetrical circular neighborhoods. The following plot shows an example of <strong>hexplot</strong>:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/239ee2ebadf5243d4ca10cde99fef21b578c7c634c40a7a8c5c0b21695ef1cb9.png" src="../_images/239ee2ebadf5243d4ca10cde99fef21b578c7c634c40a7a8c5c0b21695ef1cb9.png" />
+</div>
+</div>
+<p>Note that hexplots <strong>are not density plots</strong>.</p>
 </section>
 <section id="mobile-windows-parzen-window-kernel-density-estimation">
 <h3><span class="section-number">15.1.2. </span>Mobile Windows - Parzen Window / Kernel Density Estimation<a class="headerlink" href="#mobile-windows-parzen-window-kernel-density-estimation" title="Permalink to this heading">#</a></h3>
@@ -529,7 +537,9 @@ document.write(`
 <p>A naive approach to density estimation through Parzen Window would assign a point <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> a density by simply computing the fraction of points of <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> which fall between a neighborhood of size <span class="math notranslate nohighlight">\(r\)</span> (where <span class="math notranslate nohighlight">\(r\)</span> is a hyper-parameter) of <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, as follows:</p>
 <div class="math notranslate nohighlight">
 \[f(\mathbf{x}) = \frac{|N(\mathbf{x},h)\}|}{\alpha|\mathbf{X}|}\]</div>
-<p>where $<span class="math notranslate nohighlight">\(N(\mathbf{x},h) = \{\mathbf{y} \in \mathbf{X}\ s.t.\ ||\mathbf{y} - \mathbf{x}||_2 &lt; h \}\)</span>$</p>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[N(\mathbf{x},h) = \{\mathbf{y} \in \mathbf{X}\ s.t.\ ||\mathbf{y} - \mathbf{x}||_2 &lt; h \}\]</div>
 <p>is a neighborhood of <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> centered at <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and of radius <span class="math notranslate nohighlight">\(h\)</span>, and <span class="math notranslate nohighlight">\(\alpha\)</span> is a constant introduced to make sure that the density integrates to <span class="math notranslate nohighlight">\(1\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[\int_{\mathbf{x} \in \Re^d} f(\mathbf{x}) d\mathbf{x}= 1\]</div>
@@ -555,10 +565,15 @@ document.write(`
 </div>
 <p>The plot also plots points putting their distance from <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> in the x axis and the assigned weight in the y axis. As can be noted, even very close points in the x axis (e.g., the last of the green ones and the first of the red ones) get assigned very different weights, which makes the overall process sensitive to small shifts.</p>
 <p>To reduce this effect, it is common to use a smoother kernel which assigns a decreasing weight to points as their distance from <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> grows. Common choices for kernels are the Epanechnikov kernel and the Gaussian Kernel, which are defined as follows:</p>
-<p><strong>Epanechnikov Kernel</strong>
-$<span class="math notranslate nohighlight">\(K_h(\mathbf{u}) = \frac{3}{4h^2} \left(1 - \frac{\|\mathbf{u}\|^2}{h^2}\right) \mathbb{I}(\|\mathbf{u}\| \leq h)\)</span>$</p>
-<p><strong>Gaussian Kernel</strong>
-$<span class="math notranslate nohighlight">\(K_h(\mathbf{x}) = \frac{1}{(2\pi h^2)^{d/2}} \exp\left(-\frac{\|\mathbf{x}\|^2}{2h^2}\right)\)</span>$</p>
+<p><strong>Epanechnikov Kernel</strong></p>
+<div class="math notranslate nohighlight">
+\[K_h(\mathbf{u}) = \frac{3}{4h^2} \left(1 - \frac{\|\mathbf{u}\|^2}{h^2}\right) \mathbb{I}(\|\mathbf{u}\| \leq h)\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbb{I}\)</span> is the indicator function defined as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbb{I}(x) = \begin{cases} 1 &amp; \text{if } x \text{ is true} \\ 0 &amp; \text{otherwise}\end{cases}\end{split}\]</div>
+<p><strong>Gaussian Kernel</strong></p>
+<div class="math notranslate nohighlight">
+\[K_h(\mathbf{x}) = \frac{1}{(2\pi h^2)^{d/2}} \exp\left(-\frac{\|\mathbf{x}\|^2}{2h^2}\right)\]</div>
 <p>where <span class="math notranslate nohighlight">\(d\)</span> is the dimensionality of the data (<span class="math notranslate nohighlight">\(2\)</span> in our examples).</p>
 <p>The plot below compares the scores assigned to points depending on their distance from <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> according to the three kernels seen so far:</p>
 <div class="cell tag_remove-input docutils container">
@@ -593,10 +608,10 @@ $<span class="math notranslate nohighlight">\(K_h(\mathbf{x}) = \frac{1}{(2\pi h
 <p>While one way to mitigate this is to use smoother kernels (e.g., the Gaussian one) assigning a non-zero weight to each example, another approach is to choose a neighborhood of <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> such that the number of elements in the neighborhood, besides <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> is exactly equal to <span class="math notranslate nohighlight">\(K\)</span>, where <span class="math notranslate nohighlight">\(K\)</span> is an hyper-parameter. The advantage of this approach is to always rely on the same sample sample size when estimating the density.</p>
 <p>Let <span class="math notranslate nohighlight">\(N(\mathbf(x),r)\)</span> be a neighborhood centered at <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> with radius <span class="math notranslate nohighlight">\(r\)</span>. We will define <span class="math notranslate nohighlight">\(R_K\)</span> as the <strong>radius of the largest neighborhood centered at <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> containing at most <span class="math notranslate nohighlight">\(K\)</span> examples, besides <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> (if it is included in <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>)</strong>:</p>
 <div class="math notranslate nohighlight">
-\[R_K(\mathbf{x}) = \sup \{r | N(\mathbf{x},r) \setminus \{\mathbf{x}\}| \leq K\}\]</div>
+\[R_K(\mathbf{x}) = \sup \{r : |N(\mathbf{x},r) \setminus \{\mathbf{x}\}| \leq K\}\]</div>
 <p>We will also define <span class="math notranslate nohighlight">\(N_K(\mathbf{x})\)</span> as the largest neighborhood of <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> containing at most <span class="math notranslate nohighlight">\(K\)</span> elements:</p>
 <div class="math notranslate nohighlight">
-\[N_K(\mathbf{x}) = N(\mathbf{x},R_K)\]</div>
+\[N_K(\mathbf{x}) = N(\mathbf{x},R_K(\mathbf{x}))\]</div>
 <p>K-NN density estimation will assign point <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> the following density estimate:</p>
 <div class="math notranslate nohighlight">
 \[f(\mathbf{x}) = \frac{K}{|\mathbf{X}|} \cdot \frac{1}{V_d \cdot R_k(\mathbf{x})}\]</div>
@@ -654,8 +669,8 @@ $<span class="math notranslate nohighlight">\(K_h(\mathbf{x}) = \frac{1}{(2\pi h
 <img alt="../_images/ce61f5c244ed55dd6ba1080f27e84b28502fc7e18ec1383ea644a7085236e239.png" src="../_images/ce61f5c244ed55dd6ba1080f27e84b28502fc7e18ec1383ea644a7085236e239.png" />
 </div>
 </div>
-<p>The first two plots show how the log likelihood changes when <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> change, keeping the data fixed (same data as the previous plot). The last plot shows how the likelihood changes as a function of both <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>. As we can see, we have a maximum for <span class="math notranslate nohighlight">\(\mu=0\)</span> and <span class="math notranslate nohighlight">\(\sigma=0\)</span>, which are the true parameters of the distribution which generated the data.</p>
-<p>It can be shown that a close form solution exist for the estimation of the parameters of the N-Dimensional Gaussian. These are obtained by computing the derivatives of the log likelihood with respect to <span class="math notranslate nohighlight">\(\mathbf{\mu}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{\Sigma}\)</span> and setting them to zero. We will not see the mathematical details, but the Maximul Likelihood estimates of the parameters for the n-dimensional Gaussian are:</p>
+<p>The first two plots show how the log likelihood changes when <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> change, keeping the data fixed (same data as the previous plot). The last plot shows how the likelihood changes as a function of both <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>. As we can see, we have a maximum for <span class="math notranslate nohighlight">\(\mu=0\)</span> and <span class="math notranslate nohighlight">\(\sigma=1\)</span>, which are the true parameters of the distribution which generated the data.</p>
+<p>It can be shown that a close form solution exist for the estimation of the parameters of the N-Dimensional Gaussian. These are obtained by computing the derivatives of the log likelihood with respect to <span class="math notranslate nohighlight">\(\mathbf{\mu}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{\Sigma}\)</span> and setting them to zero. We will not see the mathematical details, but the Maximum Likelihood estimates of the parameters for the n-dimensional Gaussian are:</p>
 <div class="math notranslate nohighlight">
 \[\mathbf{\mu}_{ML} = \frac{1}{N} \sum_{i=1}^N \mathbf{x}_i\]</div>
 <p>and</p>
@@ -690,7 +705,7 @@ $<span class="math notranslate nohighlight">\(K_h(\mathbf{x}) = \frac{1}{(2\pi h
 </div>
 <p>We could then define a unified probability distribution averaging the two distributions:</p>
 <div class="math notranslate nohighlight">
-\[p(\mathbf{x}) = \frac{1}{2} \mathcal{N}(\mathbf{x}|\mathbf{x}_1, \mathbf{\Sigma}_1) + \frac{1}{2} \mathcal{N}(\mathbf{x}|\mathbf{x}_2, \mathbf{\Sigma}_2)\]</div>
+\[p(\mathbf{x}) = \frac{1}{2} \mathcal{N}(\mathbf{x}|\mathbf{\mu}_1, \mathbf{\Sigma}_1) + \frac{1}{2} \mathcal{N}(\mathbf{x}|\mathbf{\mu}_2, \mathbf{\Sigma}_2)\]</div>
 <p>where <span class="math notranslate nohighlight">\(\mathcal{N}(\mathbf{x}|\mathbf{\mu}_k, \mathbf{\Sigma}_k)\)</span> is the normal distribution of mean <span class="math notranslate nohighlight">\(\mathbf{\mu}_k\)</span> and covariance matrix <span class="math notranslate nohighlight">\(\mathbf{\Sigma}_k\)</span> computed at point <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>.</p>
 <p>More in general, we may want to weigh more one distribution over the others. We can hence define the following general model:</p>
 <div class="math notranslate nohighlight">
@@ -729,7 +744,7 @@ $<span class="math notranslate nohighlight">\(K_h(\mathbf{x}) = \frac{1}{(2\pi h
 </section>
 <section id="probabilistic-formulation-of-gmm-with-latent-variables">
 <h3><span class="section-number">15.2.3. </span>Probabilistic Formulation of GMM with Latent Variables<a class="headerlink" href="#probabilistic-formulation-of-gmm-with-latent-variables" title="Permalink to this heading">#</a></h3>
-<p>We will now give a more probabilistic treatment to the GMM. This will lead us to the interpretation of the model as one with latent variables and to the illustration of the Expectation-Maximization (E-M) algorithm for maximum likelihood optimization.</p>
+<p>We will now give a probabilistic treatment of the GMM. This will lead us to the interpretation of the model as one with latent variables and to the illustration of the Expectation-Maximization (E-M) algorithm for maximum likelihood optimization.</p>
 <p>We will start by introducing a <span class="math notranslate nohighlight">\(K-dimensional\)</span> random variable <span class="math notranslate nohighlight">\(\mathbf{Z}\)</span>. The values <span class="math notranslate nohighlight">\(\mathbf{z}=(z_1,\ldots,z_K)\)</span> assumed by <span class="math notranslate nohighlight">\(\mathbf{Z}\)</span> will be such that:</p>
 <div class="math notranslate nohighlight">
 \[z_k \in \{0,1\}, \text{   and   } \sum_{k=1}^K z_k = 1 \]</div>
@@ -809,7 +824,7 @@ $<span class="math notranslate nohighlight">\(K_h(\mathbf{x}) = \frac{1}{(2\pi h
 <p>As discussed earlier, we wish to maximize the logarithm of the likelihood, which we have seen assumes the following form:</p>
 <div class="math notranslate nohighlight">
 \[\log P(\mathbf{X}|\mathbf{\pi}, \mathbf{\mu}, \mathbf{\Sigma}) = \sum_{i=1}^N \log\left[\sum_{k=1}^K \pi_k \mathcal{N}(\mathbf{x_i}|\mathbf{\mu}_k, \mathbf{\Sigma}_k)\right]\]</div>
-<p>We will not see all mathematical steps, but if we <strong>derive the expression above with respect to the means <span class="math notranslate nohighlight">\(\mathbf{\mu}_k\)</span> of the Gaussian components and set them to zero</strong>, we obtain that optimal means can be obtained by the following expressions:</p>
+<p>We will not see all mathematical steps, but if we <strong>compute the derivative of the expression above with respect to the means <span class="math notranslate nohighlight">\(\mathbf{\mu}_k\)</span> of the Gaussian components and set it to zero</strong>, we obtain that optimal means can be obtained by the following expressions:</p>
 <div class="math notranslate nohighlight">
 \[\mathbf{\mu}_k = \frac{1}{N_k} \sum_{i=1}^N \gamma(z_{ik})\mathbf{x}_i \ \ \ \ \ \text{(A)}\]</div>
 <p>where <span class="math notranslate nohighlight">\(z_{ik}\)</span> is the k-th component of the <span class="math notranslate nohighlight">\(\mathbf{z}_i\)</span> value associated to the observation <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> and</p>
@@ -828,11 +843,11 @@ $<span class="math notranslate nohighlight">\(K_h(\mathbf{x}) = \frac{1}{(2\pi h
 <div class="math notranslate nohighlight">
 \[\pi_k = \frac{N_k}{N} \ \ \ \ \ \text{(C)}\]</div>
 <p>Hence, the mixing coefficient for component <span class="math notranslate nohighlight">\(k\)</span> is given by the soft count <span class="math notranslate nohighlight">\(N_k\)</span> of points assigned to component <span class="math notranslate nohighlight">\(k\)</span> divided by the total number of points <span class="math notranslate nohighlight">\(N\)</span>.</p>
-<p>We shall note that results (A), (B) and (C) <strong>do not constitute a close from solution</strong> to find the parameters of the mixture model. Indeed, they depend on the responsibilities <span class="math notranslate nohighlight">\(\gamma(z_{ik})\)</span> in a complex way. Moreover, we have a <strong>chicken and egg problem</strong>. Indeed:</p>
+<p>We shall note that results (A), (B) and (C) <strong>do not constitute a closed form solution</strong> to find the parameters of the mixture model. Indeed, they depend on the responsibilities <span class="math notranslate nohighlight">\(\gamma(z_{ik})\)</span> in a complex way. Moreover, we have a <strong>chicken and egg problem</strong>. Indeed:</p>
 <blockquote>
-<div><p>To estimate (A), (B) and (C) we need to be able to compute the responsibilities <span class="math notranslate nohighlight">\(\gamma(z_{ik})\)</span>, but to compute these values, we first need to have estimates for <span class="math notranslate nohighlight">\(\mathbf{mu}_k\)</span> (A), <span class="math notranslate nohighlight">\(\mathbf{\Sigma}_k\)</span> (B), and <span class="math notranslate nohighlight">\(\pi_k\)</span> (C).</p>
+<div><p>To estimate (A), (B) and (C) we need to be able to compute the responsibilities <span class="math notranslate nohighlight">\(\gamma(z_{ik})\)</span>, but to compute these values, we first need to have estimates for <span class="math notranslate nohighlight">\(\mathbf{\mu}_k\)</span> (A), <span class="math notranslate nohighlight">\(\mathbf{\Sigma}_k\)</span> (B), and <span class="math notranslate nohighlight">\(\pi_k\)</span> (C).</p>
 </div></blockquote>
-<p>While we do not have a close-form solution for the estimation of the parameters, we can apply a <strong>simple iterative scheme, which is an instance of the Expectation Maximization (EM) algorithm applied to the specific case of the Gaussian mixture model</strong>.</p>
+<p>While we do not have a closed form solution for the estimation of the parameters, we can apply a <strong>simple iterative scheme, which is an instance of the Expectation Maximization (EM) algorithm applied to the specific case of the Gaussian mixture model</strong>.</p>
 <p>The iterative scheme works as follows:</p>
 <ul class="simple">
 <li><p>We choose some initial values for <span class="math notranslate nohighlight">\(\mathbf{\mu}_k\)</span>, <span class="math notranslate nohighlight">\(\mathbf{\Sigma}_k\)</span> and <span class="math notranslate nohighlight">\(\pi_k\)</span>. A common initialization scheme consists in <strong>running a K-Means clustering</strong> and then fitting K Gaussian distributions, one for each cluster. We compute the initial value of the log likelihood.</p></li>
@@ -856,10 +871,13 @@ $<span class="math notranslate nohighlight">\(K_h(\mathbf{x}) = \frac{1}{(2\pi h
 </li>
 <li><p>Repeat until termination criterion is reached {</p>
 <ul>
-<li><p><strong>E Step</strong>: Compute responsibilities using the current parameter values using the formula:
-$<span class="math notranslate nohighlight">\(\gamma(z_k) = \frac{\pi_k \mathcal{N}(\mathbf{x}|\mathbf{\mu}_k \mathbf{\Sigma}_k)}{\sum_{j=1}^K \pi_j \mathcal{N}(\mathbf{x}|\mathbf{\mu}_j \mathbf{\Sigma}_j)}\)</span>$</p></li>
-<li><p><strong>M Step</strong>: Estimate the parameter values using the current estimate for the responsibilities using the following formulas:
-$<span class="math notranslate nohighlight">\(\mathbf{\mu}_k = \frac{1}{N_k} \sum_{i=1}^N \gamma(z_{ik})\mathbf{x}_i \ \ \ \ \ \text{(A)}\)</span>$</p>
+<li><p><strong>E Step</strong>: Compute responsibilities using the current parameter values using the formula:</p>
+<div class="math notranslate nohighlight">
+\[\gamma(z_k) = \frac{\pi_k \mathcal{N}(\mathbf{x}|\mathbf{\mu}_k \mathbf{\Sigma}_k)}{\sum_{j=1}^K \pi_j \mathcal{N}(\mathbf{x}|\mathbf{\mu}_j \mathbf{\Sigma}_j)}\]</div>
+</li>
+<li><p><strong>M Step</strong>: Estimate the parameter values using the current estimate for the responsibilities using the following formulas:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{\mu}_k = \frac{1}{N_k} \sum_{i=1}^N \gamma(z_{ik})\mathbf{x}_i \ \ \ \ \ \text{(A)}\]</div>
 <div class="math notranslate nohighlight">
 \[\mathbf{\Sigma}_k = \frac{1}{N_k} \sum_{i=1}^N \gamma(z_{ik}) (\mathbf{x}_i - \mathbf{\mu}_k) (\mathbf{x}_i - \mathbf{\mu}_k)^T \ \ \ \ \ \text{(B)}\]</div>
 <div class="math notranslate nohighlight">
@@ -931,7 +949,7 @@ $<span class="math notranslate nohighlight">\(\mathbf{\mu}_k = \frac{1}{N_k} \su
 <li><p>Clusters are assumed to have diagonal covariance matrices <span class="math notranslate nohighlight">\(\epsilon \mathbf{I}\)</span> where <span class="math notranslate nohighlight">\(\mathbf{I}\)</span> is the <span class="math notranslate nohighlight">\(D \times D\)</span> identity matrix and <span class="math notranslate nohighlight">\(\epsilon\)</span> is a variance parameter which is <strong>shared by all components</strong>. This means that the clusters are assumed to be all <strong>symmetrical and with the same shape</strong>.</p></li>
 </ul>
 <p>Despite these differences highlight the limitations of K-Means, it should be considered that K-Means is a significantly faster algorithm than GMM. Hence, if studying the probability density <span class="math notranslate nohighlight">\(P(\mathbf{X})\)</span> is not needed and we can assume symmetrical clusters with similar shapes, K-Means is in practice a more popular choice, due to its faster convergence.</p>
-<p>The plot below illustrate such differences:</p>
+<p>The plot below illustrates such differences:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <img alt="../_images/976da06fdfe07c65cb7712afc9a9fe82859380437f7cf303d88421194ad90fc4.png" src="../_images/976da06fdfe07c65cb7712afc9a9fe82859380437f7cf303d88421194ad90fc4.png" />
