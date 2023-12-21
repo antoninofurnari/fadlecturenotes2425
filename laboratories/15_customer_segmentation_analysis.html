@@ -1,0 +1,1683 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>31. Dataset &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'laboratories/15_customer_segmentation_analysis';</script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="30. Clustering, Density Estimation, and Principal Component Analysis" href="14_clustering_density_estimation_pca.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../lectures/index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Lecture Notes on Fundamentals of Data Analysis - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Lecture Notes on Fundamentals of Data Analysis - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../lectures/index.html">
+                    Lecture Notes on Fundamental of Data Analysis
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lectures/01_intro_data_analysis.html">1. Introduction to Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/03_main_data_analysis_concepts.html">2. Main data analysis concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/04_misure_di_frequenze_e_rappresentazione_grafica_dei_dati.html">3. Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/05_misure_di_tendenza_centrale_dispersione_e_forma.html">4. Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/06_associazione_variabili.html">5. Associazione tra Variabili</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/07_probability.html">6. Probability for Data Manipulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/08_common_distributions.html">7. Common Probability Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/09_information_theory.html">8. Basic Elements of Information Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/10_statistical_inference.html">9. Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/11_linear_regression.html">10. Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/12_logistic_regression.html">11. Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/13_causal_analysis.html">12. Causal Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/14_data_as_nd_points.html">13. Data as N-Dimensional Points</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/15_clustering.html">14. Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/16_density_estimation.html">15. Density Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/17_principal_component_analysis.html">16. Principal Component Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratories</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_setup.html">17. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_intro_python.html">18. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_intro_numpy.html">19. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_intro_matplotlib.html">20. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_intro_pandas.html">21. Introduzione a Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">22. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_misure_di_tendenza_centrale_dispersione_e_forma.html">23. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_associazione_variabili.html">24. Associazione tra Variabili</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_heart-disease-analysis.html">25. Exploratory Analysis on the Heart Disease Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_statistical_inference.html">26. Laboratory on Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_regressione_lineare.html">27. Laboratorio su Regressione Lineare</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_regressione_logistica.html">28. Laboratorio su regressione logistica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_linear_logistic_regression_example_analysis.html">29. Linear and Logistic Regression Laboratory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_clustering_density_estimation_pca.html">30. Clustering, Density Estimation, and Principal Component Analysis</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">31. Dataset</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/antoninofurnari/fadlecturenotes/blob/master/lecturenotes/laboratories/15_customer_segmentation_analysis.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/antoninofurnari/fadlecturenotes" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/antoninofurnari/fadlecturenotes/issues/new?title=Issue%20on%20page%20%2Flaboratories/15_customer_segmentation_analysis.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/laboratories/15_customer_segmentation_analysis.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Dataset</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="dataset">
+<h1><span class="section-number">31. </span>Dataset<a class="headerlink" href="#dataset" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Credit card customer segmentation: <a class="reference external" href="https://www.kaggle.com/datasets/thedevastator/predicting-credit-card-customer-attrition-with-m/data">https://www.kaggle.com/datasets/thedevastator/predicting-credit-card-customer-attrition-with-m/data</a></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;BankChurners.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 10127 entries, 0 to 10126
+Data columns (total 23 columns):
+ #   Column                                                                                                                              Non-Null Count  Dtype  
+---  ------                                                                                                                              --------------  -----  
+ 0   CLIENTNUM                                                                                                                           10127 non-null  int64  
+ 1   Attrition_Flag                                                                                                                      10127 non-null  object 
+ 2   Customer_Age                                                                                                                        10127 non-null  int64  
+ 3   Gender                                                                                                                              10127 non-null  object 
+ 4   Dependent_count                                                                                                                     10127 non-null  int64  
+ 5   Education_Level                                                                                                                     10127 non-null  object 
+ 6   Marital_Status                                                                                                                      10127 non-null  object 
+ 7   Income_Category                                                                                                                     10127 non-null  object 
+ 8   Card_Category                                                                                                                       10127 non-null  object 
+ 9   Months_on_book                                                                                                                      10127 non-null  int64  
+ 10  Total_Relationship_Count                                                                                                            10127 non-null  int64  
+ 11  Months_Inactive_12_mon                                                                                                              10127 non-null  int64  
+ 12  Contacts_Count_12_mon                                                                                                               10127 non-null  int64  
+ 13  Credit_Limit                                                                                                                        10127 non-null  float64
+ 14  Total_Revolving_Bal                                                                                                                 10127 non-null  int64  
+ 15  Avg_Open_To_Buy                                                                                                                     10127 non-null  float64
+ 16  Total_Amt_Chng_Q4_Q1                                                                                                                10127 non-null  float64
+ 17  Total_Trans_Amt                                                                                                                     10127 non-null  int64  
+ 18  Total_Trans_Ct                                                                                                                      10127 non-null  int64  
+ 19  Total_Ct_Chng_Q4_Q1                                                                                                                 10127 non-null  float64
+ 20  Avg_Utilization_Ratio                                                                                                               10127 non-null  float64
+ 21  Naive_Bayes_Classifier_Attrition_Flag_Card_Category_Contacts_Count_12_mon_Dependent_count_Education_Level_Months_Inactive_12_mon_1  10127 non-null  float64
+ 22  Naive_Bayes_Classifier_Attrition_Flag_Card_Category_Contacts_Count_12_mon_Dependent_count_Education_Level_Months_Inactive_12_mon_2  10127 non-null  float64
+dtypes: float64(7), int64(10), object(6)
+memory usage: 1.8+ MB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Attrition_Flag&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Existing Customer    8500
+Attrited Customer    1627
+Name: Attrition_Flag, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Education_Level&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Graduate         3128
+High School      2013
+Unknown          1519
+Uneducated       1487
+College          1013
+Post-Graduate     516
+Doctorate         451
+Name: Education_Level, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Marital_Status&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Married     4687
+Single      3943
+Unknown      749
+Divorced     748
+Name: Marital_Status, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Income_Category&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Less than $40K    3561
+$40K - $60K       1790
+$80K - $120K      1535
+$60K - $80K       1402
+Unknown           1112
+$120K +            727
+Name: Income_Category, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Card_Category&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Blue        9436
+Silver       555
+Gold         116
+Platinum      20
+Name: Card_Category, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-7a42f3e5-0b50-42a4-95b2-3235997025a4" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>CLIENTNUM</th>
+      <th>Customer_Age</th>
+      <th>Dependent_count</th>
+      <th>Months_on_book</th>
+      <th>Total_Relationship_Count</th>
+      <th>Months_Inactive_12_mon</th>
+      <th>Contacts_Count_12_mon</th>
+      <th>Credit_Limit</th>
+      <th>Total_Revolving_Bal</th>
+      <th>Avg_Open_To_Buy</th>
+      <th>Total_Amt_Chng_Q4_Q1</th>
+      <th>Total_Trans_Amt</th>
+      <th>Total_Trans_Ct</th>
+      <th>Total_Ct_Chng_Q4_Q1</th>
+      <th>Avg_Utilization_Ratio</th>
+      <th>Naive_Bayes_Classifier_Attrition_Flag_Card_Category_Contacts_Count_12_mon_Dependent_count_Education_Level_Months_Inactive_12_mon_1</th>
+      <th>Naive_Bayes_Classifier_Attrition_Flag_Card_Category_Contacts_Count_12_mon_Dependent_count_Education_Level_Months_Inactive_12_mon_2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>1.012700e+04</td>
+      <td>10127.000000</td>
+      <td>10127.000000</td>
+      <td>10127.000000</td>
+      <td>10127.000000</td>
+      <td>10127.000000</td>
+      <td>10127.000000</td>
+      <td>10127.000000</td>
+      <td>10127.000000</td>
+      <td>10127.000000</td>
+      <td>10127.000000</td>
+      <td>10127.000000</td>
+      <td>10127.000000</td>
+      <td>10127.000000</td>
+      <td>10127.000000</td>
+      <td>10127.000000</td>
+      <td>10127.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>7.391776e+08</td>
+      <td>46.325960</td>
+      <td>2.346203</td>
+      <td>35.928409</td>
+      <td>3.812580</td>
+      <td>2.341167</td>
+      <td>2.455317</td>
+      <td>8631.953698</td>
+      <td>1162.814061</td>
+      <td>7469.139637</td>
+      <td>0.759941</td>
+      <td>4404.086304</td>
+      <td>64.858695</td>
+      <td>0.712222</td>
+      <td>0.274894</td>
+      <td>0.159997</td>
+      <td>0.840003</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>3.690378e+07</td>
+      <td>8.016814</td>
+      <td>1.298908</td>
+      <td>7.986416</td>
+      <td>1.554408</td>
+      <td>1.010622</td>
+      <td>1.106225</td>
+      <td>9088.776650</td>
+      <td>814.987335</td>
+      <td>9090.685324</td>
+      <td>0.219207</td>
+      <td>3397.129254</td>
+      <td>23.472570</td>
+      <td>0.238086</td>
+      <td>0.275691</td>
+      <td>0.365301</td>
+      <td>0.365301</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>7.080821e+08</td>
+      <td>26.000000</td>
+      <td>0.000000</td>
+      <td>13.000000</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>1438.300000</td>
+      <td>0.000000</td>
+      <td>3.000000</td>
+      <td>0.000000</td>
+      <td>510.000000</td>
+      <td>10.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000008</td>
+      <td>0.000420</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>7.130368e+08</td>
+      <td>41.000000</td>
+      <td>1.000000</td>
+      <td>31.000000</td>
+      <td>3.000000</td>
+      <td>2.000000</td>
+      <td>2.000000</td>
+      <td>2555.000000</td>
+      <td>359.000000</td>
+      <td>1324.500000</td>
+      <td>0.631000</td>
+      <td>2155.500000</td>
+      <td>45.000000</td>
+      <td>0.582000</td>
+      <td>0.023000</td>
+      <td>0.000099</td>
+      <td>0.999660</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>7.179264e+08</td>
+      <td>46.000000</td>
+      <td>2.000000</td>
+      <td>36.000000</td>
+      <td>4.000000</td>
+      <td>2.000000</td>
+      <td>2.000000</td>
+      <td>4549.000000</td>
+      <td>1276.000000</td>
+      <td>3474.000000</td>
+      <td>0.736000</td>
+      <td>3899.000000</td>
+      <td>67.000000</td>
+      <td>0.702000</td>
+      <td>0.176000</td>
+      <td>0.000181</td>
+      <td>0.999820</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>7.731435e+08</td>
+      <td>52.000000</td>
+      <td>3.000000</td>
+      <td>40.000000</td>
+      <td>5.000000</td>
+      <td>3.000000</td>
+      <td>3.000000</td>
+      <td>11067.500000</td>
+      <td>1784.000000</td>
+      <td>9859.000000</td>
+      <td>0.859000</td>
+      <td>4741.000000</td>
+      <td>81.000000</td>
+      <td>0.818000</td>
+      <td>0.503000</td>
+      <td>0.000337</td>
+      <td>0.999900</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>8.283431e+08</td>
+      <td>73.000000</td>
+      <td>5.000000</td>
+      <td>56.000000</td>
+      <td>6.000000</td>
+      <td>6.000000</td>
+      <td>6.000000</td>
+      <td>34516.000000</td>
+      <td>2517.000000</td>
+      <td>34516.000000</td>
+      <td>3.397000</td>
+      <td>18484.000000</td>
+      <td>139.000000</td>
+      <td>3.714000</td>
+      <td>0.999000</td>
+      <td>0.999580</td>
+      <td>0.999990</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-7a42f3e5-0b50-42a4-95b2-3235997025a4')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-7a42f3e5-0b50-42a4-95b2-3235997025a4 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-7a42f3e5-0b50-42a4-95b2-3235997025a4');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-172b4af5-ad1c-45c1-8ece-e587302d124f">
+  <button class="colab-df-quickchart" onclick="quickchart('df-172b4af5-ad1c-45c1-8ece-e587302d124f')"
+            title="Suggest charts"
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-172b4af5-ad1c-45c1-8ece-e587302d124f button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Credit_Limit&#39;</span><span class="p">]</span><span class="o">-</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Total_Revolving_Bal&#39;</span><span class="p">]</span><span class="o">-</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Avg_Open_To_Buy&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-2.301352990316114e-16
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Naive_Bayes_Classifier_Attrition_Flag_Card_Category_Contacts_Count_12_mon_Dependent_count_Education_Level_Months_Inactive_12_mon_1&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0        0.000093
+1        0.000057
+2        0.000021
+3        0.000134
+4        0.000022
+           ...   
+10122    0.000191
+10123    0.995270
+10124    0.997880
+10125    0.996710
+10126    0.996620
+Name: Naive_Bayes_Classifier_Attrition_Flag_Card_Category_Contacts_Count_12_mon_Dependent_count_Education_Level_Months_Inactive_12_mon_1, Length: 10127, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>pd.get_dummies?
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data_dummy</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;CLIENTNUM&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">data_dummy</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 10127 entries, 0 to 10126
+Data columns (total 41 columns):
+ #   Column                                                                                                                              Non-Null Count  Dtype  
+---  ------                                                                                                                              --------------  -----  
+ 0   Customer_Age                                                                                                                        10127 non-null  int64  
+ 1   Dependent_count                                                                                                                     10127 non-null  int64  
+ 2   Months_on_book                                                                                                                      10127 non-null  int64  
+ 3   Total_Relationship_Count                                                                                                            10127 non-null  int64  
+ 4   Months_Inactive_12_mon                                                                                                              10127 non-null  int64  
+ 5   Contacts_Count_12_mon                                                                                                               10127 non-null  int64  
+ 6   Credit_Limit                                                                                                                        10127 non-null  float64
+ 7   Total_Revolving_Bal                                                                                                                 10127 non-null  int64  
+ 8   Avg_Open_To_Buy                                                                                                                     10127 non-null  float64
+ 9   Total_Amt_Chng_Q4_Q1                                                                                                                10127 non-null  float64
+ 10  Total_Trans_Amt                                                                                                                     10127 non-null  int64  
+ 11  Total_Trans_Ct                                                                                                                      10127 non-null  int64  
+ 12  Total_Ct_Chng_Q4_Q1                                                                                                                 10127 non-null  float64
+ 13  Avg_Utilization_Ratio                                                                                                               10127 non-null  float64
+ 14  Naive_Bayes_Classifier_Attrition_Flag_Card_Category_Contacts_Count_12_mon_Dependent_count_Education_Level_Months_Inactive_12_mon_1  10127 non-null  float64
+ 15  Naive_Bayes_Classifier_Attrition_Flag_Card_Category_Contacts_Count_12_mon_Dependent_count_Education_Level_Months_Inactive_12_mon_2  10127 non-null  float64
+ 16  Attrition_Flag_Attrited Customer                                                                                                    10127 non-null  uint8  
+ 17  Attrition_Flag_Existing Customer                                                                                                    10127 non-null  uint8  
+ 18  Gender_F                                                                                                                            10127 non-null  uint8  
+ 19  Gender_M                                                                                                                            10127 non-null  uint8  
+ 20  Education_Level_College                                                                                                             10127 non-null  uint8  
+ 21  Education_Level_Doctorate                                                                                                           10127 non-null  uint8  
+ 22  Education_Level_Graduate                                                                                                            10127 non-null  uint8  
+ 23  Education_Level_High School                                                                                                         10127 non-null  uint8  
+ 24  Education_Level_Post-Graduate                                                                                                       10127 non-null  uint8  
+ 25  Education_Level_Uneducated                                                                                                          10127 non-null  uint8  
+ 26  Education_Level_Unknown                                                                                                             10127 non-null  uint8  
+ 27  Marital_Status_Divorced                                                                                                             10127 non-null  uint8  
+ 28  Marital_Status_Married                                                                                                              10127 non-null  uint8  
+ 29  Marital_Status_Single                                                                                                               10127 non-null  uint8  
+ 30  Marital_Status_Unknown                                                                                                              10127 non-null  uint8  
+ 31  Income_Category_$120K +                                                                                                             10127 non-null  uint8  
+ 32  Income_Category_$40K - $60K                                                                                                         10127 non-null  uint8  
+ 33  Income_Category_$60K - $80K                                                                                                         10127 non-null  uint8  
+ 34  Income_Category_$80K - $120K                                                                                                        10127 non-null  uint8  
+ 35  Income_Category_Less than $40K                                                                                                      10127 non-null  uint8  
+ 36  Income_Category_Unknown                                                                                                             10127 non-null  uint8  
+ 37  Card_Category_Blue                                                                                                                  10127 non-null  uint8  
+ 38  Card_Category_Gold                                                                                                                  10127 non-null  uint8  
+ 39  Card_Category_Platinum                                                                                                              10127 non-null  uint8  
+ 40  Card_Category_Silver                                                                                                                10127 non-null  uint8  
+dtypes: float64(7), int64(9), uint8(25)
+memory usage: 1.5 MB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">zscore</span>
+<span class="n">data_zscore</span> <span class="o">=</span> <span class="n">data_dummy</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">zscore</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+<span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">data_zscore</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
+<span class="n">pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data_zscore</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>#sk-container-id-3 {color: black;background-color: white;}#sk-container-id-3 pre{padding: 0;}#sk-container-id-3 div.sk-toggleable {background-color: white;}#sk-container-id-3 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-3 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-3 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-3 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-3 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-3 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-3 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-3 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-3 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-3 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-3 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-3 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-3 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-3 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-3 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-3 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-3 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-3 div.sk-item {position: relative;z-index: 1;}#sk-container-id-3 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-3 div.sk-item::before, #sk-container-id-3 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-3 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-3 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-3 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-3 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-3 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-3 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-3 div.sk-label-container {text-align: center;}#sk-container-id-3 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-3 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-3" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>PCA(n_components=41)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox" checked><label for="sk-estimator-id-3" class="sk-toggleable__label sk-toggleable__label-arrow">PCA</label><div class="sk-toggleable__content"><pre>PCA(n_components=41)</pre></div></div></div></div></div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="o">.</span><span class="n">cumsum</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;BarContainer object of 41 artists&gt;
+</pre></div>
+</div>
+<img alt="../_images/eaf965d42e224108829dc228aeaece77eef2407d6fe5965988fff6b25328e7f5.png" src="../_images/eaf965d42e224108829dc228aeaece77eef2407d6fe5965988fff6b25328e7f5.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()[:</span><span class="mi">26</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.11312079, 0.21997251, 0.28144686, 0.32720753, 0.36974346,
+       0.40898309, 0.44471475, 0.47816118, 0.50986822, 0.54072053,
+       0.57100135, 0.60088622, 0.63004372, 0.65885286, 0.68686768,
+       0.71430269, 0.74116512, 0.76729213, 0.79338479, 0.81866618,
+       0.84319517, 0.86735701, 0.89114888, 0.91451478, 0.93633617,
+       0.95316929])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+<span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">26</span><span class="p">)</span>
+<span class="n">pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data_dummy</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>#sk-container-id-4 {color: black;background-color: white;}#sk-container-id-4 pre{padding: 0;}#sk-container-id-4 div.sk-toggleable {background-color: white;}#sk-container-id-4 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-4 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-4 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-4 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-4 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-4 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-4 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-4 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-4 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-4 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-4 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-4 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-4 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-4 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-4 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-4 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-4 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-4 div.sk-item {position: relative;z-index: 1;}#sk-container-id-4 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-4 div.sk-item::before, #sk-container-id-4 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-4 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-4 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-4 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-4 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-4 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-4 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-4 div.sk-label-container {text-align: center;}#sk-container-id-4 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-4 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-4" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>PCA(n_components=26)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-4" type="checkbox" checked><label for="sk-estimator-id-4" class="sk-toggleable__label sk-toggleable__label-arrow">PCA</label><div class="sk-toggleable__content"><pre>PCA(n_components=26)</pre></div></div></div></div></div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+
+
+<span class="c1"># Access the loadings (coefficients)</span>
+<span class="n">loadings</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">components_</span>
+
+<span class="c1"># Create a load plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="c1"># Plot loadings for the first two principal components</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">loadings</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:],</span> <span class="n">loadings</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+
+<span class="c1"># Annotate each point with the variable names</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">var_name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data_dummy</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">var_name</span><span class="p">,</span> <span class="p">(</span><span class="n">loadings</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">],</span> <span class="n">loadings</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">]),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">loadings</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="p">]],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">loadings</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="p">]])</span>
+
+<span class="c1"># Add labels and title</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;PC1 Loadings&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;PC2 Loadings&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add grid lines for reference</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mf">0.0001</span><span class="p">,</span><span class="mf">0.0001</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">.0001</span><span class="p">,</span><span class="mf">0.0001</span><span class="p">])</span>
+
+<span class="c1"># Show the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/232d433d69dd2e5779a5cb5e5dba8a8bbc73dc939a7c8d212cf6e2d674addfc4.png" src="../_images/232d433d69dd2e5779a5cb5e5dba8a8bbc73dc939a7c8d212cf6e2d674addfc4.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pca</span><span class="o">.</span><span class="n">components_</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(26, 41)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">components_</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([9.99993545e-01, 9.99740965e-01, 9.99998913e-01, 9.99981485e-01,
+       9.99974722e-01, 9.99956301e-01, 6.66666663e-01, 6.66666647e-01,
+       6.66666661e-01, 4.29991733e-01, 1.00000000e+00, 9.99997964e-01,
+       5.70373603e-01, 5.78687704e-03, 2.48252519e-01, 2.48252499e-01,
+       2.51116420e-01, 2.51116420e-01, 4.26396692e-01, 4.26396692e-01,
+       8.50522478e-01, 1.57275516e-01, 8.54567672e-01, 8.53967328e-01,
+       5.80429541e-01, 8.53252054e-01, 8.53211438e-01, 7.49664854e-01,
+       7.49707610e-01, 7.49912893e-01, 7.49524847e-01, 5.77111826e-01,
+       7.94546184e-01, 7.68449125e-01, 7.39451863e-01, 6.71699415e-01,
+       6.11054613e-01, 5.14279837e-01, 1.92140278e-03, 6.08712409e-05,
+       4.62061313e-01])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">26</span><span class="p">)</span>
+<span class="n">pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data_dummy</span><span class="p">)</span>
+<span class="n">columns_scores</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;column&#39;</span><span class="p">:</span> <span class="n">data_dummy</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>
+    <span class="s1">&#39;score&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">components_</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="p">})</span>
+<span class="n">columns_scores</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;score&#39;</span><span class="p">,</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;column&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;column&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/7226165382ab724ec2bc7a9dd351b1451d6e093d7a438713416b27ff520d69fa.png" src="../_images/7226165382ab724ec2bc7a9dd351b1451d6e093d7a438713416b27ff520d69fa.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data_pca</span><span class="o">=</span><span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">data_dummy</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
+
+<span class="c1"># Range of k values to test</span>
+<span class="n">k_values</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+<span class="n">costs</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Compute K-means cost for each k</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">k_values</span><span class="p">:</span>
+    <span class="n">kmeans_model</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+    <span class="n">kmeans_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data_pca</span><span class="p">)</span>
+
+    <span class="n">cost</span> <span class="o">=</span> <span class="n">kmeans_model</span><span class="o">.</span><span class="n">inertia_</span>
+    <span class="n">costs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cost</span><span class="p">)</span>
+
+<span class="c1"># Find the optimal number of clusters using the elbow method</span>
+<span class="n">optimal_k</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">optimal_cost</span> <span class="o">=</span> <span class="n">costs</span><span class="p">[</span><span class="n">optimal_k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Create subplots</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="c1"># Plot the data on the left</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data_pca</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">data_pca</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Data points&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Feature 1&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Feature 2&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot the elbow curve on the right</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_values</span><span class="p">,</span> <span class="n">costs</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Elbow Method for Optimal k&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Number of Clusters (k)&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Cost&#39;</span><span class="p">)</span>
+
+<span class="c1"># Highlight the optimal number of clusters</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">optimal_k</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Optimal k = </span><span class="si">{</span><span class="n">optimal_k</span><span class="si">}</span><span class="se">\n</span><span class="s1">Cost = </span><span class="si">{</span><span class="n">optimal_cost</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/python3.10/dist-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to &#39;auto&#39; in 1.4. Set the value of `n_init` explicitly to suppress the warning
+  warnings.warn(
+/usr/local/lib/python3.10/dist-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to &#39;auto&#39; in 1.4. Set the value of `n_init` explicitly to suppress the warning
+  warnings.warn(
+/usr/local/lib/python3.10/dist-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to &#39;auto&#39; in 1.4. Set the value of `n_init` explicitly to suppress the warning
+  warnings.warn(
+/usr/local/lib/python3.10/dist-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to &#39;auto&#39; in 1.4. Set the value of `n_init` explicitly to suppress the warning
+  warnings.warn(
+/usr/local/lib/python3.10/dist-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to &#39;auto&#39; in 1.4. Set the value of `n_init` explicitly to suppress the warning
+  warnings.warn(
+/usr/local/lib/python3.10/dist-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to &#39;auto&#39; in 1.4. Set the value of `n_init` explicitly to suppress the warning
+  warnings.warn(
+/usr/local/lib/python3.10/dist-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to &#39;auto&#39; in 1.4. Set the value of `n_init` explicitly to suppress the warning
+  warnings.warn(
+/usr/local/lib/python3.10/dist-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to &#39;auto&#39; in 1.4. Set the value of `n_init` explicitly to suppress the warning
+  warnings.warn(
+/usr/local/lib/python3.10/dist-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to &#39;auto&#39; in 1.4. Set the value of `n_init` explicitly to suppress the warning
+  warnings.warn(
+/usr/local/lib/python3.10/dist-packages/sklearn/cluster/_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to &#39;auto&#39; in 1.4. Set the value of `n_init` explicitly to suppress the warning
+  warnings.warn(
+</pre></div>
+</div>
+<img alt="../_images/e0e2a1deabf3faa797404a8e41191813248784f96558748ce5b360438645f41f.png" src="../_images/e0e2a1deabf3faa797404a8e41191813248784f96558748ce5b360438645f41f.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.cm</span> <span class="k">as</span> <span class="nn">cm</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">silhouette_samples</span><span class="p">,</span> <span class="n">silhouette_score</span>
+
+<span class="n">range_n_clusters</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+
+<span class="n">silhouettes</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">n_clusters</span> <span class="ow">in</span> <span class="n">range_n_clusters</span><span class="p">:</span>
+    <span class="c1"># Create a subplot with 1 row and 2 columns</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+
+    <span class="c1"># The 1st subplot is the silhouette plot</span>
+    <span class="c1"># The silhouette coefficient can range from -1, 1 but in this example all</span>
+    <span class="c1"># lie within [-0.1, 1]</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="c1"># The (n_clusters+1)*10 is for inserting blank space between silhouette</span>
+    <span class="c1"># plots of individual clusters, to demarcate them clearly.</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_pca</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">n_clusters</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span><span class="p">])</span>
+
+    <span class="c1"># Initialize the clusterer with n_clusters value and a random generator</span>
+    <span class="c1"># seed of 10 for reproducibility.</span>
+    <span class="n">clusterer</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">n_clusters</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">cluster_labels</span> <span class="o">=</span> <span class="n">clusterer</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">data_pca</span><span class="p">)</span>
+
+    <span class="c1"># The silhouette_score gives the average value for all the samples.</span>
+    <span class="c1"># This gives a perspective into the density and separation of the formed</span>
+    <span class="c1"># clusters</span>
+    <span class="n">silhouette_avg</span> <span class="o">=</span> <span class="n">silhouette_score</span><span class="p">(</span><span class="n">data_pca</span><span class="p">,</span> <span class="n">cluster_labels</span><span class="p">)</span>
+    <span class="c1"># print(</span>
+    <span class="c1">#     &quot;For n_clusters =&quot;,</span>
+    <span class="c1">#     n_clusters,</span>
+    <span class="c1">#     &quot;The average silhouette_score is :&quot;,</span>
+    <span class="c1">#     silhouette_avg,</span>
+    <span class="c1"># )</span>
+
+    <span class="n">silhouettes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">silhouette_avg</span><span class="p">)</span>
+
+    <span class="c1"># Compute the silhouette scores for each sample</span>
+    <span class="n">sample_silhouette_values</span> <span class="o">=</span> <span class="n">silhouette_samples</span><span class="p">(</span><span class="n">data_pca</span><span class="p">,</span> <span class="n">cluster_labels</span><span class="p">)</span>
+
+    <span class="n">y_lower</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">):</span>
+        <span class="c1"># Aggregate the silhouette scores for samples belonging to</span>
+        <span class="c1"># cluster i, and sort them</span>
+        <span class="n">ith_cluster_silhouette_values</span> <span class="o">=</span> <span class="n">sample_silhouette_values</span><span class="p">[</span><span class="n">cluster_labels</span> <span class="o">==</span> <span class="n">i</span><span class="p">]</span>
+
+        <span class="n">ith_cluster_silhouette_values</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+        <span class="n">size_cluster_i</span> <span class="o">=</span> <span class="n">ith_cluster_silhouette_values</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">y_upper</span> <span class="o">=</span> <span class="n">y_lower</span> <span class="o">+</span> <span class="n">size_cluster_i</span>
+
+        <span class="n">color</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">nipy_spectral</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">/</span> <span class="n">n_clusters</span><span class="p">)</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">fill_betweenx</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">y_lower</span><span class="p">,</span> <span class="n">y_upper</span><span class="p">),</span>
+            <span class="mi">0</span><span class="p">,</span>
+            <span class="n">ith_cluster_silhouette_values</span><span class="p">,</span>
+            <span class="n">facecolor</span><span class="o">=</span><span class="n">color</span><span class="p">,</span>
+            <span class="n">edgecolor</span><span class="o">=</span><span class="n">color</span><span class="p">,</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Label the silhouette plots with their cluster numbers at the middle</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">y_lower</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">size_cluster_i</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+
+        <span class="c1"># Compute the new y_lower for next plot</span>
+        <span class="n">y_lower</span> <span class="o">=</span> <span class="n">y_upper</span> <span class="o">+</span> <span class="mi">10</span>  <span class="c1"># 10 for the 0 samples</span>
+
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;The silhouette plot for the various clusters.&quot;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;The silhouette coefficient values&quot;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Cluster label&quot;</span><span class="p">)</span>
+
+    <span class="c1"># The vertical line for average silhouette score of all the values</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">silhouette_avg</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>  <span class="c1"># Clear the yaxis labels / ticks</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+    <span class="c1"># 2nd Plot showing the actual clusters formed</span>
+    <span class="n">colors</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">nipy_spectral</span><span class="p">(</span><span class="n">cluster_labels</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span> <span class="o">/</span> <span class="n">n_clusters</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+        <span class="n">data_pca</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">data_pca</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;k&quot;</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Labeling the clusters</span>
+    <span class="n">centers</span> <span class="o">=</span> <span class="n">clusterer</span><span class="o">.</span><span class="n">cluster_centers_</span>
+    <span class="c1"># Draw white circles at cluster centers</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+        <span class="n">centers</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span>
+        <span class="n">centers</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span>
+        <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span>
+        <span class="n">c</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+        <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">centers</span><span class="p">):</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;$</span><span class="si">%d</span><span class="s2">$&quot;</span> <span class="o">%</span> <span class="n">i</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">)</span>
+
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;The visualization of the clustered data.&quot;</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Feature space for the 1st feature&quot;</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Feature space for the 2nd feature&quot;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span>
+        <span class="s2">&quot;Silhouette analysis for KMeans clustering on sample data with n_clusters = </span><span class="si">%d</span><span class="s2">&quot;</span>
+        <span class="o">%</span> <span class="n">n_clusters</span><span class="p">,</span>
+        <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span>
+        <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/3c294a692181a467aa715a66bc52af545f99fe9e59039c21960674395d8918bb.png" src="../_images/3c294a692181a467aa715a66bc52af545f99fe9e59039c21960674395d8918bb.png" />
+<img alt="../_images/09e172b1b6f00f41ac4e0df2e2c50f3df6ad0ab8849ccfab81fec275194a72c6.png" src="../_images/09e172b1b6f00f41ac4e0df2e2c50f3df6ad0ab8849ccfab81fec275194a72c6.png" />
+<img alt="../_images/e618f475cb696616ae98425eb335cf872f303411ec534e9962ea50174bd8d430.png" src="../_images/e618f475cb696616ae98425eb335cf872f303411ec534e9962ea50174bd8d430.png" />
+<img alt="../_images/2bc4ca55b254bdd29e6469b4d44e842132e453198f8fad043f50c9867f3cadf8.png" src="../_images/2bc4ca55b254bdd29e6469b4d44e842132e453198f8fad043f50c9867f3cadf8.png" />
+<img alt="../_images/284e7f6c7dc6a7189ee9fabfa1f6e83e8b2c770f5d95e49470565eadcf1de4a3.png" src="../_images/284e7f6c7dc6a7189ee9fabfa1f6e83e8b2c770f5d95e49470565eadcf1de4a3.png" />
+<img alt="../_images/14fb573463680df8787208288155fa75350d525aaf19f58a3d5c3f520529f669.png" src="../_images/14fb573463680df8787208288155fa75350d525aaf19f58a3d5c3f520529f669.png" />
+<img alt="../_images/1598128338f2bd7ff13cb828115ad540e359473dffca8d4c984ab9bf4ff6871b.png" src="../_images/1598128338f2bd7ff13cb828115ad540e359473dffca8d4c984ab9bf4ff6871b.png" />
+<img alt="../_images/06c0f3ec34f0c99aed33f848b0a5253d96cf267ddae59672b09a3321e6956bd0.png" src="../_images/06c0f3ec34f0c99aed33f848b0a5253d96cf267ddae59672b09a3321e6956bd0.png" />
+<img alt="../_images/aa2398f65d1ee28f2a2964a41d4a53923bb89d3e398752ab189e6bb9a4b3db65.png" src="../_images/aa2398f65d1ee28f2a2964a41d4a53923bb89d3e398752ab189e6bb9a4b3db65.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.mixture</span> <span class="kn">import</span> <span class="n">GaussianMixture</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">gmm</span> <span class="o">=</span> <span class="n">GaussianMixture</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">gmm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data_pca</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>#sk-container-id-5 {color: black;background-color: white;}#sk-container-id-5 pre{padding: 0;}#sk-container-id-5 div.sk-toggleable {background-color: white;}#sk-container-id-5 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-5 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-5 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-5 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-5 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-5 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-5 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-5 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-5 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-5 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-5 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-5 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-5 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-5 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-5 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-5 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-5 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-5 div.sk-item {position: relative;z-index: 1;}#sk-container-id-5 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-5 div.sk-item::before, #sk-container-id-5 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-5 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-5 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-5 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-5 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-5 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-5 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-5 div.sk-label-container {text-align: center;}#sk-container-id-5 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-5 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-5" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>GaussianMixture(n_components=4)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-5" type="checkbox" checked><label for="sk-estimator-id-5" class="sk-toggleable__label sk-toggleable__label-arrow">GaussianMixture</label><div class="sk-toggleable__content"><pre>GaussianMixture(n_components=4)</pre></div></div></div></div></div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">gmm</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">data_pca</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.00000000e+00, 1.06913546e-11, 0.00000000e+00, 1.00000000e+00],
+       [1.00000000e+00, 0.00000000e+00, 4.30784851e-13, 0.00000000e+00],
+       [0.00000000e+00, 5.67766538e-22, 0.00000000e+00, 1.00000000e+00],
+       ...,
+       [9.99999998e-01, 0.00000000e+00, 2.18267972e-09, 0.00000000e+00],
+       [9.76923126e-01, 0.00000000e+00, 2.30768739e-02, 0.00000000e+00],
+       [1.00000000e+00, 0.00000000e+00, 0.00000000e+00, 0.00000000e+00]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">gmm</span><span class="o">.</span><span class="n">score_samples</span><span class="p">(</span><span class="n">data_pca</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([8.54370731e-17, 1.94294065e-38, 2.76396264e-31, ...,
+       1.25794089e-20, 1.99084993e-23, 1.40644272e-22])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.mixture</span> <span class="kn">import</span> <span class="n">GaussianMixture</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span>
+
+<span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data_zscore</span><span class="p">)</span>
+<span class="n">data_pca</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">data_zscore</span><span class="p">)</span>
+
+<span class="c1"># Fit a Gaussian Mixture Model with 3 components</span>
+<span class="n">gmm</span> <span class="o">=</span> <span class="n">GaussianMixture</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">gmm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data_pca</span><span class="p">)</span>
+
+<span class="c1"># Create a meshgrid for plotting</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">data_pca</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">data_pca</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">100</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">data_pca</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">data_pca</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">100</span><span class="p">))</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">y</span><span class="o">.</span><span class="n">ravel</span><span class="p">()]</span>
+
+<span class="c1"># Compute PDF values for each component</span>
+<span class="c1">#pdf_values = [weight * multivariate_normal(mean, cov).pdf(grid)</span>
+<span class="c1">#              for mean, cov, weight in zip(gmm.means_, gmm.covariances_, gmm.weights_)]</span>
+
+<span class="c1">#pdf1, pdf2, pdf3 = pdf_values</span>
+
+<span class="c1"># Reshape PDF values for contour plotting</span>
+<span class="c1">#pdf_values = np.sum(pdf_values, axis=0).reshape(x.shape)</span>
+
+<span class="c1"># Plot the GMM components and contours</span>
+<span class="c1">#plt.figure(figsize=(10, 8))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data_pca</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">data_pca</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data Points&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="c1">#plt.scatter(gmm.means_[:, 0], gmm.means_[:, 1], color=&#39;red&#39;, marker=&#39;x&#39;, label=&#39;Gaussian Means&#39;)</span>
+
+<span class="c1">#plt.contour(x, y, np.array(pdf1).reshape(x.shape), levels=5, colors=&#39;blue&#39;, alpha=0.5)</span>
+<span class="c1">#plt.contour(x, y, np.array(pdf2).reshape(x.shape), levels=5, colors=&#39;orange&#39;, alpha=0.5)</span>
+<span class="c1">#plt.contour(x, y, np.array(pdf3).reshape(x.shape), levels=5, colors=&#39;green&#39;, alpha=0.5)</span>
+
+<span class="n">pdf_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">gmm</span><span class="o">.</span><span class="n">score_samples</span><span class="p">(</span><span class="n">grid</span><span class="p">))</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="c1"># Plot contours for the GMM</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">pdf_values</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;GMM in 2D with Three Components&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;X-axis&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Y-axis&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/d3379ef415114ded8f6a0c5cc4f81fd81df51ae42283b851131f0fe6d613206d.png" src="../_images/d3379ef415114ded8f6a0c5cc4f81fd81df51ae42283b851131f0fe6d613206d.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pdf_values</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(10000,)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./laboratories"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="14_clustering_density_estimation_pca.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">30. </span>Clustering, Density Estimation, and Principal Component Analysis</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Antonino Furnari
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
