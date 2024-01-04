@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>31. Dataset &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+    <title>32. Customer Segmentation Analysis Example &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
   
   
   
@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="30. Clustering, Density Estimation, and Principal Component Analysis" href="14_clustering_density_estimation_pca.html" />
+    <link rel="prev" title="31. Clustering, Density Estimation, and Principal Component Analysis" href="14_clustering_density_estimation_pca.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -186,24 +186,25 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../lectures/15_clustering.html">14. Clustering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lectures/16_density_estimation.html">15. Density Estimation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lectures/17_principal_component_analysis.html">16. Principal Component Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/18_predictive_modeling.html">17. Introduction to Predictive Modelling</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratories</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_setup.html">17. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_intro_python.html">18. Introduzione a Python</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_intro_numpy.html">19. Introduzione a Numpy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_intro_matplotlib.html">20. Introduzione a Matplotlib</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_intro_pandas.html">21. Introduzione a Pandas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">22. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="07_misure_di_tendenza_centrale_dispersione_e_forma.html">23. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
-<li class="toctree-l1"><a class="reference internal" href="08_associazione_variabili.html">24. Associazione tra Variabili</a></li>
-<li class="toctree-l1"><a class="reference internal" href="09_heart-disease-analysis.html">25. Exploratory Analysis on the Heart Disease Dataset</a></li>
-<li class="toctree-l1"><a class="reference internal" href="10_statistical_inference.html">26. Laboratory on Statistical Inference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="11_regressione_lineare.html">27. Laboratorio su Regressione Lineare</a></li>
-<li class="toctree-l1"><a class="reference internal" href="12_regressione_logistica.html">28. Laboratorio su regressione logistica</a></li>
-<li class="toctree-l1"><a class="reference internal" href="13_linear_logistic_regression_example_analysis.html">29. Linear and Logistic Regression Laboratory</a></li>
-<li class="toctree-l1"><a class="reference internal" href="14_clustering_density_estimation_pca.html">30. Clustering, Density Estimation, and Principal Component Analysis</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">31. Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_setup.html">18. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_intro_python.html">19. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_intro_numpy.html">20. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_intro_matplotlib.html">21. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_intro_pandas.html">22. Introduzione a Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">23. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_misure_di_tendenza_centrale_dispersione_e_forma.html">24. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_associazione_variabili.html">25. Associazione tra Variabili</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_heart-disease-analysis.html">26. Exploratory Analysis on the Heart Disease Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_statistical_inference.html">27. Laboratory on Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_regressione_lineare.html">28. Laboratorio su Regressione Lineare</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_regressione_logistica.html">29. Laboratorio su regressione logistica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_linear_logistic_regression_example_analysis.html">30. Linear and Logistic Regression Laboratory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_clustering_density_estimation_pca.html">31. Clustering, Density Estimation, and Principal Component Analysis</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">32. Customer Segmentation Analysis Example</a></li>
 </ul>
 
     </div>
@@ -418,7 +419,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Dataset</h1>
+    <h1>Customer Segmentation Analysis Example</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -432,8 +433,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="dataset">
-<h1><span class="section-number">31. </span>Dataset<a class="headerlink" href="#dataset" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="customer-segmentation-analysis-example">
+<h1><span class="section-number">32. </span>Customer Segmentation Analysis Example<a class="headerlink" href="#customer-segmentation-analysis-example" title="Permalink to this heading">#</a></h1>
 <ul class="simple">
 <li><p>Credit card customer segmentation: <a class="reference external" href="https://www.kaggle.com/datasets/thedevastator/predicting-credit-card-customer-attrition-with-m/data">https://www.kaggle.com/datasets/thedevastator/predicting-credit-card-customer-attrition-with-m/data</a></p></li>
 </ul>
@@ -1621,7 +1622,7 @@ memory usage: 1.5 MB
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">30. </span>Clustering, Density Estimation, and Principal Component Analysis</p>
+        <p class="prev-next-title"><span class="section-number">31. </span>Clustering, Density Estimation, and Principal Component Analysis</p>
       </div>
     </a>
 </div>
