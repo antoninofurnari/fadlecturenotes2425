@@ -26,6 +26,7 @@ parts:
   - file: lectures/15_clustering
   - file: lectures/16_density_estimation
   - file: lectures/17_principal_component_analysis
+  - file: lectures/18_predictive_modeling
 - caption: Laboratories
   numbered: True
   chapters:
