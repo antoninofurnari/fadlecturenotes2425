@@ -1,0 +1,997 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>18. Classification Task and Evaluation Measures &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures/19_classification';</script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="19. Discriminative Models for Classification" href="20_discriminative_models_for_classification.html" />
+    <link rel="prev" title="17. Introduction to Predictive Modelling and Regression Models" href="18_predictive_modeling.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Lecture Notes on Fundamentals of Data Analysis - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Lecture Notes on Fundamentals of Data Analysis - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Lecture Notes on Fundamental of Data Analysis
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_intro_data_analysis.html">1. Introduction to Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_main_data_analysis_concepts.html">2. Main data analysis concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_misure_di_frequenze_e_rappresentazione_grafica_dei_dati.html">3. Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_misure_di_tendenza_centrale_dispersione_e_forma.html">4. Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_associazione_variabili.html">5. Associazione tra Variabili</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_probability.html">6. Probability for Data Manipulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_common_distributions.html">7. Common Probability Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_information_theory.html">8. Basic Elements of Information Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_statistical_inference.html">9. Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_linear_regression.html">10. Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_logistic_regression.html">11. Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_causal_analysis.html">12. Causal Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_data_as_nd_points.html">13. Data as N-Dimensional Points</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_clustering.html">14. Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_density_estimation.html">15. Density Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_principal_component_analysis.html">16. Principal Component Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_predictive_modeling.html">17. Introduction to Predictive Modelling and Regression Models</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">18. Classification Task and Evaluation Measures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20_discriminative_models_for_classification.html">19. Discriminative Models for Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21_generative_models_for_classification.html">20. Generative Models for Classification</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratories</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/01_setup.html">21. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/02_intro_python.html">22. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/03_intro_numpy.html">23. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/04_intro_matplotlib.html">24. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/05_intro_pandas.html">25. Introduzione a Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">26. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/07_misure_di_tendenza_centrale_dispersione_e_forma.html">27. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/08_associazione_variabili.html">28. Associazione tra Variabili</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/09_heart-disease-analysis.html">29. Exploratory Analysis on the Heart Disease Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/10_statistical_inference.html">30. Laboratory on Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/11_regressione_lineare.html">31. Laboratorio su Regressione Lineare</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/12_regressione_logistica.html">32. Laboratorio su regressione logistica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/13_linear_logistic_regression_example_analysis.html">33. Linear and Logistic Regression Laboratory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/14_clustering_density_estimation_pca.html">34. Clustering, Density Estimation, and Principal Component Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/15_customer_segmentation_analysis.html">35. Customer Segmentation Analysis Example</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/antoninofurnari/fadlecturenotes/blob/master/lecturenotes/lectures/19_classification.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/antoninofurnari/fadlecturenotes" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/antoninofurnari/fadlecturenotes/issues/new?title=Issue%20on%20page%20%2Flectures/19_classification.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/lectures/19_classification.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Classification Task and Evaluation Measures</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-definition">18.1. Task Definition</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">18.1.1. Examples</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eavaluation-measures">18.2. Eavaluation Measures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy">18.2.1. Accuracy</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-imbalanced-dataset">18.2.1.1. Example – Imbalanced Dataset</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-types">18.2.2. Error Types</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">18.2.3. Confusion Matrix</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-spam-detector">18.2.3.1. Example 1 – Spam Detector</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-imbalanced-dataset">18.2.3.2. Example 2 – Imbalanced Dataset</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#precision-and-recall">18.2.4. Precision and Recall</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#high-precision-vs-high-recall">18.2.4.1. High Precision vs High Recall</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-spam-detector">18.2.4.2. Example – Spam Detector</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-1-score">18.2.5. <span class="math notranslate nohighlight">\(F_{1}\)</span> Score</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">18.2.5.1. Example – Spam Detector</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix-for-multi-class-classification">18.2.6. Confusion Matrix for Multi-Class Classification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#roc-receiver-operating-characteristic-curve-and-area-under-the-curve-auc-measures">18.2.7. ROC (Receiver Operating Characteristic) Curve and Area Under the Curve (AUC) Measures</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">18.3. References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="classification-task-and-evaluation-measures">
+<h1><span class="section-number">18. </span>Classification Task and Evaluation Measures<a class="headerlink" href="#classification-task-and-evaluation-measures" title="Permalink to this heading">#</a></h1>
+<p>Classification models are another broad class of predictive models. Following the Machine Learning terminology, it is common to talk about classification or regression “tasks”. These are the two main classes of tasks belonging to the broader class of reinforcement learning.</p>
+<section id="task-definition">
+<h2><span class="section-number">18.1. </span>Task Definition<a class="headerlink" href="#task-definition" title="Permalink to this heading">#</a></h2>
+<p>Recall that a predictive model is a function defined as follows:</p>
+<div class="math notranslate nohighlight">
+\[h : \mathcal{X} \to \mathcal{Y}\]</div>
+<p>If in the case of regression <span class="math notranslate nohighlight">\(\mathcal{X}=\Re^n\)</span> and <span class="math notranslate nohighlight">\(\mathcal{Y}=\Re^m\)</span>, in the case of classification, the output targets are discrete values <strong>which are generally referred to as “classes”</strong>. Without loss of generality, if there are <span class="math notranslate nohighlight">\(M\)</span> classes, then we define <span class="math notranslate nohighlight">\(\mathcal{Y}=\{1,\ldots,M\}\)</span>. If the input are numerical vectors (it does not have to always be this way, but it’s a common formulation), a classification model can be defined as:</p>
+<div class="math notranslate nohighlight">
+\[h : \Re^n \to \{0,\ldots,M-1\}\]</div>
+<p>Also in this case, we will assume to have a set of data to train and evaluate our model</p>
+<div class="math notranslate nohighlight">
+\[\text{D}=\{(x_i,y_i)\}_{i=1}^N\]</div>
+<p>Note that in this case <span class="math notranslate nohighlight">\(x_i\in \Re^n\)</span> and <span class="math notranslate nohighlight">\(y_i \in \{0,\ldots,M-1\}\)</span>. Here, the values <span class="math notranslate nohighlight">\(y_i\)</span> are generally called “<strong>labels</strong>”, while the values <span class="math notranslate nohighlight">\(\hat h = h(x)\)</span> predicted using the classifier <span class="math notranslate nohighlight">\(h\)</span> are called <strong>predicted labels</strong>.</p>
+<p>We can find the optimal model <span class="math notranslate nohighlight">\(h\)</span> by minimizing the empirical risk. A possible loss function is the following one:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}L(\hat y, y) = \begin{cases}1 &amp;\text{ if }&amp; \hat y \neq y \\ 0 &amp;\text{ if }&amp; \hat y=y \end{cases}\end{split}\]</div>
+<p>Hence the empirical risk will be the fraction of correct predictions:</p>
+<div class="math notranslate nohighlight">
+\[R_{emp}(h) = \frac{1}{N} \sum_{i=1}^N L(\hat h_i, h_i) = \frac{\text{number of correct predictions}}{N}\]</div>
+<p>As we shall better see later, the expression above quantifying the fraction of correct predictions is also known as <strong>accuracy</strong> and it is commonly used to evaluate classifiers. It is a number comprised between <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(1\)</span> which can also be interpreted as a percentage.</p>
+<p>The classifier can be learned by minimizing the empirical risk:</p>
+<div class="math notranslate nohighlight">
+\[\hat h = \underset{h \in \mathcal{H}}{\mathrm{arg\ min}}\ R_{emp}(h)\]</div>
+<section id="examples">
+<h3><span class="section-number">18.1.1. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h3>
+<p>Classifiers support decision making any time that observations need to be categorized in one of a predefined set of classes. Examples of such problems are:</p>
+<ul class="simple">
+<li><p>Detecting spam emails (<strong>spam vs legitimate email classification</strong>).</p></li>
+<li><p>Classifying Facebook posts as being about politics or something else
+(<strong>politics vs non-politics classification</strong>).</p></li>
+<li><p>Recognizing the object depicted in an image out of 1000 different
+objects (<strong>object recognition</strong>).</p></li>
+</ul>
+<p>For example, we can define spam detection as follows:</p>
+<ul class="simple">
+<li><p><em>Task</em>: given an e-mail, classify it as spam or non-spam.</p></li>
+<li><p><em>Input example</em> <span class="math notranslate nohighlight">\(\mathbf{e}\)</span>: the text of the e-mail. This can be a
+sequence of characters of arbitrary length. We can use some <strong>representation function</strong> to map an email <span class="math notranslate nohighlight">\(\mathbf{e}\)</span> to a vector of real numbers <span class="math notranslate nohighlight">\(\mathbf{x} \in \Re^n\)</span>. We also assume that a training set pairing the vectors <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> with labels <span class="math notranslate nohighlight">\(y \in \{ 0,1\}\)</span> is available.</p></li>
+<li><p><em>Classifier</em>: a function <span class="math notranslate nohighlight">\(h:\Re^n \rightarrow \{ 0,1\}\)</span>.</p></li>
+<li><p><em>Output</em>: a predicted label  <span class="math notranslate nohighlight">\(\widehat{y} \in \{ 0,1\}\)</span> indicating
+if the e-mail is legitimate or spam. Here we have a <strong>binary
+classification task</strong>, hence <span class="math notranslate nohighlight">\(M = 2\)</span>.</p></li>
+</ul>
+</section>
+</section>
+<section id="eavaluation-measures">
+<h2><span class="section-number">18.2. </span>Eavaluation Measures<a class="headerlink" href="#eavaluation-measures" title="Permalink to this heading">#</a></h2>
+<p>When defining classification algorithms, it is important to measure
+their performance. Performance indicators can be used to <strong>guide
+training</strong> (e.g., modify the parameters in order to improve the
+performance of the algorithm on the training set), <strong>tune
+hyper-parameters</strong> (such as the “K” in K-NN) and to <strong>finally assess
+that the algorithm works on unseen data</strong> (the test set).</p>
+<p>To measure performance, we will first define the <strong>set of ground truth
+test labels</strong>:</p>
+<div class="math notranslate nohighlight">
+\[Y_{TE} = \left\{ y^{(i)}|\left( \mathbf{x}^{(i)},y^{(i)} \right) \in TE \right\}_{i}\]</div>
+<p>We will also define the set of <strong>predicted test labels</strong> as follows:</p>
+<div class="math notranslate nohighlight">
+\[{\widehat{Y}}_{TE} = \left\{ h\left( \mathbf{x}^{(i)} \right)|\left( \mathbf{x}^{(i)},y^{(i)} \right) \in TE \right\}_{i}\]</div>
+<p>Ideally, we would like the predicted labels to match the ground truth
+labels, i.e.,  <span class="math notranslate nohighlight">\({\widehat{Y}}_{TE} = Y_{TE}\)</span>. In practice, we will use a
+performance function which associates a real number to the pair
+<span class="math notranslate nohighlight">\((Y_{TE},{\widehat{Y}}_{TE})\)</span> of ground truth and predicted labels. If
+we define <span class="math notranslate nohighlight">\(\mathcal{Y}\)</span> <strong>as the pair of all possible</strong>
+<span class="math notranslate nohighlight">\(\mathbf{(}\mathbf{Y}_{\mathbf{TE}}\mathbf{,}{\widehat{\mathbf{Y}}}_{\mathbf{TE}}\mathbf{)}\)</span>
+<strong>matched pairs</strong>, with <span class="math notranslate nohighlight">\(\left| Y_{TE} \right| = |{\widehat{Y}}_{TE}|\)</span>,
+then our performance function can be defined as:</p>
+<div class="math notranslate nohighlight">
+\[P:\mathcal{Y}{\rightarrow} \Re\]</div>
+<section id="accuracy">
+<h3><span class="section-number">18.2.1. </span>Accuracy<a class="headerlink" href="#accuracy" title="Permalink to this heading">#</a></h3>
+<p>Accuracy is a very common performance measure. We define accuracy as
+<strong>the percentage of test examples for which our algorithm has predicted
+the correct label</strong>:</p>
+<div class="math notranslate nohighlight">
+\[Accuracy\left( Y_{TE},{\widehat{Y}}_{TE} \right) = \frac{\left| \left\{ i \middle| y^{(i)} = {\widehat{y}}^{(i)} \right\} \right|}{|Y_{TE}|}\]</div>
+<p>For instance, if the test set contains <span class="math notranslate nohighlight">\(100\)</span> examples and for <span class="math notranslate nohighlight">\(70\)</span> of
+them we have predicted the correct label, then we will have:</p>
+<div class="math notranslate nohighlight">
+\[Accuracy\left( Y_{TE},{\widehat{Y}}_{TE} \right) = \frac{70}{100} = 0.7\]</div>
+<p>Note that accuracy is always a number comprised between 0 and 1. We can
+see the accuracy as a percentage. For instance, in the example above we
+could say that we have an accuracy of <span class="math notranslate nohighlight">\(70\%\)</span>.</p>
+<section id="example-imbalanced-dataset">
+<h4><span class="section-number">18.2.1.1. </span>Example – Imbalanced Dataset<a class="headerlink" href="#example-imbalanced-dataset" title="Permalink to this heading">#</a></h4>
+<p>To see the limits of accuracy, let us consider a dataset containing
+<span class="math notranslate nohighlight">\(10000\)</span> elements of two classes distributed as follows:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(500\)</span> data points from class <span class="math notranslate nohighlight">\(0\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(9500\)</span> data points from class <span class="math notranslate nohighlight">\(1\)</span>.</p></li>
+</ul>
+<p>Let us now consider a naïve classifier which always predicts class 1:</p>
+<div class="math notranslate nohighlight">
+\[f\left( \mathbf{x} \right) = 1\]</div>
+<p>Intuitively, we see that this classifier is not a good one, as it
+discards its input and just predicts the most frequent class. However,
+it can be easily seen that its accuracy is <span class="math notranslate nohighlight">\(0.95\)</span>.</p>
+</section>
+</section>
+<section id="error-types">
+<h3><span class="section-number">18.2.2. </span>Error Types<a class="headerlink" href="#error-types" title="Permalink to this heading">#</a></h3>
+<p>The main limitation of the accuracy is that it counts the number of
+mistakes made by the algorithm, but it does not consider which types of
+mistakes it makes. In general, we can make two kinds of mistakes:</p>
+<ul class="simple">
+<li><p><strong>Type 1</strong>: we classify the example as belonging to the considered
+class, but it does not. These kinds of misclassifications are often
+called <strong>False Positives (FP)</strong>.</p></li>
+<li><p><strong>Type 2</strong>: we classify the sample as not belonging to the
+considered class, but it does belong to it. These kinds of
+misclassifications are often called <strong>False Negatives (FN)</strong>.</p></li>
+</ul>
+<p>We can also have two kinds of correct predictions:</p>
+<ul class="simple">
+<li><p><strong>True Positives (TP)</strong>: these are elements from the considered
+class which have been classified as actually belonging to that
+class.</p></li>
+<li><p><strong>True Negatives (TN)</strong>: these are elements which are not from the
+considered class and have been classified as actually not belonging
+to that class.</p></li>
+</ul>
+</section>
+<section id="confusion-matrix">
+<h3><span class="section-number">18.2.3. </span>Confusion Matrix<a class="headerlink" href="#confusion-matrix" title="Permalink to this heading">#</a></h3>
+<p>To have a more complete view of how our classifier is performing, we can
+put these numbers in a table which we will call a <strong>confusion matrix</strong>:</p>
+<p><img alt="" src="../_images/confusion.png" /></p>
+<p>In the matrix, the rows indicate the true labels, whereas the columns
+indicate the predicted labels. A good confusion matrix has large numbers
+in the main diagonal (TP and TN) and low numbers in the rest of the
+matrix (where the errors are).</p>
+<p>The accuracy can be recovered from the confusion matrix as follows:</p>
+<div class="math notranslate nohighlight">
+\[Accuracy = \frac{TP + TN}{TP + FN + FP + TN}\]</div>
+<p>which consists in <strong>summing the numbers on the diagonal and dividing by
+the sum of all numbers</strong>. We can see the computation of the accuracy
+from the confusion matrix graphically as follows:</p>
+<p><img alt="" src="../_images/confusion2.png" /></p>
+<section id="example-1-spam-detector">
+<h4><span class="section-number">18.2.3.1. </span>Example 1 – Spam Detector<a class="headerlink" href="#example-1-spam-detector" title="Permalink to this heading">#</a></h4>
+<p>Let us consider a spam detector which correctly detects <span class="math notranslate nohighlight">\(40\)</span> out of <span class="math notranslate nohighlight">\(50\)</span>
+spam emails, while it only recognizes <span class="math notranslate nohighlight">\(30\)</span> out of <span class="math notranslate nohighlight">\(50\)</span> legitimate
+emails. The confusion matrix associated to this classifier will be as
+follows:</p>
+<p><img alt="" src="../_images/spam.png" /></p>
+<p>Its accuracy will be:</p>
+<div class="math notranslate nohighlight">
+\[Accuracy = \frac{40 + 30}{40 + 10 + 20 + 30} = \frac{70}{100} = 0.7\]</div>
+</section>
+<section id="example-2-imbalanced-dataset">
+<h4><span class="section-number">18.2.3.2. </span>Example 2 – Imbalanced Dataset<a class="headerlink" href="#example-2-imbalanced-dataset" title="Permalink to this heading">#</a></h4>
+<p>Let us now consider the example of our imbalanced dataset with <span class="math notranslate nohighlight">\(9500\)</span>
+data points of class 1 and <span class="math notranslate nohighlight">\(500\)</span> data points of class 0. The confusion
+matrix of the naïve classifier <span class="math notranslate nohighlight">\(f\left( \mathbf{x} \right) = 1\)</span> will be:</p>
+<p><img alt="" src="../_images/imbalanced.png" /></p>
+<p>If we compute the accuracy of this classifier, we will obtain a good
+performance:</p>
+<div class="math notranslate nohighlight">
+\[Accuracy = \frac{9500}{9500 + 500} = 0.95\]</div>
+<p>However, looking at the confusion matrix, <strong>it is clear that something
+is wrong, and our classifier is not working well</strong>.</p>
+</section>
+</section>
+<section id="precision-and-recall">
+<h3><span class="section-number">18.2.4. </span>Precision and Recall<a class="headerlink" href="#precision-and-recall" title="Permalink to this heading">#</a></h3>
+<p>The confusion matrix allows to understand if there is an issue with the
+classifier in the case of imbalanced data. However, it is still
+convenient to have scalar measures which can tell us something about how
+the classifier is doing. In practice, it is common to define two
+complementary measures: precision and recall.</p>
+<p><strong>Precision</strong> measures <strong>how many of the examples which have been
+classified as positives were actually positives</strong> and is defined as
+follows:</p>
+<div class="math notranslate nohighlight">
+\[Precision = \frac{TP}{TP + FP}\]</div>
+<p><strong>Recall</strong> measures <strong>how many of the examples which are positives, have
+been correctly classified as positives</strong> and is defined as follows:</p>
+<div class="math notranslate nohighlight">
+\[Recall = \frac{TP}{TP + FN}\]</div>
+<p>We can see graphically the computation of precision and recall as
+follows:</p>
+<p><img alt="" src="../_images/precision_recall.png" /></p>
+<section id="high-precision-vs-high-recall">
+<h4><span class="section-number">18.2.4.1. </span>High Precision vs High Recall<a class="headerlink" href="#high-precision-vs-high-recall" title="Permalink to this heading">#</a></h4>
+<p>These values capture different properties of the classifier. Depending
+on the application, we may want to have a higher precision or a higher
+recall. For example:</p>
+<ul class="simple">
+<li><p>Consider a <strong>spam detector</strong>: we may want to have a very <strong>high
+precision</strong>, even at the cost of a <strong>low recall</strong>. Indeed, we want
+to make sure that if we classify an e-mail as spam (and hence we
+filter it out), it is actually spam (hence a high precision). This
+is acceptable even if sometimes we let a spam email get through the
+filter (hence a low recall).</p></li>
+<li><p>Consider a <strong>medical pre-screening</strong> test which is used to assess if
+a patient is likely to have a given pathology. The test is cheap
+(e.g., a blood test) and can be made on a large sample of patients.
+If the test is positive, we then perform a more expensive but
+accurate test. In this case, we want to have a <strong>high recall</strong>.
+Indeed, if a patient has the pathology, we want to detect it and
+send the patient for the second, more accurate test (hence a high
+precision). This is acceptable even if sometimes we have false
+positives (hence a low precision). Indeed, if we wrongly detect a
+pathology, the second test will give the correct result.</p></li>
+</ul>
+<p>Precision and recall can often have contrasting values (e.g., we can
+obtain a high precision but a low recall and vice versa), hence it is
+generally <strong>necessary to look at both numbers together</strong>.</p>
+</section>
+<section id="example-spam-detector">
+<h4><span class="section-number">18.2.4.2. </span>Example – Spam Detector<a class="headerlink" href="#example-spam-detector" title="Permalink to this heading">#</a></h4>
+<p>Let us consider again the spam example, with the classifier obtaining
+this confusion matrix:</p>
+<p><img alt="" src="../_images/spam.png" /></p>
+<p>From the confusion matrix, we see that:</p>
+<ul class="simple">
+<li><p>TP=40.</p></li>
+<li><p>FN=10.</p></li>
+<li><p>FP=20.</p></li>
+<li><p>TN=30.</p></li>
+</ul>
+<p>We can compute the following precision and recall values:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Precision = \frac{40}{20 + 30} = 0.8\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(Recall = \frac{40}{40 + 20} = 0.67\)</span>.</p></li>
+</ul>
+<p>Like the accuracy, precision and recall are telling us that the
+classifier is not perfect. Interestingly, these measures are telling us
+that <strong>while most of the detected e-mails are actually spam, not all
+spam e-mails are correctly detected.</strong> Considering this application, we
+may want to have a very high precision, (i.e., if we detected an e-mail
+as spam, we want to make sure that it is actually spam) <strong>even at the
+cost of a lower recall.</strong></p>
+</section>
+</section>
+<section id="f-1-score">
+<h3><span class="section-number">18.2.5. </span><span class="math notranslate nohighlight">\(F_{1}\)</span> Score<a class="headerlink" href="#f-1-score" title="Permalink to this heading">#</a></h3>
+<p>We have seen that precision and recall describe different aspects of the
+classifier and hence it is often a good idea to look at them jointly.
+However, it is often convenient to have a single number which classifies
+both numbers.</p>
+<p>The <span class="math notranslate nohighlight">\(F_{1}\)</span> score allows to do exactly this, by computing the <strong>harmonic
+mean</strong> of precision and recall:</p>
+<div class="math notranslate nohighlight">
+\[F_{1} = 2 \cdot \frac{precision \cdot recall}{precision + recall}\]</div>
+<p>We can note that, in order to obtain a large <span class="math notranslate nohighlight">\(F_{1}\)</span> score, we need to
+obtain <strong>both a large precision and a large recall.</strong> This is a property
+of the harmonic mean, as it is illustrated in the following example
+which compares the arithmetic mean (precision/2+recall/2) to the
+harmonic mean (the <span class="math notranslate nohighlight">\(F_{1}\)</span> score):</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/607b8d707a4ec840139133dc96c7687b980bcc32fcc286b5c7f9eea6f0d67758.png" src="../_images/607b8d707a4ec840139133dc96c7687b980bcc32fcc286b5c7f9eea6f0d67758.png" />
+</div>
+</div>
+<p>The example above shows the isocurves obtained by considering given
+precision and recall values. As can be noted, to obtain a large <span class="math notranslate nohighlight">\(F_{1}\)</span>
+score, we need to have both a large precision and a large recall.</p>
+<section id="id1">
+<h4><span class="section-number">18.2.5.1. </span>Example – Spam Detector<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h4>
+<p>Let us consider again the spam example, with the classifier obtaining
+this confusion function:</p>
+<p><img alt="" src="../_images/spam.png" /></p>
+<p>Starting from the precision and recall values previously computed, we
+can compute the <span class="math notranslate nohighlight">\(F_{1}\)</span> score as:</p>
+<div class="math notranslate nohighlight">
+\[F_{1} = 2\frac{precision \cdot recall}{recall + recall} = \frac{1.072}{1.47} = 0.72\]</div>
+<p>Note that, since the dataset is balanced, this value is not very
+different from the accuracy of <span class="math notranslate nohighlight">\(0.7\)</span>.</p>
+</section>
+</section>
+<section id="confusion-matrix-for-multi-class-classification">
+<h3><span class="section-number">18.2.6. </span>Confusion Matrix for Multi-Class Classification<a class="headerlink" href="#confusion-matrix-for-multi-class-classification" title="Permalink to this heading">#</a></h3>
+<p>We have seen the confusion matrix in the case of binary classification.
+However, it should be noted that the confusion matrix generalizes to the
+case in which there are <span class="math notranslate nohighlight">\(M\)</span> classes. In that case, the confusion matrix
+is <span class="math notranslate nohighlight">\(M \times M\)</span> and its general element <span class="math notranslate nohighlight">\(C_{ij}\)</span> indicates the number of
+elements <strong>belonging to class i, which have been classified as belonging
+to class j</strong>. An example of a confusion matrix in the case of three
+classes is the following:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/1431d521401298e711e1e9e6f4e7bf07f26685a94bb4c2f93b9c302bbffe00fd.png" src="../_images/1431d521401298e711e1e9e6f4e7bf07f26685a94bb4c2f93b9c302bbffe00fd.png" />
+</div>
+</div>
+<p>Similar to the binary case, we expect to have large numbers on the
+diagonal and small number in all other cells. The concepts of precision,
+recall and <span class="math notranslate nohighlight">\(F_{1}\)</span> score generalize considering a binary classification
+task for each of the classes (i.e., distinguishing each class from all
+the others). Hence, in the example shown above, we would have three
+<span class="math notranslate nohighlight">\(F_{1}\)</span> scores:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1.         0.8        0.66666667 0.85714286]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="roc-receiver-operating-characteristic-curve-and-area-under-the-curve-auc-measures">
+<h3><span class="section-number">18.2.7. </span>ROC (Receiver Operating Characteristic) Curve and Area Under the Curve (AUC) Measures<a class="headerlink" href="#roc-receiver-operating-characteristic-curve-and-area-under-the-curve-auc-measures" title="Permalink to this heading">#</a></h3>
+<p>As previously mentioned, some binary classifiers output a probability or a confidence score and allow to obtain class predictions by thresholding on such probabilities or scores. When the confidence value is not a probability, it might not be easy to interpret it and find a good threshold. Even when the classifier outputs a probability, the optimal threshold might not be <span class="math notranslate nohighlight">\(0.5\)</span>. For instance, we may want to build an intrusion detection system which is more or less sensitive to potential intrusions.</p>
+<p>The ROC curve allows to evaluate the performance of a classifier independently from the threshold. Specifically, let</p>
+<div class="math notranslate nohighlight">
+\[c(\mathbf{x})\]</div>
+<p>be a function predicting a confidence value from an input vector <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>. For instance, in the case of the logistic regressor:</p>
+<div class="math notranslate nohighlight">
+\[c(\mathbf{x}) = \sigma(\beta_0 + \beta_1 x_1 + \ldots + \beta_n x_n)\]</div>
+<p>We will define our classification function as:</p>
+<div class="math notranslate nohighlight">
+\[h_\theta(\mathbf{x}) = [\sigma(\beta_0 + \beta_1 x_1 + \ldots + \beta_n x_n) \geq \theta]\]</div>
+<p>where <span class="math notranslate nohighlight">\([\cdot]\)</span> denotes the Iverson brackets and <span class="math notranslate nohighlight">\(\theta \in \Re\)</span> is a real-valued threshold.</p>
+<p>Depending on the chosen value of the threshold, we will have a given number of true positives, true negatives, false positives and false negatives:</p>
+<div class="math notranslate nohighlight">
+\[TP_\theta\]</div>
+<div class="math notranslate nohighlight">
+\[TN_\theta\]</div>
+<div class="math notranslate nohighlight">
+\[FP_\theta\]</div>
+<div class="math notranslate nohighlight">
+\[FN_\theta\]</div>
+<p>We will define the true positive rate (TPR) and true negative rate (TNR) as follows:</p>
+<div class="math notranslate nohighlight">
+\[TPR_\theta = \frac{TP_\theta}{TP_\theta+FN_\theta}\]</div>
+<div class="math notranslate nohighlight">
+\[TNR_\theta = \frac{TN_\theta}{TN_\theta+FP_\theta}\]</div>
+<p>In practice:</p>
+<ul class="simple">
+<li><p>The TPR is the fraction of true positives over all positive elements - <strong>this is the same as the recall</strong>;</p></li>
+<li><p>The TNR is the fraction of true negatives over all negative elements.</p></li>
+</ul>
+<p>We expect that:</p>
+<ul class="simple">
+<li><p>If we pick <strong>low threshold values, the TPR will be high and the TNR will be low</strong>. Indeed, with a small enough threshold, all elements will be classified as positives and there will be no predicted negatives, so the TPR will be equal to 1. At the same time, the TNR will be very low because we will have many false positives;</p></li>
+<li><p>If we pick <strong>high threshold values, the TPR will be low and the TNR will be high</strong>. Indeed, with a large enough threshold, all elements will be classified as negatives and there will be no positive predictions, so the TPR will be zero. At the same time, since all elements will be classified as negatives and there will be no positive predictions, the TNR will be equal to <span class="math notranslate nohighlight">\(1\)</span>;</p></li>
+<li><p>For threshold values in between these extremes, we will have some sort of tradeoff between TPR and TNR.</p></li>
+</ul>
+<p>An ROC curve is obtained by picking a threshold value <span class="math notranslate nohighlight">\(\theta\)</span> and plotting a 2D point <span class="math notranslate nohighlight">\((TPR_\theta, TNR_\theta)\)</span>. By varying the threshold <span class="math notranslate nohighlight">\(\theta\)</span>, we obtain a curve which tell us what is the trade-off between TPR and TNR regardless of the threshold.</p>
+<p>The following plot show an example of an ROC curve for a binary classifier on the breast cancer dataset:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/0f842ca18cabb68fced0e147d3be62c510fbf7db524bc286eb9639a8aae0a694.png" src="../_images/0f842ca18cabb68fced0e147d3be62c510fbf7db524bc286eb9639a8aae0a694.png" />
+</div>
+</div>
+<p>In general, we would like to have a rectangular curve touching point <span class="math notranslate nohighlight">\((0,1)\)</span>. In practice, we can measure the area under the ROC curve to see how well the classifier is doing. This value is generally referred to as “AUC”.</p>
+<p>The dashed line indicates the performance of a random predictor. Note the the area under the curve identified by this dashed line will be equal to <span class="math notranslate nohighlight">\(0.5\)</span>. Any curve which is systematically below this line indicates a classifier which is doing thresholding in the wrong way (i.e. we should invert the sign of the thresholding). For instance, this is the curve of the same classifier when we invert the sign of thresholding:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/e7dca858e231467a635d800df724c78e0b51d18ec234db11b1e084cf4b0ef9ab.png" src="../_images/e7dca858e231467a635d800df724c78e0b51d18ec234db11b1e084cf4b0ef9ab.png" />
+</div>
+</div>
+<p>We can use ROC curves to compare two different classifiers as shown in the following:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/3a935d215414afc22efa4374a676d0be16813ff71fbd7153d7802c0c45a51257.png" src="../_images/3a935d215414afc22efa4374a676d0be16813ff71fbd7153d7802c0c45a51257.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="references">
+<h2><span class="section-number">18.3. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Evaluation Measures for Classifcation:
+<a class="reference external" href="https://en.wikipedia.org/wiki/Precision_and_recall">https://en.wikipedia.org/wiki/Precision_and_recall</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lectures"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="18_predictive_modeling.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">17. </span>Introduction to Predictive Modelling and Regression Models</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="20_discriminative_models_for_classification.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">19. </span>Discriminative Models for Classification</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-definition">18.1. Task Definition</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">18.1.1. Examples</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eavaluation-measures">18.2. Eavaluation Measures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy">18.2.1. Accuracy</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-imbalanced-dataset">18.2.1.1. Example – Imbalanced Dataset</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-types">18.2.2. Error Types</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">18.2.3. Confusion Matrix</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-spam-detector">18.2.3.1. Example 1 – Spam Detector</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-imbalanced-dataset">18.2.3.2. Example 2 – Imbalanced Dataset</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#precision-and-recall">18.2.4. Precision and Recall</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#high-precision-vs-high-recall">18.2.4.1. High Precision vs High Recall</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-spam-detector">18.2.4.2. Example – Spam Detector</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-1-score">18.2.5. <span class="math notranslate nohighlight">\(F_{1}\)</span> Score</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">18.2.5.1. Example – Spam Detector</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix-for-multi-class-classification">18.2.6. Confusion Matrix for Multi-Class Classification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#roc-receiver-operating-characteristic-curve-and-area-under-the-curve-auc-measures">18.2.7. ROC (Receiver Operating Characteristic) Curve and Area Under the Curve (AUC) Measures</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">18.3. References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Antonino Furnari
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

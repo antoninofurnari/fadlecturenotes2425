@@ -1,0 +1,1077 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>19. Discriminative Models for Classification &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures/20_discriminative_models_for_classification';</script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="20. Generative Models for Classification" href="21_generative_models_for_classification.html" />
+    <link rel="prev" title="18. Classification Task and Evaluation Measures" href="19_classification.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Lecture Notes on Fundamentals of Data Analysis - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Lecture Notes on Fundamentals of Data Analysis - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Lecture Notes on Fundamental of Data Analysis
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_intro_data_analysis.html">1. Introduction to Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_main_data_analysis_concepts.html">2. Main data analysis concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_misure_di_frequenze_e_rappresentazione_grafica_dei_dati.html">3. Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_misure_di_tendenza_centrale_dispersione_e_forma.html">4. Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_associazione_variabili.html">5. Associazione tra Variabili</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_probability.html">6. Probability for Data Manipulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_common_distributions.html">7. Common Probability Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_information_theory.html">8. Basic Elements of Information Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_statistical_inference.html">9. Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_linear_regression.html">10. Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_logistic_regression.html">11. Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_causal_analysis.html">12. Causal Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_data_as_nd_points.html">13. Data as N-Dimensional Points</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_clustering.html">14. Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_density_estimation.html">15. Density Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_principal_component_analysis.html">16. Principal Component Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_predictive_modeling.html">17. Introduction to Predictive Modelling and Regression Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19_classification.html">18. Classification Task and Evaluation Measures</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">19. Discriminative Models for Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21_generative_models_for_classification.html">20. Generative Models for Classification</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratories</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/01_setup.html">21. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/02_intro_python.html">22. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/03_intro_numpy.html">23. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/04_intro_matplotlib.html">24. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/05_intro_pandas.html">25. Introduzione a Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">26. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/07_misure_di_tendenza_centrale_dispersione_e_forma.html">27. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/08_associazione_variabili.html">28. Associazione tra Variabili</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/09_heart-disease-analysis.html">29. Exploratory Analysis on the Heart Disease Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/10_statistical_inference.html">30. Laboratory on Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/11_regressione_lineare.html">31. Laboratorio su Regressione Lineare</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/12_regressione_logistica.html">32. Laboratorio su regressione logistica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/13_linear_logistic_regression_example_analysis.html">33. Linear and Logistic Regression Laboratory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/14_clustering_density_estimation_pca.html">34. Clustering, Density Estimation, and Principal Component Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/15_customer_segmentation_analysis.html">35. Customer Segmentation Analysis Example</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/antoninofurnari/fadlecturenotes/blob/master/lecturenotes/lectures/20_discriminative_models_for_classification.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/antoninofurnari/fadlecturenotes" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/antoninofurnari/fadlecturenotes/issues/new?title=Issue%20on%20page%20%2Flectures/20_discriminative_models_for_classification.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/lectures/20_discriminative_models_for_classification.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Discriminative Models for Classification</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-regressor-as-a-discriminative-classifier">19.1. The Logistic Regressor as a Discriminative Classifier</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-and-softmax-regressors-as-discriminative-multi-class-classifiers">19.1.1. Multinomial and Softmax Regressors as Discriminative Multi-Class Classifiers</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nearest-neighbor-classification">19.2. K-Nearest Neighbor Classification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-nearest-neighbor-or-1-nn-classification-algorithm">19.2.1. The Nearest Neighbor (or 1-NN) Classification Algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-k-nearest-neighbour-classification-algorithm">19.2.2. The K-Nearest Neighbour Classification Algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nn-as-density-estimation">19.2.3. K-NN as density estimation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-map-decision-boundary-of-k-nn-and-importance-of-parameter-k">19.2.4. Classification Map/Decision Boundary Of K-NN and Importance of Parameter K</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discriminant-functions-and-fisher-s-linear-discriminant">19.3. Discriminant Functions and Fisher’s Linear Discriminant</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fisher-s-linear-discriminant-fld">19.3.1. Fisher’s Linear Discriminant (FLD)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fisher-s-linear-discriminant-for-two-classes">19.3.2. Fisher’s Linear Discriminant for Two Classes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fisher-linear-discriminant-example-and-geometrical-interpretation">19.3.3. Fisher Linear Discriminant Example and Geometrical Interpretation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fisher-s-linear-discriminant-for-more-than-2-classes">19.3.4. Fisher’s Linear Discriminant for More than <span class="math notranslate nohighlight">\(2\)</span> Classes</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fld-with-k-classes-example">19.3.4.1. FLD with K classes - Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">19.4. References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="discriminative-models-for-classification">
+<h1><span class="section-number">19. </span>Discriminative Models for Classification<a class="headerlink" href="#discriminative-models-for-classification" title="Permalink to this heading">#</a></h1>
+<p>We will now see some representatives from a very important category of classifiers: discriminative models. These classifiers aim to <strong>learn a direct mapping from input features to class labels</strong>. This is done by explicitly modeling a decision boundary separating the data.</p>
+<p>While <strong>not all discriminative models are probabilistic</strong>, probabilistic discriminative classifiers usually obtain classification by modeling <em>directly</em> the conditional probability distribution:</p>
+<div class="math notranslate nohighlight">
+\[P(Y|X)\]</div>
+<p>where <span class="math notranslate nohighlight">\(X\)</span> is the random variable containing the input observation and <span class="math notranslate nohighlight">\(Y\)</span> is the random variable containing the associated class. Since <span class="math notranslate nohighlight">\(Y\)</span> is discrete nad a finite number of <span class="math notranslate nohighlight">\(M\)</span> classes, once we model this conditional probability, we can easily classify an observation <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> using the following function:</p>
+<div class="math notranslate nohighlight">
+\[h(\mathbf{x}) = \arg_c \max P(Y=c|X=\mathbf{x})\]</div>
+<p>This is easily done by computing the above conditional probability for all values <span class="math notranslate nohighlight">\(c=0, \ldots, M-1\)</span> keeping <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> fixed and keeping the class <span class="math notranslate nohighlight">\(c\)</span> which gives the largest probability value.</p>
+<section id="the-logistic-regressor-as-a-discriminative-classifier">
+<h2><span class="section-number">19.1. </span>The Logistic Regressor as a Discriminative Classifier<a class="headerlink" href="#the-logistic-regressor-as-a-discriminative-classifier" title="Permalink to this heading">#</a></h2>
+<p>A logistic regressor can be seen as a binary classifier which classifies an input vector <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> into one of two classes <span class="math notranslate nohighlight">\(\{0,1\}\)</span>. Recall that a logistic regressor is defined as follows:</p>
+<div class="math notranslate nohighlight">
+\[P(y=1|\mathbf{x}) = \sigma(\beta_0 + \beta_1 x_1 + \ldots + \beta_n x_n)\]</div>
+<p>While this model outputs a probability value, we can easily threshold the output probability value to obtain classifications:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}h(\mathbf{x}) = \begin{cases} 1 &amp; \text{if} &amp; \sigma(\beta_0 + \beta_1 x_1 + \ldots + \beta_n x_n) \geq 0.5 \\ 0 &amp; \text{otherwise}&amp;\end{cases}\end{split}\]</div>
+<p>It can be seen that optimizing the logistic regressor as we have seen in previous lectures corresponds to minimize the empirical risk for a given loss function penalizing incorrect predictions.</p>
+<p>As previously mentioned, discriminative classifiers explicitly model the decision boundary. We have already seen that in the case of a logistic regressor, the decision boundary is defined as follows:</p>
+<div class="math notranslate nohighlight">
+\[P\left(y=1 | \mathbf{x} \right) = 0.5 \Leftrightarrow e^{- (\beta_{0} + \beta_{1}x_{1} + \beta_{2}x_{2} + \ldots + \beta_{n} x_n)} = 1 \Leftrightarrow 0 = \beta_{0} + \beta_{1}x_{1} + \beta_{2}x_{2} + \ldots + \beta_n x_n\]</div>
+<p>Hence, the decision boundary will be a hyperplane:</p>
+<div class="math notranslate nohighlight">
+\[\beta_{0} + \beta_{1}x_{1} + \beta_{2}x_{2} + \ldots + \beta_n x_n\]</div>
+<p>For instance, in two dimensions it will be a line, as discussed previously and also reported in the following example:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/a9efe50e686aff8f8f596d46ec335e884e0353def6f040658738437bd2191585.png" src="../_images/a9efe50e686aff8f8f596d46ec335e884e0353def6f040658738437bd2191585.png" />
+</div>
+</div>
+<section id="multinomial-and-softmax-regressors-as-discriminative-multi-class-classifiers">
+<h3><span class="section-number">19.1.1. </span>Multinomial and Softmax Regressors as Discriminative Multi-Class Classifiers<a class="headerlink" href="#multinomial-and-softmax-regressors-as-discriminative-multi-class-classifiers" title="Permalink to this heading">#</a></h3>
+<p>Similarly, we can see the multinomial and softmax regressors as multi-class classifiers, i.e., classifiers when the number of classes is larger than 2. Recall that a multinomial classifier can be used to predict probabilities with the following formulas:</p>
+<div class="math notranslate nohighlight">
+\[ P(Y=k|X=\mathbf{x}) = \frac{e^{\mathbf{\beta_k}^T\mathbf{X}}}{1+\sum_{l=2}^K \mathbf{e^{\beta_l^T\mathbf{X}}}}\]</div>
+<div class="math notranslate nohighlight">
+\[ P(Y=1|X=\mathbf{x}) = \frac{1}{1+\sum_{l=2}^K \mathbf{e^{\beta_l^T\mathbf{X}}}}\]</div>
+<p>In a softamx regressor, probabilities can instead be predicted with the following formula:</p>
+<div class="math notranslate nohighlight">
+\[ P(Y=k|X=\mathbf{x}) = \frac{e^{\mathbf{\beta_k}^T\mathbf{X}}}{\sum_{l=1}^K \mathbf{e^{\beta_l^T\mathbf{X}}}}, \ \ \ \forall k=1,\ldots,K\]</div>
+<p>Similarly to the case of logistic regression, we can then define a classification function as follows:</p>
+<div class="math notranslate nohighlight">
+\[h(\mathbf{x}) = \underset{k}{\mathrm{arg\ max}}\ P(Y=k|X=\mathbf{x})\]</div>
+<p>In practice, we select the class which <strong>maximizes the estimated conditional probability <span class="math notranslate nohighlight">\(P(Y=k|X=\mathbf{x})\)</span></strong>.</p>
+</section>
+</section>
+<section id="k-nearest-neighbor-classification">
+<h2><span class="section-number">19.2. </span>K-Nearest Neighbor Classification<a class="headerlink" href="#k-nearest-neighbor-classification" title="Permalink to this heading">#</a></h2>
+<p>The logistic regressor is a parametric model: tts performance depends on the accurate choice of the parameters. Similarly to density estimation methods, parametric models have the advantage to be compact, but they make assumptions on the data. For instance, the logistic regressor assumes that <strong>data is linearly separable</strong>. A different approach to classification consists in the use of non-parametric models, which use the dataset as a support to make their predictions making very few assumptions on the nature of the data.</p>
+<p>The most popular non-parametric classification model is certainly the nearest neighbor algorithm, which is introduced in this section.</p>
+<section id="the-nearest-neighbor-or-1-nn-classification-algorithm">
+<h3><span class="section-number">19.2.1. </span>The Nearest Neighbor (or 1-NN) Classification Algorithm<a class="headerlink" href="#the-nearest-neighbor-or-1-nn-classification-algorithm" title="Permalink to this heading">#</a></h3>
+<p>Given an observation <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, the basic principle of Nearest Neighbor classification is to look at the nearest example in the training set and assign the same class. The idea is that nearby elements in the representation space will likely be similar. Consider the following example in which each data point is an email:</p>
+<p><img alt="" src="../_images/knn1.png" /></p>
+<p>What would be the class of the new example (the red cross)?</p>
+<p>Looking at the plot above, we notice that, while the test example is not exactly equal to any training example, it is still
+reasonably similar to <strong>some training examples</strong> (i.e., there are points
+nearby in the Euclidean space).</p>
+<p>Since the training and test sets have been collected in similar ways
+(e.g., both contain spam and legitimate e-mails), we can hypothesize
+that the <em>test example will be of the same class of similar examples
+belonging to the training set</em>.</p>
+<p>For instance, if two documents have similar word frequencies, they are
+probably of the same class (e.g., if both contain the words “viagra” and
+“sales” many times, they probably belong to “spam” class).</p>
+<p>We can measure how “similar” two examples <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>’
+are using a suitable distance function <span class="math notranslate nohighlight">\(d\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[d(\mathbf{x},\mathbf{x}^{\mathbf{'}})\]</div>
+<p>We expect similar examples to have a small distance. <em>A very common
+choice for</em> <span class="math notranslate nohighlight">\(d\)</span> <em>is the Euclidean distance</em>:</p>
+<div class="math notranslate nohighlight">
+\[d\left( \mathbf{x,}\mathbf{x}^{\mathbf{'}} \right) = \left\| \mathbf{x -}\mathbf{x}^{\mathbf{'}} \right\|_{2} = \sqrt{\sum_{i = 1}^{N}\left( x_{i} - x_{i}^{'} \right)^{2}}\]</div>
+<p>We can hence define a classifier which leverages our intuition
+<strong>assigning to a test example</strong> <span class="math notranslate nohighlight">\(\mathbf{x}^{\mathbf{'}}\)</span><strong>the class of
+the closest example in the training set</strong>:</p>
+<div class="math notranslate nohighlight">
+\[f\left( \mathbf{x}^{\mathbf{'}} \right) = \arg_{y}{\min{\{ d\left( \mathbf{x}^{\mathbf{'}}\mathbf{,\ x} \right)|\left( \mathbf{x},y \right) \in TR\}}}\]</div>
+<p>Here we are using the <span class="math notranslate nohighlight">\(argmin\)</span> function. The expression
+<span class="math notranslate nohighlight">\(\arg_{y}{\min\left\{ f(y) \right\}}\)</span> is defined as the value of <span class="math notranslate nohighlight">\(y\)</span>
+which minimizes <span class="math notranslate nohighlight">\(f(y)\)</span>. We can see it as a function which searches for
+the value of the index <span class="math notranslate nohighlight">\(y\)</span> leading to the global minimum of function
+<span class="math notranslate nohighlight">\(f(y)\)</span>.</p>
+<p>This algorithm is referred to as the <strong>nearest neighbor algorithm (or
+1-NN as we will see in its generalization in a moment)</strong>. In practice,
+given a test example <span class="math notranslate nohighlight">\(\mathbf{x}^{\mathbf{'}}\)</span>, the nearest neighbor
+algorithm works in two steps:</p>
+<ul class="simple">
+<li><p>Find the element <span class="math notranslate nohighlight">\(\overline{\mathbf{x}}\)</span> of the training set with
+the smallest distance with <span class="math notranslate nohighlight">\(\mathbf{x'}\)</span> (i.e., such that
+<span class="math notranslate nohighlight">\(d(\overline{\mathbf{x}},\mathbf{x}^{\mathbf{'}})\)</span> is minimum). The
+element <span class="math notranslate nohighlight">\(\overline{\mathbf{x}}\)</span> is called the nearest neighbor of
+<span class="math notranslate nohighlight">\(\mathbf{x}^{'}\)</span>.</p></li>
+<li><p>Return the ground truth label associated to <span class="math notranslate nohighlight">\(\overline{\mathbf{x}}\)</span>,
+i.e., <span class="math notranslate nohighlight">\(y\ |\ \left( \overline{\mathbf{x}},y \right) \in TR\)</span>.</p></li>
+</ul>
+<p>In the example above, the test observation will be assigned the “spam”
+class, as shown in the following figure:</p>
+<p><img alt="" src="../_images/knn2.png" /></p>
+</section>
+<section id="the-k-nearest-neighbour-classification-algorithm">
+<h3><span class="section-number">19.2.2. </span>The K-Nearest Neighbour Classification Algorithm<a class="headerlink" href="#the-k-nearest-neighbour-classification-algorithm" title="Permalink to this heading">#</a></h3>
+<p>The Nearest Neighbor (or 1-NN) algorithm assumes that data points of the
+same class are close to each other in the representation space. This can
+be reasonably true when the representation space is ideal for the
+classification task and the data is <em>clean and simple enough</em>. For
+instance, we expect similar documents to have similar word frequencies.</p>
+<p>However, it is often common to have <strong>‘outliers’</strong> in the training data,
+i.e., data points which do not closely follow the distribution of the
+other data points. This can be due to different factors:</p>
+<ul class="simple">
+<li><p><em>The data may not be clean</em>: maybe an email has been wrongly
+classified as “spam” when it’s actually not spam;</p></li>
+<li><p><em>The data representation may not be ideal</em>: there could be
+legitimate email in which the word “viagra” is used and there are
+many orthographical errors. <em>Think of a legitimate email forwarding
+a spam email</em>. Our simple representation does not account for that,
+which leads to outliers.</p></li>
+</ul>
+<p>Let us consider as an outlier a <strong>legitimate e-mail containing the word
+‘viagra’</strong>. This example can be seen graphically as follows:</p>
+<p><img alt="" src="../_images/knn3.png" /></p>
+<p>Let us now assume that we are presented with a test example which is
+shown as a red cross in the following figure:</p>
+<p><img alt="" src="../_images/knn4.png" /></p>
+<p>In the example above, the nearest neighbor algorithm would classify the
+test example (the red cross) as “non spam” since the closest point is
+the green outlier, while it is clear that the example is most probably a
+“spam” e-mail. Indeed, while the closest example is “non spam”, all
+other examples nearby belong to the “spam” class.</p>
+<p>Reasonably, in cases like this, <strong>we should not look just at the closest
+point in space</strong>, but instead, we should look at a <strong>neighborhood</strong> of
+the data point. Consider the following example:</p>
+<p><img alt="" src="../_images/knn5.png" /></p>
+<p>If we look at a sufficiently large neighborhood, we find that most of
+the points in the neighborhood are actually spam! Hence, it is wiser to
+classify the data point as belonging to the spam class, rather than to
+the non-spam one.</p>
+<p>In practice, setting an appropriate radius for the neighborhood is not
+easy. For instance, if the space is not uniformly dense (and usually it
+is not – as in the example above!), a given radius could lead to
+neighborhoods containing different numbers of elements. Indeed, in some
+cases, they may even include just zero elements. Hence, rather than
+considering a neighborhood of a given radius, **we consider
+neighborhoods of the point containing <strong>at most <span class="math notranslate nohighlight">\(\mathbf{K}\)</span> elements</strong>, where <span class="math notranslate nohighlight">\(\mathbf{K}\)</span> <strong>is a <em>hyper-parameter</em> of the
+algorithm</strong>.</p>
+<p>Similarly to what we have defined in the case of density estimation, given a point <span class="math notranslate nohighlight">\(\mathbf{x'}\)</span>, we will define the neighborhood of
+training points of size <span class="math notranslate nohighlight">\(K\)</span> centered at <span class="math notranslate nohighlight">\(\mathbf{x'}\)</span> as follows:</p>
+<div class="math notranslate nohighlight">
+\[N_K(\mathbf{x'}) = N(\mathbf{x'},R_K(\mathbf{x'}))\]</div>
+<p>where <span class="math notranslate nohighlight">\(N(x,r)\)</span> denotes a neighborhood centered at <span class="math notranslate nohighlight">\(x\)</span> and with radius <span class="math notranslate nohighlight">\(r\)</span>, and:</p>
+<div class="math notranslate nohighlight">
+\[R_K(\mathbf{x'}) = \sup \{r : |N(\mathbf{x'},r) \setminus \{\mathbf{x'}\}| \leq K\}\]</div>
+<p>Finally, we define the K-Nearest Neighbor Classification Algorithm (also
+called K-NN) as follows:</p>
+<div class="math notranslate nohighlight">
+\[f\left( \mathbf{x'} \right) = mode\{ y|\left( \mathbf{x},y \right) \in N\left( \mathbf{x'};TR,\ K \right)\}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(mode\)</span> is the “statistical mode” function, which returns the
+<strong>most frequent element of a set</strong>.</p>
+<p><span class="math notranslate nohighlight">\(\mathbf{K}\)</span> <strong>is in practice an hyperparameter of the algorithm</strong>. It
+can be set to some arbitrary value or optimized using a <strong>validation set
+or cross-validation</strong>.</p>
+<p>We should note that this definition <strong>generalizes the nearest neighbor
+algorithm defined before</strong>. Indeed, a 1-NN is exactly the nearest
+neighbor classifier seen above.</p>
+</section>
+<section id="k-nn-as-density-estimation">
+<h3><span class="section-number">19.2.3. </span>K-NN as density estimation<a class="headerlink" href="#k-nn-as-density-estimation" title="Permalink to this heading">#</a></h3>
+<p>The K-NN algorithm can be seen in terms of density estimation. This also allows to turn the algorithm into a probabilistic approach, also estimating conditional probabilities as a softmax regressor.</p>
+<p>Let <span class="math notranslate nohighlight">\(C_k\)</span> denote class <span class="math notranslate nohighlight">\(k\)</span>. Suppose our training set contains exactly <span class="math notranslate nohighlight">\(N\)</span> points and <span class="math notranslate nohighlight">\(N_k\)</span> points of class <span class="math notranslate nohighlight">\(k\)</span>, then:</p>
+<div class="math notranslate nohighlight">
+\[N = \sum_k N_k\]</div>
+<p>To classify point <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> we consider a neighborhood centered at <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and containing exactly <span class="math notranslate nohighlight">\(K\)</span> points. We will denote as <span class="math notranslate nohighlight">\(K_k\)</span> the number of points in the neighborhood belonging to class <span class="math notranslate nohighlight">\(k\)</span>, then:</p>
+<div class="math notranslate nohighlight">
+\[K = \sum_k K_k\]</div>
+<p>Recall that we defined K-NN density estimation as follows:</p>
+<div class="math notranslate nohighlight">
+\[P(\mathbf{x}) = \frac{K}{N} \cdot \frac{1}{V}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(N=|\mathbf{X}|\)</span> is the cardinality of the dataset <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> and <span class="math notranslate nohighlight">\(V = V_d \cdot R_k^d(\mathbf{x})\)</span> is the volume of the neighborhood centered around <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>. We can apply this principle to <strong>estimate the density of points of class <span class="math notranslate nohighlight">\(k\)</span> as follows</strong>:</p>
+<div class="math notranslate nohighlight">
+\[P(\mathbf{x}|C_k) = \frac{K_k}{N_k} \cdot \frac{1}{V}\]</div>
+<p>We can define the prior class probability as follows:</p>
+<div class="math notranslate nohighlight">
+\[P(C_k) = \frac{N_k}{N}\]</div>
+<p>We can now apply Bayes’ theorem to obtain the posterior probability:</p>
+<div class="math notranslate nohighlight">
+\[P(C_k|\mathbf{x}) = \frac{P(\mathbf{x}|C_k)P(C_k)}{P(\mathbf{x})} = \frac{\frac{K_k}{N_k} \cdot \frac{1}{V} \frac{N_k}{N}}{\frac{K}{N}\cdot \frac{1}{V}} = \frac{K_k}{N} \cdot \frac{N}{K} = \frac{K_k}{K}\]</div>
+<p>Note that once we are able to estimate the posterior probability, we can define the following classification function:</p>
+<div class="math notranslate nohighlight">
+\[h(\mathbf{x}) = \underset{k}{\mathrm{arg\ max}}\ P(C_k|\mathbf{x}) = \underset{k}{\mathrm{arg\ max}}\ N_k \]</div>
+<p>Which corresponds to the K-NN principle.</p>
+</section>
+<section id="classification-map-decision-boundary-of-k-nn-and-importance-of-parameter-k">
+<h3><span class="section-number">19.2.4. </span>Classification Map/Decision Boundary Of K-NN and Importance of Parameter K<a class="headerlink" href="#classification-map-decision-boundary-of-k-nn-and-importance-of-parameter-k" title="Permalink to this heading">#</a></h3>
+<p>A classifier <span class="math notranslate nohighlight">\(f\)</span> assigns a class to each input <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>. Since
+<span class="math notranslate nohighlight">\(\mathbf{x}\)</span> can be seen as a geometrical point in the <span class="math notranslate nohighlight">\(n\)</span>-dimensional
+space, it is generally interesting to see how the classification
+function <span class="math notranslate nohighlight">\(f\)</span> works on a portion of the representation space. This is
+done by generating a <strong>classification map</strong> or <strong>decision boundary</strong>,
+which is obtained computing the label that the classifier would assign
+to a dense grid of data points.</p>
+<p>As an example, consider the following plot which displays the examples
+of the Fisher Iris datasets according to two of the four features (sepal
+length and sepal width):</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/35be532fbd51f7d6a8dc78ac4bc03ffc970c93b1c7e984bd5e116c369189e9d3.png" src="../_images/35be532fbd51f7d6a8dc78ac4bc03ffc970c93b1c7e984bd5e116c369189e9d3.png" />
+</div>
+</div>
+<p>In the plot above, points of different colors represent the data points
+belonging to the three classes of the dataset. We can obtain a
+classification map by computing the label which we would obtain for each
+point of the input representation space. Examples of classification maps
+for a 1-NN, a 5-NN, a 10-NN, and a 20-NN classifiers are shown below:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/dc4e7428b02388619df4768991008dfd905afe5f82fc90202ec1bc979ed6a8e2.png" src="../_images/dc4e7428b02388619df4768991008dfd905afe5f82fc90202ec1bc979ed6a8e2.png" />
+<img alt="../_images/1da4055f16d5391206dc0df5cb4934d501a871c2d0d2d3b7d8531a6eb33add22.png" src="../_images/1da4055f16d5391206dc0df5cb4934d501a871c2d0d2d3b7d8531a6eb33add22.png" />
+<img alt="../_images/27eb8e52cdaacaec1efa37775adc61645e02a15e3d921ed026acfcd39805a236.png" src="../_images/27eb8e52cdaacaec1efa37775adc61645e02a15e3d921ed026acfcd39805a236.png" />
+<img alt="../_images/be3277aae6a5f2999aeabd8247263878a4c325d1d6b00ec3e9500d8edd5e9f6b.png" src="../_images/be3277aae6a5f2999aeabd8247263878a4c325d1d6b00ec3e9500d8edd5e9f6b.png" />
+</div>
+</div>
+<p>In practice, the function “breaks” the space into areas related to a
+given class. The number of neighbors changes the decision map:</p>
+<ul class="simple">
+<li><p>For small values, the algorithm tends to over-segment the space and
+creates very small regions for isolated training data-points.</p></li>
+<li><p>For larger values, the regions tend to be smoother and isolated data
+points are ignored.</p></li>
+<li><p>Choosing <strong>a larger K</strong> <strong>can</strong> reduce overfitting (indeed the
+isolated data-points can be seen as outliers).</p></li>
+<li><p>However, choosing a <strong>too large K</strong> can encourage underfitting, by
+completing ignoring some of the decision regions.</p></li>
+<li><p>In particular, setting <strong>K to the size of the training set</strong>, any
+data point is classified with the most numerous class.</p></li>
+</ul>
+</section>
+</section>
+<section id="discriminant-functions-and-fisher-s-linear-discriminant">
+<h2><span class="section-number">19.3. </span>Discriminant Functions and Fisher’s Linear Discriminant<a class="headerlink" href="#discriminant-functions-and-fisher-s-linear-discriminant" title="Permalink to this heading">#</a></h2>
+<p>A broad class of discriminative classifier is that of discriminant functions. While discriminant functions can also be non-linear, we will focus only on linear discriminant functions. In the case of two classes, a linear discriminant function takes the following form:</p>
+<div class="math notranslate nohighlight">
+\[y(\mathbf{x}) = \mathbf{w}^T \mathbf{x} + w_0\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> is called a weight vector and <span class="math notranslate nohighlight">\(w_0\)</span> is called a bias term. Note that this formulation is identical to the one of a linear regressor. An input vector is assigned to one of the two classes (say class <span class="math notranslate nohighlight">\(1\)</span>) if <span class="math notranslate nohighlight">\(y(\mathbf{x}) \geq 0\)</span> and to the other class (<span class="math notranslate nohighlight">\(say \)</span>0$) otherwise. In practice, we can define the following classification function:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}h(\mathbf{x}) = \begin{cases} 1 &amp; \text{if} &amp; y(\mathbf{x}) \geq 0 \\ 0 &amp; \text{otherwise} &amp; \end{cases}\end{split}\]</div>
+<p>The <strong>decision boundary of the classifier</strong> (i.e., the set of points of maximum uncertainty) is hence defined by</p>
+<div class="math notranslate nohighlight">
+\[y(\mathbf{x}) = \mathbf{w}^T \mathbf{x} + w_0 = 0\]</div>
+<p>which is a (D-1)-dimensional hyperplane in the D-dimensional space. When <span class="math notranslate nohighlight">\(\mathbf{x} \in \Re^2\)</span>, the decision boundary is the line of equation:</p>
+<div class="math notranslate nohighlight">
+\[a x_1 + b x_2 + c = 0\]</div>
+<p>dividing the space into two areas, as illustrated in the following figure:</p>
+<p><img alt="" src="../_images/discriminant.png" /></p>
+<p>In the case of <span class="math notranslate nohighlight">\(K\)</span> classes, we define <span class="math notranslate nohighlight">\(K\)</span> different one-dimensional linear discriminant functions:</p>
+<div class="math notranslate nohighlight">
+\[y_k(\mathbf{x}) = \mathbf{w}_k^T \mathbf{x} + w_{k0}\]</div>
+<p>Note that this can also be seen as projecting the D-dimensional point <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> to <span class="math notranslate nohighlight">\(K-1\)</span> dimensions. We will then assign a point <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> to class <span class="math notranslate nohighlight">\(C_k\)</span> if:</p>
+<div class="math notranslate nohighlight">
+\[y_k(\mathbf{x}) &gt; y_j(\mathbf{x})\ \forall j \neq k\]</div>
+<p>Hence our classification function can be defined as:</p>
+<div class="math notranslate nohighlight">
+\[h(\mathbf{x}) = \arg_k\max y_k(\mathbf{x})\]</div>
+<p>The decision boundary between classes <span class="math notranslate nohighlight">\(k\)</span> and <span class="math notranslate nohighlight">\(j\)</span> is defined by:</p>
+<div class="math notranslate nohighlight">
+\[y_k(\mathbf{x}) = y_j(\mathbf{x}) \Rightarrow (\mathbf{w}_k - \mathbf{w}_j)^T \mathbf{x} + (w_{k0}-w_{j0}) = 0\]</div>
+<p>Not that this is again a D-1 dimensional hyperplane in the D-dimensional space. For instance in 2D, it will be a line. The multi-class classification will be hence performed by dividing the space into different regions, as shown in the following:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/7898ed57d01e33f3255a8c3f71520746d56a6c8d48aeac6f859ba8fd7654582b.png" src="../_images/7898ed57d01e33f3255a8c3f71520746d56a6c8d48aeac6f859ba8fd7654582b.png" />
+</div>
+</div>
+<section id="fisher-s-linear-discriminant-fld">
+<h3><span class="section-number">19.3.1. </span>Fisher’s Linear Discriminant (FLD)<a class="headerlink" href="#fisher-s-linear-discriminant-fld" title="Permalink to this heading">#</a></h3>
+<p>There are different ways to construct discriminant functions. In this context, we will focus on Fisher’s Linear Discriminant, a technique to <strong>reduce the dimensionality of the data to support classification</strong>.</p>
+<p>While FLD does not directly lead to a discriminant function, it allows to <strong>map the data to a lower-dimensional space in which building discriminant functions is much easier</strong>.</p>
+<p>More specifically, FLD allows finding a linear transformation that maps a set of data divided into <span class="math notranslate nohighlight">\(K\)</span> classes into a <span class="math notranslate nohighlight">\(K-1\)</span> dimensional space where the data is maximally separable. For example, in the case of binary classification, the data will be projected into a one-dimensional space where they are separable.</p>
+<p><strong>FLD has similarities with Principal Component Analysis (PCA)</strong> as both aim to map data into a subspace with certain characteristics. However, there are two fundamental differences:</p>
+<ul class="simple">
+<li><p>PCA is an <strong>unsupervised method</strong>, meaning it does not require providing any labels (class membership of the data). FLD, on the other hand, is a <strong>supervised method</strong> as it uses labels to find the data projection that makes them separable.</p></li>
+<li><p>When applying PCA, we specify the number of components in the target space. FLD always projects the data into a space of dimension <span class="math notranslate nohighlight">\(K-1\)</span>, where <span class="math notranslate nohighlight">\(K\)</span> is the number of classes.</p></li>
+</ul>
+</section>
+<section id="fisher-s-linear-discriminant-for-two-classes">
+<h3><span class="section-number">19.3.2. </span>Fisher’s Linear Discriminant for Two Classes<a class="headerlink" href="#fisher-s-linear-discriminant-for-two-classes" title="Permalink to this heading">#</a></h3>
+<p>The original formulation of the Fisher Linear Discriminant focuses on the case in which the data is divided into two classes.</p>
+<p>Let <span class="math notranslate nohighlight">\(\{x_i\}_{i=1}^N\)</span> be a set of <span class="math notranslate nohighlight">\(D\)</span>-dimensional observations divided into two classes <span class="math notranslate nohighlight">\(C_1\)</span> and <span class="math notranslate nohighlight">\(C_2\)</span> such that <span class="math notranslate nohighlight">\(x_i \in C_1 \lor x_i \in C_2\)</span>.</p>
+<p>We want to find a linear transformation of the data into a one-dimensional space:</p>
+<div class="math notranslate nohighlight">
+\[y(\mathbf{x}) = \mathbf{w}^T \mathbf{x}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> is a <span class="math notranslate nohighlight">\(D\)</span>-dimensional observation, <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> is a <span class="math notranslate nohighlight">\(D\)</span>-dimensional vector called the <strong>weight vector</strong>, and <span class="math notranslate nohighlight">\(y(\mathbf{x})\)</span> is the projection onto one dimension of <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> (thus, <span class="math notranslate nohighlight">\(y(\mathbf{x})\)</span> is a scalar). If the found projection maximizes the separability of the data, we only need to find a threshold <span class="math notranslate nohighlight">\(w_0\)</span> and classify:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}h(\mathbf{x}) = \begin{cases} C_1 &amp; \text{if} &amp; y(\mathbf{x}) \geq w_0\\
+C_2 &amp;\text{if}&amp; y(\mathbf{x}) &lt; w_0\end{cases}\end{split}\]</div>
+<p>Let’s first see how to find the parameters <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> that maximize the separability of the projected data. Consider the means of the data belonging to the two classes:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{m}_1 = \frac{1}{N_1} \sum_{x_i \in C_1} x_i, \ \ \ \ \ \ \ \ \mathbf{m}_2 = \frac{1}{N_2} \sum_{x_i \in C_2} x_i,\]</div>
+<p>where <span class="math notranslate nohighlight">\(N_1\)</span> is the number of elements belonging to class <span class="math notranslate nohighlight">\(C_1\)</span>, and <span class="math notranslate nohighlight">\(N_2\)</span> is the number of elements belonging to class <span class="math notranslate nohighlight">\(C_2\)</span>. The simplest measure of separability between the classes would be the distance between the means of the classes calculated on the projected data:</p>
+<div class="math notranslate nohighlight">
+\[m_1 = \mathbf{w}^T\mathbf{m}_1, \ m_2 = \mathbf{w}^T\mathbf{m}_2\]</div>
+<div class="math notranslate nohighlight">
+\[m_2 - m_1 = \mathbf{w}^T(\mathbf{m}_2-\mathbf{m}_1)\]</div>
+<p>To maximize the quantity <span class="math notranslate nohighlight">\(m_2-m_1\)</span>, we introduce the constraint that <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> is a unit vector (<span class="math notranslate nohighlight">\(\mathbf{w}^T\mathbf{w}=1\)</span>). We need to maximize:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{w}^T (\mathbf{m}_2-\mathbf{m}_1) \text{ subject to } \mathbf{w}^T\mathbf{w}=1\]</div>
+<p>This can be converted to the following form using the method of Lagrangian multipliers:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{w}^T (\mathbf{m}_2-\mathbf{m}_1) + \lambda (1-\mathbf{w}^T\mathbf{w})\]</div>
+<p>Setting the derivative with respect to <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> equal to zero, it can be shown that a solution is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{w}^* = \frac{\mathbf{m}_2-\mathbf{m}_1}{||\mathbf{m}_2-\mathbf{m}_1||}\]</div>
+<p>This solution, however, does not guarantee that the data will be separable, as the data in the different classes can have arbitrary variances, as illustrated in this figure:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/337949879e6333a3867f1f70dda6310161ed09d5fd561f626169a42d0e2ada63.png" src="../_images/337949879e6333a3867f1f70dda6310161ed09d5fd561f626169a42d0e2ada63.png" />
+</div>
+</div>
+<p>Indeed, as we can see, classes in the right plot are more separable, despite the classes having the same means in the left and right plots.</p>
+<p>In addition to maximizing the distance between means, we also want to minimize the variances of the data belonging to individual classes, given by:</p>
+<div class="math notranslate nohighlight">
+\[s_k^2 = \sum_{\mathbf{x}_i \in C_k} (y(\mathbf{x}_i) - m_k)^2, \ k=1,2\]</div>
+<p>To <strong>maximize the distance between transformed means</strong> and <strong>minimize the variances of the transformed data</strong>, the Fisher criterion is defined as follows:</p>
+<div class="math notranslate nohighlight">
+\[J(\mathbf{w}) = \frac{(m_2-m_1)^2}{s_1^2+s_2^2}\]</div>
+<p>By maximizing <span class="math notranslate nohighlight">\(J(\mathbf{w})\)</span> with respect to <span class="math notranslate nohighlight">\(\mathbf{w}\)</span>, we achieve both objectives:</p>
+<ul class="simple">
+<li><p>Maximize <span class="math notranslate nohighlight">\((m_2-m_1)\)</span> in the numerator;</p></li>
+<li><p>Minimize <span class="math notranslate nohighlight">\(s_1^2+s_2^2\)</span> in the denominator.</p></li>
+</ul>
+<p>It can be shown that the Fisher criterion can be explicitly expressed as a function of <span class="math notranslate nohighlight">\(\mathbf{w}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[J(\mathbf{w}) = \frac{\mathbf{w}^T \mathbf{S}_B\mathbf{w}}{\mathbf{w}^T \mathbf{S}_W\mathbf{w}}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(\mathbf{S}_B\)</span> is the <strong>between-class covariance matrix</strong> and is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{S}_B = (\mathbf{m}_2-\mathbf{m}_1)(\mathbf{m}_2-\mathbf{m}_1)^T\]</div>
+<p>and <span class="math notranslate nohighlight">\(\mathbf{S}_W\)</span> is the total <strong>within-class covariance matrix</strong> and is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{S}_W = \sum_{\mathbf{x}_i \in C_1}(\mathbf{x}_i-\mathbf{m}_1)(\mathbf{x}_i-\mathbf{m}_1)^T + \sum_{\mathbf{x}_i \in C_2}(\mathbf{x}_i-\mathbf{m}_2)(\mathbf{x}_i-\mathbf{m}_2)^T\]</div>
+<p>In can be shown that the quantity <span class="math notranslate nohighlight">\(J(\mathbf{w})\)</span> is maximized by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{w}\propto\mathbf{S}^{-1}_{W}(\mathbf{m_2}-\mathbf{m_1})\]</div>
+<p>With a possible solution given by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{w}^* = \frac{\mathbf{S}^{-1}_{W}(\mathbf{m_2}-\mathbf{m_1})}{||\mathbf{S}^{-1}_{W}(\mathbf{m_2}-\mathbf{m_1})||}\]</div>
+<p>Notice that if the between-class covariance matrix is diagonal, the found solution is equivalent to maximizing only <span class="math notranslate nohighlight">\(\mathbf{m}_2-\mathbf{m}_1\)</span>.</p>
+<p>Once the optimal projection <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> is found, we can project the data using <span class="math notranslate nohighlight">\(y(\mathbf{x})=\mathbf{w}^T\mathbf{x}\)</span>. Therefore, we need to find the threshold <span class="math notranslate nohighlight">\(y_0\)</span> to classify the data using the discriminant <span class="math notranslate nohighlight">\(y(x)\geq y_0\)</span>. The optimal threshold <span class="math notranslate nohighlight">\(y_0\)</span> can be found by modeling the data of the two classes using two Gaussians and determining the point where they intersect.</p>
+</section>
+<section id="fisher-linear-discriminant-example-and-geometrical-interpretation">
+<h3><span class="section-number">19.3.3. </span>Fisher Linear Discriminant Example and Geometrical Interpretation<a class="headerlink" href="#fisher-linear-discriminant-example-and-geometrical-interpretation" title="Permalink to this heading">#</a></h3>
+<p>As in the case of PCA, the expression</p>
+<div class="math notranslate nohighlight">
+\[y(\mathbf{x}) = \mathbf{w}^T \mathbf{x}\]</div>
+<p>projects the data into the unit vector <span class="math notranslate nohighlight">\(\mathbf{w}\)</span>. Hence, in the case of two classes, FLD <strong>finds a direction along which to project the data so that it maintains maximum separability</strong>. Note that, while PCA was unsupervised (no labels were needed), FLD make uses of labels to chooses the direction of maximum separability.</p>
+<p>Let us consider the following data from the breast cancer dataset:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/2509a4a895e5911c5706dd65b55f519f8ef5c0299cb99b0121c0f6269798e7bd.png" src="../_images/2509a4a895e5911c5706dd65b55f519f8ef5c0299cb99b0121c0f6269798e7bd.png" />
+</div>
+</div>
+<p>Fisher’s Linear Discriminant allows to find a vector <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> such that, if we project the data along that vector, the two classes are maximally separable, as shown in the plot below:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/fe188b77835a1f220cf7ae44699d156139111b4420b5f1d001fe5d7534c217eb.png" src="../_images/fe188b77835a1f220cf7ae44699d156139111b4420b5f1d001fe5d7534c217eb.png" />
+</div>
+</div>
+<p>We can hence project the data along the found direction, <strong>mapping each element to a real-valued number</strong>. The plot below shows the histograms of the scores of points belonging to the two classes:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/fe2e6274c0afdd8f7d8747652947ac954f9464f7e59f6204ede56d578edbcfed.png" src="../_images/fe2e6274c0afdd8f7d8747652947ac954f9464f7e59f6204ede56d578edbcfed.png" />
+</div>
+</div>
+<p>We now have <strong>a score-based classifier</strong>, which could be directly <strong>evaluated using an ROC curve</strong>. If we want to output a prediction, we need to find an appropriate threshold. One way to do it is through a grid search on the training set. If we plot the accuracy of the classification model with respect to the threshold, we obtain the following curve:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/d6d7d0ae79e5597f1efaadcf7215a4e891014cf00a168e6668d13448d7862f4d.png" src="../_images/d6d7d0ae79e5597f1efaadcf7215a4e891014cf00a168e6668d13448d7862f4d.png" />
+</div>
+</div>
+<p>We can now set <span class="math notranslate nohighlight">\(w_0 = -19.51\)</span> and obtain our discriminant function:</p>
+<div class="math notranslate nohighlight">
+\[y(\mathbf{x}) = \mathbf{w}^T \mathbf{x} + w_0\]</div>
+<p>We know that the decision boundary of the classifier will be given by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{w}^T \mathbf{x} + w_0 = 0\]</div>
+<p>This is a line perpendicular to the direction found by FLD, as shown in the following plot:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/a2e23e7021938fc3a1ac982586f94a43df4f58b6fce97754707b008800d4d5dd.png" src="../_images/a2e23e7021938fc3a1ac982586f94a43df4f58b6fce97754707b008800d4d5dd.png" />
+</div>
+</div>
+<p>Alternatively to manually finding a threshold, we could train another classifier on top of these features - for instance, a logistic regressor.</p>
+</section>
+<section id="fisher-s-linear-discriminant-for-more-than-2-classes">
+<h3><span class="section-number">19.3.4. </span>Fisher’s Linear Discriminant for More than <span class="math notranslate nohighlight">\(2\)</span> Classes<a class="headerlink" href="#fisher-s-linear-discriminant-for-more-than-2-classes" title="Permalink to this heading">#</a></h3>
+<p>When we have <span class="math notranslate nohighlight">\(K&gt;2\)</span> classes and the data dimensionality <span class="math notranslate nohighlight">\(D\)</span> is larger than <span class="math notranslate nohighlight">\(K\)</span> (<span class="math notranslate nohighlight">\(D&gt;K\)</span>), the FLD will project the data into <span class="math notranslate nohighlight">\(D'\)</span> new linear features</p>
+<div class="math notranslate nohighlight">
+\[y_k = \mathbf{w}_k^T \mathbf{x}\]</div>
+<p>where <span class="math notranslate nohighlight">\(k=1, \ldots, D'\)</span>. Conveniently, we can group the <span class="math notranslate nohighlight">\(y_k\)</span> real values to obtain a <span class="math notranslate nohighlight">\(D'\)</span>-dimensional vector <span class="math notranslate nohighlight">\(\mathbf{y}\)</span>. We can also consider the weight matrix <span class="math notranslate nohighlight">\(\mathbf{W}\)</span> in which the vectors <span class="math notranslate nohighlight">\(\mathbf{w}_i\)</span> are columns:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{W} = (\mathbf{w_1}, \mathbf{w_2}, \ldots, \mathbf{w_k})\]</div>
+<p>We hence have:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{y} = \mathbf{W}^T \mathbf{x}\]</div>
+<p>Similarly to FLD in the case of two classes, we are not including any bias or threshold. Also in this case, FLD is a dimensionality reduction technique rather than a true discriminant function.</p>
+<p>The formulation of the Fisher’s Linear Discriminant in this case is similar to the case of <span class="math notranslate nohighlight">\(2\)</span> classes. We define the within-class covariance matrix as follows:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{S}_W = \sum_{k=1}^K \mathbf{S}_k\]</div>
+<p>Where <span class="math notranslate nohighlight">\(\mathbf{S}_k\)</span> is the covariance matrix of data belonging to class <span class="math notranslate nohighlight">\(C_k\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{S}_k = \sum_{i \in C_k} (\mathbf{x}_i - \mathbf{m}_k) (\mathbf{x}_i - \mathbf{m}_k)^T\]</div>
+<p>and <span class="math notranslate nohighlight">\(\mathbf{m}_k\)</span> are the individual classes’ means:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{m}_k = \frac{1}{N_k} \sum_{i \in C_k} \mathbf{x}_i\]</div>
+<p>The between-class covariance matrix is defined as:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{S}_B = \sum_{k=1}^K N_k (\mathbf{m}_k - \mathbf{m})(\mathbf{m}_k - \mathbf{m})^T\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{m}\)</span> is the mean of the overall dataset</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{m} = \frac{1}{N} \sum_{i=1}^N \mathbf{x}_i\]</div>
+<p>and <span class="math notranslate nohighlight">\(N_k\)</span> is the number of elements in class <span class="math notranslate nohighlight">\(C_k\)</span>. Intuitively, the between-class covariance matrix measures how much dispersed the means of the individual classes are with respect to the overall mean of the data.</p>
+<p>These two quantities are associated to the same concepts computed on the transformed data:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{s}_W = \sum_{k=1}^K \sum_{i \in C_k} (\mathbf{y}_n - \mathbf{\mu}_k) (\mathbf{y}_n - \mathbf{\mu}_k)^T\]</div>
+<div class="math notranslate nohighlight">
+\[\mathbf{s}_B = \sum_{k=1}^K N_k (\mathbf{\mu}_k - \mathbf{\mu})(\mathbf{\mu}_k - \mathbf{\mu})^T\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{\mu}_k\)</span> are the means of the projected data within each class, and <span class="math notranslate nohighlight">\(\mathbf{\mu}\)</span> is the overall mean of the projected data:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{\mu}_k = \frac{1}{N_k} \sum_{i \in C_k} \mathbf{y}_i\]</div>
+<div class="math notranslate nohighlight">
+\[\mathbf{\mu} = \frac{1}{N} \sum_{k=1}^K N_k \mathbf{\mu}_k\]</div>
+<p>To minimize within-class variability and maximize between-class variability, the following criterion is usually defined:</p>
+<div class="math notranslate nohighlight">
+\[J(\mathbf{W}) = Tr\{\mathbf{s}_W^{-1}\mathbf{s}_B\}\]</div>
+<p>We will not see the mathematical details of the formulation and optimization of this objective, but in practice the objective can be optimized to obtain <span class="math notranslate nohighlight">\(\hat{\mathbf{W}}\)</span>.</p>
+<p>Similarly to PCA, when projecting data with FLD <strong>we can choose a number of dimensions smaller than <span class="math notranslate nohighlight">\(K-1\)</span></strong>. Note that as in the case of two variables, FLD only provides a method to project data to a lower dimensional space. After this transformation is found, <strong>we can fit a classifier in the new space</strong>.</p>
+<section id="fld-with-k-classes-example">
+<h4><span class="section-number">19.3.4.1. </span>FLD with K classes - Example<a class="headerlink" href="#fld-with-k-classes-example" title="Permalink to this heading">#</a></h4>
+<p>As an example of the application of Fisher’s Linear Discriminant, let us consider Fisher’s Iris dataset. As we have already seen, the dataset contains four different features:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/3f0ebe6754ef18ad9cf55216c416f44c226d17979d07d2847c84e68f97704bb9.png" src="../_images/3f0ebe6754ef18ad9cf55216c416f44c226d17979d07d2847c84e68f97704bb9.png" />
+</div>
+</div>
+<p>Since the data has <span class="math notranslate nohighlight">\(3\)</span> classes, we can project the data to <span class="math notranslate nohighlight">\(2\)</span> dimensions, where we try to maximize linear separability:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/ec8342950868e3a2e449ac939ea22fb9c0a1337f3fccf66d432f1c1f213aab0a.png" src="../_images/ec8342950868e3a2e449ac939ea22fb9c0a1337f3fccf66d432f1c1f213aab0a.png" />
+</div>
+</div>
+<p>As we can see, the data are now easier to linearly separate. As in the case of two classes, no thresholds have been determined. We can either find appropriate thresholds (e.g., with grid search) or train another classifier on top of these features.</p>
+</section>
+</section>
+</section>
+<section id="references">
+<h2><span class="section-number">19.4. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Nearest Neighbor: Section 2.5.2 of [1]</p></li>
+<li><p>Fisher’s Discriminant Analysis: Section 4.1.4 and Section 4.1.6 of [1]</p></li>
+</ul>
+<p>[1] Bishop, Christopher M. <em>Pattern recognition and machine learning</em>.
+springer, 2006.
+<a class="reference external" href="https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf">https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf</a></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lectures"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="19_classification.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">18. </span>Classification Task and Evaluation Measures</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="21_generative_models_for_classification.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">20. </span>Generative Models for Classification</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-regressor-as-a-discriminative-classifier">19.1. The Logistic Regressor as a Discriminative Classifier</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-and-softmax-regressors-as-discriminative-multi-class-classifiers">19.1.1. Multinomial and Softmax Regressors as Discriminative Multi-Class Classifiers</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nearest-neighbor-classification">19.2. K-Nearest Neighbor Classification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-nearest-neighbor-or-1-nn-classification-algorithm">19.2.1. The Nearest Neighbor (or 1-NN) Classification Algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-k-nearest-neighbour-classification-algorithm">19.2.2. The K-Nearest Neighbour Classification Algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nn-as-density-estimation">19.2.3. K-NN as density estimation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-map-decision-boundary-of-k-nn-and-importance-of-parameter-k">19.2.4. Classification Map/Decision Boundary Of K-NN and Importance of Parameter K</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discriminant-functions-and-fisher-s-linear-discriminant">19.3. Discriminant Functions and Fisher’s Linear Discriminant</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fisher-s-linear-discriminant-fld">19.3.1. Fisher’s Linear Discriminant (FLD)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fisher-s-linear-discriminant-for-two-classes">19.3.2. Fisher’s Linear Discriminant for Two Classes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fisher-linear-discriminant-example-and-geometrical-interpretation">19.3.3. Fisher Linear Discriminant Example and Geometrical Interpretation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fisher-s-linear-discriminant-for-more-than-2-classes">19.3.4. Fisher’s Linear Discriminant for More than <span class="math notranslate nohighlight">\(2\)</span> Classes</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fld-with-k-classes-example">19.3.4.1. FLD with K classes - Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">19.4. References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Antonino Furnari
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

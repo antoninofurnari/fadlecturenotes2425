@@ -1,0 +1,1111 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>20. Generative Models for Classification &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures/21_generative_models_for_classification';</script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="21. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro" href="../laboratories/01_setup.html" />
+    <link rel="prev" title="19. Discriminative Models for Classification" href="20_discriminative_models_for_classification.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Lecture Notes on Fundamentals of Data Analysis - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Lecture Notes on Fundamentals of Data Analysis - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Lecture Notes on Fundamental of Data Analysis
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_intro_data_analysis.html">1. Introduction to Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_main_data_analysis_concepts.html">2. Main data analysis concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_misure_di_frequenze_e_rappresentazione_grafica_dei_dati.html">3. Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_misure_di_tendenza_centrale_dispersione_e_forma.html">4. Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_associazione_variabili.html">5. Associazione tra Variabili</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_probability.html">6. Probability for Data Manipulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_common_distributions.html">7. Common Probability Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_information_theory.html">8. Basic Elements of Information Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_statistical_inference.html">9. Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_linear_regression.html">10. Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_logistic_regression.html">11. Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_causal_analysis.html">12. Causal Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_data_as_nd_points.html">13. Data as N-Dimensional Points</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_clustering.html">14. Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_density_estimation.html">15. Density Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_principal_component_analysis.html">16. Principal Component Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_predictive_modeling.html">17. Introduction to Predictive Modelling and Regression Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19_classification.html">18. Classification Task and Evaluation Measures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20_discriminative_models_for_classification.html">19. Discriminative Models for Classification</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">20. Generative Models for Classification</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratories</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/01_setup.html">21. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/02_intro_python.html">22. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/03_intro_numpy.html">23. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/04_intro_matplotlib.html">24. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/05_intro_pandas.html">25. Introduzione a Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">26. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/07_misure_di_tendenza_centrale_dispersione_e_forma.html">27. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/08_associazione_variabili.html">28. Associazione tra Variabili</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/09_heart-disease-analysis.html">29. Exploratory Analysis on the Heart Disease Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/10_statistical_inference.html">30. Laboratory on Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/11_regressione_lineare.html">31. Laboratorio su Regressione Lineare</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/12_regressione_logistica.html">32. Laboratorio su regressione logistica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/13_linear_logistic_regression_example_analysis.html">33. Linear and Logistic Regression Laboratory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/14_clustering_density_estimation_pca.html">34. Clustering, Density Estimation, and Principal Component Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/15_customer_segmentation_analysis.html">35. Customer Segmentation Analysis Example</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/antoninofurnari/fadlecturenotes/blob/master/lecturenotes/lectures/21_generative_models_for_classification.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/antoninofurnari/fadlecturenotes" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/antoninofurnari/fadlecturenotes/issues/new?title=Issue%20on%20page%20%2Flectures/21_generative_models_for_classification.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/lectures/21_generative_models_for_classification.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Generative Models for Classification</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-a-posteriori-map-classification-principle">20.1. Maximum A Posteriori (MAP) Classification Principle</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-prior-p-c">20.1.1. The Prior <span class="math notranslate nohighlight">\(P(C)\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-evidence-p-x">20.1.2. The Evidence <span class="math notranslate nohighlight">\(P(X)\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-likelihood-p-x-c">20.1.3. The Likelihood <span class="math notranslate nohighlight">\(P(X|C)\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#map-classification-with-discrete-observations">20.2. MAP Classification with Discrete Observations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">20.2.1. Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-discriminant-analysis-lda">20.3. Linear Discriminant Analysis (LDA)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-discriminant-analysis-for-d-1">20.3.1. Linear Discriminant Analysis for D=1</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#lda-and-mahalanobis-distance">20.3.1.1. LDA and Mahalanobis Distance</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-discriminant-analysis-and-discriminant-function">20.3.1.2. Linear Discriminant Analysis and Discriminant Function</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization">20.3.1.3. Optimization</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">20.3.2. Linear Discriminant Analysis for D&gt;1</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multidimensional-mahalanobis-distance">20.3.2.1. Multidimensional Mahalanobis Distance</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-discriminant-function">20.3.2.2. Linear Discriminant Function</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lda-for-dimensionality-reduction">20.3.3. LDA for Dimensionality Reduction</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quadratic-discriminant-analysis-qda">20.4. Quadratic Discriminant Analysis (QDA)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-bayes-classifier">20.5. Naïve Bayes Classifier</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-assumption">20.5.1. Naïve Assumption</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-naive-bayes">20.5.2. Gaussian naïve Bayes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-bayes-and-qda">20.5.3. Naive Bayes and QDA</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">20.6. References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="generative-models-for-classification">
+<h1><span class="section-number">20. </span>Generative Models for Classification<a class="headerlink" href="#generative-models-for-classification" title="Permalink to this heading">#</a></h1>
+<p>As we have already discussed, discriminative models explicitly model the decision boundary. Probabilistic approaches do so by directly modeling the conditional probability distribution</p>
+<div class="math notranslate nohighlight">
+\[P(Y=k|X=\mathbf{x})\]</div>
+<p>This is for instance the case of a logistic regressor.</p>
+<p>Generative models are another class of algorithms which do not explicitly model the conditional probability. Instead, they model the probability of the predictors independently for each class:</p>
+<div class="math notranslate nohighlight">
+\[P(\mathbf{x}|Y=k)\]</div>
+<p>and then use the Bayes’ theorem to obtain the conditional probability and make predictions.</p>
+<p>Differently from discriminative models, generative models make assumptions on the distribution of the data (e.g., data is often assumed to be Guassian) and hence are often less general than discriminative models. However, they can be advantageous <strong>when the training data is scarce</strong>. Also, while discriminative models such as the logistic regressor are unstable when data is linearly separable, generative approaches do not suffer from this limitation.</p>
+<p>Generative models are so called because, by modeling the distribution of the data, they provide a complete data model which may also be used to generate new data following the joint probability distribution</p>
+<div class="math notranslate nohighlight">
+\[P(X,Y)\]</div>
+<p>even if they are mainly used to perform classification in this context.</p>
+<section id="maximum-a-posteriori-map-classification-principle">
+<h2><span class="section-number">20.1. </span>Maximum A Posteriori (MAP) Classification Principle<a class="headerlink" href="#maximum-a-posteriori-map-classification-principle" title="Permalink to this heading">#</a></h2>
+<p>Generative classifiers use the Maximum A Posteriori (MAP) classification principle, which makes use of Bayes’ rule.</p>
+<p>We will begin by considering the following stochastic event:</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathbf{x}\)</span> being of class <span class="math notranslate nohighlight">\(c\)</span></p>
+</div></blockquote>
+<p>Where <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> is the input example and <span class="math notranslate nohighlight">\(c \in \{ 0,\ldots,M - 1\}\)</span>
+is one of the <span class="math notranslate nohighlight">\(M\)</span> possible classes in our classification problem.</p>
+<p>Let us consider the following conditional probability:</p>
+<div class="math notranslate nohighlight">
+\[P(c|\mathbf{x})\]</div>
+<p>This conditional probability answers to the question:</p>
+<p>“What is the probability of observing class c, given an input example
+<span class="math notranslate nohighlight">\(\mathbf{x}\)</span>?”</p>
+<p>If we can quantify such probability for every possible class <span class="math notranslate nohighlight">\(c\)</span>, we
+have a <strong>conditional probability distribution over the classes, given
+the input data</strong>. For instance, if we have a classification problem over
+<span class="math notranslate nohighlight">\(4\)</span> classes, we have the following scheme:</p>
+<p><img alt="" src="../_images/map1.png" /></p>
+<p>The conditional probability distribution allows us to quantify how
+probable it is that the example at hand belongs to a given class. Hence,
+it is natural to classify <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> as belonging to the class <span class="math notranslate nohighlight">\(c’\)</span>
+for which the probability <span class="math notranslate nohighlight">\(P(c'|\mathbf{x})\)</span> is maximum. This process of
+choosing the class which maximizes the probability is written as follows
+in mathematical terms:</p>
+<div class="math notranslate nohighlight">
+\[c' = \arg_{c}{\max{P(c|\mathbf{x})}}\]</div>
+<p>In the example above, we would assign class 2 to the input example:</p>
+<p><img alt="" src="../_images/map2.png" /></p>
+<p>As previously noted, a MAP classifier can be defined as follows:</p>
+<div class="math notranslate nohighlight">
+\[f\left( \mathbf{x} \right) = \arg_{c}{\max{P\left( c \middle| \mathbf{x} \right)}}\]</div>
+<p>The Maximum A Posteriori classification rule offers a practical way to
+make decisions (i.e., classify elements), given probability estimates.
+However, we still need to understand <strong>how to estimate the probability</strong>
+<span class="math notranslate nohighlight">\(\mathbf{P}\mathbf{(}\mathbf{C}\mathbf{|}\mathbf{X}\mathbf{)}\)</span>.</p>
+<p>Unfortunately, <strong>computing such quantity using a frequentist approach is
+not easy when</strong> <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> <strong>is a continuous variable</strong>. Indeed, to
+compute the distribution of classes given an example, we should be able
+to observe all possible classes which a given example can belong to.
+However, we usually have <strong>a single class</strong> associated to a given data
+point, which makes such computation difficult.</p>
+<p>Using the Bayes’ theorem, we have:</p>
+<div class="math notranslate nohighlight">
+\[P\left( C \middle| X \right) = \frac{P\left( X \middle| C \right)P(C)}{P(X)}\]</div>
+<p>Using this expression, we need to compute three quantities to obtain the
+hard-to-estimate <span class="math notranslate nohighlight">\(P(C|X)\)</span>:</p>
+<ul class="simple">
+<li><p>The likelihood <span class="math notranslate nohighlight">\(P(X|C)\)</span>;</p></li>
+<li><p>The prior <span class="math notranslate nohighlight">\(P(C)\)</span>;</p></li>
+<li><p>The evidence <span class="math notranslate nohighlight">\(P(X)\)</span>.</p></li>
+</ul>
+<p>We will now see how to compute each of these quantities.</p>
+<section id="the-prior-p-c">
+<h3><span class="section-number">20.1.1. </span>The Prior <span class="math notranslate nohighlight">\(P(C)\)</span><a class="headerlink" href="#the-prior-p-c" title="Permalink to this heading">#</a></h3>
+<p><span class="math notranslate nohighlight">\(P(C)\)</span>: this is the <strong>prior probability of a given class</strong>. If observing
+a class <span class="math notranslate nohighlight">\(c\)</span> is not very common, then <span class="math notranslate nohighlight">\(P(c)\)</span> will be small. We can use
+different approaches to estimate <span class="math notranslate nohighlight">\(P(c)\)</span>:</p>
+<ul class="simple">
+<li><p>We can estimate <span class="math notranslate nohighlight">\(P(c)\)</span> by <strong>considering the number of examples in
+the dataset</strong>. For instance, if our dataset contains <span class="math notranslate nohighlight">\(800\)</span> non-spam
+e-mails and <span class="math notranslate nohighlight">\(200\)</span> spam e-mails, we can assume that <span class="math notranslate nohighlight">\(P(0) = 0.2\)</span> and
+<span class="math notranslate nohighlight">\(P(1) = 0.8\)</span>.</p></li>
+<li><p>Alternatively, we could <strong><em>study</em> what is the proportion of examples
+in each class in the real world</strong>. In the case of spam detection, we
+could ask a large sample of people how many e-mails they receive in
+average and how many spam e-mails they receive. These numbers can be
+used to define the prior probability.</p></li>
+<li><p>Another common choice, when we don’t have enough information on the
+phenomenon is to <strong>assume that all classes are equally probable</strong>,
+in which case <span class="math notranslate nohighlight">\(P(C) = \frac{1}{m}\)</span><em>,</em> where <span class="math notranslate nohighlight">\(m\)</span> is the number of
+classes.</p></li>
+</ul>
+<p>There are many ways to define the prior probability. However, it should
+be considered that this quantity should be interpreted in Bayesian
+terms. This means that, by specifying a prior probability, we are
+introducing our <strong>degree of belief</strong> on what classes are more or less
+likely in the system.</p>
+</section>
+<section id="the-evidence-p-x">
+<h3><span class="section-number">20.1.2. </span>The Evidence <span class="math notranslate nohighlight">\(P(X)\)</span><a class="headerlink" href="#the-evidence-p-x" title="Permalink to this heading">#</a></h3>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is multi-dimensional, estimating <span class="math notranslate nohighlight">\(P(X)\)</span> can be complicated.
+However, if our goal is not to estimate <span class="math notranslate nohighlight">\(P\left( C \middle| X \right)\)</span>,
+but only to determine the class <span class="math notranslate nohighlight">\(c'\)</span> which maximizes the posterior
+probability <span class="math notranslate nohighlight">\(P(C = c'|X)\)</span>, we can note that we don’t need to estimate
+<span class="math notranslate nohighlight">\(P(X)\)</span>.</p>
+<p>Let us consider the MAP classification rule again:</p>
+<div class="math notranslate nohighlight">
+\[f(\mathbf{x}) = \arg_{c}{\max{P(c|\mathbf{x})}} = \arg_{c}{\max\frac{P\left( \mathbf{x} \middle| c \right)P(c)}{P(\mathbf{x})}}\]</div>
+<p>Since <span class="math notranslate nohighlight">\(P(\mathbf{x})\)</span> is independent form the value of <span class="math notranslate nohighlight">\(C\)</span>, the choice
+of the best class <span class="math notranslate nohighlight">\(c\)</span> does not depend on this term. Hence, we can say
+that <span class="math notranslate nohighlight">\(P\left( C \middle| X \right)\)</span> is proportional to the term in the
+numerator:</p>
+<div class="math notranslate nohighlight">
+\[P\left( C \middle| \mathbf{x} \right) \propto P\left( \mathbf{x} \middle| C \right)P(C)\]</div>
+<p>And hence:</p>
+<div class="math notranslate nohighlight">
+\[f(\mathbf{x}) = \arg_{c}{\max{P(c|\mathbf{x})}} = \arg_{c}{\max{P\left( \mathbf{x} \middle| c \right)P(c)}}\]</div>
+</section>
+<section id="the-likelihood-p-x-c">
+<h3><span class="section-number">20.1.3. </span>The Likelihood <span class="math notranslate nohighlight">\(P(X|C)\)</span><a class="headerlink" href="#the-likelihood-p-x-c" title="Permalink to this heading">#</a></h3>
+<p>While estimating the prior is easy and estimating the evidence is not necessary for classification purposes (it would be indeed necessary if we were to compute probabilities), computing the likelihood term is less straightforward.</p>
+<p>If we have <span class="math notranslate nohighlight">\(M\)</span> different classes, a general approach to estimate the likelihood consists in group all observations belonging to a given class <span class="math notranslate nohighlight">\(C=c\)</span> (let’s call <span class="math notranslate nohighlight">\(X_{c}\)</span> the random variable of the examples
+belonging to this group) and estimate the probability <span class="math notranslate nohighlight">\(P\left( X_{c} \right)\)</span>.</p>
+<p>If we repeat this process for every possible value of <span class="math notranslate nohighlight">\(C\)</span>, we have
+concretely estimated <span class="math notranslate nohighlight">\(P(X|C)\)</span> as:</p>
+<div class="math notranslate nohighlight">
+\[P\left( X = x \middle| C = c \right) = P(X_{c})\]</div>
+<p>To estimate <span class="math notranslate nohighlight">\(P(X_{c})\)</span> we will generally need to make a few assumptions. Depending on such assumptions, we obtain different generative models.</p>
+</section>
+</section>
+<section id="map-classification-with-discrete-observations">
+<h2><span class="section-number">20.2. </span>MAP Classification with Discrete Observations<a class="headerlink" href="#map-classification-with-discrete-observations" title="Permalink to this heading">#</a></h2>
+<p>If <span class="math notranslate nohighlight">\(X_{c}\)</span> is discrete, we can estimate <span class="math notranslate nohighlight">\(P(X_{c}\)</span>) by counting how many
+times each of the values appear. For instance, if <span class="math notranslate nohighlight">\(X_{c}\)</span> is
+two-dimensional, we can build a 2D table to count co-occurrence of the
+values and estimate the probability in a frequentist way.</p>
+<section id="example">
+<h3><span class="section-number">20.2.1. </span>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h3>
+<p>Let us consider a simplified version of the Fisher Iris classification
+problem in which we have two variables: SepalWidth and SepalLength with
+three levels each “Small”, “Medium” and “Large”. We can consider a 2D
+variable <span class="math notranslate nohighlight">\(X = \lbrack SepalWidth,\ SepalLenght\rbrack\)</span>. The examples can
+belong to three different classes: setosa, versicolor, virginica. We can
+define the three likelihoods <span class="math notranslate nohighlight">\(P\left( X_{setosa} \right)\)</span>,
+<span class="math notranslate nohighlight">\(P(X_{versicolor})\)</span>, and <span class="math notranslate nohighlight">\(P(X_{virginica})\)</span> considering the following
+three tables:</p>
+<p><img alt="" src="../_images/map_fisher1.png" /></p>
+<p>In each of the tables, the rows are related to the SepalWidth variable,
+whereas the columns are related to the SepalLength variable. The tables
+contain absolute counts of the occurrences of specific values of the two
+variables. <strong>We can transform these tables into joint probability
+distributions by dividing each cell by the sum of the values in the
+table</strong>:</p>
+<p><img alt="" src="../_images/map_fisher2.png" /></p>
+<p>The tables above allow to estimate <span class="math notranslate nohighlight">\(P\left( X \middle| C \right)\)</span>. For
+instance, we have:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P\left( SepalWidth = Medium,\ \ SepalLength = Small \middle| C = Setosa \right) = 0.72\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(P\left( SepalWidth = Small,\ \ SepalLength = Medium \middle| C = Versicolor \right) = 0.32\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(P\left( SepalWidth = Medium,\ \ SepalLength = Large \middle| C = Virginica \right) = 0.24\)</span>;</p></li>
+</ul>
+<p>If we assign equal priors to the three species <span class="math notranslate nohighlight">\(P(C) = \frac{1}{3}\)</span>, we
+can use the tables above to classify an example. For instance, let us
+consider an example with <span class="math notranslate nohighlight">\(X = \lbrack Medium,\ Medium\rbrack\)</span>, i.e.,
+<span class="math notranslate nohighlight">\(SepalWidth = Medium\)</span> and <span class="math notranslate nohighlight">\(SepalLength = Medium\)</span>. To classify this input
+example, we will perform the following operation:</p>
+<div class="math notranslate nohighlight">
+\[f\left( \lbrack Medium,\ Medium\rbrack \right) = \arg_{c}{\max{P\left( \lbrack Medium,Medium\rbrack \middle| c \right)P(c)}}\]</div>
+<p>To do so we need to compute the following three values:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P\left( \lbrack Medium,Medium\rbrack \middle| Setosa \right)P(Setosa) = 0 \cdot \frac{1}{3} = 0\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(P\left( \lbrack Medium,Medium\rbrack \middle| Versicolor \right)P(Setosa) = 0.4 \cdot \frac{1}{3} = 0.13\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(P\left( \lbrack Medium,Medium\rbrack \middle| Virginica \right)P(Virginica) = 0.34 \cdot \frac{1}{3} = 0.11\)</span>;</p></li>
+</ul>
+<p>We will hence classify the example as “Setosa”, as this maximizes the
+posterior probability.</p>
+</section>
+</section>
+<section id="linear-discriminant-analysis-lda">
+<h2><span class="section-number">20.3. </span>Linear Discriminant Analysis (LDA)<a class="headerlink" href="#linear-discriminant-analysis-lda" title="Permalink to this heading">#</a></h2>
+<p>Linear Discriminant Analysis (LDA) is a generalization of Fisher’s Linear Discriminant (FLD) which makes additional assumptions on the data. As FLD, also LDA is closely related to PCA in that it finds a linear transformation of the data which better explains it (in the case of LDA the aim is to discriminate the different classes).</p>
+<section id="linear-discriminant-analysis-for-d-1">
+<h3><span class="section-number">20.3.1. </span>Linear Discriminant Analysis for D=1<a class="headerlink" href="#linear-discriminant-analysis-for-d-1" title="Permalink to this heading">#</a></h3>
+<p>We will start by considering the case in which the data is uni-dimensional, hence <span class="math notranslate nohighlight">\(D=1\)</span>. Recall that, since LDA is a generative algorithm, our goal is to estimate the terms:</p>
+<div class="math notranslate nohighlight">
+\[P(x|C_k)=P(X_k)\]</div>
+<p>for all classes <span class="math notranslate nohighlight">\(k=1,\ldots,K\)</span>.</p>
+<p>LDA makes the assumption that the observations will distribute in a Guassian way within each class. Hence, in the one-dimensional case, we will assume that:</p>
+<div class="math notranslate nohighlight">
+\[P(X_k) = \frac{1}{\sqrt{2 \pi \sigma_k^2}} \exp \left( - \frac{1}{2 \sigma^2_k} (x - \mu_k)^2 \right)\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mu_k\)</span> and <span class="math notranslate nohighlight">\(\sigma_k^2\)</span> are the mean and variance of the observations in class <span class="math notranslate nohighlight">\(k\)</span>.</p>
+<p>LDA further assumes that data in each class have the same variance:</p>
+<div class="math notranslate nohighlight">
+\[\sigma^2 = \sigma_1^2 = \ldots = \sigma_K^2\]</div>
+<p>Using Bayes’ theorem, we can estimate the posterior probability as follows:</p>
+<div class="math notranslate nohighlight">
+\[P(C_k|x) = \frac{\pi_k \frac{1}{\sqrt{2 \pi \sigma^2}} \exp{\left( -\frac{1}{2 \sigma^2} (x-\mu_k)^2 \right)}}{\sum_{l=1}^K \pi_l \frac{1}{\sqrt{2 \pi \sigma^2}} \exp{\left( -\frac{1}{2 \sigma^2} (x-\mu_l)^2 \right)}}\]</div>
+<p>Where we let</p>
+<div class="math notranslate nohighlight">
+\[\pi_k = P(C_k)\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[P(x) = \sum_{l=1}^K P(x|C_l) P(C_l) = \sum_{l=1}^K P(X_l) P(C_l) = \sum_{l=1}^K \pi_l \frac{1}{\sqrt{2 \pi \sigma^2}} \exp{\left( -\frac{1}{2 \sigma^2} (x-\mu_l)^2 \right)}\]</div>
+<p>By the MAP principle, we will assign <span class="math notranslate nohighlight">\(x\)</span> the class <span class="math notranslate nohighlight">\(k\)</span> maximizing the posterior probability <span class="math notranslate nohighlight">\(P(C_k|x)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[h(x) = \arg_k\max P(C_k|x) \]</div>
+<section id="lda-and-mahalanobis-distance">
+<h4><span class="section-number">20.3.1.1. </span>LDA and Mahalanobis Distance<a class="headerlink" href="#lda-and-mahalanobis-distance" title="Permalink to this heading">#</a></h4>
+<p>Since the logarithm is a monotonic function, maximizing <span class="math notranslate nohighlight">\(P(C_k|x)\)</span> is equivalent to maximizing <span class="math notranslate nohighlight">\(\log P(C_k|x)\)</span>. Taking the logarithm of <span class="math notranslate nohighlight">\(P(C_k|x)\)</span>, we obtain:</p>
+<div class="math notranslate nohighlight">
+\[log(P(C_k|x)) = \log \pi_k - \frac{1}{2\sigma^2} (x-\mu_k)^2 + Cst.\]</div>
+<p>Where <span class="math notranslate nohighlight">\(Cst.\)</span> is a constant term arising from the normalization constant of the Gaussian distribution and from the denominator, which is considered a constant as it is independent of <span class="math notranslate nohighlight">\(k\)</span>.</p>
+<p>Note that the quantity</p>
+<div class="math notranslate nohighlight">
+\[\frac{(x-\mu_k)^2}{\sigma^2}\]</div>
+<p>is the <strong>squared Mahalanobis distance</strong>. The Mahalanobis distance is defined as follows:</p>
+<div class="math notranslate nohighlight">
+\[D_M(x) = \sqrt{\frac{(x-\mu)^2}{\sigma^2}}\]</div>
+<p>The Mahalanobis distance measures <strong>the distance between a point <span class="math notranslate nohighlight">\(x\)</span> and a Gaussian distribution with mean <span class="math notranslate nohighlight">\(\mu\)</span> and standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span></strong>.</p>
+<p>Indeed, we can see it as the <strong>number of standard deviations between <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(\mu\)</span></strong>. By normalizing by the standard deviation, the Mahalanobis distance allows to measure the distance between Gaussian distributions of different parameters, as illustrated in the figure below:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/86f1e10767fe20a12e2accf82349cc268ff80b3db64a66d71334a32ab07eae32.png" src="../_images/86f1e10767fe20a12e2accf82349cc268ff80b3db64a66d71334a32ab07eae32.png" />
+</div>
+</div>
+<p>We can see how, even if the green dot is closer to the orange’s population mean, its distance from the blue population is smaller as this distribution is more dispersed.</p>
+<p>This is coherent with the fact that the probability value of the green point under the blue population is larger than the probability value of the same point under the orange population.</p>
+<p>Consider the case of uniform priors <span class="math notranslate nohighlight">\(\pi_k = \frac{1}{K}, \forall k\)</span>. In this case, <strong>we can see LDA as classifying each point by assigning it to the class with the closest distribution in terms of Mahalanobis distance</strong>.</p>
+</section>
+<section id="linear-discriminant-analysis-and-discriminant-function">
+<h4><span class="section-number">20.3.1.2. </span>Linear Discriminant Analysis and Discriminant Function<a class="headerlink" href="#linear-discriminant-analysis-and-discriminant-function" title="Permalink to this heading">#</a></h4>
+<p>The reasoning above suggests that LDA acts as a <strong>discriminant function</strong> assigning observations to one class or another based on the computation of some scores based on the Mahalanobis distance.</p>
+<p>We can see that LDA naturally defines a <strong>linear discriminant function</strong>, hence the words “linear” and “discriminant” in LDA. We can re-arrange the term <span class="math notranslate nohighlight">\(\log P(C_k|x)\)</span> as follows:</p>
+<div class="math notranslate nohighlight">
+\[\delta_k(x)=\log P(C_k|x) = w_k x + w_{k0} + Cst.\]</div>
+<p>with</p>
+<div class="math notranslate nohighlight">
+\[w_k = \frac{\mu_k}{\sigma^2}\]</div>
+<div class="math notranslate nohighlight">
+\[w_{k0} = \log \pi_k-\frac{\mu_k^2}{2\sigma^2}\]</div>
+<p>Where we set <span class="math notranslate nohighlight">\(\delta_k(x)=\log P(C_k|x)\)</span> as a shorthand notation.</p>
+<p>From the expression above, it is clear that LDA defines <strong>a linear discriminant</strong> <span class="math notranslate nohighlight">\(\delta_k\)</span>, hence LDA can be considered both a <strong>generative algorithm</strong> (explicitly modeling probabilities <span class="math notranslate nohighlight">\(P(X_c)\)</span>) and a <strong>discriminative one</strong> (explicitly modeling a decision boundary).</p>
+<p>For instance, if <span class="math notranslate nohighlight">\(K=2\)</span> (two classes) and <span class="math notranslate nohighlight">\(\pi_1=\pi_2\)</span> (uniform priors), then the decision boundary is given by:</p>
+<div class="math notranslate nohighlight">
+\[\delta_1(x) = \delta_2(x) \Rightarrow x \cdot \frac{\mu_1}{\sigma^2} - \frac{\mu_1^2}{2 \sigma^2} + \log \pi_1 = x \cdot \frac{\mu_2}{\sigma^2} - \frac{\mu_2^2}{2 \sigma^2} + \log \pi_2 \Rightarrow\]</div>
+<div class="math notranslate nohighlight">
+\[\Rightarrow x \cdot \mu_1 - \frac{\mu_1^2}{2} = x \cdot \mu_2 - \frac{\mu_2^2}{2} \Rightarrow x  = \frac{\mu_1^2 - \mu_2^2}{2 (\mu_1 - \mu_2)} \Rightarrow x = \frac{\mu_1 + \mu_2}{2}\]</div>
+<p>Note that this point would effectively act as a threshold (hence a decision boundary) to classify elements. This is also the point in which the two Guassian distribution intersect, as shown in the figure below:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/8375158905965d526605cb4120ccf11b84df06597361c8f22a1cc5e7765a6b2e.png" src="../_images/8375158905965d526605cb4120ccf11b84df06597361c8f22a1cc5e7765a6b2e.png" />
+</div>
+</div>
+<p>When the priors are not uniform, the decision boundary will not be exactly at the intersection of the two Gaussian distributions, as shown in the figure below:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/0ea2be3e85d1cfc6699135811b2c9fe4222d9b96c0f395e24dd82092cf517d7a.png" src="../_images/0ea2be3e85d1cfc6699135811b2c9fe4222d9b96c0f395e24dd82092cf517d7a.png" />
+<img alt="../_images/36f2db64f4740db9864356fa972bb4ddc996576697aba158b0ba50fb7f7017c4.png" src="../_images/36f2db64f4740db9864356fa972bb4ddc996576697aba158b0ba50fb7f7017c4.png" />
+<img alt="../_images/9fd039b024107716af5493c1651688e3810e35218ce76eb031cef36dedb2c852.png" src="../_images/9fd039b024107716af5493c1651688e3810e35218ce76eb031cef36dedb2c852.png" />
+</div>
+</div>
+</section>
+<section id="optimization">
+<h4><span class="section-number">20.3.1.3. </span>Optimization<a class="headerlink" href="#optimization" title="Permalink to this heading">#</a></h4>
+<p>In practice, we can fit the LDA classifier to the data by estimating its parameters as follows:</p>
+<div class="math notranslate nohighlight">
+\[\hat{\mu}_k = \frac{1}{N_k}\sum_{i: y_i=k} x_i\]</div>
+<div class="math notranslate nohighlight">
+\[\hat{\sigma}_k = \frac{1}{N-K} \sum_{k=1}^K \sum_{i:y_i=k}^N (x_i - \hat{\mu}_k)^2\]</div>
+<p>where <span class="math notranslate nohighlight">\(N_K\)</span> is the number of observations in class <span class="math notranslate nohighlight">\(C_k\)</span>, and <span class="math notranslate nohighlight">\(N\)</span> is the total number of elements. In practice, the first expression computes the means within each class and the second expression can be seen as a weighted average of the variances within each class.</p>
+<p>The priors are estimated based on the number of elements in each class:</p>
+<div class="math notranslate nohighlight">
+\[\pi_k = \frac{N_k}{N}\]</div>
+</section>
+</section>
+<section id="id1">
+<h3><span class="section-number">20.3.2. </span>Linear Discriminant Analysis for D&gt;1<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<p>Let us now consider the general case in which <span class="math notranslate nohighlight">\(D&gt;1\)</span>. We will assume that our input observations are realizations of a random variable <span class="math notranslate nohighlight">\(X=(X_1,X_2, \ldots, X_D)\)</span> following a multivariate Gaussian distribution.</p>
+<p>We will follow the same principle consider for the uni-dimensional case and model the likelihood terms <span class="math notranslate nohighlight">\(P(X_c)\)</span> with multivariate Gaussian distributions. Recall that the D-dimensional multivariate Gaussian is defined as follows:</p>
+<div class="math notranslate nohighlight">
+\[N\left( \mathbf{x;\mu,}\mathbf{\Sigma} \right) = \sqrt{\frac{1}{(2\pi)^{D}\det(\Sigma)}}e^{( - \frac{1}{2}\left( \mathbf{x} - \mathbf{\mu} \right)^{T}\Sigma^{- 1}\left( \mathbf{x} - \mathbf{\mu} \right))}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(\mathbf{\mu}\)</span> is a D-dimensional vector indicating the mean, and <span class="math notranslate nohighlight">\(\mathbf{\Sigma}\)</span> is the <span class="math notranslate nohighlight">\(D \times D\)</span> covariance matrix.</p>
+<p>In the multivariate case (<span class="math notranslate nohighlight">\(D&gt;1\)</span>) LDA assumes that observations in class <span class="math notranslate nohighlight">\(k\)</span> follow a D-dimensional Gaussian distribution with mean <span class="math notranslate nohighlight">\(\mathbf{\mu}_k\)</span> and covariance matrix <span class="math notranslate nohighlight">\(\mathbf{\Sigma}\)</span>. As in the previous case, we will assume that all classes have the same covariance matrix <span class="math notranslate nohighlight">\(\mathbf{\Sigma}\)</span>, while means can be distinct. Hence, we will model:</p>
+<div class="math notranslate nohighlight">
+\[P(\mathbf{x}|C_k) = N(\mathbf{x}; \mathbf{\mu}_k, \mathbf{\Sigma}) = \sqrt{\frac{1}{(2\pi)^{D}\det(\Sigma)}}e^{( - \frac{1}{2}\left( \mathbf{x} - \mathbf{\mu}_k \right)^{T}\Sigma^{- 1}\left( \mathbf{x} - \mathbf{\mu}_k \right))}\]</div>
+<p>We can estimate the posterior probability as follows:</p>
+<div class="math notranslate nohighlight">
+\[P(C_k|\mathbf{x}) = \frac{\pi_k \sqrt{\frac{1}{(2\pi)^{D}\det(\Sigma)}}e^{( - \frac{1}{2}\left( \mathbf{x} - \mathbf{\mu}_k \right)^{T}\Sigma^{- 1}\left( \mathbf{x} - \mathbf{\mu}_k \right))}}{\sum_{l=1}^K \pi_l \sqrt{\frac{1}{(2\pi)^{D}\det(\Sigma)}}e^{( - \frac{1}{2}\left( \mathbf{x} - \mathbf{\mu}_l \right)^{T}\Sigma^{- 1}\left( \mathbf{x} - \mathbf{\mu}_l \right))}}\]</div>
+<section id="multidimensional-mahalanobis-distance">
+<h4><span class="section-number">20.3.2.1. </span>Multidimensional Mahalanobis Distance<a class="headerlink" href="#multidimensional-mahalanobis-distance" title="Permalink to this heading">#</a></h4>
+<p>Taking the logarithm of the posterior, we obtain:</p>
+<div class="math notranslate nohighlight">
+\[\log P(C_k|mathbf{x}) = -\frac{1}{2} (\mathbf{x} - \mathbf{\mu}_k)^T \mathbf{\Sigma}^{-1}(\mathbf{x} - \mathbf{\mu}_k) + \log \pi_k + Cst.\]</div>
+<p>This is the multivariate version of the expression seen in the unidimensional case (<span class="math notranslate nohighlight">\(D=1\)</span>). Note that the expression</p>
+<div class="math notranslate nohighlight">
+\[(\mathbf{x} - \mathbf{\mu}_k)^T \mathbf{\Sigma}^{-1}(\mathbf{x} - \mathbf{\mu}_k)\]</div>
+<p>is the <strong>generalization to multiple dimensions of the squared Mahalanobis distance</strong>. The Mahalanobis distance is indeed defined as follows in the multidimensional case:</p>
+<div class="math notranslate nohighlight">
+\[D_M(\mathbf{x}) = \sqrt{(\mathbf{x}-\mathbf{\mu})^T \Sigma^{-1}(\mathbf{x}-\mathbf{\mu})}\]</div>
+<p>In this case, the Mahalanobis distance estimates <strong>the distance between a multidimensional point <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and a multivariate Gaussian distribution</strong>. To do so, we need to take into account the covariance matrix of each distribution, which defines how the data vary along the different directions.</p>
+<p>The plot below shows an example:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/2ed6721bd9cb4974511c3a08437fce8b8f6c7152eb5b5be77b768a851fa6795d.png" src="../_images/2ed6721bd9cb4974511c3a08437fce8b8f6c7152eb5b5be77b768a851fa6795d.png" />
+</div>
+</div>
+<p>We can again see LDA as classifying <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> with the class with the closest Gaussian distribution in terms of Mahalanobis distance.</p>
+</section>
+<section id="linear-discriminant-function">
+<h4><span class="section-number">20.3.2.2. </span>Linear Discriminant Function<a class="headerlink" href="#linear-discriminant-function" title="Permalink to this heading">#</a></h4>
+<p>Also in this case, LDA allows to define a multi-class linear discriminant functions:</p>
+<div class="math notranslate nohighlight">
+\[\delta_k(\mathbf{x} = \log(P(C_k|\mathbf{x}))) = \mathbf{w}_k^T \mathbf{x} + w_{k0} + Cst.\]</div>
+<p>where:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{w}_k = \mathbf{\Sigma}^{-1}\mathbf{\mu}_k\]</div>
+<div class="math notranslate nohighlight">
+\[w_{k0} = -\frac{1}{2} \mathbf{\mu}_k^T \Sigma^{-1} \mathbf{\mu}_k + \log \pi_k\]</div>
+<p>We can see <span class="math notranslate nohighlight">\(\delta_k\)</span> as a linear function of <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>. Note that the decision boundary will be made of all points <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[\delta_i(\mathbf{x}) = \delta_j(\mathbf{x}), i \neq j\]</div>
+<p>We will not see the mathematical formulation in details, but it is easy to see that will be linear functions as well. The following figure shows Gaussian fits and decision boundary for a simple example:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/9173247dfc4993f717e17ee1b0f59e9e35d9d6a7687cbf8af1f3e2d6f20bca09.png" src="../_images/9173247dfc4993f717e17ee1b0f59e9e35d9d6a7687cbf8af1f3e2d6f20bca09.png" />
+</div>
+</div>
+<p>The parameters of the LDA classifier will be fit to the data with the following formulas:</p>
+<div class="math notranslate nohighlight">
+\[\hat{\mathbf{\mu}}_k = \frac{1}{N_k}\sum_{i: y_i=k} \mathbf{x}_i\]</div>
+<div class="math notranslate nohighlight">
+\[\hat{\mathbf{\Sigma}}_k = \frac{1}{N-K} \sum_{k=1}^K \sum_{i:y_i=k}^N (\mathbf{x}_i - \hat{\mathbf{\mu}}_k)(\mathbf{x}_i - \hat{\mathbf{\mu}}_k)^T\]</div>
+</section>
+</section>
+<section id="lda-for-dimensionality-reduction">
+<h3><span class="section-number">20.3.3. </span>LDA for Dimensionality Reduction<a class="headerlink" href="#lda-for-dimensionality-reduction" title="Permalink to this heading">#</a></h3>
+<p>Linear Discriminant Analysis can also be used for dimensionality reduction, similar to Fisher’s Linear Discriminant. We will not see the mathematical details, but LDA arrives at a similar solution as FLD with some technical differences. It is useful to know that libraries such as scikit-learn often implement both versions of LDA (classification and dimensionality reduction). More information can be found here: <a class="reference external" href="https://scikit-learn.org/stable/modules/lda_qda.html#mathematical-formulation-of-lda-dimensionality-reduction">https://scikit-learn.org/stable/modules/lda_qda.html#mathematical-formulation-of-lda-dimensionality-reduction</a></p>
+</section>
+</section>
+<section id="quadratic-discriminant-analysis-qda">
+<h2><span class="section-number">20.4. </span>Quadratic Discriminant Analysis (QDA)<a class="headerlink" href="#quadratic-discriminant-analysis-qda" title="Permalink to this heading">#</a></h2>
+<p>Quadratic Discriminant Analysis has a similar formulation to Linear Discriminant Analysis, but it <strong>removes the assumption that covariance matrices in the different classes should be the same</strong>, which was formulated as:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{\Sigma}_1 = \mathbf{\Sigma}_2 = \ldots = \mathbf{\Sigma}_k = \mathbf{\Sigma}\]</div>
+<p>In this sense, LDA can be seen as a specific case of QDA.</p>
+<p>We will not see the mathematical details, but, dropping this constraint makes the decision boundary between classes a <strong>quadratic function</strong>, rather than <strong>a linear one</strong>, hence the term “quadratic” in QDA.</p>
+<p>The figure below compares LDA and QDA for classes with different covariance matrices:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/3cb3661da284bb99f2fa3bd623578387e975c1ee4600d917f5392bb38ce1266b.png" src="../_images/3cb3661da284bb99f2fa3bd623578387e975c1ee4600d917f5392bb38ce1266b.png" />
+</div>
+</div>
+</section>
+<section id="naive-bayes-classifier">
+<h2><span class="section-number">20.5. </span>Naïve Bayes Classifier<a class="headerlink" href="#naive-bayes-classifier" title="Permalink to this heading">#</a></h2>
+<p>Let us consider the problem of classifying <strong>e-mail messages as spam
+or non-spam</strong>, with the e-mails represented with bag of words (a representation which counts the number of occurrences of each word given a vocabulary), with
+<strong>vocabulary size equal to 20000 words</strong>. In this example, we will
+consider <span class="math notranslate nohighlight">\(X = \lbrack X_{1},\ldots,X_{n}\rbrack\)</span> (e.g., <span class="math notranslate nohighlight">\(n = 20000)\)</span> as
+a multi-dimensional random variable containing the features and <span class="math notranslate nohighlight">\(C\)</span> as
+the random variable representing the class.</p>
+<p>If we want to apply the MAP rule, we obtain:</p>
+<div class="math notranslate nohighlight">
+\[f(\mathbf{x}) = \arg_{c}{\max{P\left( \mathbf{x} \middle| c \right)}}P(c)\]</div>
+<p>When the dimensionality of the input data is very high, modeling
+<span class="math notranslate nohighlight">\(P(X|C)\)</span> directly as seen before is very challenging.</p>
+<p>For instance, <strong>if we wanted to fit a 20000-D Gaussian</strong>, we would have
+to compute <span class="math notranslate nohighlight">\(Cov(X)\)</span>. This would be a matrix of dimension
+<span class="math notranslate nohighlight">\(20000 \times 20000\)</span>, which <strong>would require about 1.5GB in single
+precision</strong>!</p>
+<section id="naive-assumption">
+<h3><span class="section-number">20.5.1. </span>Naïve Assumption<a class="headerlink" href="#naive-assumption" title="Permalink to this heading">#</a></h3>
+<p>We have seen that probabilities can be factorized using the product
+rule. Hence, we could obtain:</p>
+<div class="math notranslate nohighlight">
+\[P\left( X \middle| C \right) = P\left( X_{1},\ldots,X_{n} \middle| C \right) = P\left( X_{1} \middle| C \right)P\left( X_{2} \middle| X_{1},C \right)P\left( X_{3} \middle| X_{2},X_{1},C \right)\ldots P(X_{n}|X_{1},\ldots,X_{n - 1},C)\]</div>
+<p>However, this is not a very helpful factorization as the terms
+<span class="math notranslate nohighlight">\(P(X_{i}|X_{1},\ldots,X_{i - 1},C)\)</span> are conditioned also on other
+features, which makes them not easy to model.</p>
+<p>We can make the <strong>naïve assumption</strong> that <strong>the input features are
+conditional independent given the class</strong>. That is, if the examples are
+represented by the multimodal random variable
+<span class="math notranslate nohighlight">\(X = \lbrack X_{1},\ldots,X_{n}\rbrack\)</span> (features) and <span class="math notranslate nohighlight">\(C\)</span> (class):</p>
+<div class="math notranslate nohighlight">
+\[X_{i}\bot X_{j}\ |\ C,\ \forall i \neq j\]</div>
+<p>If <span class="math notranslate nohighlight">\(X_{i}\)</span> and <span class="math notranslate nohighlight">\(X_{j}\)</span> are <strong>word counts</strong>, then we are saying that if I
+take all non-spam e-mails, then the number of occurrences of a given
+word <strong>does not influence</strong> the number of occurrences of <strong>another
+word</strong>. This is <strong>obviously not true in general!</strong> For instance, there
+can be legitimate e-mails of different topics. If the e-mail is about a
+vacation, the words ‘trip’, ‘flight’, ‘luggage’ will appear often.
+Instead, if the e-mail is about work, the words ‘meeting’, ‘report’,
+‘time’, will appear more often. This means that, within the same
+category (non-spam e-mails), the number of occurrences of a word (e.g.,
+‘trip’) may be related to the number of occurrences of another words
+(e.g., ‘flight’), which breaks the assumption of <strong>conditional
+independence</strong>. This is why this assumption is called <strong>naïve
+assumption</strong>. With this in mind, it should be considered that, despite
+such naïve assumption, the Naïve Bayes Classifier works surprisingly
+well in many contexts.</p>
+<p>We know that:</p>
+<div class="math notranslate nohighlight">
+\[X\bot Y|Z \Leftrightarrow P\left( X,Y|Z \right) = P\left( X|Z \right)P\left( Y|Z \right)\]</div>
+<p>Hence, we discover that, under the assumption of conditional
+independence:</p>
+<div class="math notranslate nohighlight">
+\[P\left( X_{1},\ldots,X_{n} \middle| C \right) = P\left( X_{1} \middle| C \right)P\left( X_{2} \middle| C \right)\ldots P(X_{n}|C)\]</div>
+<p>So, we can re-write the MAP classification rule as:</p>
+<div class="math notranslate nohighlight">
+\[f(\mathbf{x}) = \arg_{c}max\ P\left( \mathbf{x}_{1} \middle| c \right)\left( \mathbf{x}_{2} \middle| c \right)\ldots P\left( \mathbf{x}_{n} \middle| c \right)P(c)\]</div>
+<p>The single <span class="math notranslate nohighlight">\(P(X_{1}|C)\)</span> terms are now easy to model, since <span class="math notranslate nohighlight">\(X_{1}\)</span> is
+mono-dimensional. In practice, depending on the considered problem, we
+can model these terms in different ways. Two common approaches,
+depending on the data, are to use a Gaussian distribution or a
+Multinomial distribution.</p>
+<p>When we use Gaussian distributions to model the <span class="math notranslate nohighlight">\(P(X_{i}|C)\)</span> terms, the
+classification method is called “Gaussian Naïve Bayes). Similarly, if we
+consider a multinomial distribution, the classification method is called
+“Multinomial Naïve Bayes”.</p>
+</section>
+<section id="gaussian-naive-bayes">
+<h3><span class="section-number">20.5.2. </span>Gaussian naïve Bayes<a class="headerlink" href="#gaussian-naive-bayes" title="Permalink to this heading">#</a></h3>
+<p>Let us consider again our sex classification example based on height and
+weight. We will consider <span class="math notranslate nohighlight">\(X = \lbrack H,W\rbrack\)</span>, which are random
+variables representing heights and weights of subjects. If we assume
+that the data is approximately Gaussian, the probabilities <span class="math notranslate nohighlight">\(P(H|C)\)</span> and
+<span class="math notranslate nohighlight">\(P(W|C)\)</span> can be modeled with univariate (1D) Gaussian distributions.
+This is done by first obtaining four samples:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(H_{1}\)</span>: the heights of subjects when <span class="math notranslate nohighlight">\(C = 1\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(W_{1}\)</span>: the weights of subjects when <span class="math notranslate nohighlight">\(C = 1;\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(H_{0}\)</span>: the heights of subjects when <span class="math notranslate nohighlight">\(C = 0\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(W_{0}\)</span>: the weights of subjects when <span class="math notranslate nohighlight">\(C = 0.\)</span></p></li>
+</ul>
+<blockquote>
+<div><p>We hence model each sample as a 1D Gaussian distribution by computing
+a mean and a variance value from each of these samples to obtain four
+Gaussian distributions:</p>
+</div></blockquote>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P\left( H = h \middle| C = 0 \right) = N(x;\mu_{1},\sigma_{1})\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(P\left( W = w \middle| C = 0 \right) = N(x;\mu_{2},\sigma_{2})\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(P\left( H = h \middle| C = 1 \right) = N(x;\mu_{3},\sigma_{3})\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(P\left( W = w \middle| C = 1 \right) = N(x;\mu_{4},\sigma_{4})\)</span>;</p></li>
+</ul>
+<p>After this, we can apply the classification rule:</p>
+<ul class="simple">
+<li><p>The example <span class="math notranslate nohighlight">\((h,w)\)</span> is classified as class 1 if</p></li>
+</ul>
+<p><span class="math notranslate nohighlight">\(P\left( h \middle| C = 1 \right)P\left( w \middle| C = 1 \right)P(C = 1) &gt; P\left( h \middle| C = 0 \right)P\left( w \middle| C = 0 \right)P(C = 0)\)</span>;</p>
+<ul class="simple">
+<li><p>The example <span class="math notranslate nohighlight">\((h,w)\)</span> is classified as class 0 otherwise.</p></li>
+</ul>
+<p>We can exemplify this process as follows:</p>
+<p><img alt="" src="../_images/map_weight3.png" /></p>
+</section>
+<section id="naive-bayes-and-qda">
+<h3><span class="section-number">20.5.3. </span>Naive Bayes and QDA<a class="headerlink" href="#naive-bayes-and-qda" title="Permalink to this heading">#</a></h3>
+<p>We will not see it in details, but it can be shown that a <strong>Gaussian Naive Bayes classifier is equivalent to a Quadratic Discriminant Analysis classifier with diagonal covariance matrices</strong>. By forcing the covariance matrices to have zeros on all off-diagonal elements, we are assuming that variables are <strong>conditionally independent with respect to classes</strong> (hence independent within each class).</p>
+<p>The figure below compares a Quadratic Discriminant Analysis classifier with a Gaussian Naive Bayes on the same data:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/4b926b1b7c2db9b2a570d63dcf914ec5a180865f424a11a7c128f214b04181ba.png" src="../_images/4b926b1b7c2db9b2a570d63dcf914ec5a180865f424a11a7c128f214b04181ba.png" />
+</div>
+</div>
+<p>As we can see both decision boundaries are non-linear. This happens because we did not constrain all covariance matrices to be the equal.</p>
+<p>Differently from QDA, in Gaussian Naive Bayes the fitted Gaussians are <strong>aligned to the axes</strong>, which is due to the naive assumption. This brings some differences in the decision boundary between class 1 and class 2 in the specific example above.</p>
+</section>
+</section>
+<section id="references">
+<h2><span class="section-number">20.6. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Naïve Bayes Classifier: <a class="reference external" href="https://en.wikipedia.org/wiki/Naive_Bayes_classifier">https://en.wikipedia.org/wiki/Naive_Bayes_classifier</a>;</p></li>
+<li><p><a class="reference external" href="https://scikit-learn.org/stable/modules/lda_qda.html#lda-qda">https://scikit-learn.org/stable/modules/lda_qda.html#lda-qda</a></p></li>
+<li><p>Section 4.4 of [1]</p></li>
+</ul>
+<p>[1] James, Gareth Gareth Michael. An introduction to statistical learning: with applications in Python, 2023.<a class="reference external" href="https://www.statlearning.com">https://www.statlearning.com</a></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lectures"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="20_discriminative_models_for_classification.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">19. </span>Discriminative Models for Classification</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../laboratories/01_setup.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">21. </span>Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-a-posteriori-map-classification-principle">20.1. Maximum A Posteriori (MAP) Classification Principle</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-prior-p-c">20.1.1. The Prior <span class="math notranslate nohighlight">\(P(C)\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-evidence-p-x">20.1.2. The Evidence <span class="math notranslate nohighlight">\(P(X)\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-likelihood-p-x-c">20.1.3. The Likelihood <span class="math notranslate nohighlight">\(P(X|C)\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#map-classification-with-discrete-observations">20.2. MAP Classification with Discrete Observations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">20.2.1. Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-discriminant-analysis-lda">20.3. Linear Discriminant Analysis (LDA)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-discriminant-analysis-for-d-1">20.3.1. Linear Discriminant Analysis for D=1</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#lda-and-mahalanobis-distance">20.3.1.1. LDA and Mahalanobis Distance</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-discriminant-analysis-and-discriminant-function">20.3.1.2. Linear Discriminant Analysis and Discriminant Function</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization">20.3.1.3. Optimization</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">20.3.2. Linear Discriminant Analysis for D&gt;1</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multidimensional-mahalanobis-distance">20.3.2.1. Multidimensional Mahalanobis Distance</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-discriminant-function">20.3.2.2. Linear Discriminant Function</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lda-for-dimensionality-reduction">20.3.3. LDA for Dimensionality Reduction</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quadratic-discriminant-analysis-qda">20.4. Quadratic Discriminant Analysis (QDA)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-bayes-classifier">20.5. Naïve Bayes Classifier</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-assumption">20.5.1. Naïve Assumption</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-naive-bayes">20.5.2. Gaussian naïve Bayes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-bayes-and-qda">20.5.3. Naive Bayes and QDA</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">20.6. References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Antonino Furnari
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
