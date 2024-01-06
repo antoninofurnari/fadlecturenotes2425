@@ -27,6 +27,9 @@ parts:
   - file: lectures/16_density_estimation
   - file: lectures/17_principal_component_analysis
   - file: lectures/18_predictive_modeling
+  - file: lectures/19_classification
+  - file: lectures/20_discriminative_models_for_classification
+  - file: lectures/21_generative_models_for_classification
 - caption: Laboratories
   numbered: True
   chapters:
