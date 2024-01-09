@@ -448,10 +448,11 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-the-performance-of-a-predictive-model">17.3. Evaluating the Performance of a Predictive Model</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generalization-and-cross-validation">17.3.1. Generalization and Cross-Validation</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#holdout-validation-or-single-split">17.3.1.1. Holdout Validation or Single Split</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#k-fold-cross-validation">17.3.1.2. K-Fold Cross-Validation</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#leave-one-out-cross-validation">17.3.1.3. Leave-One-Out Cross-Validation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting">17.3.1. Overfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generalization-and-cross-validation">17.3.2. Generalization and Cross-Validation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#holdout-validation-or-single-split">17.3.2.1. Holdout Validation or Single Split</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#k-fold-cross-validation">17.3.2.2. K-Fold Cross-Validation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#leave-one-out-cross-validation">17.3.2.3. Leave-One-Out Cross-Validation</a></li>
 </ul>
 </li>
 </ul>
@@ -475,7 +476,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-normalization">17.6.3. Data Normalization</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regressor">17.6.4. Linear Regressor</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">17.6.5. Non-Linear Regression</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lasso-regularization">17.6.6. Lasso Regularization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-regularization">17.6.6. Ridge Regularization</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lasso-regression">17.6.7. Lasso Regression</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grid-search">17.6.8. Grid Search</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scikit-learn-pipelines">17.6.9. Scikit-Learn Pipelines</a></li>
@@ -578,6 +579,8 @@ document.write(`
 <section id="evaluating-the-performance-of-a-predictive-model">
 <h2><span class="section-number">17.3. </span>Evaluating the Performance of a Predictive Model<a class="headerlink" href="#evaluating-the-performance-of-a-predictive-model" title="Permalink to this heading">#</a></h2>
 <p>Once we choose a model <span class="math notranslate nohighlight">\(\hat h\)</span> minimizing the empirical risk computed on the training set, we need to <strong>evaluate the performance of the model</strong>. This is a fundamental step, as we want to know <strong>how well will the model do “in the wild”, beyond the training set</strong>.</p>
+<section id="overfitting">
+<h3><span class="section-number">17.3.1. </span>Overfitting<a class="headerlink" href="#overfitting" title="Permalink to this heading">#</a></h3>
 <p>One may think that a model minimizing the empirical risk will be the best possible one. However, especially <strong>when the training set is not large enough (as compared to the complexity of the model) or not representative enough of the joint probability distribution <span class="math notranslate nohighlight">\(P(X,Y)\)</span></strong>, the estimation of the empirical risk may be limited. As an example, consider the following model:</p>
 <div class="math notranslate nohighlight">
 \[\hat h(x) = y \text{ s.t. } (x,y) \in \text{TR}\]</div>
@@ -613,16 +616,17 @@ In practice, there are different ways to reduce the model capacity. In the examp
 </div>
 </div>
 <p>Note that even a polynomial of degree equal to <span class="math notranslate nohighlight">\(50\)</span> (right) achieves reasonable results now.</p>
+</section>
 <section id="generalization-and-cross-validation">
-<h3><span class="section-number">17.3.1. </span>Generalization and Cross-Validation<a class="headerlink" href="#generalization-and-cross-validation" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">17.3.2. </span>Generalization and Cross-Validation<a class="headerlink" href="#generalization-and-cross-validation" title="Permalink to this heading">#</a></h3>
 <p>The example above has shown how it is possible to obtain models that work well on the training data but do not generalize to unseen data, while ideally we would want models which work well on the test data as well. We call the ability of the model to obtain a similar error (e.g., the empirical risk)  on both the training set and unseen data <strong>generalization</strong>.</p>
 <p>To measure the ability of a model to generalize, we could just take the model and use it “<strong>in the wild</strong>”. However, since we want our tests to be repeatable, we instead resort to a series of techniques which <strong>consist in using a part of our dataset as a training set and different part of the dataset as a test set</strong>. These techniques are generally referred to as <strong>cross validation</strong>. In the following, we see the main approaches to cross validation.</p>
 <p>However, before to proceed, we should point out that, while we could evaluate the performance of a model with the <strong>empirical risk</strong>, in practice, it is common to use <strong>performance measures</strong> (the higher the better) or <strong>error measures</strong> (the lower the better) which may be different from the <strong>loss function chosen to train the algorithm</strong>. This is due to the fact that loss functions often need to have some properties to facilitate learning, so they can represent an <strong>approximation of or a deviation from our true objective measure of performance</strong>. We will see more in details the main performance measures later, but for the moment we will note that we will evaluate models using a given performance measure:</p>
 <div class="math notranslate nohighlight">
-\[p(\hat Y, Y) : \mathcal{Y} \times \mathcal{Y} \to \Re\]</div>
+\[p(\hat Y, Y) : \mathcal{Y}^N \times \mathcal{Y}^N \to \Re\]</div>
 <p>where <span class="math notranslate nohighlight">\(Y=\{y_i | (x_i,y_i) \in S \}_{i=1}^N\)</span> is a set of ground truth values from a set of data <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(\hat Y = \{h(x_i) | (x_i,y_i) \in S \}_{i=1}^N\)</span> is the set of corresponding predictions. Note that, given the definition above, the empirical risk can be seen as a performance measure, but we need not restrict to the empirical risk to evaluate predictive models.</p>
 <section id="holdout-validation-or-single-split">
-<h4><span class="section-number">17.3.1.1. </span>Holdout Validation or Single Split<a class="headerlink" href="#holdout-validation-or-single-split" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">17.3.2.1. </span>Holdout Validation or Single Split<a class="headerlink" href="#holdout-validation-or-single-split" title="Permalink to this heading">#</a></h4>
 <p>The simplest form of cross-validation is the holdout test. In this case, the initial set of data is split into two different sets: a training set, which will be used to optimize the model (e.g., with empirical risk minimization) and a test set, which is used to evaluate the performance of the model. The act of optimizing the model on the training set is often called <strong>training</strong>, while the act of evaluating the performance of the model on the test set is called <strong>testing</strong>. This approach <strong>pretends that the test data is not available at training time and only uses it to evaluate performance</strong>.</p>
 <p>The <strong>rule number one</strong> when using this technique is <strong>to avoid in any way to choose any characteristic of the model based on the training data</strong>. Indeed, if we did so, we could end up in some form of unmeasurable overfitting. To make sure that both the training and test set are i.i.d., before the split, the data is <strong>randomly shuffled</strong>.</p>
 <p>Also, since training data is usually precious and datasets are often not large enough, it is common to split the data asymmetrically, choosing <span class="math notranslate nohighlight">\(70-80\%\)</span> of the data for training and <span class="math notranslate nohighlight">\(20-30\%\)</span> of the data for testing.</p>
@@ -634,7 +638,7 @@ In practice, there are different ways to reduce the model capacity. In the examp
 </div>
 </section>
 <section id="k-fold-cross-validation">
-<h4><span class="section-number">17.3.1.2. </span>K-Fold Cross-Validation<a class="headerlink" href="#k-fold-cross-validation" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">17.3.2.2. </span>K-Fold Cross-Validation<a class="headerlink" href="#k-fold-cross-validation" title="Permalink to this heading">#</a></h4>
 <p>When the dataset is very small, we may not want to sacrifice a part of it for testing only as this may lead to a biased model. Also, we should note that a small test set could lead to a biased estimation of the model performance. In these cases, rather than randomly splitting the data into two parts, we randomly split it into <span class="math notranslate nohighlight">\(K\)</span> different parts, which will be called <strong>folds</strong>.</p>
 <p>We then perform training and testing <span class="math notranslate nohighlight">\(K\)</span> times, each time using fold <span class="math notranslate nohighlight">\(i\)</span> as the test set, and the remaining folds as the training set. The final model performance is obtained by averaging the performance scores computed in each iteration. Note that the obtained performance is unbiased, as each number in the final average is computed on data which has not been seen during training.</p>
 <p>The figure below illustrates the case of a 4-fold cross-validation.</p>
@@ -646,7 +650,7 @@ In practice, there are different ways to reduce the model capacity. In the examp
 <p>The K-Fold cross validation has the advantage of allowing to validate the model without throwing away a significant part of the data, but it is practically feasible only when the training procedure is not too computationally expensive. Indeed, if training a model takes one week, a K-Fold validation will typically require four weeks.</p>
 </section>
 <section id="leave-one-out-cross-validation">
-<h4><span class="section-number">17.3.1.3. </span>Leave-One-Out Cross-Validation<a class="headerlink" href="#leave-one-out-cross-validation" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">17.3.2.3. </span>Leave-One-Out Cross-Validation<a class="headerlink" href="#leave-one-out-cross-validation" title="Permalink to this heading">#</a></h4>
 <p>In leave-one-out cross-validation, the validation stage is performed in <span class="math notranslate nohighlight">\(N\)</span> iterations, where <span class="math notranslate nohighlight">\(N\)</span> is the number of elements in the dataset. At the <span class="math notranslate nohighlight">\(i^{th}\)</span> iteration, the model is trained on all data points except <span class="math notranslate nohighlight">\((x_i,y_i)\)</span> and tested on <span class="math notranslate nohighlight">\((x_i,y_i)\)</span>. The final performance is obtained by averaging the performance scores obtained at each iterations. Note that this is the same as K-Fold cross-validation with <span class="math notranslate nohighlight">\(K=N\)</span>. The figure below illustrates the process:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -1314,8 +1318,8 @@ VAL      23.48 2157650.15  1468.89
 </div>
 </div>
 </section>
-<section id="lasso-regularization">
-<h3><span class="section-number">17.6.6. </span>Lasso Regularization<a class="headerlink" href="#lasso-regularization" title="Permalink to this heading">#</a></h3>
+<section id="ridge-regularization">
+<h3><span class="section-number">17.6.6. </span>Ridge Regularization<a class="headerlink" href="#ridge-regularization" title="Permalink to this heading">#</a></h3>
 <p>We can see that, as the polynomial gets larger, the effect of overfitting increases. We can try to reduce this effect with Ridge or Lasso regularization. We’ll focus on degree <span class="math notranslate nohighlight">\(2\)</span> and try to apply ridge regression to it. Since Ridge regression relies on a parameter, we will try some values of the regularization parameter <span class="math notranslate nohighlight">\(\alpha\)</span> (as it is called by sklearn). Let us define a function for convenience:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2010,7 +2014,7 @@ Evaluating a=375 d=4 MSE=695227.56
 
 <span class="n">mlp_regressor</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
     <span class="p">(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span>
-    <span class="p">(</span><span class="s1">&#39;ridge_regression&#39;</span><span class="p">,</span> <span class="n">MLPRegressor</span><span class="p">())</span>
+    <span class="p">(</span><span class="s1">&#39;mlp_regression&#39;</span><span class="p">,</span> <span class="n">MLPRegressor</span><span class="p">())</span>
 <span class="p">])</span>
 
 <span class="n">mlp_regressor</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
@@ -2316,10 +2320,11 @@ Evaluating a=375 d=4 MSE=695227.56
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-the-performance-of-a-predictive-model">17.3. Evaluating the Performance of a Predictive Model</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generalization-and-cross-validation">17.3.1. Generalization and Cross-Validation</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#holdout-validation-or-single-split">17.3.1.1. Holdout Validation or Single Split</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#k-fold-cross-validation">17.3.1.2. K-Fold Cross-Validation</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#leave-one-out-cross-validation">17.3.1.3. Leave-One-Out Cross-Validation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting">17.3.1. Overfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generalization-and-cross-validation">17.3.2. Generalization and Cross-Validation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#holdout-validation-or-single-split">17.3.2.1. Holdout Validation or Single Split</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#k-fold-cross-validation">17.3.2.2. K-Fold Cross-Validation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#leave-one-out-cross-validation">17.3.2.3. Leave-One-Out Cross-Validation</a></li>
 </ul>
 </li>
 </ul>
@@ -2343,7 +2348,7 @@ Evaluating a=375 d=4 MSE=695227.56
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-normalization">17.6.3. Data Normalization</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regressor">17.6.4. Linear Regressor</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">17.6.5. Non-Linear Regression</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lasso-regularization">17.6.6. Lasso Regularization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-regularization">17.6.6. Ridge Regularization</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lasso-regression">17.6.7. Lasso Regression</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grid-search">17.6.8. Grid Search</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scikit-learn-pipelines">17.6.9. Scikit-Learn Pipelines</a></li>
