@@ -497,8 +497,8 @@ document.write(`
 \[\begin{split}L(\hat y, y) = \begin{cases}1 &amp;\text{ if }&amp; \hat y \neq y \\ 0 &amp;\text{ if }&amp; \hat y=y \end{cases}\end{split}\]</div>
 <p>Hence the empirical risk will be the fraction of correct predictions:</p>
 <div class="math notranslate nohighlight">
-\[R_{emp}(h) = \frac{1}{N} \sum_{i=1}^N L(\hat h_i, h_i) = \frac{\text{number of correct predictions}}{N}\]</div>
-<p>As we shall better see later, the expression above quantifying the fraction of correct predictions is also known as <strong>accuracy</strong> and it is commonly used to evaluate classifiers. It is a number comprised between <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(1\)</span> which can also be interpreted as a percentage.</p>
+\[R_{emp}(h) = \frac{1}{N} \sum_{i=1}^N L(\hat y_i, y_i) = \frac{\text{number of incorrect predictions}}{N}\]</div>
+<p>The empirical risk computed as defined above is also known as <strong>error rate</strong>. It is a number comprised between <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(1\)</span> which can also be interpreted as a percentage.</p>
 <p>The classifier can be learned by minimizing the empirical risk:</p>
 <div class="math notranslate nohighlight">
 \[\hat h = \underset{h \in \mathcal{H}}{\mathrm{arg\ min}}\ R_{emp}(h)\]</div>
@@ -801,21 +801,20 @@ the others). Hence, in the example shown above, we would have three
 \[FP_\theta\]</div>
 <div class="math notranslate nohighlight">
 \[FN_\theta\]</div>
-<p>We will define the true positive rate (TPR) and true negative rate (TNR) as follows:</p>
+<p>We will define the true positive rate (TPR) and false positive rate (FPR) as follows:</p>
 <div class="math notranslate nohighlight">
 \[TPR_\theta = \frac{TP_\theta}{TP_\theta+FN_\theta}\]</div>
 <div class="math notranslate nohighlight">
-\[TNR_\theta = \frac{TN_\theta}{TN_\theta+FP_\theta}\]</div>
+\[FPR_\theta = \frac{FP_\theta}{FP_\theta+TN_\theta}\]</div>
 <p>In practice:</p>
 <ul class="simple">
 <li><p>The TPR is the fraction of true positives over all positive elements - <strong>this is the same as the recall</strong>;</p></li>
-<li><p>The TNR is the fraction of true negatives over all negative elements.</p></li>
+<li><p>The FPR on the contrary is the fraction of false positive predictions over all negative elements.</p></li>
 </ul>
-<p>We expect that:</p>
+<p>We note that:</p>
 <ul class="simple">
-<li><p>If we pick <strong>low threshold values, the TPR will be high and the TNR will be low</strong>. Indeed, with a small enough threshold, all elements will be classified as positives and there will be no predicted negatives, so the TPR will be equal to 1. At the same time, the TNR will be very low because we will have many false positives;</p></li>
-<li><p>If we pick <strong>high threshold values, the TPR will be low and the TNR will be high</strong>. Indeed, with a large enough threshold, all elements will be classified as negatives and there will be no positive predictions, so the TPR will be zero. At the same time, since all elements will be classified as negatives and there will be no positive predictions, the TNR will be equal to <span class="math notranslate nohighlight">\(1\)</span>;</p></li>
-<li><p>For threshold values in between these extremes, we will have some sort of tradeoff between TPR and TNR.</p></li>
+<li><p>If we pick <strong>low threshold values, both the TPR and the FPR will be equal to 1</strong>. Indeed, with a small enough threshold, all elements will be classified as positives and there will be no predicted negatives, so the TPR will be equal to 1. At the same time, the FPR will be 1 because we will have no true negatives;</p></li>
+<li><p>If we pick <strong>high threshold values, both the TPR and the TNR will be zero</strong>. Indeed, with a large enough threshold, all elements will be classified as negatives and there will be no positive predictions, so the TPR will be zero. At the same time, since all elements will be classified as negatives and there will be no false positive predictions, the FPR will be equal to <span class="math notranslate nohighlight">\(0\)</span>;</p></li>
 </ul>
 <p>An ROC curve is obtained by picking a threshold value <span class="math notranslate nohighlight">\(\theta\)</span> and plotting a 2D point <span class="math notranslate nohighlight">\((TPR_\theta, TNR_\theta)\)</span>. By varying the threshold <span class="math notranslate nohighlight">\(\theta\)</span>, we obtain a curve which tell us what is the trade-off between TPR and TNR regardless of the threshold.</p>
 <p>The following plot show an example of an ROC curve for a binary classifier on the breast cancer dataset:</p>
@@ -824,7 +823,7 @@ the others). Hence, in the example shown above, we would have three
 <img alt="../_images/0f842ca18cabb68fced0e147d3be62c510fbf7db524bc286eb9639a8aae0a694.png" src="../_images/0f842ca18cabb68fced0e147d3be62c510fbf7db524bc286eb9639a8aae0a694.png" />
 </div>
 </div>
-<p>In general, we would like to have a rectangular curve touching point <span class="math notranslate nohighlight">\((0,1)\)</span>. In practice, we can measure the area under the ROC curve to see how well the classifier is doing. This value is generally referred to as “AUC”.</p>
+<p>We know that the two points <span class="math notranslate nohighlight">\((0,0)\)</span> and <span class="math notranslate nohighlight">\((1,1)\)</span> belong to the curve. Ideally, starting from a low threshold (with TPR=FPR=1), as we move the threshold up enough, <strong>we would expect the FPR to decrease (we are discarding false positives), while the TPR is still high (we are not discarding true positives)</strong>. Hence the ideal curve should be a rectangular curve touching point <span class="math notranslate nohighlight">\((0,1)\)</span>. In practice, we can measure the area under the ROC curve to see how well the classifier is doing. This value is generally referred to as “AUC”.</p>
 <p>The dashed line indicates the performance of a random predictor. Note the the area under the curve identified by this dashed line will be equal to <span class="math notranslate nohighlight">\(0.5\)</span>. Any curve which is systematically below this line indicates a classifier which is doing thresholding in the wrong way (i.e. we should invert the sign of the thresholding). For instance, this is the curve of the same classifier when we invert the sign of thresholding:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">

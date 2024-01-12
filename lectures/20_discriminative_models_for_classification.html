@@ -476,7 +476,7 @@ document.write(`
 <p>While <strong>not all discriminative models are probabilistic</strong>, probabilistic discriminative classifiers usually obtain classification by modeling <em>directly</em> the conditional probability distribution:</p>
 <div class="math notranslate nohighlight">
 \[P(Y|X)\]</div>
-<p>where <span class="math notranslate nohighlight">\(X\)</span> is the random variable containing the input observation and <span class="math notranslate nohighlight">\(Y\)</span> is the random variable containing the associated class. Since <span class="math notranslate nohighlight">\(Y\)</span> is discrete nad a finite number of <span class="math notranslate nohighlight">\(M\)</span> classes, once we model this conditional probability, we can easily classify an observation <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> using the following function:</p>
+<p>where <span class="math notranslate nohighlight">\(X\)</span> is the random variable containing the input observation and <span class="math notranslate nohighlight">\(Y\)</span> is the random variable containing the associated class. Since <span class="math notranslate nohighlight">\(Y\)</span> is discrete and we have a finite number of classes <span class="math notranslate nohighlight">\(M\)</span>, once we model this conditional probability, we can easily classify an observation <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> using the following function:</p>
 <div class="math notranslate nohighlight">
 \[h(\mathbf{x}) = \arg_c \max P(Y=c|X=\mathbf{x})\]</div>
 <p>This is easily done by computing the above conditional probability for all values <span class="math notranslate nohighlight">\(c=0, \ldots, M-1\)</span> keeping <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> fixed and keeping the class <span class="math notranslate nohighlight">\(c\)</span> which gives the largest probability value.</p>
@@ -519,7 +519,7 @@ document.write(`
 </section>
 <section id="k-nearest-neighbor-classification">
 <h2><span class="section-number">19.2. </span>K-Nearest Neighbor Classification<a class="headerlink" href="#k-nearest-neighbor-classification" title="Permalink to this heading">#</a></h2>
-<p>The logistic regressor is a parametric model: tts performance depends on the accurate choice of the parameters. Similarly to density estimation methods, parametric models have the advantage to be compact, but they make assumptions on the data. For instance, the logistic regressor assumes that <strong>data is linearly separable</strong>. A different approach to classification consists in the use of non-parametric models, which use the dataset as a support to make their predictions making very few assumptions on the nature of the data.</p>
+<p>The logistic regressor is a parametric model: its performance depends on the accurate choice of the parameters. Similarly to density estimation methods, parametric models have the advantage to be compact, but they make assumptions on the data. For instance, the logistic regressor assumes that <strong>data is linearly separable</strong>. A different approach to classification consists in the use of non-parametric models, which use the dataset as a support to make their predictions making very few assumptions on the nature of the data.</p>
 <p>The most popular non-parametric classification model is certainly the nearest neighbor algorithm, which is introduced in this section.</p>
 <section id="the-nearest-neighbor-or-1-nn-classification-algorithm">
 <h3><span class="section-number">19.2.1. </span>The Nearest Neighbor (or 1-NN) Classification Algorithm<a class="headerlink" href="#the-nearest-neighbor-or-1-nn-classification-algorithm" title="Permalink to this heading">#</a></h3>
@@ -548,12 +548,7 @@ choice for</em> <span class="math notranslate nohighlight">\(d\)</span> <em>is t
 <strong>assigning to a test example</strong> <span class="math notranslate nohighlight">\(\mathbf{x}^{\mathbf{'}}\)</span><strong>the class of
 the closest example in the training set</strong>:</p>
 <div class="math notranslate nohighlight">
-\[f\left( \mathbf{x}^{\mathbf{'}} \right) = \arg_{y}{\min{\{ d\left( \mathbf{x}^{\mathbf{'}}\mathbf{,\ x} \right)|\left( \mathbf{x},y \right) \in TR\}}}\]</div>
-<p>Here we are using the <span class="math notranslate nohighlight">\(argmin\)</span> function. The expression
-<span class="math notranslate nohighlight">\(\arg_{y}{\min\left\{ f(y) \right\}}\)</span> is defined as the value of <span class="math notranslate nohighlight">\(y\)</span>
-which minimizes <span class="math notranslate nohighlight">\(f(y)\)</span>. We can see it as a function which searches for
-the value of the index <span class="math notranslate nohighlight">\(y\)</span> leading to the global minimum of function
-<span class="math notranslate nohighlight">\(f(y)\)</span>.</p>
+\[h\left( \mathbf{x}^{\mathbf{'}} \right) = \arg_{y}{\min{\{ d\left( \mathbf{x}^{\mathbf{'}}\mathbf{,\ x} \right)|\left( \mathbf{x},y \right) \in TR\}}}\]</div>
 <p>This algorithm is referred to as the <strong>nearest neighbor algorithm (or
 1-NN as we will see in its generalization in a moment)</strong>. In practice,
 given a test example <span class="math notranslate nohighlight">\(\mathbf{x}^{\mathbf{'}}\)</span>, the nearest neighbor
@@ -614,7 +609,7 @@ easy. For instance, if the space is not uniformly dense (and usually it
 is not – as in the example above!), a given radius could lead to
 neighborhoods containing different numbers of elements. Indeed, in some
 cases, they may even include just zero elements. Hence, rather than
-considering a neighborhood of a given radius, **we consider
+considering a neighborhood of a given radius, we consider
 neighborhoods of the point containing <strong>at most <span class="math notranslate nohighlight">\(\mathbf{K}\)</span> elements</strong>, where <span class="math notranslate nohighlight">\(\mathbf{K}\)</span> <strong>is a <em>hyper-parameter</em> of the
 algorithm</strong>.</p>
 <p>Similarly to what we have defined in the case of density estimation, given a point <span class="math notranslate nohighlight">\(\mathbf{x'}\)</span>, we will define the neighborhood of
@@ -627,7 +622,7 @@ training points of size <span class="math notranslate nohighlight">\(K\)</span> 
 <p>Finally, we define the K-Nearest Neighbor Classification Algorithm (also
 called K-NN) as follows:</p>
 <div class="math notranslate nohighlight">
-\[f\left( \mathbf{x'} \right) = mode\{ y|\left( \mathbf{x},y \right) \in N\left( \mathbf{x'};TR,\ K \right)\}\]</div>
+\[h\left( \mathbf{x'} \right) = mode\{ y|\left( \mathbf{x},y \right) \in N\left( \mathbf{x'};TR,\ K \right)\}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(mode\)</span> is the “statistical mode” function, which returns the
 <strong>most frequent element of a set</strong>.</p>
 <p><span class="math notranslate nohighlight">\(\mathbf{K}\)</span> <strong>is in practice an hyperparameter of the algorithm</strong>. It
@@ -714,9 +709,16 @@ data point is classified with the most numerous class.</p></li>
 <p>A broad class of discriminative classifier is that of discriminant functions. While discriminant functions can also be non-linear, we will focus only on linear discriminant functions. In the case of two classes, a linear discriminant function takes the following form:</p>
 <div class="math notranslate nohighlight">
 \[y(\mathbf{x}) = \mathbf{w}^T \mathbf{x} + w_0\]</div>
-<p>where <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> is called a weight vector and <span class="math notranslate nohighlight">\(w_0\)</span> is called a bias term. Note that this formulation is identical to the one of a linear regressor. An input vector is assigned to one of the two classes (say class <span class="math notranslate nohighlight">\(1\)</span>) if <span class="math notranslate nohighlight">\(y(\mathbf{x}) \geq 0\)</span> and to the other class (<span class="math notranslate nohighlight">\(say \)</span>0$) otherwise. In practice, we can define the following classification function:</p>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> is called a weight vector and <span class="math notranslate nohighlight">\(w_0\)</span> is called a bias term. Note that this formulation is identical to the one of a linear regressor. An input vector is assigned to one of the two classes (say class <span class="math notranslate nohighlight">\(1\)</span>) if <span class="math notranslate nohighlight">\(y(\mathbf{x}) \geq 0\)</span> and to the other class (say <span class="math notranslate nohighlight">\(0\)</span>) otherwise. In practice, we can define the following classification function:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}h(\mathbf{x}) = \begin{cases} 1 &amp; \text{if} &amp; y(\mathbf{x}) \geq 0 \\ 0 &amp; \text{otherwise} &amp; \end{cases}\end{split}\]</div>
+<p>Note that the criterion:</p>
+<div class="math notranslate nohighlight">
+\[y(\mathbf{x}) = \mathbf{w}^T \mathbf{x} + w_0 &gt; 0\]</div>
+<p>Is equivalent to:</p>
+<div class="math notranslate nohighlight">
+\[y(\mathbf{x}) = \mathbf{w}^T \mathbf{x} &gt; -w_0\]</div>
+<p>Hence, the term <span class="math notranslate nohighlight">\(y_0=-w_0\)</span> is also called “a threshold”.</p>
 <p>The <strong>decision boundary of the classifier</strong> (i.e., the set of points of maximum uncertainty) is hence defined by</p>
 <div class="math notranslate nohighlight">
 \[y(\mathbf{x}) = \mathbf{w}^T \mathbf{x} + w_0 = 0\]</div>
@@ -753,6 +755,7 @@ data point is classified with the most numerous class.</p></li>
 <li><p>PCA is an <strong>unsupervised method</strong>, meaning it does not require providing any labels (class membership of the data). FLD, on the other hand, is a <strong>supervised method</strong> as it uses labels to find the data projection that makes them separable.</p></li>
 <li><p>When applying PCA, we specify the number of components in the target space. FLD always projects the data into a space of dimension <span class="math notranslate nohighlight">\(K-1\)</span>, where <span class="math notranslate nohighlight">\(K\)</span> is the number of classes.</p></li>
 </ul>
+<p>Fisher’s Linear Discriminant is often confused with another technique (which we will see later) called “Linear Discriminant Analysis” (LDA). While they are still distinct, they allow to achieve similar results, especially when concerned with dimensionality reduction, hence many libraries implement PCA rather than implementing Fisher’s Linear Discriminant as a supervised dimensionality reduction technique.</p>
 </section>
 <section id="fisher-s-linear-discriminant-for-two-classes">
 <h3><span class="section-number">19.3.2. </span>Fisher’s Linear Discriminant for Two Classes<a class="headerlink" href="#fisher-s-linear-discriminant-for-two-classes" title="Permalink to this heading">#</a></h3>
@@ -761,7 +764,7 @@ data point is classified with the most numerous class.</p></li>
 <p>We want to find a linear transformation of the data into a one-dimensional space:</p>
 <div class="math notranslate nohighlight">
 \[y(\mathbf{x}) = \mathbf{w}^T \mathbf{x}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> is a <span class="math notranslate nohighlight">\(D\)</span>-dimensional observation, <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> is a <span class="math notranslate nohighlight">\(D\)</span>-dimensional vector called the <strong>weight vector</strong>, and <span class="math notranslate nohighlight">\(y(\mathbf{x})\)</span> is the projection onto one dimension of <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> (thus, <span class="math notranslate nohighlight">\(y(\mathbf{x})\)</span> is a scalar). If the found projection maximizes the separability of the data, we only need to find a threshold <span class="math notranslate nohighlight">\(w_0\)</span> and classify:</p>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> is a <span class="math notranslate nohighlight">\(D\)</span>-dimensional observation, <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> is a <span class="math notranslate nohighlight">\(D\)</span>-dimensional vector called the <strong>weight vector</strong>, and <span class="math notranslate nohighlight">\(y(\mathbf{x})\)</span> is the projection onto one dimension of <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> (thus, <span class="math notranslate nohighlight">\(y(\mathbf{x})\)</span> is a scalar). If the found projection maximizes the linear separability of the data, we only need to find a threshold <span class="math notranslate nohighlight">\(w_0\)</span> and classify:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}h(\mathbf{x}) = \begin{cases} C_1 &amp; \text{if} &amp; y(\mathbf{x}) \geq w_0\\
 C_2 &amp;\text{if}&amp; y(\mathbf{x}) &lt; w_0\end{cases}\end{split}\]</div>
@@ -848,7 +851,7 @@ C_2 &amp;\text{if}&amp; y(\mathbf{x}) &lt; w_0\end{cases}\end{split}\]</div>
 <img alt="../_images/d6d7d0ae79e5597f1efaadcf7215a4e891014cf00a168e6668d13448d7862f4d.png" src="../_images/d6d7d0ae79e5597f1efaadcf7215a4e891014cf00a168e6668d13448d7862f4d.png" />
 </div>
 </div>
-<p>We can now set <span class="math notranslate nohighlight">\(w_0 = -19.51\)</span> and obtain our discriminant function:</p>
+<p>We can now set <span class="math notranslate nohighlight">\(w_0 = -(-19.51)\)</span> and obtain our discriminant function:</p>
 <div class="math notranslate nohighlight">
 \[y(\mathbf{x}) = \mathbf{w}^T \mathbf{x} + w_0\]</div>
 <p>We know that the decision boundary of the classifier will be given by:</p>
