@@ -48,6 +48,7 @@ parts:
   - file: laboratories/13_linear_logistic_regression_example_analysis
   - file: laboratories/14_clustering_density_estimation_pca
   - file: laboratories/15_customer_segmentation_analysis
+  - file: laboratories/16_classificazione
 
   
   
