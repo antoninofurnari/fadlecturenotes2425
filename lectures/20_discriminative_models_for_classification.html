@@ -896,7 +896,7 @@ C_2 &amp;\text{if}&amp; y(\mathbf{x}) &lt; w_0\end{cases}\end{split}\]</div>
 <p>and <span class="math notranslate nohighlight">\(N_k\)</span> is the number of elements in class <span class="math notranslate nohighlight">\(C_k\)</span>. Intuitively, the between-class covariance matrix measures how much dispersed the means of the individual classes are with respect to the overall mean of the data.</p>
 <p>These two quantities are associated to the same concepts computed on the transformed data:</p>
 <div class="math notranslate nohighlight">
-\[\mathbf{s}_W = \sum_{k=1}^K \sum_{i \in C_k} (\mathbf{y}_n - \mathbf{\mu}_k) (\mathbf{y}_n - \mathbf{\mu}_k)^T\]</div>
+\[\mathbf{s}_W = \sum_{k=1}^K \sum_{i \in C_k} (\mathbf{y}_i - \mathbf{\mu}_k) (\mathbf{y}_i - \mathbf{\mu}_k)^T\]</div>
 <div class="math notranslate nohighlight">
 \[\mathbf{s}_B = \sum_{k=1}^K N_k (\mathbf{\mu}_k - \mathbf{\mu})(\mathbf{\mu}_k - \mathbf{\mu})^T\]</div>
 <p>where <span class="math notranslate nohighlight">\(\mathbf{\mu}_k\)</span> are the means of the projected data within each class, and <span class="math notranslate nohighlight">\(\mathbf{\mu}\)</span> is the overall mean of the projected data:</p>

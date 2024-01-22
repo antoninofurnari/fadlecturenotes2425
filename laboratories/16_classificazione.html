@@ -1050,9 +1050,8 @@ TPR: 0.953125
 </div>
 </div>
 <p>Un modo per guardare a precision e recall insieme, consiste nel calcolare lo score <span class="math notranslate nohighlight">\(F_1\)</span>, che si definisce come la media armonica tra precision e recall:</p>
-<p>\begin{equation}
-F_1 = 2 \cdot \frac{precision \cdot recall}{precision + recall}
-\end{equation}</p>
+<div class="math notranslate nohighlight">
+\[F_1 = 2 \cdot \frac{precision \cdot recall}{precision + recall}\]</div>
 <p>Lo score <span class="math notranslate nohighlight">\(F_1\)</span> può essere calcolato come segue:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1072,9 +1071,8 @@ F_1 = 2 \cdot \frac{precision \cdot recall}{precision + recall}
 <section id="accuracy">
 <h4><span class="section-number">36.1.3.3. </span>Accuracy<a class="headerlink" href="#accuracy" title="Permalink to this heading">#</a></h4>
 <p>Abbiamo visto che per valutare bene un classificatore, dobbiamo guardare alla matrice di confusione nella sua interezza. Una misura molto semplice che ci permette di ottenere un unico numero da guardare per valutare un classificatore è l’accuracy. L’accuracy misura la frazione di campioni che sono stati correttamente classificati. Essa si calcola come segue:</p>
-<p>\begin{equation}
-Accuracy = \frac{TP+TN}{TP+TN+FP+FN}
-\end{equation}</p>
+<div class="math notranslate nohighlight">
+\[Accuracy = \frac{TP+TN}{TP+TN+FP+FN}\]</div>
 <p>Sommando TP e TN otteniamo il numero di elementi classificati correttamente (si noti che ciò corrisponde a sommare tutti gli elementi sulla diagonale principale della matrice di confusione non normalizzata). Sommando TP, TN, FP e FN otteniamo il numero totale degli elementi contenuti nel dataset.</p>
 <p>Possiamo calcolare l’accuracy sommando gli elementi sulla diagonale principale della matrice di confusione non normalizzata:</p>
 <div class="cell docutils container">
@@ -2169,38 +2167,31 @@ Migliore k: 9.00
 <p>Si faccia un esempio analogo (con disegno) a quello appena visto nel caso 2D.</p>
 </div></blockquote>
 <p>Oltre a massimizzare la distanza tra le medie, vogliamo duqnue anche minimizzare le varianze dei dati appartenenti alle singole classi date da:</p>
-<p>\begin{equation}
-s_k^2 = \sum_{\mathbf{x}_i \in C_k} y(\mathbf{x}_i - m_k)^2,\ k=1,2
-\end{equation}</p>
+<div class="math notranslate nohighlight">
+\[s_k^2 = \sum_{\mathbf{x}_i \in C_k} y(\mathbf{x}_i - m_k)^2,\ k=1,2\]</div>
 <p>Per <strong>massimizzare la distanza tra le medie trasformate</strong> e <strong>minimizzare le varianze dei dati trasformati</strong>, viene definito il criterio di Fisher come segue:</p>
-<p>\begin{equation}
-J(\mathbf{w}) = \frac{(m_2-m_1)^2}{s_1^2+s_2^2}
-\end{equation}</p>
+<div class="math notranslate nohighlight">
+\[J(\mathbf{w}) = \frac{(m_2-m_1)^2}{s_1^2+s_2^2}\]</div>
 <p>Massimizzando <span class="math notranslate nohighlight">\(J(\mathbf{w})\)</span> rispetto a <span class="math notranslate nohighlight">\(\mathbf{w}\)</span>, raggiungiamo entrambi gli obiettivi:</p>
 <ul class="simple">
 <li><p>Massimizziamo <span class="math notranslate nohighlight">\((m_2-m_1)\)</span> che si trova al numeratore;</p></li>
 <li><p>Minimizziamo <span class="math notranslate nohighlight">\(s_1^2+s_2^2\)</span> che si trova al denominatore.</p></li>
 </ul>
 <p>Il criterio di Fisher può essere riscritto in forma esplicita come dipendente da <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> come segue:</p>
-<p>\begin{equation}
-J(\mathbf{w}) = \frac{\mathbf{w}^T \mathbf{S}_B\mathbf{w}}{\mathbf{w}^T \mathbf{S}_W\mathbf{w}}
-\end{equation}</p>
+<div class="math notranslate nohighlight">
+\[J(\mathbf{w}) = \frac{\mathbf{w}^T \mathbf{S}_B\mathbf{w}}{\mathbf{w}^T \mathbf{S}_W\mathbf{w}}\]</div>
 <p>Dove <span class="math notranslate nohighlight">\(\mathbf{S}_B\)</span> è la <strong>between-class covariance matrix</strong> (matrice di covarianza intra-classe) ed è data da:</p>
-<p>\begin{equation}
-\mathbf{S}_B = (\mathbf{m}_2-\mathbf{m}_1)(\mathbf{m}_2-\mathbf{m}_1)^T
-\end{equation}</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{S}_B = (\mathbf{m}_2-\mathbf{m}_1)(\mathbf{m}_2-\mathbf{m}_1)^T\]</div>
 <p>e <span class="math notranslate nohighlight">\(\mathbf{S}_W\)</span> è la <strong>within-class covariance matrix</strong> totale (matrice di covarianza inter-classe) ed è data da:</p>
-<p>\begin{equation}
-\mathbf{S}<em>W = \sum</em>{\mathbf{x}_i \in C_1}(\mathbf{x}_i-\mathbf{m}_1)(\mathbf{x}_i-\mathbf{m}<em>1)^T + \sum</em>{\mathbf{x}_i \in C_2}(\mathbf{x}_i-\mathbf{m}_2)(\mathbf{x}_i-\mathbf{m}_2)^T
-\end{equation}</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{S}_W = \sum_{\mathbf{x}_i \in C_1}(\mathbf{x}_i-\mathbf{m}_1)(\mathbf{x}_i-\mathbf{m}_1)^T + \sum_{\mathbf{x}_i \in C_2}(\mathbf{x}_i-\mathbf{m}_2)(\mathbf{x}_i-\mathbf{m}_2)^T\]</div>
 <p>La quantità <span class="math notranslate nohighlight">\(J(\mathbf{w})\)</span> risulta essere massimizzata da:</p>
-<p>\begin{equation}
-\mathbf{w}\propto\mathbf{S}^{-1}_{W}(\mathbf{m_2}-\mathbf{m_1})
-\end{equation}</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{w}\propto\mathbf{S}^{-1}_{W}(\mathbf{m_2}-\mathbf{m_1})\]</div>
 <p>Per cui, una possibile soluzione è:</p>
-<p>\begin{equation}
-\mathbf{w}^* = \frac{\mathbf{S}^{-1}<em>{W}(\mathbf{m_2}-\mathbf{m_1})}{||\mathbf{S}^{-1}</em>{W}(\mathbf{m_2}-\mathbf{m_1})||}
-\end{equation}</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{w}^* = \frac{\mathbf{S}^{-1}_{W}(\mathbf{m_2}-\mathbf{m_1})}{||\mathbf{S}^{-1}_{W}(\mathbf{m_2}-\mathbf{m_1})||}\]</div>
 <p>Notiamo che se la matrice di covarianza inter-classe è diagonale, la soluzione trovata è equivalente a quella trovata massimizzando solo <span class="math notranslate nohighlight">\(\mathbf{m}_2-\mathbf{m}_1\)</span>.</p>
 <p>Una volta trovata la proiezione ottimale <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> possiamo proiettare i dati mediante <span class="math notranslate nohighlight">\(y(\mathbf{x})=\mathbf{w}^T\mathbf{x}\)</span>. Dobbiamo dunque trovare la soglia <span class="math notranslate nohighlight">\(y_0\)</span> per classificare i dati utilizzando il discriminante <span class="math notranslate nohighlight">\(y(x)\geq y_0\)</span>. La soglia ottimale <span class="math notranslate nohighlight">\(y_0\)</span> può essere trovata modellando i dati delle due classi mediante due Gaussiane e trovando il punto in cui esse si intersecano.</p>
 <section id="esempio-breast-cancer-dataset">
@@ -2394,9 +2385,8 @@ J(\mathbf{w}) = \frac{\mathbf{w}^T \mathbf{S}_B\mathbf{w}}{\mathbf{w}^T \mathbf{
 <section id="interpretazione-geometrica-dei-coefficienti">
 <h3><span class="section-number">36.3.2. </span>Interpretazione geometrica dei coefficienti<a class="headerlink" href="#interpretazione-geometrica-dei-coefficienti" title="Permalink to this heading">#</a></h3>
 <p>Mettendo insieme la proiezione LDA e la classificazione mediante soglia <span class="math notranslate nohighlight">\(y(\mathbf{x})\)</span>, abbiamo costruito il <strong>discriminante lineare</strong>:</p>
-<p>\begin{equation}
-z(\mathbf{x}) = \mathbf{w}^T \mathbf{x} + w_0
-\end{equation}</p>
+<div class="math notranslate nohighlight">
+\[z(\mathbf{x}) = \mathbf{w}^T \mathbf{x} + w_0\]</div>
 <p>dove <span class="math notranslate nohighlight">\(w_0=-y_0\)</span>. Utilizzando il discriminante, possiamo classificare i dati come segue:</p>
 <div class="math notranslate nohighlight">
 \[\mathbf{x}\ \text{ appartenente a } C_1  \text{ se } z(\mathbf{x})\geq 0\]</div>
@@ -2426,13 +2416,11 @@ z(\mathbf{x}) = \mathbf{w}^T \mathbf{x} + w_0
 </div>
 </div>
 <p>In generale, siano <span class="math notranslate nohighlight">\(\mathbf{x}_A\)</span> e <span class="math notranslate nohighlight">\(\mathbf{x}_B\)</span> due punti distinti che si trovano sul decision boundary. Si ha:</p>
-<p>\begin{equation}
-z(\mathbf{x}_A)=z(\mathbf{x}_B)=0 \Rightarrow \mathbf{w}^T(\mathbf{x}_A-\mathbf{x}_B)=0
-\end{equation}</p>
+<div class="math notranslate nohighlight">
+\[z(\mathbf{x}_A)=z(\mathbf{x}_B)=0 \Rightarrow \mathbf{w}^T(\mathbf{x}_A-\mathbf{x}_B)=0\]</div>
 <p>da cui evinciamo che <strong>il vettore w è ortogonale all’iperpiano che separa i dati (il decision bounday)</strong>. Inoltre, la distanza tra l’iperpiano e l’origine è data da:</p>
-<p>\begin{equation}
-\frac{|\mathbf{w}^T \mathbf{0}+w_0|}{||\mathbf{w}||} = \frac{|w_0|}{||\mathbf{w}||}
-\end{equation}</p>
+<div class="math notranslate nohighlight">
+\[\frac{|\mathbf{w}^T \mathbf{0}+w_0|}{||\mathbf{w}||} = \frac{|w_0|}{||\mathbf{w}||}\]</div>
 <p>Non dobbiamo inoltre dimenticare che, dato che proiettiamo i dati mediante l’espressione <span class="math notranslate nohighlight">\(z(\mathbf{x})=\mathbf{w}^Tx\)</span>, <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> rappresenta la direzione lungo la quale i dati saranno proiettati.</p>
 <p>Possiamo dunque interpretare i parametri trovati come segue:</p>
 <ul class="simple">
@@ -2779,23 +2767,22 @@ M &amp;se&amp; P(H=h\ |\ S=M) \geq P(H=h\ |\ S=F) \\
 F &amp;altrimenti &amp;
 \end{cases}\end{split}\]</div>
 <p>Dobbiamo dunque trovare un modo per <strong>rappresentare la verosimiglianza</strong> <span class="math notranslate nohighlight">\(P(H\ | \ S)\)</span> in modo da poterne calcolare i valori per ogni valore di <span class="math notranslate nohighlight">\(H\)</span> e di <span class="math notranslate nohighlight">\(S\)</span>. Osservando che <span class="math notranslate nohighlight">\(S\)</span> può assumere solo due valori, possiamo rappresentare due funzioni di <span class="math notranslate nohighlight">\(H\)</span> distinte:</p>
-<p>\begin{equation}
-P(H\ |\ S=M) \
-P(H\ |\ S=F)
-\end{equation}</p>
+<div class="math notranslate nohighlight">
+\[P(H\ |\ S=M)\]</div>
+<div class="math notranslate nohighlight">
+\[P(H\ |\ S=F)\]</div>
 <p>Secondo i principi della probabilità Bayesiana, queste due probabilità possono essere modellate sulla base delle nostre <strong>credenze</strong> (<strong>assunzioni</strong>) sui dati. In particolare, ci siamo già “convinti” in passato che <span class="math notranslate nohighlight">\(H\)</span> si distribuisce <strong>approssimativamente</strong> secondo una Gaussiana. Possiamo dunque modellare le due probabilità viste con due Gaussiane:</p>
-<p>\begin{equation}
-P(H=h\ |\ S=M) = G(h; \mu_M,\sigma_M^2) \
-P(H=h\ |\ S=F) = G(h; \mu_F,\sigma_F^2)
-\end{equation}</p>
+<div class="math notranslate nohighlight">
+\[P(H=h\ |\ S=M) = G(h; \mu_M,\sigma_M^2)\]</div>
+<div class="math notranslate nohighlight">
+\[P(H=h\ |\ S=F) = G(h; \mu_F,\sigma_F^2)\]</div>
 <p>Dove <span class="math notranslate nohighlight">\(\mu_M\)</span> e <span class="math notranslate nohighlight">\(\mu_F\)</span> sono le medie stimate dai due campioni di altezze maschili e femminili mentre <span class="math notranslate nohighlight">\(\sigma_M^2\)</span> e <span class="math notranslate nohighlight">\(\sigma_F^2\)</span> sono le due varianze stimate dai campioni.</p>
 <p>Una volta definite le due Gaussiane, il nostro classificatore diventa:</p>
-<p>\begin{equation}
-s^* = \begin{cases}
-M &amp;se&amp; G(h; \mu_M,\sigma_M^2) \geq G(h; \mu_F,\sigma_F^2) \
+<div class="math notranslate nohighlight">
+\[\begin{split}s^* = \begin{cases}
+M &amp;se&amp; G(h; \mu_M,\sigma_M^2) \geq G(h; \mu_F,\sigma_F^2) \\
 F &amp;altrimenti &amp;
-\end{cases}
-\end{equation}</p>
+\end{cases}\end{split}\]</div>
 <p>Vediamo ora di tradurre tutto in termini computazionali e di implementare il nostro classificatore <strong>MAP</strong> con assunzione di Gaussianità delle altezze. Utilizzeremo nuovamente il dataset di pesi e altezze:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2962,9 +2949,8 @@ Accuracy: 0.85
 </div>
 <p>Abbiamo visto come l’approccio MAP ci permetta di definire un classificatore senza la necessità di definire una soglia. In pratica, il criterio MAP identifica un punto (una soglia) nello spazio dei valori di <span class="math notranslate nohighlight">\(H\)</span> <strong>oltre il quale</strong> è più conveniente predire “M” piuttosto che “F”.</p>
 <p>Tale punto è quello in cui le due Gaussiane si intersecano e si trova (a occhio) intorno a 170cm. Per tutti i valori superiori a tale valore soglia, la Gaussiana relativa a “M” darà sempre valori maggiori di quelli della Gaussiana relativa a “F” e viceversa, al di sotto del valore soglia, la Gaussiana relativa a “F” darà valori superiori a quelli della Gaussiana relativa a “M”. Se volessimo trovare il valore soglia analiticamente, dovremmo risolvere l’equazione:</p>
-<p>\begin{equation}
-G_M(x)=G_F(x)
-\end{equation}</p>
+<div class="math notranslate nohighlight">
+\[G_M(x)=G_F(x)\]</div>
 <p>nella variabile <span class="math notranslate nohighlight">\(x\)</span>. Tale equazione si riconduce alla forma:</p>
 <p><span class="math notranslate nohighlight">\(ax^2 + bx + c=0\)</span></p>
 <p>con:</p>
@@ -3021,14 +3007,12 @@ G_M(x)=G_F(x)
 <section id="classificatore-basato-su-distanza-di-mahalanobis">
 <h3><span class="section-number">36.5.1. </span>Classificatore Basato su Distanza di Mahalanobis<a class="headerlink" href="#classificatore-basato-su-distanza-di-mahalanobis" title="Permalink to this heading">#</a></h3>
 <p>Un altro metodo di classificazione consiste nel misurare la distanza dell’elemento <span class="math notranslate nohighlight">\(h\)</span> da classificare rispetto alle due popolazioni alle quali esso può appartenere. Tale misura di distanza viene ottenuta mediante la <strong>distanza di Mahalanobis</strong>. La distanza di <strong>Mahalanobis</strong> tra un vettore <span class="math notranslate nohighlight">\(\mathbf x = (x_1, \ldots, x_n)^T\)</span> multivariato e un gruppo di valori di valor medio <span class="math notranslate nohighlight">\(\mathbf \mu = (\mu_1, \ldots, \mu_n)^T\)</span> e matrice di covarianza <span class="math notranslate nohighlight">\(\Sigma\)</span> si definisce come:</p>
-<p>\begin{equation}
-D_M(\mathbf{x}) = \sqrt{(\mathbf{x}-\mathbf{\mu})^T \Sigma^{-1}(\mathbf{x}-\mathbf{\mu})}
-\end{equation}</p>
+<div class="math notranslate nohighlight">
+\[D_M(\mathbf{x}) = \sqrt{(\mathbf{x}-\mathbf{\mu})^T \Sigma^{-1}(\mathbf{x}-\mathbf{\mu})}\]</div>
 <p>Considerando la matrice di covarianza, la distanza di <strong>Mahalanobis</strong> tiene conto della correlazione che sussiste tra le variabili del gruppo di valori considerato.</p>
 <p>Nel caso di un campione <strong>monovariato</strong> <span class="math notranslate nohighlight">\(x\)</span> e di un gruppo di valori di media <span class="math notranslate nohighlight">\(\mu\)</span> e varianza <span class="math notranslate nohighlight">\(\sigma^2\)</span>, la distanza di Mahalanobis resta definita come segue:</p>
-<p>\begin{equation}
-D_M(x) = \frac{x-\mu}{\sigma}
-\end{equation}</p>
+<div class="math notranslate nohighlight">
+\[D_M(x) = \sqrt{(\frac{x-\mu}{\sigma})^2}\]</div>
 <p>Una interpretazione della distanza di Mahalanobis nel caso monovariato è che essa misura lo scostamento di un valore dalla media di un campione in termini di deviazioni standard <span class="math notranslate nohighlight">\(\sigma\)</span>. Ciò permette di pesare le distanze da campioni <strong>più dispersi</strong> in maniera minore rispetto alle distanze da campioni <strong>meno dispersi</strong>.</p>
 <p>Vediamo un esempio. Consideriamo due popolazioni normali di media e varianza <span class="math notranslate nohighlight">\(\mu_1=-5, \mu_2=3, \sigma_1=3, \sigma_2=1\)</span>. Consideriamo inoltre il punto <span class="math notranslate nohighlight">\(x=0\)</span>:</p>
 <div class="cell docutils container">
@@ -3081,14 +3065,13 @@ Distanza dalla media della seconda popolazione: 9
 </div>
 </div>
 <p>Il punto è più vicino alla media della seconda popolazione, il che potrebbe portarci a concludere che esso appartiene ad essa. Tuttavia, se calcoliamo le probabilità:</p>
-<p>\begin{equation}
-P(x\ |\ Popolazione = 1) = G(x;\mu_1,\sigma_1) \
-P(x\ |\ Popolazione = 2) = G(x;\mu_2,\sigma_2)
-\end{equation}</p>
+<div class="math notranslate nohighlight">
+\[P(x\ |\ Popolazione = 1) = G(x;\mu_1,\sigma_1)\]</div>
+<div class="math notranslate nohighlight">
+\[P(x\ |\ Popolazione = 2) = G(x;\mu_2,\sigma_2)\]</div>
 <p>scopriamo che:</p>
-<p>\begin{equation}
-P(x\ |\ Popolazione=1) &gt; P(x\ |\ Popolazione = 2)
-\end{equation}</p>
+<div class="math notranslate nohighlight">
+\[P(x\ |\ Popolazione=1) &gt; P(x\ |\ Popolazione = 2)\]</div>
 <p>Vediamolo in termini computazionali:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
