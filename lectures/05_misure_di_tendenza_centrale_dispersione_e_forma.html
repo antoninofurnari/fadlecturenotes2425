@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Misure di Tendenza Centrale, Dispersione e Forma &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+    <title>11. Misure di Tendenza Centrale, Dispersione e Forma &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
   
   
   
@@ -68,6 +68,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="10. Misure di Frequenze e Rappresentazione Grafica dei Dati" href="04_misure_di_frequenze_e_rappresentazione_grafica_dei_dati.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -178,6 +179,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="03_main_data_analysis_concepts.html">3. Introduction to Data Analysis and Key Concepts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="07_probability.html">4. Probability for Data Manipulation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratory 1</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/03_intro_numpy.html">5. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/04_intro_matplotlib.html">6. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/05_intro_pandas.html">7. Introduzione a Pandas</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 3</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="08_common_distributions.html">8. Probability Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_information_theory.html">9. Basic Elements of Information Theory</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 4</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="04_misure_di_frequenze_e_rappresentazione_grafica_dei_dati.html">10. Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">11. Misure di Tendenza Centrale, Dispersione e Forma</a></li>
 </ul>
 
     </div>
@@ -404,38 +421,38 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerosita">Numerosità</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indicatori-di-tendenza-centrale">Indicatori di tendenza centrale</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#media">Media</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mediana">Mediana</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantili-percentili-e-quartili">Quantili, Percentili e Quartili</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#quantili">Quantili</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#percentili">Percentili</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#quartili">Quartili</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerosita">11.1. Numerosità</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indicatori-di-tendenza-centrale">11.2. Indicatori di tendenza centrale</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#media">11.2.1. Media</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mediana">11.2.2. Mediana</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantili-percentili-e-quartili">11.2.3. Quantili, Percentili e Quartili</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#quantili">11.2.3.1. Quantili</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#percentili">11.2.3.2. Percentili</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#quartili">11.2.3.3. Quartili</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moda">Moda</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moda">11.2.4. Moda</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indicatori-di-dispersione">Indicatori di dispersione</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimo-massimo-e-range">Minimo, Massimo e Range</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distanza-interquartile">Distanza interquartile</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#varianza-e-deviazione-standard">Varianza e Deviazione Standard</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizzazioni-dei-dati">Normalizzazioni dei Dati</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizzazione-tra-0-e-1">Normalizzazione tra 0 e 1</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizzazione-tra-1-e-1">Normalizzazione tra -1 e 1</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#standardizzazione-z-scoring">Standardizzazione (z-scoring)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indicatori-di-dispersione">11.3. Indicatori di dispersione</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimo-massimo-e-range">11.3.1. Minimo, Massimo e Range</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distanza-interquartile">11.3.2. Distanza interquartile</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#varianza-e-deviazione-standard">11.3.3. Varianza e Deviazione Standard</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizzazioni-dei-dati">11.3.4. Normalizzazioni dei Dati</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizzazione-tra-0-e-1">11.3.4.1. Normalizzazione tra 0 e 1</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizzazione-tra-1-e-1">11.3.4.2. Normalizzazione tra -1 e 1</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#standardizzazione-z-scoring">11.3.4.3. Standardizzazione (z-scoring)</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indicatori-di-forma">Indicatori di Forma</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#asimmetria-skewness">Asimmetria (skewness)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#curtosi-kurtosis">Curtosi (kurtosis)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indicatori-di-forma-opzionale">11.3.5. Indicatori di Forma (Opzionale)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#asimmetria-skewness">11.3.5.1. Asimmetria (skewness)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#curtosi-kurtosis">11.3.5.2. Curtosi (kurtosis)</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot">Boxplot</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referenze">Referenze</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot">11.4. Boxplot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referenze">11.5. Referenze</a></li>
 </ul>
             </nav>
         </div>
@@ -448,7 +465,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="misure-di-tendenza-centrale-dispersione-e-forma">
-<h1>Misure di Tendenza Centrale, Dispersione e Forma<a class="headerlink" href="#misure-di-tendenza-centrale-dispersione-e-forma" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">11. </span>Misure di Tendenza Centrale, Dispersione e Forma<a class="headerlink" href="#misure-di-tendenza-centrale-dispersione-e-forma" title="Permalink to this heading">#</a></h1>
 <p>La statistica descrittiva si occupa di descrivere, rappresentare e sintetizzare un campione di dati relativo ad una popolazione. Gli strumenti della statistica descrittiva possono essere sia numerici che grafici. I dati analizzati possono essere descritti secondo diversi aspetti. Esistono pertanto diversi “indicatori” oggettivi:</p>
 <ul class="simple">
 <li><p><strong>numerosità</strong> del campione;</p></li>
@@ -475,7 +492,7 @@ dtype: float64
 </div>
 <p>Il campione contiene dei valori <code class="docutils literal notranslate"><span class="pre">NaN</span></code>. Si tratta di valori mancanti che per qualche motivo non sono stati rilevati e andranno gestiti opportunamente.</p>
 <section id="numerosita">
-<h2>Numerosità<a class="headerlink" href="#numerosita" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">11.1. </span>Numerosità<a class="headerlink" href="#numerosita" title="Permalink to this heading">#</a></h2>
 <p>La numerosità di un campione univariato <span class="math notranslate nohighlight">\(\{x^{(i)}\}_i^N\)</span> è data dal numero di valori in esso contenuto: <span class="math notranslate nohighlight">\(|\{x^{(i)}\}_i^N| = N\)</span>. La numerosità di ciascuna colonna può anche essere diversa in quanto possono essistere dei valori mancanti, indicati in genere con <code class="docutils literal notranslate"><span class="pre">NA</span></code> o <code class="docutils literal notranslate"><span class="pre">NaN</span></code>. Nel nostro caso:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -494,10 +511,10 @@ memory usage: 208.0 bytes
 <p>Il sommario sopra indica che, sebbene abbiamo <span class="math notranslate nohighlight">\(10\)</span> valori, solo <span class="math notranslate nohighlight">\(8\)</span> di questi sono non nulli.</p>
 </section>
 <section id="indicatori-di-tendenza-centrale">
-<h2>Indicatori di tendenza centrale<a class="headerlink" href="#indicatori-di-tendenza-centrale" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">11.2. </span>Indicatori di tendenza centrale<a class="headerlink" href="#indicatori-di-tendenza-centrale" title="Permalink to this heading">#</a></h2>
 <p>Gli indicatori centrali danno un’idea approssimata dell’ordine di grandezza dei valori del campione.</p>
 <section id="media">
-<h3>Media<a class="headerlink" href="#media" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">11.2.1. </span>Media<a class="headerlink" href="#media" title="Permalink to this heading">#</a></h3>
 <p>La media di un campione è definita come la somma dei suoi valori diviso la sua numerosità:</p>
 <div class="math notranslate nohighlight">
 \[\overline X = \frac{1}{N}\sum_i^N x^{(i)}\]</div>
@@ -511,7 +528,7 @@ memory usage: 208.0 bytes
 </div>
 </section>
 <section id="mediana">
-<h3>Mediana<a class="headerlink" href="#mediana" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">11.2.2. </span>Mediana<a class="headerlink" href="#mediana" title="Permalink to this heading">#</a></h3>
 <p>Quando gli elementi di un campione possono essere ordinati (ad esempio se sono valori numerici), la mediana di un campione (o l’elemento mediano) è l’elemento che divide in due parti uguali l’insieme ordinato dei valori del campione.</p>
 <p>L’elemento mediano si può ottenere ordinando i valori del campione e procedendo come segue:</p>
 <ul class="simple">
@@ -547,10 +564,10 @@ x_{(n+1)/2} &amp; \text{if } n \textit{ is odd}\\
 \end{split}\]</div>
 </section>
 <section id="quantili-percentili-e-quartili">
-<h3>Quantili, Percentili e Quartili<a class="headerlink" href="#quantili-percentili-e-quartili" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">11.2.3. </span>Quantili, Percentili e Quartili<a class="headerlink" href="#quantili-percentili-e-quartili" title="Permalink to this heading">#</a></h3>
 <p>Quantili, percentili e quartili generalizzano il concetto di mediana.</p>
 <section id="quantili">
-<h4>Quantili<a class="headerlink" href="#quantili" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">11.2.3.1. </span>Quantili<a class="headerlink" href="#quantili" title="Permalink to this heading">#</a></h4>
 <p>Un quantile di ordine <span class="math notranslate nohighlight">\(\alpha\)</span> è un valore <span class="math notranslate nohighlight">\(q_\alpha\)</span> che divide un campione in due parti di dimensioni proprozionali a <span class="math notranslate nohighlight">\(\alpha\)</span> e <span class="math notranslate nohighlight">\(1-\alpha\)</span>. Valori più piccoli o uguali a <span class="math notranslate nohighlight">\(q_\alpha\)</span> appartengono alla prima parte della suddivisione, mentre valori maggiori a <span class="math notranslate nohighlight">\(q_\alpha\)</span> appartengono alla seconda parte.</p>
 <p>Ad esempio, dato il campione già ordinato <code class="docutils literal notranslate"><span class="pre">[1,2,3,3,4,5,6,6,7,8,8,9]</span></code>, un quantile <span class="math notranslate nohighlight">\(q_{0.25}\)</span> dividerà il campione in due parti di dimensione proporzionale a <span class="math notranslate nohighlight">\(0.25\)</span> e <span class="math notranslate nohighlight">\(1-0.25=0.75\)</span>. In questo caso <span class="math notranslate nohighlight">\(q_{0.25}=3\)</span> e le due parti saranno <code class="docutils literal notranslate"><span class="pre">[1,2,3,3]</span></code> e <code class="docutils literal notranslate"><span class="pre">[4,5,6,6,7,8,8,9]</span></code>.</p>
 <p>Anche in questo caso, come nel caso della mediana, si effettuano medie di valori adiacenti ove opportuno.</p>
@@ -582,11 +599,11 @@ Quantile di ordine 0.15: 2.0
 </ul>
 </section>
 <section id="percentili">
-<h4>Percentili<a class="headerlink" href="#percentili" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">11.2.3.2. </span>Percentili<a class="headerlink" href="#percentili" title="Permalink to this heading">#</a></h4>
 <p>I percentili sono semplicemente quantili espressi in precentuale. Un quantile di ordine <span class="math notranslate nohighlight">\(0.25\)</span> è un percentile di ordine <span class="math notranslate nohighlight">\(25\%\)</span>.</p>
 </section>
 <section id="quartili">
-<h4>Quartili<a class="headerlink" href="#quartili" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">11.2.3.3. </span>Quartili<a class="headerlink" href="#quartili" title="Permalink to this heading">#</a></h4>
 <p>I quartili sono degli specifici quantili che suddividono il campione in quattro parti. In particolare:</p>
 <ul class="simple">
 <li><p>Il quartile di ordine 0 è un quantile di ordine 0;</p></li>
@@ -610,7 +627,7 @@ Quartile di ordine 4 (massimo): 4.0
 </section>
 </section>
 <section id="moda">
-<h3>Moda<a class="headerlink" href="#moda" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">11.2.4. </span>Moda<a class="headerlink" href="#moda" title="Permalink to this heading">#</a></h3>
 <p>La moda di un campione è l’elemento che si ripete più spesso. Ad esempio, consideriamo il seguente campione:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -657,10 +674,10 @@ dtype: int64
 </section>
 </section>
 <section id="indicatori-di-dispersione">
-<h2>Indicatori di dispersione<a class="headerlink" href="#indicatori-di-dispersione" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">11.3. </span>Indicatori di dispersione<a class="headerlink" href="#indicatori-di-dispersione" title="Permalink to this heading">#</a></h2>
 <p>Gli indici di dispersione hanno il compito di quantificare in quale misura i valori di una distribuzione sono “dispersi”, ovvero “lontani tra loro”.</p>
 <section id="minimo-massimo-e-range">
-<h3>Minimo, Massimo e Range<a class="headerlink" href="#minimo-massimo-e-range" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">11.3.1. </span>Minimo, Massimo e Range<a class="headerlink" href="#minimo-massimo-e-range" title="Permalink to this heading">#</a></h3>
 <p>Semplici indici di dispersione sono il minimo (<span class="math notranslate nohighlight">\(min \{x^{(i)}\}_i^N\)</span>), il massimo (<span class="math notranslate nohighlight">\(max \{x^{(i)}\}_i^N\)</span>) e il range (<span class="math notranslate nohighlight">\(max \{x^{(i)}\}_i^N\)</span> - <span class="math notranslate nohighlight">\(min \{x^{(i)}\}_i^N\)</span>). Tornando al ultimo esempio:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -696,7 +713,7 @@ Range: 7
 </div>
 </section>
 <section id="distanza-interquartile">
-<h3>Distanza interquartile<a class="headerlink" href="#distanza-interquartile" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">11.3.2. </span>Distanza interquartile<a class="headerlink" href="#distanza-interquartile" title="Permalink to this heading">#</a></h3>
 <p>Il range non è un indice di dispersione molto robusto, in quanto non tiene conto della presenza di evenutali outliers. Si considerino ad esempio i seguenti campioni “artificiali”:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -729,7 +746,7 @@ Lo scarto interquartile di sample 2 è: 2.0
 </div>
 </section>
 <section id="varianza-e-deviazione-standard">
-<h3>Varianza e Deviazione Standard<a class="headerlink" href="#varianza-e-deviazione-standard" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">11.3.3. </span>Varianza e Deviazione Standard<a class="headerlink" href="#varianza-e-deviazione-standard" title="Permalink to this heading">#</a></h3>
 <p>La varianza (detto anche scarto quadratico medio) fornisce una stima di quanto i dati osservati si allontanano dalla media. La varianza calcola la media dei quadrati degli scarti dei valori rispetto alla media, penalizzando i grandi scostamenti dal valore medio (dovuti agli outliers) maggiormente rispetto ai piccoli scostamenti:</p>
 <div class="math notranslate nohighlight">
 \[s^2 = \frac{\sum_{i=1}^n(x_i-\overline x)^2}{n}\]</div>
@@ -818,10 +835,10 @@ Name: height, dtype: float64
 <p>Notiamo che in effetti la stima di densità per gli uomini ha individuato una curva più “spanciata”, che si correla bene con la più alta devizione standard.</p>
 </section>
 <section id="normalizzazioni-dei-dati">
-<h3>Normalizzazioni dei Dati<a class="headerlink" href="#normalizzazioni-dei-dati" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">11.3.4. </span>Normalizzazioni dei Dati<a class="headerlink" href="#normalizzazioni-dei-dati" title="Permalink to this heading">#</a></h3>
 <p>Gli indicatori di dispersione dei dati visti dipendono fortemente dalla natura dei dati e dalla loro unità di misura. Ad esempio, le età si misurano in anni, mentre i pesi in Kg o libbre. Pertanto, esistono delle tecniche di normalizzazione dei dati che permettono di rendere dati basati su unità di misura diverse comparabili tra di loro.</p>
 <section id="normalizzazione-tra-0-e-1">
-<h4>Normalizzazione tra 0 e 1<a class="headerlink" href="#normalizzazione-tra-0-e-1" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">11.3.4.1. </span>Normalizzazione tra 0 e 1<a class="headerlink" href="#normalizzazione-tra-0-e-1" title="Permalink to this heading">#</a></h4>
 <p>Questa normalizzazione scala i dati in modo che i valori minimo e massimo risultino esattamente pari a <span class="math notranslate nohighlight">\(0\)</span> e <span class="math notranslate nohighlight">\(1\)</span>, usando la seguente formula:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -852,7 +869,7 @@ dtype: float64
 </div>
 </section>
 <section id="normalizzazione-tra-1-e-1">
-<h4>Normalizzazione tra -1 e 1<a class="headerlink" href="#normalizzazione-tra-1-e-1" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">11.3.4.2. </span>Normalizzazione tra -1 e 1<a class="headerlink" href="#normalizzazione-tra-1-e-1" title="Permalink to this heading">#</a></h4>
 <p>In questo caso, i dati vengono riscalati in modo che i nuovi minimo e massimo siano <span class="math notranslate nohighlight">\(-1\)</span> e <span class="math notranslate nohighlight">\(1\)</span>, usando la seguente formula:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -883,7 +900,7 @@ dtype: float64
 </div>
 </section>
 <section id="standardizzazione-z-scoring">
-<h4>Standardizzazione (z-scoring)<a class="headerlink" href="#standardizzazione-z-scoring" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">11.3.4.3. </span>Standardizzazione (z-scoring)<a class="headerlink" href="#standardizzazione-z-scoring" title="Permalink to this heading">#</a></h4>
 <p>In molti casi è utile normalizzare i dati in modo che essi presentino media nulla e deviazione standard unitaria. Questo tipo di normalizzazione viene detta “z-scoring” e viene effettuata sottraendo ai dati la media e dividendo per la deviazione standard.</p>
 <div class="math notranslate nohighlight">
 \[
@@ -899,11 +916,11 @@ z_i = \frac{x_i-\overline x}{s_x}
 </div>
 </section>
 </section>
-<section id="indicatori-di-forma">
-<h3>Indicatori di Forma<a class="headerlink" href="#indicatori-di-forma" title="Permalink to this heading">#</a></h3>
+<section id="indicatori-di-forma-opzionale">
+<h3><span class="section-number">11.3.5. </span>Indicatori di Forma (Opzionale)<a class="headerlink" href="#indicatori-di-forma-opzionale" title="Permalink to this heading">#</a></h3>
 <p>Vediamo adesso alcuni indicatori che permettono di farsi un’idea su determinati aspetti della “forma” della distribuzione dei dati.</p>
 <section id="asimmetria-skewness">
-<h4>Asimmetria (skewness)<a class="headerlink" href="#asimmetria-skewness" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">11.3.5.1. </span>Asimmetria (skewness)<a class="headerlink" href="#asimmetria-skewness" title="Permalink to this heading">#</a></h4>
 <p>La skewness è indice dello “sbilanciamento” a sinistra (valore negativo) o a destra (valore positivo) di un campione di dati rispetto al valore centrale. La formula della skewness è la seguente:</p>
 <div class="math notranslate nohighlight">
 \[ \sum_i^n \frac{(x_i-\overline x)^3}{n \cdot s_x^3}\]</div>
@@ -930,7 +947,7 @@ Skweness altezza: 0.14
 </div>
 </section>
 <section id="curtosi-kurtosis">
-<h4>Curtosi (kurtosis)<a class="headerlink" href="#curtosi-kurtosis" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">11.3.5.2. </span>Curtosi (kurtosis)<a class="headerlink" href="#curtosi-kurtosis" title="Permalink to this heading">#</a></h4>
 <p>L’indice di curtosi misura lo “spessore” delle code di una misura di densità. Esso è definito come segue:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -952,7 +969,7 @@ K = \frac{1}{n} \sum_{i=1}^{n} \left(\frac{X_i - \bar{X}}{s}\right)^4 - 3
 </section>
 </section>
 <section id="boxplot">
-<h2>Boxplot<a class="headerlink" href="#boxplot" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">11.4. </span>Boxplot<a class="headerlink" href="#boxplot" title="Permalink to this heading">#</a></h2>
 <p>I boxplot costituiscono un metodo di visualizzazione compatto per rappresentare alcune caratteristiche descrittive dei dati sotto analisi. In particolare, dato un campione, un boxplot riesce a rappresentarne efficacemente le seguenti quantità:</p>
 <ul class="simple">
 <li><p>Valore mediano;</p></li>
@@ -1103,7 +1120,7 @@ Name: weight, dtype: float64
 <p>Dal grafico sopra possiamo notare che, mentre weight contiene degli outliers nella parte alta, height non li contiene. Questo non è particolarmente sorprendente, perché è più facile trovare un certo numero di persone sovrappeso che persone molto più alte della norma.</p>
 </section>
 <section id="referenze">
-<h2>Referenze<a class="headerlink" href="#referenze" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">11.5. </span>Referenze<a class="headerlink" href="#referenze" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Capitolo 3 di: Heumann, Christian, and Michael Schomaker Shalabh. Introduction to statistics and data analysis. Springer International Publishing Switzerland, 2016.</p></li>
 </ul>
@@ -1140,6 +1157,15 @@ Name: weight, dtype: float64
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="04_misure_di_frequenze_e_rappresentazione_grafica_dei_dati.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">10. </span>Misure di Frequenze e Rappresentazione Grafica dei Dati</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
@@ -1155,38 +1181,38 @@ Name: weight, dtype: float64
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerosita">Numerosità</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indicatori-di-tendenza-centrale">Indicatori di tendenza centrale</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#media">Media</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mediana">Mediana</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantili-percentili-e-quartili">Quantili, Percentili e Quartili</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#quantili">Quantili</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#percentili">Percentili</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#quartili">Quartili</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerosita">11.1. Numerosità</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indicatori-di-tendenza-centrale">11.2. Indicatori di tendenza centrale</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#media">11.2.1. Media</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mediana">11.2.2. Mediana</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantili-percentili-e-quartili">11.2.3. Quantili, Percentili e Quartili</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#quantili">11.2.3.1. Quantili</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#percentili">11.2.3.2. Percentili</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#quartili">11.2.3.3. Quartili</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moda">Moda</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moda">11.2.4. Moda</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indicatori-di-dispersione">Indicatori di dispersione</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimo-massimo-e-range">Minimo, Massimo e Range</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distanza-interquartile">Distanza interquartile</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#varianza-e-deviazione-standard">Varianza e Deviazione Standard</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizzazioni-dei-dati">Normalizzazioni dei Dati</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizzazione-tra-0-e-1">Normalizzazione tra 0 e 1</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizzazione-tra-1-e-1">Normalizzazione tra -1 e 1</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#standardizzazione-z-scoring">Standardizzazione (z-scoring)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indicatori-di-dispersione">11.3. Indicatori di dispersione</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimo-massimo-e-range">11.3.1. Minimo, Massimo e Range</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distanza-interquartile">11.3.2. Distanza interquartile</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#varianza-e-deviazione-standard">11.3.3. Varianza e Deviazione Standard</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizzazioni-dei-dati">11.3.4. Normalizzazioni dei Dati</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizzazione-tra-0-e-1">11.3.4.1. Normalizzazione tra 0 e 1</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizzazione-tra-1-e-1">11.3.4.2. Normalizzazione tra -1 e 1</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#standardizzazione-z-scoring">11.3.4.3. Standardizzazione (z-scoring)</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indicatori-di-forma">Indicatori di Forma</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#asimmetria-skewness">Asimmetria (skewness)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#curtosi-kurtosis">Curtosi (kurtosis)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indicatori-di-forma-opzionale">11.3.5. Indicatori di Forma (Opzionale)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#asimmetria-skewness">11.3.5.1. Asimmetria (skewness)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#curtosi-kurtosis">11.3.5.2. Curtosi (kurtosis)</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot">Boxplot</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referenze">Referenze</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot">11.4. Boxplot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referenze">11.5. Referenze</a></li>
 </ul>
   </nav></div>
 
