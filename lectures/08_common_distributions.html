@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Common Probability Distributions &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+    <title>Probability Distributions &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
   
   
   
@@ -394,7 +394,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Common Probability Distributions</h1>
+    <h1>Probability Distributions</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -404,20 +404,43 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discrete-uniform-distribution">Discrete Uniform Distribution</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-mass-functions-pmf-discrete-variables">Probability Mass Functions (PMF) - Discrete Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-probability-mass-function-for-a-fair-coin">Example: Probability Mass Function for a Fair Coin</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-probability-mass-function-for-a-biased-coin">Example: Probability Mass Function for a Biased Coin</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-probability-mass-function">Exercise: Probability Mass Function</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-density-functions-pdf-continuous-variables">Probability Density Functions (PDF) - Continuous Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-uniform-pdf">Example: Uniform PDF</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cumulative-distribution-functions-cdf">Cumulative Distribution Functions (CDF)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cdf-of-continuous-random-variables">CDF of Continuous Random Variables</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cdf-of-discrete-random-variables">CDF of Discrete Random Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-pdf-and-cdf-of-a-fair-die">Example - PDF and CDF of a fair die</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bernoulli-distribution">Bernoulli Distribution</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Example</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binomial-distribution">Binomial Distribution</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation">Expectation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variance">Variance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#covariance">Covariance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#standardization">Standardization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-probability-distributions">Common Probability Distributions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discrete-uniform-distribution">Discrete Uniform Distribution</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Example</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#poisson-distribution">Poisson Distribution</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bernoulli-distribution">Bernoulli Distribution</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Example</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binomial-distribution">Binomial Distribution</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Example</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Example</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#categorical-distribution">Categorical Distribution</a><ul class="nav section-nav flex-column">
@@ -447,8 +470,478 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="common-probability-distributions">
-<h1>Common Probability Distributions<a class="headerlink" href="#common-probability-distributions" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="probability-distributions">
+<h1>Probability Distributions<a class="headerlink" href="#probability-distributions" title="Permalink to this heading">#</a></h1>
+<p>We have seen how it is possible to assign a probability value to a given
+outcome of a random variable.</p>
+<p>In practice, it is often useful to assign probability values to <strong>all
+the values</strong> that the random variable can assume.</p>
+<p>To do so, we can define a <strong>function</strong>, which we will call <strong>probability
+distribution</strong> which assigns a probability value to each of the possible
+values of a random variable.</p>
+<p>In the case of discrete variables, we will talk about “<strong>probability
+mass functions</strong>”, whereas in the case of continuous variable, we will
+refer to “<strong>probability density functions</strong>”.</p>
+<p>A probability distribution characterizes the random variable and defines
+which outcomes it is more likely to observe.</p>
+<p>Once we find that a given random variable <span class="math notranslate nohighlight">\(X\)</span> is characterized by a
+probability distirbution <span class="math notranslate nohighlight">\(P(X)\)</span>, we can say that <strong>“X follows P”</strong> and
+write:</p>
+<div class="math notranslate nohighlight">
+\[X \sim P\]</div>
+<section id="probability-mass-functions-pmf-discrete-variables">
+<h2>Probability Mass Functions (PMF) - Discrete Variables<a class="headerlink" href="#probability-mass-functions-pmf-discrete-variables" title="Permalink to this heading">#</a></h2>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is discrete, <span class="math notranslate nohighlight">\(P(X)\)</span> is called a “probability mass function”
+(PMF). <span class="math notranslate nohighlight">\(P\)</span> maps the values of <span class="math notranslate nohighlight">\(X\)</span> to real numbers indicating whether a
+given value is more or less likely.</p>
+<p>A PMF on a random variable <span class="math notranslate nohighlight">\(X\)</span> is a function</p>
+<div class="math notranslate nohighlight">
+\[P:\Omega \rightarrow \lbrack 0,1\rbrack\]</div>
+<p>Where <span class="math notranslate nohighlight">\(\Omega\)</span> is the sample space <span class="math notranslate nohighlight">\(X\)</span>.</p>
+<p>This function satisfies the following properties:</p>
+<ul class="simple">
+<li><p><strong>The domain of</strong> <span class="math notranslate nohighlight">\(\mathbf{P}\)</span> <strong>is the set of all possible states
+of</strong> <span class="math notranslate nohighlight">\(\mathbf{X}\)</span><strong>.</strong></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{\forall}\mathbf{x}\mathbf{\in}\Omega\mathbf{,\ }\mathbf{0}\mathbf{\leq}\mathbf{P}\left( \mathbf{x} \right)\mathbf{\leq}\mathbf{1}\)</span>.
+An impossible event has probability 0, whereas a certain event has
+probability 1. No event can have negative probability or probability
+larger than 1.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sum_{\mathbf{x}\mathbf{\in}\mathbf{\Omega}}^{}{\mathbf{P}\mathbf{(}\mathbf{x}\mathbf{)}}\mathbf{=}\mathbf{1}\)</span>.
+The sum of the probabilities associated to all possible events must
+be one. This implies that the probability distribution is
+normalized. Also, this means that at least one of the events should
+happen.</p></li>
+</ul>
+<p><strong>Example:</strong> Let <span class="math notranslate nohighlight">\(X\)</span> be the random variable indicating the outcome of a
+coin toss.</p>
+<ul class="simple">
+<li><p>The space of all possible functions (the domain of <span class="math notranslate nohighlight">\(P(X)\)</span>) is
+<span class="math notranslate nohighlight">\(\{ head,\ tail\}\)</span>.</p></li>
+<li><p>The probabilities <span class="math notranslate nohighlight">\(P(head)\)</span> and <span class="math notranslate nohighlight">\(P(tail)\)</span> must be larger than or
+equal to zero and smaller than or equal to 1.</p></li>
+<li><p>Also, <span class="math notranslate nohighlight">\(P(head) + P(tail) = 1\ \)</span>. This is obvious, as one of the two
+outcomes will always happen. Indeed, if we had <span class="math notranslate nohighlight">\(P(tail) = 0.3\)</span>, this
+would mean that, 30 times out of 100 times we toss a coin, the
+outcome will be tail. What will happen in all other cases? The
+outcome will be head, hence, <span class="math notranslate nohighlight">\(P(head)\)</span>, so <span class="math notranslate nohighlight">\(P(head) + P(tail) = 1\)</span>.</p></li>
+<li><p>In the case of a fair coin, we can characterize <span class="math notranslate nohighlight">\(P(X)\)</span> as a
+“discrete uniform distribution”, i.e., a distribution which maps any
+value <span class="math notranslate nohighlight">\(x \in X\)</span> to a constant, such that the properties of the
+probability mass functions are satisfied.</p></li>
+<li><p>If we have <span class="math notranslate nohighlight">\(N\)</span> possible outcomes, the discrete uniform probability
+will be <span class="math notranslate nohighlight">\(P(X = x) = \frac{1}{N}\)</span> , which means that all outcomes
+have the same probability.</p></li>
+<li><p>This definition satisfies the constraints. Indeed,
+<span class="math notranslate nohighlight">\(\frac{1}{N} \geq 0,\ \forall N\)</span> and
+<span class="math notranslate nohighlight">\(\sum_{i}^{}{P\left( X = x_{i} \right)} = 1\)</span>.</p></li>
+</ul>
+<section id="example-probability-mass-function-for-a-fair-coin">
+<h3>Example: Probability Mass Function for a Fair Coin<a class="headerlink" href="#example-probability-mass-function-for-a-fair-coin" title="Permalink to this heading">#</a></h3>
+<p>A probability mass function can be plotted as a 2D diagram where the
+values of the function (<span class="math notranslate nohighlight">\(P(x)\)</span>) is plotted against the values of the
+independent variable <span class="math notranslate nohighlight">\(x\)</span>. This is the diagram associated to the PMF of
+the previous example, where <span class="math notranslate nohighlight">\(P(head) = P(tail) = 0.5\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Define the outcomes of a fair coin (0 for tails, 1 for heads)</span>
+<span class="n">outcomes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Tail&quot;</span><span class="p">,</span> <span class="s2">&quot;Head&quot;</span><span class="p">]</span>
+
+<span class="c1"># Probability of each outcome for a fair coin</span>
+<span class="n">probability</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]</span>
+
+<span class="c1"># Create the PMF plot with vertical lines and dots</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">outcomes</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">probability</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linestyles</span><span class="o">=</span><span class="s1">&#39;solid&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">outcomes</span><span class="p">,</span> <span class="n">probability</span><span class="p">,</span> <span class="s1">&#39;bo&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Outcome&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;PMF of a Fair Coin&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">outcomes</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Show the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/888a70ac931c8fe0436e04741501456ef024eb997604c71fdf4d99dbff9985b2.png" src="../_images/888a70ac931c8fe0436e04741501456ef024eb997604c71fdf4d99dbff9985b2.png" />
+</div>
+</div>
+</section>
+<section id="example-probability-mass-function-for-a-biased-coin">
+<h3>Example: Probability Mass Function for a Biased Coin<a class="headerlink" href="#example-probability-mass-function-for-a-biased-coin" title="Permalink to this heading">#</a></h3>
+<p>Now suppose we tossed our coin for 10000 times and discovered that 6000
+times the outcome was “head”, whereas 4000 times it was “tail”. We
+deduce the coin is not fair.</p>
+<p>Using a <strong>frequentist</strong> approach, we can manually assign values to our
+PMF using the general formula:</p>
+<div class="math notranslate nohighlight">
+\[P(x) = \frac{\# trials\ in\ which\ X = x}{\#\ trials}\]</div>
+<p>That is, in our case:</p>
+<div class="math notranslate nohighlight">
+\[P(head) = \frac{6000}{10000} = 0.6;P(tail) = \frac{4000}{10000} = 0.4\]</div>
+<p>We shall note that the probability we just defined satisfies all
+properties of probabilities, i.e.:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(0 \leq P(x) \leq 1\ \forall x\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\sum_{x}^{}{P(x) = 1}.\)</span></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Define the outcomes of a biased coin (0 for tails, 1 for heads)</span>
+<span class="n">outcomes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Tail&quot;</span><span class="p">,</span> <span class="s2">&quot;Head&quot;</span><span class="p">]</span>
+
+<span class="c1"># Probability of each outcome for a biased coin</span>
+<span class="n">probability</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">]</span>
+
+<span class="c1"># Create the PMF plot with vertical lines and dots</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">outcomes</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">probability</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linestyles</span><span class="o">=</span><span class="s1">&#39;solid&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">outcomes</span><span class="p">,</span> <span class="n">probability</span><span class="p">,</span> <span class="s1">&#39;bo&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Outcome&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;PMF of a Biased Coin&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">outcomes</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Show the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/c738a5bad6a12903b8ef1cac7fbee67d920bab1e09697f9d72cb615a10fe4226.png" src="../_images/c738a5bad6a12903b8ef1cac7fbee67d920bab1e09697f9d72cb615a10fe4226.png" />
+</div>
+</div>
+<section id="exercise-probability-mass-function">
+<h4>Exercise: Probability Mass Function<a class="headerlink" href="#exercise-probability-mass-function" title="Permalink to this heading">#</a></h4>
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> be a random variable representing the outcome of rolling a fair
+dice with <span class="math notranslate nohighlight">\(6\)</span> faces:</p>
+<ul class="simple">
+<li><p>What is the space of possible values of <span class="math notranslate nohighlight">\(X\)</span>?</p></li>
+<li><p>What is its cardinality?</p></li>
+<li><p>What is the associated probability mass function <span class="math notranslate nohighlight">\(P(X)\)</span>?</p></li>
+<li><p>Suppose the dice is not fair and <span class="math notranslate nohighlight">\(P(X = 1) = 0.2\)</span>, whereas all other
+outcomes are equally probable. What is the probability mass function
+of <span class="math notranslate nohighlight">\(P(X)\)</span>?</p></li>
+<li><p>Draw the PMF obtained for the dice.</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="probability-density-functions-pdf-continuous-variables">
+<h2>Probability Density Functions (PDF) - Continuous Variables<a class="headerlink" href="#probability-density-functions-pdf-continuous-variables" title="Permalink to this heading">#</a></h2>
+<p>Probability distributions are called “probability density functions”
+when the random variable is continuous.</p>
+<p>To be a probability density function over a variable <span class="math notranslate nohighlight">\(X\)</span>, a function
+<span class="math notranslate nohighlight">\(f:\Omega \rightarrow \lbrack 0,1\rbrack\)</span> must satisfy the following
+properties:</p>
+<ul class="simple">
+<li><p>The domain of <span class="math notranslate nohighlight">\(f\)</span> is the set of all possible values of <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\forall x \in \Omega,\ P(x) \geq 0\)</span>. No probability can be negative.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\int f(x)dx = 1\)</span>. This is equivalent to <span class="math notranslate nohighlight">\(\sum P(x) = 1\)</span> in the
+case of a discrete variable. The sum turns into an integral in the
+case of continuous variables.</p></li>
+</ul>
+<p>Note that, in the case of continuous variables, we have:</p>
+<div class="math notranslate nohighlight">
+\[ P(a \leq x \leq b) = \int_{a}^b f(x) dx\]</div>
+<p><strong>NOTE</strong>: In general, we say that the density function at a given value <span class="math notranslate nohighlight">\(x\)</span> is zero: <span class="math notranslate nohighlight">\(f(x)=0\)</span>. While this may seem counter-intuitive, we should consider the density function as the limit fo the probability as we narrow a neighborhood around <span class="math notranslate nohighlight">\(x\)</span>. If the neighborhood has size <span class="math notranslate nohighlight">\(0\)</span>, then the density will be zero. In practice, if we take a neighborhood which is non-zero, then we get an integral between two values and a final probability not equal to zero.</p>
+<p>After all, from an intuitive point of view, the probability of having a value exactly equal to <span class="math notranslate nohighlight">\(x\)</span> is indeed zero, in the case of a continuous variable! So we should be more interested in the probability in a given range of values.</p>
+<section id="example-uniform-pdf">
+<h3>Example: Uniform PDF<a class="headerlink" href="#example-uniform-pdf" title="Permalink to this heading">#</a></h3>
+<p>Let us consider a random number generator which outputs numbers comprised between <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> be a random variable assuming the values generated by the
+random number generator.</p>
+<p>The PDF of <span class="math notranslate nohighlight">\(X\)</span> will be a uniform distribution such that:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P(x) = 0\ \forall x &lt; a\ \ or\ x &gt; b\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(P(x) = \frac{1}{b - a}\ \forall a \leq x \leq b\)</span>;</p></li>
+</ul>
+<p>We can see that this PDF satisfies all constraints:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P(x) \geq 0\ \forall x.\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\int P(x)dx = 1\)</span> (prove that this is true as an exercise).</p></li>
+</ul>
+<p>The diagram below shows an illustration of a uniform PDF with bounds a and b,
+i.e., <span class="math notranslate nohighlight">\(U(a,b)\)</span>. Of course, continuous distributions can be (and
+generally are) much more complicated than that.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Define the parameters for the uniform distribution</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># Start of the interval</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">8</span>  <span class="c1"># End of the interval</span>
+
+<span class="c1"># Generate data points for the uniform distribution</span>
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)]</span> <span class="o">*</span> <span class="mi">2</span>
+
+<span class="c1"># Create the uniform distribution plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Blue line representing the uniform distribution</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">)</span>  <span class="c1"># Highlight the area under the curve</span>
+
+<span class="c1"># Highlight &quot;a&quot; and &quot;b&quot; with vertical lines that stop at the blue line</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="p">(</span><span class="mf">3.3</span> <span class="o">/</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="p">(</span><span class="mf">3.3</span> <span class="o">/</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">((</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.02</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;1 / (b - a)&#39;</span><span class="p">,</span> <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability Density&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Uniform Distribution&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="n">b</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.05</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.15</span><span class="p">,</span><span class="mf">0.2</span><span class="p">,</span><span class="mf">0.25</span><span class="p">,</span><span class="mf">0.3</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">])</span>
+
+
+<span class="c1"># Show the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/f511b722e64c3d354c9622cf02e03ef28ca948bdaf4f84407b5ce27775a9f8ea.png" src="../_images/f511b722e64c3d354c9622cf02e03ef28ca948bdaf4f84407b5ce27775a9f8ea.png" />
+</div>
+</div>
+</section>
+<section id="cumulative-distribution-functions-cdf">
+<h3>Cumulative Distribution Functions (CDF)<a class="headerlink" href="#cumulative-distribution-functions-cdf" title="Permalink to this heading">#</a></h3>
+<p>Similar to the Empirical Cumulative Distribution Functions, we can define Cumulative Distribution Functions for random variables, starting from the density or mass functions. A cumulative distribution function is generally defined as:</p>
+<div class="math notranslate nohighlight">
+\[ F(x) = P(X \leq x) \]</div>
+</section>
+<section id="cdf-of-continuous-random-variables">
+<h3>CDF of Continuous Random Variables<a class="headerlink" href="#cdf-of-continuous-random-variables" title="Permalink to this heading">#</a></h3>
+<p>In the case of continuous random variables, the definition leads to:</p>
+<div class="math notranslate nohighlight">
+\[F(x) = \int_{-\infty}^x P(x)dx\]</div>
+<p>The CDF is useful in different ways. For instance, it’s easy to see that:</p>
+<div class="math notranslate nohighlight">
+\[P(a \leq X \leq b) = \int_a^b P(x)dx = \int_{-\infty}^b P(x)dx - \int_{-\infty}^a P(x)dx = F(b) - F(a)\]</div>
+</section>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h3>
+<p>The CDF of the uniform distribution will be given by:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(F(x) = 0\)</span> for <span class="math notranslate nohighlight">\(x &lt; a\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(F(x) = \frac{x - a}{b - a}\)</span> for <span class="math notranslate nohighlight">\(a \leq x \leq b\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(F(x) = 1\)</span> for <span class="math notranslate nohighlight">\(x &gt; b\)</span></p></li>
+</ul>
+<p>The plot below shows a diagram:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Define the parameters for the uniform distribution</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># Start of the interval</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">8</span>  <span class="c1"># End of the interval</span>
+
+<span class="c1"># Generate data points for the CDF of the uniform distribution</span>
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">b</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">),</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Create the CDF plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
+
+<span class="c1"># Highlight &quot;a&quot; and &quot;b&quot; with vertical lines that stop at the blue line</span>
+<span class="c1">#plt.axvline(a, color=&#39;red&#39;, linestyle=&#39;--&#39;, label=&#39;a&#39;, lw=1.5, ymax=(x[1] - a) / (b - a))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">((</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;F(x)&#39;</span><span class="p">,</span> <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Cumulative Distribution Function (CDF) of the Uniform Distribution&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="n">b</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">])</span>
+<span class="c1">#plt.yticks([0, 0.2, 0.4, 0.6, 0.8, 1], [&#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;])</span>
+
+<span class="c1"># Show the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/00a4f47c84852bb09012db4118569e52f61380509db4e20454d4686e00d27f1e.png" src="../_images/00a4f47c84852bb09012db4118569e52f61380509db4e20454d4686e00d27f1e.png" />
+</div>
+</div>
+</section>
+<section id="cdf-of-discrete-random-variables">
+<h3>CDF of Discrete Random Variables<a class="headerlink" href="#cdf-of-discrete-random-variables" title="Permalink to this heading">#</a></h3>
+<p>In the case of discrete random variables, the definition of CDF leads to:</p>
+<div class="math notranslate nohighlight">
+\[F(x) = \sum_{y\leq x} P(y)\]</div>
+<section id="example-pdf-and-cdf-of-a-fair-die">
+<h4>Example - PDF and CDF of a fair die<a class="headerlink" href="#example-pdf-and-cdf-of-a-fair-die" title="Permalink to this heading">#</a></h4>
+<p>In the case of a fair die, the PMF will be:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f(x) = \begin{cases} 
+\frac{1}{6} &amp; \text{if } x \in \{1, 2, 3, 4, 5, 6\} \\
+0 &amp; \text{otherwise}
+\end{cases}
+\end{split}\]</div>
+<p>The CDF will be:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+F(x) = \begin{cases} 
+0 &amp; \text{if } x &lt; 1 \\
+\frac{1}{6} &amp; \text{if } 1 \leq x &lt; 2 \\
+\frac{1}{3} &amp; \text{if } 2 \leq x &lt; 3 \\
+\frac{1}{2} &amp; \text{if } 3 \leq x &lt; 4 \\
+\frac{2}{3} &amp; \text{if } 4 \leq x &lt; 5 \\
+1 &amp; \text{if } x \geq 5
+\end{cases}
+\end{split}\]</div>
+<p>The diagram below shows an example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Number of sides on the die</span>
+<span class="n">num_sides</span> <span class="o">=</span> <span class="mi">6</span>
+
+<span class="c1"># Create an array of possible outcomes (1 through 6)</span>
+<span class="n">outcomes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_sides</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Calculate the PMF for a fair die</span>
+<span class="n">pmf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">num_sides</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="n">num_sides</span><span class="p">)</span>
+
+<span class="c1"># Calculate the CDF for a fair die</span>
+<span class="n">cdf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">pmf</span><span class="p">)</span>
+
+<span class="c1"># Create a figure with vertical subplots</span>
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># Plot the PMF with vertical lines and dots in the first subplot</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">outcomes</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">pmf</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;PMF&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">outcomes</span><span class="p">,</span> <span class="n">pmf</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Probability&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;PMF of a Fair Six-Sided Die&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Plot the CDF in the second subplot with only horizontal lines</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">outcomes</span><span class="p">,</span> <span class="n">cdf</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;mid&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Outcome&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Probability&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;CDF of a Fair Six-Sided Die&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">outcomes</span><span class="p">)</span>
+
+<span class="c1"># Adjust layout to prevent overlap</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+<span class="c1"># Show the plots</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/b96fc33c7fc05bf59bd380dab928b8f83fdd5ee97fe60e06e6065fa77f644e77.png" src="../_images/b96fc33c7fc05bf59bd380dab928b8f83fdd5ee97fe60e06e6065fa77f644e77.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="expectation">
+<h2>Expectation<a class="headerlink" href="#expectation" title="Permalink to this heading">#</a></h2>
+<p>When it is known that a random variable follows a probability
+distribution, <strong>it is possible to characterize that variable</strong> (and
+hence the related probability distribution) <strong>with some statistics</strong>.</p>
+<p>The most straightforward of them is the expectation. <strong>The concept of
+expectation is very related to the concept of mean.</strong> When we compute
+the mean of a given set of numbers, we usually sum all the numbers
+together and then divide by the total.</p>
+<p>Since a probability distribution will tell us which values will be more
+frequent than others, we can compute this mean with a weighted average,
+where the weights are given by the probability distribution.</p>
+<p>Specifically, we can define the expectation of a random variable X as
+follows:</p>
+<div class="math notranslate nohighlight">
+\[E_{X\sim P}\lbrack X\rbrack = \sum_{x \in \chi}^{}{xP(x)}\]</div>
+<p>In the case of continuous variables, the expectation takes the form of
+an integral:</p>
+<div class="math notranslate nohighlight">
+\[E_{X \sim P}\lbrack X\rbrack = \int xP(x)dx\]</div>
+<p>This is very related to the concept of mean value (or expected value) of
+a random variable.</p>
+</section>
+<section id="variance">
+<h2>Variance<a class="headerlink" href="#variance" title="Permalink to this heading">#</a></h2>
+<p>The variance gives a measure of how much variability there is in a
+variable <span class="math notranslate nohighlight">\(X\)</span> around its mean <span class="math notranslate nohighlight">\(E\lbrack X\rbrack\)</span>.</p>
+<p>The variance is defined as follows:</p>
+<div class="math notranslate nohighlight">
+\[var\lbrack X\rbrack = E\lbrack\left( X - E\lbrack X\rbrack \right)^{2}\rbrack\]</div>
+</section>
+<section id="covariance">
+<h2>Covariance<a class="headerlink" href="#covariance" title="Permalink to this heading">#</a></h2>
+<p>The covariance gives a measure of how two variables are linearly related
+to each other. It allows to <strong>measure to what extent the increase of one
+of the variables corresponds to an increase of the value of the other
+one</strong>.</p>
+<p>Given two random variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>, the covariance is defined as
+follows:</p>
+<div class="math notranslate nohighlight">
+\[Cov(X,Y) = E\lbrack\left( X - E\lbrack X\rbrack \right)\left( Y - E\lbrack Y\rbrack \right)\rbrack\]</div>
+<p>We can distinguish the following terms:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(E\lbrack X\rbrack\)</span> and <span class="math notranslate nohighlight">\(E\lbrack Y\rbrack\)</span> are the expectations of
+<span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y.\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((X - E\lbrack X\rbrack)\)</span> and <span class="math notranslate nohighlight">\((Y - E\lbrack Y\rbrack)\)</span> are the
+differences between the samples and the expected values.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\left( X - E\lbrack X\rbrack \right)\left( Y - E\lbrack Y\rbrack \right)\)</span>
+computes the product between the differences.</p></li>
+</ul>
+<p>We have:</p>
+<ul class="simple">
+<li><p>If the signs of the terms agree, the product is positive.</p></li>
+<li><p>If the signs of the terms disagree, the product is negative.</p></li>
+</ul>
+<p>In practice, if when <span class="math notranslate nohighlight">\(X\)</span> is larger than the mean, then <span class="math notranslate nohighlight">\(Y\)</span>
+is larger than the mean and vice versa, when <span class="math notranslate nohighlight">\(X\)</span> is lower
+than the mean then <span class="math notranslate nohighlight">\(Y\)</span> is lower than the mean, then the two
+variables are <em>correlated,</em> and the covariance is high.</p>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is a multi-dimensional variable
+<span class="math notranslate nohighlight">\(X = \lbrack X_{1},X_{2},\ldots,X_{n}\rbrack\)</span>, we can compute all the
+possible covariances between variable pairs:
+<span class="math notranslate nohighlight">\(Cov\lbrack X_{i},X_{j}\rbrack\)</span>. This allows to create a matrix, which
+is generally referred to as <strong>the covariance matrix</strong>. The general term
+of the covariance matrix <span class="math notranslate nohighlight">\(Cov(X)\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[Cov(X)_{i,j} = \Sigma_{ij} = Cov(X_{i},X_{j})\]</div>
+</section>
+<section id="standardization">
+<h2>Standardization<a class="headerlink" href="#standardization" title="Permalink to this heading">#</a></h2>
+<p>Similar to z-scoring, standardization transforms a random variable <span class="math notranslate nohighlight">\(X\)</span> into a variable <span class="math notranslate nohighlight">\(Z\)</span> so that it has:</p>
+<ul class="simple">
+<li><p>Expectation equal to zero: <span class="math notranslate nohighlight">\(E(X) = 0\)</span>.</p></li>
+<li><p>Variance equal to one: <span class="math notranslate nohighlight">\(Var(X) = 1\)</span>.</p></li>
+</ul>
+<p>The new standardized variable will be:</p>
+<div class="math notranslate nohighlight">
+\[Z = \frac{X - \mu_X}{\sigma_X} = \frac{X-E[X]}{\sqrt{Var[X]}}\]</div>
+</section>
+<section id="common-probability-distributions">
+<h2>Common Probability Distributions<a class="headerlink" href="#common-probability-distributions" title="Permalink to this heading">#</a></h2>
 <p>There are several common probability distributions which can be used to
 describe random events. <strong>These distributions have an analytical
 formulation which depends generally on one or more parameters.</strong></p>
@@ -460,7 +953,7 @@ variable.</p>
 <p>It is hence useful to know the <strong>most common probability distributions</strong>
 so that we can recognize the cases in which they can be used.</p>
 <section id="discrete-uniform-distribution">
-<h2>Discrete Uniform Distribution<a class="headerlink" href="#discrete-uniform-distribution" title="Permalink to this heading">#</a></h2>
+<h3>Discrete Uniform Distribution<a class="headerlink" href="#discrete-uniform-distribution" title="Permalink to this heading">#</a></h3>
 <p>The discrete uniform distribution is controlled by a parameter <span class="math notranslate nohighlight">\(k \in \mathbb{N}\)</span> and assumes that all outcomes have the same probability of occurring:</p>
 <div class="math notranslate nohighlight">
 \[P(X=a_i) = \frac{1}{k}\]</div>
@@ -470,8 +963,8 @@ so that we can recognize the cases in which they can be used.</p>
 \[E[X] = \frac{k+1}{2}\]</div>
 <div class="math notranslate nohighlight">
 \[Var[X] = \frac{1}{12}(k^2-1)\]</div>
-<section id="example">
-<h3>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h3>
+<section id="id1">
+<h4>Example<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h4>
 <p>The outcomes of rolling a fair die follow a uniform distribution with <span class="math notranslate nohighlight">\(k=6\)</span>, as shown in the diagram below:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -481,7 +974,7 @@ so that we can recognize the cases in which they can be used.</p>
 </section>
 </section>
 <section id="bernoulli-distribution">
-<h2>Bernoulli Distribution<a class="headerlink" href="#bernoulli-distribution" title="Permalink to this heading">#</a></h2>
+<h3>Bernoulli Distribution<a class="headerlink" href="#bernoulli-distribution" title="Permalink to this heading">#</a></h3>
 <p>The Bernoulli distribution is a distribution over a single binary random
 variable, i.e., the variable <span class="math notranslate nohighlight">\(X\)</span> can take only two values:
 <span class="math notranslate nohighlight">\(\left\{ 0,1 \right\}\)</span>.</p>
@@ -498,8 +991,8 @@ variable to be equal to 1.</p>
 <li><p><span class="math notranslate nohighlight">\(E\lbrack x\rbrack = \phi\)</span>;</p></li>
 <li><p><span class="math notranslate nohighlight">\(Var(x) = \phi(1 - \phi)\)</span>.</p></li>
 </ul>
-<section id="id1">
-<h3>Example<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<section id="id2">
+<h4>Example<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h4>
 <p>A skewed coin lands on “head” <span class="math notranslate nohighlight">\(60\%\)</span> of the
 times. If we define <span class="math notranslate nohighlight">\(X = 1\)</span> when the outcome is head and <span class="math notranslate nohighlight">\(X = 0\)</span> when
 the outcome is tail, then the variable follows a Bernoulli distribution
@@ -507,7 +1000,7 @@ with <span class="math notranslate nohighlight">\(\phi = 0.6\)</span>.</p>
 </section>
 </section>
 <section id="binomial-distribution">
-<h2>Binomial Distribution<a class="headerlink" href="#binomial-distribution" title="Permalink to this heading">#</a></h2>
+<h3>Binomial Distribution<a class="headerlink" href="#binomial-distribution" title="Permalink to this heading">#</a></h3>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <img alt="../_images/b4ba486ffca81fed577fcc5d0d825a6576c5dcd4433a1eed434d02c99df6b8aa.png" src="../_images/b4ba486ffca81fed577fcc5d0d825a6576c5dcd4433a1eed434d02c99df6b8aa.png" />
@@ -530,8 +1023,8 @@ Bernoulli distribution with parameter</strong>
 </ul>
 <p>The expected value is <span class="math notranslate nohighlight">\(E\lbrack k\rbrack = np\)</span>;</p>
 <p>The variance is <span class="math notranslate nohighlight">\(Var\lbrack k\rbrack = np(1 - p)\)</span>;</p>
-<section id="id2">
-<h3>Example<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<section id="id3">
+<h4>Example<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h4>
 <p>What is the probability of tossing a coin three times and obtaining
 three heads? We have:</p>
 <ul class="simple">
@@ -545,21 +1038,21 @@ three heads? We have:</p>
 <p><strong>Exercise</strong></p>
 <p>What is the probability of tossing an unfair coin
 (<span class="math notranslate nohighlight">\(P\left( 'head^{'} \right) = 0.6\)</span>) 7 times and obtaining <span class="math notranslate nohighlight">\(2\)</span> tails?</p>
-</section>
-</section>
-<section id="poisson-distribution">
-<h2>Poisson Distribution<a class="headerlink" href="#poisson-distribution" title="Permalink to this heading">#</a></h2>
+<div class="toggle docutils container">
+<p class="rubric">Poisson Distribution (Optional)</p>
 <p>The Poisson distribution expresses the <strong>probability of a given number of events occurring in a fixed interval of time or space if they occur independently with a known rate</strong>. It is useful to model situations in which the number of events is very large and the probability of a given event happening is relatively small. The Poisson distribution is controlled by a parameter <span class="math notranslate nohighlight">\(\lambda&gt;0\)</span> (the rate at which each event occurs) and defined as:</p>
 <div class="math notranslate nohighlight">
 \[P(X=x) = \frac{\lambda^x}{x!}\exp(-\lambda)\]</div>
 <p>with <span class="math notranslate nohighlight">\(x=0,1,2,3,\ldots\)</span> representing the number of events happening at the same time/space. The plot below shows the Poisson distribution for different choices of the <span class="math notranslate nohighlight">\(\lambda\)</span> parameter:</p>
+</div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <img alt="../_images/26b32f3ff10869b84d807ff3b8402495ab558285601402006112a858df2434d1.png" src="../_images/26b32f3ff10869b84d807ff3b8402495ab558285601402006112a858df2434d1.png" />
 </div>
 </div>
-<section id="id3">
-<h3>Example<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+</section>
+<section id="id4">
+<h4>Example<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h4>
 <p>During World War II Germans bombed the south of London many times. People started to believe that some areas were more targeted by the bombing and hence started moving from one part of a city to another in an attempt to avoid those areas.</p>
 <p>After the end of the war, R. D. Charles showed that the bombings were actually random and independent. To do so, he divided the interested area in <span class="math notranslate nohighlight">\(576\)</span> squares of <span class="math notranslate nohighlight">\(0.24 Km^2\)</span>. The number of total bombs was <span class="math notranslate nohighlight">\(537\)</span>, hence less than one per square (a rare event). Assuming that the bombing was uniform and casual, the probability of a square being bombed would be:</p>
 <div class="math notranslate nohighlight">
@@ -621,6 +1114,10 @@ three heads? We have:</p>
 </div></div></div>
 </div>
 <p>Since the numbers are very close, we can imagine that the bombing was really random.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</section>
 </section>
 </section>
 <section id="categorical-distribution">
@@ -916,20 +1413,43 @@ learning</em>. MIT press, 2016. <a class="reference external" href="https://www.
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discrete-uniform-distribution">Discrete Uniform Distribution</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-mass-functions-pmf-discrete-variables">Probability Mass Functions (PMF) - Discrete Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-probability-mass-function-for-a-fair-coin">Example: Probability Mass Function for a Fair Coin</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-probability-mass-function-for-a-biased-coin">Example: Probability Mass Function for a Biased Coin</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-probability-mass-function">Exercise: Probability Mass Function</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-density-functions-pdf-continuous-variables">Probability Density Functions (PDF) - Continuous Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-uniform-pdf">Example: Uniform PDF</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cumulative-distribution-functions-cdf">Cumulative Distribution Functions (CDF)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cdf-of-continuous-random-variables">CDF of Continuous Random Variables</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cdf-of-discrete-random-variables">CDF of Discrete Random Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-pdf-and-cdf-of-a-fair-die">Example - PDF and CDF of a fair die</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bernoulli-distribution">Bernoulli Distribution</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Example</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binomial-distribution">Binomial Distribution</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation">Expectation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variance">Variance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#covariance">Covariance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#standardization">Standardization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-probability-distributions">Common Probability Distributions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discrete-uniform-distribution">Discrete Uniform Distribution</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Example</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#poisson-distribution">Poisson Distribution</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bernoulli-distribution">Bernoulli Distribution</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Example</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binomial-distribution">Binomial Distribution</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Example</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Example</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#categorical-distribution">Categorical Distribution</a><ul class="nav section-nav flex-column">
