@@ -7,30 +7,7 @@ options:
   numbered: True
 
 parts:
-- caption: Theory
-  numbered: True
-  chapters:
-  - file: lectures/01_intro_data_analysis
-  - file: lectures/03_main_data_analysis_concepts
-  - file: lectures/04_misure_di_frequenze_e_rappresentazione_grafica_dei_dati
-  - file: lectures/05_misure_di_tendenza_centrale_dispersione_e_forma
-  - file: lectures/06_associazione_variabili
-  - file: lectures/07_probability
-  - file: lectures/08_common_distributions
-  - file: lectures/09_information_theory
-  - file: lectures/10_statistical_inference
-  - file: lectures/11_linear_regression
-  - file: lectures/12_logistic_regression
-  - file: lectures/13_causal_analysis
-  - file: lectures/14_data_as_nd_points
-  - file: lectures/15_clustering
-  - file: lectures/16_density_estimation
-  - file: lectures/17_principal_component_analysis
-  - file: lectures/18_predictive_modeling
-  - file: lectures/19_classification
-  - file: lectures/20_discriminative_models_for_classification
-  - file: lectures/21_generative_models_for_classification
-- caption: Laboratories
+- caption: Lecture 1
   numbered: True
   chapters:
   - file: laboratories/01_setup
@@ -38,17 +15,48 @@ parts:
   - file: laboratories/03_intro_numpy
   - file: laboratories/04_intro_matplotlib
   - file: laboratories/05_intro_pandas
-  - file: laboratories/06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati
-  - file: laboratories/07_misure_di_tendenza_centrale_dispersione_e_forma
-  - file: laboratories/08_associazione_variabili
-  - file: laboratories/09_heart-disease-analysis
-  - file: laboratories/10_statistical_inference
-  - file: laboratories/11_regressione_lineare
-  - file: laboratories/12_regressione_logistica
-  - file: laboratories/13_linear_logistic_regression_example_analysis
-  - file: laboratories/14_clustering_density_estimation_pca
-  - file: laboratories/15_customer_segmentation_analysis
-  - file: laboratories/16_classificazione
+# - caption: Theory
+#   numbered: True
+#   chapters:
+  # - file: lectures/01_intro_data_analysis
+  # - file: lectures/03_main_data_analysis_concepts
+  # - file: lectures/04_misure_di_frequenze_e_rappresentazione_grafica_dei_dati
+  # - file: lectures/05_misure_di_tendenza_centrale_dispersione_e_forma
+  # - file: lectures/06_associazione_variabili
+  # - file: lectures/07_probability
+  # - file: lectures/08_common_distributions
+  # - file: lectures/09_information_theory
+  # - file: lectures/10_statistical_inference
+  # - file: lectures/11_linear_regression
+  # - file: lectures/12_logistic_regression
+  # - file: lectures/13_causal_analysis
+  # - file: lectures/14_data_as_nd_points
+  # - file: lectures/15_clustering
+  # - file: lectures/16_density_estimation
+  # - file: lectures/17_principal_component_analysis
+  # - file: lectures/18_predictive_modeling
+  # - file: lectures/19_classification
+  # - file: lectures/20_discriminative_models_for_classification
+  # - file: lectures/21_generative_models_for_classification
+# - caption: Laboratories
+#   numbered: True
+#   chapters:
+#   - file: laboratories/01_setup
+#   - file: laboratories/02_intro_python
+#   - file: laboratories/03_intro_numpy
+#   - file: laboratories/04_intro_matplotlib
+#   - file: laboratories/05_intro_pandas
+#   - file: laboratories/06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati
+#   - file: laboratories/07_misure_di_tendenza_centrale_dispersione_e_forma
+#   - file: laboratories/08_associazione_variabili
+#   - file: laboratories/09_heart-disease-analysis
+#   - file: laboratories/10_statistical_inference
+#   - file: laboratories/11_regressione_lineare
+#   - file: laboratories/12_regressione_logistica
+#   - file: laboratories/13_linear_logistic_regression_example_analysis
+#   - file: laboratories/14_clustering_density_estimation_pca
+#   - file: laboratories/15_customer_segmentation_analysis
+#   - file: laboratories/16_classificazione
 
   
   
