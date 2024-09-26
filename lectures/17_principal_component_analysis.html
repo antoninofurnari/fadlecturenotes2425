@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>16. Principal Component Analysis &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+    <title>Principal Component Analysis &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
   
   
   
@@ -68,8 +68,6 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="17. Introduction to Predictive Modelling and Regression Models" href="18_predictive_modeling.html" />
-    <link rel="prev" title="15. Density Estimation" href="16_density_estimation.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -171,47 +169,13 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_intro_data_analysis.html">1. Introduction to Data Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_main_data_analysis_concepts.html">2. Main data analysis concepts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_misure_di_frequenze_e_rappresentazione_grafica_dei_dati.html">3. Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_misure_di_tendenza_centrale_dispersione_e_forma.html">4. Misure di Tendenza Centrale, Dispersione e Forma</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_associazione_variabili.html">5. Associazione tra Variabili</a></li>
-<li class="toctree-l1"><a class="reference internal" href="07_probability.html">6. Probability for Data Manipulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="08_common_distributions.html">7. Common Probability Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="09_information_theory.html">8. Basic Elements of Information Theory</a></li>
-<li class="toctree-l1"><a class="reference internal" href="10_statistical_inference.html">9. Statistical Inference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="11_linear_regression.html">10. Linear Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="12_logistic_regression.html">11. Logistic Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="13_causal_analysis.html">12. Causal Data Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="14_data_as_nd_points.html">13. Data as N-Dimensional Points</a></li>
-<li class="toctree-l1"><a class="reference internal" href="15_clustering.html">14. Clustering</a></li>
-<li class="toctree-l1"><a class="reference internal" href="16_density_estimation.html">15. Density Estimation</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">16. Principal Component Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="18_predictive_modeling.html">17. Introduction to Predictive Modelling and Regression Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="19_classification.html">18. Classification Task and Evaluation Measures</a></li>
-<li class="toctree-l1"><a class="reference internal" href="20_discriminative_models_for_classification.html">19. Discriminative Models for Classification</a></li>
-<li class="toctree-l1"><a class="reference internal" href="21_generative_models_for_classification.html">20. Generative Models for Classification</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratories</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 1</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/01_setup.html">21. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/02_intro_python.html">22. Introduzione a Python</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/03_intro_numpy.html">23. Introduzione a Numpy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/04_intro_matplotlib.html">24. Introduzione a Matplotlib</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/05_intro_pandas.html">25. Introduzione a Pandas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">26. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/07_misure_di_tendenza_centrale_dispersione_e_forma.html">27. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/08_associazione_variabili.html">28. Associazione tra Variabili</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/09_heart-disease-analysis.html">29. Exploratory Analysis on the Heart Disease Dataset</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/10_statistical_inference.html">30. Laboratory on Statistical Inference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/11_regressione_lineare.html">31. Laboratorio su Regressione Lineare</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/12_regressione_logistica.html">32. Laboratorio su regressione logistica</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/13_linear_logistic_regression_example_analysis.html">33. Linear and Logistic Regression Laboratory</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/14_clustering_density_estimation_pca.html">34. Clustering, Density Estimation, and Principal Component Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/15_customer_segmentation_analysis.html">35. Customer Segmentation Analysis Example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/16_classificazione.html">36. Classificazione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/01_setup.html">1. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/02_intro_python.html">2. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/03_intro_numpy.html">3. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/04_intro_matplotlib.html">4. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/05_intro_pandas.html">5. Introduzione a Pandas</a></li>
 </ul>
 
     </div>
@@ -438,25 +402,25 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-selection-vs-feature-reduction">16.1. Feature Selection vs Feature Reduction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-reduction-example">16.2. Feature Reduction Example</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rotating-around-the-origin">16.2.1. Rotating Around the Origin</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#amount-of-information-reconstruction-error-and-variance">16.2.2. Amount of Information, Reconstruction Error and Variance</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#projection-along-a-direction">16.2.3. Projection Along a Direction</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-index-to-rule-them-all">16.2.4. An Index to Rule them All</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-selection-vs-feature-reduction">Feature Selection vs Feature Reduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-reduction-example">Feature Reduction Example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rotating-around-the-origin">Rotating Around the Origin</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#amount-of-information-reconstruction-error-and-variance">Amount of Information, Reconstruction Error and Variance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#projection-along-a-direction">Projection Along a Direction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-index-to-rule-them-all">An Index to Rule them All</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-formulation">16.3. General Formulation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#back-to-our-example">16.4. Back to Our Example</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-an-appropriate-number-of-components">16.5. Choosing an Appropriate Number of Components</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-principal-components-load-plots">16.6. Interpretation of the Principal Components - Load Plots</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-of-pca">16.7. Applications of PCA</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensionality-reduction-and-visualization">16.7.1. Dimensionality Reduction and Visualization</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-decorrelation-principal-component-regression">16.7.2. Data Decorrelation - Principal Component Regression</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-compression">16.7.3. Data Compression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-formulation">General Formulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#back-to-our-example">Back to Our Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-an-appropriate-number-of-components">Choosing an Appropriate Number of Components</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-principal-components-load-plots">Interpretation of the Principal Components - Load Plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-of-pca">Applications of PCA</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensionality-reduction-and-visualization">Dimensionality Reduction and Visualization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-decorrelation-principal-component-regression">Data Decorrelation - Principal Component Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-compression">Data Compression</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">16.8. References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
             </nav>
         </div>
@@ -469,12 +433,12 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="principal-component-analysis">
-<h1><span class="section-number">16. </span>Principal Component Analysis<a class="headerlink" href="#principal-component-analysis" title="Permalink to this heading">#</a></h1>
+<h1>Principal Component Analysis<a class="headerlink" href="#principal-component-analysis" title="Permalink to this heading">#</a></h1>
 <p>So far, we have worked with relatively small datasets, with a limited set of interpretable variables. We have seen how models such as linear and logistic regression can help in understanding and interpreting the relationships between variables.</p>
 <p>In practice, in many cases, we will work with larger sets of data, where individual variables are not always interpretable. <strong>Consider for instance a dataset of medical images with a resolution of <span class="math notranslate nohighlight">\(600 \times 600\)</span> pixels. We may want to be able to apply data analysis to such images, for instance, for automated diagnosis, but, if we think about it, we obtain a set of <span class="math notranslate nohighlight">\(360000\)</span> individual columns. Moreover, such columns are not directly interpretable (each one represent the gray value of a specific pixel in the image).</strong></p>
 <p>In most of these cases, <strong>the data will be highly redundant, with different variables being dependent or reporting similar data in different forms</strong>. Think about it: if there is a large number of variables, it is more likely that some of them capture the same phenomenon from different points of view.</p>
 <section id="feature-selection-vs-feature-reduction">
-<h2><span class="section-number">16.1. </span>Feature Selection vs Feature Reduction<a class="headerlink" href="#feature-selection-vs-feature-reduction" title="Permalink to this heading">#</a></h2>
+<h2>Feature Selection vs Feature Reduction<a class="headerlink" href="#feature-selection-vs-feature-reduction" title="Permalink to this heading">#</a></h2>
 <p>We have seen how, when many variables are available, it makes sense to select a subset of such variables. In regression analysis, in particular, we have seen how, when features are highly correlated, we should <strong>discard some of them to reduce collinearity</strong>. Indeed, if two variables <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are highly correlated, one of the two is redundant to a given extent, and we can ignore it.</p>
 <p>We have seen how variables can be selected in different ways:</p>
 <ul class="simple">
@@ -486,7 +450,7 @@ document.write(`
 <p>Instead of selecting a subset of features to work with, <strong>feature reduction techniques</strong> aim to <strong>find a new set of features which summarize the original set of features losing a small amount of information, while maintaining a limited number of dimensions</strong>.</p>
 </section>
 <section id="feature-reduction-example">
-<h2><span class="section-number">16.2. </span>Feature Reduction Example<a class="headerlink" href="#feature-reduction-example" title="Permalink to this heading">#</a></h2>
+<h2>Feature Reduction Example<a class="headerlink" href="#feature-reduction-example" title="Permalink to this heading">#</a></h2>
 <p>Let us consider the Iris dataset. In particular, we will consider two features: <code class="docutils literal notranslate"><span class="pre">sepal</span> <span class="pre">length</span></code> and <code class="docutils literal notranslate"><span class="pre">petal</span> <span class="pre">length</span></code>:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -508,7 +472,7 @@ document.write(`
 </ul>
 <p>We also note that, ideally, we expect the <strong>new variables <span class="math notranslate nohighlight">\(z_1\)</span> and <span class="math notranslate nohighlight">\(z_2\)</span> to be decorrelated</strong>. Indeed, if <span class="math notranslate nohighlight">\(z_1\)</span> and <span class="math notranslate nohighlight">\(z_2\)</span> are decorrelated, adding <span class="math notranslate nohighlight">\(z_2\)</span> to the picture only brings additional informative content about the original data, avoiding “repeating” information which is already summarized in <span class="math notranslate nohighlight">\(z_1\)</span>.</p>
 <section id="rotating-around-the-origin">
-<h3><span class="section-number">16.2.1. </span>Rotating Around the Origin<a class="headerlink" href="#rotating-around-the-origin" title="Permalink to this heading">#</a></h3>
+<h3>Rotating Around the Origin<a class="headerlink" href="#rotating-around-the-origin" title="Permalink to this heading">#</a></h3>
 <p>In our example, we note that a specific rotation of the data around the central point</p>
 <div class="math notranslate nohighlight">
 \[(\overline x, \overline y) = \big(\frac{1}{N}\sum_{i=1}^N x_1^{(i)}, \frac{1}{N}\sum_{i=1}^N x_2^{(i)}\big)\]</div>
@@ -521,7 +485,7 @@ document.write(`
 <p>As we can see, this specific rotation (we will see later how to compute the optimal one) has produced a version of the data which is uncorrelated. Note that the rotation around the mean point is a rigid and invertible transformation, hence there is no loss of information.</p>
 </section>
 <section id="amount-of-information-reconstruction-error-and-variance">
-<h3><span class="section-number">16.2.2. </span>Amount of Information, Reconstruction Error and Variance<a class="headerlink" href="#amount-of-information-reconstruction-error-and-variance" title="Permalink to this heading">#</a></h3>
+<h3>Amount of Information, Reconstruction Error and Variance<a class="headerlink" href="#amount-of-information-reconstruction-error-and-variance" title="Permalink to this heading">#</a></h3>
 <p>Without loss of generality, let us now consider the two variables:</p>
 <div class="math notranslate nohighlight">
 \[h_1 = x_1 - \overline x_1, h_2 = x_2 - \overline x_2 \]</div>
@@ -584,7 +548,7 @@ Variance of h2: 3.10
 <p>Intuitively, <strong>larger variance lends to a larger informative content, and hence to a smaller reconstruction error</strong>. Indeed, in variables exhibiting low variance, points tend to be less distinguishable, hence making it harder to reconstruct the original data.</p>
 </section>
 <section id="projection-along-a-direction">
-<h3><span class="section-number">16.2.3. </span>Projection Along a Direction<a class="headerlink" href="#projection-along-a-direction" title="Permalink to this heading">#</a></h3>
+<h3>Projection Along a Direction<a class="headerlink" href="#projection-along-a-direction" title="Permalink to this heading">#</a></h3>
 <p>Note that we can see the transformation:</p>
 <div class="math notranslate nohighlight">
 \[z_1 = h_1 \cos(\theta)  - h_2 \sin(\theta)\]</div>
@@ -621,7 +585,7 @@ Variance of h2: 3.10
 </ul>
 </section>
 <section id="an-index-to-rule-them-all">
-<h3><span class="section-number">16.2.4. </span>An Index to Rule them All<a class="headerlink" href="#an-index-to-rule-them-all" title="Permalink to this heading">#</a></h3>
+<h3>An Index to Rule them All<a class="headerlink" href="#an-index-to-rule-them-all" title="Permalink to this heading">#</a></h3>
 <p>We can see the variable <span class="math notranslate nohighlight">\(z_1\)</span> found by rotating the data as <strong>a single index summarizing the original data</strong>. Since it is the single dimension which leads to the smallest reconstruction error, <strong>if we have a computational budget of a single variable</strong>, it does make sense to represent the data using this value.</p>
 <p>Recall that, in the end, <span class="math notranslate nohighlight">\(z_1\)</span> is a linear combination of <span class="math notranslate nohighlight">\(h_1\)</span> and <span class="math notranslate nohighlight">\(h_2\)</span>:</p>
 <div class="math notranslate nohighlight">
@@ -630,7 +594,7 @@ Variance of h2: 3.10
 </section>
 </section>
 <section id="general-formulation">
-<h2><span class="section-number">16.3. </span>General Formulation<a class="headerlink" href="#general-formulation" title="Permalink to this heading">#</a></h2>
+<h2>General Formulation<a class="headerlink" href="#general-formulation" title="Permalink to this heading">#</a></h2>
 <p>We have seen a simple example in the case of two variables. Let us now discuss the general formulation in the case of <span class="math notranslate nohighlight">\(D\)</span>-dimensional variables.</p>
 <p>Let <span class="math notranslate nohighlight">\(\{\mathbf{x}_n\}\)</span> be a set of <span class="math notranslate nohighlight">\(N\)</span> observations, where <span class="math notranslate nohighlight">\(n=1,\ldots,N\)</span>, and <span class="math notranslate nohighlight">\(\mathbf{x}_n\)</span> is a vector of dimensionality <span class="math notranslate nohighlight">\(D\)</span>. We will define Principal Component Analysis as a projection of the data to <span class="math notranslate nohighlight">\(M \lt D\)</span> dimensions such that the variance of the projected data is maximized.</p>
 <p>We will first consider the case in which <span class="math notranslate nohighlight">\(M=1\)</span>. In this case, we want to find a D-dimensional vector <span class="math notranslate nohighlight">\(\mathbf{u}_1\)</span> such that, projecting the data to this vector, variance is maximized. Without loss of generality, we will choose <span class="math notranslate nohighlight">\(\mathbf{u}_1\)</span> such that <span class="math notranslate nohighlight">\(\mathbf{u}_1^T\mathbf{u}=1\)</span>. This corresponds to choosing <span class="math notranslate nohighlight">\(\mathbf{u}_1\)</span> as a <strong>unit vector</strong>, which makes sense, as we are interested in the direction of the projection. We will find this assumption useful later.</p>
@@ -711,7 +675,7 @@ x_{N1} &amp; x_{N2} &amp; \ldots &amp; x_{ND} \\
 </ul>
 </section>
 <section id="back-to-our-example">
-<h2><span class="section-number">16.4. </span>Back to Our Example<a class="headerlink" href="#back-to-our-example" title="Permalink to this heading">#</a></h2>
+<h2>Back to Our Example<a class="headerlink" href="#back-to-our-example" title="Permalink to this heading">#</a></h2>
 <p>We now have the computational tools to fully understand our example. Let us plot the data again. We will consider the mean-centered data:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -775,7 +739,7 @@ Eigenvectors:
 <p>The two principal components denote the <strong>main directions of variation within the data</strong>. In the plot above, the vector sizes are proportional to the related eigenvalues (hence the variance).</p>
 </section>
 <section id="choosing-an-appropriate-number-of-components">
-<h2><span class="section-number">16.5. </span>Choosing an Appropriate Number of Components<a class="headerlink" href="#choosing-an-appropriate-number-of-components" title="Permalink to this heading">#</a></h2>
+<h2>Choosing an Appropriate Number of Components<a class="headerlink" href="#choosing-an-appropriate-number-of-components" title="Permalink to this heading">#</a></h2>
 <p>We have seen how PCA allows to reduce the dimensionality of the data. In short, this can be done by computing the first <span class="math notranslate nohighlight">\(M\)</span> eigenvalues and the associated eigenvectors.</p>
 <p>In some cases, it is clear what is the value of <span class="math notranslate nohighlight">\(M\)</span> we need to set. For example, in the case of sorting Fisher’s Iris, we set <span class="math notranslate nohighlight">\(M=1\)</span> because we needed a scalar number. In other cases, we would like to reduce the dimensionality of the data, <strong>while keeping a reasonable amount of information about the original data</strong>.</p>
 <p>We have seen that the variance is related to the MSE reprojection error and hence to the informative content. We can measure <strong>how much information we are retaining by selecting <span class="math notranslate nohighlight">\(M\)</span> components by measuring the cumulative variance of the first M components</strong>.</p>
@@ -944,7 +908,7 @@ Eigenvectors:
 <p>This approach can guide us in choosing the right number of dimensions to keep, selecting a budget of the variance we wish to be able to retain.</p>
 </section>
 <section id="interpretation-of-the-principal-components-load-plots">
-<h2><span class="section-number">16.6. </span>Interpretation of the Principal Components - Load Plots<a class="headerlink" href="#interpretation-of-the-principal-components-load-plots" title="Permalink to this heading">#</a></h2>
+<h2>Interpretation of the Principal Components - Load Plots<a class="headerlink" href="#interpretation-of-the-principal-components-load-plots" title="Permalink to this heading">#</a></h2>
 <p>When we transform data with PCA, the new variables have a less direct interpretation. Indeed, if a given variable is a linear combination of other variables, it is not straightforward to assign a meaning to each component.</p>
 <p>However, we know that the first components are the ones which contain most of the variance. Hence, inspecting the weights that each of these components given to the original features can give some insights into which of the original features are more relevant. In this context, <strong>the weights of the principal components are also called loadings</strong>. Loadings with <strong>large absolute values are more influential in determining the value of the principal components</strong>.</p>
 <p>In practice, we can assess the relevance of features with a <strong>load plot</strong>, which represents each original variable as a 2D point of coordinates given by the loadings corresponding to the first two principal components. Let us show the load plot for our example:</p>
@@ -961,10 +925,10 @@ Eigenvectors:
 <p>A loading plot can also be useful to perform feature selection. For instance, from the plot above all variables seem to be influential, but <code class="docutils literal notranslate"><span class="pre">petal</span> <span class="pre">width</span></code> and <code class="docutils literal notranslate"><span class="pre">petal</span> <span class="pre">length</span></code> are correlated. We could think of using as a subset of variables <code class="docutils literal notranslate"><span class="pre">sepal</span> <span class="pre">width</span></code>, <code class="docutils literal notranslate"><span class="pre">sepal</span> <span class="pre">length</span></code> and one of the other two (e.g., <code class="docutils literal notranslate"><span class="pre">petal</span> <span class="pre">length</span></code>).</p>
 </section>
 <section id="applications-of-pca">
-<h2><span class="section-number">16.7. </span>Applications of PCA<a class="headerlink" href="#applications-of-pca" title="Permalink to this heading">#</a></h2>
+<h2>Applications of PCA<a class="headerlink" href="#applications-of-pca" title="Permalink to this heading">#</a></h2>
 <p>PCA has several applications in data analysis. We will summarize the main ones in the following.</p>
 <section id="dimensionality-reduction-and-visualization">
-<h3><span class="section-number">16.7.1. </span>Dimensionality Reduction and Visualization<a class="headerlink" href="#dimensionality-reduction-and-visualization" title="Permalink to this heading">#</a></h3>
+<h3>Dimensionality Reduction and Visualization<a class="headerlink" href="#dimensionality-reduction-and-visualization" title="Permalink to this heading">#</a></h3>
 <p>We have seen that data can be interpreted as a set of D-dimensional points. When <span class="math notranslate nohighlight">\(D=2\)</span>, it is often useful to visualize the data through a scatterplot. This allows us to see how the data distributes in the space. When <span class="math notranslate nohighlight">\(D&gt;2\)</span>, we can show a series a scatterplot (a pairplot or scattermatrix). However, when <span class="math notranslate nohighlight">\(D\)</span> is very large, it is usually unfeasible to visualize data with all possible scatterplots.</p>
 <p>In these cases, it can be useful to transform the data with PCA and then visualize the data points as 2D points in the space identified by the first two principal components.</p>
 <p>We will show an example on the multidimensional dataset <strong>DIGITS</strong>. The dataset contains small images of resolution <span class="math notranslate nohighlight">\(8 \times 8 pixels\)</span> representing handwritten digits from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(9\)</span>. We can see the dataset as containing <span class="math notranslate nohighlight">\(64\)</span> variables. Each variable indicates the pixel value at a specific location.</p>
@@ -981,7 +945,7 @@ Eigenvectors:
 </div>
 </section>
 <section id="data-decorrelation-principal-component-regression">
-<h3><span class="section-number">16.7.2. </span>Data Decorrelation - Principal Component Regression<a class="headerlink" href="#data-decorrelation-principal-component-regression" title="Permalink to this heading">#</a></h3>
+<h3>Data Decorrelation - Principal Component Regression<a class="headerlink" href="#data-decorrelation-principal-component-regression" title="Permalink to this heading">#</a></h3>
 <p>PCA is also useful when we need to fit a linear regressor and we are in the presence of a dataset with multi-collinearity.</p>
 <p>Let us consider the <code class="docutils literal notranslate"><span class="pre">auto_mpg</span></code> dataset:</p>
 <div class="cell tag_remove-input docutils container">
@@ -1247,7 +1211,7 @@ Eigenvectors:
 <p>While the result is not as interpretable as it was before, this technique may be useful in the case of predictive analysis.</p>
 </section>
 <section id="data-compression">
-<h3><span class="section-number">16.7.3. </span>Data Compression<a class="headerlink" href="#data-compression" title="Permalink to this heading">#</a></h3>
+<h3>Data Compression<a class="headerlink" href="#data-compression" title="Permalink to this heading">#</a></h3>
 <p>Now let’s see a simple example of data compression using PCA. In particular, we will consider the case of compressing images. An image can be seen as high-dimensional data, where the number of dimensions is equal to the number of pixels. For example, an RGB image of size <span class="math notranslate nohighlight">\(640 \times 480\)</span> pixels has <span class="math notranslate nohighlight">\(3 \cdot 640 \cdot 480=921600\)</span> dimensions.</p>
 <p>We expect that there will be redundant information in all these dimensions. One method to compress images is to divide them into fixed-size blocks (e.g., <span class="math notranslate nohighlight">\(8 \times 8\)</span>). Each of these blocks will be an element belonging to a population (the population of <span class="math notranslate nohighlight">\(8 \times 8\)</span> blocks of the image).</p>
 <p>Assuming that the information in the blocks is highly correlated, we can try to compress it by applying PCA to the sample of blocks extracted from our image and choosing only a few principal components to represent the content of the blocks.</p>
@@ -1310,7 +1274,7 @@ Number of dimensions: 819840
 </section>
 </section>
 <section id="references">
-<h2><span class="section-number">16.8. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Parts of Chapter 12 of [1]</p></li>
 </ul>
@@ -1348,24 +1312,6 @@ Number of dimensions: 819840
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="16_density_estimation.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">15. </span>Density Estimation</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="18_predictive_modeling.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">17. </span>Introduction to Predictive Modelling and Regression Models</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -1381,25 +1327,25 @@ Number of dimensions: 819840
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-selection-vs-feature-reduction">16.1. Feature Selection vs Feature Reduction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-reduction-example">16.2. Feature Reduction Example</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rotating-around-the-origin">16.2.1. Rotating Around the Origin</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#amount-of-information-reconstruction-error-and-variance">16.2.2. Amount of Information, Reconstruction Error and Variance</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#projection-along-a-direction">16.2.3. Projection Along a Direction</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-index-to-rule-them-all">16.2.4. An Index to Rule them All</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-selection-vs-feature-reduction">Feature Selection vs Feature Reduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-reduction-example">Feature Reduction Example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rotating-around-the-origin">Rotating Around the Origin</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#amount-of-information-reconstruction-error-and-variance">Amount of Information, Reconstruction Error and Variance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#projection-along-a-direction">Projection Along a Direction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-index-to-rule-them-all">An Index to Rule them All</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-formulation">16.3. General Formulation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#back-to-our-example">16.4. Back to Our Example</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-an-appropriate-number-of-components">16.5. Choosing an Appropriate Number of Components</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-principal-components-load-plots">16.6. Interpretation of the Principal Components - Load Plots</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-of-pca">16.7. Applications of PCA</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensionality-reduction-and-visualization">16.7.1. Dimensionality Reduction and Visualization</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-decorrelation-principal-component-regression">16.7.2. Data Decorrelation - Principal Component Regression</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-compression">16.7.3. Data Compression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-formulation">General Formulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#back-to-our-example">Back to Our Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-an-appropriate-number-of-components">Choosing an Appropriate Number of Components</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-principal-components-load-plots">Interpretation of the Principal Components - Load Plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-of-pca">Applications of PCA</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensionality-reduction-and-visualization">Dimensionality Reduction and Visualization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-decorrelation-principal-component-regression">Data Decorrelation - Principal Component Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-compression">Data Compression</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">16.8. References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
   </nav></div>
 

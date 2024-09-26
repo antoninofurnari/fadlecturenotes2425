@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>15. Density Estimation &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+    <title>Density Estimation &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
   
   
   
@@ -68,8 +68,6 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="16. Principal Component Analysis" href="17_principal_component_analysis.html" />
-    <link rel="prev" title="14. Clustering" href="15_clustering.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -171,47 +169,13 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_intro_data_analysis.html">1. Introduction to Data Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_main_data_analysis_concepts.html">2. Main data analysis concepts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_misure_di_frequenze_e_rappresentazione_grafica_dei_dati.html">3. Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_misure_di_tendenza_centrale_dispersione_e_forma.html">4. Misure di Tendenza Centrale, Dispersione e Forma</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_associazione_variabili.html">5. Associazione tra Variabili</a></li>
-<li class="toctree-l1"><a class="reference internal" href="07_probability.html">6. Probability for Data Manipulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="08_common_distributions.html">7. Common Probability Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="09_information_theory.html">8. Basic Elements of Information Theory</a></li>
-<li class="toctree-l1"><a class="reference internal" href="10_statistical_inference.html">9. Statistical Inference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="11_linear_regression.html">10. Linear Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="12_logistic_regression.html">11. Logistic Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="13_causal_analysis.html">12. Causal Data Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="14_data_as_nd_points.html">13. Data as N-Dimensional Points</a></li>
-<li class="toctree-l1"><a class="reference internal" href="15_clustering.html">14. Clustering</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">15. Density Estimation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="17_principal_component_analysis.html">16. Principal Component Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="18_predictive_modeling.html">17. Introduction to Predictive Modelling and Regression Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="19_classification.html">18. Classification Task and Evaluation Measures</a></li>
-<li class="toctree-l1"><a class="reference internal" href="20_discriminative_models_for_classification.html">19. Discriminative Models for Classification</a></li>
-<li class="toctree-l1"><a class="reference internal" href="21_generative_models_for_classification.html">20. Generative Models for Classification</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratories</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 1</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/01_setup.html">21. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/02_intro_python.html">22. Introduzione a Python</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/03_intro_numpy.html">23. Introduzione a Numpy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/04_intro_matplotlib.html">24. Introduzione a Matplotlib</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/05_intro_pandas.html">25. Introduzione a Pandas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">26. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/07_misure_di_tendenza_centrale_dispersione_e_forma.html">27. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/08_associazione_variabili.html">28. Associazione tra Variabili</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/09_heart-disease-analysis.html">29. Exploratory Analysis on the Heart Disease Dataset</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/10_statistical_inference.html">30. Laboratory on Statistical Inference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/11_regressione_lineare.html">31. Laboratorio su Regressione Lineare</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/12_regressione_logistica.html">32. Laboratorio su regressione logistica</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/13_linear_logistic_regression_example_analysis.html">33. Linear and Logistic Regression Laboratory</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/14_clustering_density_estimation_pca.html">34. Clustering, Density Estimation, and Principal Component Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/15_customer_segmentation_analysis.html">35. Customer Segmentation Analysis Example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/16_classificazione.html">36. Classificazione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/01_setup.html">1. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/02_intro_python.html">2. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/03_intro_numpy.html">3. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/04_intro_matplotlib.html">4. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/05_intro_pandas.html">5. Introduzione a Pandas</a></li>
 </ul>
 
     </div>
@@ -438,33 +402,33 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#non-parametric-density-estimation-techniques">15.1. Non-parametric Density Estimation Techniques</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fixed-windows-d-dimensional-histograms">15.1.1. Fixed Windows - D-Dimensional Histograms</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mobile-windows-parzen-window-kernel-density-estimation">15.1.2. Mobile Windows - Parzen Window / Kernel Density Estimation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fixed-samples-k-nearest-neighbor">15.1.3. Fixed Samples - K-Nearest Neighbor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#non-parametric-density-estimation-techniques">Non-parametric Density Estimation Techniques</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fixed-windows-d-dimensional-histograms">Fixed Windows - D-Dimensional Histograms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mobile-windows-parzen-window-kernel-density-estimation">Mobile Windows - Parzen Window / Kernel Density Estimation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fixed-samples-k-nearest-neighbor">Fixed Samples - K-Nearest Neighbor</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parametric-density-estimation">15.2. Parametric Density Estimation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-a-gaussian-to-the-data">15.2.1. Fitting a Gaussian to the Data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-mixture-models-gmm">15.2.2. Gaussian Mixture Models (GMM)</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-by-maximum-likelihood">15.2.2.1. Optimization by Maximum Likelihood</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parametric-density-estimation">Parametric Density Estimation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-a-gaussian-to-the-data">Fitting a Gaussian to the Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-mixture-models-gmm">Gaussian Mixture Models (GMM)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-by-maximum-likelihood">Optimization by Maximum Likelihood</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilistic-formulation-of-gmm-with-latent-variables">15.2.3. Probabilistic Formulation of GMM with Latent Variables</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#inferring-values-for-the-latent-variable-mathbf-z">15.2.3.1. Inferring Values for the Latent Variable <span class="math notranslate nohighlight">\(\mathbf{Z}\)</span></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-from-a-gmm">15.2.3.2. Sampling from a GMM</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilistic-formulation-of-gmm-with-latent-variables">Probabilistic Formulation of GMM with Latent Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#inferring-values-for-the-latent-variable-mathbf-z">Inferring Values for the Latent Variable <span class="math notranslate nohighlight">\(\mathbf{Z}\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-from-a-gmm">Sampling from a GMM</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-expectation-maximization-algorithm-for-gmm">15.2.4. The Expectation-Maximization Algorithm for GMM</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pseudocode">15.2.4.1. Pseudocode</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-execution">15.2.4.2. Example Execution</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation-maximization-in-general">15.2.4.3. Expectation Maximization in General</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-expectation-maximization-algorithm-for-gmm">The Expectation-Maximization Algorithm for GMM</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pseudocode">Pseudocode</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-execution">Example Execution</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation-maximization-in-general">Expectation Maximization in General</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gmm-vs-k-means">15.2.5. GMM vs K-Means</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gmm-vs-k-means">GMM vs K-Means</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">15.3. References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
             </nav>
         </div>
@@ -477,7 +441,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="density-estimation">
-<h1><span class="section-number">15. </span>Density Estimation<a class="headerlink" href="#density-estimation" title="Permalink to this heading">#</a></h1>
+<h1>Density Estimation<a class="headerlink" href="#density-estimation" title="Permalink to this heading">#</a></h1>
 <p>We have seen that clustering algorithms aim to mine the underlying structure of data by breaking it into coherent groups. For example k-means clustering <strong>allows to identify parts of the feature space with high density (i.e., a large number of observations)</strong> by partitioning all observations into a <strong>a discrete sets of <span class="math notranslate nohighlight">\(K\)</span> data groups distributed around centroids</strong>.</p>
 <p>An alternative <strong>smoother</strong> approach would be to study the probability <span class="math notranslate nohighlight">\(P(X)\)</span>, where <span class="math notranslate nohighlight">\(X\)</span> is the data. Indeed, if we could determine the probability value of an given point in space <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, we could naturally discover clusters in the data (<strong>zones with high probability values</strong>). Knowing the distribution of the data is also useful for a number of things:</p>
 <ul class="simple">
@@ -492,7 +456,7 @@ document.write(`
 </ul>
 <p>In the following, we will see the main representatives of these two classes of methods.</p>
 <section id="non-parametric-density-estimation-techniques">
-<h2><span class="section-number">15.1. </span>Non-parametric Density Estimation Techniques<a class="headerlink" href="#non-parametric-density-estimation-techniques" title="Permalink to this heading">#</a></h2>
+<h2>Non-parametric Density Estimation Techniques<a class="headerlink" href="#non-parametric-density-estimation-techniques" title="Permalink to this heading">#</a></h2>
 <p>We hence usually resort to different approaches, the main of which are:</p>
 <ul class="simple">
 <li><p><strong>Fixed windows</strong>: this consists in “discretizing” the range of the the variable <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> in “bins” of size <span class="math notranslate nohighlight">\(r\)</span> and counting how many values fall within each window. <strong>Histogram</strong> belong to this class of methods for density estimation. Note that histograms can also be <strong>extended to multiple dimensions</strong> by considering d-dimensional tiles (e.g., square tiles in <span class="math notranslate nohighlight">\(\Re^2\)</span>);</p></li>
@@ -507,7 +471,7 @@ document.write(`
 </div>
 <p>(a) The space is divided into non-overlapping square tiles (other shapes could be used as long as they’ll cover the whole space), then the density for each square is computed by considering the number of examples falling into each square. (b) Given an arbitrary point <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> in the n-dimensional space, a neighborhood of a given radius <span class="math notranslate nohighlight">\(r\)</span> is considered and the density for that point is estimated by considering the number of examples falling in the neighborhood. (c) Given an arbitrary point <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> in the n-dimensional space, we consider a neighborhood centered at <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and radius <span class="math notranslate nohighlight">\(R_k(\mathbf{x})\)</span> large enough to contain <span class="math notranslate nohighlight">\(K\)</span> points. The density at <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> is computed by considering the size <span class="math notranslate nohighlight">\(R_k(\mathbf{x})\)</span> (the smaller, the denser).</p>
 <section id="fixed-windows-d-dimensional-histograms">
-<h3><span class="section-number">15.1.1. </span>Fixed Windows - D-Dimensional Histograms<a class="headerlink" href="#fixed-windows-d-dimensional-histograms" title="Permalink to this heading">#</a></h3>
+<h3>Fixed Windows - D-Dimensional Histograms<a class="headerlink" href="#fixed-windows-d-dimensional-histograms" title="Permalink to this heading">#</a></h3>
 <p>Density estimation can be easily performed using D-Dimensional histograms. This method is the same as the one we saw in the case of 1-d histograms, but in general, <strong>we will divide the D-Dimensional space into D-Dimensional regions (typically hypercubes)</strong>. In the 2D case, these will simply be square tiles. The algorithm hence assigns a uniform density value to each region.</p>
 <p>Let <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> be our set of observations and let <span class="math notranslate nohighlight">\(R_i\)</span> be the <span class="math notranslate nohighlight">\(i^{th}\)</span> region of a set of <span class="math notranslate nohighlight">\(\mathcal{R}=\{R_i\}_i\)</span> regions in which we divided the space. We will assign the following density value to the <span class="math notranslate nohighlight">\(R_i\)</span> region:</p>
 <div class="math notranslate nohighlight">
@@ -538,7 +502,7 @@ document.write(`
 <p>Note that hexplots <strong>are not density plots</strong>.</p>
 </section>
 <section id="mobile-windows-parzen-window-kernel-density-estimation">
-<h3><span class="section-number">15.1.2. </span>Mobile Windows - Parzen Window / Kernel Density Estimation<a class="headerlink" href="#mobile-windows-parzen-window-kernel-density-estimation" title="Permalink to this heading">#</a></h3>
+<h3>Mobile Windows - Parzen Window / Kernel Density Estimation<a class="headerlink" href="#mobile-windows-parzen-window-kernel-density-estimation" title="Permalink to this heading">#</a></h3>
 <p>While histograms allow to estimate density by placing a fixed grid on the data, the Parzen window approach, also known as kernel density estimation, places <strong>a window, or region, around each arbitrary point in space <span class="math notranslate nohighlight">\(\mathbf{x}\)</span></strong>. This has the big advantage to allow us to estimate density values at arbitrary points <strong>rather than setting fixed density over all points in a region</strong>.</p>
 <p>A naive approach to density estimation through Parzen Window would assign a point <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> a density by simply computing the fraction of points of <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> which fall between a neighborhood of size <span class="math notranslate nohighlight">\(r\)</span> (where <span class="math notranslate nohighlight">\(r\)</span> is a hyper-parameter) of <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, as follows:</p>
 <div class="math notranslate nohighlight">
@@ -609,7 +573,7 @@ document.write(`
 </div>
 </section>
 <section id="fixed-samples-k-nearest-neighbor">
-<h3><span class="section-number">15.1.3. </span>Fixed Samples - K-Nearest Neighbor<a class="headerlink" href="#fixed-samples-k-nearest-neighbor" title="Permalink to this heading">#</a></h3>
+<h3>Fixed Samples - K-Nearest Neighbor<a class="headerlink" href="#fixed-samples-k-nearest-neighbor" title="Permalink to this heading">#</a></h3>
 <p>With either histograms or mobile windows, we have considered regions with a fixed size (e.g., the bandwidth <span class="math notranslate nohighlight">\(h\)</span>). In practice, this will lead to regions with very few or zero examples and regions with many examples. This can lead to some limitations as density estimates relying on fewer points will be more unstable (they will have a higher variance) and we will not be able to reliably estimate a density in areas where there are fewer points.</p>
 <p>While one way to mitigate this is to use smoother kernels (e.g., the Gaussian one) assigning a non-zero weight to each example, another approach is to choose a neighborhood of <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> such that the number of elements in the neighborhood, besides <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> is exactly equal to <span class="math notranslate nohighlight">\(K\)</span>, where <span class="math notranslate nohighlight">\(K\)</span> is an hyper-parameter. The advantage of this approach is to always rely on the same sample sample size when estimating the density.</p>
 <p>Let <span class="math notranslate nohighlight">\(N(\mathbf{x},r)\)</span> be a neighborhood centered at <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> with radius <span class="math notranslate nohighlight">\(r\)</span>. We will define <span class="math notranslate nohighlight">\(R_K\)</span> as the <strong>radius of the largest neighborhood centered at <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> containing at most <span class="math notranslate nohighlight">\(K\)</span> examples, besides <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> (if it is included in <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>)</strong>:</p>
@@ -639,7 +603,7 @@ document.write(`
 </section>
 </section>
 <section id="parametric-density-estimation">
-<h2><span class="section-number">15.2. </span>Parametric Density Estimation<a class="headerlink" href="#parametric-density-estimation" title="Permalink to this heading">#</a></h2>
+<h2>Parametric Density Estimation<a class="headerlink" href="#parametric-density-estimation" title="Permalink to this heading">#</a></h2>
 <p>Parametric methods aim to estimate density by <strong>fitting a parametric model to the data</strong>. This has some advantages over non-parametric density estimation:</p>
 <ul class="simple">
 <li><p>The chosen model has in general a known analytical formulation which we can reason on, or that we can even plug into a cost function and differentiate to pursue some optimization objective;</p></li>
@@ -653,7 +617,7 @@ document.write(`
 </ul>
 <p>For the reasons above, it is common to use non-parametric density estimations for visualizations (e.g., the density plots we have seen and used in many cases), especially for exploration, when we do not know much about the data, and to use parametric model when we need to create efficient models able to make predictions (as we will see later in the course).</p>
 <section id="fitting-a-gaussian-to-the-data">
-<h3><span class="section-number">15.2.1. </span>Fitting a Gaussian to the Data<a class="headerlink" href="#fitting-a-gaussian-to-the-data" title="Permalink to this heading">#</a></h3>
+<h3>Fitting a Gaussian to the Data<a class="headerlink" href="#fitting-a-gaussian-to-the-data" title="Permalink to this heading">#</a></h3>
 <p>Recall the PDF of a multivariate Gaussian distribution with <span class="math notranslate nohighlight">\(n\)</span> dimensions:</p>
 <div class="math notranslate nohighlight">
 \[N\left( \mathbf{x;\mu,}\mathbf{\Sigma} \right) = \sqrt{\frac{1}{(2\pi)^{n}\det(\Sigma)}}e^{( - \frac{1}{2}\left( \mathbf{x} - \mathbf{\mu} \right)^{T}\Sigma^{- 1}\left( \mathbf{x} - \mathbf{\mu} \right))}\]</div>
@@ -693,7 +657,7 @@ document.write(`
 <p>Which is the definition we have seen in the past for the covariance matrix.</p>
 </section>
 <section id="gaussian-mixture-models-gmm">
-<h3><span class="section-number">15.2.2. </span>Gaussian Mixture Models (GMM)<a class="headerlink" href="#gaussian-mixture-models-gmm" title="Permalink to this heading">#</a></h3>
+<h3>Gaussian Mixture Models (GMM)<a class="headerlink" href="#gaussian-mixture-models-gmm" title="Permalink to this heading">#</a></h3>
 <p>We have seen that, when we can assume that the data follows a Gaussian distribution, it can be convenient to fit a D-dimensional Gaussian to the data and <strong>summarize the data with distribution</strong>. In practice, this consists in estimating a D-dimensional mean vector <span class="math notranslate nohighlight">\(\mathbf{\mu}\)</span> and a <span class="math notranslate nohighlight">\(D \times D\)</span> covariance matrix <span class="math notranslate nohighlight">\(\mathbf{\Sigma}\)</span>.</p>
 <p>In practice, however <strong>data is not always Gaussian</strong>. As we have seen in the case of clustering, we can expect that our data is actually grouped under different clusters. Think about the Old Faithful dataset. Since the data <strong>has two modes</strong>, a Guassian model would lead to a poor fit.</p>
 <p>The plot below compares a Guassian fit with a Kernel Density Estimation form the same data. The data has been standardized.</p>
@@ -735,7 +699,7 @@ document.write(`
 </div>
 </div>
 <section id="optimization-by-maximum-likelihood">
-<h4><span class="section-number">15.2.2.1. </span>Optimization by Maximum Likelihood<a class="headerlink" href="#optimization-by-maximum-likelihood" title="Permalink to this heading">#</a></h4>
+<h4>Optimization by Maximum Likelihood<a class="headerlink" href="#optimization-by-maximum-likelihood" title="Permalink to this heading">#</a></h4>
 <p>The Gaussian Mixture Model depends on the following parameters:</p>
 <div class="math notranslate nohighlight">
 \[\mathbf{\pi} = \{\pi_1, \pi_2, \ldots, \pi_K\} \text{,   } \mathbf{\mu}=\{\mathbf{\mu}_1, \mathbf{\mu}_2, \ldots, \mathbf{\mu}_K\}, \mathbf{\Sigma} = \{\mathbf{\Sigma}_1,\mathbf{\Sigma}_2, \ldots, \mathbf{\Sigma}_K\}\]</div>
@@ -749,7 +713,7 @@ document.write(`
 </section>
 </section>
 <section id="probabilistic-formulation-of-gmm-with-latent-variables">
-<h3><span class="section-number">15.2.3. </span>Probabilistic Formulation of GMM with Latent Variables<a class="headerlink" href="#probabilistic-formulation-of-gmm-with-latent-variables" title="Permalink to this heading">#</a></h3>
+<h3>Probabilistic Formulation of GMM with Latent Variables<a class="headerlink" href="#probabilistic-formulation-of-gmm-with-latent-variables" title="Permalink to this heading">#</a></h3>
 <p>We will now give a probabilistic treatment of the GMM. This will lead us to the interpretation of the model as one with latent variables and to the illustration of the Expectation-Maximization (E-M) algorithm for maximum likelihood optimization.</p>
 <p>We will start by introducing a <span class="math notranslate nohighlight">\(K-dimensional\)</span> random variable <span class="math notranslate nohighlight">\(\mathbf{Z}\)</span>. The values <span class="math notranslate nohighlight">\(\mathbf{z}=(z_1,\ldots,z_K)\)</span> assumed by <span class="math notranslate nohighlight">\(\mathbf{Z}\)</span> will be such that:</p>
 <div class="math notranslate nohighlight">
@@ -786,7 +750,7 @@ document.write(`
 \[= \sum_{k=1}^K P(z_k=1) P(\mathbf{x}|z_k=1) = \sum_{k=1}^K \pi_k \mathcal{N}(\mathbf{x}|\mathbf{\mu}_k, \mathbf{\Sigma}_k)\]</div>
 <p>This leads us to <strong>the same exact definition of the GMM seen previously</strong>, but within a probabilistic framework where we also have access to the joint distribution <span class="math notranslate nohighlight">\(p(\mathbf{x,z})\)</span>, which will be useful when we’ll introduce the Expectation Maximization algorithm to maximize the likelihood and hence optimize the model.</p>
 <section id="inferring-values-for-the-latent-variable-mathbf-z">
-<h4><span class="section-number">15.2.3.1. </span>Inferring Values for the Latent Variable <span class="math notranslate nohighlight">\(\mathbf{Z}\)</span><a class="headerlink" href="#inferring-values-for-the-latent-variable-mathbf-z" title="Permalink to this heading">#</a></h4>
+<h4>Inferring Values for the Latent Variable <span class="math notranslate nohighlight">\(\mathbf{Z}\)</span><a class="headerlink" href="#inferring-values-for-the-latent-variable-mathbf-z" title="Permalink to this heading">#</a></h4>
 <p>Another interesting interpretation is that, to each <strong>observed <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> value</strong>, we will implicitly <strong>assign a corresponding <span class="math notranslate nohighlight">\(\mathbf{z}_i\)</span> value</strong> indicating to which component of the Gaussian Mixture Model the observation belongs. This is useful, as it will allow us to use the GMM model as a <strong>clustering algorithm</strong> in which we can determine to which cluster each data point belongs.</p>
 <p>In practice, this can be done by finding the <span class="math notranslate nohighlight">\(z_k\)</span> value for which the following quantity is maximized:</p>
 <div class="math notranslate nohighlight">
@@ -810,7 +774,7 @@ document.write(`
 </div>
 </section>
 <section id="sampling-from-a-gmm">
-<h4><span class="section-number">15.2.3.2. </span>Sampling from a GMM<a class="headerlink" href="#sampling-from-a-gmm" title="Permalink to this heading">#</a></h4>
+<h4>Sampling from a GMM<a class="headerlink" href="#sampling-from-a-gmm" title="Permalink to this heading">#</a></h4>
 <p>Note that this formulation of the GMM allows us to <strong>generate data new points <span class="math notranslate nohighlight">\(\hat{\mathbf{x}}\)</span> which would follow the distribution of the original data</strong>. This is done by following a techniques such as the following one, which is also known as <strong>ancestral sampling</strong>:</p>
 <ul class="simple">
 <li><p>We first sample a variable <span class="math notranslate nohighlight">\(\hat{\mathbf{z}}\)</span> from the marginal distribution <span class="math notranslate nohighlight">\(P(\mathbf{z})\)</span>. Note that this distribution is a categorical one;</p></li>
@@ -826,7 +790,7 @@ document.write(`
 </section>
 </section>
 <section id="the-expectation-maximization-algorithm-for-gmm">
-<h3><span class="section-number">15.2.4. </span>The Expectation-Maximization Algorithm for GMM<a class="headerlink" href="#the-expectation-maximization-algorithm-for-gmm" title="Permalink to this heading">#</a></h3>
+<h3>The Expectation-Maximization Algorithm for GMM<a class="headerlink" href="#the-expectation-maximization-algorithm-for-gmm" title="Permalink to this heading">#</a></h3>
 <p>As discussed earlier, we wish to maximize the logarithm of the likelihood, which we have seen assumes the following form:</p>
 <div class="math notranslate nohighlight">
 \[\log P(\mathbf{X}|\mathbf{\pi}, \mathbf{\mu}, \mathbf{\Sigma}) = \sum_{i=1}^N \log\left[\sum_{k=1}^K \pi_k \mathcal{N}(\mathbf{x_i}|\mathbf{\mu}_k, \mathbf{\Sigma}_k)\right]\]</div>
@@ -867,7 +831,7 @@ document.write(`
 </ul>
 <p>It can be shown (but we will not formally see it) that each E step followed by an M step is guaranteed to increase the log likelihood (and hence the likelihood). Hence the algorithm will converge sooner or later.</p>
 <section id="pseudocode">
-<h4><span class="section-number">15.2.4.1. </span>Pseudocode<a class="headerlink" href="#pseudocode" title="Permalink to this heading">#</a></h4>
+<h4>Pseudocode<a class="headerlink" href="#pseudocode" title="Permalink to this heading">#</a></h4>
 <p>The box below summarizes the algorithm in pseudocode:</p>
 <blockquote>
 <div><ol class="arabic">
@@ -903,7 +867,7 @@ document.write(`
 </div></blockquote>
 </section>
 <section id="example-execution">
-<h4><span class="section-number">15.2.4.2. </span>Example Execution<a class="headerlink" href="#example-execution" title="Permalink to this heading">#</a></h4>
+<h4>Example Execution<a class="headerlink" href="#example-execution" title="Permalink to this heading">#</a></h4>
 <p>Similarly to K-Means clustering, we will now see an example execution of the E-M algorithm. We will consider a GMM with 2 components. Since the EM algorithm is slower than K-Means, we will not show all iterations.</p>
 <p>We will consider the following synthetic dataset:</p>
 <div class="cell tag_remove-input docutils container">
@@ -943,12 +907,12 @@ document.write(`
 </div>
 </section>
 <section id="expectation-maximization-in-general">
-<h4><span class="section-number">15.2.4.3. </span>Expectation Maximization in General<a class="headerlink" href="#expectation-maximization-in-general" title="Permalink to this heading">#</a></h4>
+<h4>Expectation Maximization in General<a class="headerlink" href="#expectation-maximization-in-general" title="Permalink to this heading">#</a></h4>
 <p>We have seen the EM algorithm instantiated to the optimization of GMMs. However, the EM algorithm is <strong>a general framework for finding maximum likelihood estimates of parameters in models with latent variables</strong>. As such, it can be applied also in other contexts in which the Maximum Likelihood estimates lead to a “<strong>chicken and egg</strong>” problem, in which we need to be able to estimate the probability of latent variables to fit a model to the observed data, but, at the same time, we need to fit the model to the data to model latent variables.</p>
 </section>
 </section>
 <section id="gmm-vs-k-means">
-<h3><span class="section-number">15.2.5. </span>GMM vs K-Means<a class="headerlink" href="#gmm-vs-k-means" title="Permalink to this heading">#</a></h3>
+<h3>GMM vs K-Means<a class="headerlink" href="#gmm-vs-k-means" title="Permalink to this heading">#</a></h3>
 <p>The EM algorithm is very similar to the optimization algorithm of K-Means. It can be shown that K-Means can be seen as a particular case of Gaussian Mixture Models in which:</p>
 <ul class="simple">
 <li><p>Points are assigned to clusters in a “<em>hard</em>” way, as compared to the <strong>soft assignment</strong> made by the responsibilities <span class="math notranslate nohighlight">\(\gamma(z_{ik})\)</span> in Gaussian Mixture Models;</p></li>
@@ -964,7 +928,7 @@ document.write(`
 </section>
 </section>
 <section id="references">
-<h2><span class="section-number">15.3. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Metric_space">https://en.wikipedia.org/wiki/Metric_space</a></p></li>
 <li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Measure_(mathematics)">https://en.wikipedia.org/wiki/Measure_(mathematics)</a></p></li>
@@ -1008,24 +972,6 @@ document.write(`
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="15_clustering.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">14. </span>Clustering</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="17_principal_component_analysis.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">16. </span>Principal Component Analysis</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -1041,33 +987,33 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#non-parametric-density-estimation-techniques">15.1. Non-parametric Density Estimation Techniques</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fixed-windows-d-dimensional-histograms">15.1.1. Fixed Windows - D-Dimensional Histograms</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mobile-windows-parzen-window-kernel-density-estimation">15.1.2. Mobile Windows - Parzen Window / Kernel Density Estimation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fixed-samples-k-nearest-neighbor">15.1.3. Fixed Samples - K-Nearest Neighbor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#non-parametric-density-estimation-techniques">Non-parametric Density Estimation Techniques</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fixed-windows-d-dimensional-histograms">Fixed Windows - D-Dimensional Histograms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mobile-windows-parzen-window-kernel-density-estimation">Mobile Windows - Parzen Window / Kernel Density Estimation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fixed-samples-k-nearest-neighbor">Fixed Samples - K-Nearest Neighbor</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parametric-density-estimation">15.2. Parametric Density Estimation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-a-gaussian-to-the-data">15.2.1. Fitting a Gaussian to the Data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-mixture-models-gmm">15.2.2. Gaussian Mixture Models (GMM)</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-by-maximum-likelihood">15.2.2.1. Optimization by Maximum Likelihood</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parametric-density-estimation">Parametric Density Estimation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-a-gaussian-to-the-data">Fitting a Gaussian to the Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-mixture-models-gmm">Gaussian Mixture Models (GMM)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-by-maximum-likelihood">Optimization by Maximum Likelihood</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilistic-formulation-of-gmm-with-latent-variables">15.2.3. Probabilistic Formulation of GMM with Latent Variables</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#inferring-values-for-the-latent-variable-mathbf-z">15.2.3.1. Inferring Values for the Latent Variable <span class="math notranslate nohighlight">\(\mathbf{Z}\)</span></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-from-a-gmm">15.2.3.2. Sampling from a GMM</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilistic-formulation-of-gmm-with-latent-variables">Probabilistic Formulation of GMM with Latent Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#inferring-values-for-the-latent-variable-mathbf-z">Inferring Values for the Latent Variable <span class="math notranslate nohighlight">\(\mathbf{Z}\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-from-a-gmm">Sampling from a GMM</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-expectation-maximization-algorithm-for-gmm">15.2.4. The Expectation-Maximization Algorithm for GMM</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pseudocode">15.2.4.1. Pseudocode</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-execution">15.2.4.2. Example Execution</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation-maximization-in-general">15.2.4.3. Expectation Maximization in General</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-expectation-maximization-algorithm-for-gmm">The Expectation-Maximization Algorithm for GMM</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pseudocode">Pseudocode</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-execution">Example Execution</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation-maximization-in-general">Expectation Maximization in General</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gmm-vs-k-means">15.2.5. GMM vs K-Means</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gmm-vs-k-means">GMM vs K-Means</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">15.3. References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
   </nav></div>
 

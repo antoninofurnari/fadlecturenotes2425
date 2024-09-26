@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>14. Clustering &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+    <title>Clustering &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
   
   
   
@@ -68,8 +68,6 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="15. Density Estimation" href="16_density_estimation.html" />
-    <link rel="prev" title="13. Data as N-Dimensional Points" href="14_data_as_nd_points.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -171,47 +169,13 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_intro_data_analysis.html">1. Introduction to Data Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_main_data_analysis_concepts.html">2. Main data analysis concepts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_misure_di_frequenze_e_rappresentazione_grafica_dei_dati.html">3. Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_misure_di_tendenza_centrale_dispersione_e_forma.html">4. Misure di Tendenza Centrale, Dispersione e Forma</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_associazione_variabili.html">5. Associazione tra Variabili</a></li>
-<li class="toctree-l1"><a class="reference internal" href="07_probability.html">6. Probability for Data Manipulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="08_common_distributions.html">7. Common Probability Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="09_information_theory.html">8. Basic Elements of Information Theory</a></li>
-<li class="toctree-l1"><a class="reference internal" href="10_statistical_inference.html">9. Statistical Inference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="11_linear_regression.html">10. Linear Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="12_logistic_regression.html">11. Logistic Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="13_causal_analysis.html">12. Causal Data Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="14_data_as_nd_points.html">13. Data as N-Dimensional Points</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">14. Clustering</a></li>
-<li class="toctree-l1"><a class="reference internal" href="16_density_estimation.html">15. Density Estimation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="17_principal_component_analysis.html">16. Principal Component Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="18_predictive_modeling.html">17. Introduction to Predictive Modelling and Regression Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="19_classification.html">18. Classification Task and Evaluation Measures</a></li>
-<li class="toctree-l1"><a class="reference internal" href="20_discriminative_models_for_classification.html">19. Discriminative Models for Classification</a></li>
-<li class="toctree-l1"><a class="reference internal" href="21_generative_models_for_classification.html">20. Generative Models for Classification</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratories</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 1</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/01_setup.html">21. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/02_intro_python.html">22. Introduzione a Python</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/03_intro_numpy.html">23. Introduzione a Numpy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/04_intro_matplotlib.html">24. Introduzione a Matplotlib</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/05_intro_pandas.html">25. Introduzione a Pandas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">26. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/07_misure_di_tendenza_centrale_dispersione_e_forma.html">27. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/08_associazione_variabili.html">28. Associazione tra Variabili</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/09_heart-disease-analysis.html">29. Exploratory Analysis on the Heart Disease Dataset</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/10_statistical_inference.html">30. Laboratory on Statistical Inference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/11_regressione_lineare.html">31. Laboratorio su Regressione Lineare</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/12_regressione_logistica.html">32. Laboratorio su regressione logistica</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/13_linear_logistic_regression_example_analysis.html">33. Linear and Logistic Regression Laboratory</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/14_clustering_density_estimation_pca.html">34. Clustering, Density Estimation, and Principal Component Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/15_customer_segmentation_analysis.html">35. Customer Segmentation Analysis Example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/16_classificazione.html">36. Classificazione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/01_setup.html">1. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/02_intro_python.html">2. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/03_intro_numpy.html">3. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/04_intro_matplotlib.html">4. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/05_intro_pandas.html">5. Introduzione a Pandas</a></li>
 </ul>
 
     </div>
@@ -438,25 +402,25 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-definition">14.1. Problem Definition</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-example">14.1.1. Graphical Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-definition">Problem Definition</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-example">Graphical Example</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-means-clustering">14.2. K-Means Clustering</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization">14.2.1. Optimization</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pseudocode">14.2.1.1. Pseudocode</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-means-clustering">K-Means Clustering</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization">Optimization</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pseudocode">Pseudocode</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-execution">14.2.2. Example Execution</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-right-value-for-k">14.2.3. Choosing the Right Value for K</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#elbow-method">14.2.3.1. Elbow Method</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#silhouette-method">14.2.3.2. Silhouette Method</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-execution">Example Execution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-right-value-for-k">Choosing the Right Value for K</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#elbow-method">Elbow Method</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#silhouette-method">Silhouette Method</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-clustering-algorithms">14.3. Other Clustering Algorithms</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">14.4. References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-clustering-algorithms">Other Clustering Algorithms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
             </nav>
         </div>
@@ -469,7 +433,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="clustering">
-<h1><span class="section-number">14. </span>Clustering<a class="headerlink" href="#clustering" title="Permalink to this heading">#</a></h1>
+<h1>Clustering<a class="headerlink" href="#clustering" title="Permalink to this heading">#</a></h1>
 <p>When we deal with complex datasets of multiple observations and variables, it can be useful to be able to understand the underlying structure of the data.</p>
 <p>One approach to do so is to determine whether the data can be grouped into <strong>clusters containing points with similar characteristics</strong>. This can be useful in different application scenarios in data analysis:</p>
 <ol class="arabic simple">
@@ -500,7 +464,7 @@ document.write(`
 </li>
 </ol>
 <section id="problem-definition">
-<h2><span class="section-number">14.1. </span>Problem Definition<a class="headerlink" href="#problem-definition" title="Permalink to this heading">#</a></h2>
+<h2>Problem Definition<a class="headerlink" href="#problem-definition" title="Permalink to this heading">#</a></h2>
 <p>Clustering aims to break the data into distinct group with similar properties. Let us consider the “Old Faithful” dataset, which comprises <span class="math notranslate nohighlight">\(272\)</span> observations of the eruption of the Old Faithful geyser at the Yellowstone National Park in USA. Each observation includes two variables:</p>
 <ul class="simple">
 <li><p>The <strong>duration</strong> of the eruption in minutes;</p></li>
@@ -533,7 +497,7 @@ different from each other.</p>
 <p><strong>The number of clusters</strong> <span class="math notranslate nohighlight">\(\mathbf{K}\)</span> <strong>is often a hyper-parameter of
 the algorithm.</strong></p>
 <section id="graphical-example">
-<h3><span class="section-number">14.1.1. </span>Graphical Example<a class="headerlink" href="#graphical-example" title="Permalink to this heading">#</a></h3>
+<h3>Graphical Example<a class="headerlink" href="#graphical-example" title="Permalink to this heading">#</a></h3>
 <p>For instance, consider the following 2D points:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -557,7 +521,7 @@ dissimilar (i.e., their Euclidean distance is large).</p>
 </section>
 </section>
 <section id="k-means-clustering">
-<h2><span class="section-number">14.2. </span>K-Means Clustering<a class="headerlink" href="#k-means-clustering" title="Permalink to this heading">#</a></h2>
+<h2>K-Means Clustering<a class="headerlink" href="#k-means-clustering" title="Permalink to this heading">#</a></h2>
 <p>K-Means is the most popular clustering algorithm. As in the definition we just gave of clustering, the goal of K-Means is to break the data</p>
 <div class="math notranslate nohighlight">
 \[\mathbf{X} = \left\{ \mathbf{x}^{(i)} \right\}_{i = 1}^{N},\ \mathbf{x}^{(i)} \in \mathfrak{R}^{n}\]</div>
@@ -588,7 +552,7 @@ a parameter specified by the user (its application may depend on the application
 <div class="math notranslate nohighlight">
 \[\{\hat r_{ij}\}_{ij}, \{ \hat{\mathbf{\mu}_j} \}_j = \arg{\min{\sum_{j = 1}^{K}{\sum_{i = 1}^{N}{r_{ij}\left\| \mathbf{x}^{(i)} - \mathbf{\mu}_{i} \right\|^{2}}}}}\]</div>
 <section id="optimization">
-<h3><span class="section-number">14.2.1. </span>Optimization<a class="headerlink" href="#optimization" title="Permalink to this heading">#</a></h3>
+<h3>Optimization<a class="headerlink" href="#optimization" title="Permalink to this heading">#</a></h3>
 <p>The minimization above can be performed using an iterative algorithm.
 The first step of the algorithm is to choose <span class="math notranslate nohighlight">\(K\)</span> random centroids
 <span class="math notranslate nohighlight">\(\mathbf{\mu}_{i}\)</span>. After this initialization, the algorithm iterates
@@ -618,7 +582,7 @@ iterations.</p>
 solution reached may depend on the random initialization. However, in
 practice it usually leads to a reasonable solution.</em></p>
 <section id="pseudocode">
-<h4><span class="section-number">14.2.1.1. </span>Pseudocode<a class="headerlink" href="#pseudocode" title="Permalink to this heading">#</a></h4>
+<h4>Pseudocode<a class="headerlink" href="#pseudocode" title="Permalink to this heading">#</a></h4>
 <p>We can see the optimization algorithm in pseudo-code as follows:</p>
 <blockquote>
 <div><p>Randomly initialize <span class="math notranslate nohighlight">\(K\)</span> cluster centroids <span class="math notranslate nohighlight">\(\mu_{1},\mu_{2},\ldots,\mu_{K} \in \mathfrak{R}^{n}\)</span></p>
@@ -632,7 +596,7 @@ practice it usually leads to a reasonable solution.</em></p>
 </section>
 </section>
 <section id="example-execution">
-<h3><span class="section-number">14.2.2. </span>Example Execution<a class="headerlink" href="#example-execution" title="Permalink to this heading">#</a></h3>
+<h3>Example Execution<a class="headerlink" href="#example-execution" title="Permalink to this heading">#</a></h3>
 <p>Let us see a graphical example of the process.</p>
 <p><strong>Dataset</strong></p>
 <div class="cell tag_remove-input docutils container">
@@ -703,13 +667,13 @@ practice it usually leads to a reasonable solution.</em></p>
 </div>
 </section>
 <section id="choosing-the-right-value-for-k">
-<h3><span class="section-number">14.2.3. </span>Choosing the Right Value for K<a class="headerlink" href="#choosing-the-right-value-for-k" title="Permalink to this heading">#</a></h3>
+<h3>Choosing the Right Value for K<a class="headerlink" href="#choosing-the-right-value-for-k" title="Permalink to this heading">#</a></h3>
 <p>In the K-Means clustering algorithm, <span class="math notranslate nohighlight">\(K\)</span> is a <strong>hyper-parameter</strong>. This means that, <strong>it is a parameter of the method, affecting the final model we obtain after the optimization procedure</strong>, but <strong>its value is not automatically determined by the optimization procedure</strong>.</p>
 <p>One common approach to determine the values of hyper-parameters is to make some guesses and fit different models with the guessed values of the hyper-parameters. We can then choose the model which has the “best value” of the considered hyper-parameters.</p>
 <p>When it turns to determining the optimal <span class="math notranslate nohighlight">\(K\)</span> value for K-Means clustering, there are two main techniques which are commonly used: <strong>the elbow method</strong> and <strong>the silhouette method</strong>, which are discussed in the following.</p>
 <p>Note that these are bot <strong>heuristic methods not giving many guarantees on the final selection of <span class="math notranslate nohighlight">\(K\)</span></strong>, but they can still help decide on the number of clusters, in particular if guided by an intuition of what a good value of <span class="math notranslate nohighlight">\(K\)</span> would look like.</p>
 <section id="elbow-method">
-<h4><span class="section-number">14.2.3.1. </span>Elbow Method<a class="headerlink" href="#elbow-method" title="Permalink to this heading">#</a></h4>
+<h4>Elbow Method<a class="headerlink" href="#elbow-method" title="Permalink to this heading">#</a></h4>
 <p>The elbow method consists in fitting K-Means models for different values of <span class="math notranslate nohighlight">\(K\)</span>. For each <span class="math notranslate nohighlight">\(K\)</span>, we then plot the final value of the cost function. We expect that <strong>as <span class="math notranslate nohighlight">\(K\)</span> increases, the cost will decrease</strong>. Indeed, if <span class="math notranslate nohighlight">\(K\)</span> is very large (even larger than it should be), we will anyway get a smaller cost due to the fact that the presence of more clusters will inevitably lower their individual variances.</p>
 <p>However, we expect the cost function to <strong>slow the speed of decrease in the presence of the optimal (or a good) <span class="math notranslate nohighlight">\(K\)</span></strong>. This is called the “elbow point” as the curve should look like an elbow. We can see it in the example below:</p>
 <div class="cell tag_remove-input docutils container">
@@ -719,7 +683,7 @@ practice it usually leads to a reasonable solution.</em></p>
 </div>
 </section>
 <section id="silhouette-method">
-<h4><span class="section-number">14.2.3.2. </span>Silhouette Method<a class="headerlink" href="#silhouette-method" title="Permalink to this heading">#</a></h4>
+<h4>Silhouette Method<a class="headerlink" href="#silhouette-method" title="Permalink to this heading">#</a></h4>
 <p>The silhouette method tries to assess how good a given clustering model is by measuring <strong>how well the data is grouped in the identified clusters</strong>. This is done by computing, <strong>for each data point</strong> a score indicating whether <strong>how well the data point fits the assigned cluster with respect to all others</strong>.</p>
 <p>If the model is a good one (hence a good <span class="math notranslate nohighlight">\(K\)</span> value), we would expect each data point to fit well its assigned cluster and not to fit well any other cluster. If this does not happen, it means that the clusters are not very well separated and we <strong>either have more or less clusters</strong>.</p>
 <p>To do so, for a given data point <span class="math notranslate nohighlight">\(i\)</span> assigned to cluster <span class="math notranslate nohighlight">\(C_I\)</span>, the silhouette method computes the following score:</p>
@@ -770,11 +734,11 @@ practice it usually leads to a reasonable solution.</em></p>
 </section>
 </section>
 <section id="other-clustering-algorithms">
-<h2><span class="section-number">14.3. </span>Other Clustering Algorithms<a class="headerlink" href="#other-clustering-algorithms" title="Permalink to this heading">#</a></h2>
+<h2>Other Clustering Algorithms<a class="headerlink" href="#other-clustering-algorithms" title="Permalink to this heading">#</a></h2>
 <p>It is important to note that various clustering algorithms exist beyond the commonly discussed k-means method. While k-means is a popular and widely used algorithm for partitioning data into distinct groups based on similarity, it is one approach among many. Numerous other clustering algorithms offer different perspectives and address specific challenges. Some examples include <strong>hierarchical clustering</strong>, <strong>DBSCAN</strong> (Density-Based Spatial Clustering of Applications with Noise), and <strong>spectral clustering</strong>. These alternatives provide unique strengths and are tailored to different types of data and scenarios. While our focus has been on understanding clustering in general and the k-means algorithm in particular, it is important to know that other approaches may be more suitable depending on the specific problem at hand. In the next lectures, we will see <strong>Gaussian Mixture Models (GMMs)</strong>, a probabilistic model for density estimation which can also be interpreted as a clustering algorithm.</p>
 </section>
 <section id="references">
-<h2><span class="section-number">14.4. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Section 10.3.1 of [1]</p></li>
 <li><p>Section 2.3.9 of [2]</p></li>
@@ -819,24 +783,6 @@ springer.</p>
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="14_data_as_nd_points.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">13. </span>Data as N-Dimensional Points</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="16_density_estimation.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">15. </span>Density Estimation</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -852,25 +798,25 @@ springer.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-definition">14.1. Problem Definition</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-example">14.1.1. Graphical Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-definition">Problem Definition</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-example">Graphical Example</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-means-clustering">14.2. K-Means Clustering</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization">14.2.1. Optimization</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pseudocode">14.2.1.1. Pseudocode</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-means-clustering">K-Means Clustering</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization">Optimization</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pseudocode">Pseudocode</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-execution">14.2.2. Example Execution</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-right-value-for-k">14.2.3. Choosing the Right Value for K</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#elbow-method">14.2.3.1. Elbow Method</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#silhouette-method">14.2.3.2. Silhouette Method</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-execution">Example Execution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-right-value-for-k">Choosing the Right Value for K</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#elbow-method">Elbow Method</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#silhouette-method">Silhouette Method</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-clustering-algorithms">14.3. Other Clustering Algorithms</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">14.4. References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-clustering-algorithms">Other Clustering Algorithms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
   </nav></div>
 

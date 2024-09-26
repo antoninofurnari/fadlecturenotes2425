@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>23. Introduzione a Numpy &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+    <title>3. Introduzione a Numpy &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
   
   
   
@@ -68,8 +68,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="24. Introduzione a Matplotlib" href="04_intro_matplotlib.html" />
-    <link rel="prev" title="22. Introduzione a Python" href="02_intro_python.html" />
+    <link rel="next" title="4. Introduzione a Matplotlib" href="04_intro_matplotlib.html" />
+    <link rel="prev" title="2. Introduzione a Python" href="02_intro_python.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -171,47 +171,13 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../lectures/01_intro_data_analysis.html">1. Introduction to Data Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures/03_main_data_analysis_concepts.html">2. Main data analysis concepts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures/04_misure_di_frequenze_e_rappresentazione_grafica_dei_dati.html">3. Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures/05_misure_di_tendenza_centrale_dispersione_e_forma.html">4. Misure di Tendenza Centrale, Dispersione e Forma</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures/06_associazione_variabili.html">5. Associazione tra Variabili</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures/07_probability.html">6. Probability for Data Manipulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures/08_common_distributions.html">7. Common Probability Distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures/09_information_theory.html">8. Basic Elements of Information Theory</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures/10_statistical_inference.html">9. Statistical Inference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures/11_linear_regression.html">10. Linear Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures/12_logistic_regression.html">11. Logistic Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures/13_causal_analysis.html">12. Causal Data Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures/14_data_as_nd_points.html">13. Data as N-Dimensional Points</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures/15_clustering.html">14. Clustering</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures/16_density_estimation.html">15. Density Estimation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures/17_principal_component_analysis.html">16. Principal Component Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures/18_predictive_modeling.html">17. Introduction to Predictive Modelling and Regression Models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures/19_classification.html">18. Classification Task and Evaluation Measures</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures/20_discriminative_models_for_classification.html">19. Discriminative Models for Classification</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures/21_generative_models_for_classification.html">20. Generative Models for Classification</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratories</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 1</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_setup.html">21. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_intro_python.html">22. Introduzione a Python</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">23. Introduzione a Numpy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_intro_matplotlib.html">24. Introduzione a Matplotlib</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_intro_pandas.html">25. Introduzione a Pandas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">26. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="07_misure_di_tendenza_centrale_dispersione_e_forma.html">27. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
-<li class="toctree-l1"><a class="reference internal" href="08_associazione_variabili.html">28. Associazione tra Variabili</a></li>
-<li class="toctree-l1"><a class="reference internal" href="09_heart-disease-analysis.html">29. Exploratory Analysis on the Heart Disease Dataset</a></li>
-<li class="toctree-l1"><a class="reference internal" href="10_statistical_inference.html">30. Laboratory on Statistical Inference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="11_regressione_lineare.html">31. Laboratorio su Regressione Lineare</a></li>
-<li class="toctree-l1"><a class="reference internal" href="12_regressione_logistica.html">32. Laboratorio su regressione logistica</a></li>
-<li class="toctree-l1"><a class="reference internal" href="13_linear_logistic_regression_example_analysis.html">33. Linear and Logistic Regression Laboratory</a></li>
-<li class="toctree-l1"><a class="reference internal" href="14_clustering_density_estimation_pca.html">34. Clustering, Density Estimation, and Principal Component Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="15_customer_segmentation_analysis.html">35. Customer Segmentation Analysis Example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="16_classificazione.html">36. Classificazione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_setup.html">1. Introduzione ai laboratori e Installazione dell’Ambiente di Lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_intro_python.html">2. Introduzione a Python</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_intro_matplotlib.html">4. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_intro_pandas.html">5. Introduzione a Pandas</a></li>
 </ul>
 
     </div>
@@ -438,17 +404,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numpy-arrays">23.1. Numpy Arrays</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linspace-arange-zeros-ones-eye-e-random">23.2. Linspace, Arange, Zeros, Ones, Eye e Random</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#max-min-sum-argmax-argmin">23.3. max, min, sum, argmax, argmin</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indicizzazione-e-slicing">23.4. Indicizzazione e Slicing</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indicizzazione-e-slicing-logici">23.5. Indicizzazione e Slicing Logici</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reshape">23.6. Reshape</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#composizione-di-array-mediante-concatenate-e-stack">23.7. Composizione di Array Mediante <code class="docutils literal notranslate"><span class="pre">concatenate</span></code> e <code class="docutils literal notranslate"><span class="pre">stack</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipi">23.8. Tipi</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gestione-della-memoria-in-numpy">23.9. Gestione della Memoria in Numpy</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcasting">23.10. Broadcasting</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">23.11. Esercizi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numpy-arrays">3.1. Numpy Arrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linspace-arange-zeros-ones-eye-e-random">3.2. Linspace, Arange, Zeros, Ones, Eye e Random</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#max-min-sum-argmax-argmin">3.3. max, min, sum, argmax, argmin</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indicizzazione-e-slicing">3.4. Indicizzazione e Slicing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indicizzazione-e-slicing-logici">3.5. Indicizzazione e Slicing Logici</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reshape">3.6. Reshape</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#composizione-di-array-mediante-concatenate-e-stack">3.7. Composizione di Array Mediante <code class="docutils literal notranslate"><span class="pre">concatenate</span></code> e <code class="docutils literal notranslate"><span class="pre">stack</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipi">3.8. Tipi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gestione-della-memoria-in-numpy">3.9. Gestione della Memoria in Numpy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcasting">3.10. Broadcasting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">3.11. Esercizi</a></li>
 </ul>
             </nav>
         </div>
@@ -461,7 +427,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="introduzione-a-numpy">
-<h1><span class="section-number">23. </span>Introduzione a Numpy<a class="headerlink" href="#introduzione-a-numpy" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">3. </span>Introduzione a Numpy<a class="headerlink" href="#introduzione-a-numpy" title="Permalink to this heading">#</a></h1>
 <p><strong>Numpy</strong> è la libreria di riferimento di <strong>scipy</strong> per il calcolo scientifico. Il cuore della libreria è costituito dai <strong>numpy array</strong> che permettono di gestire agevolmente operazioni tra vettori e matrici. Gli array di Python sono in generale <strong>tensori</strong>, ovvero strutture numeriche dal numero di dimensioni variabili, che possono dunque essere array monodimensionali, matrici bidimensionali, o strutture a più dimensioni (es. cuboidi 10 x 10 x 10). Per utilizzare gli array di numpy, dobbiamo prima importare il pacchetto <strong>numpy</strong>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -471,7 +437,7 @@ document.write(`
 </div>
 </div>
 <section id="numpy-arrays">
-<h2><span class="section-number">23.1. </span>Numpy Arrays<a class="headerlink" href="#numpy-arrays" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">3.1. </span>Numpy Arrays<a class="headerlink" href="#numpy-arrays" title="Permalink to this heading">#</a></h2>
 <p>Un array multidimensionale di numpy può essere definito a partire da una lista di liste, come segue:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -654,7 +620,7 @@ Transposed:
 </div></blockquote>
 </section>
 <section id="linspace-arange-zeros-ones-eye-e-random">
-<h2><span class="section-number">23.2. </span>Linspace, Arange, Zeros, Ones, Eye e Random<a class="headerlink" href="#linspace-arange-zeros-ones-eye-e-random" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">3.2. </span>Linspace, Arange, Zeros, Ones, Eye e Random<a class="headerlink" href="#linspace-arange-zeros-ones-eye-e-random" title="Permalink to this heading">#</a></h2>
 <p>Le funzioni <strong>linspace</strong>, <strong>arange</strong>, <strong>zeros</strong>, <strong>ones</strong>, <strong>eye</strong> e <strong>random</strong> di <strong>numpy</strong> sono utili a generare array numerici al volo. In particolare, la funzione <strong>linspace</strong>, permette di generare una sequenza di <strong>n</strong> numeri equispaziati che vanno da un valore minimo a un valore massimo:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -814,7 +780,7 @@ Transposed:
 </div></blockquote>
 </section>
 <section id="max-min-sum-argmax-argmin">
-<h2><span class="section-number">23.3. </span>max, min, sum, argmax, argmin<a class="headerlink" href="#max-min-sum-argmax-argmin" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">3.3. </span>max, min, sum, argmax, argmin<a class="headerlink" href="#max-min-sum-argmax-argmin" title="Permalink to this heading">#</a></h2>
 <p>È possibile calcolare massimi e minimi e somme di una matrice per righe e colonne come segue:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -915,7 +881,7 @@ Transposed:
 </div>
 </section>
 <section id="indicizzazione-e-slicing">
-<h2><span class="section-number">23.4. </span>Indicizzazione e Slicing<a class="headerlink" href="#indicizzazione-e-slicing" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">3.4. </span>Indicizzazione e Slicing<a class="headerlink" href="#indicizzazione-e-slicing" title="Permalink to this heading">#</a></h2>
 <p>Gli array di numpy possono essere indicizzati in maniera simile a quanto avviene per le liste di Python:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1075,7 +1041,7 @@ mat[...,1] -&gt; [[&#39;2&#39; &#39;b&#39;]
 </div></blockquote>
 </section>
 <section id="indicizzazione-e-slicing-logici">
-<h2><span class="section-number">23.5. </span>Indicizzazione e Slicing Logici<a class="headerlink" href="#indicizzazione-e-slicing-logici" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">3.5. </span>Indicizzazione e Slicing Logici<a class="headerlink" href="#indicizzazione-e-slicing-logici" title="Permalink to this heading">#</a></h2>
 <p>In numpy è inoltre possibile indicizzare gli array in maniera “logica”, ovvero passando come indici un array di valori booleani. Ad esempio, se vogliamo selezionare il primo e il terzo valore di un array, dobbiamo passare come indici l’array <code class="docutils literal notranslate"><span class="pre">[True,</span> <span class="pre">False,</span> <span class="pre">True]</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1136,7 +1102,7 @@ mat[...,1] -&gt; [[&#39;2&#39; &#39;b&#39;]
 </div></blockquote>
 </section>
 <section id="reshape">
-<h2><span class="section-number">23.6. </span>Reshape<a class="headerlink" href="#reshape" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">3.6. </span>Reshape<a class="headerlink" href="#reshape" title="Permalink to this heading">#</a></h2>
 <p>In alcuni casi può essere utile cambiare la “shape” di una matrice. Ad esempio, una matrice 3x2 può essere modificata riarrangiando gli elementi in modo da ottenere una matrice 2x3, una matrice 1x6 o una matrice 6x1. Ciò si può fare mediante il metodo “reshape”:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1204,7 +1170,7 @@ mat[...,1] -&gt; [[&#39;2&#39; &#39;b&#39;]
 </div>
 </section>
 <section id="composizione-di-array-mediante-concatenate-e-stack">
-<h2><span class="section-number">23.7. </span>Composizione di Array Mediante <code class="docutils literal notranslate"><span class="pre">concatenate</span></code> e <code class="docutils literal notranslate"><span class="pre">stack</span></code><a class="headerlink" href="#composizione-di-array-mediante-concatenate-e-stack" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">3.7. </span>Composizione di Array Mediante <code class="docutils literal notranslate"><span class="pre">concatenate</span></code> e <code class="docutils literal notranslate"><span class="pre">stack</span></code><a class="headerlink" href="#composizione-di-array-mediante-concatenate-e-stack" title="Permalink to this heading">#</a></h2>
 <p>Numpy permette di unire diversi array mediante due principali funzioni: <code class="docutils literal notranslate"><span class="pre">concatenate</span></code> e <code class="docutils literal notranslate"><span class="pre">vstack</span></code>. La funzione <code class="docutils literal notranslate"><span class="pre">concatenate</span></code> prende in input una lista (o tupla) di array e permette di concatenarli lungo una dimensione (<code class="docutils literal notranslate"><span class="pre">axis</span></code>) esistente specificata, che di default è pari a zero (concatenazione per righe):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1362,7 +1328,7 @@ mat[...,1] -&gt; [[&#39;2&#39; &#39;b&#39;]
 <p>In questo caso, gli array sono stati concatenati lungo l’ultima dimensione.</p>
 </section>
 <section id="tipi">
-<h2><span class="section-number">23.8. </span>Tipi<a class="headerlink" href="#tipi" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">3.8. </span>Tipi<a class="headerlink" href="#tipi" title="Permalink to this heading">#</a></h2>
 <p>Ogni array di numpy ha il suo tipo (si veda <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.13.0/user/basics.types.html">https://docs.scipy.org/doc/numpy-1.13.0/user/basics.types.html</a> per la lista di tipi supportati). Possiamo vedere il tipo di un array ispezionando la proprietà dtype:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1409,7 +1375,7 @@ mat[...,1] -&gt; [[&#39;2&#39; &#39;b&#39;]
 </div>
 </section>
 <section id="gestione-della-memoria-in-numpy">
-<h2><span class="section-number">23.9. </span>Gestione della Memoria in Numpy<a class="headerlink" href="#gestione-della-memoria-in-numpy" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">3.9. </span>Gestione della Memoria in Numpy<a class="headerlink" href="#gestione-della-memoria-in-numpy" title="Permalink to this heading">#</a></h2>
 <p>Numpy gestisce la memoria in maniera dinamica per questioni di efficienza. Pertanto, un assegnamento o una operazione di slicing, in genere <strong>non creano una nuova copia dei dati</strong>. Si consideri ad esempio questo codice:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1473,7 +1439,7 @@ mat[...,1] -&gt; [[&#39;2&#39; &#39;b&#39;]
 <p>In questa nuova versione del codice, <code class="docutils literal notranslate"><span class="pre">a</span></code> non viene più modificato alla modifica di <code class="docutils literal notranslate"><span class="pre">b</span></code>.</p>
 </section>
 <section id="broadcasting">
-<h2><span class="section-number">23.10. </span>Broadcasting<a class="headerlink" href="#broadcasting" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">3.10. </span>Broadcasting<a class="headerlink" href="#broadcasting" title="Permalink to this heading">#</a></h2>
 <p>Numpy gestisce in maniera intelligente le operazioni tra array che presentano shape diverse sotto determinate condizioni. Vediamo un esempio pratico: supponiamo di avere una matrice <span class="math notranslate nohighlight">\(2\times3\)</span> e un array <span class="math notranslate nohighlight">\(1\times3\)</span>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1683,7 +1649,7 @@ Mat1*Mat2
 <p>In questo caso, il prodotto tra i due tensori è stato ottenuto moltiplicando tutte le righe delle matrici bidimensionali <code class="docutils literal notranslate"><span class="pre">mat1[0,...]</span></code> per <code class="docutils literal notranslate"><span class="pre">mat2[0]</span></code> (prima riga di mat2) e tutte le righe delle matrici bidimensionali <code class="docutils literal notranslate"><span class="pre">mat1[1,...]</span></code> per <code class="docutils literal notranslate"><span class="pre">mat2[1]</span></code> (seconda riga di mat2). Ciò è equivalente a ripetere tutti gli elementi di <code class="docutils literal notranslate"><span class="pre">mat2</span></code> lungo la seconda dimensione (quella contenente <span class="math notranslate nohighlight">\(1\)</span>) ed effettuare un prodotto punto a punto tra <code class="docutils literal notranslate"><span class="pre">mat1</span></code> e la versione adattata di <code class="docutils literal notranslate"><span class="pre">mat2</span></code>.</p>
 </section>
 <section id="esercizi">
-<h2><span class="section-number">23.11. </span>Esercizi<a class="headerlink" href="#esercizi" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">3.11. </span>Esercizi<a class="headerlink" href="#esercizi" title="Permalink to this heading">#</a></h2>
 <blockquote>
 <div><p>🧑‍💻 Esercizio 1</p>
 <p>Definire una matrice 3x4, poi:</p>
@@ -1748,7 +1714,7 @@ Mat1*Mat2
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">22. </span>Introduzione a Python</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>Introduzione a Python</p>
       </div>
     </a>
     <a class="right-next"
@@ -1756,7 +1722,7 @@ Mat1*Mat2
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">24. </span>Introduzione a Matplotlib</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Introduzione a Matplotlib</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1775,17 +1741,17 @@ Mat1*Mat2
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numpy-arrays">23.1. Numpy Arrays</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linspace-arange-zeros-ones-eye-e-random">23.2. Linspace, Arange, Zeros, Ones, Eye e Random</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#max-min-sum-argmax-argmin">23.3. max, min, sum, argmax, argmin</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indicizzazione-e-slicing">23.4. Indicizzazione e Slicing</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indicizzazione-e-slicing-logici">23.5. Indicizzazione e Slicing Logici</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reshape">23.6. Reshape</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#composizione-di-array-mediante-concatenate-e-stack">23.7. Composizione di Array Mediante <code class="docutils literal notranslate"><span class="pre">concatenate</span></code> e <code class="docutils literal notranslate"><span class="pre">stack</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipi">23.8. Tipi</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gestione-della-memoria-in-numpy">23.9. Gestione della Memoria in Numpy</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcasting">23.10. Broadcasting</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">23.11. Esercizi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numpy-arrays">3.1. Numpy Arrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linspace-arange-zeros-ones-eye-e-random">3.2. Linspace, Arange, Zeros, Ones, Eye e Random</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#max-min-sum-argmax-argmin">3.3. max, min, sum, argmax, argmin</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indicizzazione-e-slicing">3.4. Indicizzazione e Slicing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indicizzazione-e-slicing-logici">3.5. Indicizzazione e Slicing Logici</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reshape">3.6. Reshape</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#composizione-di-array-mediante-concatenate-e-stack">3.7. Composizione di Array Mediante <code class="docutils literal notranslate"><span class="pre">concatenate</span></code> e <code class="docutils literal notranslate"><span class="pre">stack</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipi">3.8. Tipi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gestione-della-memoria-in-numpy">3.9. Gestione della Memoria in Numpy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcasting">3.10. Broadcasting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">3.11. Esercizi</a></li>
 </ul>
   </nav></div>
 
