@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>9. Basic Elements of Information Theory &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+    <title>6. Basic Elements of Information Theory &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
   
   
   
@@ -68,8 +68,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="10. Misure di Frequenze e Rappresentazione Grafica dei Dati" href="04_misure_di_frequenze_e_rappresentazione_grafica_dei_dati.html" />
-    <link rel="prev" title="8. Probability Distributions" href="08_common_distributions.html" />
+    <link rel="next" title="7. Introduzione a Numpy" href="../laboratories/03_intro_numpy.html" />
+    <link rel="prev" title="5. Probability Distributions" href="08_common_distributions.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -181,16 +181,16 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="03_main_data_analysis_concepts.html">3. Introduction to Data Analysis and Key Concepts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="07_probability.html">4. Probability for Data Manipulation</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratory 1</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/03_intro_numpy.html">5. Introduzione a Numpy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/04_intro_matplotlib.html">6. Introduzione a Matplotlib</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/05_intro_pandas.html">7. Introduzione a Pandas</a></li>
-</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 3</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="08_common_distributions.html">8. Probability Distributions</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">9. Basic Elements of Information Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_common_distributions.html">5. Probability Distributions</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Basic Elements of Information Theory</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratory 1</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/03_intro_numpy.html">7. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/04_intro_matplotlib.html">8. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/05_intro_pandas.html">9. Introduzione a Pandas</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 4</span></p>
 <ul class="nav bd-sidenav">
@@ -422,19 +422,19 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-information">9.1. Self-information</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy">9.2. Entropy</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy-of-a-bernoulli-variable">9.2.1. Entropy of a Bernoulli variable</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-information">6.1. Self-information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy">6.2. Entropy</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy-of-a-bernoulli-variable">6.2.1. Entropy of a Bernoulli variable</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-concepts-optional">9.3. Other Concepts (Optional)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#joint-entropy-and-conditional-entropy">9.3.1. Joint Entropy and Conditional Entropy</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kullback-leibler-divergence">9.3.2. Kullback-Leibler Divergence</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mutual-information">9.3.3. Mutual Information</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-processing-inequality">9.3.4. Data Processing Inequality</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-concepts-optional">6.3. Other Concepts (Optional)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#joint-entropy-and-conditional-entropy">6.3.1. Joint Entropy and Conditional Entropy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kullback-leibler-divergence">6.3.2. Kullback-Leibler Divergence</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mutual-information">6.3.3. Mutual Information</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-processing-inequality">6.3.4. Data Processing Inequality</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">9.4. References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">6.4. References</a></li>
 </ul>
             </nav>
         </div>
@@ -447,7 +447,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="basic-elements-of-information-theory">
-<h1><span class="section-number">9. </span>Basic Elements of Information Theory<a class="headerlink" href="#basic-elements-of-information-theory" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">6. </span>Basic Elements of Information Theory<a class="headerlink" href="#basic-elements-of-information-theory" title="Permalink to this heading">#</a></h1>
 <p>Probability Theory allows to deal with the uncertain, however, it does
 not allow to quantify it. Information theory provides the tools to
 <strong>quantify how much information is present in a signal</strong>.</p>
@@ -460,7 +460,7 @@ event has occurred.</p>
 hence it is not very informative. The message “there was a solar eclipse
 this morning” is instead very unlikely, and hence informative.</p>
 <section id="self-information">
-<h2><span class="section-number">9.1. </span>Self-information<a class="headerlink" href="#self-information" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">6.1. </span>Self-information<a class="headerlink" href="#self-information" title="Permalink to this heading">#</a></h2>
 <p>We would like to quantify information in a way that formalizes the
 intuition discussed before:</p>
 <ul class="simple">
@@ -505,7 +505,7 @@ is satisfied.</p></li>
 </ul>
 </section>
 <section id="entropy">
-<h2><span class="section-number">9.2. </span>Entropy<a class="headerlink" href="#entropy" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">6.2. </span>Entropy<a class="headerlink" href="#entropy" title="Permalink to this heading">#</a></h2>
 <p><em>Self-information is defined on a single outcome</em>. We can quantify the
 amount of <strong>uncertainty</strong> in an entire probability distribution using
 the <strong>Shannon entropy</strong>:</p>
@@ -554,7 +554,7 @@ will be:</p></li>
 2.16 bits, smaller than in the case of the fair die.</p></li>
 </ul>
 <section id="entropy-of-a-bernoulli-variable">
-<h3><span class="section-number">9.2.1. </span>Entropy of a Bernoulli variable<a class="headerlink" href="#entropy-of-a-bernoulli-variable" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.2.1. </span>Entropy of a Bernoulli variable<a class="headerlink" href="#entropy-of-a-bernoulli-variable" title="Permalink to this heading">#</a></h3>
 <p>Let’s consider a variable <span class="math notranslate nohighlight">\(X\)</span> following a Bernoulli distribution with probability <span class="math notranslate nohighlight">\(p\)</span>, i.e.:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}X_p = \begin{cases}
@@ -575,9 +575,9 @@ will be:</p></li>
 </section>
 </section>
 <section id="other-concepts-optional">
-<h2><span class="section-number">9.3. </span>Other Concepts (Optional)<a class="headerlink" href="#other-concepts-optional" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">6.3. </span>Other Concepts (Optional)<a class="headerlink" href="#other-concepts-optional" title="Permalink to this heading">#</a></h2>
 <section id="joint-entropy-and-conditional-entropy">
-<h3><span class="section-number">9.3.1. </span>Joint Entropy and Conditional Entropy<a class="headerlink" href="#joint-entropy-and-conditional-entropy" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.3.1. </span>Joint Entropy and Conditional Entropy<a class="headerlink" href="#joint-entropy-and-conditional-entropy" title="Permalink to this heading">#</a></h3>
 <p>Given two random variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>, we can define the <strong>joint entropy</strong> as:</p>
 <div class="math notranslate nohighlight">
 \[H(X,Y) = -\sum_{x \in \mathcal{X}}\sum_{y \in \mathcal{Y}} p(x,y) \log p(x,y)\]</div>
@@ -587,7 +587,7 @@ will be:</p></li>
 <p>The conditional entropy measures the uncertainty over <span class="math notranslate nohighlight">\(X\)</span> when <span class="math notranslate nohighlight">\(Y\)</span> is known.</p>
 </section>
 <section id="kullback-leibler-divergence">
-<h3><span class="section-number">9.3.2. </span>Kullback-Leibler Divergence<a class="headerlink" href="#kullback-leibler-divergence" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.3.2. </span>Kullback-Leibler Divergence<a class="headerlink" href="#kullback-leibler-divergence" title="Permalink to this heading">#</a></h3>
 <p>The Kullback-Leibler divergence (also called KL-divergence) is a statistical distance measure which can be used to quantify the distance between two probability distributions (i.e., how much different they are from one another). For discrete probability distributions, this is defined as:</p>
 <div class="math notranslate nohighlight">
 \[D_{KL}(P || Q) = \sum_{x \in \chi} P(x)\log\left(\frac{P(x)}{Q(x)}\right)\]</div>
@@ -600,7 +600,7 @@ will be:</p></li>
 <p>The KL divergence is also called <strong>relative entropy</strong>.</p>
 </section>
 <section id="mutual-information">
-<h3><span class="section-number">9.3.3. </span>Mutual Information<a class="headerlink" href="#mutual-information" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.3.3. </span>Mutual Information<a class="headerlink" href="#mutual-information" title="Permalink to this heading">#</a></h3>
 <p>Let us consider two random variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> with a joint probability function <span class="math notranslate nohighlight">\(P(X,Y)\)</span>. We define the <strong>mutual information</strong> <span class="math notranslate nohighlight">\(I(X;Y)\)</span> as the <strong>relative entropy</strong> between the joint distribution and the product distribution:</p>
 <div class="math notranslate nohighlight">
 \[I(X;Y) = \sum_{x \in \mathcal{X}}\sum_{y \in \mathcal{Y}} p(x,y) \log \frac{P(x,y)}{P(x)P(y)}\]</div>
@@ -619,7 +619,7 @@ will be:</p></li>
 <p>From which we observe that <strong>the mutual information between two variables X and Y is the reduction in the uncertainty about one variable when the other one is known.</strong></p>
 </section>
 <section id="data-processing-inequality">
-<h3><span class="section-number">9.3.4. </span>Data Processing Inequality<a class="headerlink" href="#data-processing-inequality" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.3.4. </span>Data Processing Inequality<a class="headerlink" href="#data-processing-inequality" title="Permalink to this heading">#</a></h3>
 <p>We will say that random variables <span class="math notranslate nohighlight">\(X\)</span>, <span class="math notranslate nohighlight">\(Y\)</span>, and <span class="math notranslate nohighlight">\(Z\)</span> form a Markov Chain in that order (denoted as <span class="math notranslate nohighlight">\(X \to Y \to Z\)</span>) if we can write:</p>
 <div class="math notranslate nohighlight">
 \[P(X,Y,Z) = P(Z|Y) P(Y|X) P(X)\]</div>
@@ -632,7 +632,7 @@ will be:</p></li>
 </section>
 </section>
 <section id="references">
-<h2><span class="section-number">9.4. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">6.4. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Some parts of chapter 1 of [3].</p></li>
 </ul>
@@ -677,15 +677,15 @@ theory</em>. John Wiley &amp; Sons, 2012.</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">8. </span>Probability Distributions</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Probability Distributions</p>
       </div>
     </a>
     <a class="right-next"
-       href="04_misure_di_frequenze_e_rappresentazione_grafica_dei_dati.html"
+       href="../laboratories/03_intro_numpy.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">10. </span>Misure di Frequenze e Rappresentazione Grafica dei Dati</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Introduzione a Numpy</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -704,19 +704,19 @@ theory</em>. John Wiley &amp; Sons, 2012.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-information">9.1. Self-information</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy">9.2. Entropy</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy-of-a-bernoulli-variable">9.2.1. Entropy of a Bernoulli variable</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-information">6.1. Self-information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy">6.2. Entropy</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy-of-a-bernoulli-variable">6.2.1. Entropy of a Bernoulli variable</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-concepts-optional">9.3. Other Concepts (Optional)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#joint-entropy-and-conditional-entropy">9.3.1. Joint Entropy and Conditional Entropy</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kullback-leibler-divergence">9.3.2. Kullback-Leibler Divergence</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mutual-information">9.3.3. Mutual Information</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-processing-inequality">9.3.4. Data Processing Inequality</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-concepts-optional">6.3. Other Concepts (Optional)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#joint-entropy-and-conditional-entropy">6.3.1. Joint Entropy and Conditional Entropy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kullback-leibler-divergence">6.3.2. Kullback-Leibler Divergence</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mutual-information">6.3.3. Mutual Information</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-processing-inequality">6.3.4. Data Processing Inequality</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">9.4. References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">6.4. References</a></li>
 </ul>
   </nav></div>
 
