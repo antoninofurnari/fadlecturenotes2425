@@ -33,6 +33,20 @@ parts:
   chapters:
   - file: lectures/04_misure_di_frequenze_e_rappresentazione_grafica_dei_dati
   - file: lectures/05_misure_di_tendenza_centrale_dispersione_e_forma
+- caption: Lecture 5
+  numbered: True
+  chapters:
+  - file: lectures/06_associazione_variabili
+- caption: Laboratory 2
+  numbered: True
+  chapters:
+  - file: laboratories/06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati
+  - file: laboratories/07_misure_di_tendenza_centrale_dispersione_e_forma
+  - file: laboratories/08_associazione_variabili
+- caption: Lecture 6
+  numbered: True
+  chapters:
+  - file: lectures/10_statistical_inference
   # - file: laboratories/03_intro_numpy
   # - file: laboratories/04_intro_matplotlib
   # - file: laboratories/05_intro_pandas
