@@ -64,8 +64,14 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
-    <script>mermaid.initialize({startOnLoad:true});</script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+    <script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";
+window.addEventListener("load", () => mermaid.run());
+</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'lectures/03_main_data_analysis_concepts';</script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -198,6 +204,20 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="04_misure_di_frequenze_e_rappresentazione_grafica_dei_dati.html">10. Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05_misure_di_tendenza_centrale_dispersione_e_forma.html">11. Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 5</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="06_associazione_variabili.html">12. Associazione tra Variabili</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratory 2</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">13. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/07_misure_di_tendenza_centrale_dispersione_e_forma.html">14. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/08_associazione_variabili.html">15. Associazione tra Variabili</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 6</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="10_statistical_inference.html">16. Statistical Inference</a></li>
 </ul>
 
     </div>
@@ -988,8 +1008,8 @@ document.write(`
 <h4><span class="section-number">3.6.4.1. </span>Non-Linear Workflow<a class="headerlink" href="#non-linear-workflow" title="Permalink to this heading">#</a></h4>
 <p>It should be noted that the process is not exactly linear. A good data analysis will iterate over the different steps and possibly jump back to any of those steps to revise it. For instance, after fitting the models on the data in step 5, one may note that some other models could give better results, and jump back to step 4 to refine the choice of the models, to then return to step 5.</p>
 <p>The figure below shows the described workflow. Solid arrows illustrate the main flow, while dashed arrows show possible alternative paths after performing data exploration (step 4). Similar dashed arrows pointing to any past node may apply to the other nodes as well. In the example below, after exploratory data analysis (step 4), we may note that the data is not clean (maybe we find some outliers) or not adequately formatted, so we jump back to step 3. Similarly, we may find that we need more data, and jump back to step 2, or we may want to revisit and refine our data analysis question (step 1).</p>
-<div class="mermaid">
-            flowchart TD
+<pre  class="mermaid">
+        flowchart TD
     A(1. Define your data analysis question)
     B(2. Collect the data needed to answer the data analysis question)
     C(3. Clean and format the data)
@@ -1003,7 +1023,7 @@ document.write(`
     D-.-&gt; A
     D -.-&gt; B
     D -.-&gt; C
-        </div></section>
+    </pre></section>
 <section id="id2">
 <h4><span class="section-number">3.6.4.2. </span>Example<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h4>
 <p>A data analyst working for an e-commerce company is tasked with analyzing customer reviews to improve product quality and customer satisfaction. The analyst starts by defining the question that the data analysis needs to answer (<strong>step 1 - define your data analysis question</strong>): “What are the common themes and issues in customer reviews, and how can we address them to improve product quality and satisfaction?” To answer this question, the analyst collects a diverse dataset of customer reviews from various sources (<strong>step 2 - collect the data needed</strong>), including the company’s website, social media, and third-party review platforms. This dataset includes text reviews, ratings, and timestamps.</p>

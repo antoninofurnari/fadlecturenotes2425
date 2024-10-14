@@ -197,6 +197,20 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="04_misure_di_frequenze_e_rappresentazione_grafica_dei_dati.html">10. Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05_misure_di_tendenza_centrale_dispersione_e_forma.html">11. Misure di Tendenza Centrale, Dispersione e Forma</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 5</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="06_associazione_variabili.html">12. Associazione tra Variabili</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratory 2</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/06_misure_di_frequenze_e_rappresentazioni_grafiche_dei_dati.html">13. Laboratorio su Misure di Frequenze e Rappresentazione Grafica dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/07_misure_di_tendenza_centrale_dispersione_e_forma.html">14. Laboratorio su Misure di Tendenza Centrale, Dispersione e Forma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/08_associazione_variabili.html">15. Associazione tra Variabili</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 6</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="10_statistical_inference.html">16. Statistical Inference</a></li>
+</ul>
 
     </div>
 </nav></div>
@@ -467,10 +481,8 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#estimation-of-the-parameters-of-a-gaussian-distribution">5.7.6.4. Estimation of the Parameters of a Gaussian Distribution</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standardization-and-normal-distribution">5.7.7. Standardization and Normal Distribution</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#central-limit-theorem">5.7.7.1. Central Limit Theorem</a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standardization-and-normal-distribution">5.7.7. Standardization and Normal Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#central-limit-theorem">5.7.8. Central Limit Theorem</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-distributions-optional">5.8. Other Distributions (Optional)</a><ul class="nav section-nav flex-column">
@@ -520,21 +532,12 @@ given value is more or less likely.</p>
 <p>A PMF on a random variable <span class="math notranslate nohighlight">\(X\)</span> is a function</p>
 <div class="math notranslate nohighlight">
 \[P:\Omega \rightarrow \lbrack 0,1\rbrack\]</div>
-<p>Where <span class="math notranslate nohighlight">\(\Omega\)</span> is the sample space <span class="math notranslate nohighlight">\(X\)</span>.</p>
-<p>This function satisfies the following properties:</p>
-<ul class="simple">
-<li><p><strong>The domain of</strong> <span class="math notranslate nohighlight">\(\mathbf{P}\)</span> <strong>is the set of all possible states
-of</strong> <span class="math notranslate nohighlight">\(\mathbf{X}\)</span><strong>.</strong></p></li>
-<li><p><span class="math notranslate nohighlight">\(\mathbf{\forall}\mathbf{x}\mathbf{\in}\Omega\mathbf{,\ }\mathbf{0}\mathbf{\leq}\mathbf{P}\left( \mathbf{x} \right)\mathbf{\leq}\mathbf{1}\)</span>.
-An impossible event has probability 0, whereas a certain event has
-probability 1. No event can have negative probability or probability
-larger than 1.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\sum_{\mathbf{x}\mathbf{\in}\mathbf{\Omega}}^{}{\mathbf{P}\mathbf{(}\mathbf{x}\mathbf{)}}\mathbf{=}\mathbf{1}\)</span>.
-The sum of the probabilities associated to all possible events must
-be one. This implies that the probability distribution is
+<p>Where <span class="math notranslate nohighlight">\(\Omega\)</span> is the sample space <span class="math notranslate nohighlight">\(X\)</span>, which satisfies the following property:</p>
+<div class="math notranslate nohighlight">
+\[\sum_{\mathbf{x}\mathbf{\in}\mathbf{\Omega}}^{}{\mathbf{P}\mathbf{(}\mathbf{x}\mathbf{)}}\mathbf{=}\mathbf{1}\]</div>
+<p>This condition implies that the probability distribution is
 normalized. Also, this means that at least one of the events should
-happen.</p></li>
-</ul>
+happen.</p>
 <p><strong>Example:</strong> Let <span class="math notranslate nohighlight">\(X\)</span> be the random variable indicating the outcome of a
 coin toss.</p>
 <ul class="simple">
@@ -613,16 +616,15 @@ of <span class="math notranslate nohighlight">\(P(X)\)</span>?</p></li>
 <h2><span class="section-number">5.2. </span>Probability Density Functions (PDF) - Continuous Variables<a class="headerlink" href="#probability-density-functions-pdf-continuous-variables" title="Permalink to this heading">#</a></h2>
 <p>Probability distributions are called “probability density functions”
 when the random variable is continuous.</p>
-<p>To be a probability density function over a variable <span class="math notranslate nohighlight">\(X\)</span>, a function
-<span class="math notranslate nohighlight">\(f:\Omega \rightarrow \lbrack 0,1\rbrack\)</span> must satisfy the following
-properties:</p>
-<ul class="simple">
-<li><p>The domain of <span class="math notranslate nohighlight">\(f\)</span> is the set of all possible values of <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\forall x \in \Omega,\ P(x) \geq 0\)</span>. No probability can be negative.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\int f(x)dx = 1\)</span>. This is equivalent to <span class="math notranslate nohighlight">\(\sum P(x) = 1\)</span> in the
+<p>A probability density function over a variable <span class="math notranslate nohighlight">\(X\)</span> is defined as follows:</p>
+<div class="math notranslate nohighlight">
+\[f:\Omega \rightarrow \lbrack 0,1\rbrack\]</div>
+<p>and must satisfy the following property:</p>
+<div class="math notranslate nohighlight">
+\[\int f(x)dx = 1\]</div>
+<p>This condition is equivalent to <span class="math notranslate nohighlight">\(\sum P(x) = 1\)</span> in the
 case of a discrete variable. The sum turns into an integral in the
-case of continuous variables.</p></li>
-</ul>
+case of continuous variables.</p>
 <p>Note that, in the case of continuous variables, we have:</p>
 <div class="math notranslate nohighlight">
 \[ P(a \leq x \leq b) = \int_{a}^b f(x) dx\]</div>
@@ -656,7 +658,7 @@ generally are) much more complicated than that.</p>
 <h3><span class="section-number">5.2.2. </span>Cumulative Distribution Functions (CDF)<a class="headerlink" href="#cumulative-distribution-functions-cdf" title="Permalink to this heading">#</a></h3>
 <p>Similar to the Empirical Cumulative Distribution Functions, we can define Cumulative Distribution Functions for random variables, starting from the density or mass functions. A cumulative distribution function is generally defined as:</p>
 <div class="math notranslate nohighlight">
-\[ F(x) = P(X \leq x) \]</div>
+\[ F(x) = f(X \leq x) \]</div>
 </section>
 <section id="cdf-of-continuous-random-variables">
 <h3><span class="section-number">5.2.3. </span>CDF of Continuous Random Variables<a class="headerlink" href="#cdf-of-continuous-random-variables" title="Permalink to this heading">#</a></h3>
@@ -665,7 +667,7 @@ generally are) much more complicated than that.</p>
 \[F(x) = \int_{-\infty}^x P(x)dx\]</div>
 <p>The CDF is useful in different ways. For instance, it’s easy to see that:</p>
 <div class="math notranslate nohighlight">
-\[P(a \leq X \leq b) = \int_a^b P(x)dx = \int_{-\infty}^b P(x)dx - \int_{-\infty}^a P(x)dx = F(b) - F(a)\]</div>
+\[P(a \leq X \leq b) = \int_a^b f(x)dx = \int_{-\infty}^b f(x)dx - \int_{-\infty}^a f(x)dx = F(b) - F(a)\]</div>
 </section>
 <section id="example">
 <h3><span class="section-number">5.2.4. </span>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h3>
@@ -737,7 +739,7 @@ follows:</p>
 <p>In the case of continuous variables, the expectation takes the form of
 an integral:</p>
 <div class="math notranslate nohighlight">
-\[E_{X \sim P}\lbrack X\rbrack = \int xP(x)dx\]</div>
+\[E_{X \sim P}\lbrack X\rbrack = \int xf(x)dx\]</div>
 <p>This is very related to the concept of mean value (or expected value) of
 a random variable.</p>
 </section>
@@ -790,10 +792,10 @@ of the covariance matrix <span class="math notranslate nohighlight">\(Cov(X)\)</
 <h2><span class="section-number">5.6. </span>Standardization<a class="headerlink" href="#standardization" title="Permalink to this heading">#</a></h2>
 <p>Standardization transforms a random variable <span class="math notranslate nohighlight">\(X\)</span> into a variable <span class="math notranslate nohighlight">\(Z\)</span> so that it has:</p>
 <ul class="simple">
-<li><p>Expectation equal to zero: <span class="math notranslate nohighlight">\(E(X) = 0\)</span>.</p></li>
-<li><p>Variance equal to one: <span class="math notranslate nohighlight">\(Var(X) = 1\)</span>.</p></li>
+<li><p>Expectation equal to zero: <span class="math notranslate nohighlight">\(E(Z) = 0\)</span>.</p></li>
+<li><p>Variance equal to one: <span class="math notranslate nohighlight">\(Var(Z) = 1\)</span>.</p></li>
 </ul>
-<p>The new standardized variable will be:</p>
+<p>The standardized variable will be:</p>
 <div class="math notranslate nohighlight">
 \[Z = \frac{X - \mu_X}{\sigma_X} = \frac{X-E[X]}{\sqrt{Var[X]}}\]</div>
 </section>
@@ -905,7 +907,7 @@ finite.</p>
 <ul class="simple">
 <li><p>The distribution is parametrized by a vector
 <span class="math notranslate nohighlight">\(\mathbf{p} \in \lbrack 0,1\rbrack^k\)</span>, where <span class="math notranslate nohighlight">\(p_{i}\)</span> gives the
-probability of the i^th^ state.</p></li>
+probability of the <span class="math notranslate nohighlight">\(i^{th}\)</span> state.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\mathbf{p}\)</span> must be such that <span class="math notranslate nohighlight">\(\sum_{i = 1}^kp_{i} = 1\)</span> to
 obtain a valid probability distribution.</p></li>
 <li><p>The analytical form of the distribution is given by:
@@ -1105,8 +1107,9 @@ following formula (in the univariate case):</p>
 <img alt="../_images/aba8db2cd10ec3fa2bd151841d5b89c89e4239402a10e698b6839d3c3978c4cd.png" src="../_images/aba8db2cd10ec3fa2bd151841d5b89c89e4239402a10e698b6839d3c3978c4cd.png" />
 </div>
 </div>
+</section>
 <section id="central-limit-theorem">
-<h4><span class="section-number">5.7.7.1. </span>Central Limit Theorem<a class="headerlink" href="#central-limit-theorem" title="Permalink to this heading">#</a></h4>
+<h3><span class="section-number">5.7.8. </span>Central Limit Theorem<a class="headerlink" href="#central-limit-theorem" title="Permalink to this heading">#</a></h3>
 <p>The Central Limit Theorem is a statistical principle that states that the distribution of the sum (or average) of a large number of independent, identically distributed (i.i.d.) random variables <span class="math notranslate nohighlight">\(\{X_i\}_{i=1}^n\)</span> approaches a normal distribution as <span class="math notranslate nohighlight">\(n \to \infty\)</span>, regardless of the shape of the original population’s distribution.</p>
 <p>While we will not see this theorem formally, it is a fundamental result which in some sense “justifies” the pervasive use of the Gaussian distribution in data analysis.</p>
 <p>In the plot below, we plot the distributions of the average outcome of rolling a given number of dice. We can see each die as described by a different and independent random variable, hence the distribution will get close to Gaussian as we increase the number of dice.</p>
@@ -1115,7 +1118,6 @@ following formula (in the univariate case):</p>
 <img alt="../_images/d3b0dcfd55343902762bdbfdf6de40e0d4d72373e1bf9592ba8247dffffb8d78.png" src="../_images/d3b0dcfd55343902762bdbfdf6de40e0d4d72373e1bf9592ba8247dffffb8d78.png" />
 </div>
 </div>
-</section>
 </section>
 </section>
 <section id="other-distributions-optional">
@@ -1345,10 +1347,8 @@ learning</em>. MIT press, 2016. <a class="reference external" href="https://www.
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#estimation-of-the-parameters-of-a-gaussian-distribution">5.7.6.4. Estimation of the Parameters of a Gaussian Distribution</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standardization-and-normal-distribution">5.7.7. Standardization and Normal Distribution</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#central-limit-theorem">5.7.7.1. Central Limit Theorem</a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standardization-and-normal-distribution">5.7.7. Standardization and Normal Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#central-limit-theorem">5.7.8. Central Limit Theorem</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-distributions-optional">5.8. Other Distributions (Optional)</a><ul class="nav section-nav flex-column">
