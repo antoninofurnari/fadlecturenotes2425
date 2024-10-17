@@ -787,7 +787,7 @@ Lo scarto interquartile di sample 2 è: 2.0
 </div>
 </div>
 <p>Gli indici di dispersione visti fino ad ora (esclusa la varianza) hanno come unità di misura la stessa dei dati di input. Nel caso dei pesi, i dati vengono misurati in libbre. E’ pertanto corretto dire che <strong>minimo</strong>, <strong>massimo</strong>, <strong>range</strong>, <strong>scarto interquartile</strong> e <strong>scarto medio assoluto</strong> calcolati sui pesi si misurano in libbre.</p>
-<p>Lo stesso discorso non vale per la varianza, che si misurera in <strong>libbre al quadrato</strong>. Se vogliamo ottenere una misura di dispersione <strong>commensurabile</strong>, possiamo calcolare la radice quadrata della varianza, ottenendo così la <strong>deviazione standard</strong> (o <strong>scarto quadratico medio</strong>), che si definisce come segue:</p>
+<p>Lo stesso discorso non vale per la varianza, che si misurerà in <strong>libbre al quadrato</strong>. Se vogliamo ottenere una misura di dispersione <strong>commensurabile</strong>, possiamo calcolare la radice quadrata della varianza, ottenendo così la <strong>deviazione standard</strong> (o <strong>scarto quadratico medio</strong>), che si definisce come segue:</p>
 <div class="math notranslate nohighlight">
 \[s = \sqrt{s^2}=\sqrt{\frac{\sum_{i=1}{n}(x_i-x^2)}{n}}\]</div>
 <p>Consideriamo nuovamente il nostro dataset di pesi e altezze. Le medie e deviazioni standard delle due variabili pesi e altezze sono:</p>
@@ -1126,10 +1126,10 @@ Name: weight, dtype: float64
 <img alt="../_images/db9870db93f43d1f5fad5b884eb5a5ef92962c8a9bb875fa1febbea3a817d64c.png" src="../_images/db9870db93f43d1f5fad5b884eb5a5ef92962c8a9bb875fa1febbea3a817d64c.png" />
 </div>
 </div>
-<p>I boxplot possono essere utili a comparare campioni. Ad esempio, i seguenti boxplot comparano le distribuzioni di pesi e altezze:</p>
+<p>I boxplot possono essere utili a comparare campioni. Ad esempio, i seguenti boxplot comparano le distribuzioni dei pesi tra uomini e donne:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/de9d9858067cfff7aba0e57b0a745dcab64a42666616ae4f88072f53d881a1a3.png" src="../_images/de9d9858067cfff7aba0e57b0a745dcab64a42666616ae4f88072f53d881a1a3.png" />
+<img alt="../_images/2e92b6a7c2b0516dd1727221d8ebbf77b8b30f496962aed000dc876d3f0c6657.png" src="../_images/2e92b6a7c2b0516dd1727221d8ebbf77b8b30f496962aed000dc876d3f0c6657.png" />
 </div>
 </div>
 <p>Dal grafico sopra possiamo notare che, mentre weight contiene degli outliers nella parte alta, height non li contiene. Questo non è particolarmente sorprendente, perché è più facile trovare un certo numero di persone sovrappeso che persone molto più alte della norma.</p>
