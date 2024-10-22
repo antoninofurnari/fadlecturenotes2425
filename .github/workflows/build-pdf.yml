@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3  # Updated to v3
         with:
           persist-credentials: false
       - name: Install Fonts
@@ -28,7 +28,7 @@ jobs:
             latexmk                   \
             xindy
       - name: Setup Miniconda
-        uses: conda-incubator/setup-miniconda@v2
+        uses: conda-incubator/setup-miniconda@v3  # Updated to v3
         with:
           auto-update-conda: true
           auto-activate-base: false
@@ -40,13 +40,13 @@ jobs:
         shell: bash -l {0}
         run: |
           jb build lecturenotes/ --builder pdflatex
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3  # Updated to v3
         with:
           name: pdf
           path: lecturenotes/_build/latex/book.pdf
-      - uses: ncipollo/release-action@v1
+      - uses: ncipollo/release-action@v1  # Keep this as is, check if a newer version exists
         with:
           artifacts: lecturenotes/_build/latex/book.pdf
           allowUpdates: true
           replacesArtifacts: true
-          tag: "latest" 
+          tag: "latest"
