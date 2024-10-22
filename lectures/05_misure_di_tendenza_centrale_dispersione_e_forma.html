@@ -790,7 +790,7 @@ Lo scarto interquartile di sample 2 è: 2.0
 <p>Lo stesso discorso non vale per la varianza, che si misurerà in <strong>libbre al quadrato</strong>. Se vogliamo ottenere una misura di dispersione <strong>commensurabile</strong>, possiamo calcolare la radice quadrata della varianza, ottenendo così la <strong>deviazione standard</strong> (o <strong>scarto quadratico medio</strong>), che si definisce come segue:</p>
 <div class="math notranslate nohighlight">
 \[s = \sqrt{s^2}=\sqrt{\frac{\sum_{i=1}{n}(x_i-x^2)}{n}}\]</div>
-<p>Consideriamo nuovamente il nostro dataset di pesi e altezze. Le medie e deviazioni standard delle due variabili pesi e altezze sono:</p>
+<p>Consideriamo nuovamente il nostro dataset di pesi e altezze. Le medie e deviazioni standard delle della variabile peso per i due sessi sono:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html"><div>
@@ -810,36 +810,25 @@ Lo scarto interquartile di sample 2 è: 2.0
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
-      <th></th>
-      <th>height</th>
-      <th>weight</th>
+      <th>sex</th>
+      <th>F</th>
+      <th>M</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>mean</th>
-      <td>66.826046</td>
-      <td>35.818062</td>
+      <td>64.179431</td>
+      <td>69.933710</td>
     </tr>
     <tr>
       <th>std</th>
-      <td>4.002658</td>
-      <td>7.987908</td>
+      <td>2.686187</td>
+      <td>2.911766</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
-</div>
-<p>La deviazione standard ci dice qualcosa anche sulla “forma” della distribuzione. Confrontiamo ad esempio le deviazioni standard delle altezze di uomini e donne:</p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sex
-F    2.686187
-M    2.911766
-Name: height, dtype: float64
-</pre></div>
-</div>
-</div>
 </div>
 <p>Dal confronto notiamo che le altezze degli uomini sono “più disperse” (hanno cioè una deviazione standard più alta). Confrontiamo le stime di densità dei due campioni:</p>
 <div class="cell tag_remove-input docutils container">

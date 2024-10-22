@@ -1261,16 +1261,16 @@ document.write(`
 </table>
 <p>Supponiamo adesso di dover “ricostruire” i valori mancanti. Se le due variabili sono indipendenti, allora:</p>
 <div class="math notranslate nohighlight">
-\[P(X=x_i, Y=y_j) = P(X=x_i) P(Y=y_j)\]</div>
+\[P(X=x_j, Y=y_i) = P(X=x_j) P(Y=y_i)\]</div>
 <p>Ricordiamo che:</p>
 <div class="math notranslate nohighlight">
-\[P(X=x_i) = \frac{n_{+i}}{n}, P(Y=y_j) = \frac{n_{j+}}{n}, P(X=x_i, Y=y_j)=\frac{n_{ij}}{n}\]</div>
+\[P(X=x_j) = \frac{n_{+j}}{n}, P(Y=y_i) = \frac{n_{i+}}{n}, P(X=x_j, Y=y_i)=\frac{n_{ij}}{n}\]</div>
 <p>Da qui otteniamo che:</p>
 <div class="math notranslate nohighlight">
-\[\tilde n_{ij} = n \cdot P(X=x_i,Y=y_j) = n \cdot P(X=x_i) \cdot P(Y=y_j) = n \cdot \frac{n_{+i}}{n} \frac{n_{j+}}{n} = \frac{n_{+i}n_{j+}}{n}\]</div>
+\[\tilde n_{ij} = n \cdot P(X=x_j,Y=y_i) = n \cdot P(X=x_j) \cdot P(Y=y_i) = n \cdot \frac{n_{+j}}{n} \frac{n_{i+}}{n} = \frac{n_{+j}n_{i+}}{n}\]</div>
 <p>Da cui:</p>
 <div class="math notranslate nohighlight">
-\[\tilde n_{ij} = P(X=x_i) n_{j+} = P(Y=y_j) n_{+i}\]</div>
+\[\tilde n_{ij} = P(X=x_j) n_{i+} = P(Y=y_i) n_{+j}\]</div>
 <p>Dove la tilde su <span class="math notranslate nohighlight">\(\tilde n_{ij}\)</span> indica che questo è un valore stimato, non il valore realmente osservato.</p>
 <blockquote>
 <div><p>Quanto visto sopra suggerisce che le frequenze <span class="math notranslate nohighlight">\(n_{ij}\)</span> seguando la stessa distribuzione delle frequenze marginali in caso di indipendenza tra le variabili.</p>
