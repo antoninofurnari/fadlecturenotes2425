@@ -437,8 +437,6 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling">16.1. Sampling</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-random-sample">16.1.1. Simple random sample</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stratified-sampling">16.1.2. Stratified Sampling</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cluster-sampling">16.1.3. Cluster sampling</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-size-and-standard-error">16.2. Sample Size and Standard Error</a></li>
@@ -457,33 +455,28 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-confidence-intervals-in-practice">16.5.2. Computing Confidence Intervals in Practice</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-sampling-distributions">16.6. Other Sampling Distributions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-2-distribution">16.6.1. <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-distribution">16.6.2. F-Distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing">16.6. Hypothesis Testing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing-for-means">16.6.1. Hypothesis Testing for Means</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#one-tailed-tests">16.6.1.1. One-tailed Tests</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing">16.7. Hypothesis Testing</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing-for-means">16.7.1. Hypothesis Testing for Means</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#one-tailed-tests">16.7.1.1. One-tailed Tests</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hypotheses-tests-in-general">16.7.2. Hypotheses Tests in General</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-important-tests">16.7.3. Other Important Tests</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#one-sample-t-test">16.7.3.1. One Sample T-Test</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#two-sample-t-test">16.7.3.2. Two Sample T-Test</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-square-test-for-independence">16.7.3.3. Chi-Square Test for Independence</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-square-goodness-of-fit-test">16.7.3.4. Chi-Square Goodness-of-Fit Test</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pearson-spearman-kendall-correlation-test">16.7.3.5. Pearson/Spearman/Kendall Correlation Test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hypotheses-tests-in-general">16.6.2. Hypotheses Tests in General</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-important-tests">16.6.3. Other Important Tests</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#one-sample-t-test">16.6.3.1. One Sample T-Test</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#two-sample-t-test">16.6.3.2. Two Sample T-Test</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-square-test-for-independence">16.6.3.3. Chi-Square Test for Independence</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-square-goodness-of-fit-test">16.6.3.4. Chi-Square Goodness-of-Fit Test</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pearson-spearman-correlation-test">16.6.3.5. Pearson/Spearman Correlation Test</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assessing-whether-a-sample-is-normally-distributed">16.8. Assessing whether a Sample is Normally Distributed</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantile-quantile-plots-q-q-plots">16.8.1. Quantile-Quantile Plots (Q-Q Plots)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shapiro-wilk-normality-test">16.8.2. Shapiro-Wilk Normality Test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assessing-whether-a-sample-is-normally-distributed">16.7. Assessing whether a Sample is Normally Distributed</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantile-quantile-plots-q-q-plots">16.7.1. Quantile-Quantile Plots (Q-Q Plots)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shapiro-wilk-normality-test">16.7.2. Shapiro-Wilk Normality Test</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">16.9. References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">16.8. References</a></li>
 </ul>
             </nav>
         </div>
@@ -500,7 +493,7 @@ document.write(`
 <p>So far, we have seen methods for describing a sample of data (descriptive statistics) and we have reasoned on abstract concepts using basic probability theory concepts. In practice, we are often interested in the properties of a <strong>population</strong>, rather than a sample or some abstract quantities. Examples are:</p>
 <ul class="simple">
 <li><p>What are the percentage of votes each candidate will get at an election?</p></li>
-<li><p>What is the proportion of defective goods in a manufactoring process?</p></li>
+<li><p>What is the proportion of defective goods in a manufacturing process?</p></li>
 <li><p>Is there a relationship between smoking and developing a given disease in the world population?</p></li>
 </ul>
 <p>One approach to answer these questions would be to collect the whole population, but this is often unfeasible (e.g., interviewing <strong>all voters</strong>) and sometimes impossible.</p>
@@ -539,31 +532,6 @@ document.write(`
 <div><p>We interview people on their voting preferences by dialing random phone numbers.</p>
 </div></blockquote>
 <p>While this may seem sound, we will not end up with a simple random sample because we will not select people without a phone number and we will oversample people with more than one numbers (e.g., work and home).</p>
-<p>The figure below shows the results of different simple random samples extracted from the same population.</p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="../_images/2605e9721def7eac3de56a5d663192bc8b8782641ccf0066e5bcc3c28cda4168.png" src="../_images/2605e9721def7eac3de56a5d663192bc8b8782641ccf0066e5bcc3c28cda4168.png" />
-</div>
-</div>
-</section>
-<section id="stratified-sampling">
-<h3><span class="section-number">16.1.2. </span>Stratified Sampling<a class="headerlink" href="#stratified-sampling" title="Permalink to this heading">#</a></h3>
-<p>In some cases, our population may be heterogenous (e.g., it could contain different groups of observations with different properties). In this case, representative randomized sampling is hard to obtain. For instance, we may hypothesize that the variable <code class="docutils literal notranslate"><span class="pre">Occupation</span></code> could influence voting preferences. If we randomly sample from the whole population, we may under-represent some of the groups. An alternative approach is to use stratified sampling. In this case, we divide the population into homogeneous groups based on the <code class="docutils literal notranslate"><span class="pre">Occupation</span></code> variable and randomly sample from such groups. Note that this requires some knowledge or assumptions on the population.</p>
-<p>The figure below shows an example in which the true population is heterogeneous, the result of a uniform sampling, and the result of stratified sampling.</p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="../_images/886ebe7a71f1b2809ef834c40e9f86a13aafb1354f4b38384cb2b29ccd9bad0c.png" src="../_images/886ebe7a71f1b2809ef834c40e9f86a13aafb1354f4b38384cb2b29ccd9bad0c.png" />
-</div>
-</div>
-</section>
-<section id="cluster-sampling">
-<h3><span class="section-number">16.1.3. </span>Cluster sampling<a class="headerlink" href="#cluster-sampling" title="Permalink to this heading">#</a></h3>
-<p>Cluster sampling is a similar technique useful when the population is concentrated in specific areas (e.g., geographical areas). In this case, we divide the space into clusters and cluster from them. As shown in the figure below, cluster sampling gives similar results to uniform sampling, but it’s logistically more convenient</p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="../_images/13cdc48b17cbfd7644bc6f0ffc994062d43bce7bf575e83570fc058bf8861b4b.png" src="../_images/13cdc48b17cbfd7644bc6f0ffc994062d43bce7bf575e83570fc058bf8861b4b.png" />
-</div>
-</div>
 </section>
 </section>
 <section id="sample-size-and-standard-error">
@@ -571,13 +539,77 @@ document.write(`
 <p>While the <strong>way we sample</strong> is fundamental, also its size is very important. Intuitively speaking, a survey on a small number of people is probably not very accurate. Indeed, we expect that, <strong>if the sample is small, it is easier to obtain a biased representation of the population by chance</strong>. In general, the larger the sample, the better, but is there a way to estimate what a good size would be for my sample?</p>
 <p>Let’s consider this example:</p>
 <blockquote>
-<div><p>A factory produces chips. Among all chips produced, about <span class="math notranslate nohighlight">\(p\%\)</span> will be defective (i.e., a chip has a probability of <span class="math notranslate nohighlight">\(p\)</span> to be defective). We want to estimate this probability. To do it directly, we should test each chip. The defect rate <span class="math notranslate nohighlight">\(p\)</span> will be given by the fraction of defective chips: <span class="math notranslate nohighlight">\(p=\frac{x}{N}\)</span>, where <span class="math notranslate nohighlight">\(x\)</span> is the number of defective chips and <span class="math notranslate nohighlight">\(N\)</span> is the total number of chips. However, testing all chips would slow down production, so this is not feasible. Instead, we choose to test a random sample of all chips and estimate the defect rate from this sample: <span class="math notranslate nohighlight">\(\hat p = \frac{x}{n}\)</span>, where <span class="math notranslate nohighlight">\(n\)</span> is the sample size. Now the question is: given that my sample has size <span class="math notranslate nohighlight">\(n\)</span>, what is the error that I will likely make in the estimation of <span class="math notranslate nohighlight">\(\hat p\)</span>?</p>
+<div><p>A factory produces chips. Among all chips produced, about <span class="math notranslate nohighlight">\(p\%\)</span> will be defective (i.e., a chip has probability <span class="math notranslate nohighlight">\(p\)</span> to be defective). We want to estimate this probability. To do it directly, we should test each chip. The defect rate <span class="math notranslate nohighlight">\(p\)</span> will be given by the fraction of defective chips: <span class="math notranslate nohighlight">\(p=\frac{x}{N}\)</span>, where <span class="math notranslate nohighlight">\(x\)</span> is the number of defective chips and <span class="math notranslate nohighlight">\(N\)</span> is the total number of chips. However, testing all chips would slow down production, so this is not feasible. Instead, we choose to test a random sample of all chips and estimate the defect rate from this sample: <span class="math notranslate nohighlight">\(\hat p = \frac{x}{n}\)</span>, where <span class="math notranslate nohighlight">\(n\)</span> is the sample size. Now the question is: given that my sample has size <span class="math notranslate nohighlight">\(n\)</span>, what is the error that I will likely make estimating <span class="math notranslate nohighlight">\(p\)</span> with <span class="math notranslate nohighlight">\(\hat p\)</span>?</p>
 </div></blockquote>
 <p>To answer this question, we need to introduce the concept of <strong>sampling distribution</strong>. What we expect is that, if we draw many random samples in the same way, we will end up with different estimates of <span class="math notranslate nohighlight">\(\hat p\)</span>. If these estimates are similar to each other, then the error will probably be small, but if these estimates will be significantly different, then my error is large.</p>
-<p>Since we are drawing different random samples, it makes sense to introduce a random variable <span class="math notranslate nohighlight">\(X\)</span> depending on the sampling process. In particular we will define:</p>
+<p>For example, consider the following <span class="math notranslate nohighlight">\(10\)</span> samplings with size <span class="math notranslate nohighlight">\(50\)</span>:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Sample Size (n = 50)</p></th>
+<th class="head"><p>Defective Chips (x)</p></th>
+<th class="head"><p>Estimated Defect Rate (<span class="math notranslate nohighlight">\(\hat{p} = \frac{x}{n}\)</span>)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>50</p></td>
+<td><p>0</p></td>
+<td><p>0.000</p></td>
+</tr>
+<tr class="row-odd"><td><p>50</p></td>
+<td><p>1</p></td>
+<td><p>0.020</p></td>
+</tr>
+<tr class="row-even"><td><p>50</p></td>
+<td><p>2</p></td>
+<td><p>0.040</p></td>
+</tr>
+<tr class="row-odd"><td><p>50</p></td>
+<td><p>4</p></td>
+<td><p>0.080</p></td>
+</tr>
+<tr class="row-even"><td><p>50</p></td>
+<td><p>3</p></td>
+<td><p>0.060</p></td>
+</tr>
+<tr class="row-odd"><td><p>50</p></td>
+<td><p>5</p></td>
+<td><p>0.100</p></td>
+</tr>
+<tr class="row-even"><td><p>50</p></td>
+<td><p>3</p></td>
+<td><p>0.060</p></td>
+</tr>
+<tr class="row-odd"><td><p>50</p></td>
+<td><p>2</p></td>
+<td><p>0.040</p></td>
+</tr>
+<tr class="row-even"><td><p>50</p></td>
+<td><p>1</p></td>
+<td><p>0.020</p></td>
+</tr>
+<tr class="row-odd"><td><p>50</p></td>
+<td><p>4</p></td>
+<td><p>0.080</p></td>
+</tr>
+</tbody>
+</table>
+<p>If we repeat the experiment for a larger number of times (e.g., <span class="math notranslate nohighlight">\(1000\)</span>), we could imagine the distribution of <span class="math notranslate nohighlight">\(x\)</span> (number of defective chips) to follow a similar trend:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/5063273c8fe855a9ab31473e1c978c7688b4cebba12166b0c6a6b170fdff2b22.png" src="../_images/5063273c8fe855a9ab31473e1c978c7688b4cebba12166b0c6a6b170fdff2b22.png" />
+</div>
+</div>
+<p>We can see a peak at about <span class="math notranslate nohighlight">\(2\)</span>, but there is some variability in the measurements. The variability is given by the fact that <span class="math notranslate nohighlight">\(50\)</span> is a small sample size. The plot below shows examples of what we would observe for different sample sizes:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/272d47a6b1ac33b6eab16ccb9db9fec0813a4e2b287ea07c8321592e534318f2.png" src="../_images/272d47a6b1ac33b6eab16ccb9db9fec0813a4e2b287ea07c8321592e534318f2.png" />
+</div>
+</div>
+<p>As we can see, the mean is always around <span class="math notranslate nohighlight">\(0.05\)</span>, but the standard deviation decreases as the sample size increases. This suggests that <strong>the error in the estimation of the real defect rate decreases with large samples</strong>.</p>
+<p>In practice, we can see the act of <strong>taking a random sample of size <span class="math notranslate nohighlight">\(50\)</span> ad a random experiment</strong> and introduce a random variable <span class="math notranslate nohighlight">\(X\)</span> depending on the sampling process. In particular we will define:</p>
 <div class="math notranslate nohighlight">
 \[X = \text{number of defective chips in the sample}\]</div>
-<p>The estimated defect rate will be a random variable:</p>
+<p>Also the estimated defect rate will be a random variable:</p>
 <div class="math notranslate nohighlight">
 \[\hat P = \frac{X}{n} \]</div>
 <p>As can be noted, <span class="math notranslate nohighlight">\(X\)</span> can be modeled with a <strong>Binomial distribution</strong> (the probability of having <span class="math notranslate nohighlight">\(k\)</span> successes in a sequence of <span class="math notranslate nohighlight">\(n\)</span> independent experiments with probability <span class="math notranslate nohighlight">\(p\)</span>). Recall we have:</p>
@@ -592,7 +624,7 @@ document.write(`
 \[Var[\hat P] = Var\left[\frac{X}{n}\right] = \frac{p(1-p)}{n}\]</div>
 <div class="math notranslate nohighlight">
 \[Std[\hat P] = \frac{\sqrt{p(1-p)}}{\sqrt{n}}\]</div>
-<p>If can be shown (but we will not see it) that for large values of <span class="math notranslate nohighlight">\(n\)</span>, <span class="math notranslate nohighlight">\(\hat P\)</span> will be approximately normal.</p>
+<p>If can be shown (but we will not see it formally) that for large values of <span class="math notranslate nohighlight">\(n\)</span>, <span class="math notranslate nohighlight">\(\hat P\)</span> will be approximately normal.</p>
 <p>Note that the <span class="math notranslate nohighlight">\(Std[\hat P]\)</span> depends in fact on the true probability <span class="math notranslate nohighlight">\(p\)</span>, which is in general not available. So, in its place, it is common to consider the <strong>standard error</strong> of <span class="math notranslate nohighlight">\(\hat P\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[SE(\hat p) = \frac{\sqrt{\hat p(1-\hat p)}}{\sqrt{n}}\]</div>
@@ -606,11 +638,11 @@ document.write(`
 <p><strong>This result is very important: if we want to reduce the error in the estimation of a property of the population, we need to increase the sample size.</strong></p>
 <p>In our example above, if we set:</p>
 <div class="math notranslate nohighlight">
-\[n=100, p=0.1\]</div>
+\[n=50, p=0.05\]</div>
 <p>we will have a standard error equal to:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.02
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.03
 </pre></div>
 </div>
 </div>
@@ -623,13 +655,6 @@ document.write(`
 </div>
 </div>
 </div>
-<p>The figure below compares how the estimated defect rates will distribute in the two cases:</p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="../_images/539657efea1c886f26ba39014ffdd01cb46be4763b24f80823d078086e810adf.png" src="../_images/539657efea1c886f26ba39014ffdd01cb46be4763b24f80823d078086e810adf.png" />
-</div>
-</div>
-<p>The distribution on the right is narrower, meaning that the probability of estimating a defect rate closer to the true value is higher.</p>
 </section>
 <section id="confidence-intervals">
 <h2><span class="section-number">16.3. </span>Confidence Intervals<a class="headerlink" href="#confidence-intervals" title="Permalink to this heading">#</a></h2>
@@ -685,7 +710,7 @@ document.write(`
 <p>However, a <span class="math notranslate nohighlight">\(68\%\)</span> confidence seems to be rather low - still, in <span class="math notranslate nohighlight">\(32\%\)</span> of the cases, the true defect rate could be outside the confidence interval. What can we do to increase confidence? Well, we know that about <span class="math notranslate nohighlight">\(95.5\%\)</span> of the density of the Gaussian distribution is between <span class="math notranslate nohighlight">\(-2\sigma\)</span> and <span class="math notranslate nohighlight">\(2\sigma\)</span>. We can update our confidence interval as:</p>
 <div class="math notranslate nohighlight">
 \[[\hat p-2SE(\hat p), \hat p+2SE(\hat p)] = [0.022, 0.058]\]</div>
-<p>Now we can say with <span class="math notranslate nohighlight">\(95.5\%\)</span> confidence that the true defect rate will be in the <span class="math notranslate nohighlight">\([0.022, 0.058]\)</span>. What happened? To increase our confidence, we obtained a larger range. Of course, we could say that the true defect rate is comprised between <span class="math notranslate nohighlight">\([0,1]\)</span>…</p>
+<p>Now we can say with <span class="math notranslate nohighlight">\(95.5\%\)</span> confidence that the true defect rate will be in the <span class="math notranslate nohighlight">\([0.022, 0.058]\)</span>. What happened? To increase our confidence, we obtained a larger range. Of course, we could say that the true defect rate is comprised between <span class="math notranslate nohighlight">\([0,1]\)</span> with <span class="math notranslate nohighlight">\(100\%\)</span> probability!</p>
 <p>Our “new” confidence interval does not support our hypothesis that the defect rate is under <span class="math notranslate nohighlight">\(0.05\)</span>, but at the same time, it’s a very large interval…it does not refute the hypothesis either. <strong>How can we narrow this interval?</strong> We know that, if we had a larger <span class="math notranslate nohighlight">\(n\)</span>, our standard error would be smaller. We hence increase our sample and check another set of <span class="math notranslate nohighlight">\(1500\)</span> boards. We get <span class="math notranslate nohighlight">\(82\)</span> defective boards over the <span class="math notranslate nohighlight">\(2000\)</span> we tested, with an estimated defect rate:</p>
 <div class="math notranslate nohighlight">
 \[\hat p = \frac{82}{1000} = 0.41\]</div>
@@ -722,7 +747,7 @@ Confidence interval: [0.030, 0.052]
 <p>We expect that this estimator will give different results depending on sampling, leading to a distribution of values. In practice, it is important to measure two important aspects of an estimator, namely, its <strong>bias</strong> and its <strong>variance</strong>.</p>
 <section id="bias-of-an-estimator">
 <h3><span class="section-number">16.4.1. </span>Bias of an Estimator<a class="headerlink" href="#bias-of-an-estimator" title="Permalink to this heading">#</a></h3>
-<p>Let <span class="math notranslate nohighlight">\(X\)</span> be a random variable (e.g., the heights of all people in the world) and let <span class="math notranslate nohighlight">\(x=(x_1,x_2,\ldots,x_n)\)</span> be a realization of <span class="math notranslate nohighlight">\(X\)</span> (a sample from the population). Let <span class="math notranslate nohighlight">\(T(X)\)</span> be an estimator of the true value <span class="math notranslate nohighlight">\(\phi\)</span> depending on the variable <span class="math notranslate nohighlight">\(X\)</span>. For instance, <span class="math notranslate nohighlight">\(\phi\)</span> could be the mean value of all heights. <span class="math notranslate nohighlight">\(T(X)\)</span> is then an estimator of the mean and <span class="math notranslate nohighlight">\(\hat phi = T(x)\)</span> is the estimate we obtain considering the sample <span class="math notranslate nohighlight">\(x\)</span>, for instance:</p>
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> be a random variable (e.g., the heights of all people in the world) and let <span class="math notranslate nohighlight">\(x=(x_1,x_2,\ldots,x_n)\)</span> be a realization of <span class="math notranslate nohighlight">\(X\)</span> (a sample from the population). Let <span class="math notranslate nohighlight">\(T(X)\)</span> be an estimator of the true value <span class="math notranslate nohighlight">\(\phi\)</span> depending on the variable <span class="math notranslate nohighlight">\(X\)</span>. For instance, <span class="math notranslate nohighlight">\(\phi\)</span> could be the mean value of all heights. <span class="math notranslate nohighlight">\(T(X)\)</span> is then an estimator of the mean and <span class="math notranslate nohighlight">\(\hat \phi = T(x)\)</span> is the estimate we obtain considering the sample <span class="math notranslate nohighlight">\(x\)</span>, for instance:</p>
 <div class="math notranslate nohighlight">
 \[T(x) = \frac{\sum_{i=1}^n x_i}{n}\]</div>
 <p>Note that <strong><span class="math notranslate nohighlight">\(T(x)\)</span> is a random variable</strong>, while <span class="math notranslate nohighlight">\(T(x)\)</span> is the value we obtain when we consider the realization <span class="math notranslate nohighlight">\(x\)</span>.</p>
@@ -844,7 +869,7 @@ s_{n-1}^2=\frac{1}{n-1}\sum_{i=0}^{n}(x_i-\overline x)^2
 <div class="math notranslate nohighlight">
 \[s_{n-1} = 0.01nm\]</div>
 <p>with a sample of <span class="math notranslate nohighlight">\(n=1000\)</span> measurements.</p>
-<p>We know that the random variable <span class="math notranslate nohighlight">\(\overline X\)</span> will distribute according to t-Student distribution with <span class="math notranslate nohighlight">\(n-1\)</span> degrees of freedom:</p>
+<p>We know that the random variable <span class="math notranslate nohighlight">\(\overline X\)</span> will distribute according to a t-Student distribution with <span class="math notranslate nohighlight">\(n-1\)</span> degrees of freedom:</p>
 <div class="math notranslate nohighlight">
 \[\frac{\overline X-\mu}{s/\sqrt{n}}\]</div>
 <p>Using the inverse of the CDF function (we will not see the details), we find out that <span class="math notranslate nohighlight">\(95\%\)</span> of the density is included between <span class="math notranslate nohighlight">\(-1.96\sigma\)</span> and <span class="math notranslate nohighlight">\(1.96\sigma\)</span>. We hence write:</p>
@@ -870,39 +895,8 @@ s_{n-1}^2=\frac{1}{n-1}\sum_{i=0}^{n}(x_i-\overline x)^2
 <p>We will see how to compute these practically in the laboratory sessions.</p>
 </section>
 </section>
-<section id="other-sampling-distributions">
-<h2><span class="section-number">16.6. </span>Other Sampling Distributions<a class="headerlink" href="#other-sampling-distributions" title="Permalink to this heading">#</a></h2>
-<p>We now briefly see two other important sampling distributions which will be useful for hypothesis tests.</p>
-<section id="chi-2-distribution">
-<h3><span class="section-number">16.6.1. </span><span class="math notranslate nohighlight">\(\chi^2\)</span> distribution<a class="headerlink" href="#chi-2-distribution" title="Permalink to this heading">#</a></h3>
-<p>Let <span class="math notranslate nohighlight">\(X_1\)</span>, <span class="math notranslate nohighlight">\(X_2\)</span>, <span class="math notranslate nohighlight">\(\ldots\)</span>, <span class="math notranslate nohighlight">\(X_n\)</span> be <span class="math notranslate nohighlight">\(n\)</span> independent and normally distributed (<span class="math notranslate nohighlight">\(X_i \sim N(0,1)\)</span> - Gaussian distributions with zero-mean and unit standard deviations) variables. The sum of their squares:</p>
-<div class="math notranslate nohighlight">
-\[\sum_{i=1}^n X_i^2\]</div>
-<p>Is <span class="math notranslate nohighlight">\(\chi_n^2\)</span>-distributed, where <span class="math notranslate nohighlight">\(n\)</span> is also called the “number of degrees of freedom”. We will not see the PDF of the distribution, but it’s shape for different values of <span class="math notranslate nohighlight">\(k\)</span> is shown in the following plot:</p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="../_images/c69d55ae262ab39851acf046a1009ed99d1c799e8d06d9b51bc6b807963c70ed.png" src="../_images/c69d55ae262ab39851acf046a1009ed99d1c799e8d06d9b51bc6b807963c70ed.png" />
-</div>
-</div>
-</section>
-<section id="f-distribution">
-<h3><span class="section-number">16.6.2. </span>F-Distribution<a class="headerlink" href="#f-distribution" title="Permalink to this heading">#</a></h3>
-<p>Let</p>
-<div class="math notranslate nohighlight">
-\[X \sim \chi_m^2 \text{ and } Y \sim \chi_n^2\]</div>
-<p>then the ratio between the two variables:</p>
-<div class="math notranslate nohighlight">
-\[\frac{Y/m}{Y/n} \sim F_{m,n}\]</div>
-<p>follows the Fisher F-distribution with degrees of freedom <span class="math notranslate nohighlight">\((m.n)\)</span>. The shape of the distribution is as follows:</p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="../_images/4b50d72fd59e01b3f501f4bdb8ababc5cb82b64057c10ddeb3f3e6aa2649247f.png" src="../_images/4b50d72fd59e01b3f501f4bdb8ababc5cb82b64057c10ddeb3f3e6aa2649247f.png" />
-</div>
-</div>
-</section>
-</section>
 <section id="hypothesis-testing">
-<h2><span class="section-number">16.7. </span>Hypothesis Testing<a class="headerlink" href="#hypothesis-testing" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">16.6. </span>Hypothesis Testing<a class="headerlink" href="#hypothesis-testing" title="Permalink to this heading">#</a></h2>
 <p>Confidence bounds provide a set of plausible values for a given statistic of a population estimated from a sample (e.g., the mean, proportions, etc.). A hypothesis test instead attempts to refute a specific claim about the statistic. Examples of hypotheses to be refuted are:</p>
 <ul class="simple">
 <li><p>The population mean is equal to <span class="math notranslate nohighlight">\(0.1\)</span>;</p></li>
@@ -911,7 +905,7 @@ s_{n-1}^2=\frac{1}{n-1}\sum_{i=0}^{n}(x_i-\overline x)^2
 </ul>
 <p>If the hypothesis is rejected, we conclude that it is not true. Otherwise, we cannot really prove that it is false, so it makes sense to act as it is were true.</p>
 <section id="hypothesis-testing-for-means">
-<h3><span class="section-number">16.7.1. </span>Hypothesis Testing for Means<a class="headerlink" href="#hypothesis-testing-for-means" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">16.6.1. </span>Hypothesis Testing for Means<a class="headerlink" href="#hypothesis-testing-for-means" title="Permalink to this heading">#</a></h3>
 <p>We get back to our example of estimating the average diameter of manufactured components. We set our machines to produce components of a diameter of exactly <span class="math notranslate nohighlight">\(0.1nm\)</span> and find an empirical average of <span class="math notranslate nohighlight">\(0.1001nm\)</span> with a standard deviation of <span class="math notranslate nohighlight">\(0.003\)</span>. We imagine the difference is due to small errors in measurement, calculation, or manufacturing, so we are keen to conclude that <strong>the population mean is indeed <span class="math notranslate nohighlight">\(\mu = 0.1nm\)</span></strong>.</p>
 <p>Our boss objects that this may not be the case, and the population mean is not <span class="math notranslate nohighlight">\(0.1nm\)</span>. He formulates a test to confute the following hypothesis, that he calls the <strong>null hypothesis</strong>:</p>
 <blockquote>
@@ -956,12 +950,8 @@ s_{n-1}^2=\frac{1}{n-1}\sum_{i=0}^{n}(x_i-\overline x)^2
 <div><p>If the true mean is <span class="math notranslate nohighlight">\(\mu=0.1\)</span> and we repeat sampling many times (<span class="math notranslate nohighlight">\(n=1000\)</span>), then <span class="math notranslate nohighlight">\(30\%\)</span> of the times we obtain a deviation more extreme than the observed one.</p>
 </div></blockquote>
 <p>We now compare this number to the significance level of <span class="math notranslate nohighlight">\(5\%\)</span>. If we reject the null hypothesis, we risk to make a mistake <span class="math notranslate nohighlight">\(30\%\)</span> of times, which is above the threshold of <span class="math notranslate nohighlight">\(5\%\)</span>. Hence, <strong>we cannot reject the null hypothesis</strong> under the circumstances.</p>
-<p>Does this mean that the two means are the same? We don’t know, but we have two choices:</p>
-<ul class="simple">
-<li><p>Assume they are the same;</p></li>
-<li><p>Collect more measurements hoping to reduce uncertainty.</p></li>
-</ul>
-<p>Our boss goes the second way and collects a total of <span class="math notranslate nohighlight">\(n=5000\)</span> examples, obtaining:</p>
+<p>Does this mean that the two means are the same? We don’t know, the test does not tell us what to do in this case! But we may try to collect more measurements hoping to reduce uncertainty.</p>
+<p>Our boss wants to prove us wrong, so they collect a total of <span class="math notranslate nohighlight">\(n=5000\)</span> examples and obtains:</p>
 <div class="math notranslate nohighlight">
 \[\overline x = 0.10009\]</div>
 <div class="math notranslate nohighlight">
@@ -984,7 +974,7 @@ s_{n-1}^2=\frac{1}{n-1}\sum_{i=0}^{n}(x_i-\overline x)^2
 </div>
 <p>This p-value is now below the threshold of <span class="math notranslate nohighlight">\(5\%\)</span>. We can now reject the null hypothesis and conclude that the population mean is different from <span class="math notranslate nohighlight">\(0.1\)</span>. The boss was right, there’s something wrong with the process!</p>
 <section id="one-tailed-tests">
-<h4><span class="section-number">16.7.1.1. </span>One-tailed Tests<a class="headerlink" href="#one-tailed-tests" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">16.6.1.1. </span>One-tailed Tests<a class="headerlink" href="#one-tailed-tests" title="Permalink to this heading">#</a></h4>
 <p>The tests seen above is a “two-tailed test” in which we summed the areas in the two tails of the distribution. Depending on the form of the alternative hypothesis, in particular:</p>
 <ul class="simple">
 <li><p>If the alternative hypothesis has the form <span class="math notranslate nohighlight">\(\mu \neq \mu_0\)</span>, then we want to check when the deviation from the assumed mean is larger than the observed one: <span class="math notranslate nohighlight">\(P(|x| &gt; |z|)\)</span>;</p></li>
@@ -1000,11 +990,11 @@ s_{n-1}^2=\frac{1}{n-1}\sum_{i=0}^{n}(x_i-\overline x)^2
 </section>
 </section>
 <section id="hypotheses-tests-in-general">
-<h3><span class="section-number">16.7.2. </span>Hypotheses Tests in General<a class="headerlink" href="#hypotheses-tests-in-general" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">16.6.2. </span>Hypotheses Tests in General<a class="headerlink" href="#hypotheses-tests-in-general" title="Permalink to this heading">#</a></h3>
 <p>A hypothesis test generally includes:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(H_0\)</span>: the <strong>null hypothesis</strong>, e.g., the means of two populations are equal;</p></li>
-<li><p><span class="math notranslate nohighlight">\(H_a\)</span>: the <strong>alternative hypothesis</strong>, e.g., the means of two populations are not equal,</p></li>
+<li><p><span class="math notranslate nohighlight">\(H_a\)</span>: the <strong>alternative hypothesis</strong>, e.g., the means of two populations are not equal (this determines if the test is one- or two-tailed);</p></li>
 <li><p>a <strong>test statistics</strong> which quantifies how likely it is to reject the null hypothesis. The test statistics follows a specific distribution which depends on the type of statistical tests we are performing. E.g., it can follow a t-Student distribution;</p></li>
 <li><p>a <strong>significance level</strong> <span class="math notranslate nohighlight">\(\alpha\)</span> which defines the sensitivity of the test. A common value is <span class="math notranslate nohighlight">\(\alpha=0.05\)</span>, which means that we can wrongly reject the null hypothesis <span class="math notranslate nohighlight">\(5\%\)</span> of the times when it is in fact true. It represents the degree of error that we are willing to accept when performing hypothesis testing. Common values are <span class="math notranslate nohighlight">\(0.1\)</span>, <span class="math notranslate nohighlight">\(0.05\)</span>, <span class="math notranslate nohighlight">\(0.01\)</span>;</p></li>
 <li><p>the <strong>p-value</strong>: this quantifies the probability of sampling a test statistics at least as extreme as the one observed under the null hypothesis. In practice, the p-value measures the probability that the null hypothesis is true but we are observing test statistic leading to rejection nevertheless.</p></li>
@@ -1012,14 +1002,14 @@ s_{n-1}^2=\frac{1}{n-1}\sum_{i=0}^{n}(x_i-\overline x)^2
 <p>The null hypothesis is rejected if the <strong>p-value is larger than the chosen significance level <span class="math notranslate nohighlight">\(\alpha\)</span></strong>. We will not see in details all the possible hypothesis tests, but all of them follow a similar scheme.</p>
 </section>
 <section id="other-important-tests">
-<h3><span class="section-number">16.7.3. </span>Other Important Tests<a class="headerlink" href="#other-important-tests" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">16.6.3. </span>Other Important Tests<a class="headerlink" href="#other-important-tests" title="Permalink to this heading">#</a></h3>
 <p>In this section, we briefly see the main statistical tests which can be used in practice, besides the one for means. We will not see how they are formulated, but we will see how to interpret them. We will see a few other tests when we’ll talk about linear regression.</p>
 <section id="one-sample-t-test">
-<h4><span class="section-number">16.7.3.1. </span>One Sample T-Test<a class="headerlink" href="#one-sample-t-test" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">16.6.3.1. </span>One Sample T-Test<a class="headerlink" href="#one-sample-t-test" title="Permalink to this heading">#</a></h4>
 <p>This is the test for sample means we have previously seen. It is used to <strong>determine whether the mean of a single sample is significantly different from a known or hypothesized value.</strong></p>
 </section>
 <section id="two-sample-t-test">
-<h4><span class="section-number">16.7.3.2. </span>Two Sample T-Test<a class="headerlink" href="#two-sample-t-test" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">16.6.3.2. </span>Two Sample T-Test<a class="headerlink" href="#two-sample-t-test" title="Permalink to this heading">#</a></h4>
 <p>A two-sample t-test is used to determine if there is a significant difference between the means of two independent samples. It’s often used when you want to compare the means of two different populations or treatments. The test assesses whether the difference between the sample means is statistically significant or if it could have occurred due to random chance. Also in this case, the test statistic will follow a t-Student distribution.</p>
 <p>Let’s consider the height-weight dataset:</p>
 <div class="cell tag_remove-input docutils container">
@@ -1155,10 +1145,10 @@ Conclusion: there is a significant difference between the two means.
 </div>
 </section>
 <section id="chi-square-test-for-independence">
-<h4><span class="section-number">16.7.3.3. </span>Chi-Square Test for Independence<a class="headerlink" href="#chi-square-test-for-independence" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">16.6.3.3. </span>Chi-Square Test for Independence<a class="headerlink" href="#chi-square-test-for-independence" title="Permalink to this heading">#</a></h4>
 <p>The Chi-Square Test for Independence is a statistical test used to determine whether there is an association or independence between two or more categorical variables. This test is particularly useful when we want to assess whether changes in one categorical variable are related to changes in another categorical variable. The typical scenario is to set up a contingency table to compare the observed frequencies (counts) of the joint categories of the two variables to the expected frequencies that would occur under the assumption of independence.</p>
 <p>The null hypothesis for the Chi-Square Test for Independence is that <strong>there is no association between the two categorical variables</strong> (they are independent), while the alternative hypothesis suggests that there is an association (they are dependent).</p>
-<p>The test statistics follows a Chi-square distribution in this case.</p>
+<p>The test statistics follows a Chi-square distribution (we won’t see the details) in this case.</p>
 <p>Let’s consider the Titanic dataset:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -1432,7 +1422,7 @@ Cramer V statistic: 0.34
 </div>
 </div>
 </div>
-<p>We have numbers different from zero, but is this due to chance or is it statistically significant? If we run a chi-square contingency test:</p>
+<p>We have numbers different from zero, but <strong>is this due to chance or is it statistically significant</strong>? If we run a chi-square contingency test:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chi-Square Statistic: 102.88898875696056
@@ -1445,7 +1435,7 @@ There is a significant association between &#39;Pclass&#39; and &#39;survived&#3
 </div>
 </section>
 <section id="chi-square-goodness-of-fit-test">
-<h4><span class="section-number">16.7.3.4. </span>Chi-Square Goodness-of-Fit Test<a class="headerlink" href="#chi-square-goodness-of-fit-test" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">16.6.3.4. </span>Chi-Square Goodness-of-Fit Test<a class="headerlink" href="#chi-square-goodness-of-fit-test" title="Permalink to this heading">#</a></h4>
 <p>The Chi-Square Goodness of Fit test is a statistical test used to determine whether observed categorical data (frequencies) fit a specified distribution or expected frequencies. This test is often used to assess whether the observed data deviates significantly from a hypothesized distribution. The typical scenario is to compare observed frequencies with expected frequencies based on a theoretical model or prior knowledge.</p>
 <p>The null hypothesis for the Chi-Square Goodness of Fit test is that <strong>there is no significant difference between the observed and expected frequencies</strong>, meaning the observed data fits the specified distribution. The alternative hypothesis suggests that there is a significant difference.</p>
 <p>The test statistics follows a Chi-square distribution in this case.</p>
@@ -1493,9 +1483,9 @@ The observed data fits the expected distribution.
 </div>
 <p>Given the large p-value, we could not reject the null hypothesis that there are significant differences between expected and observed frequencies.</p>
 </section>
-<section id="pearson-spearman-kendall-correlation-test">
-<h4><span class="section-number">16.7.3.5. </span>Pearson/Spearman/Kendall Correlation Test<a class="headerlink" href="#pearson-spearman-kendall-correlation-test" title="Permalink to this heading">#</a></h4>
-<p>We have seen how to compute Pearson/Spearman/Kendall correlation coefficient. However, what can we say when we get small values? Are those supposed to be zero, but we got something different from zero due to sampling, or are they significantly different from zero?</p>
+<section id="pearson-spearman-correlation-test">
+<h4><span class="section-number">16.6.3.5. </span>Pearson/Spearman Correlation Test<a class="headerlink" href="#pearson-spearman-correlation-test" title="Permalink to this heading">#</a></h4>
+<p>We have seen how to compute Pearson/Spearman correlation coefficient. However, what can we say when we get small values? Are those supposed to be zero, but we got something different from zero due to sampling, or are they significantly different from zero?</p>
 <p>The statistical tests associated with the correlation coefficients are used to determine whether the observed correlation between two variables is statistically significant or if it might have occurred due to random chance. This test assesses whether the correlation in the sample data is likely to reflect a true correlation in the population.</p>
 <p>The null hypothesis is that <strong>there is no statistically significant correlation between the two variables in the population</strong>. In other words, the true correlation coefficient in the population is zero.</p>
 <p>Let us consider the Titanic dataset. We find the following correlation between the <code class="docutils literal notranslate"><span class="pre">Age</span></code> and <code class="docutils literal notranslate"><span class="pre">Fare</span></code> variables:</p>
@@ -1507,7 +1497,7 @@ The observed data fits the expected distribution.
 <img alt="../_images/9af90fc2a2513ed1854ac8bb175a1dcbe0f4c650ea2add3ab0d284378bcd4bef.png" src="../_images/9af90fc2a2513ed1854ac8bb175a1dcbe0f4c650ea2add3ab0d284378bcd4bef.png" />
 </div>
 </div>
-<p>Is this small positive correlation “true” or due to chance? If we run a statistical test:</p>
+<p>Is this small positive correlation “true” or due to chance? Let us run a statistical test:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pearson correlation coefficient (r): 0.09606669176903891
@@ -1518,7 +1508,7 @@ Reject the null hypothesis. There is a significant correlation between age and f
 </div>
 </div>
 <p>The p-value is small enough to reject the null hypothesis: the correlation is small but statistically significant.</p>
-<p>Similar tests exist for Spearman and Kendall coefficients:</p>
+<p>Similar tests exist for Spearman coefficient:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Spearman correlation coefficient (r): 0.1350512177342878
@@ -1528,45 +1518,14 @@ Reject the null hypothesis. There is a significant correlation between age and f
 </div>
 </div>
 </div>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kendall correlation coefficient (r): 0.0932489072038393
-P-value: 0.0002448778306655404
-Reject the null hypothesis. There is a significant monotonic relationship between age and fare.
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Contingency Table:
-col_0   count
-Sex          
-female    314
-male      577
-Chi-Square statistic: [77.63075196]
-P-value: [1.24220953e-18]
-Degrees of Freedom: 1
-Reject the null hypothesis. There is a significant difference in proportions.
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reject the null hypothesis. There are significant differences among groups.
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 </section>
 </section>
 <section id="assessing-whether-a-sample-is-normally-distributed">
-<h2><span class="section-number">16.8. </span>Assessing whether a Sample is Normally Distributed<a class="headerlink" href="#assessing-whether-a-sample-is-normally-distributed" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">16.7. </span>Assessing whether a Sample is Normally Distributed<a class="headerlink" href="#assessing-whether-a-sample-is-normally-distributed" title="Permalink to this heading">#</a></h2>
 <p>While the Normal distribution is pervasive, in some cases, it is useful to assess whether a given sample follows a normal distribution before assuming this is true.</p>
 <section id="quantile-quantile-plots-q-q-plots">
-<h3><span class="section-number">16.8.1. </span>Quantile-Quantile Plots (Q-Q Plots)<a class="headerlink" href="#quantile-quantile-plots-q-q-plots" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">16.7.1. </span>Quantile-Quantile Plots (Q-Q Plots)<a class="headerlink" href="#quantile-quantile-plots-q-q-plots" title="Permalink to this heading">#</a></h3>
 <p>One common way to do so is using the Quantile-Quantile plots. The basic idea is to <strong>compare the quantiles of the empirical data distribution with the theoretical quantiles of the reference distribution</strong>. To avoid scale issues, the empirical data is first transformed into z-scores. If the sample follows the theoretical distribution, the quantiles will match. By plotting the empirical quantiles against the theoretical ones, we should obtain a set of points that lie on the line <span class="math notranslate nohighlight">\(y=x\)</span>. In the following graph, we show the q-q plot for the weight sample in our weight-height dataset:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -1596,7 +1555,7 @@ Reject the null hypothesis. There is a significant difference in proportions.
 <p>We will see how we can conduct a statistical test to check if a sample is Gaussian in the next lessons.</p>
 </section>
 <section id="shapiro-wilk-normality-test">
-<h3><span class="section-number">16.8.2. </span>Shapiro-Wilk Normality Test<a class="headerlink" href="#shapiro-wilk-normality-test" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">16.7.2. </span>Shapiro-Wilk Normality Test<a class="headerlink" href="#shapiro-wilk-normality-test" title="Permalink to this heading">#</a></h3>
 <p>The Shapiro-Wilk test is a statistical test used to assess whether a sample follows a Gaussian (normal) distribution. It works by comparing the observed data to what you would expect if the data were drawn from a truly Gaussian distribution.</p>
 <p>We will not see the formal details of this test, but we can use it in our analyses. Here is the result on the <code class="docutils literal notranslate"><span class="pre">weight</span></code> sample in our height-weight dataset:</p>
 <div class="cell tag_remove-input docutils container">
@@ -1611,7 +1570,7 @@ Sample does not look Gaussian (reject H0)
 </section>
 </section>
 <section id="references">
-<h2><span class="section-number">16.9. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">16.8. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Chapters 6-8 of [1];</p></li>
 <li><p>Parts of chapter 9 of [2].</p></li>
@@ -1677,8 +1636,6 @@ Sample does not look Gaussian (reject H0)
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling">16.1. Sampling</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-random-sample">16.1.1. Simple random sample</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stratified-sampling">16.1.2. Stratified Sampling</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cluster-sampling">16.1.3. Cluster sampling</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-size-and-standard-error">16.2. Sample Size and Standard Error</a></li>
@@ -1697,33 +1654,28 @@ Sample does not look Gaussian (reject H0)
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-confidence-intervals-in-practice">16.5.2. Computing Confidence Intervals in Practice</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-sampling-distributions">16.6. Other Sampling Distributions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-2-distribution">16.6.1. <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-distribution">16.6.2. F-Distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing">16.6. Hypothesis Testing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing-for-means">16.6.1. Hypothesis Testing for Means</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#one-tailed-tests">16.6.1.1. One-tailed Tests</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing">16.7. Hypothesis Testing</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing-for-means">16.7.1. Hypothesis Testing for Means</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#one-tailed-tests">16.7.1.1. One-tailed Tests</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hypotheses-tests-in-general">16.7.2. Hypotheses Tests in General</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-important-tests">16.7.3. Other Important Tests</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#one-sample-t-test">16.7.3.1. One Sample T-Test</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#two-sample-t-test">16.7.3.2. Two Sample T-Test</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-square-test-for-independence">16.7.3.3. Chi-Square Test for Independence</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-square-goodness-of-fit-test">16.7.3.4. Chi-Square Goodness-of-Fit Test</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pearson-spearman-kendall-correlation-test">16.7.3.5. Pearson/Spearman/Kendall Correlation Test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hypotheses-tests-in-general">16.6.2. Hypotheses Tests in General</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-important-tests">16.6.3. Other Important Tests</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#one-sample-t-test">16.6.3.1. One Sample T-Test</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#two-sample-t-test">16.6.3.2. Two Sample T-Test</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-square-test-for-independence">16.6.3.3. Chi-Square Test for Independence</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-square-goodness-of-fit-test">16.6.3.4. Chi-Square Goodness-of-Fit Test</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pearson-spearman-correlation-test">16.6.3.5. Pearson/Spearman Correlation Test</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assessing-whether-a-sample-is-normally-distributed">16.8. Assessing whether a Sample is Normally Distributed</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantile-quantile-plots-q-q-plots">16.8.1. Quantile-Quantile Plots (Q-Q Plots)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shapiro-wilk-normality-test">16.8.2. Shapiro-Wilk Normality Test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assessing-whether-a-sample-is-normally-distributed">16.7. Assessing whether a Sample is Normally Distributed</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantile-quantile-plots-q-q-plots">16.7.1. Quantile-Quantile Plots (Q-Q Plots)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shapiro-wilk-normality-test">16.7.2. Shapiro-Wilk Normality Test</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">16.9. References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">16.8. References</a></li>
 </ul>
   </nav></div>
 
