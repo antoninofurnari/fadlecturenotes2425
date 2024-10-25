@@ -32,6 +32,7 @@ jobs:
 
       - name: Build Jupyter Book to HTML
         run: |
+          conda init
           conda activate fadlecturenotes  # Activate the environment
           jb build lecturenotes/ --builder html
 
