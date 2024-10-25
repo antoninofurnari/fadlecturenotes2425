@@ -12,14 +12,6 @@ jobs:
         with:
           persist-credentials: false
       
-      - name: Install Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y \
-            fonts-liberation \
-            fonts-cmu \
-            wkhtmltopdf  # Install wkhtmltopdf for HTML to PDF conversion
-
       - name: Setup Miniconda
         uses: conda-incubator/setup-miniconda@v3
         with:
@@ -40,9 +32,13 @@ jobs:
         run: |
           conda run -n fadlecturenotes jb build lecturenotes/ --builder html
 
-      - name: Convert HTML to PDF
+      - name: List HTML Output Directory
         run: |
-          wkhtmltopdf lecturenotes/_build/html/index.html lecturenotes/_build/pdf/book.pdf
+          ls -l lecturenotes/_build/html/lectures/  # List files to verify that index.html exists
+
+      - name: Convert HTML to PDF using Base URL
+        run: |
+          wkhtmltopdf --base-url ${GITHUB_WORKSPACE}/lecturenotes/_build/html/ ${GITHUB_WORKSPACE}/lecturenotes/_build/html/lectures/index.html ${GITHUB_WORKSPACE}/lecturenotes/_build/pdf/book.pdf --debug-javascript
 
       - uses: actions/upload-artifact@v3
         with:
