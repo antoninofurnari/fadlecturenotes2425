@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Laboratory on Statistical Inference &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+    <title>23. Laboratory on Statistical Inference &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
   
   
   
@@ -68,6 +68,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="24. Laboratorio su Regressione Lineare" href="11_regressione_lineare.html" />
+    <link rel="prev" title="22. Clustering" href="../lectures/15_clustering.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -208,6 +210,30 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 6</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../lectures/10_statistical_inference.html">16. Statistical Inference</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 7 &amp; 8</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lectures/11_linear_regression.html">18. Linear Regression</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 9</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lectures/12_logistic_regression.html">19. Logistic Regression</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 10</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lectures/13_causal_analysis.html">20. Causal Data Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 11</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lectures/14_data_as_nd_points.html">21. Data as N-Dimensional Points</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/15_clustering.html">22. Clustering</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratory 3</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">23. Laboratory on Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_regressione_lineare.html">24. Laboratorio su Regressione Lineare</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_regressione_logistica.html">25. Laboratorio su regressione logistica</a></li>
 </ul>
 
     </div>
@@ -434,23 +460,23 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling">Sampling</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals">Confidence Intervals</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-for-means">Confidence Intervals for Means</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-for-variances">Confidence Intervals for Variances</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-for-proportion">Confidence Intervals for Proportion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling">23.1. Sampling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals">23.2. Confidence Intervals</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-for-means">23.2.1. Confidence Intervals for Means</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-for-variances">23.2.2. Confidence Intervals for Variances</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-for-proportion">23.2.3. Confidence Intervals for Proportion</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing">Hypothesis Testing</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-sample-t-test">One sample t-test</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-sample-t-test">Two-sample t-test</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-square-test-of-independence">Chi-square test of independence</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-square-goodness-of-fit-test">Chi-Square Goodness-of-Fit Test</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pearson-spearman-kendall-correlation-test">Pearson/Spearman/Kendall Correlation Test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing">23.3. Hypothesis Testing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-sample-t-test">23.3.1. One sample t-test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-sample-t-test">23.3.2. Two-sample t-test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-square-test-of-independence">23.3.3. Chi-square test of independence</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-square-goodness-of-fit-test">23.3.4. Chi-Square Goodness-of-Fit Test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pearson-spearman-kendall-correlation-test">23.3.5. Pearson/Spearman/Kendall Correlation Test</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normality-tests">Normality Tests</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normality-tests">23.4. Normality Tests</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">23.5. Exercises</a></li>
 </ul>
             </nav>
         </div>
@@ -463,10 +489,10 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="laboratory-on-statistical-inference">
-<h1>Laboratory on Statistical Inference<a class="headerlink" href="#laboratory-on-statistical-inference" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">23. </span>Laboratory on Statistical Inference<a class="headerlink" href="#laboratory-on-statistical-inference" title="Permalink to this heading">#</a></h1>
 <p>In this laboratory, we will see the main tools to perform statistical inference. We will contextualize better these tools with real data analysis later.</p>
 <section id="sampling">
-<h2>Sampling<a class="headerlink" href="#sampling" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">23.1. </span>Sampling<a class="headerlink" href="#sampling" title="Permalink to this heading">#</a></h2>
 <p>In Python we can easily sample from known distributions using numpy <code class="docutils literal notranslate"><span class="pre">random</span></code> module, as shown in the example below:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -528,7 +554,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/66bf1c319330466ada9558e293204d913c2935baa0b2a9a471ad4ada7684da0b.png" src="../_images/66bf1c319330466ada9558e293204d913c2935baa0b2a9a471ad4ada7684da0b.png" />
+<img alt="../_images/333ea43c7d351f74181a064ee6fdb63cc0c84816cd3691751bf801ff04976cda.png" src="../_images/333ea43c7d351f74181a064ee6fdb63cc0c84816cd3691751bf801ff04976cda.png" />
 </div>
 </div>
 <p>We can also sample from an existing sample to obtain a <strong>subsample</strong>. This can be done starting from a dataset. For instance, let us consider the <em>weight-height</em> dataset:</p>
@@ -630,7 +656,7 @@ memory usage: 132.3+ KB
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-Int64Index: 1000 entries, 2885 to 3152
+Int64Index: 1000 entries, 3135 to 376
 Data columns (total 4 columns):
  #   Column  Non-Null Count  Dtype  
 ---  ------  --------------  -----  
@@ -668,6 +694,13 @@ memory usage: 39.1+ KB
   </thead>
   <tbody>
     <tr>
+      <th>3135</th>
+      <td>M</td>
+      <td>24.02</td>
+      <td>162.56</td>
+      <td>63.50288</td>
+    </tr>
+    <tr>
       <th>2885</th>
       <td>M</td>
       <td>28.90</td>
@@ -675,32 +708,25 @@ memory usage: 39.1+ KB
       <td>86.18248</td>
     </tr>
     <tr>
-      <th>506</th>
-      <td>F</td>
-      <td>23.15</td>
-      <td>162.56</td>
-      <td>61.23492</td>
-    </tr>
-    <tr>
-      <th>1771</th>
-      <td>F</td>
-      <td>44.59</td>
-      <td>162.56</td>
-      <td>117.93392</td>
-    </tr>
-    <tr>
-      <th>162</th>
+      <th>3136</th>
       <td>M</td>
-      <td>25.06</td>
-      <td>170.18</td>
-      <td>72.57472</td>
+      <td>22.80</td>
+      <td>172.72</td>
+      <td>68.03880</td>
     </tr>
     <tr>
-      <th>969</th>
+      <th>3774</th>
       <td>M</td>
-      <td>25.84</td>
-      <td>175.26</td>
-      <td>79.37860</td>
+      <td>33.50</td>
+      <td>180.34</td>
+      <td>108.86208</td>
+    </tr>
+    <tr>
+      <th>2203</th>
+      <td>M</td>
+      <td>26.52</td>
+      <td>180.34</td>
+      <td>86.18248</td>
     </tr>
   </tbody>
 </table>
@@ -717,7 +743,7 @@ memory usage: 39.1+ KB
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-Int64Index: 5000 entries, 1633 to 3834
+Int64Index: 5000 entries, 1724 to 2400
 Data columns (total 4 columns):
  #   Column  Non-Null Count  Dtype  
 ---  ------  --------------  -----  
@@ -755,39 +781,39 @@ memory usage: 195.3+ KB
   </thead>
   <tbody>
     <tr>
-      <th>1633</th>
-      <td>F</td>
-      <td>27.46</td>
-      <td>162.56</td>
-      <td>72.57472</td>
+      <th>1724</th>
+      <td>M</td>
+      <td>28.24</td>
+      <td>187.96</td>
+      <td>99.79024</td>
     </tr>
     <tr>
-      <th>4001</th>
+      <th>1714</th>
+      <td>M</td>
+      <td>24.43</td>
+      <td>180.34</td>
+      <td>79.37860</td>
+    </tr>
+    <tr>
+      <th>2737</th>
       <td>F</td>
-      <td>26.62</td>
-      <td>170.18</td>
+      <td>21.93</td>
+      <td>157.48</td>
+      <td>54.43104</td>
+    </tr>
+    <tr>
+      <th>3262</th>
+      <td>F</td>
+      <td>32.13</td>
+      <td>154.94</td>
       <td>77.11064</td>
     </tr>
     <tr>
-      <th>4199</th>
+      <th>3154</th>
       <td>M</td>
-      <td>23.76</td>
-      <td>193.04</td>
-      <td>88.45044</td>
-    </tr>
-    <tr>
-      <th>1405</th>
-      <td>M</td>
-      <td>21.79</td>
-      <td>167.64</td>
-      <td>61.23492</td>
-    </tr>
-    <tr>
-      <th>1478</th>
-      <td>F</td>
-      <td>34.96</td>
-      <td>165.10</td>
-      <td>95.25432</td>
+      <td>25.81</td>
+      <td>177.80</td>
+      <td>81.64656</td>
     </tr>
   </tbody>
 </table>
@@ -807,7 +833,7 @@ memory usage: 195.3+ KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/c4ca63a64803dd5a3278b7c5d60defeacc73b237953bdf528156dc17164f9f5e.png" src="../_images/c4ca63a64803dd5a3278b7c5d60defeacc73b237953bdf528156dc17164f9f5e.png" />
+<img alt="../_images/6c43b57b257c1d9b84877aa7de4681f5506c36092148e3369446333dd645c139.png" src="../_images/6c43b57b257c1d9b84877aa7de4681f5506c36092148e3369446333dd645c139.png" />
 </div>
 </div>
 <p>Alternatively, we can sample using <code class="docutils literal notranslate"><span class="pre">np.random.choice</span></code>:</p>
@@ -821,7 +847,7 @@ memory usage: 195.3+ KB
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-Int64Index: 100 entries, 2882 to 4213
+Int64Index: 100 entries, 217 to 708
 Data columns (total 4 columns):
  #   Column  Non-Null Count  Dtype  
 ---  ------  --------------  -----  
@@ -859,39 +885,39 @@ memory usage: 3.9+ KB
   </thead>
   <tbody>
     <tr>
-      <th>2882</th>
+      <th>217</th>
       <td>F</td>
-      <td>23.15</td>
-      <td>162.56</td>
-      <td>61.234920</td>
+      <td>37.11</td>
+      <td>152.40</td>
+      <td>86.182480</td>
     </tr>
     <tr>
-      <th>2278</th>
+      <th>4036</th>
+      <td>F</td>
+      <td>33.28</td>
+      <td>165.10</td>
+      <td>90.718400</td>
+    </tr>
+    <tr>
+      <th>2512</th>
+      <td>F</td>
+      <td>28.01</td>
+      <td>160.02</td>
+      <td>71.667536</td>
+    </tr>
+    <tr>
+      <th>2235</th>
+      <td>F</td>
+      <td>27.45</td>
+      <td>167.64</td>
+      <td>77.110640</td>
+    </tr>
+    <tr>
+      <th>1299</th>
       <td>M</td>
-      <td>25.85</td>
-      <td>167.64</td>
-      <td>72.574720</td>
-    </tr>
-    <tr>
-      <th>983</th>
-      <td>F</td>
-      <td>39.45</td>
-      <td>162.56</td>
-      <td>104.326160</td>
-    </tr>
-    <tr>
-      <th>855</th>
-      <td>F</td>
-      <td>20.37</td>
-      <td>170.18</td>
-      <td>58.966960</td>
-    </tr>
-    <tr>
-      <th>2859</th>
-      <td>F</td>
-      <td>28.91</td>
-      <td>167.64</td>
-      <td>81.192968</td>
+      <td>27.30</td>
+      <td>175.26</td>
+      <td>83.914520</td>
     </tr>
   </tbody>
 </table>
@@ -916,7 +942,7 @@ memory usage: 3.9+ KB
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-Int64Index: 1000 entries, 377 to 1705
+Int64Index: 1000 entries, 3274 to 358
 Data columns (total 4 columns):
  #   Column  Non-Null Count  Dtype  
 ---  ------  --------------  -----  
@@ -954,39 +980,39 @@ memory usage: 39.1+ KB
   </thead>
   <tbody>
     <tr>
-      <th>377</th>
+      <th>3274</th>
       <td>F</td>
-      <td>23.30</td>
-      <td>165.10</td>
-      <td>63.502880</td>
+      <td>20.58</td>
+      <td>162.56</td>
+      <td>54.43104</td>
     </tr>
     <tr>
-      <th>4129</th>
+      <th>2188</th>
       <td>F</td>
-      <td>28.72</td>
-      <td>152.40</td>
-      <td>66.678024</td>
+      <td>18.87</td>
+      <td>162.56</td>
+      <td>49.89512</td>
     </tr>
     <tr>
-      <th>3291</th>
+      <th>950</th>
       <td>F</td>
-      <td>30.78</td>
-      <td>165.10</td>
-      <td>83.914520</td>
+      <td>21.18</td>
+      <td>149.86</td>
+      <td>47.62716</td>
     </tr>
     <tr>
-      <th>2622</th>
+      <th>2623</th>
       <td>F</td>
-      <td>25.19</td>
-      <td>152.40</td>
-      <td>58.513368</td>
+      <td>26.59</td>
+      <td>162.56</td>
+      <td>70.30676</td>
     </tr>
     <tr>
-      <th>2572</th>
+      <th>2350</th>
       <td>F</td>
-      <td>24.21</td>
-      <td>167.64</td>
-      <td>68.038800</td>
+      <td>28.80</td>
+      <td>175.26</td>
+      <td>88.45044</td>
     </tr>
   </tbody>
 </table>
@@ -1027,39 +1053,39 @@ memory usage: 39.1+ KB
   </thead>
   <tbody>
     <tr>
-      <th>3883</th>
-      <td>M</td>
-      <td>21.70</td>
-      <td>182.88</td>
-      <td>72.57472</td>
-    </tr>
-    <tr>
-      <th>1686</th>
+      <th>2894</th>
       <td>F</td>
-      <td>29.28</td>
-      <td>152.40</td>
-      <td>68.03880</td>
-    </tr>
-    <tr>
-      <th>3134</th>
-      <td>F</td>
-      <td>24.95</td>
-      <td>165.10</td>
-      <td>68.03880</td>
-    </tr>
-    <tr>
-      <th>1778</th>
-      <td>M</td>
-      <td>24.41</td>
-      <td>185.42</td>
-      <td>83.91452</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>F</td>
-      <td>27.46</td>
+      <td>24.36</td>
       <td>162.56</td>
-      <td>72.57472</td>
+      <td>64.410064</td>
+    </tr>
+    <tr>
+      <th>2479</th>
+      <td>F</td>
+      <td>26.63</td>
+      <td>165.10</td>
+      <td>72.574720</td>
+    </tr>
+    <tr>
+      <th>275</th>
+      <td>F</td>
+      <td>29.76</td>
+      <td>170.18</td>
+      <td>86.182480</td>
+    </tr>
+    <tr>
+      <th>2394</th>
+      <td>F</td>
+      <td>22.32</td>
+      <td>162.56</td>
+      <td>58.966960</td>
+    </tr>
+    <tr>
+      <th>1125</th>
+      <td>F</td>
+      <td>22.85</td>
+      <td>160.02</td>
+      <td>58.513368</td>
     </tr>
   </tbody>
 </table>
@@ -1073,8 +1099,8 @@ memory usage: 39.1+ KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>M    500
-F    500
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>F    500
+M    500
 Name: sex, dtype: int64
 </pre></div>
 </div>
@@ -1082,10 +1108,10 @@ Name: sex, dtype: int64
 </div>
 </section>
 <section id="confidence-intervals">
-<h2>Confidence Intervals<a class="headerlink" href="#confidence-intervals" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">23.2. </span>Confidence Intervals<a class="headerlink" href="#confidence-intervals" title="Permalink to this heading">#</a></h2>
 <p>Let us see how to compute confidence intervals in Python.</p>
 <section id="confidence-intervals-for-means">
-<h3>Confidence Intervals for Means<a class="headerlink" href="#confidence-intervals-for-means" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">23.2.1. </span>Confidence Intervals for Means<a class="headerlink" href="#confidence-intervals-for-means" title="Permalink to this heading">#</a></h3>
 <p>We can compute confidence intervals for the estimation of means with <code class="docutils literal notranslate"><span class="pre">scipy</span></code>. Let us see how to compute confidence intervals for the mean of <code class="docutils literal notranslate"><span class="pre">height</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1144,7 +1170,7 @@ Confidence interval: [169.50, 170.29]
 </div>
 </section>
 <section id="confidence-intervals-for-variances">
-<h3>Confidence Intervals for Variances<a class="headerlink" href="#confidence-intervals-for-variances" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">23.2.2. </span>Confidence Intervals for Variances<a class="headerlink" href="#confidence-intervals-for-variances" title="Permalink to this heading">#</a></h3>
 <p>To compute confidence intervals for the estimation of variances, we have to use the <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1178,7 +1204,7 @@ Confidence Interval for Variance: (95.04, 103.49)
 </div>
 </section>
 <section id="confidence-intervals-for-proportion">
-<h3>Confidence Intervals for Proportion<a class="headerlink" href="#confidence-intervals-for-proportion" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">23.2.3. </span>Confidence Intervals for Proportion<a class="headerlink" href="#confidence-intervals-for-proportion" title="Permalink to this heading">#</a></h3>
 <p>Let us see how to compute confidence intervals for the proportion of females over males:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1212,10 +1238,10 @@ Confidence Interval for Proportion: (0.53, 0.56)
 </section>
 </section>
 <section id="hypothesis-testing">
-<h2>Hypothesis Testing<a class="headerlink" href="#hypothesis-testing" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">23.3. </span>Hypothesis Testing<a class="headerlink" href="#hypothesis-testing" title="Permalink to this heading">#</a></h2>
 <p>Let us see now the main hypothesis tests.</p>
 <section id="one-sample-t-test">
-<h3>One sample t-test<a class="headerlink" href="#one-sample-t-test" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">23.3.1. </span>One sample t-test<a class="headerlink" href="#one-sample-t-test" title="Permalink to this heading">#</a></h3>
 <p>This test allows to assess whether a sample has a given mean. Let us check if the average height in our dataset is equal to <span class="math notranslate nohighlight">\(170cm\)</span>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1288,7 +1314,7 @@ P-value: 0.0000
 </div>
 </section>
 <section id="two-sample-t-test">
-<h3>Two-sample t-test<a class="headerlink" href="#two-sample-t-test" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">23.3.2. </span>Two-sample t-test<a class="headerlink" href="#two-sample-t-test" title="Permalink to this heading">#</a></h3>
 <p>Let us now check if males and females have the same average height:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1351,9 +1377,9 @@ Conclusion: there is a significant difference between the mean exam scores of th
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test statistic: -0.18
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test statistic: 0.52
 Significance level: 0.05
-P-value: 0.86
+P-value: 0.60
 Conclusion: there is no significant difference between the mean exam scores of the two classes.
 </pre></div>
 </div>
@@ -1361,7 +1387,7 @@ Conclusion: there is no significant difference between the mean exam scores of t
 </div>
 </section>
 <section id="chi-square-test-of-independence">
-<h3>Chi-square test of independence<a class="headerlink" href="#chi-square-test-of-independence" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">23.3.3. </span>Chi-square test of independence<a class="headerlink" href="#chi-square-test-of-independence" title="Permalink to this heading">#</a></h3>
 <p>Let us consider the Titanic dataset:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1693,7 +1719,7 @@ There is a significant association between &#39;Sex&#39; and &#39;survived&#39;.
 </div>
 </section>
 <section id="chi-square-goodness-of-fit-test">
-<h3>Chi-Square Goodness-of-Fit Test<a class="headerlink" href="#chi-square-goodness-of-fit-test" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">23.3.4. </span>Chi-Square Goodness-of-Fit Test<a class="headerlink" href="#chi-square-goodness-of-fit-test" title="Permalink to this heading">#</a></h3>
 <p>The Chi-Square Goodness of Fit test allows to determine whether observed frequencies fit a specified distribution or expected frequencies.</p>
 <p>As we can imagine, the distribution of <code class="docutils literal notranslate"><span class="pre">sex</span></code> in the Titanic dataset is not uniform:</p>
 <div class="cell docutils container">
@@ -1844,7 +1870,7 @@ The observed data fits the expected distribution.
 <p>Since the p-value is large, we could not reject the null hypothesis and we can conclude that there is no significant difference between observed and expected frequencies.</p>
 </section>
 <section id="pearson-spearman-kendall-correlation-test">
-<h3>Pearson/Spearman/Kendall Correlation Test<a class="headerlink" href="#pearson-spearman-kendall-correlation-test" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">23.3.5. </span>Pearson/Spearman/Kendall Correlation Test<a class="headerlink" href="#pearson-spearman-kendall-correlation-test" title="Permalink to this heading">#</a></h3>
 <p>We can easily compute correlation coefficients and the p-value of the related statistical tests using <code class="docutils literal notranslate"><span class="pre">scipy</span></code>. Let us see some examples:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1919,7 +1945,7 @@ Kendall Tau r: -0.05. P-value: 0.31
 </section>
 </section>
 <section id="normality-tests">
-<h2>Normality Tests<a class="headerlink" href="#normality-tests" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">23.4. </span>Normality Tests<a class="headerlink" href="#normality-tests" title="Permalink to this heading">#</a></h2>
 <p>We can check for the normality of sample using Q-Q plots and normality tests. Let us see a Q-Q plot to check if <code class="docutils literal notranslate"><span class="pre">BMI</span></code> is normally distributed:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1981,10 +2007,39 @@ Sample does not look Gaussian (reject H0)
 </div>
 </div>
 </div>
+<p>For D’Agostino’s K-squares test, we just need to use <code class="docutils literal notranslate"><span class="pre">normaltest</span></code> instead of <code class="docutils literal notranslate"><span class="pre">shapiro</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">normaltest</span>
+
+<span class="n">statistic</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">normaltest</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;BMI&#39;</span><span class="p">])</span>
+
+<span class="c1"># Set the significance level (alpha)</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test statistic: </span><span class="si">{</span><span class="n">statistic</span><span class="si">:</span><span class="s2">0.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;P-value: </span><span class="si">{</span><span class="n">p_value</span><span class="si">:</span><span class="s2">0.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Check the p-value against the significance level</span>
+<span class="k">if</span> <span class="n">p_value</span> <span class="o">&gt;</span> <span class="n">alpha</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sample looks Gaussian (fail to reject H0)&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sample does not look Gaussian (reject H0)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test statistic: 484.80
+P-value: 0.00
+Sample does not look Gaussian (reject H0)
+</pre></div>
+</div>
+</div>
+</div>
 <p><strong>Word of Caution</strong>: normality tests such as the Shapiro-Wilk test may reject the hypothesis of Gaussianity for any large sample (even if approximately Gaussian), so we should use this test with caution.</p>
 </section>
 <section id="exercises">
-<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">23.5. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
 <blockquote>
 <div><p>🧑‍💻 Exercise 1</p>
 <p>Consider the sample of all passengers in the titanic dataset. Compute the mean age of all passengers. Then, compute the confidence bounds for this mean setting the confidence level to 0.95. Is the estimated mean a reliable estimate of the population mean?</p>
@@ -2077,6 +2132,24 @@ Add a new <code class="docutils literal notranslate"><span class="pre">Old</span
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="../lectures/15_clustering.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">22. </span>Clustering</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="11_regressione_lineare.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">24. </span>Laboratorio su Regressione Lineare</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -2092,23 +2165,23 @@ Add a new <code class="docutils literal notranslate"><span class="pre">Old</span
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling">Sampling</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals">Confidence Intervals</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-for-means">Confidence Intervals for Means</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-for-variances">Confidence Intervals for Variances</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-for-proportion">Confidence Intervals for Proportion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling">23.1. Sampling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals">23.2. Confidence Intervals</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-for-means">23.2.1. Confidence Intervals for Means</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-for-variances">23.2.2. Confidence Intervals for Variances</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-for-proportion">23.2.3. Confidence Intervals for Proportion</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing">Hypothesis Testing</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-sample-t-test">One sample t-test</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-sample-t-test">Two-sample t-test</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-square-test-of-independence">Chi-square test of independence</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-square-goodness-of-fit-test">Chi-Square Goodness-of-Fit Test</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pearson-spearman-kendall-correlation-test">Pearson/Spearman/Kendall Correlation Test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing">23.3. Hypothesis Testing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-sample-t-test">23.3.1. One sample t-test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-sample-t-test">23.3.2. Two-sample t-test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-square-test-of-independence">23.3.3. Chi-square test of independence</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-square-goodness-of-fit-test">23.3.4. Chi-Square Goodness-of-Fit Test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pearson-spearman-kendall-correlation-test">23.3.5. Pearson/Spearman/Kendall Correlation Test</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normality-tests">Normality Tests</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normality-tests">23.4. Normality Tests</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">23.5. Exercises</a></li>
 </ul>
   </nav></div>
 

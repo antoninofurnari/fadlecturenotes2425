@@ -68,6 +68,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="18. Linear Regression" href="11_linear_regression.html" />
     <link rel="prev" title="15. Associazione tra Variabili" href="../laboratories/08_associazione_variabili.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -209,6 +210,30 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 6</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">16. Statistical Inference</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 7 &amp; 8</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="11_linear_regression.html">18. Linear Regression</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 9</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="12_logistic_regression.html">19. Logistic Regression</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 10</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="13_causal_analysis.html">20. Causal Data Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 11</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="14_data_as_nd_points.html">21. Data as N-Dimensional Points</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_clustering.html">22. Clustering</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratory 3</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/10_statistical_inference.html">23. Laboratory on Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/11_regressione_lineare.html">24. Laboratorio su Regressione Lineare</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/12_regressione_logistica.html">25. Laboratorio su regressione logistica</a></li>
 </ul>
 
     </div>
@@ -435,6 +460,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">16. Statistical Inference</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling">16.1. Sampling</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-random-sample">16.1.1. Simple random sample</a></li>
 </ul>
@@ -476,8 +502,14 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shapiro-wilk-normality-test">16.7.2. Shapiro-Wilk Normality Test</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">16.8. References</a></li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#d-agostino-s-k-squared-test">17. D’Agostino’s K-squared test</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">17.1. References</a></li>
+</ul>
+</li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -680,7 +712,7 @@ document.write(`
 <p>This is graphically shown in the plot below. The blue segment is the one of bounds <span class="math notranslate nohighlight">\([p-\sigma(\hat p), p+\sigma(\hat p)]\)</span>. Note that, all times a point <span class="math notranslate nohighlight">\(\hat p\)</span> happens to be in the blue segment centered around <span class="math notranslate nohighlight">\(p\)</span>, then <span class="math notranslate nohighlight">\(p\)</span> is in the segment centered around <span class="math notranslate nohighlight">\(\hat p\)</span>.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/79a41188b42614d3a519428991e7f865c132b308c1b29ea61c3c99bda80976ee.png" src="../_images/79a41188b42614d3a519428991e7f865c132b308c1b29ea61c3c99bda80976ee.png" />
+<img alt="../_images/16b3a7bc4de69f70e1c0ed0f324bf9ac59c85609cad1df9bb3c7c4b289435447.png" src="../_images/16b3a7bc4de69f70e1c0ed0f324bf9ac59c85609cad1df9bb3c7c4b289435447.png" />
 </div>
 </div>
 <p>This allows us to write:</p>
@@ -783,7 +815,7 @@ s_n^2=\frac{1}{n}\sum_{i=0}^{n}(x^{(i)}-\overline x)^2
 <p>where <span class="math notranslate nohighlight">\(\sigma^2\)</span> is the variance of the population. An unbiased estimator for the variance is given by:</p>
 <div class="math notranslate nohighlight">
 \[
-s_{n-1}^2=\frac{1}{n-1}\sum_{i=0}^{n}(x_i-\overline x)^2
+s_{n-1}^2=\frac{1}{n-1}\sum_{i=0}^{n}(x^{(i)}-\overline x)^2
 \]</div>
 <p>Note that this approaches to <span class="math notranslate nohighlight">\(s_{n}^2\)</span> as <span class="math notranslate nohighlight">\(n \to \infty\)</span>. In practice:</p>
 <ul class="simple">
@@ -1523,13 +1555,33 @@ Reject the null hypothesis. There is a significant correlation between age and f
 </section>
 <section id="assessing-whether-a-sample-is-normally-distributed">
 <h2><span class="section-number">16.7. </span>Assessing whether a Sample is Normally Distributed<a class="headerlink" href="#assessing-whether-a-sample-is-normally-distributed" title="Permalink to this heading">#</a></h2>
-<p>While the Normal distribution is pervasive, in some cases, it is useful to assess whether a given sample follows a normal distribution before assuming this is true.</p>
-<section id="quantile-quantile-plots-q-q-plots">
-<h3><span class="section-number">16.7.1. </span>Quantile-Quantile Plots (Q-Q Plots)<a class="headerlink" href="#quantile-quantile-plots-q-q-plots" title="Permalink to this heading">#</a></h3>
-<p>One common way to do so is using the Quantile-Quantile plots. The basic idea is to <strong>compare the quantiles of the empirical data distribution with the theoretical quantiles of the reference distribution</strong>. To avoid scale issues, the empirical data is first transformed into z-scores. If the sample follows the theoretical distribution, the quantiles will match. By plotting the empirical quantiles against the theoretical ones, we should obtain a set of points that lie on the line <span class="math notranslate nohighlight">\(y=x\)</span>. In the following graph, we show the q-q plot for the weight sample in our weight-height dataset:</p>
+<p>While the Normal distribution is pervasive, in some cases, it is useful to assess whether a given sample follows a normal distribution before assuming this is true. Let us consider the dataset of heights and weights and plot the distribution of weights:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/0d25654550e151ceec6e9b687e4f3198e5b734eb470254bfe0fd5414a7d0f401.png" src="../_images/0d25654550e151ceec6e9b687e4f3198e5b734eb470254bfe0fd5414a7d0f401.png" />
+<img alt="../_images/32938500bd6e457de5d30d3efccc69e7c19c18d88b57fa0f3922c0a907d86f86.png" src="../_images/32938500bd6e457de5d30d3efccc69e7c19c18d88b57fa0f3922c0a907d86f86.png" />
+</div>
+</div>
+<p>Does the distribution look Gaussian? Let us compute Skewness and Kurtosis:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Skewness of weight: 0.57
+Kurtosis of weight: -0.06
+</pre></div>
+</div>
+</div>
+</div>
+<p>We not that:</p>
+<ul class="simple">
+<li><p>We have a positive Skewness: this indicates that the distribution is skewed towards the right side (the right tail is longer) as compared to a Normal distribution;</p></li>
+<li><p>We have a Kurtosis slightly lower than zero: the distribution is slightly “flatter” than a Normal distribution.</p></li>
+</ul>
+<p>While Skewness and Kurtosis can help characterize deviations from normality, there are tests which can be used.</p>
+<section id="quantile-quantile-plots-q-q-plots">
+<h3><span class="section-number">16.7.1. </span>Quantile-Quantile Plots (Q-Q Plots)<a class="headerlink" href="#quantile-quantile-plots-q-q-plots" title="Permalink to this heading">#</a></h3>
+<p>One common way to do so is using the Quantile-Quantile plots. The basic idea is to <strong>compare the quantiles of the empirical data distribution with the theoretical quantiles of the reference distribution</strong>. To avoid scale issues, <strong>the empirical data is first transformed into z-scores</strong>. If the sample follows the theoretical distribution, the quantiles will match. By plotting the empirical quantiles against the theoretical ones, we should obtain a set of points that lie on the line <span class="math notranslate nohighlight">\(y=x\)</span>. In the following graph, we show the q-q plot for the weight sample in our weight-height dataset:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/357005ac389bb116ce498fa3a86c69c6bc8002fbef4da6b2129756bbbefa6a67.png" src="../_images/357005ac389bb116ce498fa3a86c69c6bc8002fbef4da6b2129756bbbefa6a67.png" />
 </div>
 </div>
 <p>The plot relates the “theoretical” quantiles with those of the sample. The fact that the points on the plot do not lie on the diagonal indicates that there is a discrepancy between the empirical data distribution and the Gaussian distribution.</p>
@@ -1543,7 +1595,7 @@ Reject the null hypothesis. There is a significant correlation between age and f
 <p>The following figure compares the q-q plots of different distributions:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/8b9ea889459005c4c61a3dc214ab0f67b139770df154fdac84c59db943479d7b.png" src="../_images/8b9ea889459005c4c61a3dc214ab0f67b139770df154fdac84c59db943479d7b.png" />
+<img alt="../_images/4793b4ba94e81dffb92e1eb40b7121591aa9790fdd6845322eb4cbcb4bf9cfa0.png" src="../_images/4793b4ba94e81dffb92e1eb40b7121591aa9790fdd6845322eb4cbcb4bf9cfa0.png" />
 </div>
 </div>
 <p>Every time we observe a Q-Q Plot, we can relate these features to characteristics of the distribution. Clearly, these characteristics can also combine to create more complex Q-Q Plots, as seen in the case of weights. Now, we have the tools to analyze the Q-Q Plot of weights:</p>
@@ -1556,7 +1608,7 @@ Reject the null hypothesis. There is a significant correlation between age and f
 </section>
 <section id="shapiro-wilk-normality-test">
 <h3><span class="section-number">16.7.2. </span>Shapiro-Wilk Normality Test<a class="headerlink" href="#shapiro-wilk-normality-test" title="Permalink to this heading">#</a></h3>
-<p>The Shapiro-Wilk test is a statistical test used to assess whether a sample follows a Gaussian (normal) distribution. It works by comparing the observed data to what you would expect if the data were drawn from a truly Gaussian distribution.</p>
+<p>The Shapiro-Wilk test is a statistical test used to assess whether a sample follows a Gaussian (normal) distribution. It is used with small samples (<span class="math notranslate nohighlight">\(n\leq 2000\)</span>) It works by comparing the observed data to what you would expect if the data were drawn from a truly Gaussian distribution.</p>
 <p>We will not see the formal details of this test, but we can use it in our analyses. Here is the result on the <code class="docutils literal notranslate"><span class="pre">weight</span></code> sample in our height-weight dataset:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -1569,8 +1621,21 @@ Sample does not look Gaussian (reject H0)
 </div>
 </section>
 </section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="d-agostino-s-k-squared-test">
+<h1><span class="section-number">17. </span>D’Agostino’s K-squared test<a class="headerlink" href="#d-agostino-s-k-squared-test" title="Permalink to this heading">#</a></h1>
+<p>When samples are large (<span class="math notranslate nohighlight">\(n \geq 50\)</span>), the D’Agostino’s K-squared test is more used. It is based on Skewness and Kurtosis. Here is the result for our example:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test statistic: 201.64
+P-value: 0.00
+Sample does not look Gaussian (reject H0)
+</pre></div>
+</div>
+</div>
+</div>
 <section id="references">
-<h2><span class="section-number">16.8. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">17.1. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Chapters 6-8 of [1];</p></li>
 <li><p>Parts of chapter 9 of [2].</p></li>
@@ -1619,6 +1684,15 @@ Sample does not look Gaussian (reject H0)
         <p class="prev-next-title"><span class="section-number">15. </span>Associazione tra Variabili</p>
       </div>
     </a>
+    <a class="right-next"
+       href="11_linear_regression.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">18. </span>Linear Regression</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -1634,6 +1708,7 @@ Sample does not look Gaussian (reject H0)
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">16. Statistical Inference</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling">16.1. Sampling</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-random-sample">16.1.1. Simple random sample</a></li>
 </ul>
@@ -1675,8 +1750,14 @@ Sample does not look Gaussian (reject H0)
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shapiro-wilk-normality-test">16.7.2. Shapiro-Wilk Normality Test</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">16.8. References</a></li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#d-agostino-s-k-squared-test">17. D’Agostino’s K-squared test</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">17.1. References</a></li>
+</ul>
+</li>
+</ul>
+
   </nav></div>
 
 </div></div>

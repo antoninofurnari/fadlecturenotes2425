@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Laboratorio su regressione logistica &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+    <title>25. Laboratorio su regressione logistica &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
   
   
   
@@ -68,6 +68,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="24. Laboratorio su Regressione Lineare" href="11_regressione_lineare.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -208,6 +209,30 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 6</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../lectures/10_statistical_inference.html">16. Statistical Inference</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 7 &amp; 8</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lectures/11_linear_regression.html">18. Linear Regression</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 9</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lectures/12_logistic_regression.html">19. Logistic Regression</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 10</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lectures/13_causal_analysis.html">20. Causal Data Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 11</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lectures/14_data_as_nd_points.html">21. Data as N-Dimensional Points</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/15_clustering.html">22. Clustering</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratory 3</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="10_statistical_inference.html">23. Laboratory on Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_regressione_lineare.html">24. Laboratorio su Regressione Lineare</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">25. Laboratorio su regressione logistica</a></li>
 </ul>
 
     </div>
@@ -434,22 +459,22 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regressione-logistica-semplice">Regressione Logistica Semplice</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limiti-della-regressione-lineare-con-variabile-dipendente-categorica">Limiti della regressione lineare con variabile dipendente categorica</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regressione-logistica">Regressione Logistica</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisi-del-regressore-logistico">Analisi del regressore logistico</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#significativita">Significatività</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#analisi-dei-coefficienti">Analisi dei coefficienti</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regressione-logistica-semplice">25.1. Regressione Logistica Semplice</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limiti-della-regressione-lineare-con-variabile-dipendente-categorica">25.1.1. Limiti della regressione lineare con variabile dipendente categorica</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regressione-logistica">25.1.2. Regressione Logistica</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisi-del-regressore-logistico">25.1.3. Analisi del regressore logistico</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#significativita">25.1.3.1. Significatività</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#analisi-dei-coefficienti">25.1.3.2. Analisi dei coefficienti</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regressione-logistica-multipla">Regressione Logistica Multipla</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esempio-di-regressione-logistica-con-piu-di-due-variabili-indipendenti">Esempio di regressione logistica con più di due variabili indipendenti</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regressione-logistica-multipla">25.2. Regressione Logistica Multipla</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esempio-di-regressione-logistica-con-piu-di-due-variabili-indipendenti">25.2.1. Esempio di regressione logistica con più di due variabili indipendenti</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regressore-logistico-multinomiale">Regressore Logistico Multinomiale</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">Esercizi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regressore-logistico-multinomiale">25.3. Regressore Logistico Multinomiale</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">25.4. Esercizi</a></li>
 </ul>
             </nav>
         </div>
@@ -462,7 +487,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="laboratorio-su-regressione-logistica">
-<h1>Laboratorio su regressione logistica<a class="headerlink" href="#laboratorio-su-regressione-logistica" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">25. </span>Laboratorio su regressione logistica<a class="headerlink" href="#laboratorio-su-regressione-logistica" title="Permalink to this heading">#</a></h1>
 <p>Supponiamo di voler studiare la correlazione tra due variabili, di cui una (la variabile dipendente) sia categorica e binaria (ovvero, che può assumere solo i valori <span class="math notranslate nohighlight">\(0\)</span> e <span class="math notranslate nohighlight">\(1\)</span>). Per studiare questo caso, considereremo un esempio riadattato da <a class="reference external" href="http://nbviewer.jupyter.org/github/justmarkham/DAT8/blob/master/notebooks/12_logistic_regression.ipynb">http://nbviewer.jupyter.org/github/justmarkham/DAT8/blob/master/notebooks/12_logistic_regression.ipynb</a>.</p>
 <p>Consideriamo il <strong>Glass Identification Data Set</strong> (<a class="reference external" href="https://archive.ics.uci.edu/ml/datasets/glass+identification">https://archive.ics.uci.edu/ml/datasets/glass+identification</a>). Si tratta di un dataset che contiene una serie di misurazioni per diversi campioni di vetro. Carichiamo il dataset mediante la API di UCI ML:</p>
 <div class="cell docutils container">
@@ -747,7 +772,7 @@ memory usage: 16.8 KB
 </div></div></div>
 </div>
 <section id="regressione-logistica-semplice">
-<h2>Regressione Logistica Semplice<a class="headerlink" href="#regressione-logistica-semplice" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">25.1. </span>Regressione Logistica Semplice<a class="headerlink" href="#regressione-logistica-semplice" title="Permalink to this heading">#</a></h2>
 <p>Supponiamo adesso di voler indagare la correlazione tra la percentuale di alluminio presente nel vetro (variabile <code class="docutils literal notranslate"><span class="pre">Al</span></code>) e la variabile dicotomica <code class="docutils literal notranslate"><span class="pre">window_glass</span></code>. In particolare, vogliamo capire se la variabile <code class="docutils literal notranslate"><span class="pre">Al</span></code> influenza l’esito di <code class="docutils literal notranslate"><span class="pre">window_glass</span></code>, ovvero fino a che punto è possibile prevedere il tipo di vetro conoscendo solo la percentuale di alluminio presente. Iniziamo a studiare la correlazione mediante uno scatterplot:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -767,7 +792,7 @@ memory usage: 16.8 KB
 <p>Sembra esserci una correlazione tra le due variabili? Quale tipo di vetro sembra contere in genere maggiori concentrazioni di alluminio?</p>
 </div></blockquote>
 <section id="limiti-della-regressione-lineare-con-variabile-dipendente-categorica">
-<h3>Limiti della regressione lineare con variabile dipendente categorica<a class="headerlink" href="#limiti-della-regressione-lineare-con-variabile-dipendente-categorica" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">25.1.1. </span>Limiti della regressione lineare con variabile dipendente categorica<a class="headerlink" href="#limiti-della-regressione-lineare-con-variabile-dipendente-categorica" title="Permalink to this heading">#</a></h3>
 <p>Proviamo adesso a visualizzare la retta di regressione relativa alle due variabili:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -848,7 +873,7 @@ memory usage: 16.8 KB
 </ul>
 </section>
 <section id="regressione-logistica">
-<h3>Regressione Logistica<a class="headerlink" href="#regressione-logistica" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">25.1.2. </span>Regressione Logistica<a class="headerlink" href="#regressione-logistica" title="Permalink to this heading">#</a></h3>
 <p>Possiamo calcolare un <strong>regressore logistico</strong> come segue:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -941,7 +966,7 @@ dtype: float64
 </div></blockquote>
 </section>
 <section id="analisi-del-regressore-logistico">
-<h3>Analisi del regressore logistico<a class="headerlink" href="#analisi-del-regressore-logistico" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">25.1.3. </span>Analisi del regressore logistico<a class="headerlink" href="#analisi-del-regressore-logistico" title="Permalink to this heading">#</a></h3>
 <p>Visualizziamo il summary del regressore logistico calcolato in precedenza:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -987,7 +1012,7 @@ dtype: float64
 </table></div></div>
 </div>
 <section id="significativita">
-<h4>Significatività<a class="headerlink" href="#significativita" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">25.1.3.1. </span>Significatività<a class="headerlink" href="#significativita" title="Permalink to this heading">#</a></h4>
 <p>Il summary presenta diversi elementi. Analizziamone i più importanti:</p>
 <ul class="simple">
 <li><p>Pseudo R-squared: va interpretato come l’R-Squared nel caso della regressione lineare. Ci dice quanto il modello “spiega” bene i dati;</p></li>
@@ -1002,7 +1027,7 @@ dtype: float64
 </ul>
 </section>
 <section id="analisi-dei-coefficienti">
-<h4>Analisi dei coefficienti<a class="headerlink" href="#analisi-dei-coefficienti" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">25.1.3.2. </span>Analisi dei coefficienti<a class="headerlink" href="#analisi-dei-coefficienti" title="Permalink to this heading">#</a></h4>
 <p>Analizziamo i coefficienti del regressore logistico calcolato prima. Visualizziamo nuovamente il summary:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1075,7 +1100,7 @@ dtype: float64
 </section>
 </section>
 <section id="regressione-logistica-multipla">
-<h2>Regressione Logistica Multipla<a class="headerlink" href="#regressione-logistica-multipla" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">25.2. </span>Regressione Logistica Multipla<a class="headerlink" href="#regressione-logistica-multipla" title="Permalink to this heading">#</a></h2>
 <p>E’ possibile calcolare un regressore logistico a partire da più variabili indipendenti semplicemente rivedendo il modello come:</p>
 <p>\begin{equation}
 logit(p)=\beta_0 + \beta_1 x_1 + \ldots + \beta_n x_n
@@ -1182,7 +1207,7 @@ dtype: float64
 <p>Considerato che <code class="docutils literal notranslate"><span class="pre">Si</span></code> e <code class="docutils literal notranslate"><span class="pre">Na</span></code> hanno la stessa unità di misura (misurano entrambe delle concentrazioni), quali delle due variabili influenza maggiormente l’esito dell’appartenenza o meno alla classe <code class="docutils literal notranslate"><span class="pre">window_glass</span></code>? Se le unità di misura fossero diverse, potremmo fare le stesse considerazioni?</p>
 </div></blockquote>
 <section id="esempio-di-regressione-logistica-con-piu-di-due-variabili-indipendenti">
-<h3>Esempio di regressione logistica con più di due variabili indipendenti<a class="headerlink" href="#esempio-di-regressione-logistica-con-piu-di-due-variabili-indipendenti" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">25.2.1. </span>Esempio di regressione logistica con più di due variabili indipendenti<a class="headerlink" href="#esempio-di-regressione-logistica-con-piu-di-due-variabili-indipendenti" title="Permalink to this heading">#</a></h3>
 <p>Vediamo un esempio di regressione logistica con più di due variabili indipendenti. Utilizzeremo il dataset di R <code class="docutils literal notranslate"><span class="pre">biopsy</span></code>. Possiamo caricarlo mediante <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1626,7 +1651,7 @@ dtype: float64
 </section>
 </section>
 <section id="regressore-logistico-multinomiale">
-<h2>Regressore Logistico Multinomiale<a class="headerlink" href="#regressore-logistico-multinomiale" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">25.3. </span>Regressore Logistico Multinomiale<a class="headerlink" href="#regressore-logistico-multinomiale" title="Permalink to this heading">#</a></h2>
 <p>Vediamo un esempio di regressore logistico multinomiale sul dataset delle Iris di Fisher. Carichiamo il dataset con <code class="docutils literal notranslate"><span class="pre">seaborn</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1840,7 +1865,7 @@ dtype: float64
 </ul>
 </section>
 <section id="esercizi">
-<h2>Esercizi<a class="headerlink" href="#esercizi" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">25.4. </span>Esercizi<a class="headerlink" href="#esercizi" title="Permalink to this heading">#</a></h2>
 <blockquote>
 <div><p>🧑‍💻 Esercizio 1</p>
 <p>Si calcoli un regressore logistico per predire i valori della variabile <code class="docutils literal notranslate"><span class="pre">Survived</span></code> a partire dalle altre variabili del dataset Titanic. Si gestiscano adeguatamente le variabili categoriche. Si utilizzi il metodo della backward elimination per eliminare le variabili che non contribuiscono significativamente alla regressione. Si analizzi il regressore trovato e si discuta il significato dei suoi parametri.</p>
@@ -1886,6 +1911,15 @@ dtype: float64
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="11_regressione_lineare.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">24. </span>Laboratorio su Regressione Lineare</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
@@ -1901,22 +1935,22 @@ dtype: float64
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regressione-logistica-semplice">Regressione Logistica Semplice</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limiti-della-regressione-lineare-con-variabile-dipendente-categorica">Limiti della regressione lineare con variabile dipendente categorica</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regressione-logistica">Regressione Logistica</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisi-del-regressore-logistico">Analisi del regressore logistico</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#significativita">Significatività</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#analisi-dei-coefficienti">Analisi dei coefficienti</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regressione-logistica-semplice">25.1. Regressione Logistica Semplice</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limiti-della-regressione-lineare-con-variabile-dipendente-categorica">25.1.1. Limiti della regressione lineare con variabile dipendente categorica</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regressione-logistica">25.1.2. Regressione Logistica</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisi-del-regressore-logistico">25.1.3. Analisi del regressore logistico</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#significativita">25.1.3.1. Significatività</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#analisi-dei-coefficienti">25.1.3.2. Analisi dei coefficienti</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regressione-logistica-multipla">Regressione Logistica Multipla</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esempio-di-regressione-logistica-con-piu-di-due-variabili-indipendenti">Esempio di regressione logistica con più di due variabili indipendenti</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regressione-logistica-multipla">25.2. Regressione Logistica Multipla</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esempio-di-regressione-logistica-con-piu-di-due-variabili-indipendenti">25.2.1. Esempio di regressione logistica con più di due variabili indipendenti</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regressore-logistico-multinomiale">Regressore Logistico Multinomiale</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">Esercizi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regressore-logistico-multinomiale">25.3. Regressore Logistico Multinomiale</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">25.4. Esercizi</a></li>
 </ul>
   </nav></div>
 

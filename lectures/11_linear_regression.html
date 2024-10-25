@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Linear Regression &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+    <title>18. Linear Regression &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
   
   
   
@@ -68,6 +68,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="19. Logistic Regression" href="12_logistic_regression.html" />
+    <link rel="prev" title="16. Statistical Inference" href="10_statistical_inference.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -208,6 +210,30 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 6</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="10_statistical_inference.html">16. Statistical Inference</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 7 &amp; 8</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">18. Linear Regression</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 9</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="12_logistic_regression.html">19. Logistic Regression</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 10</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="13_causal_analysis.html">20. Causal Data Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 11</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="14_data_as_nd_points.html">21. Data as N-Dimensional Points</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_clustering.html">22. Clustering</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratory 3</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/10_statistical_inference.html">23. Laboratory on Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/11_regressione_lineare.html">24. Laboratorio su Regressione Lineare</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/12_regressione_logistica.html">25. Laboratorio su regressione logistica</a></li>
 </ul>
 
     </div>
@@ -434,53 +460,53 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-auto-mpg-dataset">The Auto MPG Dataset</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-models">Regression Models</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-linear-regression">Simple Linear Regression</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-coefficients-ordinary-least-squares-ols">Estimating the Coefficients - Ordinary Least Squares (OLS)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-coefficients-of-linear-regression">Interpretation of the Coefficients of Linear Regression</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-of-the-coefficient-estimates">Accuracy of the Coefficient Estimates</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-errors-of-the-regression-coefficients">Standard Errors of the Regression Coefficients</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-of-the-regression-coefficients">Confidence Intervals of the Regression Coefficients</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-tests-for-the-relevance-of-coefficients">Statistical Tests for the Relevance of Coefficients</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-auto-mpg-dataset">18.1. The Auto MPG Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-models">18.2. Regression Models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-linear-regression">18.3. Simple Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-coefficients-ordinary-least-squares-ols">18.3.1. Estimating the Coefficients - Ordinary Least Squares (OLS)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-coefficients-of-linear-regression">18.3.2. Interpretation of the Coefficients of Linear Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-of-the-coefficient-estimates">18.3.3. Accuracy of the Coefficient Estimates</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-errors-of-the-regression-coefficients">18.3.3.1. Standard Errors of the Regression Coefficients</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-of-the-regression-coefficients">18.3.3.2. Confidence Intervals of the Regression Coefficients</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-tests-for-the-relevance-of-coefficients">18.3.3.3. Statistical Tests for the Relevance of Coefficients</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-of-the-model">Accuracy of the Model</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#residual-standard-error">Residual Standard Error</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#r-2-statistic"><span class="math notranslate nohighlight">\(R^2\)</span> Statistic</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-of-the-model">18.3.4. Accuracy of the Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#residual-standard-error">18.3.4.1. Residual Standard Error</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#r-2-statistic">18.3.4.2. <span class="math notranslate nohighlight">\(R^2\)</span> Statistic</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-linear-regression">Multiple Linear Regression</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geometrical-interpretation">Geometrical Interpretation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-interpretation">Statistical Interpretation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-regression-coefficients">Estimating the Regression Coefficients</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-f-test">The F-Test</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-selection">Variable Selection</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adjusted-r-2">Adjusted <span class="math notranslate nohighlight">\(R^2\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-linear-regression">18.4. Multiple Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geometrical-interpretation">18.4.1. Geometrical Interpretation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-interpretation">18.4.2. Statistical Interpretation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-regression-coefficients">18.4.3. Estimating the Regression Coefficients</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-f-test">18.4.4. The F-Test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-selection">18.4.5. Variable Selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adjusted-r-2">18.4.6. Adjusted <span class="math notranslate nohighlight">\(R^2\)</span></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qualitative-predictors">Qualitative Predictors</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predictors-with-only-two-levels">Predictors with Only Two Levels</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predictors-with-more-than-two-levels">Predictors with More than Two Levels</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qualitative-predictors">18.5. Qualitative Predictors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predictors-with-only-two-levels">18.5.1. Predictors with Only Two Levels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predictors-with-more-than-two-levels">18.5.2. Predictors with More than Two Levels</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extensions-of-the-linear-model">Extensions of the Linear Model</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interaction-terms">Interaction Terms</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#non-linear-relationships-quadratic-and-polynomial-regression">Non-linear Relationships: Quadratic and Polynomial Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extensions-of-the-linear-model">18.6. Extensions of the Linear Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interaction-terms">18.6.1. Interaction Terms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#non-linear-relationships-quadratic-and-polynomial-regression">18.6.2. Non-linear Relationships: Quadratic and Polynomial Regression</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#residual-plots-and-residual-q-q-plots">Residual Plots and Residual Q-Q Plots</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collinearity-and-regularization-techniques">Collinearity and Regularization Techniques</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-regression">Ridge Regression</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-ridge-regression-coefficients">Interpretation of the ridge regression coefficients</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#residual-plots-and-residual-q-q-plots">18.7. Residual Plots and Residual Q-Q Plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collinearity-and-regularization-techniques">18.8. Collinearity and Regularization Techniques</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-regression">18.8.1. Ridge Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-ridge-regression-coefficients">18.8.1.1. Interpretation of the ridge regression coefficients</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lasso-regression">Lasso Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lasso-regression">18.8.2. Lasso Regression</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">18.9. References</a></li>
 </ul>
             </nav>
         </div>
@@ -493,11 +519,11 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="linear-regression">
-<h1>Linear Regression<a class="headerlink" href="#linear-regression" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">18. </span>Linear Regression<a class="headerlink" href="#linear-regression" title="Permalink to this heading">#</a></h1>
 <p>Linear regression is a fundamental and widely used statistical technique in data analysis and machine learning. It is a powerful tool for <strong>modeling and understanding the relationships between variables</strong>. At its core, linear regression aims to establish a linear relationship between a <strong>dependent variable</strong> (the one you want to predict) and <strong>one or more independent variables</strong> (the ones used for prediction). This technique allows us to make predictions, infer associations, and gain insights into how changes in independent variables influence the target variable. Linear regression is both intuitive and versatile, making it a valuable tool for tasks ranging from simple trend analysis to more complex predictive modeling and hypothesis testing.</p>
 <p>In this context, we will explore the concepts and applications of linear regression, its different types, and how to implement it using Python.</p>
 <section id="the-auto-mpg-dataset">
-<h2>The Auto MPG Dataset<a class="headerlink" href="#the-auto-mpg-dataset" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">18.1. </span>The Auto MPG Dataset<a class="headerlink" href="#the-auto-mpg-dataset" title="Permalink to this heading">#</a></h2>
 <p>We will consider the <a class="reference external" href="https://archive.ics.uci.edu/dataset/9/auto+mpg">Auto MPG</a> dataset, which contains <span class="math notranslate nohighlight">\(398\)</span> measurements of <span class="math notranslate nohighlight">\(8\)</span> different properties of different cars:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -676,7 +702,7 @@ Car Name: The name or identifier of the car model.</p></li>
 </div>
 </section>
 <section id="regression-models">
-<h2>Regression Models<a class="headerlink" href="#regression-models" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">18.2. </span>Regression Models<a class="headerlink" href="#regression-models" title="Permalink to this heading">#</a></h2>
 <p>Regression models, in general, aim to <strong>study the relationship between two variables</strong>, <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>, by defining a mathematical model <span class="math notranslate nohighlight">\(f\)</span> such that:</p>
 <div class="math notranslate nohighlight">
 \[Y=f(X) + \epsilon\]</div>
@@ -695,7 +721,7 @@ Car Name: The name or identifier of the car model.</p></li>
 <p>The function <span class="math notranslate nohighlight">\(f\)</span> can take different forms. The most common one is the <strong>linear form</strong> that we will see in the next section. While the linear form is very simple (and hence we can anticipate it will be a limited model in many cases), it has the great advantage to be <strong>easy to interpret</strong>.</p>
 </section>
 <section id="simple-linear-regression">
-<h2>Simple Linear Regression<a class="headerlink" href="#simple-linear-regression" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">18.3. </span>Simple Linear Regression<a class="headerlink" href="#simple-linear-regression" title="Permalink to this heading">#</a></h2>
 <p>Simple linear regression aims to model the <strong>linear relationship</strong> between two variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>. In our example dataset, we will consider <span class="math notranslate nohighlight">\(X=\text{horsepower}\)</span> and <span class="math notranslate nohighlight">\(Y=\text{mpg}\)</span>.</p>
 <p>Since we are trying to model a linear relationship, we can imagine <strong>a line passing through the data</strong>. The simple linear regression model is defined as:</p>
 <div class="math notranslate nohighlight">
@@ -727,7 +753,7 @@ Car Name: The name or identifier of the car model.</p></li>
 </div>
 <p>This line will also be called the <strong>regression line</strong>.</p>
 <section id="estimating-the-coefficients-ordinary-least-squares-ols">
-<h3>Estimating the Coefficients - Ordinary Least Squares (OLS)<a class="headerlink" href="#estimating-the-coefficients-ordinary-least-squares-ols" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">18.3.1. </span>Estimating the Coefficients - Ordinary Least Squares (OLS)<a class="headerlink" href="#estimating-the-coefficients-ordinary-least-squares-ols" title="Permalink to this heading">#</a></h3>
 <p>To estimate the coefficients of our optimal model, we should first define what is a good model. We will say that <strong>a good model is one that predicts well the <span class="math notranslate nohighlight">\(Y\)</span> variable from the <span class="math notranslate nohighlight">\(X\)</span> one</strong>. We already know from the example above that, since the relationship is not perfectly linear, the model will make some mistakes.</p>
 <p>Let <span class="math notranslate nohighlight">\(\{(x_i,y_i)\}\)</span> be our set of observations. Let</p>
 <div class="math notranslate nohighlight">
@@ -768,7 +794,7 @@ Car Name: The name or identifier of the car model.</p></li>
 \[\hat \beta_0 = \overline y - \hat \beta_1 \overline x\]</div>
 </section>
 <section id="interpretation-of-the-coefficients-of-linear-regression">
-<h3>Interpretation of the Coefficients of Linear Regression<a class="headerlink" href="#interpretation-of-the-coefficients-of-linear-regression" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">18.3.2. </span>Interpretation of the Coefficients of Linear Regression<a class="headerlink" href="#interpretation-of-the-coefficients-of-linear-regression" title="Permalink to this heading">#</a></h3>
 <p>Using the formulas above, we find the following values for the example above:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -795,7 +821,7 @@ beta_1: -0.16
 <p>which reveals that <strong>when we observe an increment of one unit of x, we observe an increment of <span class="math notranslate nohighlight">\(\beta_1\)</span> units in y</strong>. In our example, <span class="math notranslate nohighlight">\(\beta_1=-0.15\)</span>, hence we can say that, for cars with one additional unit of horsepower, we observe an drop in mps <span class="math notranslate nohighlight">\(-0.15\)</span> units.</p>
 </section>
 <section id="accuracy-of-the-coefficient-estimates">
-<h3>Accuracy of the Coefficient Estimates<a class="headerlink" href="#accuracy-of-the-coefficient-estimates" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">18.3.3. </span>Accuracy of the Coefficient Estimates<a class="headerlink" href="#accuracy-of-the-coefficient-estimates" title="Permalink to this heading">#</a></h3>
 <p>Recall that we are trying to model the relationship between two random variables <span class="math notranslate nohighlight">\(X\)</span> as <span class="math notranslate nohighlight">\(Y\)</span> with a simple linear model:</p>
 <div class="math notranslate nohighlight">
 \[Y = \beta_0 + \beta_1X+\epsilon\]</div>
@@ -817,7 +843,7 @@ beta_1: -0.16
 <p>Each of the first three subplots shows a different sample drawn from the population, with its corresponding estimated regression line, along with the true population regression line. The last subplot compares the different estimated lines with the population regression line and the average regression line (in red). Coefficient estimates are shown in the subplot titles.</p>
 <p>As can be noted, each estimate can be inaccurate, while the average regression line is very close to the population regression line. This is due to the fact that our estimators for the parameters of the regression coefficients <strong>have non-zero variance</strong>. In practice, in can be shown that these estimators are <strong>unbiased</strong> (hence the average regression line is close to the population line).</p>
 <section id="standard-errors-of-the-regression-coefficients">
-<h4>Standard Errors of the Regression Coefficients<a class="headerlink" href="#standard-errors-of-the-regression-coefficients" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">18.3.3.1. </span>Standard Errors of the Regression Coefficients<a class="headerlink" href="#standard-errors-of-the-regression-coefficients" title="Permalink to this heading">#</a></h4>
 <p>A natural question is hence <strong>“how do we assess how good our estimates of the regression coefficients are”</strong>. We resort here to <strong>statistical inference</strong>. It can be shown that the squared standard errors associated to the coefficient estimates are:</p>
 <div class="math notranslate nohighlight">
 \[SE(\hat \beta_0)^2 = \sigma^2 \left[\frac{1}{n} + \frac{\overline x^2}{\sum_{i=1}^{n}(x_i-\overline x)^2}\right], SE(\hat \beta_1)^2 = \frac{\sigma^2}{\sum_{i=1}^{n}(x_i-\overline x)^2}\]</div>
@@ -840,7 +866,7 @@ beta_1: -0.16
 </div>
 </section>
 <section id="confidence-intervals-of-the-regression-coefficients">
-<h4>Confidence Intervals of the Regression Coefficients<a class="headerlink" href="#confidence-intervals-of-the-regression-coefficients" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">18.3.3.2. </span>Confidence Intervals of the Regression Coefficients<a class="headerlink" href="#confidence-intervals-of-the-regression-coefficients" title="Permalink to this heading">#</a></h4>
 <p>As we have seen, standard errors allow to compute confidence intervals. We will not see it into details, but it turns out that the true values will be in the following intervals with a <span class="math notranslate nohighlight">\(95\%\)</span> confidence:</p>
 <div class="math notranslate nohighlight">
 \[[\hat \beta_0 - 1.96 \cdot SE(\hat \beta_0), \hat \beta_0 + 1.96 \cdot SE(\hat \beta_0)]\]</div>
@@ -885,7 +911,7 @@ beta_1: -0.16
 <p>In the plot above, the shading around the line illustrates the variability induced by the confidence intervals estimated for the coefficients.</p>
 </section>
 <section id="statistical-tests-for-the-relevance-of-coefficients">
-<h4>Statistical Tests for the Relevance of Coefficients<a class="headerlink" href="#statistical-tests-for-the-relevance-of-coefficients" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">18.3.3.3. </span>Statistical Tests for the Relevance of Coefficients<a class="headerlink" href="#statistical-tests-for-the-relevance-of-coefficients" title="Permalink to this heading">#</a></h4>
 <p>Standard errors are also used to perform <strong>hypothesis tests</strong> on the coefficients. In practice, it is common to perform a statistical test to assess whether the coefficient <span class="math notranslate nohighlight">\(\beta_1\)</span> is significantly different from zero. It is interesting to check this because, if <span class="math notranslate nohighlight">\(\beta_1\)</span> was equal to zero, then there would not be any correlation between the variables (and hence the linear regressor would not be useful). Indeed, if <span class="math notranslate nohighlight">\(\beta-1=0\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[Y=\beta_0 + \epsilon\]</div>
@@ -933,10 +959,10 @@ beta_1: -0.16
 </section>
 </section>
 <section id="accuracy-of-the-model">
-<h3>Accuracy of the Model<a class="headerlink" href="#accuracy-of-the-model" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">18.3.4. </span>Accuracy of the Model<a class="headerlink" href="#accuracy-of-the-model" title="Permalink to this heading">#</a></h3>
 <p>The tests performed above will tell us if there is a relationship between the variables, but they will not tell us <strong>how well does the model fit the data</strong>. For instance, if the relationship between <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> is not linear, we would expect the model not to fit the data very well. In practice, we can use different measures of accuracy of the model.</p>
 <section id="residual-standard-error">
-<h4>Residual Standard Error<a class="headerlink" href="#residual-standard-error" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">18.3.4.1. </span>Residual Standard Error<a class="headerlink" href="#residual-standard-error" title="Permalink to this heading">#</a></h4>
 <p>One way to measure how well the model fits the data is to check the variance of the residuals <span class="math notranslate nohighlight">\(\epsilon\)</span>. Recall that our model is:</p>
 <div class="math notranslate nohighlight">
 \[Y=\beta_0 + \beta_1 X + \epsilon\]</div>
@@ -952,7 +978,7 @@ beta_1: -0.16
 <p>So the percentage error will be <span class="math notranslate nohighlight">\(4.91/23.52 \approx 20\%\)</span>.</p>
 </section>
 <section id="r-2-statistic">
-<h4><span class="math notranslate nohighlight">\(R^2\)</span> Statistic<a class="headerlink" href="#r-2-statistic" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">18.3.4.2. </span><span class="math notranslate nohighlight">\(R^2\)</span> Statistic<a class="headerlink" href="#r-2-statistic" title="Permalink to this heading">#</a></h4>
 <p>The RSE value is an absolute measure, which is measured in the units of <span class="math notranslate nohighlight">\(Y\)</span>. Indeed, to interpret it, we had to check the range of the <span class="math notranslate nohighlight">\(Y\)</span> values. An alternative way to check if the model is fitting the data well, would be to compare the performance of our model with the performance of a <strong>baseline model</strong> which assumes no association between the <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> variables. This model would be:</p>
 <div class="math notranslate nohighlight">
 \[Y = k\]</div>
@@ -997,7 +1023,7 @@ beta_1: -0.16
 </section>
 </section>
 <section id="multiple-linear-regression">
-<h2>Multiple Linear Regression<a class="headerlink" href="#multiple-linear-regression" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">18.4. </span>Multiple Linear Regression<a class="headerlink" href="#multiple-linear-regression" title="Permalink to this heading">#</a></h2>
 <p>In the example above, we have seen that about <span class="math notranslate nohighlight">\(61\%\)</span> of the variance in <span class="math notranslate nohighlight">\(Y\)</span> was explained by the model. One may wonder why about <span class="math notranslate nohighlight">\(39\%\)</span> of the variance could not be explained. Some common reasons may be:</p>
 <ul class="simple">
 <li><p>There is stochasticity in the data which prevents us to learn an accurate function to predict <span class="math notranslate nohighlight">\(Y\)</span> from <span class="math notranslate nohighlight">\(X\)</span>;</p></li>
@@ -1021,7 +1047,7 @@ beta_1: -0.16
 <div class="math notranslate nohighlight">
 \[R^2=0.808\]</div>
 <section id="geometrical-interpretation">
-<h3>Geometrical Interpretation<a class="headerlink" href="#geometrical-interpretation" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">18.4.1. </span>Geometrical Interpretation<a class="headerlink" href="#geometrical-interpretation" title="Permalink to this heading">#</a></h3>
 <p>The multiple regression model based on two variable has a geometrical interpretation. Indeed, the equation:</p>
 <div class="math notranslate nohighlight">
 \[Z = \beta_0 + \beta_1 X + \beta_2 Y\]</div>
@@ -1035,7 +1061,7 @@ beta_1: -0.16
 <p>In general, when we consider <span class="math notranslate nohighlight">\(n\)</span> variables, the linear regressor will be <strong>a (n-1)-dimensional hyperplane in the n-dimensional space</strong>.</p>
 </section>
 <section id="statistical-interpretation">
-<h3>Statistical Interpretation<a class="headerlink" href="#statistical-interpretation" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">18.4.2. </span>Statistical Interpretation<a class="headerlink" href="#statistical-interpretation" title="Permalink to this heading">#</a></h3>
 <p>The statistical interpretation of a multiple linear regression model is very similar to the interpretation of a simple linear regression model. Given the general model:</p>
 <div class="math notranslate nohighlight">
 \[y=\beta_0 + \beta_1 x_1 + \ldots + \beta_i x_i + \ldots + \beta_n x_n\]</div>
@@ -1126,7 +1152,7 @@ beta_1: -0.16
 </table>
 </section>
 <section id="estimating-the-regression-coefficients">
-<h3>Estimating the Regression Coefficients<a class="headerlink" href="#estimating-the-regression-coefficients" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">18.4.3. </span>Estimating the Regression Coefficients<a class="headerlink" href="#estimating-the-regression-coefficients" title="Permalink to this heading">#</a></h3>
 <p>Given the general model:</p>
 <div class="math notranslate nohighlight">
 \[y=\beta_0 + \beta_1 x_1 + \ldots + \beta_i x_i + \ldots + \beta_n x_n\]</div>
@@ -1183,7 +1209,7 @@ e^{(m)}
 \[\mathbf{\hat \beta} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y}\]</div>
 </section>
 <section id="the-f-test">
-<h3>The F-Test<a class="headerlink" href="#the-f-test" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">18.4.4. </span>The F-Test<a class="headerlink" href="#the-f-test" title="Permalink to this heading">#</a></h3>
 <p>When fitting a multiple linear regressor, it is common to perform a statistical test to check whether at least one of the regression coefficients is significantly different from zero (in the population). This test is called an <span class="math notranslate nohighlight">\(F-test\)</span>. We define the <strong>null and alternative hypotheses</strong> as follows:</p>
 <div class="math notranslate nohighlight">
 \[H_0: \beta_1=\beta_2=\ldots=\beta_n=0\]</div>
@@ -1218,7 +1244,7 @@ e^{(m)}
 <p>This indicates that the regressor is statistically relevant. The <span class="math notranslate nohighlight">\(F-statistic\)</span> is much larger than <span class="math notranslate nohighlight">\(1\)</span> and the p-value (Prob(F-statistic)) is very small (under the significance level <span class="math notranslate nohighlight">\(\alpha = 0.05\)</span>).</p>
 </section>
 <section id="variable-selection">
-<h3>Variable Selection<a class="headerlink" href="#variable-selection" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">18.4.5. </span>Variable Selection<a class="headerlink" href="#variable-selection" title="Permalink to this heading">#</a></h3>
 <p>Let’s now try to fit a multiple linear regressor on our dataset by including all variables. Our dependent variable will be <code class="docutils literal notranslate"><span class="pre">mpg</span></code>, while the set of dependent variables will be:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -1350,7 +1376,7 @@ e^{(m)}
 <p>All variables now have an acceptable p-value (<span class="math notranslate nohighlight">\(\alpha=0.05\)</span>). We are done. Note that, by removing the two variables, <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> now has an acceptable p-value. This indicates that one of the removed variables was redundant with respect to <code class="docutils literal notranslate"><span class="pre">horsepower</span></code>.</p>
 </section>
 <section id="adjusted-r-2">
-<h3>Adjusted <span class="math notranslate nohighlight">\(R^2\)</span><a class="headerlink" href="#adjusted-r-2" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">18.4.6. </span>Adjusted <span class="math notranslate nohighlight">\(R^2\)</span><a class="headerlink" href="#adjusted-r-2" title="Permalink to this heading">#</a></h3>
 <p>While in the case of simple regression we saw that <span class="math notranslate nohighlight">\(R^2=\rho\)</span> (where <span class="math notranslate nohighlight">\(\rho\)</span> is the correlation coefficient), in the case of multiple regression, it turns out that:</p>
 <div class="math notranslate nohighlight">
 \[R^2 = Cov(Y, \hat Y)^2\]</div>
@@ -1363,7 +1389,7 @@ e^{(m)}
 </section>
 </section>
 <section id="qualitative-predictors">
-<h2>Qualitative Predictors<a class="headerlink" href="#qualitative-predictors" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">18.5. </span>Qualitative Predictors<a class="headerlink" href="#qualitative-predictors" title="Permalink to this heading">#</a></h2>
 <p>So far, we have studied relationships between continuous variables. In practice, linear regression allows to also study relationship between <strong>continuous dependent variables</strong> and <strong>qualitative independent variables</strong>. We will consider another dataset similar to the <strong>Auto MPG</strong> dataset:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -1509,7 +1535,7 @@ Fuel Type: [&#39;gas&#39; &#39;diesel&#39;]
 </div>
 <p>We will not see the meaning of all the values of <code class="docutils literal notranslate"><span class="pre">fuelsystem</span></code>, while the values of <code class="docutils literal notranslate"><span class="pre">fueltype</span></code> are self-explanatory.</p>
 <section id="predictors-with-only-two-levels">
-<h3>Predictors with Only Two Levels<a class="headerlink" href="#predictors-with-only-two-levels" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">18.5.1. </span>Predictors with Only Two Levels<a class="headerlink" href="#predictors-with-only-two-levels" title="Permalink to this heading">#</a></h3>
 <p>We will first see the case in which qualitative predictors only have two levels. To handle these as independent variables, we can define a new <strong>dummy variable</strong> which will encode <span class="math notranslate nohighlight">\(1\)</span> as one of the two levels and <span class="math notranslate nohighlight">\(0\)</span> as the other one. For instance, we can introduce a <code class="docutils literal notranslate"><span class="pre">fueltype[T.gas]</span></code> variable defined as follows:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}fueltype[T.gas] = \begin{cases} 1 &amp; \text{if } fueltype=gas \\ 0 &amp; \text{otherwise}\end{cases}\end{split}\]</div>
@@ -1542,7 +1568,7 @@ Fuel Type: [&#39;gas&#39; &#39;diesel&#39;]
 </ul>
 </section>
 <section id="predictors-with-more-than-two-levels">
-<h3>Predictors with More than Two Levels<a class="headerlink" href="#predictors-with-more-than-two-levels" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">18.5.2. </span>Predictors with More than Two Levels<a class="headerlink" href="#predictors-with-more-than-two-levels" title="Permalink to this heading">#</a></h3>
 <p>When predictors have <span class="math notranslate nohighlight">\(n\)</span> levels, we need to introduce <strong>multiple dummy variables</strong>. Specifically, we need to introduce <span class="math notranslate nohighlight">\(n-1\)</span> binary variables. For instance, if the levels of the variable <code class="docutils literal notranslate"><span class="pre">income</span></code> are <code class="docutils literal notranslate"><span class="pre">low</span></code>, <code class="docutils literal notranslate"><span class="pre">medium</span></code> and <code class="docutils literal notranslate"><span class="pre">high</span></code>, we could introduce two variables <code class="docutils literal notranslate"><span class="pre">income[T.low]</span></code> and <code class="docutils literal notranslate"><span class="pre">income[T.medium]</span></code>. These are sufficient to express all possible values of <code class="docutils literal notranslate"><span class="pre">income</span></code> as shown in the table below:</p>
 <table class="table">
 <thead>
@@ -1607,10 +1633,10 @@ Fuel Type: [&#39;gas&#39; &#39;diesel&#39;]
 </section>
 </section>
 <section id="extensions-of-the-linear-model">
-<h2>Extensions of the Linear Model<a class="headerlink" href="#extensions-of-the-linear-model" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">18.6. </span>Extensions of the Linear Model<a class="headerlink" href="#extensions-of-the-linear-model" title="Permalink to this heading">#</a></h2>
 <p>The linear model makes the very restrictive assumption that the the nature of the relationship between the variables is linear. However, in many cases, it is common to find relationships which deviate from this assumption. In the following sections, we will see some simple ways to deviate from these assumption within a linear regression model.</p>
 <section id="interaction-terms">
-<h3>Interaction Terms<a class="headerlink" href="#interaction-terms" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">18.6.1. </span>Interaction Terms<a class="headerlink" href="#interaction-terms" title="Permalink to this heading">#</a></h3>
 <p>A linear regression model assumes that <strong>the effect of the different independent variables to the prediction of the dependent variable is additive</strong>:</p>
 <div class="math notranslate nohighlight">
 \[y = \beta_0 + \beta_1 x_1 + \ldots + \beta_n x_n + \epsilon\]</div>
@@ -1720,7 +1746,7 @@ Fuel Type: [&#39;gas&#39; &#39;diesel&#39;]
 </ul>
 </section>
 <section id="non-linear-relationships-quadratic-and-polynomial-regression">
-<h3>Non-linear Relationships: Quadratic and Polynomial Regression<a class="headerlink" href="#non-linear-relationships-quadratic-and-polynomial-regression" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">18.6.2. </span>Non-linear Relationships: Quadratic and Polynomial Regression<a class="headerlink" href="#non-linear-relationships-quadratic-and-polynomial-regression" title="Permalink to this heading">#</a></h3>
 <p>In many cases, the relationship between two variables is not linear. Let’s visualize the scatterplot between <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -1778,7 +1804,7 @@ Fuel Type: [&#39;gas&#39; &#39;diesel&#39;]
 </section>
 </section>
 <section id="residual-plots-and-residual-q-q-plots">
-<h2>Residual Plots and Residual Q-Q Plots<a class="headerlink" href="#residual-plots-and-residual-q-q-plots" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">18.7. </span>Residual Plots and Residual Q-Q Plots<a class="headerlink" href="#residual-plots-and-residual-q-q-plots" title="Permalink to this heading">#</a></h2>
 <p>Residual plots are a way to diagnose if the linear model we are fitting on the data actually describes the relationship between the variables. For instance, if the relationship is not linear, and we try to force a linear model, the model will not be accurate.</p>
 <p>If the relation is accurate, we expect the residuals of the model (i.e., the <span class="math notranslate nohighlight">\(e_i=\hat y_i - y_i\)</span> terms) to be random and approximately Gaussian.</p>
 <p><strong>To check if the residuals are random, it is common to show a residual plot</strong>, which plots the residuals on the <span class="math notranslate nohighlight">\(y\)</span> axis and the true <span class="math notranslate nohighlight">\(y\)</span> values on the y axis. We expect to observe a cloud of points centered around the zero  with no specific patters.</p>
@@ -1792,12 +1818,12 @@ Fuel Type: [&#39;gas&#39; &#39;diesel&#39;]
 <p>From the plot, we can see that some models have residuals less correlated with the predicted variable and quantiles closer to the normal distribution. This happens when the model explains better the variance of the predicted variable. In particular, we can note that the quadratic model (second row) and the one with the interaction term (last row) are a much better fit than the purely linear models (other two rows).</p>
 </section>
 <section id="collinearity-and-regularization-techniques">
-<h2>Collinearity and Regularization Techniques<a class="headerlink" href="#collinearity-and-regularization-techniques" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">18.8. </span>Collinearity and Regularization Techniques<a class="headerlink" href="#collinearity-and-regularization-techniques" title="Permalink to this heading">#</a></h2>
 <p>When fitting a multiple linear regressor, we should bear in mind that having two very correlated variables can lead to a poor model. For instance, in the case of perfectly correlated variables, two rows of the <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> matrix will be linearly dependent (one can be computed as a linear function of the other), hence the determinant of <span class="math notranslate nohighlight">\(\mathbf{X}^T\mathbf{X}\)</span> will be zero, the matrix cannot be inverted, and the coefficients cannot be estimated.</p>
 <p>Even if two variables are nearly collinear (strongly correlated), the <span class="math notranslate nohighlight">\(\mathbf{X}^T\mathbf{X}\)</span> matrix will be ill conditioned and the parameters will be estimated with high numerical imprecision.</p>
 <p>In general, when there is collinearity between two variables (or even <strong>multicollinearity</strong>, involving more than two variables), <strong>the results of the multiple linear regressor cannot be trusted</strong>. In such cases, we can try to remove the correlated variables (we can identify correlated variables with the correlation matrix), apply regularization techniques (discussed later) or perform Principal Component Analysis (PCA), which aims to provide a set of decorrelated features from <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>. The PCA method will be presented later.</p>
 <section id="ridge-regression">
-<h3>Ridge Regression<a class="headerlink" href="#ridge-regression" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">18.8.1. </span>Ridge Regression<a class="headerlink" href="#ridge-regression" title="Permalink to this heading">#</a></h3>
 <p>One way to remove collinearity is to <strong>remove those variables which are highly correlated with other variables</strong>. This will effectively remove collinearity and solve the instability issues of linear regression. However, when there is a large number of predictors, this approach may not be very convenient. Also, it is not always clear which predictors to remove and which ones to keep, especially in the case of <strong>multicollinearity</strong> (sets of more than two variables which are highly correlated).</p>
 <p>A “<strong>soft approach</strong>” would be to feed all variables to the model and <strong>encourage it to set some of the coefficients to zero</strong>. If we could do this, the model would <strong>effectively select which variables to exclude from the model</strong>, hence releasing us from making a hard decision.</p>
 <p>This can be done by changing our cost function, the RSS. Recall that the RSS of linear regression (Ordinary Least Squares) can be written as:</p>
@@ -1821,7 +1847,7 @@ Fuel Type: [&#39;gas&#39; &#39;diesel&#39;]
 <p>As can be seen, the coefficient values are gradually shrunk towards zero as the value of <span class="math notranslate nohighlight">\(\lambda\)</span> increases. Interestingly, the model <strong>“decides”</strong> which coefficients to shrink. For instance, for low values of <span class="math notranslate nohighlight">\(\lambda\)</span>, <code class="docutils literal notranslate"><span class="pre">weight</span></code> is shrunk, while <code class="docutils literal notranslate"><span class="pre">acceleration</span></code> is first shrunk, then allowed to be larger than zero. This is due to the fact that, the regularization term acts as a sort of “soft constraint” encouraging the model to find smaller weights, while still finding a good solution.</p>
 <p>It can be shown (but we will not see it formally), that ridge regression <strong>reduces the variance of coefficient estimates</strong>. At the same time, <strong>the bias is increased</strong>. So, finding a good value of <span class="math notranslate nohighlight">\(\lambda\)</span> allows to <strong>control the bias-variance trade-off</strong>.</p>
 <section id="interpretation-of-the-ridge-regression-coefficients">
-<h4>Interpretation of the ridge regression coefficients<a class="headerlink" href="#interpretation-of-the-ridge-regression-coefficients" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">18.8.1.1. </span>Interpretation of the ridge regression coefficients<a class="headerlink" href="#interpretation-of-the-ridge-regression-coefficients" title="Permalink to this heading">#</a></h4>
 <p>Let us compare the parameters obtained through a ridge regressor with those obtained with a linear regressor (OLS):</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -1896,7 +1922,7 @@ Fuel Type: [&#39;gas&#39; &#39;diesel&#39;]
 </section>
 </section>
 <section id="lasso-regression">
-<h3>Lasso Regression<a class="headerlink" href="#lasso-regression" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">18.8.2. </span>Lasso Regression<a class="headerlink" href="#lasso-regression" title="Permalink to this heading">#</a></h3>
 <p>The ridge regressor will in general set coefficients exactly to zero only for very large values of <span class="math notranslate nohighlight">\(\lambda\)</span>. An alternative model which has been shown to set coefficients more likely to zero is the <strong>lasso regressor</strong>. The main difference with ridge regression is in the regularization term. The new cost function of a lasso regressor is as follows:</p>
 <div class="math notranslate nohighlight">
 \[\sum_{i=1}^m (y_i - \beta_0 - \sum_{j=1}^n \beta_j x_{ij})^2 + \lambda \sum_{j=1}^n |\beta_j| = RSS + \lambda \sum_{j=1}^n |\beta_j|\]</div>
@@ -1911,7 +1937,7 @@ Fuel Type: [&#39;gas&#39; &#39;diesel&#39;]
 </section>
 </section>
 <section id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">18.9. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Chapter 3 of [1]</p></li>
 <li><p>Parts of chapter 11 of [2]</p></li>
@@ -1951,6 +1977,24 @@ Fuel Type: [&#39;gas&#39; &#39;diesel&#39;]
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="10_statistical_inference.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">16. </span>Statistical Inference</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="12_logistic_regression.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">19. </span>Logistic Regression</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -1966,53 +2010,53 @@ Fuel Type: [&#39;gas&#39; &#39;diesel&#39;]
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-auto-mpg-dataset">The Auto MPG Dataset</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-models">Regression Models</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-linear-regression">Simple Linear Regression</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-coefficients-ordinary-least-squares-ols">Estimating the Coefficients - Ordinary Least Squares (OLS)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-coefficients-of-linear-regression">Interpretation of the Coefficients of Linear Regression</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-of-the-coefficient-estimates">Accuracy of the Coefficient Estimates</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-errors-of-the-regression-coefficients">Standard Errors of the Regression Coefficients</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-of-the-regression-coefficients">Confidence Intervals of the Regression Coefficients</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-tests-for-the-relevance-of-coefficients">Statistical Tests for the Relevance of Coefficients</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-auto-mpg-dataset">18.1. The Auto MPG Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-models">18.2. Regression Models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-linear-regression">18.3. Simple Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-coefficients-ordinary-least-squares-ols">18.3.1. Estimating the Coefficients - Ordinary Least Squares (OLS)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-coefficients-of-linear-regression">18.3.2. Interpretation of the Coefficients of Linear Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-of-the-coefficient-estimates">18.3.3. Accuracy of the Coefficient Estimates</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-errors-of-the-regression-coefficients">18.3.3.1. Standard Errors of the Regression Coefficients</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-of-the-regression-coefficients">18.3.3.2. Confidence Intervals of the Regression Coefficients</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-tests-for-the-relevance-of-coefficients">18.3.3.3. Statistical Tests for the Relevance of Coefficients</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-of-the-model">Accuracy of the Model</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#residual-standard-error">Residual Standard Error</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#r-2-statistic"><span class="math notranslate nohighlight">\(R^2\)</span> Statistic</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-of-the-model">18.3.4. Accuracy of the Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#residual-standard-error">18.3.4.1. Residual Standard Error</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#r-2-statistic">18.3.4.2. <span class="math notranslate nohighlight">\(R^2\)</span> Statistic</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-linear-regression">Multiple Linear Regression</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geometrical-interpretation">Geometrical Interpretation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-interpretation">Statistical Interpretation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-regression-coefficients">Estimating the Regression Coefficients</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-f-test">The F-Test</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-selection">Variable Selection</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adjusted-r-2">Adjusted <span class="math notranslate nohighlight">\(R^2\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-linear-regression">18.4. Multiple Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geometrical-interpretation">18.4.1. Geometrical Interpretation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-interpretation">18.4.2. Statistical Interpretation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-regression-coefficients">18.4.3. Estimating the Regression Coefficients</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-f-test">18.4.4. The F-Test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-selection">18.4.5. Variable Selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adjusted-r-2">18.4.6. Adjusted <span class="math notranslate nohighlight">\(R^2\)</span></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qualitative-predictors">Qualitative Predictors</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predictors-with-only-two-levels">Predictors with Only Two Levels</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predictors-with-more-than-two-levels">Predictors with More than Two Levels</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qualitative-predictors">18.5. Qualitative Predictors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predictors-with-only-two-levels">18.5.1. Predictors with Only Two Levels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predictors-with-more-than-two-levels">18.5.2. Predictors with More than Two Levels</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extensions-of-the-linear-model">Extensions of the Linear Model</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interaction-terms">Interaction Terms</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#non-linear-relationships-quadratic-and-polynomial-regression">Non-linear Relationships: Quadratic and Polynomial Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extensions-of-the-linear-model">18.6. Extensions of the Linear Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interaction-terms">18.6.1. Interaction Terms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#non-linear-relationships-quadratic-and-polynomial-regression">18.6.2. Non-linear Relationships: Quadratic and Polynomial Regression</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#residual-plots-and-residual-q-q-plots">Residual Plots and Residual Q-Q Plots</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collinearity-and-regularization-techniques">Collinearity and Regularization Techniques</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-regression">Ridge Regression</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-ridge-regression-coefficients">Interpretation of the ridge regression coefficients</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#residual-plots-and-residual-q-q-plots">18.7. Residual Plots and Residual Q-Q Plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collinearity-and-regularization-techniques">18.8. Collinearity and Regularization Techniques</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-regression">18.8.1. Ridge Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-ridge-regression-coefficients">18.8.1.1. Interpretation of the ridge regression coefficients</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lasso-regression">Lasso Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lasso-regression">18.8.2. Lasso Regression</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">18.9. References</a></li>
 </ul>
   </nav></div>
 
