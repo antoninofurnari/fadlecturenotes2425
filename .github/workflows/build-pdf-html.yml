@@ -35,18 +35,16 @@ jobs:
           echo "Initializing Conda"
           conda init bash
           source ~/.bashrc  # Activate the changes made by conda init
+          pip install pyppeteer
 
-      - name: Build Jupyter Book to HTML
+      - name: Build Jupyter Book to PDF
         run: |
-          conda run -n fadlecturenotes jb build lecturenotes/ --builder html
+          conda run -n fadlecturenotes jb build lecturenotes/ --builder pdfhtml
 
       - name: List HTML Output Directory
         run: |
-          ls -l lecturenotes/_build/html/lectures/  # List files to verify that index.html exists
-
-      - name: Convert HTML to PDF using Base URL
-        run: |
-          wkhtmltopdf --base-url ${GITHUB_WORKSPACE}/lecturenotes/_build/html/ ${GITHUB_WORKSPACE}/lecturenotes/_build/html/lectures/index.html ${GITHUB_WORKSPACE}/lecturenotes/_build/pdf/book.pdf --debug-javascript
+          ls -l lecturenotes/_build/
+          ls -l lecturenotes/_build/pdf/
 
       - uses: actions/upload-artifact@v3
         with:
