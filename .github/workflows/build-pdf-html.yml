@@ -32,6 +32,7 @@ jobs:
 
       - name: Build Jupyter Book to HTML
         run: |
+          source activate fadlecturenotes  # Activate the environment
           jb build lecturenotes/ --builder html
 
       - name: Convert HTML to PDF
