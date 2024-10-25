@@ -468,7 +468,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-of-the-coefficient-estimates">18.3.3. Accuracy of the Coefficient Estimates</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-errors-of-the-regression-coefficients">18.3.3.1. Standard Errors of the Regression Coefficients</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-of-the-regression-coefficients">18.3.3.2. Confidence Intervals of the Regression Coefficients</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-tests-for-the-relevance-of-coefficients">18.3.3.3. Statistical Tests for the Relevance of Coefficients</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-tests-for-the-significance-of-coefficients">18.3.3.3. Statistical Tests for the Significance of Coefficients</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-of-the-model">18.3.4. Accuracy of the Model</a><ul class="nav section-nav flex-column">
@@ -745,7 +745,7 @@ Car Name: The name or identifier of the car model.</p></li>
 <img alt="../_images/2a666893895881e826c843f1cc97b4d2e6292b30af6f5084f9d4aeb041ec1fb6.png" src="../_images/2a666893895881e826c843f1cc97b4d2e6292b30af6f5084f9d4aeb041ec1fb6.png" />
 </div>
 </div>
-<p>We hence aim to estimate two appropriate values <span class="math notranslate nohighlight">\(\hat \beta_0\)</span> and <span class="math notranslate nohighlight">\(\hat \beta_1\)</span> from data in a way that they provide a model which represent well our data. In the case of our example, we expect the geometrical model to have this aspect:</p>
+<p>We hence aim to estimate two appropriate values <span class="math notranslate nohighlight">\(\hat \beta_0\)</span> and <span class="math notranslate nohighlight">\(\hat \beta_1\)</span> from data in a way that they provide a model which represents well our data. In the case of our example, we expect the geometrical model to have this aspect:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <img alt="../_images/528afcac8e04ed0389165862a00453351b8a1980d8f1adb134e6947820a6de46.png" src="../_images/528afcac8e04ed0389165862a00453351b8a1980d8f1adb134e6947820a6de46.png" />
@@ -858,12 +858,6 @@ beta_1: -0.16
 <li><p>The standard errors are proportional to <span class="math notranslate nohighlight">\(\sigma^2\)</span>. This is expected, as we will have more uncertainty when the variance of the error term is high, hence when the points are more <strong>scattered around the population regression line</strong>.</p></li>
 <li><p>The standard errors depend inversely on <span class="math notranslate nohighlight">\(n\sigma_x^2 = \sum_{i=1}^n(x_i-\overline x)\)</span> (the variance of <span class="math notranslate nohighlight">\(x\)</span> multiplied by the sample size). This means that we will have more uncertainty in the estimates if <span class="math notranslate nohighlight">\(x\)</span> concentrate in a narrow range.</p></li>
 </ul>
-<p>The plot below shows some examples of fit for different values of <span class="math notranslate nohighlight">\(RSE\)</span> and <span class="math notranslate nohighlight">\(n\sigma_x^2\)</span>:</p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="../_images/1f889cba8fce5410f87cb8276a475d6cd0c313eb99a1c8fffa72b297398b7fb8.png" src="../_images/1f889cba8fce5410f87cb8276a475d6cd0c313eb99a1c8fffa72b297398b7fb8.png" />
-</div>
-</div>
 </section>
 <section id="confidence-intervals-of-the-regression-coefficients">
 <h4><span class="section-number">18.3.3.2. </span>Confidence Intervals of the Regression Coefficients<a class="headerlink" href="#confidence-intervals-of-the-regression-coefficients" title="Permalink to this heading">#</a></h4>
@@ -910,8 +904,8 @@ beta_1: -0.16
 </div>
 <p>In the plot above, the shading around the line illustrates the variability induced by the confidence intervals estimated for the coefficients.</p>
 </section>
-<section id="statistical-tests-for-the-relevance-of-coefficients">
-<h4><span class="section-number">18.3.3.3. </span>Statistical Tests for the Relevance of Coefficients<a class="headerlink" href="#statistical-tests-for-the-relevance-of-coefficients" title="Permalink to this heading">#</a></h4>
+<section id="statistical-tests-for-the-significance-of-coefficients">
+<h4><span class="section-number">18.3.3.3. </span>Statistical Tests for the Significance of Coefficients<a class="headerlink" href="#statistical-tests-for-the-significance-of-coefficients" title="Permalink to this heading">#</a></h4>
 <p>Standard errors are also used to perform <strong>hypothesis tests</strong> on the coefficients. In practice, it is common to perform a statistical test to assess whether the coefficient <span class="math notranslate nohighlight">\(\beta_1\)</span> is significantly different from zero. It is interesting to check this because, if <span class="math notranslate nohighlight">\(\beta_1\)</span> was equal to zero, then there would not be any correlation between the variables (and hence the linear regressor would not be useful). Indeed, if <span class="math notranslate nohighlight">\(\beta-1=0\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[Y=\beta_0 + \epsilon\]</div>
@@ -1377,9 +1371,9 @@ e^{(m)}
 </section>
 <section id="adjusted-r-2">
 <h3><span class="section-number">18.4.6. </span>Adjusted <span class="math notranslate nohighlight">\(R^2\)</span><a class="headerlink" href="#adjusted-r-2" title="Permalink to this heading">#</a></h3>
-<p>While in the case of simple regression we saw that <span class="math notranslate nohighlight">\(R^2=\rho\)</span> (where <span class="math notranslate nohighlight">\(\rho\)</span> is the correlation coefficient), in the case of multiple regression, it turns out that:</p>
+<p>While in the case of simple regression we saw that <span class="math notranslate nohighlight">\(R^2=\rho(x,y)^2\)</span> (where <span class="math notranslate nohighlight">\(\rho\)</span> is the correlation coefficient), in the case of multiple regression, it turns out that:</p>
 <div class="math notranslate nohighlight">
-\[R^2 = Cov(Y, \hat Y)^2\]</div>
+\[R^2 = \rho(Y, \hat Y)^2\]</div>
 <p>In general, having more variables in the linear regressor will reduce the error term and improve the covariance between <span class="math notranslate nohighlight">\(Y\)</span> and <span class="math notranslate nohighlight">\(\hat Y\)</span>, hence increasing the <span class="math notranslate nohighlight">\(R^2\)</span>. However, in general having a small increase in <span class="math notranslate nohighlight">\(R^2\)</span> when we add a new variable may not be good. Indeed, we could prefer a simpler model with a slightly smaller <span class="math notranslate nohighlight">\(R^2\)</span> value.</p>
 <p>To express this, we can compute the adjusted <span class="math notranslate nohighlight">\(R^2\)</span> as follows:</p>
 <div class="math notranslate nohighlight">
@@ -1646,26 +1640,12 @@ Fuel Type: [&#39;gas&#39; &#39;diesel&#39;]
 <p>As a concrete example, consider the problem of regressing <code class="docutils literal notranslate"><span class="pre">mpg</span></code> from <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> and <code class="docutils literal notranslate"><span class="pre">weight</span></code>. A simple model of the kind:</p>
 <div class="math notranslate nohighlight">
 \[mpg = \beta_0 + \beta_1 horsepower + \beta_1 weight\]</div>
-<p>assumes that the <span class="math notranslate nohighlight">\(\beta_1\)</span>, the increment that we observe in <code class="docutils literal notranslate"><span class="pre">mpg</span></code> when <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> increments by one unit is <strong>constant even when other variables change their values</strong>. However, we can imagine how, for light vehicles <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> affects <code class="docutils literal notranslate"><span class="pre">mpg</span></code> in a way, while for heavy vehicles <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> affects <code class="docutils literal notranslate"><span class="pre">mpg</span></code> in a different way. For example, we expect light vehicle with big <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> to be more efficient than heavy vehicles with small <code class="docutils literal notranslate"><span class="pre">horsepower</span></code>. To account for this, we could consider the following model instead:</p>
+<p>assumes that the <span class="math notranslate nohighlight">\(\beta_1\)</span>, the increment that we observe in <code class="docutils literal notranslate"><span class="pre">mpg</span></code> when <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> increments by one unit is <strong>constant even when other variables change their values</strong>. However, we can imagine how, for light vehicles <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> affects <code class="docutils literal notranslate"><span class="pre">mpg</span></code> in a way, while for heavy vehicles <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> affects <code class="docutils literal notranslate"><span class="pre">mpg</span></code> in a different way. For example, we expect light vehicles with big <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> to be more efficient than heavy vehicles with small <code class="docutils literal notranslate"><span class="pre">horsepower</span></code>. To account for this, we could consider the following model instead:</p>
 <div class="math notranslate nohighlight">
 \[mpg = \beta_0 + \beta_1 horsepower + \beta_2 weight + \beta_3 horsepower \times weight\]</div>
 <p>Note that the model above is nonlinear in <span class="math notranslate nohighlight">\(horsepower\)</span> and <span class="math notranslate nohighlight">\(weight\)</span>, but it is still linear if we introduce a variable <span class="math notranslate nohighlight">\(hw = horsepower \times weight\)</span>. We can easily do this by adding a new column to our design matrix computed as the product of the two variables. Then we can fit the model using the same exact estimators seen before.</p>
 <p>This new regressor obtained <span class="math notranslate nohighlight">\(R^2=0.748\)</span>, which is larger as compared to <span class="math notranslate nohighlight">\(R^2=0.706\)</span> obtained for the <span class="math notranslate nohighlight">\(mpg = \beta_0 + \beta_1 horsepower + \beta_2 weight\)</span> regressor. Both regressor have a large F-statistic and an associated p-value close to zero. The new regressor explains more variance than the previous one.</p>
 <p>The estimated coefficients are:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">columns</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;displacement&#39;, &#39;cylinders&#39;, &#39;horsepower&#39;, &#39;weight&#39;, &#39;acceleration&#39;,
-       &#39;model_year&#39;, &#39;origin&#39;, &#39;mpg&#39;],
-      dtype=&#39;object&#39;)
-</pre></div>
-</div>
-</div>
-</div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html"><table class="simpletable">
@@ -2018,7 +1998,7 @@ Fuel Type: [&#39;gas&#39; &#39;diesel&#39;]
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-of-the-coefficient-estimates">18.3.3. Accuracy of the Coefficient Estimates</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-errors-of-the-regression-coefficients">18.3.3.1. Standard Errors of the Regression Coefficients</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-of-the-regression-coefficients">18.3.3.2. Confidence Intervals of the Regression Coefficients</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-tests-for-the-relevance-of-coefficients">18.3.3.3. Statistical Tests for the Relevance of Coefficients</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-tests-for-the-significance-of-coefficients">18.3.3.3. Statistical Tests for the Significance of Coefficients</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-of-the-model">18.3.4. Accuracy of the Model</a><ul class="nav section-nav flex-column">
