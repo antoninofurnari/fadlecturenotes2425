@@ -36,10 +36,9 @@ jobs:
           conda init bash
           source ~/.bashrc  # Activate the changes made by conda init
 
-      - name: Activate Environment and Build Jupyter Book to HTML
+      - name: Build Jupyter Book to HTML
         run: |
-          conda activate fadlecturenotes  # Activate the environment
-          jb build lecturenotes/ --builder html
+          conda run -n fadlecturenotes jb build lecturenotes/ --builder html
 
       - name: Convert HTML to PDF
         run: |
