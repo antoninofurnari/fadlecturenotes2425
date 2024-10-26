@@ -55,10 +55,10 @@ parts:
   numbered: True
   chapters:
   - file: lectures/12_logistic_regression
-# - caption: Lecture 10
-#   numbered: True
-#   chapters:
-#   - file: lectures/13_causal_analysis
+- caption: Lecture 10
+  numbered: True
+  chapters:
+  - file: lectures/13_causal_analysis
 # - caption: Lecture 11
 #   numbered: True
 #   chapters:
