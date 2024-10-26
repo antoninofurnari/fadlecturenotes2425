@@ -47,10 +47,10 @@ parts:
   numbered: True
   chapters:
   - file: lectures/10_statistical_inference
-# - caption: Lecture 7 & 8
-#   numbered: True
-#   chapters:
-#   - file: lectures/11_linear_regression
+- caption: Lecture 7 & 8
+  numbered: True
+  chapters:
+  - file: lectures/11_linear_regression
 # - caption: Lecture 9
 #   numbered: True
 #   chapters:
