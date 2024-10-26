@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>21. Data as N-Dimensional Points &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+    <title>Data as N-Dimensional Points &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
   
   
   
@@ -68,8 +68,6 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="22. Clustering" href="15_clustering.html" />
-    <link rel="prev" title="20. Causal Data Analysis" href="13_causal_analysis.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -211,29 +209,6 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="10_statistical_inference.html">16. Statistical Inference</a></li>
 
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 7 &amp; 8</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="11_linear_regression.html">18. Linear Regression</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 9</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="12_logistic_regression.html">19. Logistic Regression</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 10</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="13_causal_analysis.html">20. Causal Data Analysis</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 11</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">21. Data as N-Dimensional Points</a></li>
-<li class="toctree-l1"><a class="reference internal" href="15_clustering.html">22. Clustering</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratory 3</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/10_statistical_inference.html">23. Laboratory on Statistical Inference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/11_regressione_lineare.html">24. Laboratorio su Regressione Lineare</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/12_regressione_logistica.html">25. Laboratorio su regressione logistica</a></li>
 </ul>
 
     </div>
@@ -460,17 +435,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#features-and-representation-functions">21.1. Features and Representation Functions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#important-properties-of-feature-spaces">21.2. Important Properties of Feature Spaces</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#norms">21.2.1. Norms</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metrics">21.2.2. Metrics</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#l-p-metrics">21.2.2.1. L-p Metrics</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cosine-distance">21.2.2.2. Cosine Distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#features-and-representation-functions">Features and Representation Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#important-properties-of-feature-spaces">Important Properties of Feature Spaces</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#norms">Norms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metrics">Metrics</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#l-p-metrics">L-p Metrics</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cosine-distance">Cosine Distance</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">21.3. References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
             </nav>
         </div>
@@ -483,7 +458,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="data-as-n-dimensional-points">
-<h1><span class="section-number">21. </span>Data as N-Dimensional Points<a class="headerlink" href="#data-as-n-dimensional-points" title="Permalink to this heading">#</a></h1>
+<h1>Data as N-Dimensional Points<a class="headerlink" href="#data-as-n-dimensional-points" title="Permalink to this heading">#</a></h1>
 <p>So far, we have seen data as a collection of observations of multiple variables. We have often represented a dataset as a table or a data matrix. In all previous analyses, we have focused on the interpretation of the values of each variable.</p>
 <p>However, in many cases (and especially when variables are many), it is useful to given a geometric interpretation of data and see observation as <strong>d-dimensional data points</strong>, where <span class="math notranslate nohighlight">\(d\)</span> is the number of variables in the dataset. Consider the following data:</p>
 <table class="table">
@@ -528,7 +503,7 @@ document.write(`
 </div>
 <p>Each observation, is a 2D point in the Cartesian space. This geometrical interpretation of data is central to data analysis and very convenient in particular <strong>when many different variables are available</strong>.</p>
 <section id="features-and-representation-functions">
-<h2><span class="section-number">21.1. </span>Features and Representation Functions<a class="headerlink" href="#features-and-representation-functions" title="Permalink to this heading">#</a></h2>
+<h2>Features and Representation Functions<a class="headerlink" href="#features-and-representation-functions" title="Permalink to this heading">#</a></h2>
 <p>In this context in which we are not always <strong>explicitly giving names or interpretation to the variables</strong>, each of the variables will also be referred to as <strong>a feature of the data</strong>. For instance, <strong>a dataset of images of <span class="math notranslate nohighlight">\(100 \times 100\)</span> pixels can be seen as a collection of <span class="math notranslate nohighlight">\(10000\)</span>-dimensional vectors</strong>, where each vector’s dimension is a “feature”, i.e., the value of a specific pixel of the image.</p>
 <p>Given this interpretation of variables as features, it is often common to talk about <strong>feature extraction</strong>, in the case of any process transforming the data <span class="math notranslate nohighlight">\(\mathbf{x} \in \Re^d\)</span> to another form <span class="math notranslate nohighlight">\(\mathbf{y} \in \Re^m\)</span>. In this context, a function:</p>
 <div class="math notranslate nohighlight">
@@ -537,10 +512,10 @@ document.write(`
 <p>We will also refer to <span class="math notranslate nohighlight">\(\Re^d\)</span> and <span class="math notranslate nohighlight">\(\Re^m\)</span> as “<strong>feature spaces</strong>” or “<strong>representation spaces</strong>” as they will be <strong>vector spaces</strong> to which data points (also called <strong>feature vectors</strong>) belong.</p>
 </section>
 <section id="important-properties-of-feature-spaces">
-<h2><span class="section-number">21.2. </span>Important Properties of Feature Spaces<a class="headerlink" href="#important-properties-of-feature-spaces" title="Permalink to this heading">#</a></h2>
+<h2>Important Properties of Feature Spaces<a class="headerlink" href="#important-properties-of-feature-spaces" title="Permalink to this heading">#</a></h2>
 <p>Since observations <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> are vectors living in some vector spaces, all <strong>basic properties of vectors and vector spaces introduced in linear algebra will apply here as well</strong>. We’ll recall the most important concepts as we need them in the course, but, for the moment, it is useful to summarize the main important properties.</p>
 <section id="norms">
-<h3><span class="section-number">21.2.1. </span>Norms<a class="headerlink" href="#norms" title="Permalink to this heading">#</a></h3>
+<h3>Norms<a class="headerlink" href="#norms" title="Permalink to this heading">#</a></h3>
 <p>Given a vector space <span class="math notranslate nohighlight">\(S\)</span>, a norm <span class="math notranslate nohighlight">\(p\)</span> is a function from <span class="math notranslate nohighlight">\(S\)</span> to a non negative real number:</p>
 <div class="math notranslate nohighlight">
 \[p \in S \to \Re^+_0\]</div>
@@ -575,7 +550,7 @@ document.write(`
 </div>
 </section>
 <section id="metrics">
-<h3><span class="section-number">21.2.2. </span>Metrics<a class="headerlink" href="#metrics" title="Permalink to this heading">#</a></h3>
+<h3>Metrics<a class="headerlink" href="#metrics" title="Permalink to this heading">#</a></h3>
 <p>Given a space <span class="math notranslate nohighlight">\(S\)</span>, a function</p>
 <p><span class="math notranslate nohighlight">\(m : S \times S \to \Re\)</span></p>
 <p>is <strong>a metric</strong> if the following properties are satisfied:</p>
@@ -586,7 +561,7 @@ document.write(`
 <li><p>Triangle inequality: <span class="math notranslate nohighlight">\(m(\mathbf{x},\mathbf{y}) \leq m(\mathbf{x},\mathbf{z}) + m(\mathbf{z},\mathbf{y}), \forall \mathbf{x}, \mathbf{y}, \mathbf{z} \in S\)</span></p></li>
 </ol>
 <section id="l-p-metrics">
-<h4><span class="section-number">21.2.2.1. </span>L-p Metrics<a class="headerlink" href="#l-p-metrics" title="Permalink to this heading">#</a></h4>
+<h4>L-p Metrics<a class="headerlink" href="#l-p-metrics" title="Permalink to this heading">#</a></h4>
 <p>From the L-p norms, we can derive <strong>a family of metrics</strong> as follows:</p>
 <div class="math notranslate nohighlight">
 \[L_p(\mathbf{x},\mathbf{y}) = ||\mathbf{x} - \mathbf{y}||_p = \left( \sum_{i=1}^{d} |x_i - y_i|^p \right)^{1/p}\]</div>
@@ -616,7 +591,7 @@ L-Inf Distance: 4.00
 <p>While the Euclidean distance measures the length of the straight segment connecting the two points, the Manhattan distance is the one in grey (dashed), which measures the distance that a taxi driver should drive in Manhattan (or any other square-block based city) to reach the destination.</p>
 </section>
 <section id="cosine-distance">
-<h4><span class="section-number">21.2.2.2. </span>Cosine Distance<a class="headerlink" href="#cosine-distance" title="Permalink to this heading">#</a></h4>
+<h4>Cosine Distance<a class="headerlink" href="#cosine-distance" title="Permalink to this heading">#</a></h4>
 <p>The cosine distance is useful when we need to compare two vectors but we do not care about differences arising from scaling factors. Note that the euclidean distance of two proportional vectors is in general non-zero:</p>
 <div class="math notranslate nohighlight">
 \[||\mathbf{x} - \alpha \mathbf{x}||^2 &gt; 0, \alpha \neq 1\]</div>
@@ -651,7 +626,7 @@ L-Inf Distance: 4.00
 </section>
 </section>
 <section id="references">
-<h2><span class="section-number">21.3. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Norm_(mathematics)">https://en.wikipedia.org/wiki/Norm_(mathematics)</a></p></li>
 <li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Lp_space">https://en.wikipedia.org/wiki/Lp_space</a></p></li>
@@ -693,24 +668,6 @@ L-Inf Distance: 4.00
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="13_causal_analysis.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">20. </span>Causal Data Analysis</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="15_clustering.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">22. </span>Clustering</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -726,17 +683,17 @@ L-Inf Distance: 4.00
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#features-and-representation-functions">21.1. Features and Representation Functions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#important-properties-of-feature-spaces">21.2. Important Properties of Feature Spaces</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#norms">21.2.1. Norms</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metrics">21.2.2. Metrics</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#l-p-metrics">21.2.2.1. L-p Metrics</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cosine-distance">21.2.2.2. Cosine Distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#features-and-representation-functions">Features and Representation Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#important-properties-of-feature-spaces">Important Properties of Feature Spaces</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#norms">Norms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metrics">Metrics</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#l-p-metrics">L-p Metrics</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cosine-distance">Cosine Distance</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">21.3. References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
   </nav></div>
 
