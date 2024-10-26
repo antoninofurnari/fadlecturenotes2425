@@ -25,6 +25,11 @@ jobs:
           environment-file: environment.yml
           activate-environment: fadlecturenotes
 
+      - name: Install Pyppeteer
+        run: |
+          conda activate fadlecturenotes
+          pip install pyppeteer
+
       - name: Build HTML
         shell: bash -l {0}
         run: jb build lecturenotes/
@@ -33,7 +38,7 @@ jobs:
         shell: bash -l {0}
         run: |
           jb build lecturenotes/ --builder pdfhtml
-        # The `pdfhtml` builder uses HTML to generate the PDF. If LaTeX is needed, use `pdflatex`
+        # The `pdfhtml` builder uses HTML to generate the PDF
 
       - name: Upload PDF Artifact
         uses: actions/upload-artifact@v3
