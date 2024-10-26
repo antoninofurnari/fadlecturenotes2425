@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Causal Data Analysis &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+    <title>20. Causal Data Analysis &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
   
   
   
@@ -68,6 +68,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="19. Logistic Regression" href="12_logistic_regression.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -217,6 +218,10 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 9</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="12_logistic_regression.html">19. Logistic Regression</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 10</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">20. Causal Data Analysis</a></li>
 </ul>
 
     </div>
@@ -443,57 +448,57 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sleep-vs-exam-performance">Sleep vs Exam Performance</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-causation-potential-outcomes-counterfactuals">Measuring Causation - Potential Outcomes (Counterfactuals)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bias-arising-from-correlation">The Bias Arising from Correlation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#randomized-controlled-trials-rct">Randomized Controlled Trials (RCT)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sleep-vs-exam-performance">20.1. Sleep vs Exam Performance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-causation-potential-outcomes-counterfactuals">20.2. Measuring Causation - Potential Outcomes (Counterfactuals)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bias-arising-from-correlation">20.3. The Bias Arising from Correlation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#randomized-controlled-trials-rct">20.4. Randomized Controlled Trials (RCT)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">20.4.1. Example</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#causal-effect-and-observational-studies">Causal Effect and Observational Studies</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-for-interest">Controlling for <code class="docutils literal notranslate"><span class="pre">interest</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#causal-effect-and-observational-studies">20.5. Causal Effect and Observational Studies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-for-interest">20.5.1. Controlling for <code class="docutils literal notranslate"><span class="pre">interest</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-causal-models">Graphical Causal Models</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#main-structures-of-causal-graphical-models">Main Structures of Causal Graphical Models</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#chains">Chains</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-causal-models">20.6. Graphical Causal Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#main-structures-of-causal-graphical-models">20.6.1. Main Structures of Causal Graphical Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#chains">20.6.1.1. Chains</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forks">Forks</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#colliders">Colliders</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dependence-flow-rules">Dependence Flow Rules</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-1-is-d-perp-c">Question 1: is <span class="math notranslate nohighlight">\(D \perp C\)</span>?</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-2-is-d-perp-c-a">Question 2: is <span class="math notranslate nohighlight">\(D \perp C | A\)</span>?</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-3-is-d-perp-c-g">Question 3: is <span class="math notranslate nohighlight">\(D \perp C | G\)</span>?</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-4-is-a-perp-f">Question 4: is <span class="math notranslate nohighlight">\(A \perp F\)</span>?</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-5-is-a-perp-f-e">Question 5: is <span class="math notranslate nohighlight">\(A \perp F | E\)</span>?</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-6-is-a-perp-f-e-c">Question 6: is <span class="math notranslate nohighlight">\(A \perp F | E, C\)</span>?</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-graphical-causal-models-to-diagnose-bias">Using Graphical Causal Models to Diagnose Bias</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confounding-bias">Confounding Bias</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-common-causes-and-unmeasurable-variables">Multiple Common Causes and Unmeasurable Variables</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#surrogate-confounders">Surrogate Confounders</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-bias">Selection Bias</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-for-a-common-effect">Controlling For a Common Effect</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-on-a-mediator">Controlling on a Mediator</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#main-sources-of-bias">Main Sources of Bias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forks">20.6.2. Forks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#colliders">20.6.3. Colliders</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dependence-flow-rules">20.6.4. Dependence Flow Rules</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-1-is-d-perp-c">20.6.4.1. Question 1: is <span class="math notranslate nohighlight">\(D \perp C\)</span>?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-2-is-d-perp-c-a">20.6.4.2. Question 2: is <span class="math notranslate nohighlight">\(D \perp C | A\)</span>?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-3-is-d-perp-c-g">20.6.4.3. Question 3: is <span class="math notranslate nohighlight">\(D \perp C | G\)</span>?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-4-is-a-perp-f">20.6.4.4. Question 4: is <span class="math notranslate nohighlight">\(A \perp F\)</span>?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-5-is-a-perp-f-e">20.6.4.5. Question 5: is <span class="math notranslate nohighlight">\(A \perp F | E\)</span>?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-6-is-a-perp-f-e-c">20.6.4.6. Question 6: is <span class="math notranslate nohighlight">\(A \perp F | E, C\)</span>?</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-for-causal-analysis">Linear Regression for Causal Analysis</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-on-the-lucas-dataset">Example on the LUCAS Dataset</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#does-smoking-causes-car-accident">Does <code class="docutils literal notranslate"><span class="pre">Smoking</span></code> causes <code class="docutils literal notranslate"><span class="pre">Car</span> <span class="pre">Accident</span></code>?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-graphical-causal-models-to-diagnose-bias">20.7. Using Graphical Causal Models to Diagnose Bias</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confounding-bias">20.7.1. Confounding Bias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-common-causes-and-unmeasurable-variables">20.7.2. Multiple Common Causes and Unmeasurable Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#surrogate-confounders">20.7.2.1. Surrogate Confounders</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-bias">20.7.3. Selection Bias</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-for-a-common-effect">20.7.3.1. Controlling For a Common Effect</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-on-a-mediator">20.7.3.2. Controlling on a Mediator</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#main-sources-of-bias">20.7.3.3. Main Sources of Bias</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-for-causal-analysis">20.8. Linear Regression for Causal Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-on-the-lucas-dataset">20.8.1. Example on the LUCAS Dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#does-smoking-causes-car-accident">20.8.1.1. Does <code class="docutils literal notranslate"><span class="pre">Smoking</span></code> causes <code class="docutils literal notranslate"><span class="pre">Car</span> <span class="pre">Accident</span></code>?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">20.9. References</a></li>
 </ul>
             </nav>
         </div>
@@ -506,7 +511,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="causal-data-analysis">
-<h1>Causal Data Analysis<a class="headerlink" href="#causal-data-analysis" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">20. </span>Causal Data Analysis<a class="headerlink" href="#causal-data-analysis" title="Permalink to this heading">#</a></h1>
 <p>We have seen how to characterize the relationship between two or more variables with correlation and linear regression. We also said that <strong>correlation is not causation</strong>, meaning that, if we observe a correlation between two variables, that does not necessarily implies a cause-effect relationship between them. However, in many cases, it is still useful (or required!) to establish a cause-effect relationship (or lack thereof) between two variables. Consider the following examples:</p>
 <ul class="simple">
 <li><p>We assess that <strong>a given disease is more frequent among smokers</strong>. Is this just a correlation or is there a cause-effect relationship? If a smoker stops smoking, will their risk to get the disease be reduced?</p></li>
@@ -516,7 +521,7 @@ document.write(`
 <p>Luckily, the field of <strong>causal analysis</strong> has, over the years, developed a set of tools which allow to answer those questions.</p>
 <p>The goal of this lecture is to provide a primer of causal analysis, introducing the main concepts and discussing some techniques which can be applied in some simple cases.</p>
 <section id="sleep-vs-exam-performance">
-<h2>Sleep vs Exam Performance<a class="headerlink" href="#sleep-vs-exam-performance" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">20.1. </span>Sleep vs Exam Performance<a class="headerlink" href="#sleep-vs-exam-performance" title="Permalink to this heading">#</a></h2>
 <p>We will consider a simple example which will guide us through the understanding of the main concepts of causal analysis. The data is made up and showing somewhat extreme correlations, but it should serve the purpose of illustrating the main concepts.</p>
 <p>We want to study the relationship between sleep and exam performance (in a <span class="math notranslate nohighlight">\(0-100\)</span> scale), so we asked <span class="math notranslate nohighlight">\(50\)</span> students to tell us about their sleeping habits (in particular, we asked if they sleep, in average, 8 hours of more, the recommended number of hours for their age). We put these numbers together with the average exam performance of the students, obtaining the following data:</p>
 <div class="cell tag_remove-input docutils container">
@@ -822,7 +827,7 @@ P-value: 0.014630790631265746
 <p>Also in this case, the difference seems to be statistically significant.</p>
 </section>
 <section id="measuring-causation-potential-outcomes-counterfactuals">
-<h2>Measuring Causation - Potential Outcomes (Counterfactuals)<a class="headerlink" href="#measuring-causation-potential-outcomes-counterfactuals" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">20.2. </span>Measuring Causation - Potential Outcomes (Counterfactuals)<a class="headerlink" href="#measuring-causation-potential-outcomes-counterfactuals" title="Permalink to this heading">#</a></h2>
 <p>We now start formulating hypotheses and theories: it looks counter-intuitive, but this is what the data is telling us. Isn’t it? It might be that sleeping too much makes you less reactive in the morning, so you cannot properly focus and this makes you a worse student.</p>
 <p>If this is true, than we could “<strong>prescribe</strong>” students to sleep less than <span class="math notranslate nohighlight">\(8\)</span> hours to obtain gains in performance. But we also know that… <strong>correlation is not (necessarily) causation!</strong>. We are seeing a correlation here - is it also causation? Of course, we want to be able to tell our students whether to sleep less or not!</p>
 <p>To be able to truly assess a causal relationship between the two variables, ideally, we would like to <strong>take the same student and ask them to sleep more than <span class="math notranslate nohighlight">\(8\)</span> hours for one year, than less than <span class="math notranslate nohighlight">\(8\)</span> hours for another years, then compare performance</strong>. This is of course unethical and impractical. And even if we could do so, between the two years, different other factors may change, so the two values will never be fully comparable.</p>
@@ -847,7 +852,7 @@ P-value: 0.014630790631265746
 <p>This simply restricts the computation to the treated subjects, and <strong>also establishes a causal effect</strong>.</p>
 </section>
 <section id="the-bias-arising-from-correlation">
-<h2>The Bias Arising from Correlation<a class="headerlink" href="#the-bias-arising-from-correlation" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">20.3. </span>The Bias Arising from Correlation<a class="headerlink" href="#the-bias-arising-from-correlation" title="Permalink to this heading">#</a></h2>
 <p>Without potential outcomes, we cannot compute the <span class="math notranslate nohighlight">\(ATE\)</span> or <span class="math notranslate nohighlight">\(ATT\)</span> scores. Indeed, we have <strong>two distinct groups</strong>, the <strong>treated</strong> (i.e., those observations <span class="math notranslate nohighlight">\(i\)</span> such that <span class="math notranslate nohighlight">\(T_i=1\)</span>) and the <strong>untreated</strong>, also known as <strong>control group</strong> (i.e., those observations <span class="math notranslate nohighlight">\(i\)</span> such that <span class="math notranslate nohighlight">\(T_i=0\)</span>).</p>
 <p>We could think to replace that calculation with the only data we can observe:</p>
 <div class="math notranslate nohighlight">
@@ -1229,7 +1234,7 @@ P-value: 0.014630790631265746
 <p>Now that we have an intuition into what may make correlation be not indicative of causation, let’s see how to reduce bias to establish cause-effect relationships.</p>
 </section>
 <section id="randomized-controlled-trials-rct">
-<h2>Randomized Controlled Trials (RCT)<a class="headerlink" href="#randomized-controlled-trials-rct" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">20.4. </span>Randomized Controlled Trials (RCT)<a class="headerlink" href="#randomized-controlled-trials-rct" title="Permalink to this heading">#</a></h2>
 <p>We have seen that correlation is causation when the treated and control groups are comparable for everything except the treatment. The most robust method to remove this bias is via <strong>randomized experiments</strong>, or <strong>Randomized Controlled Trials</strong> (RCT).</p>
 <p>A randomized experiment <strong>randomly assigns individuals in a population to a treatment or a control group</strong>. By performing a random assignment, we wish to make the two groups indistinguishable. Of course <strong>one of the two groups will take the treatment and this will likely make the two group distinguishable</strong>, but we wish to make sure that, <strong>apart from the treatment, the two groups are indeed indistinguishable</strong>.</p>
 <p>It can be shown that random assignment makes sure that the potential outcomes are conditionally independent given the treatment:</p>
@@ -1247,7 +1252,7 @@ P-value: 0.014630790631265746
 \[E[Y(1)|T=1] - E[Y(0)|T=0] = E[Y(1)] - E[Y(0)] = E[Y(1)-Y(10)] = ATE\]</div>
 <p>Hence, in this case, <strong>correlation would be causation</strong>.</p>
 <section id="example">
-<h3>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">20.4.1. </span>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h3>
 <p>Let us now consider an example. A school wants to see if a new teaching method is effective. To do so, they ask <span class="math notranslate nohighlight">\(50\)</span> students if they want to <strong>voluntarily enroll a tutoring program</strong>. After one year, they measure the average performance of students who participated in the programme and compare it to those of students who did not participate in the programme. We obtain the following data:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -1457,7 +1462,7 @@ P-value: 0.014630790631265746
 </section>
 </section>
 <section id="causal-effect-and-observational-studies">
-<h2>Causal Effect and Observational Studies<a class="headerlink" href="#causal-effect-and-observational-studies" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">20.5. </span>Causal Effect and Observational Studies<a class="headerlink" href="#causal-effect-and-observational-studies" title="Permalink to this heading">#</a></h2>
 <p>We have seen how to interpret an observed association as a cause-effect relationship we need to reduce bias. The gold standard is to use randomized controlled trials, however <strong>this is not always feasible or ethical</strong>. Consider for instance <strong>the problem of estimating the effect of smoking on the development of a given disease</strong>. To perform a randomized experiment, we should select subjects randomly in two groups and ask people in one of the two groups to smoke. <strong>This is of course unethical, considering that we suspect that smoking has a bad effect on health</strong>.</p>
 <p>In these cases, we can only resort to <strong>observational data</strong>: we collect data of smokers and non-smokers and observe association in the data. However, we know that this process is <strong>subject to bias</strong>. How do we deal with it? In this part of the lecture, we will see that <strong>graphical causal models</strong> give us a framework to <strong>set our believes on where bias come from</strong>. If we can accurately model the source of bias, we can remove it by <strong>controlling</strong> on the variable “causing” the bias.</p>
 <p>Let us consider our past example: students and tutoring. Let us assume that we cannot perform the random assignment (again, it’s unethical!). Since we imagine that <strong>the interest of students towards study can be a source of bias</strong>, we now ask students to also tell us how interested they are in studying in general in a scale from <span class="math notranslate nohighlight">\(1\)</span> to <span class="math notranslate nohighlight">\(5\)</span>. We obtain the following observations:</p>
@@ -1590,7 +1595,7 @@ Chi-square p-value: 2.761663e-06
 <p>We were right also in this case! Interest affects tutoring, hence interest is our source of bias!</p>
 <p>The correlation between the <code class="docutils literal notranslate"><span class="pre">interest</span></code> variable and <code class="docutils literal notranslate"><span class="pre">tutoring</span></code> is making the “treated” (<code class="docutils literal notranslate"><span class="pre">tutoring=1</span></code>) and the “control” (<code class="docutils literal notranslate"><span class="pre">tutoring=0</span></code>) groups not comparable. Indeed, if people in the treated group have more chances of getting a higher response value (performance), then no wonder that we observe such dramatic differences among the two groups! In other words, <strong>the effect we observe may be due to the bias introduced by <code class="docutils literal notranslate"><span class="pre">interest</span></code>, the effect of <code class="docutils literal notranslate"><span class="pre">tutoring</span></code>, or a combination of both</strong>.</p>
 <section id="controlling-for-interest">
-<h3>Controlling for <code class="docutils literal notranslate"><span class="pre">interest</span></code><a class="headerlink" href="#controlling-for-interest" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">20.5.1. </span>Controlling for <code class="docutils literal notranslate"><span class="pre">interest</span></code><a class="headerlink" href="#controlling-for-interest" title="Permalink to this heading">#</a></h3>
 <p>How do we make the groups more comparable? Recall that we want:</p>
 <div class="math notranslate nohighlight">
 \[Y(0) \perp Y(1) | T\]</div>
@@ -1670,7 +1675,7 @@ Chi-square p-value: 2.761663e-06
 </section>
 </section>
 <section id="graphical-causal-models">
-<h2>Graphical Causal Models<a class="headerlink" href="#graphical-causal-models" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">20.6. </span>Graphical Causal Models<a class="headerlink" href="#graphical-causal-models" title="Permalink to this heading">#</a></h2>
 <p>We have seen a simple case in which we could identify the main source of bias which was leading to an observed association not implying a cause-effect mechanism. However, not all cases are so simple and <strong>more than one variable may be responsible for bias</strong>. The question now is</p>
 <blockquote>
 <div><p>How do we identify the variables we should control for?</p>
@@ -1684,10 +1689,10 @@ Chi-square p-value: 2.761663e-06
 <p>Indeed, we expect <code class="docutils literal notranslate"><span class="pre">interest</span></code> (<span class="math notranslate nohighlight">\(X\)</span>) to influence both <code class="docutils literal notranslate"><span class="pre">performance</span></code> (<span class="math notranslate nohighlight">\(Y\)</span>) and whether a subject belong to the treated or control group, i.e., the <code class="docutils literal notranslate"><span class="pre">tutoring</span></code> variable (<span class="math notranslate nohighlight">\(T\)</span>). From the model above, we can identify <code class="docutils literal notranslate"><span class="pre">interest</span></code> as a source of bias, but <strong>as we will see shortly, we can use a set of rules to identify which variables we should control for or not control for from a graphical model</strong>.</p>
 <p>Before proceeding, a short note on <strong>how graphical models are created</strong>: these are generally designed by the data analyst who encodes their own <strong>beliefs</strong> on how the world works. These come from a “Bayesian” view of the world in which we first establish our beliefs and then use a theoretical framework to draw conclusions from them.</p>
 <section id="main-structures-of-causal-graphical-models">
-<h3>Main Structures of Causal Graphical Models<a class="headerlink" href="#main-structures-of-causal-graphical-models" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">20.6.1. </span>Main Structures of Causal Graphical Models<a class="headerlink" href="#main-structures-of-causal-graphical-models" title="Permalink to this heading">#</a></h3>
 <p>Once we form a graphical model, we can identify a set of standard structures which will allow us to choose which variables to control for. We will see the main structures, but others beside the ones discussed here may exist.</p>
 <section id="chains">
-<h4>Chains<a class="headerlink" href="#chains" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">20.6.1.1. </span>Chains<a class="headerlink" href="#chains" title="Permalink to this heading">#</a></h4>
 <p>The most straightforward structure is a chain of this kind:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -1744,7 +1749,7 @@ Chi-square p-value: 2.761663e-06
 </section>
 </section>
 <section id="forks">
-<h3>Forks<a class="headerlink" href="#forks" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">20.6.2. </span>Forks<a class="headerlink" href="#forks" title="Permalink to this heading">#</a></h3>
 <p>We have a fork structure when a variable causes two other variables. Let us see an example:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -1772,7 +1777,7 @@ Chi-square p-value: 2.761663e-06
 <p>When we condition on <span class="math notranslate nohighlight">\(B\)</span>, dependency (hence association) does not flow through <span class="math notranslate nohighlight">\(B\)</span>, so <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(C\)</span> will be independent and we will measure no association, as it should be.</p>
 </section>
 <section id="colliders">
-<h3>Colliders<a class="headerlink" href="#colliders" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">20.6.3. </span>Colliders<a class="headerlink" href="#colliders" title="Permalink to this heading">#</a></h3>
 <p>The last, important structure, is a collider. This is in some sense the opposite of a fork: a variable is caused by two different variables. Let us see this with an example:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -1809,7 +1814,7 @@ Chi-square p-value: 2.761663e-06
 </div>
 </section>
 <section id="dependence-flow-rules">
-<h3>Dependence Flow Rules<a class="headerlink" href="#dependence-flow-rules" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">20.6.4. </span>Dependence Flow Rules<a class="headerlink" href="#dependence-flow-rules" title="Permalink to this heading">#</a></h3>
 <p>Using these structures, we can deem if two nodes <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are dependent by checking <strong>if an unblocked path exists between <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span></strong>. This can be done by combining the rules we have seen above, which are also summarized in the following figure:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -1829,13 +1834,13 @@ Chi-square p-value: 2.761663e-06
 <img alt="../_images/0ecd28dbf877f34d3029eb955565bed27d2d27e91fbf2ca75d1da128e49192e5.svg" src="../_images/0ecd28dbf877f34d3029eb955565bed27d2d27e91fbf2ca75d1da128e49192e5.svg" /></div>
 </div>
 <section id="question-1-is-d-perp-c">
-<h4>Question 1: is <span class="math notranslate nohighlight">\(D \perp C\)</span>?<a class="headerlink" href="#question-1-is-d-perp-c" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">20.6.4.1. </span>Question 1: is <span class="math notranslate nohighlight">\(D \perp C\)</span>?<a class="headerlink" href="#question-1-is-d-perp-c" title="Permalink to this heading">#</a></h4>
 <p>The <span class="math notranslate nohighlight">\(D \to A \leftarrow C\)</span> structure is a <strong>collider</strong>. We know that, when we do not condition on the collider, the collider blocks dependence, so we can say that:</p>
 <div class="math notranslate nohighlight">
 \[D \perp C\]</div>
 </section>
 <section id="question-2-is-d-perp-c-a">
-<h4>Question 2: is <span class="math notranslate nohighlight">\(D \perp C | A\)</span>?<a class="headerlink" href="#question-2-is-d-perp-c-a" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">20.6.4.2. </span>Question 2: is <span class="math notranslate nohighlight">\(D \perp C | A\)</span>?<a class="headerlink" href="#question-2-is-d-perp-c-a" title="Permalink to this heading">#</a></h4>
 <p>We have the following graph:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -1846,7 +1851,7 @@ Chi-square p-value: 2.761663e-06
 \[D \not\perp C | A \]</div>
 </section>
 <section id="question-3-is-d-perp-c-g">
-<h4>Question 3: is <span class="math notranslate nohighlight">\(D \perp C | G\)</span>?<a class="headerlink" href="#question-3-is-d-perp-c-g" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">20.6.4.3. </span>Question 3: is <span class="math notranslate nohighlight">\(D \perp C | G\)</span>?<a class="headerlink" href="#question-3-is-d-perp-c-g" title="Permalink to this heading">#</a></h4>
 <p>We now have this graph:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -1871,7 +1876,7 @@ Chi-square p-value: 2.761663e-06
 \[D \not\perp C | G\]</div>
 </section>
 <section id="question-4-is-a-perp-f">
-<h4>Question 4: is <span class="math notranslate nohighlight">\(A \perp F\)</span>?<a class="headerlink" href="#question-4-is-a-perp-f" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">20.6.4.4. </span>Question 4: is <span class="math notranslate nohighlight">\(A \perp F\)</span>?<a class="headerlink" href="#question-4-is-a-perp-f" title="Permalink to this heading">#</a></h4>
 <p>We can illustrate the dependence flow with red dashed arrows as follows:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -1882,7 +1887,7 @@ Chi-square p-value: 2.761663e-06
 \[A \perp F\]</div>
 </section>
 <section id="question-5-is-a-perp-f-e">
-<h4>Question 5: is <span class="math notranslate nohighlight">\(A \perp F | E\)</span>?<a class="headerlink" href="#question-5-is-a-perp-f-e" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">20.6.4.5. </span>Question 5: is <span class="math notranslate nohighlight">\(A \perp F | E\)</span>?<a class="headerlink" href="#question-5-is-a-perp-f-e" title="Permalink to this heading">#</a></h4>
 <p>We now have this dependence flow:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -1893,7 +1898,7 @@ Chi-square p-value: 2.761663e-06
 \[A \not\perp F | E\]</div>
 </section>
 <section id="question-6-is-a-perp-f-e-c">
-<h4>Question 6: is <span class="math notranslate nohighlight">\(A \perp F | E, C\)</span>?<a class="headerlink" href="#question-6-is-a-perp-f-e-c" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">20.6.4.6. </span>Question 6: is <span class="math notranslate nohighlight">\(A \perp F | E, C\)</span>?<a class="headerlink" href="#question-6-is-a-perp-f-e-c" title="Permalink to this heading">#</a></h4>
 <p>Let us see the dependence flow in this case:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -1906,10 +1911,10 @@ Chi-square p-value: 2.761663e-06
 </section>
 </section>
 <section id="using-graphical-causal-models-to-diagnose-bias">
-<h2>Using Graphical Causal Models to Diagnose Bias<a class="headerlink" href="#using-graphical-causal-models-to-diagnose-bias" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">20.7. </span>Using Graphical Causal Models to Diagnose Bias<a class="headerlink" href="#using-graphical-causal-models-to-diagnose-bias" title="Permalink to this heading">#</a></h2>
 <p>We will now see how using graphical causal models allows to diagnose bias and understand which variables we should condition on and which we should not when trying to measure a causal effect through correlation. We will see that we have two main sources of bias: <strong>confounding bias</strong> and <strong>selection bias</strong>.</p>
 <section id="confounding-bias">
-<h3>Confounding Bias<a class="headerlink" href="#confounding-bias" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">20.7.1. </span>Confounding Bias<a class="headerlink" href="#confounding-bias" title="Permalink to this heading">#</a></h3>
 <p>Confounding bias happens when <strong>the treatment and the effect have a common cause</strong>. Let us consider the following example, which we already saw previously:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -1926,7 +1931,7 @@ Chi-square p-value: 2.761663e-06
 \[Y(0) \perp Y(1) | T, X\]</div>
 </section>
 <section id="multiple-common-causes-and-unmeasurable-variables">
-<h3>Multiple Common Causes and Unmeasurable Variables<a class="headerlink" href="#multiple-common-causes-and-unmeasurable-variables" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">20.7.2. </span>Multiple Common Causes and Unmeasurable Variables<a class="headerlink" href="#multiple-common-causes-and-unmeasurable-variables" title="Permalink to this heading">#</a></h3>
 <p>Note that we can also have multiple common causes. Let us consider the following example:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -1941,7 +1946,7 @@ Chi-square p-value: 2.761663e-06
 <div class="math notranslate nohighlight">
 \[Y(0) \perp Y(1) | T, X1, X2\]</div>
 <section id="surrogate-confounders">
-<h4>Surrogate Confounders<a class="headerlink" href="#surrogate-confounders" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">20.7.2.1. </span>Surrogate Confounders<a class="headerlink" href="#surrogate-confounders" title="Permalink to this heading">#</a></h4>
 <p>In some cases, unmeasurable variables do not have a measurable direct effect. Let us consider the following example:</p>
 <blockquote>
 <div><p>We are interested in studying if a given habit (e.g., smoking) can have a causal effect on the development of a given disease. We observe a strong correlation, i.e., subject how have the habit develop the disease more likely. However, someone argues that a gene may exists that causes both the habit and the disease. For instance, people may have the “smoking gene” which “makes them like smoking” and at the same time makes it more likely for them to get the disease.</p>
@@ -1965,10 +1970,10 @@ Chi-square p-value: 2.761663e-06
 </section>
 </section>
 <section id="selection-bias">
-<h3>Selection Bias<a class="headerlink" href="#selection-bias" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">20.7.3. </span>Selection Bias<a class="headerlink" href="#selection-bias" title="Permalink to this heading">#</a></h3>
 <p>While confounding bias happens when we do not condition on a common cause, selection bias happens when <strong>we control for too many variables</strong>. While one may think that it is a good idea to control on any variable “just in case”, this is not true in general and can lead to <strong>selection bias</strong>.</p>
 <section id="controlling-for-a-common-effect">
-<h4>Controlling For a Common Effect<a class="headerlink" href="#controlling-for-a-common-effect" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">20.7.3.1. </span>Controlling For a Common Effect<a class="headerlink" href="#controlling-for-a-common-effect" title="Permalink to this heading">#</a></h4>
 <p>Let us consider the following example in which we want to measure the causal effect of <code class="docutils literal notranslate"><span class="pre">intuitive</span> <span class="pre">intelligence</span></code> on <code class="docutils literal notranslate"><span class="pre">performance</span></code>:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -1987,7 +1992,7 @@ Chi-square p-value: 2.761663e-06
 </div>
 </section>
 <section id="controlling-on-a-mediator">
-<h4>Controlling on a Mediator<a class="headerlink" href="#controlling-on-a-mediator" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">20.7.3.2. </span>Controlling on a Mediator<a class="headerlink" href="#controlling-on-a-mediator" title="Permalink to this heading">#</a></h4>
 <p>Another case of selection bias, arising from cases in which we control for variables we should not control on, is given by the case in which we control on a mediator of the treatment and the outcome. Let us consider this example:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -1997,7 +2002,7 @@ Chi-square p-value: 2.761663e-06
 <p><strong>Indeed, while we expect that interested students will study more and obtain better performance, by observing only people who study a lot, <code class="docutils literal notranslate"><span class="pre">interest</span></code> and <code class="docutils literal notranslate"><span class="pre">performance</span></code> may seem to be little correlated. Indeed, even people with little interest will obtain good performance if they study for long hours.</strong></p>
 </section>
 <section id="main-sources-of-bias">
-<h4>Main Sources of Bias<a class="headerlink" href="#main-sources-of-bias" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">20.7.3.3. </span>Main Sources of Bias<a class="headerlink" href="#main-sources-of-bias" title="Permalink to this heading">#</a></h4>
 <p>To summarize, the main sources of bias are three:</p>
 <ul class="simple">
 <li><p><strong>Confounders</strong>: we should control on the common cause;</p></li>
@@ -2014,7 +2019,7 @@ Chi-square p-value: 2.761663e-06
 </section>
 </section>
 <section id="linear-regression-for-causal-analysis">
-<h2>Linear Regression for Causal Analysis<a class="headerlink" href="#linear-regression-for-causal-analysis" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">20.8. </span>Linear Regression for Causal Analysis<a class="headerlink" href="#linear-regression-for-causal-analysis" title="Permalink to this heading">#</a></h2>
 <p>We have seen how to choose a suitable set of variables to control for when we aim to establish a cause-effect relationship. When we said “we control for <span class="math notranslate nohighlight">\(X\)</span>”, we implied that we can divide the data in groups and measure association within each group, to then aggregate results and obtain an average effect.</p>
 <p>In this section, we will see how we can automate this process with <strong>linear regression</strong>. Let us consider our previous example in which we wanted to measure the causal effect of <code class="docutils literal notranslate"><span class="pre">tutoring</span></code> on <code class="docutils literal notranslate"><span class="pre">performance</span></code>, when we know that <code class="docutils literal notranslate"><span class="pre">interest</span></code> can be a confounder:</p>
 <div class="cell tag_remove-input docutils container">
@@ -2225,7 +2230,7 @@ Chi-square p-value: 2.761663e-06
 </div>
 <p>Coherently with the conclusions made with observational data, there is not a significant relationship between <code class="docutils literal notranslate"><span class="pre">tutoring</span></code> and <code class="docutils literal notranslate"><span class="pre">performance</span></code>.</p>
 <section id="example-on-the-lucas-dataset">
-<h3>Example on the LUCAS Dataset<a class="headerlink" href="#example-on-the-lucas-dataset" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">20.8.1. </span>Example on the LUCAS Dataset<a class="headerlink" href="#example-on-the-lucas-dataset" title="Permalink to this heading">#</a></h3>
 <p>We will see some examples on the LUCAS dataset, which can be found here:</p>
 <p><a class="reference external" href="https://www.causality.inf.ethz.ch/data/LUCAS.html">https://www.causality.inf.ethz.ch/data/LUCAS.html</a></p>
 <p>LUCAS is an <strong>artificial dataset</strong> in which data has been generated drawing values from known distribution to emulate a causal phenomenon. Besides the data, the authors propose the <strong>following true causal graph</strong> (which reflects the way data has been generated):</p>
@@ -2440,7 +2445,7 @@ Chi-square p-value: 2.761663e-06
 </div></div></div>
 </div>
 <section id="does-smoking-causes-car-accident">
-<h4>Does <code class="docutils literal notranslate"><span class="pre">Smoking</span></code> causes <code class="docutils literal notranslate"><span class="pre">Car</span> <span class="pre">Accident</span></code>?<a class="headerlink" href="#does-smoking-causes-car-accident" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">20.8.1.1. </span>Does <code class="docutils literal notranslate"><span class="pre">Smoking</span></code> causes <code class="docutils literal notranslate"><span class="pre">Car</span> <span class="pre">Accident</span></code>?<a class="headerlink" href="#does-smoking-causes-car-accident" title="Permalink to this heading">#</a></h4>
 <p>We will try to answer the question as to whether there is a causal effect between <code class="docutils literal notranslate"><span class="pre">Smoking</span></code> and <code class="docutils literal notranslate"><span class="pre">Car</span> <span class="pre">Accident</span></code>. We can start by fitting a logistic regressor:</p>
 <div class="math notranslate nohighlight">
 \[P(Car Accident|Smoking) = \sigma(\beta_0 + \beta_1 Smoking)\]</div>
@@ -2511,7 +2516,7 @@ Chi-square p-value: 2.761663e-06
 </section>
 </section>
 <section id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">20.9. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
 <p>[1] Most of the content of this lecture is based on part of the awesome lecture series “<a class="reference external" href="https://matheusfacure.github.io/python-causality-handbook/landing-page.html">Causal Inference for The Brave and True</a>” by Matheus Facure Alves.</p>
 <p>[2] Judea Pearl and Dana Mackenzie. “The Book of Why: The New Science of Cause and Effect”. Penguin.</p>
 </section>
@@ -2547,6 +2552,15 @@ Chi-square p-value: 2.761663e-06
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="12_logistic_regression.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">19. </span>Logistic Regression</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
@@ -2562,57 +2576,57 @@ Chi-square p-value: 2.761663e-06
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sleep-vs-exam-performance">Sleep vs Exam Performance</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-causation-potential-outcomes-counterfactuals">Measuring Causation - Potential Outcomes (Counterfactuals)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bias-arising-from-correlation">The Bias Arising from Correlation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#randomized-controlled-trials-rct">Randomized Controlled Trials (RCT)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sleep-vs-exam-performance">20.1. Sleep vs Exam Performance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-causation-potential-outcomes-counterfactuals">20.2. Measuring Causation - Potential Outcomes (Counterfactuals)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bias-arising-from-correlation">20.3. The Bias Arising from Correlation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#randomized-controlled-trials-rct">20.4. Randomized Controlled Trials (RCT)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">20.4.1. Example</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#causal-effect-and-observational-studies">Causal Effect and Observational Studies</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-for-interest">Controlling for <code class="docutils literal notranslate"><span class="pre">interest</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#causal-effect-and-observational-studies">20.5. Causal Effect and Observational Studies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-for-interest">20.5.1. Controlling for <code class="docutils literal notranslate"><span class="pre">interest</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-causal-models">Graphical Causal Models</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#main-structures-of-causal-graphical-models">Main Structures of Causal Graphical Models</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#chains">Chains</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-causal-models">20.6. Graphical Causal Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#main-structures-of-causal-graphical-models">20.6.1. Main Structures of Causal Graphical Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#chains">20.6.1.1. Chains</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forks">Forks</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#colliders">Colliders</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dependence-flow-rules">Dependence Flow Rules</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-1-is-d-perp-c">Question 1: is <span class="math notranslate nohighlight">\(D \perp C\)</span>?</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-2-is-d-perp-c-a">Question 2: is <span class="math notranslate nohighlight">\(D \perp C | A\)</span>?</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-3-is-d-perp-c-g">Question 3: is <span class="math notranslate nohighlight">\(D \perp C | G\)</span>?</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-4-is-a-perp-f">Question 4: is <span class="math notranslate nohighlight">\(A \perp F\)</span>?</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-5-is-a-perp-f-e">Question 5: is <span class="math notranslate nohighlight">\(A \perp F | E\)</span>?</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-6-is-a-perp-f-e-c">Question 6: is <span class="math notranslate nohighlight">\(A \perp F | E, C\)</span>?</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-graphical-causal-models-to-diagnose-bias">Using Graphical Causal Models to Diagnose Bias</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confounding-bias">Confounding Bias</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-common-causes-and-unmeasurable-variables">Multiple Common Causes and Unmeasurable Variables</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#surrogate-confounders">Surrogate Confounders</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-bias">Selection Bias</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-for-a-common-effect">Controlling For a Common Effect</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-on-a-mediator">Controlling on a Mediator</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#main-sources-of-bias">Main Sources of Bias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forks">20.6.2. Forks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#colliders">20.6.3. Colliders</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dependence-flow-rules">20.6.4. Dependence Flow Rules</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-1-is-d-perp-c">20.6.4.1. Question 1: is <span class="math notranslate nohighlight">\(D \perp C\)</span>?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-2-is-d-perp-c-a">20.6.4.2. Question 2: is <span class="math notranslate nohighlight">\(D \perp C | A\)</span>?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-3-is-d-perp-c-g">20.6.4.3. Question 3: is <span class="math notranslate nohighlight">\(D \perp C | G\)</span>?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-4-is-a-perp-f">20.6.4.4. Question 4: is <span class="math notranslate nohighlight">\(A \perp F\)</span>?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-5-is-a-perp-f-e">20.6.4.5. Question 5: is <span class="math notranslate nohighlight">\(A \perp F | E\)</span>?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-6-is-a-perp-f-e-c">20.6.4.6. Question 6: is <span class="math notranslate nohighlight">\(A \perp F | E, C\)</span>?</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-for-causal-analysis">Linear Regression for Causal Analysis</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-on-the-lucas-dataset">Example on the LUCAS Dataset</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#does-smoking-causes-car-accident">Does <code class="docutils literal notranslate"><span class="pre">Smoking</span></code> causes <code class="docutils literal notranslate"><span class="pre">Car</span> <span class="pre">Accident</span></code>?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-graphical-causal-models-to-diagnose-bias">20.7. Using Graphical Causal Models to Diagnose Bias</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confounding-bias">20.7.1. Confounding Bias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-common-causes-and-unmeasurable-variables">20.7.2. Multiple Common Causes and Unmeasurable Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#surrogate-confounders">20.7.2.1. Surrogate Confounders</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-bias">20.7.3. Selection Bias</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-for-a-common-effect">20.7.3.1. Controlling For a Common Effect</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-on-a-mediator">20.7.3.2. Controlling on a Mediator</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#main-sources-of-bias">20.7.3.3. Main Sources of Bias</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-for-causal-analysis">20.8. Linear Regression for Causal Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-on-the-lucas-dataset">20.8.1. Example on the LUCAS Dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#does-smoking-causes-car-accident">20.8.1.1. Does <code class="docutils literal notranslate"><span class="pre">Smoking</span></code> causes <code class="docutils literal notranslate"><span class="pre">Car</span> <span class="pre">Accident</span></code>?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">20.9. References</a></li>
 </ul>
   </nav></div>
 
