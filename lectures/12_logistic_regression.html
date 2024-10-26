@@ -472,10 +472,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-logistic-regression">19.10. Multinomial Logistic Regression</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-iris-dataset">19.10.1. The Iris Dataset</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-limitations-of-a-linear-regression-in-the-presence-of-more-than-two-classes">19.10.2. Additional Limitations of a Linear Regression in the Presence of More than Two Classes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-multinomial-logistic-regression-model">19.10.3. The Multinomial Logistic Regression Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-multinomial-logistic-regression-model-optional">19.10.3. The Multinomial Logistic Regression Model (Optional)</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-parameters-of-the-multinomial-logistic-regressor-model">19.10.3.1. Estimating the Parameters of the Multinomial Logistic Regressor Model</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-parameters-of-a-multinomial-logistic-regressor">19.10.3.2. Interpretation of the Parameters of a Multinomial Logistic Regressor</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-softmax-regressor">19.10.3.3. The Softmax Regressor</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-softmax-regressor-optional">19.10.3.3. The Softmax Regressor (Optional)</a></li>
 </ul>
 </li>
 </ul>
@@ -863,7 +863,7 @@ document.write(`
 \[P(Diagnosis=1|radius1) = \beta_0 + \beta_1 radius1\]</div>
 <p>Would not be appropriate. Indeed, while <span class="math notranslate nohighlight">\(P(Diagnosis=1| radius1)\)</span> needs to be in the <span class="math notranslate nohighlight">\([0,1]\)</span> range, the linear combination <span class="math notranslate nohighlight">\(\beta_0 + \beta_1 radius1\)</span> will naturally output values <strong>smaller than <span class="math notranslate nohighlight">\(0\)</span></strong> and <strong>larger than <span class="math notranslate nohighlight">\(1\)</span></strong>. How should we interpret such values?</p>
 <p>Intuitively, we would expect to <span class="math notranslate nohighlight">\(P(Diagnosis=1| radius1)\)</span> to assume values in the <span class="math notranslate nohighlight">\([0,1]\)</span> range for intermediate values (say <code class="docutils literal notranslate"><span class="pre">radius</span></code> <span class="math notranslate nohighlight">\(\in [10,20]\)</span>), while for extremely low values of (say <code class="docutils literal notranslate"><span class="pre">radius</span></code> <span class="math notranslate nohighlight">\(&lt;10\)</span>) the probability <strong>should saturate to <span class="math notranslate nohighlight">\(0\)</span></strong> and for extremely large values (say <code class="docutils literal notranslate"><span class="pre">radius</span></code> <span class="math notranslate nohighlight">\(&gt;20\)</span>) the probability should saturate to 1.</p>
-<p>when <code class="docutils literal notranslate"><span class="pre">radius1</span></code> takes large values (say larger than <span class="math notranslate nohighlight">\(20\)</span>), we expect <strong>probability to saturate to <span class="math notranslate nohighlight">\(1\)</span></strong>.</p>
+<p>When <code class="docutils literal notranslate"><span class="pre">radius1</span></code> takes large values (say larger than <span class="math notranslate nohighlight">\(20\)</span>), we expect <strong>probability to saturate to <span class="math notranslate nohighlight">\(1\)</span></strong>.</p>
 <p>In practice, we would expect a result similar to the following:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -1575,9 +1575,9 @@ will hence be:</p>
 <p>Even if the two mappings should be equivalent, we can see how a linear model would find very different results.</p>
 <p>This is an example of how the linear model is <strong>even more limited when more than two possible outcomes of the dependent variable are possible</strong>.</p>
 </section>
-<section id="the-multinomial-logistic-regression-model">
-<h3><span class="section-number">19.10.3. </span>The Multinomial Logistic Regression Model<a class="headerlink" href="#the-multinomial-logistic-regression-model" title="Permalink to this heading">#</a></h3>
-<p>When the dependent variable can assume more than two values, <strong>we can define the multinomial logistic regression model</strong>. In this case, we select one fo the values of the dependent variable <span class="math notranslate nohighlight">\(Y\)</span> as <strong>a baseline class</strong>. Without loss of generality, let <span class="math notranslate nohighlight">\(K\)</span> be the number of classes and let <span class="math notranslate nohighlight">\(Y=1\)</span> be the baseline class. Recall that in the case of the logistic regressor, we modeled the logarithm of the odd as our linear function:</p>
+<section id="the-multinomial-logistic-regression-model-optional">
+<h3><span class="section-number">19.10.3. </span>The Multinomial Logistic Regression Model (Optional)<a class="headerlink" href="#the-multinomial-logistic-regression-model-optional" title="Permalink to this heading">#</a></h3>
+<p>When the dependent variable can assume more than two values, <strong>we can define the multinomial logistic regression model</strong>. In this case, we select one of the values of the dependent variable <span class="math notranslate nohighlight">\(Y\)</span> as <strong>a baseline class</strong>. Without loss of generality, let <span class="math notranslate nohighlight">\(K\)</span> be the number of classes and let <span class="math notranslate nohighlight">\(Y=1\)</span> be the baseline class. Recall that in the case of the logistic regressor, we modeled the logarithm of the odd as our linear function:</p>
 <div class="math notranslate nohighlight">
 \[\log \left(\frac{P(y=1|\mathbf{x})}{1-P(y=1|\mathbf{x})}\right) = \beta_0 + \beta_1 x_1 + \ldots + \beta_n x_n\]</div>
 <p>Since we have more than one possible outcomes for the dependent variable, rather than modeling the odds, a multinomial logistic regressor models the logarithm of the ratio between a given class <span class="math notranslate nohighlight">\(k\)</span> and the baseline class <span class="math notranslate nohighlight">\(1\)</span> as follows:</p>
@@ -1671,8 +1671,8 @@ will hence be:</p>
 <li><p>The coefficient <span class="math notranslate nohighlight">\(-6.8564\)</span> of <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> for <code class="docutils literal notranslate"><span class="pre">species=2</span></code> indicates that when we observe an increase in one centimeter of <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code>, the odd of <code class="docutils literal notranslate"><span class="pre">setosa</span></code> versus <code class="docutils literal notranslate"><span class="pre">virginica</span></code> decreases multiplicatively by <span class="math notranslate nohighlight">\(e^{-6.8464} = 0.001\)</span> (a large -<span class="math notranslate nohighlight">\(99.9\%\)</span>!).</p></li>
 </ul>
 </section>
-<section id="the-softmax-regressor">
-<h4><span class="section-number">19.10.3.3. </span>The Softmax Regressor<a class="headerlink" href="#the-softmax-regressor" title="Permalink to this heading">#</a></h4>
+<section id="the-softmax-regressor-optional">
+<h4><span class="section-number">19.10.3.3. </span>The Softmax Regressor (Optional)<a class="headerlink" href="#the-softmax-regressor-optional" title="Permalink to this heading">#</a></h4>
 <p>Softmax regression is an alternative formulation of multinomial logistic regression which is designed to avoid the definition of a baseline and it is hence symmetrical. In a softmax regressor, the probabilities are modeled as follows:</p>
 <div class="math notranslate nohighlight">
 \[ P(Y=k|X=\mathbf{x}) = \frac{e^{\mathbf{\beta_k}^T\mathbf{X}}}{\sum_{l=1}^K \mathbf{e^{\beta_l^T\mathbf{X}}}}, \ \ \ \forall k=1,\ldots,K\]</div>
@@ -1766,10 +1766,10 @@ will hence be:</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-logistic-regression">19.10. Multinomial Logistic Regression</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-iris-dataset">19.10.1. The Iris Dataset</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-limitations-of-a-linear-regression-in-the-presence-of-more-than-two-classes">19.10.2. Additional Limitations of a Linear Regression in the Presence of More than Two Classes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-multinomial-logistic-regression-model">19.10.3. The Multinomial Logistic Regression Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-multinomial-logistic-regression-model-optional">19.10.3. The Multinomial Logistic Regression Model (Optional)</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-parameters-of-the-multinomial-logistic-regressor-model">19.10.3.1. Estimating the Parameters of the Multinomial Logistic Regressor Model</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-parameters-of-a-multinomial-logistic-regressor">19.10.3.2. Interpretation of the Parameters of a Multinomial Logistic Regressor</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-softmax-regressor">19.10.3.3. The Softmax Regressor</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-softmax-regressor-optional">19.10.3.3. The Softmax Regressor (Optional)</a></li>
 </ul>
 </li>
 </ul>
