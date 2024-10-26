@@ -71,6 +71,7 @@ parts:
   - file: laboratories/11_regressione_lineare
   - file: laboratories/12_regressione_logistica
   # - file: laboratories/03_intro_numpy
+  
   # - file: laboratories/04_intro_matplotlib
   # - file: laboratories/05_intro_pandas
 # - caption: Theory
