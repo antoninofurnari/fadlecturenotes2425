@@ -1,0 +1,59 @@
+name: Build PDF
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build-pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            fonts-liberation \
+            fonts-cmu \
+            wkhtmltopdf  # Install wkhtmltopdf
+
+      - name: Setup Miniconda
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          auto-update-conda: true
+          auto-activate-base: false
+          miniconda-version: 'latest'
+          python-version: 3.8
+          environment-file: environment.yml
+          activate-environment: fadlecturenotes
+
+      - name: Initialize Conda
+        run: |
+          echo "Initializing Conda"
+          conda init bash
+          source ~/.bashrc  # Activate the changes made by conda init
+          pip install pyppeteer
+
+      - name: Build Jupyter Book to PDF
+        run: |
+          conda run -n fadlecturenotes jb build lecturenotes/ --builder pdfhtml
+
+      - name: List HTML Output Directory
+        run: |
+          ls -l lecturenotes/_build/
+          ls -l lecturenotes/_build/pdf/
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: pdf
+          path: lecturenotes/_build/pdf/book.pdf
+
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: lecturenotes/_build/pdf/book.pdf
+          allowUpdates: true
+          replacesArtifacts: true
+          tag: "latest"

@@ -1,0 +1,63 @@
+name: Build HTML and PDF, Deploy to GH-PAGES
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-html-and-pdf-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+
+      - name: Setup Miniconda
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          auto-update-conda: true
+          auto-activate-base: false
+          miniconda-version: 'latest'
+          python-version: 3.8
+          environment-file: environment.yml
+          activate-environment: fadlecturenotes
+
+      - name: Initialize Conda
+        shell: bash -l {0}
+        run: |
+          conda init bash
+          source ~/.bashrc
+
+      - name: Install Pyppeteer
+        shell: bash -l {0}
+        run: |
+          conda activate fadlecturenotes
+          pip install pyppeteer
+
+      - name: Build HTML
+        shell: bash -l {0}
+        run: jb build lecturenotes/
+
+      - name: Build PDF
+        shell: bash -l {0}
+        run: |
+          jb build lecturenotes/ --builder pdfhtml
+        # The `pdfhtml` builder uses HTML to generate the PDF
+
+      - name: Upload PDF Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: jupyter-book-pdf
+          path: lecturenotes/_build/pdf/book.pdf
+        # Adjust `path` if the generated PDF is in a different location
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: lecturenotes/_build/html
+          CLEAN: true
