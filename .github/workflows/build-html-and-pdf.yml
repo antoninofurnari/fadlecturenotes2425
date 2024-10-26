@@ -25,7 +25,14 @@ jobs:
           environment-file: environment.yml
           activate-environment: fadlecturenotes
 
+      - name: Initialize Conda
+        shell: bash -l {0}
+        run: |
+          conda init bash
+          source ~/.bashrc
+
       - name: Install Pyppeteer
+        shell: bash -l {0}
         run: |
           conda activate fadlecturenotes
           pip install pyppeteer
