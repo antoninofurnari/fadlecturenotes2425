@@ -51,10 +51,10 @@ parts:
   numbered: True
   chapters:
   - file: lectures/11_linear_regression
-# - caption: Lecture 9
-#   numbered: True
-#   chapters:
-#   - file: lectures/12_logistic_regression
+- caption: Lecture 9
+  numbered: True
+  chapters:
+  - file: lectures/12_logistic_regression
 # - caption: Lecture 10
 #   numbered: True
 #   chapters:
