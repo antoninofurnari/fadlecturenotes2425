@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>19. Logistic Regression &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+    <title>18. Logistic Regression &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
   
   
   
@@ -68,8 +68,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="20. Causal Data Analysis" href="13_causal_analysis.html" />
-    <link rel="prev" title="18. Linear Regression" href="11_linear_regression.html" />
+    <link rel="next" title="19. Causal Data Analysis" href="13_causal_analysis.html" />
+    <link rel="prev" title="17. Linear Regression" href="11_linear_regression.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -210,30 +210,29 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 6</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="10_statistical_inference.html">16. Statistical Inference</a></li>
-
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 7 &amp; 8</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="11_linear_regression.html">18. Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_linear_regression.html">17. Linear Regression</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 9</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">19. Logistic Regression</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">18. Logistic Regression</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 10</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="13_causal_analysis.html">20. Causal Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_causal_analysis.html">19. Causal Data Analysis</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 11</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="14_data_as_nd_points.html">21. Data as N-Dimensional Points</a></li>
-<li class="toctree-l1"><a class="reference internal" href="15_clustering.html">22. Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_data_as_nd_points.html">20. Data as N-Dimensional Points</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_clustering.html">21. Clustering</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratory 3</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/10_statistical_inference.html">23. Laboratory on Statistical Inference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/11_regressione_lineare.html">24. Laboratorio su Regressione Lineare</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/12_regressione_logistica.html">25. Laboratorio su regressione logistica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/10_statistical_inference.html">22. Laboratory on Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/11_regressione_lineare.html">23. Laboratorio su Regressione Lineare</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/12_regressione_logistica.html">24. Laboratorio su regressione logistica</a></li>
 </ul>
 
     </div>
@@ -460,27 +459,27 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-data">19.1. Example Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limits-of-linear-regression">19.2. Limits of Linear Regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-binary-values-to-probabilities">19.3. From Binary Values to Probabilities</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-function">19.4. The Logistic Function</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-regression-model">19.5. The Logistic Regression Model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-interpretation-of-the-coefficients-of-a-linear-regressor">19.6. Statistical Interpretation of the Coefficients of a Linear Regressor</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geometrical-interpretation-of-the-coefficients-of-a-logistic-regressor">19.7. Geometrical Interpretation of the Coefficients of a Logistic Regressor</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimation-of-the-parameters-of-a-logistic-regressor">19.8. Estimation of the Parameters of a Logistic Regressor</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-logistic-regression">19.9. Example of Logistic Regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-logistic-regression">19.10. Multinomial Logistic Regression</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-iris-dataset">19.10.1. The Iris Dataset</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-limitations-of-a-linear-regression-in-the-presence-of-more-than-two-classes">19.10.2. Additional Limitations of a Linear Regression in the Presence of More than Two Classes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-multinomial-logistic-regression-model-optional">19.10.3. The Multinomial Logistic Regression Model (Optional)</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-parameters-of-the-multinomial-logistic-regressor-model">19.10.3.1. Estimating the Parameters of the Multinomial Logistic Regressor Model</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-parameters-of-a-multinomial-logistic-regressor">19.10.3.2. Interpretation of the Parameters of a Multinomial Logistic Regressor</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-softmax-regressor-optional">19.10.3.3. The Softmax Regressor (Optional)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-data">18.1. Example Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limits-of-linear-regression">18.2. Limits of Linear Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-binary-values-to-probabilities">18.3. From Binary Values to Probabilities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-function">18.4. The Logistic Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-regression-model">18.5. The Logistic Regression Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-interpretation-of-the-coefficients-of-a-linear-regressor">18.6. Statistical Interpretation of the Coefficients of a Linear Regressor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geometrical-interpretation-of-the-coefficients-of-a-logistic-regressor">18.7. Geometrical Interpretation of the Coefficients of a Logistic Regressor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimation-of-the-parameters-of-a-logistic-regressor">18.8. Estimation of the Parameters of a Logistic Regressor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-logistic-regression">18.9. Example of Logistic Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-logistic-regression">18.10. Multinomial Logistic Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-iris-dataset">18.10.1. The Iris Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-limitations-of-a-linear-regression-in-the-presence-of-more-than-two-classes">18.10.2. Additional Limitations of a Linear Regression in the Presence of More than Two Classes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-multinomial-logistic-regression-model-optional">18.10.3. The Multinomial Logistic Regression Model (Optional)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-parameters-of-the-multinomial-logistic-regressor-model">18.10.3.1. Estimating the Parameters of the Multinomial Logistic Regressor Model</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-parameters-of-a-multinomial-logistic-regressor">18.10.3.2. Interpretation of the Parameters of a Multinomial Logistic Regressor</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-softmax-regressor-optional">18.10.3.3. The Softmax Regressor (Optional)</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">19.11. References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">18.11. References</a></li>
 </ul>
             </nav>
         </div>
@@ -493,10 +492,10 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="logistic-regression">
-<h1><span class="section-number">19. </span>Logistic Regression<a class="headerlink" href="#logistic-regression" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">18. </span>Logistic Regression<a class="headerlink" href="#logistic-regression" title="Permalink to this heading">#</a></h1>
 <p>Linear regression allows to model relationships between <strong>continuos independent and dependent variables</strong> and <strong>between qualitative independent variables and continuous variables</strong>. However, it does not allow to model relationships between continuous or qualitative independent variables and <strong>qualitative dependent variables</strong>.</p>
 <section id="example-data">
-<h2><span class="section-number">19.1. </span>Example Data<a class="headerlink" href="#example-data" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">18.1. </span>Example Data<a class="headerlink" href="#example-data" title="Permalink to this heading">#</a></h2>
 <p>Establishing such relationships is useful in different contexts. For instance, let us consider the <a class="reference external" href="https://archive.ics.uci.edu/dataset/17/breast+cancer+wisconsin+diagnostic">Breast Cancer Wisconsin</a> dataset:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -826,7 +825,7 @@ document.write(`
 </ul>
 </section>
 <section id="limits-of-linear-regression">
-<h2><span class="section-number">19.2. </span>Limits of Linear Regression<a class="headerlink" href="#limits-of-linear-regression" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">18.2. </span>Limits of Linear Regression<a class="headerlink" href="#limits-of-linear-regression" title="Permalink to this heading">#</a></h2>
 <p>Of course, we would like to quantify this relationship in a more formal way.
 <strong>As in the case of a linear regressor, we want to define a model which can predict the independent variable <span class="math notranslate nohighlight">\(y\)</span> from the dependent variables <span class="math notranslate nohighlight">\(x_i\)</span>. If such model gives good predictions, than we can trust its interpretation as a means of studying the relationship between the variables.</strong></p>
 <p>We can think of converting <code class="docutils literal notranslate"><span class="pre">B</span> <span class="pre">=&gt;</span> <span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">M</span> <span class="pre">=&gt;</span> <span class="pre">0</span></code>, and then compute a linear regressor:</p>
@@ -854,7 +853,7 @@ document.write(`
 <p><strong>In practice, while with a linear regressor we wanted to predict continuous values, now we want to assign observations <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> to discrete bins (in this case only two possible ones). As we will better study later in the course, this problem is known as classification.</strong></p>
 </section>
 <section id="from-binary-values-to-probabilities">
-<h2><span class="section-number">19.3. </span>From Binary Values to Probabilities<a class="headerlink" href="#from-binary-values-to-probabilities" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">18.3. </span>From Binary Values to Probabilities<a class="headerlink" href="#from-binary-values-to-probabilities" title="Permalink to this heading">#</a></h2>
 <p>If we want to model some form of continuous value, we could think to transition from <span class="math notranslate nohighlight">\(\{0,1\}\)</span> to <span class="math notranslate nohighlight">\([0,1]\)</span> using probabilities, which is a way to turn discretized values to “soft” values indicating our belief in the fact that <code class="docutils literal notranslate"><span class="pre">Diagnosis</span></code> will take either a <span class="math notranslate nohighlight">\(0\)</span> or <span class="math notranslate nohighlight">\(1\)</span> value. We could hence think to model the following probability, rather than modeling <code class="docutils literal notranslate"><span class="pre">Diagnosis</span></code> directly:</p>
 <div class="math notranslate nohighlight">
 \[P(Diagnosis=1| radius1)\]</div>
@@ -873,7 +872,7 @@ document.write(`
 <p>As can be noted, the function above is not linear, and hence it cannot be fit with a linear regressor. However, we have seen that a linear regressor can be tweaked to also represent nonlinear functions.</p>
 </section>
 <section id="the-logistic-function">
-<h2><span class="section-number">19.4. </span>The Logistic Function<a class="headerlink" href="#the-logistic-function" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">18.4. </span>The Logistic Function<a class="headerlink" href="#the-logistic-function" title="Permalink to this heading">#</a></h2>
 <p>Similarly to polynomial regression, we need to find a <strong>transformation of the formulation of the linear regressor to transform its output into a nonlinear function of the independent variables</strong>. Of course, we do not want <em>any</em> transformation, but one that has the previously highlighted properties. While different functions have similar characteristics, in practice the <strong>logistic function has some nice properties that, as we will se in a moment, allow to easily interpret the resulting model in a probabilistic way</strong>. The logistic function is defined as:</p>
 <div class="math notranslate nohighlight">
 \[f(x) = \frac{1}{1+e^{-x}}\]</div>
@@ -890,7 +889,7 @@ document.write(`
 </ul>
 </section>
 <section id="the-logistic-regression-model">
-<h2><span class="section-number">19.5. </span>The Logistic Regression Model<a class="headerlink" href="#the-logistic-regression-model" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">18.5. </span>The Logistic Regression Model<a class="headerlink" href="#the-logistic-regression-model" title="Permalink to this heading">#</a></h2>
 <p>In practice, we define our model, <strong>the logistic regressor model</strong> as follows (<strong>simple logistic regression</strong>):</p>
 <div class="math notranslate nohighlight">
 \[P(Diagnosis=1|X) = f(\beta_0 + \beta_1 X) = \frac{1}{1+e^{-(\beta_0 + \beta_1 X)}}\]</div>
@@ -914,7 +913,7 @@ document.write(`
 <p>The expression above shows how a logistic regressor can be seen as <strong>a linear regressor (the expression on the right side of the equation) on the logit (the log odd)</strong>. This paves the way to useful interpretations of the model, as shown in the next section.</p>
 </section>
 <section id="statistical-interpretation-of-the-coefficients-of-a-linear-regressor">
-<h2><span class="section-number">19.6. </span>Statistical Interpretation of the Coefficients of a Linear Regressor<a class="headerlink" href="#statistical-interpretation-of-the-coefficients-of-a-linear-regressor" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">18.6. </span>Statistical Interpretation of the Coefficients of a Linear Regressor<a class="headerlink" href="#statistical-interpretation-of-the-coefficients-of-a-linear-regressor" title="Permalink to this heading">#</a></h2>
 <p>Let’s now see how to interpret the coefficients of a logistic regressor. Remember that the regression model (in the case of simple logistic regression) is as follows:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -959,7 +958,7 @@ document.write(`
 </ul>
 </section>
 <section id="geometrical-interpretation-of-the-coefficients-of-a-logistic-regressor">
-<h2><span class="section-number">19.7. </span>Geometrical Interpretation of the Coefficients of a Logistic Regressor<a class="headerlink" href="#geometrical-interpretation-of-the-coefficients-of-a-logistic-regressor" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">18.7. </span>Geometrical Interpretation of the Coefficients of a Logistic Regressor<a class="headerlink" href="#geometrical-interpretation-of-the-coefficients-of-a-logistic-regressor" title="Permalink to this heading">#</a></h2>
 <p>Similar to linear regression, also the coefficients of logistic
 regression have a geometrical interpretation. We will see that, while
 linear regression finds a «curve» that fits the data, logistic
@@ -1013,7 +1012,7 @@ line. This is because <strong>a logistic regressor is a linear classifier</stron
 despite the logistic function is not linear!</p>
 </section>
 <section id="estimation-of-the-parameters-of-a-logistic-regressor">
-<h2><span class="section-number">19.8. </span>Estimation of the Parameters of a Logistic Regressor<a class="headerlink" href="#estimation-of-the-parameters-of-a-logistic-regressor" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">18.8. </span>Estimation of the Parameters of a Logistic Regressor<a class="headerlink" href="#estimation-of-the-parameters-of-a-logistic-regressor" title="Permalink to this heading">#</a></h2>
 <p>To fit the model and find suitable values for the <span class="math notranslate nohighlight">\(\mathbf{\beta_i}\)</span>
 parameters, we will define a <strong>cost function</strong>, similarly to what we have
 done in the case of linear regression.</p>
@@ -1298,7 +1297,7 @@ will hence be:</p>
 </div>
 </section>
 <section id="example-of-logistic-regression">
-<h2><span class="section-number">19.9. </span>Example of Logistic Regression<a class="headerlink" href="#example-of-logistic-regression" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">18.9. </span>Example of Logistic Regression<a class="headerlink" href="#example-of-logistic-regression" title="Permalink to this heading">#</a></h2>
 <p>Let us now apply logistic regression to a larger set of variables in our regression problem. We will consider the following independent variables:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">radius1</span></code></p></li>
@@ -1408,10 +1407,10 @@ will hence be:</p>
 </ul>
 </section>
 <section id="multinomial-logistic-regression">
-<h2><span class="section-number">19.10. </span>Multinomial Logistic Regression<a class="headerlink" href="#multinomial-logistic-regression" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">18.10. </span>Multinomial Logistic Regression<a class="headerlink" href="#multinomial-logistic-regression" title="Permalink to this heading">#</a></h2>
 <p>In many cases, we want to study the relationship between a set of <strong>continuous or categorical independent variable and a non-binary categorical dependent variable</strong>.</p>
 <section id="the-iris-dataset">
-<h3><span class="section-number">19.10.1. </span>The Iris Dataset<a class="headerlink" href="#the-iris-dataset" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">18.10.1. </span>The Iris Dataset<a class="headerlink" href="#the-iris-dataset" title="Permalink to this heading">#</a></h3>
 <p>An example is given by Fisher’s Iris dataset.</p>
 <p>The dataset was introduced by Ronald Fisher in 1936 and contains observations related to 150 specimens of iris flowers belonging to 3 different species: “setosa”, “versicolor”, and “virginica”. Example images of the three flowers are given below:</p>
 <p><img alt="" src="../_images/iris.png" /></p>
@@ -1553,7 +1552,7 @@ will hence be:</p>
 </div>
 </section>
 <section id="additional-limitations-of-a-linear-regression-in-the-presence-of-more-than-two-classes">
-<h3><span class="section-number">19.10.2. </span>Additional Limitations of a Linear Regression in the Presence of More than Two Classes<a class="headerlink" href="#additional-limitations-of-a-linear-regression-in-the-presence-of-more-than-two-classes" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">18.10.2. </span>Additional Limitations of a Linear Regression in the Presence of More than Two Classes<a class="headerlink" href="#additional-limitations-of-a-linear-regression-in-the-presence-of-more-than-two-classes" title="Permalink to this heading">#</a></h3>
 <p>Let us consider again a case with a single independent feature. We will select <code class="docutils literal notranslate"><span class="pre">petal_length</span></code>. The following image plots it with respect to the three classes:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -1576,7 +1575,7 @@ will hence be:</p>
 <p>This is an example of how the linear model is <strong>even more limited when more than two possible outcomes of the dependent variable are possible</strong>.</p>
 </section>
 <section id="the-multinomial-logistic-regression-model-optional">
-<h3><span class="section-number">19.10.3. </span>The Multinomial Logistic Regression Model (Optional)<a class="headerlink" href="#the-multinomial-logistic-regression-model-optional" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">18.10.3. </span>The Multinomial Logistic Regression Model (Optional)<a class="headerlink" href="#the-multinomial-logistic-regression-model-optional" title="Permalink to this heading">#</a></h3>
 <p>When the dependent variable can assume more than two values, <strong>we can define the multinomial logistic regression model</strong>. In this case, we select one of the values of the dependent variable <span class="math notranslate nohighlight">\(Y\)</span> as <strong>a baseline class</strong>. Without loss of generality, let <span class="math notranslate nohighlight">\(K\)</span> be the number of classes and let <span class="math notranslate nohighlight">\(Y=1\)</span> be the baseline class. Recall that in the case of the logistic regressor, we modeled the logarithm of the odd as our linear function:</p>
 <div class="math notranslate nohighlight">
 \[\log \left(\frac{P(y=1|\mathbf{x})}{1-P(y=1|\mathbf{x})}\right) = \beta_0 + \beta_1 x_1 + \ldots + \beta_n x_n\]</div>
@@ -1603,7 +1602,7 @@ will hence be:</p>
 \[ P(Y=1|X=\mathbf{x}) = \frac{1}{1+\sum_{l=2}^K \mathbf{e^{\beta_l^T\mathbf{X}}}}\]</div>
 <p>These two expressions can be used to compute the probabilities of the classes once that the parameters have been estimated and <span class="math notranslate nohighlight">\(\mathcal{x}\)</span> is observed.</p>
 <section id="estimating-the-parameters-of-the-multinomial-logistic-regressor-model">
-<h4><span class="section-number">19.10.3.1. </span>Estimating the Parameters of the Multinomial Logistic Regressor Model<a class="headerlink" href="#estimating-the-parameters-of-the-multinomial-logistic-regressor-model" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">18.10.3.1. </span>Estimating the Parameters of the Multinomial Logistic Regressor Model<a class="headerlink" href="#estimating-the-parameters-of-the-multinomial-logistic-regressor-model" title="Permalink to this heading">#</a></h4>
 <p>We can estimate the paramters of the multinomial logistic regressor model again by maximizing the likelihood of the model on the data. Assuming that all observations are i.i.d., we can write:</p>
 <div class="math notranslate nohighlight">
 \[L(\mathbf{\beta}) = \prod_{i=1}^N P(Y=y^{(i)}|X=\mathbf{x}^{(i)};\mathbf{\beta})\]</div>
@@ -1616,7 +1615,7 @@ will hence be:</p>
 <p>Similarly to the logistic regressor, there is no close form for the estimation of the parameters, but iterative algorithms such as <strong>gradient descent</strong> are in general used for optimization.</p>
 </section>
 <section id="interpretation-of-the-parameters-of-a-multinomial-logistic-regressor">
-<h4><span class="section-number">19.10.3.2. </span>Interpretation of the Parameters of a Multinomial Logistic Regressor<a class="headerlink" href="#interpretation-of-the-parameters-of-a-multinomial-logistic-regressor" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">18.10.3.2. </span>Interpretation of the Parameters of a Multinomial Logistic Regressor<a class="headerlink" href="#interpretation-of-the-parameters-of-a-multinomial-logistic-regressor" title="Permalink to this heading">#</a></h4>
 <p>The statistical interpretation of the parameters of a multinomial logistic regressor is similar to the one of a logistic regressor, but we should pay attention to the choice of the baseline.</p>
 <p>Let us consider our example of studying the relationship between <code class="docutils literal notranslate"><span class="pre">sepal_lenght</span></code> and <code class="docutils literal notranslate"><span class="pre">species</span></code>. We will map <code class="docutils literal notranslate"><span class="pre">virginica</span></code> to <span class="math notranslate nohighlight">\(0\)</span>, <code class="docutils literal notranslate"><span class="pre">versicolor</span></code> to <span class="math notranslate nohighlight">\(1\)</span> and <code class="docutils literal notranslate"><span class="pre">setosa</span></code> to <span class="math notranslate nohighlight">\(2\)</span>. Once the model is fit, we will find the following values:</p>
 <table class="table">
@@ -1672,7 +1671,7 @@ will hence be:</p>
 </ul>
 </section>
 <section id="the-softmax-regressor-optional">
-<h4><span class="section-number">19.10.3.3. </span>The Softmax Regressor (Optional)<a class="headerlink" href="#the-softmax-regressor-optional" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">18.10.3.3. </span>The Softmax Regressor (Optional)<a class="headerlink" href="#the-softmax-regressor-optional" title="Permalink to this heading">#</a></h4>
 <p>Softmax regression is an alternative formulation of multinomial logistic regression which is designed to avoid the definition of a baseline and it is hence symmetrical. In a softmax regressor, the probabilities are modeled as follows:</p>
 <div class="math notranslate nohighlight">
 \[ P(Y=k|X=\mathbf{x}) = \frac{e^{\mathbf{\beta_k}^T\mathbf{X}}}{\sum_{l=1}^K \mathbf{e^{\beta_l^T\mathbf{X}}}}, \ \ \ \forall k=1,\ldots,K\]</div>
@@ -1683,7 +1682,7 @@ will hence be:</p>
 </section>
 </section>
 <section id="references">
-<h2><span class="section-number">19.11. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">18.11. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Chapter <span class="math notranslate nohighlight">\(4\)</span> of [1]</p></li>
 </ul>
@@ -1727,7 +1726,7 @@ will hence be:</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">18. </span>Linear Regression</p>
+        <p class="prev-next-title"><span class="section-number">17. </span>Linear Regression</p>
       </div>
     </a>
     <a class="right-next"
@@ -1735,7 +1734,7 @@ will hence be:</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">20. </span>Causal Data Analysis</p>
+        <p class="prev-next-title"><span class="section-number">19. </span>Causal Data Analysis</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1754,27 +1753,27 @@ will hence be:</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-data">19.1. Example Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limits-of-linear-regression">19.2. Limits of Linear Regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-binary-values-to-probabilities">19.3. From Binary Values to Probabilities</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-function">19.4. The Logistic Function</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-regression-model">19.5. The Logistic Regression Model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-interpretation-of-the-coefficients-of-a-linear-regressor">19.6. Statistical Interpretation of the Coefficients of a Linear Regressor</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geometrical-interpretation-of-the-coefficients-of-a-logistic-regressor">19.7. Geometrical Interpretation of the Coefficients of a Logistic Regressor</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimation-of-the-parameters-of-a-logistic-regressor">19.8. Estimation of the Parameters of a Logistic Regressor</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-logistic-regression">19.9. Example of Logistic Regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-logistic-regression">19.10. Multinomial Logistic Regression</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-iris-dataset">19.10.1. The Iris Dataset</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-limitations-of-a-linear-regression-in-the-presence-of-more-than-two-classes">19.10.2. Additional Limitations of a Linear Regression in the Presence of More than Two Classes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-multinomial-logistic-regression-model-optional">19.10.3. The Multinomial Logistic Regression Model (Optional)</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-parameters-of-the-multinomial-logistic-regressor-model">19.10.3.1. Estimating the Parameters of the Multinomial Logistic Regressor Model</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-parameters-of-a-multinomial-logistic-regressor">19.10.3.2. Interpretation of the Parameters of a Multinomial Logistic Regressor</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-softmax-regressor-optional">19.10.3.3. The Softmax Regressor (Optional)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-data">18.1. Example Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limits-of-linear-regression">18.2. Limits of Linear Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-binary-values-to-probabilities">18.3. From Binary Values to Probabilities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-function">18.4. The Logistic Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-regression-model">18.5. The Logistic Regression Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-interpretation-of-the-coefficients-of-a-linear-regressor">18.6. Statistical Interpretation of the Coefficients of a Linear Regressor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geometrical-interpretation-of-the-coefficients-of-a-logistic-regressor">18.7. Geometrical Interpretation of the Coefficients of a Logistic Regressor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimation-of-the-parameters-of-a-logistic-regressor">18.8. Estimation of the Parameters of a Logistic Regressor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-logistic-regression">18.9. Example of Logistic Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-logistic-regression">18.10. Multinomial Logistic Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-iris-dataset">18.10.1. The Iris Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-limitations-of-a-linear-regression-in-the-presence-of-more-than-two-classes">18.10.2. Additional Limitations of a Linear Regression in the Presence of More than Two Classes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-multinomial-logistic-regression-model-optional">18.10.3. The Multinomial Logistic Regression Model (Optional)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-parameters-of-the-multinomial-logistic-regressor-model">18.10.3.1. Estimating the Parameters of the Multinomial Logistic Regressor Model</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-parameters-of-a-multinomial-logistic-regressor">18.10.3.2. Interpretation of the Parameters of a Multinomial Logistic Regressor</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-softmax-regressor-optional">18.10.3.3. The Softmax Regressor (Optional)</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">19.11. References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">18.11. References</a></li>
 </ul>
   </nav></div>
 

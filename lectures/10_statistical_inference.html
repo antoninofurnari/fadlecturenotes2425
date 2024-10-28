@@ -68,7 +68,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="18. Linear Regression" href="11_linear_regression.html" />
+    <link rel="next" title="17. Linear Regression" href="11_linear_regression.html" />
     <link rel="prev" title="15. Associazione tra Variabili" href="../laboratories/08_associazione_variabili.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -210,30 +210,29 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 6</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">16. Statistical Inference</a></li>
-
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 7 &amp; 8</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="11_linear_regression.html">18. Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_linear_regression.html">17. Linear Regression</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 9</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="12_logistic_regression.html">19. Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_logistic_regression.html">18. Logistic Regression</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 10</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="13_causal_analysis.html">20. Causal Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_causal_analysis.html">19. Causal Data Analysis</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 11</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="14_data_as_nd_points.html">21. Data as N-Dimensional Points</a></li>
-<li class="toctree-l1"><a class="reference internal" href="15_clustering.html">22. Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_data_as_nd_points.html">20. Data as N-Dimensional Points</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_clustering.html">21. Clustering</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratory 3</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/10_statistical_inference.html">23. Laboratory on Statistical Inference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/11_regressione_lineare.html">24. Laboratorio su Regressione Lineare</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/12_regressione_logistica.html">25. Laboratorio su regressione logistica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/10_statistical_inference.html">22. Laboratory on Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/11_regressione_lineare.html">23. Laboratorio su Regressione Lineare</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/12_regressione_logistica.html">24. Laboratorio su regressione logistica</a></li>
 </ul>
 
     </div>
@@ -460,7 +459,6 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">16. Statistical Inference</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling">16.1. Sampling</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-random-sample">16.1.1. Simple random sample</a></li>
 </ul>
@@ -500,16 +498,11 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assessing-whether-a-sample-is-normally-distributed">16.7. Assessing whether a Sample is Normally Distributed</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantile-quantile-plots-q-q-plots">16.7.1. Quantile-Quantile Plots (Q-Q Plots)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shapiro-wilk-normality-test">16.7.2. Shapiro-Wilk Normality Test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-agostino-s-k-squared-test">16.7.3. D’Agostino’s K-squared test</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">16.8. References</a></li>
 </ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#d-agostino-s-k-squared-test">17. D’Agostino’s K-squared test</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">17.1. References</a></li>
-</ul>
-</li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -1620,10 +1613,8 @@ Sample does not look Gaussian (reject H0)
 </div>
 </div>
 </section>
-</section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="d-agostino-s-k-squared-test">
-<h1><span class="section-number">17. </span>D’Agostino’s K-squared test<a class="headerlink" href="#d-agostino-s-k-squared-test" title="Permalink to this heading">#</a></h1>
+<section id="d-agostino-s-k-squared-test">
+<h3><span class="section-number">16.7.3. </span>D’Agostino’s K-squared test<a class="headerlink" href="#d-agostino-s-k-squared-test" title="Permalink to this heading">#</a></h3>
 <p>When samples are large (<span class="math notranslate nohighlight">\(n \geq 50\)</span>), the D’Agostino’s K-squared test is more used. It is based on Skewness and Kurtosis. Here is the result for our example:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -1634,8 +1625,10 @@ Sample does not look Gaussian (reject H0)
 </div>
 </div>
 </div>
+</section>
+</section>
 <section id="references">
-<h2><span class="section-number">17.1. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">16.8. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Chapters 6-8 of [1];</p></li>
 <li><p>Parts of chapter 9 of [2].</p></li>
@@ -1689,7 +1682,7 @@ Sample does not look Gaussian (reject H0)
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">18. </span>Linear Regression</p>
+        <p class="prev-next-title"><span class="section-number">17. </span>Linear Regression</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1708,7 +1701,6 @@ Sample does not look Gaussian (reject H0)
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">16. Statistical Inference</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling">16.1. Sampling</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-random-sample">16.1.1. Simple random sample</a></li>
 </ul>
@@ -1748,16 +1740,11 @@ Sample does not look Gaussian (reject H0)
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assessing-whether-a-sample-is-normally-distributed">16.7. Assessing whether a Sample is Normally Distributed</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantile-quantile-plots-q-q-plots">16.7.1. Quantile-Quantile Plots (Q-Q Plots)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shapiro-wilk-normality-test">16.7.2. Shapiro-Wilk Normality Test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-agostino-s-k-squared-test">16.7.3. D’Agostino’s K-squared test</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">16.8. References</a></li>
 </ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#d-agostino-s-k-squared-test">17. D’Agostino’s K-squared test</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">17.1. References</a></li>
-</ul>
-</li>
-</ul>
-
   </nav></div>
 
 </div></div>
