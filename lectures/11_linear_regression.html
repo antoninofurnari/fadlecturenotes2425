@@ -1534,7 +1534,7 @@ Fuel Type: [&#39;gas&#39; &#39;diesel&#39;]
 \[\begin{split}fueltype[T.gas] = \begin{cases} 1 &amp; \text{if } fueltype=gas \\ 0 &amp; \text{otherwise}\end{cases}\end{split}\]</div>
 <p>If we fit the model:</p>
 <div class="math notranslate nohighlight">
-\[mpg = \beta_0 + \beta_1 horsepower + \beta_1 fueltype[T.gas]\]</div>
+\[mpg = \beta_0 + \beta_1 horsepower + \beta_2 fueltype[T.gas]\]</div>
 <p>We obtain an <span class="math notranslate nohighlight">\(R^2=0.661\)</span> with <span class="math notranslate nohighlight">\(Prob(F-statistic) \approx 0\)</span> and the following estimates for the regression parameters:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -1638,12 +1638,12 @@ Fuel Type: [&#39;gas&#39; &#39;diesel&#39;]
 \[y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_1x_2\]</div>
 <p>As a concrete example, consider the problem of regressing <code class="docutils literal notranslate"><span class="pre">mpg</span></code> from <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> and <code class="docutils literal notranslate"><span class="pre">weight</span></code>. A simple model of the kind:</p>
 <div class="math notranslate nohighlight">
-\[mpg = \beta_0 + \beta_1 horsepower + \beta_1 weight\]</div>
+\[mpg = \beta_0 + \beta_1 horsepower + \beta_2 weight\]</div>
 <p>assumes that the <span class="math notranslate nohighlight">\(\beta_1\)</span>, the increment that we observe in <code class="docutils literal notranslate"><span class="pre">mpg</span></code> when <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> increments by one unit is <strong>constant even when other variables change their values</strong>. However, we can imagine how, for light vehicles <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> affects <code class="docutils literal notranslate"><span class="pre">mpg</span></code> in a way, while for heavy vehicles <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> affects <code class="docutils literal notranslate"><span class="pre">mpg</span></code> in a different way. For example, we expect light vehicles with big <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> to be more efficient than heavy vehicles with small <code class="docutils literal notranslate"><span class="pre">horsepower</span></code>. To account for this, we could consider the following model instead:</p>
 <div class="math notranslate nohighlight">
 \[mpg = \beta_0 + \beta_1 horsepower + \beta_2 weight + \beta_3 horsepower \times weight\]</div>
 <p>Note that the model above is nonlinear in <span class="math notranslate nohighlight">\(horsepower\)</span> and <span class="math notranslate nohighlight">\(weight\)</span>, but it is still linear if we introduce a variable <span class="math notranslate nohighlight">\(hw = horsepower \times weight\)</span>. We can easily do this by adding a new column to our design matrix computed as the product of the two variables. Then we can fit the model using the same exact estimators seen before.</p>
-<p>This new regressor obtained <span class="math notranslate nohighlight">\(R^2=0.748\)</span>, which is larger as compared to <span class="math notranslate nohighlight">\(R^2=0.706\)</span> obtained for the <span class="math notranslate nohighlight">\(mpg = \beta_0 + \beta_1 horsepower + \beta_2 weight\)</span> regressor. Both regressor have a large F-statistic and an associated p-value close to zero. The new regressor explains more variance than the previous one.</p>
+<p>This new regressor obtained <span class="math notranslate nohighlight">\(R^2=0.748\)</span>, which is larger as compared to <span class="math notranslate nohighlight">\(R^2=0.706\)</span> obtained for the <span class="math notranslate nohighlight">\(mpg = \beta_0 + \beta_1 horsepower + \beta_2 weight\)</span> regressor. Both regressors have a large F-statistic and an associated p-value close to zero. The new regressor explains more variance than the previous one.</p>
 <p>The estimated coefficients are:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -1686,7 +1686,7 @@ Fuel Type: [&#39;gas&#39; &#39;diesel&#39;]
 <p>We can note that:</p>
 <ul class="simple">
 <li><p>The p-value of the product <span class="math notranslate nohighlight">\(horsepower \times weight\)</span> is almost zero. This is a strong evidence that the true relationship is not merely additive, but an interaction between the two variables actually happens.</p></li>
-<li><p>The coefficients of <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> and <code class="docutils literal notranslate"><span class="pre">weight</span></code> have changed. This makes sense, also their interpretation has changed. For instance, in the new regressor an increase of one unit of <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> is associated to an decrease of <span class="math notranslate nohighlight">\(0.2508\)</span> units of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> if <strong>the product between <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> and <code class="docutils literal notranslate"><span class="pre">weight</span></code> does not change</strong>, i.e., if the way the two quantities interact does not change.</p></li>
+<li><p>The coefficients of <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> and <code class="docutils literal notranslate"><span class="pre">weight</span></code> have changed. This makes sense, also their interpretation has changed. For instance, in the new regressor an increase of one unit of <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> is associated to a decrease of <span class="math notranslate nohighlight">\(0.2508\)</span> units of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> if <strong>the product between <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> and <code class="docutils literal notranslate"><span class="pre">weight</span></code> does not change</strong>, i.e., if the way the two quantities interact does not change.</p></li>
 </ul>
 <p>How should we interpret the coefficient <span class="math notranslate nohighlight">\(\beta_3\)</span>? Let’s rewrite our model:</p>
 <div class="math notranslate nohighlight">
@@ -1912,7 +1912,7 @@ Fuel Type: [&#39;gas&#39; &#39;diesel&#39;]
 <img alt="../_images/1de2a52c820bc6c4b1de5bd7c81ccce61b4e45a2ff1d88ceff546b121bee77db.png" src="../_images/1de2a52c820bc6c4b1de5bd7c81ccce61b4e45a2ff1d88ceff546b121bee77db.png" />
 </div>
 </div>
-<p>As can be seen, the model now makes “hard choices” on whether a value should be set to zero or not, thus performing variable selection.</p>
+<p>As can be seen, the model now makes “hard choices” on whether a value should be set to zero or not, thus performing variable selection. Once Lasso regression identified the variables to remove, we could create a reduced dataset keeping only columns with nonzero coefficients and fit a regular, interpretable, linear regressor with the original, non standardized, data.</p>
 </section>
 </section>
 <section id="references">
