@@ -734,8 +734,8 @@ Car Name: The name or identifier of the car model.</p></li>
 <p>As we will see later, we expect <span class="math notranslate nohighlight">\(\epsilon\)</span> to be <strong>small and randomly distributed</strong>.</p>
 <p>Given the model above, we will call:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(X\)</span>, the <strong>dependent variable</strong> or <strong>regressor</strong>;</p></li>
-<li><p><span class="math notranslate nohighlight">\(Y\)</span>, the <strong>independent variable</strong> or <strong>regressed variable</strong>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(X\)</span>, the <strong>independent variable</strong> or <strong>regressor</strong>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(Y\)</span>, the <strong>dependent variable</strong> or <strong>regressed variable</strong>.</p></li>
 </ul>
 <p>The values <span class="math notranslate nohighlight">\(\beta_0\)</span> and <span class="math notranslate nohighlight">\(\beta_1\)</span> are called <strong>coefficients</strong> or <strong>parameters</strong> of the model.</p>
 <p>The mathematical model above has a geometrical interpretation. Indeed, specific values of <span class="math notranslate nohighlight">\(\beta_0\)</span> and <span class="math notranslate nohighlight">\(\beta_1\)</span> identify a given line in the 2D plane, as shown in the plot below:</p>
@@ -980,7 +980,7 @@ beta_1: -0.16
 \[RSS(k)=\sum_{i=1}^n{(k-y_i)^2}\]</div>
 <p>To find the optimal value <span class="math notranslate nohighlight">\(k\)</span>, we can compute the derivative of the RSS and set it to zero:</p>
 <div class="math notranslate nohighlight">
-\[\frac{\partial RSS(k)}{\partial k}=2\sum_{i=1}^n{(k-y_i)} = 2(nk - \sum_{i=1}^n y_i) = 2(nk - n\overline y_i)\]</div>
+\[\frac{\partial RSS(k)}{\partial k}=2\sum_{i=1}^n{(k-y_i)} = 2(nk - \sum_{i=1}^n y_i) = 2(nk - n\overline y)\]</div>
 <div class="math notranslate nohighlight">
 \[2n(k - \overline y_i) = 0 \Leftrightarrow k=\overline y_i\]</div>
 <p>Hence, the optimal estimator, <strong>when there is not relationship between <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> is the average value of <span class="math notranslate nohighlight">\(Y\)</span></strong>. We will call its RSS value the <strong>total sum of squares</strong>:</p>

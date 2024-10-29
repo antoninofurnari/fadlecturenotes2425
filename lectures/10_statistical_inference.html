@@ -1571,33 +1571,27 @@ Kurtosis of weight: -0.06
 <p>While Skewness and Kurtosis can help characterize deviations from normality, there are tests which can be used.</p>
 <section id="quantile-quantile-plots-q-q-plots">
 <h3><span class="section-number">16.7.1. </span>Quantile-Quantile Plots (Q-Q Plots)<a class="headerlink" href="#quantile-quantile-plots-q-q-plots" title="Permalink to this heading">#</a></h3>
-<p>One common way to do so is using the Quantile-Quantile plots. The basic idea is to <strong>compare the quantiles of the empirical data distribution with the theoretical quantiles of the reference distribution</strong>. To avoid scale issues, <strong>the empirical data is first transformed into z-scores</strong>. If the sample follows the theoretical distribution, the quantiles will match. By plotting the empirical quantiles against the theoretical ones, we should obtain a set of points that lie on the line <span class="math notranslate nohighlight">\(y=x\)</span>. In the following graph, we show the q-q plot for the weight sample in our weight-height dataset:</p>
+<p>One way to compare two distribution is by comparing their CDFs. In the plot below we compare the ECDF of the standardized data (<code class="docutils literal notranslate"><span class="pre">weights</span></code>) with the theoretical CDF of the Normal distribution (with zero mean and unit standard deviation):</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/4c4da3e992bdd477da77e8427b9785ed44d559dfcd16c96749b474ee387cef79.png" src="../_images/4c4da3e992bdd477da77e8427b9785ed44d559dfcd16c96749b474ee387cef79.png" />
+</div>
+</div>
+<p>It is worth noting that the values on the x axes can be interpreted as quantiles due to the definition of the CDF. The plot above also highlights the discrepancies between some points obtained at specific cumulative probability values (<span class="math notranslate nohighlight">\(0.1\)</span>, <span class="math notranslate nohighlight">\(0.5\)</span>, and <span class="math notranslate nohighlight">\(0.9\)</span> in the example). Each probability value is associated to two quantiles: the empirical quantile of the data distribution (crosses) and the theoretical quantile of the Gaussian distribution (dots). The discrepancies between the pairs of quantile values are highlighted by the distances between the dashed lines of the same colors in the x axes.</p>
+<p>In practice, a better visualization to show such discrepancies is to use Quantile-Quantile plots. The basic idea is to <strong>compare the quantiles of the empirical data distribution with the theoretical quantiles of the reference distribution</strong>. To avoid scale issues, <strong>the empirical data is first transformed into z-scores</strong>. If the sample follows the theoretical distribution, the quantiles will match. By plotting the empirical quantiles against the theoretical ones, we should obtain a set of points that lie on the line <span class="math notranslate nohighlight">\(y=x\)</span>. In the following graph, we show the q-q plot for the weight sample in our weight-height dataset:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <img alt="../_images/357005ac389bb116ce498fa3a86c69c6bc8002fbef4da6b2129756bbbefa6a67.png" src="../_images/357005ac389bb116ce498fa3a86c69c6bc8002fbef4da6b2129756bbbefa6a67.png" />
 </div>
 </div>
 <p>The plot relates the “theoretical” quantiles with those of the sample. The fact that the points on the plot do not lie on the diagonal indicates that there is a discrepancy between the empirical data distribution and the Gaussian distribution.</p>
-<p>Analyzing a Q-Q Plot can be complex. In practice, <strong>there are some guidelines to understand how a sample deviates from a theoretical distribution</strong>. Referring to the Gaussian distribution, we will see how to interpret from a Q-Q plot if a sample follows a distribution that is:</p>
-<ul class="simple">
-<li><p>Right-skewed</p></li>
-<li><p>Left-skewed</p></li>
-<li><p>Symmetric with long tails</p></li>
-<li><p>Symmetric with short tails</p></li>
-</ul>
-<p>The following figure compares the q-q plots of different distributions:</p>
+<p>Analyzing a Q-Q Plot can be complex. In practice, <strong>there are some guidelines to understand how a sample deviates from a theoretical distribution</strong>. The following figure compares the q-q plots of different distributions:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/4793b4ba94e81dffb92e1eb40b7121591aa9790fdd6845322eb4cbcb4bf9cfa0.png" src="../_images/4793b4ba94e81dffb92e1eb40b7121591aa9790fdd6845322eb4cbcb4bf9cfa0.png" />
+<img alt="../_images/81877f3dde85329133805bf308c4c3b085373a7b1816ba505e4af971d53a7941.png" src="../_images/81877f3dde85329133805bf308c4c3b085373a7b1816ba505e4af971d53a7941.png" />
 </div>
 </div>
-<p>Every time we observe a Q-Q Plot, we can relate these features to characteristics of the distribution. Clearly, these characteristics can also combine to create more complex Q-Q Plots, as seen in the case of weights. Now, we have the tools to analyze the Q-Q Plot of weights:</p>
-<ul class="simple">
-<li><p>The deviation for quantiles less than -1 suggests a left-skew (see Q-Q Plot for “Left-Skewed”).</p></li>
-<li><p>The deviation for quantiles greater than 2 indicates that there are more high values than expected in a Gaussian distribution, so the right tail is a bit “longer” than it should be.</p></li>
-<li><p>Points below the diagonal around the quantile <span class="math notranslate nohighlight">\(0\)</span> indicate that the peak of the distribution is lower than it should be in the case of a Gaussian distribution.</p></li>
-</ul>
-<p>We will see how we can conduct a statistical test to check if a sample is Gaussian in the next lessons.</p>
+<p>Every time we observe a Q-Q Plot, we can relate these features to characteristics of the distribution. Clearly, these characteristics can also combine to create more complex Q-Q Plots, as seen in the case of weights.</p>
 </section>
 <section id="shapiro-wilk-normality-test">
 <h3><span class="section-number">16.7.2. </span>Shapiro-Wilk Normality Test<a class="headerlink" href="#shapiro-wilk-normality-test" title="Permalink to this heading">#</a></h3>
