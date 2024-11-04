@@ -1596,6 +1596,7 @@ Kurtosis of weight: -0.06
 <section id="shapiro-wilk-normality-test">
 <h3><span class="section-number">16.7.2. </span>Shapiro-Wilk Normality Test<a class="headerlink" href="#shapiro-wilk-normality-test" title="Permalink to this heading">#</a></h3>
 <p>The Shapiro-Wilk test is a statistical test used to assess whether a sample follows a Gaussian (normal) distribution. It is used with small samples (<span class="math notranslate nohighlight">\(n\leq 2000\)</span>) It works by comparing the observed data to what you would expect if the data were drawn from a truly Gaussian distribution.</p>
+<p>The null hypothesis for this test is that the population is normally distributed.</p>
 <p>We will not see the formal details of this test, but we can use it in our analyses. Here is the result on the <code class="docutils literal notranslate"><span class="pre">weight</span></code> sample in our height-weight dataset:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -1609,7 +1610,9 @@ Sample does not look Gaussian (reject H0)
 </section>
 <section id="d-agostino-s-k-squared-test">
 <h3><span class="section-number">16.7.3. </span>D’Agostino’s K-squared test<a class="headerlink" href="#d-agostino-s-k-squared-test" title="Permalink to this heading">#</a></h3>
-<p>When samples are large (<span class="math notranslate nohighlight">\(n \geq 50\)</span>), the D’Agostino’s K-squared test is more used. It is based on Skewness and Kurtosis. Here is the result for our example:</p>
+<p>When samples are large (<span class="math notranslate nohighlight">\(n \geq 50\)</span>), the D’Agostino’s K-squared test is more used. It is based on Skewness and Kurtosis.</p>
+<p>The null hypothesis for this test is that the population is normally distributed.</p>
+<p>Here is the result for our example:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test statistic: 201.64

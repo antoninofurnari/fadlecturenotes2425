@@ -1151,7 +1151,8 @@ beta_1: -0.16
 \[y=\beta_0 + \beta_1 x_1 + \ldots + \beta_i x_i + \ldots + \beta_n x_n\]</div>
 <p>We can define our <strong>cost function</strong> again as the residual sum of squares:</p>
 <div class="math notranslate nohighlight">
-\[RSS(\beta_0,\ldots,\beta_n) = \sum_{i=1}^n (y_i - \beta_0+\beta_1x_i + \ldots + \beta_n x_n)^2\]</div>
+\[RSS(\beta_0,\ldots,\beta_n) = \sum_{i=1}^m (y_i - \beta_0+\beta_1x_1^{(i)} + \ldots + \beta_n x_n^{(i)})^2\]</div>
+<p>Where <span class="math notranslate nohighlight">\(m\)</span> is the total number of observations and <span class="math notranslate nohighlight">\(x_j^{(i)}\)</span> is the <span class="math notranslate nohighlight">\(j^{th}\)</span> variable (<span class="math notranslate nohighlight">\(x_j\)</span>) of the <span class="math notranslate nohighlight">\(i^{th}\)</span> observations.</p>
 <p>The values <span class="math notranslate nohighlight">\(\hat \beta_0,\ldots,\hat \beta_n\)</span> values that minimize the loss function above are the <strong>multiple least square coefficient estimates</strong>.</p>
 <p>To find these optimal values, it is convenient to use matrix notation. Given <span class="math notranslate nohighlight">\(m\)</span> observations, we will have <span class="math notranslate nohighlight">\(m\)</span> equations:</p>
 <div class="math notranslate nohighlight">
