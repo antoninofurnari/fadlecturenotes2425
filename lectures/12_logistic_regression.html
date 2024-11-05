@@ -462,7 +462,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-data">18.1. Example Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limits-of-linear-regression">18.2. Limits of Linear Regression</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-binary-values-to-probabilities">18.3. From Binary Values to Probabilities</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-function">18.4. The Logistic Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-function">18.4. The Logistic Function</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-origin-of-the-logistic-function">18.4.1. The origin of the logistic function</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-regression-model">18.5. The Logistic Regression Model</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-interpretation-of-the-coefficients-of-a-linear-regressor">18.6. Statistical Interpretation of the Coefficients of a Linear Regressor</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geometrical-interpretation-of-the-coefficients-of-a-logistic-regressor">18.7. Geometrical Interpretation of the Coefficients of a Logistic Regressor</a></li>
@@ -471,8 +474,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-logistic-regression">18.10. Multinomial Logistic Regression</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-iris-dataset">18.10.1. The Iris Dataset</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-limitations-of-a-linear-regression-in-the-presence-of-more-than-two-classes">18.10.2. Additional Limitations of a Linear Regression in the Presence of More than Two Classes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-multinomial-logistic-regression-model-optional">18.10.3. The Multinomial Logistic Regression Model (Optional)</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-parameters-of-the-multinomial-logistic-regressor-model">18.10.3.1. Estimating the Parameters of the Multinomial Logistic Regressor Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-multinomial-logistic-regression-model">18.10.3. The Multinomial Logistic Regression Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-parameters-of-the-multinomial-logistic-regressor-model-optional">18.10.3.1. Estimating the Parameters of the Multinomial Logistic Regressor Model (Optional)</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-parameters-of-a-multinomial-logistic-regressor">18.10.3.2. Interpretation of the Parameters of a Multinomial Logistic Regressor</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-softmax-regressor-optional">18.10.3.3. The Softmax Regressor (Optional)</a></li>
 </ul>
@@ -873,7 +876,8 @@ document.write(`
 </section>
 <section id="the-logistic-function">
 <h2><span class="section-number">18.4. </span>The Logistic Function<a class="headerlink" href="#the-logistic-function" title="Permalink to this heading">#</a></h2>
-<p>Similarly to polynomial regression, we need to find a <strong>transformation of the formulation of the linear regressor to transform its output into a nonlinear function of the independent variables</strong>. Of course, we do not want <em>any</em> transformation, but one that has the previously highlighted properties. While different functions have similar characteristics, in practice the <strong>logistic function has some nice properties that, as we will se in a moment, allow to easily interpret the resulting model in a probabilistic way</strong>. The logistic function is defined as:</p>
+<p>Similarly to polynomial regression, we need to find a <strong>transformation of the formulation of the linear regressor to transform its output into a nonlinear function of the independent variables</strong>. Of course, we do not want <em>any</em> transformation, but one that has the previously highlighted properties.</p>
+<p>In practice the <strong>logistic function has some nice properties that, as we will se in a moment, allow to easily interpret the resulting model in a probabilistic way</strong>. The logistic function is defined as:</p>
 <div class="math notranslate nohighlight">
 \[f(x) = \frac{1}{1+e^{-x}}\]</div>
 <p>and has the following shape:</p>
@@ -887,6 +891,38 @@ document.write(`
 <li><p>Its values are comprised between <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(1\)</span>;</p></li>
 <li><p>It saturates to <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(1\)</span> for extreme values of <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
 </ul>
+<p>Additionally, it is differentiable, which will be useful for optimization later.</p>
+<section id="the-origin-of-the-logistic-function">
+<h3><span class="section-number">18.4.1. </span>The origin of the logistic function<a class="headerlink" href="#the-origin-of-the-logistic-function" title="Permalink to this heading">#</a></h3>
+<p>When looking at the logistic function for the first time, one may wonder where it comes from and why we are using this function. The original logistic function was proposed by Belgian mathematician Pierre François Verhulst in 1838 to model the problem of <strong>population growth</strong>, which can be formulated as follows:</p>
+<blockquote>
+<div><p>We want to model the growth of a population <span class="math notranslate nohighlight">\(P(t)\)</span> as time <span class="math notranslate nohighlight">\(t\)</span> passes, under the assumption that resources are limited so that the population can reach at most the <strong>carrying capacity <span class="math notranslate nohighlight">\(K\)</span></strong>.</p>
+</div></blockquote>
+<p>Verhulst tried to model the growth with a linear ODE, i.e., trying to give an analytical formulation for the derivative of the population size <span class="math notranslate nohighlight">\(P(t)\)</span> with respect to time <span class="math notranslate nohighlight">\(t\)</span>. If resources were unlimited, we could model:</p>
+<div class="math notranslate nohighlight">
+\[\frac{dP(t)}{dt} = rP\]</div>
+<p>where <span class="math notranslate nohighlight">\(r\)</span> is an unknown growth coefficient. The expression above reflects the fact that, as population grows, it grows faster and faster. The derivative will change with time as follows:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/b4129388b327a1321f2957e365d5d19fe4ab9db5c5f5dabdfaf7533d3e1c7580.png" src="../_images/b4129388b327a1321f2957e365d5d19fe4ab9db5c5f5dabdfaf7533d3e1c7580.png" />
+</div>
+</div>
+<p>As we know that resources are limited, however, we have to assume that the growth rate will at first increase, when many resources are available and population grows, then decrease. Verhulst hence revised the ODE as follows:</p>
+<div class="math notranslate nohighlight">
+\[\frac{dP(t)}{dt} = rP - (1-\frac{P}{K})\]</div>
+<p>where <span class="math notranslate nohighlight">\(K\)</span> is the carrying capacity. In practice, as <span class="math notranslate nohighlight">\(P\)</span> approaches <span class="math notranslate nohighlight">\(K\)</span>, the growth rate will slow down, as shown in the following:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/95eb35237e480080e3a38150ca9b477d445dd2b6d90a1aa7262f336831eb7612.png" src="../_images/95eb35237e480080e3a38150ca9b477d445dd2b6d90a1aa7262f336831eb7612.png" />
+</div>
+</div>
+<p>To obtain the size of population <span class="math notranslate nohighlight">\(P\)</span> for varying <span class="math notranslate nohighlight">\(t\)</span>, we can solve the ODE above, obtaining the following expression:</p>
+<div class="math notranslate nohighlight">
+\[P = \frac{K}{1+(\frac{K-P_0}{P_0})e^{-rt}}\]</div>
+<p>Scaling <span class="math notranslate nohighlight">\(K\)</span> to <span class="math notranslate nohighlight">\(1\)</span> and setting <span class="math notranslate nohighlight">\(r=1\)</span>, we obtain the standard logistic function:</p>
+<div class="math notranslate nohighlight">
+\[f(t) = \frac{1}{1+e^{-t}}\]</div>
+</section>
 </section>
 <section id="the-logistic-regression-model">
 <h2><span class="section-number">18.5. </span>The Logistic Regression Model<a class="headerlink" href="#the-logistic-regression-model" title="Permalink to this heading">#</a></h2>
@@ -1574,8 +1610,8 @@ will hence be:</p>
 <p>Even if the two mappings should be equivalent, we can see how a linear model would find very different results.</p>
 <p>This is an example of how the linear model is <strong>even more limited when more than two possible outcomes of the dependent variable are possible</strong>.</p>
 </section>
-<section id="the-multinomial-logistic-regression-model-optional">
-<h3><span class="section-number">18.10.3. </span>The Multinomial Logistic Regression Model (Optional)<a class="headerlink" href="#the-multinomial-logistic-regression-model-optional" title="Permalink to this heading">#</a></h3>
+<section id="the-multinomial-logistic-regression-model">
+<h3><span class="section-number">18.10.3. </span>The Multinomial Logistic Regression Model<a class="headerlink" href="#the-multinomial-logistic-regression-model" title="Permalink to this heading">#</a></h3>
 <p>When the dependent variable can assume more than two values, <strong>we can define the multinomial logistic regression model</strong>. In this case, we select one of the values of the dependent variable <span class="math notranslate nohighlight">\(Y\)</span> as <strong>a baseline class</strong>. Without loss of generality, let <span class="math notranslate nohighlight">\(K\)</span> be the number of classes and let <span class="math notranslate nohighlight">\(Y=1\)</span> be the baseline class. Recall that in the case of the logistic regressor, we modeled the logarithm of the odd as our linear function:</p>
 <div class="math notranslate nohighlight">
 \[\log \left(\frac{P(y=1|\mathbf{x})}{1-P(y=1|\mathbf{x})}\right) = \beta_0 + \beta_1 x_1 + \ldots + \beta_n x_n\]</div>
@@ -1601,14 +1637,16 @@ will hence be:</p>
 <div class="math notranslate nohighlight">
 \[ P(Y=1|X=\mathbf{x}) = \frac{1}{1+\sum_{l=2}^K \mathbf{e^{\beta_l^T\mathbf{X}}}}\]</div>
 <p>These two expressions can be used to compute the probabilities of the classes once that the parameters have been estimated and <span class="math notranslate nohighlight">\(\mathcal{x}\)</span> is observed.</p>
-<section id="estimating-the-parameters-of-the-multinomial-logistic-regressor-model">
-<h4><span class="section-number">18.10.3.1. </span>Estimating the Parameters of the Multinomial Logistic Regressor Model<a class="headerlink" href="#estimating-the-parameters-of-the-multinomial-logistic-regressor-model" title="Permalink to this heading">#</a></h4>
+<section id="estimating-the-parameters-of-the-multinomial-logistic-regressor-model-optional">
+<h4><span class="section-number">18.10.3.1. </span>Estimating the Parameters of the Multinomial Logistic Regressor Model (Optional)<a class="headerlink" href="#estimating-the-parameters-of-the-multinomial-logistic-regressor-model-optional" title="Permalink to this heading">#</a></h4>
 <p>We can estimate the paramters of the multinomial logistic regressor model again by maximizing the likelihood of the model on the data. Assuming that all observations are i.i.d., we can write:</p>
 <div class="math notranslate nohighlight">
 \[L(\mathbf{\beta}) = \prod_{i=1}^N P(Y=y^{(i)}|X=\mathbf{x}^{(i)};\mathbf{\beta})\]</div>
 <p>Again, we minimize the negative log likelihood:</p>
 <div class="math notranslate nohighlight">
-\[nll(\mathcal{\beta})=-\log L(\mathbf{\beta}) = -\sum_{i=1}^N \log P(Y=y^{(i)}|X=\mathbf{x}^{(i)};\mathbf{\beta}) = -\sum_{i=1}^N [y^{(i)} \neq 1](e^{-\mathbf{\beta}_k^T\mathbf{X}} - \log(1+\sum_{l=2}^K {\beta}_k^T\mathbf{X})) + [y^{(i)} = 1] (- \log(1+\sum_{l=2}^K {\beta}_k^T\mathbf{X}))\]</div>
+\[nll(\mathcal{\beta})=-\log L(\mathbf{\beta}) = -\sum_{i=1}^N \log P(Y=y^{(i)}|X=\mathbf{x}^{(i)};\mathbf{\beta}) = \]</div>
+<div class="math notranslate nohighlight">
+\[-\sum_{i=1}^N [y^{(i)} \neq 1](e^{-\mathbf{\beta}_k^T\mathbf{X}} - \log(1+\sum_{l=2}^K {\beta}_k^T\mathbf{X})) + [y^{(i)} = 1] (- \log(1+\sum_{l=2}^K {\beta}_k^T\mathbf{X}))\]</div>
 <p>Where <span class="math notranslate nohighlight">\([\cdot]\)</span> denotes the Iverson brackets:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}[x] = \begin{cases}1 &amp; \text{if } x \text{ is true} \\ 0 &amp; \text{otherwise}\end{cases}\end{split}\]</div>
@@ -1756,7 +1794,10 @@ will hence be:</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-data">18.1. Example Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limits-of-linear-regression">18.2. Limits of Linear Regression</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-binary-values-to-probabilities">18.3. From Binary Values to Probabilities</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-function">18.4. The Logistic Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-function">18.4. The Logistic Function</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-origin-of-the-logistic-function">18.4.1. The origin of the logistic function</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-regression-model">18.5. The Logistic Regression Model</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-interpretation-of-the-coefficients-of-a-linear-regressor">18.6. Statistical Interpretation of the Coefficients of a Linear Regressor</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geometrical-interpretation-of-the-coefficients-of-a-logistic-regressor">18.7. Geometrical Interpretation of the Coefficients of a Logistic Regressor</a></li>
@@ -1765,8 +1806,8 @@ will hence be:</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-logistic-regression">18.10. Multinomial Logistic Regression</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-iris-dataset">18.10.1. The Iris Dataset</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-limitations-of-a-linear-regression-in-the-presence-of-more-than-two-classes">18.10.2. Additional Limitations of a Linear Regression in the Presence of More than Two Classes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-multinomial-logistic-regression-model-optional">18.10.3. The Multinomial Logistic Regression Model (Optional)</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-parameters-of-the-multinomial-logistic-regressor-model">18.10.3.1. Estimating the Parameters of the Multinomial Logistic Regressor Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-multinomial-logistic-regression-model">18.10.3. The Multinomial Logistic Regression Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-parameters-of-the-multinomial-logistic-regressor-model-optional">18.10.3.1. Estimating the Parameters of the Multinomial Logistic Regressor Model (Optional)</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-parameters-of-a-multinomial-logistic-regressor">18.10.3.2. Interpretation of the Parameters of a Multinomial Logistic Regressor</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-softmax-regressor-optional">18.10.3.3. The Softmax Regressor (Optional)</a></li>
 </ul>
