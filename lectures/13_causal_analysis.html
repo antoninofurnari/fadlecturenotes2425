@@ -1317,7 +1317,7 @@ Chi-square p-value: 2.761663e-06
 </section>
 <section id="dependence-flow-rules">
 <h3><span class="section-number">19.6.4. </span>Dependence Flow Rules<a class="headerlink" href="#dependence-flow-rules" title="Permalink to this heading">#</a></h3>
-<p>Using these structures, we can deem if two nodes <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are dependent by checking <strong>if an unblocked path exists between <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span></strong>. This can be done by combining the rules we have seen above, which are also summarized in the following figure:</p>
+<p>Using these structures, we can determine if two nodes <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are dependent by checking <strong>if an unblocked path exists between <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span></strong>. This can be done by combining the rules we have seen above, which are also summarized in the following figure:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <img alt="../_images/394f7d08578be94d6671cded9c65e4c4c6d58963e18504d51a966916bf4711c2.svg" src="../_images/394f7d08578be94d6671cded9c65e4c4c6d58963e18504d51a966916bf4711c2.svg" /></div>
@@ -1428,7 +1428,7 @@ Chi-square p-value: 2.761663e-06
 <div class="cell_output docutils container">
 <img alt="../_images/0070078ec220dc5506f863188ec961b13c6dcdc42e856d817c9f6f3ce99aae53.svg" src="../_images/0070078ec220dc5506f863188ec961b13c6dcdc42e856d817c9f6f3ce99aae53.svg" /></div>
 </div>
-<p>Note that this corresponds to comparing subjects with the same level of interest. In this case, we will observe the direct effect of <code class="docutils literal notranslate"><span class="pre">tutoring</span></code> on <code class="docutils literal notranslate"><span class="pre">performance</span></code>, since all students in the considered ground have the same level of <code class="docutils literal notranslate"><span class="pre">interest</span></code> (so any association between <code class="docutils literal notranslate"><span class="pre">tutoring</span></code> and <code class="docutils literal notranslate"><span class="pre">performance</span></code> is given by the  causal effect). By conditioning on <span class="math notranslate nohighlight">\(X\)</span>, we obtain:</p>
+<p>Note that this corresponds to comparing subjects with the same level of interest. In this case, we will observe the direct effect of <code class="docutils literal notranslate"><span class="pre">tutoring</span></code> on <code class="docutils literal notranslate"><span class="pre">performance</span></code>, since all students in the considered group have the same level of <code class="docutils literal notranslate"><span class="pre">interest</span></code> (so any association between <code class="docutils literal notranslate"><span class="pre">tutoring</span></code> and <code class="docutils literal notranslate"><span class="pre">performance</span></code> is given by the  causal effect). By conditioning on <span class="math notranslate nohighlight">\(X\)</span>, we obtain:</p>
 <div class="math notranslate nohighlight">
 \[Y(0) \perp Y(1) | T, X\]</div>
 </section>
@@ -1741,7 +1741,13 @@ Chi-square p-value: 2.761663e-06
 <img alt="../_images/c6acbcbcf75dd2090a321ea89f6292afe2988db08120e552b4c4a48638307c50.svg" src="../_images/c6acbcbcf75dd2090a321ea89f6292afe2988db08120e552b4c4a48638307c50.svg" /></div>
 </div>
 <p>Let us have a look at the data:</p>
-<div class="cell tag_remove-input docutils container">
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lucas</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;http://www.causality.inf.ethz.ch/data/lucas0_train.csv&#39;</span><span class="p">)</span>
+<span class="n">lucas</span>
+</pre></div>
+</div>
+</div>
 <div class="cell_output docutils container">
 <div class="output text_html"><div>
 <style scoped>
@@ -1952,7 +1958,12 @@ Chi-square p-value: 2.761663e-06
 <div class="math notranslate nohighlight">
 \[P(Car Accident|Smoking) = \sigma(\beta_0 + \beta_1 Smoking)\]</div>
 <p>We need to fit a logistic regressor because the dependent variable is binary (all variables are binary). This is the result:</p>
-<div class="cell tag_remove-input docutils container">
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logit</span><span class="p">(</span><span class="s1">&#39;Car_Accident ~ Smoking&#39;</span><span class="p">,</span> <span class="n">lucas</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
          Current function value: 0.588796
@@ -1991,7 +2002,12 @@ Chi-square p-value: 2.761663e-06
 <div class="math notranslate nohighlight">
 \[P(Car Accident|Smoking, Coughing) = \sigma(\beta_0 + \beta_1 Smoking + \beta_2 Coughing)\]</div>
 <p>We obtain the following coefficients:</p>
-<div class="cell tag_remove-input docutils container">
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logit</span><span class="p">(</span><span class="s1">&#39;Car_Accident ~ Smoking + Coughing&#39;</span><span class="p">,</span> <span class="n">lucas</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
          Current function value: 0.569895
