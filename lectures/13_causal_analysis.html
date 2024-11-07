@@ -459,11 +459,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sleep-vs-exam-performance">19.1. Sleep vs Exam Performance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutoring-vs-performance">19.1. Tutoring vs Performance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-causation-potential-outcomes-counterfactuals">19.2. Measuring Causation - Potential Outcomes (Counterfactuals)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bias-arising-from-correlation">19.3. The Bias Arising from Correlation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#randomized-controlled-trials-rct">19.4. Randomized Controlled Trials (RCT)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">19.4.1. Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#randomizing-tutoring">19.4.1. Randomizing tutoring</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#causal-effect-and-observational-studies">19.5. Causal Effect and Observational Studies</a><ul class="nav section-nav flex-column">
@@ -531,740 +531,13 @@ document.write(`
 </ul>
 <p>Luckily, the field of <strong>causal analysis</strong> has, over the years, developed a set of tools which allow to answer those questions.</p>
 <p>The goal of this lecture is to provide a primer of causal analysis, introducing the main concepts and discussing some techniques which can be applied in some simple cases.</p>
-<section id="sleep-vs-exam-performance">
-<h2><span class="section-number">19.1. </span>Sleep vs Exam Performance<a class="headerlink" href="#sleep-vs-exam-performance" title="Permalink to this heading">#</a></h2>
-<p>We will consider a simple example which will guide us through the understanding of the main concepts of causal analysis. The data is made up and showing somewhat extreme correlations, but it should serve the purpose of illustrating the main concepts.</p>
-<p>We want to study the relationship between sleep and exam performance (in a <span class="math notranslate nohighlight">\(0-100\)</span> scale), so we asked <span class="math notranslate nohighlight">\(50\)</span> students to tell us about their sleeping habits (in particular, we asked if they sleep, in average, 8 hours of more, the recommended number of hours for their age). We put these numbers together with the average exam performance of the students, obtaining the following data:</p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Average Exam Performance</th>
-      <th>Sleep 8 Hours or More</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>77.472070</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>72.081839</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>69.676638</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>87.552836</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>70.589191</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>60.515116</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>100.000000</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>82.412677</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>53.392221</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>81.991137</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>55.619006</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>73.213549</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>84.005579</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>42.660374</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>62.384583</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>68.504934</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>68.092290</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>92.110403</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>58.465878</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>48.339601</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>75.761343</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>59.584134</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>69.904265</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>59.164038</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>67.323081</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>79.381058</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>26</th>
-      <td>58.620083</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>27</th>
-      <td>88.292321</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>61.347045</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>94.284754</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>30</th>
-      <td>70.239607</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>31</th>
-      <td>79.951206</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>32</th>
-      <td>59.156103</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>33</th>
-      <td>64.247615</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>34</th>
-      <td>75.990821</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>35</th>
-      <td>64.931568</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>36</th>
-      <td>76.821012</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>37</th>
-      <td>49.675010</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>38</th>
-      <td>48.250202</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>39</th>
-      <td>56.820140</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>40</th>
-      <td>72.919516</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>41</th>
-      <td>80.277671</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>42</th>
-      <td>70.984455</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>43</th>
-      <td>54.531575</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>44</th>
-      <td>56.946589</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>45</th>
-      <td>66.654732</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>46</th>
-      <td>56.555038</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>47</th>
-      <td>82.108473</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>48</th>
-      <td>74.018270</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>49</th>
-      <td>40.939895</td>
-      <td>True</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<p>We want to understand if sleep has an effect on exam performance. Let us show some boxplots:</p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="../_images/ac500a01e4a11e6984f0a0386f62a5959be1d7feb65b735c9adaab18ce28f18c.png" src="../_images/ac500a01e4a11e6984f0a0386f62a5959be1d7feb65b735c9adaab18ce28f18c.png" />
-</div>
-</div>
-<p>We got a surprising picture! Sleeping <span class="math notranslate nohighlight">\(8\)</span> hours or more, actually affects negatively the average exam performance! To check if everything is fine, we can add some “notch” to the boxplots. The notch will highlight the confidence intervals for the estimation of the median value:</p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="../_images/55b85999a7a8431ef6dd6d909a2bdcd7beb95b8d41834dbf382996012fa34e7e.png" src="../_images/55b85999a7a8431ef6dd6d909a2bdcd7beb95b8d41834dbf382996012fa34e7e.png" />
-</div>
-</div>
-<p>Since the notches do not intersect, there is no overlap between the confidence interval for a C.L. of <span class="math notranslate nohighlight">\(95\)</span>, hence it is very unlikely that the two median values are very close to each other. The difference seem to be statistically relevant. If we want to be very sure we can <strong>compute a two-sample t-Test</strong> to ensure that the mean values of the two samples actually are distinct. The null hypothesis will be that the two samples have the same mean. If we reject this hypothesis, then the two means are distinct. We obtain the following test statistic and p-value:</p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test statistic: -2.5330249947772807
-P-value: 0.014630790631265746
-</pre></div>
-</div>
-</div>
-</div>
-<p>Also in this case, the difference seems to be statistically significant.</p>
-</section>
-<section id="measuring-causation-potential-outcomes-counterfactuals">
-<h2><span class="section-number">19.2. </span>Measuring Causation - Potential Outcomes (Counterfactuals)<a class="headerlink" href="#measuring-causation-potential-outcomes-counterfactuals" title="Permalink to this heading">#</a></h2>
-<p>We now start formulating hypotheses and theories: it looks counter-intuitive, but this is what the data is telling us. Isn’t it? It might be that sleeping too much makes you less reactive in the morning, so you cannot properly focus and this makes you a worse student.</p>
-<p>If this is true, than we could “<strong>prescribe</strong>” students to sleep less than <span class="math notranslate nohighlight">\(8\)</span> hours to obtain gains in performance. But we also know that… <strong>correlation is not (necessarily) causation!</strong>. We are seeing a correlation here - is it also causation? Of course, we want to be able to tell our students whether to sleep less or not!</p>
-<p>To be able to truly assess a causal relationship between the two variables, ideally, we would like to <strong>take the same student and ask them to sleep more than <span class="math notranslate nohighlight">\(8\)</span> hours for one year, than less than <span class="math notranslate nohighlight">\(8\)</span> hours for another years, then compare performance</strong>. This is of course unethical and impractical. And even if we could do so, between the two years, different other factors may change, so the two values will never be fully comparable.</p>
-<p>We will now <strong>enter the realm of potential outcomes</strong>. In practice, we ask ourselves questions such as <strong>“what if this student slept less than <span class="math notranslate nohighlight">\(8\)</span> hours?”</strong>. Let’s see some notation first. We will define two variables:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(T_i\)</span>: a “treatment” value indicating whether the observation <span class="math notranslate nohighlight">\(i\)</span> (student <span class="math notranslate nohighlight">\(i\)</span>) took the treatment (i.e., slept more than <span class="math notranslate nohighlight">\(8\)</span> hours) or not. Here we use the standard terminology of causal inference which uses the word “treatment” as in health-related sciences. We will assume this variable to be binary: <span class="math notranslate nohighlight">\(T_i=1\)</span> means “took the treatment”, while <span class="math notranslate nohighlight">\(T_i=0\)</span> means “didn’t take the treatment”.</p></li>
-<li><p><span class="math notranslate nohighlight">\(Y_i\)</span>: the “outcome” of observation <span class="math notranslate nohighlight">\(i\)</span>. In our case, this is the average performance of student <span class="math notranslate nohighlight">\(i\)</span>.</p></li>
-</ul>
-<p>If for a unit <span class="math notranslate nohighlight">\(i\)</span>, the treatment value is <span class="math notranslate nohighlight">\(T_i=t\)</span>, we will denote the related observation <span class="math notranslate nohighlight">\(Y_i\)</span> as <span class="math notranslate nohighlight">\(Y_i(t)\)</span>. We note that, for a given unit <span class="math notranslate nohighlight">\(i\)</span>, we will <strong>either observe <span class="math notranslate nohighlight">\(Y_i(0)\)</span> or <span class="math notranslate nohighlight">\(Y_i(1)\)</span>, but never both!</strong>.</p>
-<p>Nevertheless, we will introduce the concept of <strong>potential outcome</strong> as the <strong>value we would observe if we were able to intervene on the treatment variable <span class="math notranslate nohighlight">\(T_i\)</span> and change it</strong>. If for a unit <span class="math notranslate nohighlight">\(i\)</span> we have <span class="math notranslate nohighlight">\(T_i=0\)</span>, we will directly observe the outcome <span class="math notranslate nohighlight">\(Y_i(0)\)</span>, but we will also <strong>theoretically define</strong> the potential outcome <span class="math notranslate nohighlight">\(Y_i(1)\)</span>. This <strong>is not real and cannot be observed</strong> but it will serve as a useful theoretical concept.</p>
-<p>Potential outcomes are also known as <strong>counterfactuals</strong> because they answer to the question “what if…”.</p>
-<p>If we had potential outcomes, for each unit <span class="math notranslate nohighlight">\(i\)</span> we could compute the <strong>individual treatment effect</strong> (the effect of taking the treatment) as:</p>
-<div class="math notranslate nohighlight">
-\[Y_i(1) - Y_i(0)\]</div>
-<p>This is the effect of sleeping less than <span class="math notranslate nohighlight">\(8\)</span> hours. If we average this over the distribution of observations, we obtain the <strong>average treatment effect</strong>:</p>
-<div class="math notranslate nohighlight">
-\[ATE = E[Y(1) - Y(0)]\]</div>
-<p>This value will tell us <strong>how the exam performance varies in average if the same subjects sleep less or more than <span class="math notranslate nohighlight">\(8\)</span> hours</strong>. As such, it would indicate <strong>the causal effect of sleep on examination performance</strong>.</p>
-<p>Alternatively, we can compute the <strong>average treatment effect on the treated</strong>:</p>
-<div class="math notranslate nohighlight">
-\[ATT = E[Y(1) - Y(0)|T=1]\]</div>
-<p>This simply restricts the computation to the treated subjects, and <strong>also establishes a causal effect</strong>.</p>
-</section>
-<section id="the-bias-arising-from-correlation">
-<h2><span class="section-number">19.3. </span>The Bias Arising from Correlation<a class="headerlink" href="#the-bias-arising-from-correlation" title="Permalink to this heading">#</a></h2>
-<p>Without potential outcomes, we cannot compute the <span class="math notranslate nohighlight">\(ATE\)</span> or <span class="math notranslate nohighlight">\(ATT\)</span> scores. Indeed, we have <strong>two distinct groups</strong>, the <strong>treated</strong> (i.e., those observations <span class="math notranslate nohighlight">\(i\)</span> such that <span class="math notranslate nohighlight">\(T_i=1\)</span>) and the <strong>untreated</strong>, also known as <strong>control group</strong> (i.e., those observations <span class="math notranslate nohighlight">\(i\)</span> such that <span class="math notranslate nohighlight">\(T_i=0\)</span>).</p>
-<p>We could think to replace that calculation with the only data we can observe:</p>
-<div class="math notranslate nohighlight">
-\[E[Y(1)|T=1] - E[Y(0)|T=0]\]</div>
-<p>This is what <strong>a correlation can measure</strong>: the change in average value of <span class="math notranslate nohighlight">\(Y\)</span> in two distinct groups with different characteristics.</p>
-<p>Note that there are no potential outcomes in the expression above as we directly observe <span class="math notranslate nohighlight">\(Y_i(1)\)</span> when <span class="math notranslate nohighlight">\(T_i=1\)</span> and we directly observe <span class="math notranslate nohighlight">\(Y_i(0)\)</span> when <span class="math notranslate nohighlight">\(T_i=0\)</span>. However, the expression above is now <strong>comparing different groups</strong>. Indeed, the subjects who took the treatment are different from the ones who did not take the treatment, and we do not know if their exam performance scores are really comparable. <strong>Imagine that, for some reason, students in group 0 are, by chance, better students, then the difference we measure is going to be biased and will not reveal a cause-effect relationship</strong>.</p>
-<p>We can show this in formulas. Let’s add and subtract the counterfactual term <span class="math notranslate nohighlight">\(E[Y(0)|T=1]\)</span> to the expression above:</p>
-<div class="math notranslate nohighlight">
-\[E[Y(1)|T=1] - E[Y(0)|T=0] = E[Y(1)|T=1] - E[Y(0)|T=0] - E[Y(0)|T=1] + E[Y(0)|T=1]\]</div>
-<p>We note that:</p>
-<div class="math notranslate nohighlight">
-\[ATT = E[Y(1) - Y(0)|T=1] = E[Y(1)|T=1] - E[Y(0)|T=1]\]</div>
-<p>Hence, we can see the expression above as follows:</p>
-<div class="math notranslate nohighlight">
-\[E[Y(1)|T=1] - E[Y(0)|T=0] = E[Y(1)|T=1] - E[Y(0)|T=1] + E[Y(0)|T=1] - E[Y(0)|T=0] = \]</div>
-<div class="math notranslate nohighlight">
-\[= ATT + E[Y(0)|T=1] - E[Y(0)|T=0]\]</div>
-<p>We will call the last term the bias:</p>
-<div class="math notranslate nohighlight">
-\[BIAS = E[Y(0)|T=1] - E[Y(0)|T=0]\]</div>
-<p>So the whole expression can be seen as:</p>
-<div class="math notranslate nohighlight">
-\[E[Y(1)|T=1] - E[Y(0)|T=0] = ATT + BIAS\]</div>
-<p>which shows that the effect given by the correlation (left term) is <strong>biased</strong>. Note that the bias cannot be computed (it contains a counterfactual term), but we can interpret it as follows:</p>
+<section id="tutoring-vs-performance">
+<h2><span class="section-number">19.1. </span>Tutoring vs Performance<a class="headerlink" href="#tutoring-vs-performance" title="Permalink to this heading">#</a></h2>
+<p>Let us consider an example:</p>
 <blockquote>
-<div><p>The bias measures how the treated (<span class="math notranslate nohighlight">\(T=1\)</span>) and control (<span class="math notranslate nohighlight">\(T=0\)</span>) groups would differ if no one had taken the treatment.</p>
+<div><p>A school wants to see if a new teaching method is effective. To do so, they ask <span class="math notranslate nohighlight">\(50\)</span> students if they want to <strong>voluntarily enroll a tutoring program</strong>. After one year, they measure the average performance of students who participated in the programme and compare it to those of students who did not participate in the programme.</p>
 </div></blockquote>
-<p>In practice:</p>
-<ul class="simple">
-<li><p>If the groups are similar to each other (e.g., treated and control group are mixed students with similar abilities), then the bias will be small or zero. Indeed, in this case, the difference in exam performance among the two groups if everybody sleeps less than <span class="math notranslate nohighlight">\(8\)</span> hours should be same, as students have similar abilities.</p></li>
-<li><p>If the groups are dissimilar (e.g., control students are all better students), then the bias will be different from zero. Indeed, if students in the control group are “better students”, if all sleep less than <span class="math notranslate nohighlight">\(8\)</span> hours, students in the control group will perform better in average, but this has nothing to do with sleeping less or more or with cause-effect relationships among the observed variables.</p></li>
-</ul>
-<p>Note that, given the observations above, we now know <strong>when association allows to establish a cause-effect mechanism</strong>. This happens when the bias is zero:</p>
-<div class="math notranslate nohighlight">
-\[BIAS = E[Y(0)|T=1] - E[Y(0)|T=0] = 0\]</div>
-<p>That is to say, when the difference between treated and untreated is zero (or at least very small).</p>
-<p>Given this intuition, we now try to estimate the students’ abilities by asking how many hours they study per day. We get the following data:</p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Average Study Time</th>
-      <th>Average Exam Performance</th>
-      <th>Sleep 8 Hours or More</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>6.993428</td>
-      <td>77.472070</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>5.723471</td>
-      <td>72.081839</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>7.295377</td>
-      <td>69.676638</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>9.046060</td>
-      <td>87.552836</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5.531693</td>
-      <td>70.589191</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>5.531726</td>
-      <td>60.515116</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>9.158426</td>
-      <td>100.000000</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>7.534869</td>
-      <td>82.412677</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>5.061051</td>
-      <td>53.392221</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>7.085120</td>
-      <td>81.991137</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>5.073165</td>
-      <td>55.619006</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>5.068540</td>
-      <td>73.213549</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>6.483925</td>
-      <td>84.005579</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>2.173440</td>
-      <td>42.660374</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>2.550164</td>
-      <td>62.384583</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>4.875425</td>
-      <td>68.504934</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>3.974338</td>
-      <td>68.092290</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>6.628495</td>
-      <td>92.110403</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>4.183952</td>
-      <td>58.465878</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>3.175393</td>
-      <td>48.339601</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>8.931298</td>
-      <td>75.761343</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>5.548447</td>
-      <td>59.584134</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>6.135056</td>
-      <td>69.904265</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>3.150504</td>
-      <td>59.164038</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>4.911235</td>
-      <td>67.323081</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>6.221845</td>
-      <td>79.381058</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>26</th>
-      <td>3.698013</td>
-      <td>58.620083</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>27</th>
-      <td>6.751396</td>
-      <td>88.292321</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>4.798723</td>
-      <td>61.347045</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>5.416613</td>
-      <td>94.284754</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>30</th>
-      <td>4.796587</td>
-      <td>70.239607</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>31</th>
-      <td>9.704556</td>
-      <td>79.951206</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>32</th>
-      <td>5.973006</td>
-      <td>59.156103</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>33</th>
-      <td>3.884578</td>
-      <td>64.247615</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>34</th>
-      <td>7.645090</td>
-      <td>75.990821</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>35</th>
-      <td>3.558313</td>
-      <td>64.931568</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>36</th>
-      <td>6.417727</td>
-      <td>76.821012</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>37</th>
-      <td>2.080660</td>
-      <td>49.675010</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>38</th>
-      <td>3.343628</td>
-      <td>48.250202</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>39</th>
-      <td>6.393722</td>
-      <td>56.820140</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>40</th>
-      <td>7.476933</td>
-      <td>72.919516</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>41</th>
-      <td>6.342737</td>
-      <td>80.277671</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>42</th>
-      <td>5.768703</td>
-      <td>70.984455</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>43</th>
-      <td>5.397793</td>
-      <td>54.531575</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>44</th>
-      <td>3.042956</td>
-      <td>56.946589</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>45</th>
-      <td>4.560312</td>
-      <td>66.654732</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>46</th>
-      <td>5.078722</td>
-      <td>56.555038</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>47</th>
-      <td>8.114244</td>
-      <td>82.108473</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>48</th>
-      <td>6.687237</td>
-      <td>74.018270</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>49</th>
-      <td>2.473920</td>
-      <td>40.939895</td>
-      <td>True</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<p><strong>We cannot measure bias from this data because we do not have access to counterfactual observations</strong>, but, now that we have access to a proxy for students’ abilities, we can try to see if, in the two groups, abilities are equally distributed. Let’s see this with a scatterplot:</p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="../_images/440c017958f84c511c14e5aa47dabb1274fed8cb6932be69e350cc043b57fc40.png" src="../_images/440c017958f84c511c14e5aa47dabb1274fed8cb6932be69e350cc043b57fc40.png" />
-</div>
-</div>
-<p>From the picture above, we see that students’ skills are not equally distributed in the two groups. This is not enough to say that the bias is different from zero, as we are not observing counterfactuals, but we now see that the difference in outcomes could be due to two different causes:</p>
-<ul class="simple">
-<li><p>Sleeping less than <span class="math notranslate nohighlight">\(8\)</span> hours improves exam performance.</p></li>
-<li><p>Some of the difference may be due to the fact that students sleeping less than <span class="math notranslate nohighlight">\(8\)</span> hours, incidentally, study more. This might be a sampling problem (we were lucky/unlucky) or an experiment design problem: students who sleep less have more time to study, so they have higher performance. If this is the case, it is not meaningful to look at hours of sleep to establish a cause-effect relationship.</p></li>
-</ul>
-<p>Now that we have an intuition into what may make correlation be not indicative of causation, let’s see how to reduce bias to establish cause-effect relationships.</p>
-</section>
-<section id="randomized-controlled-trials-rct">
-<h2><span class="section-number">19.4. </span>Randomized Controlled Trials (RCT)<a class="headerlink" href="#randomized-controlled-trials-rct" title="Permalink to this heading">#</a></h2>
-<p>We have seen that correlation is causation when the treated and control groups are comparable for everything except the treatment. The most robust method to remove this bias is via <strong>randomized experiments</strong>, or <strong>Randomized Controlled Trials</strong> (RCT).</p>
-<p>A randomized experiment <strong>randomly assigns individuals in a population to a treatment or a control group</strong>. By performing a random assignment, we wish to make the two groups indistinguishable. Of course <strong>one of the two groups will take the treatment and this will likely make the two groups distinguishable</strong>, but we wish to make sure that, <strong>apart from the treatment, the two groups are indeed indistinguishable</strong>.</p>
-<p>It can be shown that random assignment makes sure that the potential outcomes are conditionally independent given the treatment:</p>
-<div class="math notranslate nohighlight">
-\[Y(0) \perp Y(1) | T\]</div>
-<p>So, if the treatment <span class="math notranslate nohighlight">\(T\)</span> is fixed, the potential outcomes are independent. For instance, if we fix <span class="math notranslate nohighlight">\(T=1\)</span> (so we are taking subjects who sleep <span class="math notranslate nohighlight">\(8\)</span> hours or more), then knowing the observed value <span class="math notranslate nohighlight">\(Y_i(1)\)</span> (i.e., the observed exam performance of student <span class="math notranslate nohighlight">\(i\)</span>), does not tell me anything about the potential outcome <span class="math notranslate nohighlight">\(Y_i(1)\)</span> (the exam performance that the same student would obtain if they slept less than <span class="math notranslate nohighlight">\(8\)</span> hours).</p>
-<p>If this conditional independence is valid, then:</p>
-<div class="math notranslate nohighlight">
-\[E[Y(0)|T=0] = E[Y(0)|T=1] = E[Y(0)]\]</div>
-<p>and:</p>
-<div class="math notranslate nohighlight">
-\[E[Y(1)|T=0] = E[Y(1)|T=1] = E[Y(1)]\]</div>
-<p>Which leads to:</p>
-<div class="math notranslate nohighlight">
-\[E[Y(1)|T=1] - E[Y(0)|T=0] = E[Y(1)] - E[Y(0)] = E[Y(1)-Y(10)] = ATE\]</div>
-<p>Hence, in this case, <strong>correlation would be causation</strong>.</p>
-<section id="example">
-<h3><span class="section-number">19.4.1. </span>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h3>
-<p>Let us now consider an example. A school wants to see if a new teaching method is effective. To do so, they ask <span class="math notranslate nohighlight">\(50\)</span> students if they want to <strong>voluntarily enroll a tutoring program</strong>. After one year, they measure the average performance of students who participated in the programme and compare it to those of students who did not participate in the programme. We obtain the following data:</p>
+<p>We obtain the following data:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html"><div>
@@ -1350,14 +623,28 @@ P-value: 0.014630790631265746
 <p>200 rows × 2 columns</p>
 </div></div></div>
 </div>
-<p>Let us visualize two boxplots:</p>
+<p>We want to understand if <code class="docutils literal notranslate"><span class="pre">tutoring</span></code> has an effect on <code class="docutils literal notranslate"><span class="pre">performance</span></code>. Let us show some boxplots:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/dc6fcb080054ccf653a68f4ff7cfbaf841c25502de679fd8ecb888fa408ebedd.png" src="../_images/dc6fcb080054ccf653a68f4ff7cfbaf841c25502de679fd8ecb888fa408ebedd.png" />
+</div>
+</div>
+<p>The comparison tell us <code class="docutils literal notranslate"><span class="pre">tutoring</span></code> seems to significantly improve performance! However, we took a statistics class, so we want to check if everything is statistically significant. We add a <strong>notch</strong> to each plot. The notch will highlight the confidence intervals for the estimation of the median value:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <img alt="../_images/890f83b31343a35e1ad12191bf5482f508ad9201cf8bcfbd9f6334feeb04ae19.png" src="../_images/890f83b31343a35e1ad12191bf5482f508ad9201cf8bcfbd9f6334feeb04ae19.png" />
 </div>
 </div>
-<p>It looks like a significant improvement. Let’s check if this is statistically relevant with a two-sample t-test:</p>
-<div class="cell tag_remove-input docutils container">
+<p>Since the notches do not intersect, there is no overlap between the confidence intervals for a C.L. of <span class="math notranslate nohighlight">\(95\%\)</span>, hence it is very unlikely that the two median values are very close to each other. The difference seem to be statistically relevant. If we want to be very sure, we can <strong>compute a two-sample t-Test</strong> to ensure that the mean values of the two samples actually are distinct.</p>
+<p>The null hypothesis will be that the two samples have the same mean. If we reject this hypothesis, then the two means are distinct. We obtain the following test statistic and p-value:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">ttest_ind</span>
+<span class="n">t_stat</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">ttest_ind</span><span class="p">(</span><span class="n">students1</span><span class="p">[</span><span class="n">students1</span><span class="p">[</span><span class="s1">&#39;tutoring&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;performance&#39;</span><span class="p">],</span> <span class="n">students1</span><span class="p">[</span><span class="n">students1</span><span class="p">[</span><span class="s1">&#39;tutoring&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;performance&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;T-test results - T-statistic: </span><span class="si">{</span><span class="n">t_stat</span><span class="si">}</span><span class="s1">, p-value: </span><span class="si">{</span><span class="n">p_value</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>T-test results - T-statistic: 4.086568160195115, p-value: 6.358186591194311e-05
 </pre></div>
@@ -1365,9 +652,212 @@ P-value: 0.014630790631265746
 </div>
 </div>
 <p>It looks like the tutoring program is a great success!</p>
-<p>But, is it true? Well, we know that what we see is correlation, not necessarily causation. <strong>What if there is some bias</strong>?</p>
-<p>We quickly realize that we did not perform a randomized experiment, because we did not randomly assigned students to one of the two groups. <strong>What if only motivated students decided to enroll in the program and what if those students were the same who tend to study more than others?</strong></p>
-<p>Let’s say we could repeat the experiment, now with random assignment. <strong>Word of caution</strong>: this is not always possible. For instance, in this case, it would not be very polite to “force” students to enroll programs, so we may not be able to carry out this experiment, but let us assume for a moment that we can.</p>
+</section>
+<section id="measuring-causation-potential-outcomes-counterfactuals">
+<h2><span class="section-number">19.2. </span>Measuring Causation - Potential Outcomes (Counterfactuals)<a class="headerlink" href="#measuring-causation-potential-outcomes-counterfactuals" title="Permalink to this heading">#</a></h2>
+<p>The comparison above seems to be clear: we should enroll everybody in the tutoring program! But we also know that <strong>correlation is not (necessarily) causation!</strong>. We are seeing a correlation here - is it also causation? Of course, we want to know whether it is worth to extend the tutoring program or not!</p>
+<p>To be able to truly assess a causal relationship between the two variables, ideally, we would like to <strong>take the same student and let them attend and not attend the tutoring program at the same time, so that then we can compare, for the same student, the effect of tutoring alone.</strong> This is of course impossible to do and even if we could it would be unethical. Can we ask a student not to follow a program which we suspect will harm their performance? Even if we ask the same student to first follow the tutoring, then stop, the student “before” and “after” is not the same student after all, so the two values will never be fully comparable.</p>
+<p>We will now <strong>enter the realm of potential outcomes</strong>. In practice, we ask ourselves questions such as <strong>“what if this student did not take the tutoring?”</strong>. Let’s see some notation first. We will define two variables:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(T_i\)</span>: a “treatment” value indicating whether the observation <span class="math notranslate nohighlight">\(i\)</span> (student <span class="math notranslate nohighlight">\(i\)</span>) took the treatment (i.e., attended the tutoring) or not. Here we use the standard terminology of causal inference which uses the word “treatment” as in health-related sciences. We will assume this variable to be binary: <span class="math notranslate nohighlight">\(T_i=1\)</span> means “took the treatment”, while <span class="math notranslate nohighlight">\(T_i=0\)</span> means “didn’t take the treatment”. We will call the group of observations for which <span class="math notranslate nohighlight">\(T_i(1)\)</span> the <strong>treatment group</strong> and the group of observations for which <span class="math notranslate nohighlight">\(T_i(0)\)</span> the <strong>control group</strong>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(Y_i\)</span>: the “outcome” of observation <span class="math notranslate nohighlight">\(i\)</span>. In our case, this is the average performance of student <span class="math notranslate nohighlight">\(i\)</span>.</p></li>
+</ul>
+<p>If for a unit <span class="math notranslate nohighlight">\(i\)</span>, the treatment value is <span class="math notranslate nohighlight">\(T_i=t\)</span>, we will denote the related observation <span class="math notranslate nohighlight">\(Y_i\)</span> as <span class="math notranslate nohighlight">\(Y_i(t)\)</span>. We note that, for a given unit <span class="math notranslate nohighlight">\(i\)</span>, we will <strong>either observe <span class="math notranslate nohighlight">\(Y_i(0)\)</span> or <span class="math notranslate nohighlight">\(Y_i(1)\)</span>, but never both!</strong>.</p>
+<p>Nevertheless, we will introduce the concept of <strong>potential outcome</strong> as the <strong>value we would observe if we were able to intervene on the treatment variable <span class="math notranslate nohighlight">\(T_i\)</span> and change it</strong>. If for a unit <span class="math notranslate nohighlight">\(i\)</span> we have <span class="math notranslate nohighlight">\(T_i=0\)</span>, we will directly observe the outcome <span class="math notranslate nohighlight">\(Y_i(0)\)</span>, but we will also <strong>theoretically define</strong> the potential outcome <span class="math notranslate nohighlight">\(Y_i(1)\)</span>. This <strong>is not real and cannot be observed</strong> but it will serve as a useful theoretical concept.</p>
+<p>Potential outcomes are also known as <strong>counterfactuals</strong> because they answer to the question “what if…”.</p>
+<p>If we had potential outcomes, for each unit <span class="math notranslate nohighlight">\(i\)</span> we could compute the <strong>individual treatment effect</strong> (the effect of taking the treatment) as:</p>
+<div class="math notranslate nohighlight">
+\[Y_i(1) - Y_i(0)\]</div>
+<p>This is the effect of attending the tutoring. If we average this over the distribution of observations, we obtain the <strong>average treatment effect</strong>:</p>
+<div class="math notranslate nohighlight">
+\[ATE = E[Y(1) - Y(0)]\]</div>
+<p>This value will tell us <strong>how the exam performance varies in average if the same subjects takes the tutoring or not</strong>. As such, it would indicate <strong>the causal effect of tutoring on examination performance</strong>.</p>
+<p>Alternatively, we can compute the <strong>average treatment effect on the treated</strong>:</p>
+<div class="math notranslate nohighlight">
+\[ATT = E[Y(1) - Y(0)|T=1]\]</div>
+<p>This simply restricts the computation to the treated subjects, and <strong>also establishes a causal effect</strong>.</p>
+</section>
+<section id="the-bias-arising-from-correlation">
+<h2><span class="section-number">19.3. </span>The Bias Arising from Correlation<a class="headerlink" href="#the-bias-arising-from-correlation" title="Permalink to this heading">#</a></h2>
+<p>Without potential outcomes, we cannot compute the <span class="math notranslate nohighlight">\(ATE\)</span> or <span class="math notranslate nohighlight">\(ATT\)</span> scores. Indeed, we have <strong>two distinct groups</strong>, the <strong>treated</strong> (i.e., those observations <span class="math notranslate nohighlight">\(i\)</span> such that <span class="math notranslate nohighlight">\(T_i=1\)</span>) and the <strong>untreated</strong>, also known as <strong>control group</strong> (i.e., those observations <span class="math notranslate nohighlight">\(i\)</span> such that <span class="math notranslate nohighlight">\(T_i=0\)</span>).</p>
+<p>We could think to replace that calculation with the only data we can observe:</p>
+<div class="math notranslate nohighlight">
+\[E[Y(1)|T=1] - E[Y(0)|T=0]\]</div>
+<p>This is what <strong>a correlation can measure</strong>: the change in average value of <span class="math notranslate nohighlight">\(Y\)</span> in two distinct groups with different characteristics.</p>
+<p>Note that there are no potential outcomes in the expression above as we directly observe <span class="math notranslate nohighlight">\(Y_i(1)\)</span> when <span class="math notranslate nohighlight">\(T_i=1\)</span> and we directly observe <span class="math notranslate nohighlight">\(Y_i(0)\)</span> when <span class="math notranslate nohighlight">\(T_i=0\)</span>. However, the expression above is now <strong>comparing different groups</strong>. Indeed, the subjects who took the treatment are different from the ones who did not take the treatment, and we do not know if their exam performance scores are really comparable. <strong>Imagine that, for some reason, students in group 1 are, by chance, better students, then the difference we measure is going to be biased and will not reveal a cause-effect relationship</strong>.</p>
+<p>We can show this in formulas. Let’s add and subtract the counterfactual term <span class="math notranslate nohighlight">\(E[Y(0)|T=1]\)</span> to the expression above:</p>
+<div class="math notranslate nohighlight">
+\[E[Y(1)|T=1] - E[Y(0)|T=0] = E[Y(1)|T=1] - E[Y(0)|T=0] - E[Y(0)|T=1] + E[Y(0)|T=1]\]</div>
+<p>We note that:</p>
+<div class="math notranslate nohighlight">
+\[ATT = E[Y(1) - Y(0)|T=1] = E[Y(1)|T=1] - E[Y(0)|T=1]\]</div>
+<p>Hence, we can see the expression above as follows:</p>
+<div class="math notranslate nohighlight">
+\[E[Y(1)|T=1] - E[Y(0)|T=0] = E[Y(1)|T=1] - E[Y(0)|T=1] + E[Y(0)|T=1] - E[Y(0)|T=0] = \]</div>
+<div class="math notranslate nohighlight">
+\[= ATT + E[Y(0)|T=1] - E[Y(0)|T=0]\]</div>
+<p>We will call the last term the bias:</p>
+<div class="math notranslate nohighlight">
+\[BIAS = E[Y(0)|T=1] - E[Y(0)|T=0]\]</div>
+<p>So the whole expression can be seen as:</p>
+<div class="math notranslate nohighlight">
+\[E[Y(1)|T=1] - E[Y(0)|T=0] = ATT + BIAS\]</div>
+<p>which shows that the effect given by the correlation (left term) is <strong>biased</strong>. Note that the bias cannot be computed (it contains a counterfactual term), but we can interpret it as follows:</p>
+<blockquote>
+<div><p>The bias measures how the treated (<span class="math notranslate nohighlight">\(T=1\)</span>) and control (<span class="math notranslate nohighlight">\(T=0\)</span>) groups would differ if no one had taken the treatment.</p>
+</div></blockquote>
+<p>In practice:</p>
+<ul class="simple">
+<li><p>If the groups are similar to each other (e.g., treated and control group are mixed students with similar abilities), then the bias will be small or zero. Indeed, in this case, the difference in exam performance among the two groups if everybody sleeps less than <span class="math notranslate nohighlight">\(8\)</span> hours should be same, as students have similar abilities.</p></li>
+<li><p>If the groups are dissimilar (e.g., control students are all better students), then the bias will be different from zero. Indeed, if students in the control group are “better students”, if all sleep less than <span class="math notranslate nohighlight">\(8\)</span> hours, students in the control group will perform better in average, but this has nothing to do with sleeping less or more or with cause-effect relationships among the observed variables.</p></li>
+</ul>
+<p>Note that, given the observations above, we now know <strong>when association allows to establish a cause-effect mechanism</strong>. This happens when the bias is zero:</p>
+<div class="math notranslate nohighlight">
+\[BIAS = E[Y(0)|T=1] - E[Y(0)|T=0] = 0\]</div>
+<p>That is to say, when the difference between treated and untreated is zero (or at least very small).</p>
+<p>Given this intuition, we now try to estimate the students’ abilities by asking how many hours they study per day. We get the following data:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tutoring</th>
+      <th>performance</th>
+      <th>average_study_hours</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>76.432447</td>
+      <td>3.316778</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>91.550461</td>
+      <td>8.025442</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>85.107378</td>
+      <td>6.433760</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>69.981030</td>
+      <td>4.758812</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>70.111151</td>
+      <td>3.151239</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>195</th>
+      <td>0</td>
+      <td>68.477160</td>
+      <td>3.124462</td>
+    </tr>
+    <tr>
+      <th>196</th>
+      <td>0</td>
+      <td>87.783594</td>
+      <td>6.338848</td>
+    </tr>
+    <tr>
+      <th>197</th>
+      <td>1</td>
+      <td>88.220111</td>
+      <td>7.859334</td>
+    </tr>
+    <tr>
+      <th>198</th>
+      <td>1</td>
+      <td>93.399423</td>
+      <td>7.907677</td>
+    </tr>
+    <tr>
+      <th>199</th>
+      <td>1</td>
+      <td>84.082421</td>
+      <td>6.264832</td>
+    </tr>
+  </tbody>
+</table>
+<p>200 rows × 3 columns</p>
+</div></div></div>
+</div>
+<p><strong>We cannot measure bias from this data because we do not have access to counterfactual observations</strong>, but, now that we have access to a proxy for students’ abilities, we can try to see if, in the two groups, abilities are equally distributed. Let’s see this with a boxplot:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/3ed3de7ce3bed1ff49882959c842d0af739cbb6e9eaa0b87e516d6ef53de6d2a.png" src="../_images/3ed3de7ce3bed1ff49882959c842d0af739cbb6e9eaa0b87e516d6ef53de6d2a.png" />
+</div>
+</div>
+<p>From the picture above, we see that students’ skills are not equally distributed in the two groups. <strong>This is not enough to say that the bias is different from zero, as we are not observing counterfactuals, but we now see that the difference in outcomes could be due to two different causes</strong>:</p>
+<ul class="simple">
+<li><p>Tutoring improves exam performance.</p></li>
+<li><p>Some of the difference may be due to the fact that students following the tutoring program are also students who study more in average (<strong>maybe they are more motivated, so they study more and also choose the tutoring program</strong>) and this may affect the final performance.</p></li>
+</ul>
+<p>We can check the hypothesis that average study hours affects performance with a scatterplot:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/524f485322ad760605a8b3613cff73fc388ce0719ec721be8b847f228fa85079.png" src="../_images/524f485322ad760605a8b3613cff73fc388ce0719ec721be8b847f228fa85079.png" />
+</div>
+</div>
+<p>From the picture above there seem to be a correlation between the two!</p>
+<p>Now that we have an intuition into what may make correlation be not indicative of causation, let’s see how to reduce bias to establish cause-effect relationships.</p>
+</section>
+<section id="randomized-controlled-trials-rct">
+<h2><span class="section-number">19.4. </span>Randomized Controlled Trials (RCT)<a class="headerlink" href="#randomized-controlled-trials-rct" title="Permalink to this heading">#</a></h2>
+<p>We have seen that correlation is causation when the treated and control groups are comparable for everything except the treatment. The most robust method to remove this bias is via <strong>randomized experiments</strong>, or <strong>Randomized Controlled Trials</strong> (RCT).</p>
+<p>A randomized experiment <strong>randomly assigns individuals in a population to a treatment or a control group</strong>. By performing a random assignment, we wish to make the two groups indistinguishable. Of course <strong>one of the two groups will take the treatment and this will likely make the two groups distinguishable</strong>, but we wish to make sure that, <strong>apart from the treatment, the two groups are indeed indistinguishable</strong>.</p>
+<p>It can be shown that random assignment makes sure that the potential outcomes are conditionally independent given the treatment:</p>
+<div class="math notranslate nohighlight">
+\[Y(0) \perp Y(1) | T\]</div>
+<p>So, if the treatment <span class="math notranslate nohighlight">\(T\)</span> is fixed, the potential outcomes are independent. For instance, if we fix <span class="math notranslate nohighlight">\(T=1\)</span> (so we are taking subjects who attended the tutoring), then knowing the observed value <span class="math notranslate nohighlight">\(Y_i(1)\)</span> (i.e., the observed exam performance of student <span class="math notranslate nohighlight">\(i\)</span>), does not tell me anything about the potential outcome <span class="math notranslate nohighlight">\(Y_i(0)\)</span> (the exam performance that the same student would obtain if they did not attend the tutoring).</p>
+<blockquote>
+<div><p>Recall our example on conditional independence: if height and vocabulary are conditionally independent given age, this means that height and vocabulary are independent in the same age groups, while they are not across age groups, so <strong>age is the only thing that make height and vocabulary dependent</strong>. Similarly, if <span class="math notranslate nohighlight">\(Y(0) \perp Y(1) | T\)</span>, then <strong>the treatment is the only thing generating a difference between the outcome in the treated and in the control group</strong>.</p>
+</div></blockquote>
+<p>If this conditional independence is valid, then:</p>
+<div class="math notranslate nohighlight">
+\[E[Y(0)|T=0] = E[Y(0)|T=1] = E[Y(0)]\]</div>
+<p>and:</p>
+<div class="math notranslate nohighlight">
+\[E[Y(1)|T=0] = E[Y(1)|T=1] = E[Y(1)]\]</div>
+<p>Which leads to:</p>
+<div class="math notranslate nohighlight">
+\[E[Y(1)|T=1] - E[Y(0)|T=0] = E[Y(1)] - E[Y(0)] = E[Y(1)-Y(10)] = ATE\]</div>
+<p>Hence, in this case, <strong>correlation would be causation</strong>.</p>
+<section id="randomizing-tutoring">
+<h3><span class="section-number">19.4.1. </span>Randomizing tutoring<a class="headerlink" href="#randomizing-tutoring" title="Permalink to this heading">#</a></h3>
+<p>We now have a tool to remove the bias probably arising from our prior experiment. Let’s say we could repeat the experiment, now with random assignment.</p>
+<p><strong>Word of caution</strong>: this is not always possible. For instance, in this case, it would not be very polite to “force” students to enroll programs, so we may not be able to carry out this experiment, but let us assume for a moment that we can.</p>
 <p>We repeat the experiment and obtain these results:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -1457,10 +947,11 @@ P-value: 0.014630790631265746
 <p>Let’s visualize the boxplots:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/0be487a0ed78ae7e81c373a331e51ccd87c1281854bf9fe75925d99d07130af4.png" src="../_images/0be487a0ed78ae7e81c373a331e51ccd87c1281854bf9fe75925d99d07130af4.png" />
+<img alt="../_images/4985094fbf9bce1cf336c0d00db220f4065b0e3794558114efda2f4a6461d5f4.png" src="../_images/4985094fbf9bce1cf336c0d00db220f4065b0e3794558114efda2f4a6461d5f4.png" />
+<img alt="../_images/2a53553f39e34ab77c4f6194c871e203e6fe4e3af0d68a094ac4f64ac9e415cd.png" src="../_images/2a53553f39e34ab77c4f6194c871e203e6fe4e3af0d68a094ac4f64ac9e415cd.png" />
 </div>
 </div>
-<p>We now see a less dramatic improvement. What happened?</p>
+<p>We now see a less dramatic (and actually negative!) improvement. What happened?</p>
 <p>By performing a random assignment, we got rid of selection bias. Students voluntarily choosing to enroll in the programme were probably more motivated and keen to study. We now see that the impact of tutoring is very small. We can perform a t-test to assess if this is statistically significant:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -1621,7 +1112,7 @@ Chi-square p-value: 2.761663e-06
 <img alt="../_images/ab3b8967b0b1b26f4e1da66d9068ad2811a34c939e1e6da81dc132958a800b85.png" src="../_images/ab3b8967b0b1b26f4e1da66d9068ad2811a34c939e1e6da81dc132958a800b85.png" />
 </div>
 </div>
-<p>In the plot above, we compare the effect of tutoring in the different <code class="docutils literal notranslate"><span class="pre">interest</span></code> groups. As we can see, the association between <code class="docutils literal notranslate"><span class="pre">tutoring</span></code> and <code class="docutils literal notranslate"><span class="pre">performance</span></code> vanishes within the groups. This is shown by the fact that the notches (confidence intervals) tend to intersect. We can get a clearer picture by performing <span class="math notranslate nohighlight">\(5\)</span> different two-sample statistical tests assessing whether the means of <code class="docutils literal notranslate"><span class="pre">performance</span></code> in the two groups differ in a statistically significant way:</p>
+<p>In the plot above, we compare the effect of tutoring in the different <code class="docutils literal notranslate"><span class="pre">interest</span></code> groups. As we can see, the association between <code class="docutils literal notranslate"><span class="pre">tutoring</span></code> and <code class="docutils literal notranslate"><span class="pre">performance</span></code> tends to vanish within the groups. This is shown by the fact that the notches (confidence intervals) tend to intersect. We can get a clearer picture by performing <span class="math notranslate nohighlight">\(5\)</span> different two-sample statistical tests assessing whether the means of <code class="docutils literal notranslate"><span class="pre">performance</span></code> in the two groups differ in a statistically significant way:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html"><div>
@@ -2596,11 +2087,11 @@ Chi-square p-value: 2.761663e-06
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sleep-vs-exam-performance">19.1. Sleep vs Exam Performance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutoring-vs-performance">19.1. Tutoring vs Performance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-causation-potential-outcomes-counterfactuals">19.2. Measuring Causation - Potential Outcomes (Counterfactuals)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bias-arising-from-correlation">19.3. The Bias Arising from Correlation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#randomized-controlled-trials-rct">19.4. Randomized Controlled Trials (RCT)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">19.4.1. Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#randomizing-tutoring">19.4.1. Randomizing tutoring</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#causal-effect-and-observational-studies">19.5. Causal Effect and Observational Studies</a><ul class="nav section-nav flex-column">
