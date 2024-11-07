@@ -476,7 +476,6 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-limitations-of-a-linear-regression-in-the-presence-of-more-than-two-classes">18.10.2. Additional Limitations of a Linear Regression in the Presence of More than Two Classes</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-multinomial-logistic-regression-model">18.10.3. The Multinomial Logistic Regression Model</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-parameters-of-a-multinomial-logistic-regressor">18.10.3.1. Interpretation of the Parameters of a Multinomial Logistic Regressor</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-softmax-regressor-optional">18.10.3.2. The Softmax Regressor (Optional)</a></li>
 </ul>
 </li>
 </ul>
@@ -1715,15 +1714,15 @@ will hence be:</p>
 <li><p>The coefficient <span class="math notranslate nohighlight">\(-2.0307\)</span> of <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> for <code class="docutils literal notranslate"><span class="pre">species=1</span></code> indicates that when we observe an increase in one centimeter of <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code>, the odd of <code class="docutils literal notranslate"><span class="pre">versicolor</span></code> versus <code class="docutils literal notranslate"><span class="pre">virginica</span></code> decreases multiplicatively by <span class="math notranslate nohighlight">\(e^{-2.0307} = 0.13\)</span> (a large -<span class="math notranslate nohighlight">\(87\%\)</span>!).</p></li>
 <li><p>The coefficient <span class="math notranslate nohighlight">\(-6.8564\)</span> of <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> for <code class="docutils literal notranslate"><span class="pre">species=2</span></code> indicates that when we observe an increase in one centimeter of <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code>, the odd of <code class="docutils literal notranslate"><span class="pre">setosa</span></code> versus <code class="docutils literal notranslate"><span class="pre">virginica</span></code> decreases multiplicatively by <span class="math notranslate nohighlight">\(e^{-6.8464} = 0.001\)</span> (a large -<span class="math notranslate nohighlight">\(99.9\%\)</span>!).</p></li>
 </ul>
-</section>
-<section id="the-softmax-regressor-optional">
-<h4><span class="section-number">18.10.3.2. </span>The Softmax Regressor (Optional)<a class="headerlink" href="#the-softmax-regressor-optional" title="Permalink to this heading">#</a></h4>
+<div class="toggle docutils container">
+<p class="rubric">The Softmax Regressor (Optional)</p>
 <p>Softmax regression is an alternative formulation of multinomial logistic regression which is designed to avoid the definition of a baseline and it is hence symmetrical. In a softmax regressor, the probabilities are modeled as follows:</p>
 <div class="math notranslate nohighlight">
 \[ P(Y=k|X=\mathbf{x}) = \frac{e^{\mathbf{\beta_k}^T\mathbf{X}}}{\sum_{l=1}^K \mathbf{e^{\beta_l^T\mathbf{X}}}}, \ \ \ \forall k=1,\ldots,K\]</div>
 <p>So, rather than estimating <span class="math notranslate nohighlight">\(K-1\)</span> coefficients, we estimate <span class="math notranslate nohighlight">\(K\)</span> coefficients.</p>
 <p>The optimization of the model is performed defining a similar cost function and optimizing it with iterative methods.</p>
 <p>The softmax formulation is widely used in predictive analysis and machine learning, but less pervasive in statistics.</p>
+</div>
 </section>
 </section>
 </section>
@@ -1816,7 +1815,6 @@ will hence be:</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-limitations-of-a-linear-regression-in-the-presence-of-more-than-two-classes">18.10.2. Additional Limitations of a Linear Regression in the Presence of More than Two Classes</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-multinomial-logistic-regression-model">18.10.3. The Multinomial Logistic Regression Model</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-parameters-of-a-multinomial-logistic-regressor">18.10.3.1. Interpretation of the Parameters of a Multinomial Logistic Regressor</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-softmax-regressor-optional">18.10.3.2. The Softmax Regressor (Optional)</a></li>
 </ul>
 </li>
 </ul>
