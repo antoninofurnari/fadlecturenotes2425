@@ -490,8 +490,8 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-graphical-causal-models-to-diagnose-bias">19.7. Using Graphical Causal Models to Diagnose Bias</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confounding-bias">19.7.1. Confounding Bias</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-common-causes-and-unmeasurable-variables">19.7.2. Multiple Common Causes and Unmeasurable Variables</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#surrogate-confounders">19.7.2.1. Surrogate Confounders</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-common-causes-and-unmeasurable-variables-optional">19.7.2. Multiple Common Causes and Unmeasurable Variables (Optional)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#surrogate-confounders-optional">19.7.2.1. Surrogate Confounders (Optional)</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-bias">19.7.3. Selection Bias</a><ul class="nav section-nav flex-column">
@@ -523,7 +523,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="causal-data-analysis">
 <h1><span class="section-number">19. </span>Causal Data Analysis<a class="headerlink" href="#causal-data-analysis" title="Permalink to this heading">#</a></h1>
-<p>We have seen how to characterize the relationship between two or more variables with correlation and linear regression. We also said that <strong>correlation is not causation</strong>, meaning that, if we observe a correlation between two variables, that does not necessarily implies a cause-effect relationship between them. However, in many cases, it is still useful (or required!) to establish a cause-effect relationship (or lack thereof) between two variables. Consider the following examples:</p>
+<p>We have seen how to characterize the relationship between two or more variables with correlation and linear regression. We also said that <strong>correlation is not causation</strong>, meaning that, if we observe a correlation between two variables, that does not necessarily imply a cause-effect relationship between them. However, in many cases, it is still useful (or required!) to establish a cause-effect relationship (or lack thereof) between two variables. Consider the following examples:</p>
 <ul class="simple">
 <li><p>We assess that <strong>a given disease is more frequent among smokers</strong>. Is this just a correlation or is there a cause-effect relationship? If a smoker stops smoking, will their risk to get the disease be reduced?</p></li>
 <li><p><strong>We develop a new drug</strong> and assess that people taking this drug are less likely to get disease X. Is this just a correlation or is there a cause-effect relationship? This is important, as people should take the drug only if benefits are clear.</p></li>
@@ -1941,8 +1941,8 @@ Chi-square p-value: 2.761663e-06
 <div class="math notranslate nohighlight">
 \[Y(0) \perp Y(1) | T, X\]</div>
 </section>
-<section id="multiple-common-causes-and-unmeasurable-variables">
-<h3><span class="section-number">19.7.2. </span>Multiple Common Causes and Unmeasurable Variables<a class="headerlink" href="#multiple-common-causes-and-unmeasurable-variables" title="Permalink to this heading">#</a></h3>
+<section id="multiple-common-causes-and-unmeasurable-variables-optional">
+<h3><span class="section-number">19.7.2. </span>Multiple Common Causes and Unmeasurable Variables (Optional)<a class="headerlink" href="#multiple-common-causes-and-unmeasurable-variables-optional" title="Permalink to this heading">#</a></h3>
 <p>Note that we can also have multiple common causes. Let us consider the following example:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -1956,8 +1956,8 @@ Chi-square p-value: 2.761663e-06
 <p>While we cannot not directly condition on <code class="docutils literal notranslate"><span class="pre">parents</span></code> (<span class="math notranslate nohighlight">\(U\)</span>), we can now condition on the direct effect of <code class="docutils literal notranslate"><span class="pre">parents</span></code>, <code class="docutils literal notranslate"><span class="pre">one-to-one</span></code>, which is measurable (<span class="math notranslate nohighlight">\(X1\)</span>). We now have to condition on all common causes, <span class="math notranslate nohighlight">\(X1\)</span> and <span class="math notranslate nohighlight">\(X2\)</span>, to obtain:</p>
 <div class="math notranslate nohighlight">
 \[Y(0) \perp Y(1) | T, X1, X2\]</div>
-<section id="surrogate-confounders">
-<h4><span class="section-number">19.7.2.1. </span>Surrogate Confounders<a class="headerlink" href="#surrogate-confounders" title="Permalink to this heading">#</a></h4>
+<section id="surrogate-confounders-optional">
+<h4><span class="section-number">19.7.2.1. </span>Surrogate Confounders (Optional)<a class="headerlink" href="#surrogate-confounders-optional" title="Permalink to this heading">#</a></h4>
 <p>In some cases, unmeasurable variables do not have a measurable direct effect. Let us consider the following example:</p>
 <blockquote>
 <div><p>We are interested in studying if a given habit (e.g., smoking) can have a causal effect on the development of a given disease. We observe a strong correlation, i.e., subject how have the habit develop the disease more likely. However, someone argues that a gene may exists that causes both the habit and the disease. For instance, people may have the “smoking gene” which “makes them like smoking” and at the same time makes it more likely for them to get the disease.</p>
@@ -2627,8 +2627,8 @@ Chi-square p-value: 2.761663e-06
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-graphical-causal-models-to-diagnose-bias">19.7. Using Graphical Causal Models to Diagnose Bias</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confounding-bias">19.7.1. Confounding Bias</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-common-causes-and-unmeasurable-variables">19.7.2. Multiple Common Causes and Unmeasurable Variables</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#surrogate-confounders">19.7.2.1. Surrogate Confounders</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-common-causes-and-unmeasurable-variables-optional">19.7.2. Multiple Common Causes and Unmeasurable Variables (Optional)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#surrogate-confounders-optional">19.7.2.1. Surrogate Confounders (Optional)</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-bias">19.7.3. Selection Bias</a><ul class="nav section-nav flex-column">
