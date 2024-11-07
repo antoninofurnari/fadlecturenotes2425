@@ -223,16 +223,16 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="13_causal_analysis.html">19. Causal Data Analysis</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 11</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="14_data_as_nd_points.html">20. Data as N-Dimensional Points</a></li>
-<li class="toctree-l1"><a class="reference internal" href="15_clustering.html">21. Clustering</a></li>
-</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratory 3</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/10_statistical_inference.html">22. Laboratory on Statistical Inference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/11_regressione_lineare.html">23. Laboratorio su Regressione Lineare</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../laboratories/12_regressione_logistica.html">24. Laboratorio su regressione logistica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/10_statistical_inference.html">20. Laboratory on Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/11_regressione_lineare.html">21. Laboratorio su Regressione Lineare</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/12_regressione_logistica.html">22. Laboratorio su regressione logistica</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 11</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="14_data_as_nd_points.html">23. Data as N-Dimensional Points</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_clustering.html">24. Clustering</a></li>
 </ul>
 
     </div>
@@ -1098,7 +1098,7 @@ parameters as follows:</p>
 <p>Similarly to linear regression, we now have a cost function to minimize in order to find the values of the <span class="math notranslate nohighlight">\(\beta_i\)</span> parameters. Unfortunately, in this case, <span class="math notranslate nohighlight">\(J(\mathbf{\beta})\)</span> assumes a nonlinear form <strong>which prevents us to use the least square principles</strong> and <strong>there is no closed form solution for the parameter estimation</strong>. In these cases, parameters can be estimated using some form of <strong>iterative solver</strong>, which begins with an initial guess for the parameters and iteratively refine them to find the final solution. Luckily, the logistic regression cost function <strong>is convex, and hence only a single solution is admitted, independently from the initial guess</strong>.</p>
 <p>Different iterative solvers can be used in practice. The most commonly used is the <strong>gradient descent algorithm</strong>, which requires the cost function to be differentiable. We will not see this algorithm in details, but an introduction to it and its application to the estimation of the parameters of a logistic regressor are given in the following (hidden) section.</p>
 <div class="toggle docutils container">
-<p class="rubric">Estimating the Parameters of a Logistic Regressor through Gradient Descent</p>
+<p class="rubric">Estimating the Parameters of a Logistic Regressor through Gradient Descent (Optional)</p>
 <p>Given the cost function <span class="math notranslate nohighlight">\(J(\mathcal{\beta})\)</span> above, we want to find suitable values <span class="math notranslate nohighlight">\(\mathbf{\beta}\)</span> by
 solving the following optimization problem:</p>
 <div class="math notranslate nohighlight">
@@ -1627,7 +1627,8 @@ will hence be:</p>
 <div class="math notranslate nohighlight">
 \[ P(Y=1|X=\mathbf{x}) = \frac{1}{1+\sum_{l=2}^K \mathbf{e^{\beta_l^T\mathbf{X}}}}\]</div>
 <p>These two expressions can be used to compute the probabilities of the classes once that the parameters have been estimated and <span class="math notranslate nohighlight">\(\mathcal{x}\)</span> is observed.</p>
-<div class="toggle toggle-shown docutils container">
+<div class="toggle docutils container">
+<p class="rubric">Deriving the last two equations (optional)</p>
 <p>From this expression:</p>
 <div class="math notranslate nohighlight">
 \[\log\left(\frac{P(k)}{P(1)}\right) = \mathbf{\beta_k}^T\mathbf{X} \Rightarrow P(k)= e^{\mathbf{\beta_k}^T\mathbf{X}} P(1)\]</div>
@@ -1645,8 +1646,7 @@ will hence be:</p>
 \[ P(Y=k|X=\mathbf{x}) = \frac{e^{\mathbf{\beta_k}^T\mathbf{X}}}{1+\sum_{l=2}^K \mathbf{e^{\beta_l^T\mathbf{X}}}}\]</div>
 <div class="math notranslate nohighlight">
 \[ P(Y=1|X=\mathbf{x}) = \frac{1}{1+\sum_{l=2}^K \mathbf{e^{\beta_l^T\mathbf{X}}}}\]</div>
-</div>
-<div class="toggle toggle-shown docutils container">
+<p class="rubric">Estimating the Parameters of the Multinomial Logistic Regressor Model (Optional)</p>
 <p>We can estimate the paramters of the multinomial logistic regressor model again by maximizing the likelihood of the model on the data. Assuming that all observations are i.i.d., we can write:</p>
 <div class="math notranslate nohighlight">
 \[L(\mathbf{\beta}) = \prod_{i=1}^N P(Y=y^{(i)}|X=\mathbf{x}^{(i)};\mathbf{\beta})\]</div>

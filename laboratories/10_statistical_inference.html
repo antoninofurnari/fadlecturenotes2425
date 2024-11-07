@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>22. Laboratory on Statistical Inference &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+    <title>20. Laboratory on Statistical Inference &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
   
   
   
@@ -68,8 +68,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="23. Laboratorio su Regressione Lineare" href="11_regressione_lineare.html" />
-    <link rel="prev" title="21. Clustering" href="../lectures/15_clustering.html" />
+    <link rel="next" title="21. Laboratorio su Regressione Lineare" href="11_regressione_lineare.html" />
+    <link rel="prev" title="19. Causal Data Analysis" href="../lectures/13_causal_analysis.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -223,16 +223,16 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../lectures/13_causal_analysis.html">19. Causal Data Analysis</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 11</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../lectures/14_data_as_nd_points.html">20. Data as N-Dimensional Points</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures/15_clustering.html">21. Clustering</a></li>
-</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratory 3</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">22. Laboratory on Statistical Inference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="11_regressione_lineare.html">23. Laboratorio su Regressione Lineare</a></li>
-<li class="toctree-l1"><a class="reference internal" href="12_regressione_logistica.html">24. Laboratorio su regressione logistica</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">20. Laboratory on Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_regressione_lineare.html">21. Laboratorio su Regressione Lineare</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_regressione_logistica.html">22. Laboratorio su regressione logistica</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 11</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lectures/14_data_as_nd_points.html">23. Data as N-Dimensional Points</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/15_clustering.html">24. Clustering</a></li>
 </ul>
 
     </div>
@@ -459,23 +459,23 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling">22.1. Sampling</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals">22.2. Confidence Intervals</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-for-means">22.2.1. Confidence Intervals for Means</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-for-variances">22.2.2. Confidence Intervals for Variances</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-for-proportion">22.2.3. Confidence Intervals for Proportion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling">20.1. Sampling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals">20.2. Confidence Intervals</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-for-means">20.2.1. Confidence Intervals for Means</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-for-variances">20.2.2. Confidence Intervals for Variances</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-for-proportion">20.2.3. Confidence Intervals for Proportion</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing">22.3. Hypothesis Testing</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-sample-t-test">22.3.1. One sample t-test</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-sample-t-test">22.3.2. Two-sample t-test</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-square-test-of-independence">22.3.3. Chi-square test of independence</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-square-goodness-of-fit-test">22.3.4. Chi-Square Goodness-of-Fit Test</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pearson-spearman-kendall-correlation-test">22.3.5. Pearson/Spearman/Kendall Correlation Test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing">20.3. Hypothesis Testing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-sample-t-test">20.3.1. One sample t-test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-sample-t-test">20.3.2. Two-sample t-test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-square-test-of-independence">20.3.3. Chi-square test of independence</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-square-goodness-of-fit-test">20.3.4. Chi-Square Goodness-of-Fit Test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pearson-spearman-kendall-correlation-test">20.3.5. Pearson/Spearman/Kendall Correlation Test</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normality-tests">22.4. Normality Tests</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">22.5. Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normality-tests">20.4. Normality Tests</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">20.5. Exercises</a></li>
 </ul>
             </nav>
         </div>
@@ -488,10 +488,10 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="laboratory-on-statistical-inference">
-<h1><span class="section-number">22. </span>Laboratory on Statistical Inference<a class="headerlink" href="#laboratory-on-statistical-inference" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">20. </span>Laboratory on Statistical Inference<a class="headerlink" href="#laboratory-on-statistical-inference" title="Permalink to this heading">#</a></h1>
 <p>In this laboratory, we will see the main tools to perform statistical inference. We will contextualize better these tools with real data analysis later.</p>
 <section id="sampling">
-<h2><span class="section-number">22.1. </span>Sampling<a class="headerlink" href="#sampling" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">20.1. </span>Sampling<a class="headerlink" href="#sampling" title="Permalink to this heading">#</a></h2>
 <p>In Python we can easily sample from known distributions using numpy <code class="docutils literal notranslate"><span class="pre">random</span></code> module, as shown in the example below:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1107,10 +1107,10 @@ Name: sex, dtype: int64
 </div>
 </section>
 <section id="confidence-intervals">
-<h2><span class="section-number">22.2. </span>Confidence Intervals<a class="headerlink" href="#confidence-intervals" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">20.2. </span>Confidence Intervals<a class="headerlink" href="#confidence-intervals" title="Permalink to this heading">#</a></h2>
 <p>Let us see how to compute confidence intervals in Python.</p>
 <section id="confidence-intervals-for-means">
-<h3><span class="section-number">22.2.1. </span>Confidence Intervals for Means<a class="headerlink" href="#confidence-intervals-for-means" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">20.2.1. </span>Confidence Intervals for Means<a class="headerlink" href="#confidence-intervals-for-means" title="Permalink to this heading">#</a></h3>
 <p>We can compute confidence intervals for the estimation of means with <code class="docutils literal notranslate"><span class="pre">scipy</span></code>. Let us see how to compute confidence intervals for the mean of <code class="docutils literal notranslate"><span class="pre">height</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1169,7 +1169,7 @@ Confidence interval: [169.50, 170.29]
 </div>
 </section>
 <section id="confidence-intervals-for-variances">
-<h3><span class="section-number">22.2.2. </span>Confidence Intervals for Variances<a class="headerlink" href="#confidence-intervals-for-variances" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">20.2.2. </span>Confidence Intervals for Variances<a class="headerlink" href="#confidence-intervals-for-variances" title="Permalink to this heading">#</a></h3>
 <p>To compute confidence intervals for the estimation of variances, we have to use the <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1203,7 +1203,7 @@ Confidence Interval for Variance: (95.04, 103.49)
 </div>
 </section>
 <section id="confidence-intervals-for-proportion">
-<h3><span class="section-number">22.2.3. </span>Confidence Intervals for Proportion<a class="headerlink" href="#confidence-intervals-for-proportion" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">20.2.3. </span>Confidence Intervals for Proportion<a class="headerlink" href="#confidence-intervals-for-proportion" title="Permalink to this heading">#</a></h3>
 <p>Let us see how to compute confidence intervals for the proportion of females over males:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1237,10 +1237,10 @@ Confidence Interval for Proportion: (0.53, 0.56)
 </section>
 </section>
 <section id="hypothesis-testing">
-<h2><span class="section-number">22.3. </span>Hypothesis Testing<a class="headerlink" href="#hypothesis-testing" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">20.3. </span>Hypothesis Testing<a class="headerlink" href="#hypothesis-testing" title="Permalink to this heading">#</a></h2>
 <p>Let us see now the main hypothesis tests.</p>
 <section id="one-sample-t-test">
-<h3><span class="section-number">22.3.1. </span>One sample t-test<a class="headerlink" href="#one-sample-t-test" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">20.3.1. </span>One sample t-test<a class="headerlink" href="#one-sample-t-test" title="Permalink to this heading">#</a></h3>
 <p>This test allows to assess whether a sample has a given mean. Let us check if the average height in our dataset is equal to <span class="math notranslate nohighlight">\(170cm\)</span>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1313,7 +1313,7 @@ P-value: 0.0000
 </div>
 </section>
 <section id="two-sample-t-test">
-<h3><span class="section-number">22.3.2. </span>Two-sample t-test<a class="headerlink" href="#two-sample-t-test" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">20.3.2. </span>Two-sample t-test<a class="headerlink" href="#two-sample-t-test" title="Permalink to this heading">#</a></h3>
 <p>Let us now check if males and females have the same average height:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1386,7 +1386,7 @@ Conclusion: there is no significant difference between the mean exam scores of t
 </div>
 </section>
 <section id="chi-square-test-of-independence">
-<h3><span class="section-number">22.3.3. </span>Chi-square test of independence<a class="headerlink" href="#chi-square-test-of-independence" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">20.3.3. </span>Chi-square test of independence<a class="headerlink" href="#chi-square-test-of-independence" title="Permalink to this heading">#</a></h3>
 <p>Let us consider the Titanic dataset:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1718,7 +1718,7 @@ There is a significant association between &#39;Sex&#39; and &#39;survived&#39;.
 </div>
 </section>
 <section id="chi-square-goodness-of-fit-test">
-<h3><span class="section-number">22.3.4. </span>Chi-Square Goodness-of-Fit Test<a class="headerlink" href="#chi-square-goodness-of-fit-test" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">20.3.4. </span>Chi-Square Goodness-of-Fit Test<a class="headerlink" href="#chi-square-goodness-of-fit-test" title="Permalink to this heading">#</a></h3>
 <p>The Chi-Square Goodness of Fit test allows to determine whether observed frequencies fit a specified distribution or expected frequencies.</p>
 <p>As we can imagine, the distribution of <code class="docutils literal notranslate"><span class="pre">sex</span></code> in the Titanic dataset is not uniform:</p>
 <div class="cell docutils container">
@@ -1869,7 +1869,7 @@ The observed data fits the expected distribution.
 <p>Since the p-value is large, we could not reject the null hypothesis and we can conclude that there is no significant difference between observed and expected frequencies.</p>
 </section>
 <section id="pearson-spearman-kendall-correlation-test">
-<h3><span class="section-number">22.3.5. </span>Pearson/Spearman/Kendall Correlation Test<a class="headerlink" href="#pearson-spearman-kendall-correlation-test" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">20.3.5. </span>Pearson/Spearman/Kendall Correlation Test<a class="headerlink" href="#pearson-spearman-kendall-correlation-test" title="Permalink to this heading">#</a></h3>
 <p>We can easily compute correlation coefficients and the p-value of the related statistical tests using <code class="docutils literal notranslate"><span class="pre">scipy</span></code>. Let us see some examples:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1944,7 +1944,7 @@ Kendall Tau r: -0.05. P-value: 0.31
 </section>
 </section>
 <section id="normality-tests">
-<h2><span class="section-number">22.4. </span>Normality Tests<a class="headerlink" href="#normality-tests" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">20.4. </span>Normality Tests<a class="headerlink" href="#normality-tests" title="Permalink to this heading">#</a></h2>
 <p>We can check for the normality of sample using Q-Q plots and normality tests. Let us see a Q-Q plot to check if <code class="docutils literal notranslate"><span class="pre">BMI</span></code> is normally distributed:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2038,7 +2038,7 @@ Sample does not look Gaussian (reject H0)
 <p><strong>Word of Caution</strong>: normality tests such as the Shapiro-Wilk test may reject the hypothesis of Gaussianity for any large sample (even if approximately Gaussian), so we should use this test with caution.</p>
 </section>
 <section id="exercises">
-<h2><span class="section-number">22.5. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">20.5. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
 <blockquote>
 <div><p>🧑‍💻 Exercise 1</p>
 <p>Consider the sample of all passengers in the titanic dataset. Compute the mean age of all passengers. Then, compute the confidence bounds for this mean setting the confidence level to 0.95. Is the estimated mean a reliable estimate of the population mean?</p>
@@ -2132,12 +2132,12 @@ Add a new <code class="docutils literal notranslate"><span class="pre">Old</span
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../lectures/15_clustering.html"
+       href="../lectures/13_causal_analysis.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">21. </span>Clustering</p>
+        <p class="prev-next-title"><span class="section-number">19. </span>Causal Data Analysis</p>
       </div>
     </a>
     <a class="right-next"
@@ -2145,7 +2145,7 @@ Add a new <code class="docutils literal notranslate"><span class="pre">Old</span
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">23. </span>Laboratorio su Regressione Lineare</p>
+        <p class="prev-next-title"><span class="section-number">21. </span>Laboratorio su Regressione Lineare</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -2164,23 +2164,23 @@ Add a new <code class="docutils literal notranslate"><span class="pre">Old</span
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling">22.1. Sampling</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals">22.2. Confidence Intervals</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-for-means">22.2.1. Confidence Intervals for Means</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-for-variances">22.2.2. Confidence Intervals for Variances</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-for-proportion">22.2.3. Confidence Intervals for Proportion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling">20.1. Sampling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals">20.2. Confidence Intervals</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-for-means">20.2.1. Confidence Intervals for Means</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-for-variances">20.2.2. Confidence Intervals for Variances</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-for-proportion">20.2.3. Confidence Intervals for Proportion</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing">22.3. Hypothesis Testing</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-sample-t-test">22.3.1. One sample t-test</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-sample-t-test">22.3.2. Two-sample t-test</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-square-test-of-independence">22.3.3. Chi-square test of independence</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-square-goodness-of-fit-test">22.3.4. Chi-Square Goodness-of-Fit Test</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pearson-spearman-kendall-correlation-test">22.3.5. Pearson/Spearman/Kendall Correlation Test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing">20.3. Hypothesis Testing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-sample-t-test">20.3.1. One sample t-test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-sample-t-test">20.3.2. Two-sample t-test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-square-test-of-independence">20.3.3. Chi-square test of independence</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chi-square-goodness-of-fit-test">20.3.4. Chi-Square Goodness-of-Fit Test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pearson-spearman-kendall-correlation-test">20.3.5. Pearson/Spearman/Kendall Correlation Test</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normality-tests">22.4. Normality Tests</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">22.5. Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normality-tests">20.4. Normality Tests</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">20.5. Exercises</a></li>
 </ul>
   </nav></div>
 

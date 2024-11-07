@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>23. Laboratorio su Regressione Lineare &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+    <title>21. Laboratorio su Regressione Lineare &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
   
   
   
@@ -68,8 +68,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="24. Laboratorio su regressione logistica" href="12_regressione_logistica.html" />
-    <link rel="prev" title="22. Laboratory on Statistical Inference" href="10_statistical_inference.html" />
+    <link rel="next" title="22. Laboratorio su regressione logistica" href="12_regressione_logistica.html" />
+    <link rel="prev" title="20. Laboratory on Statistical Inference" href="10_statistical_inference.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -223,16 +223,16 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../lectures/13_causal_analysis.html">19. Causal Data Analysis</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 11</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../lectures/14_data_as_nd_points.html">20. Data as N-Dimensional Points</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lectures/15_clustering.html">21. Clustering</a></li>
-</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratory 3</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="10_statistical_inference.html">22. Laboratory on Statistical Inference</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">23. Laboratorio su Regressione Lineare</a></li>
-<li class="toctree-l1"><a class="reference internal" href="12_regressione_logistica.html">24. Laboratorio su regressione logistica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_statistical_inference.html">20. Laboratory on Statistical Inference</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">21. Laboratorio su Regressione Lineare</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_regressione_logistica.html">22. Laboratorio su regressione logistica</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 11</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lectures/14_data_as_nd_points.html">23. Data as N-Dimensional Points</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/15_clustering.html">24. Clustering</a></li>
 </ul>
 
     </div>
@@ -459,25 +459,25 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regressione-lineare-semplice">23.1. Regressione Lineare Semplice</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisi-di-un-regressore-lineare-semplice">23.1.1. Analisi di un regressore lineare semplice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regressione-lineare-semplice">21.1. Regressione Lineare Semplice</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisi-di-un-regressore-lineare-semplice">21.1.1. Analisi di un regressore lineare semplice</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regressione-lineare-multipla">23.2. Regressione Lineare Multipla</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boston-house-pricing-dataset">23.2.1. Boston House Pricing Dataset</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regressori-lineari-variabili-categoriche-e-variabili-dummy">23.2.2. Regressori lineari, variabili categoriche e variabili dummy</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-elimination">23.2.3. Backward Elimination</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regressione-lineare-multipla">21.2. Regressione Lineare Multipla</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boston-house-pricing-dataset">21.2.1. Boston House Pricing Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regressori-lineari-variabili-categoriche-e-variabili-dummy">21.2.2. Regressori lineari, variabili categoriche e variabili dummy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-elimination">21.2.3. Backward Elimination</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#residual-plots">23.3. Residual Plots</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estensioni-al-modello-lineare">23.4. Estensioni al Modello Lineare</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interaction-terms">23.4.1. Interaction terms</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modello-quadratico">23.4.2. Modello Quadratico</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regressione-polinomiale">23.4.3. Regressione Polinomiale</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#residual-plots">21.3. Residual Plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estensioni-al-modello-lineare">21.4. Estensioni al Modello Lineare</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interaction-terms">21.4.1. Interaction terms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modello-quadratico">21.4.2. Modello Quadratico</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regressione-polinomiale">21.4.3. Regressione Polinomiale</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-e-lasso-regression">23.5. Ridge e Lasso Regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">23.6. Esercizi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-e-lasso-regression">21.5. Ridge e Lasso Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">21.6. Esercizi</a></li>
 </ul>
             </nav>
         </div>
@@ -490,7 +490,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="laboratorio-su-regressione-lineare">
-<h1><span class="section-number">23. </span>Laboratorio su Regressione Lineare<a class="headerlink" href="#laboratorio-su-regressione-lineare" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">21. </span>Laboratorio su Regressione Lineare<a class="headerlink" href="#laboratorio-su-regressione-lineare" title="Permalink to this heading">#</a></h1>
 <p>La regressione lineare ci permette di modellare la relazione tra una <strong>variabile dipendente</strong> <span class="math notranslate nohighlight">\(y\)</span> e una o più <strong>variabili indipendenti</strong> (o regressori) <span class="math notranslate nohighlight">\(x_i\)</span>. Ciò avviene definendo il seguente modello parametrico:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -594,7 +594,7 @@ memory usage: 132.3+ KB
 </div></div></div>
 </div>
 <section id="regressione-lineare-semplice">
-<h2><span class="section-number">23.1. </span>Regressione Lineare Semplice<a class="headerlink" href="#regressione-lineare-semplice" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">21.1. </span>Regressione Lineare Semplice<a class="headerlink" href="#regressione-lineare-semplice" title="Permalink to this heading">#</a></h2>
 <p>Vediamo un esempio di regressione semplice (ovvero rispetto a una sola variabile indipendente <span class="math notranslate nohighlight">\(x_1\)</span>). Consideriamo le variabili <code class="docutils literal notranslate"><span class="pre">weight</span></code> e <code class="docutils literal notranslate"><span class="pre">BMI</span></code>, cercando di prevedere i valori di <code class="docutils literal notranslate"><span class="pre">BMI</span></code> da <code class="docutils literal notranslate"><span class="pre">weight</span></code>. Costruiremo dunque un modello lineare di questo tipo:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -673,7 +673,7 @@ dtype: float64
 <p>Cosa possiamo dire della retta visualizzata? Esistono valori per i quali l’errore commesso è maggiore? Qual è l’equazione della retta mostrata nel grafico?</p>
 </div></blockquote>
 <section id="analisi-di-un-regressore-lineare-semplice">
-<h3><span class="section-number">23.1.1. </span>Analisi di un regressore lineare semplice<a class="headerlink" href="#analisi-di-un-regressore-lineare-semplice" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">21.1.1. </span>Analisi di un regressore lineare semplice<a class="headerlink" href="#analisi-di-un-regressore-lineare-semplice" title="Permalink to this heading">#</a></h3>
 <p>Analizziamo adesso il regrssore ottenuto e vediamo che interpretazione hanno i parametri individuati. Possiamo visualizzare un sommario sul regressore mediante il metodo <code class="docutils literal notranslate"><span class="pre">summary</span></code> dell’oggetto <code class="docutils literal notranslate"><span class="pre">ols</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -751,7 +751,7 @@ Analizziamo il significato di ciascuno di questi valori:</p></li>
 </section>
 </section>
 <section id="regressione-lineare-multipla">
-<h2><span class="section-number">23.2. </span>Regressione Lineare Multipla<a class="headerlink" href="#regressione-lineare-multipla" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">21.2. </span>Regressione Lineare Multipla<a class="headerlink" href="#regressione-lineare-multipla" title="Permalink to this heading">#</a></h2>
 <p>Vediamo adesso un esempio di regressione multipla. La regressione lineare multipla permette di studiare le relazioni tra una variabile dipendente e un insieme di variabili indipendenti. Calcoliamo un regressore lineare per predire i valori di <code class="docutils literal notranslate"><span class="pre">BMI</span></code> da quelli di <code class="docutils literal notranslate"><span class="pre">height</span></code> e <code class="docutils literal notranslate"><span class="pre">weight</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -823,7 +823,7 @@ Analizziamo il significato di ciascuno di questi valori:</p></li>
 <p>Il regressore lineare trovato ha un valore di <span class="math notranslate nohighlight">\(R^2\)</span> molto alto (<span class="math notranslate nohighlight">\(0.986\)</span>), una F-statistic alta e un valore di Prob(F-statistic) nullo. Possiamo concludere che il regressore è significativo. I p-value dei parametri sono tutti nulli, il che significa che le variabili contribuiscono tutte significativamente alla regressione.</p>
 <p>L’intercetta ha un valore pari a <span class="math notranslate nohighlight">\(55.88\)</span>, il che indica che, idealmente, un soggetto di peso e altezza nulla avrebbe un <code class="docutils literal notranslate"><span class="pre">BMI</span></code> pari a <span class="math notranslate nohighlight">\(55.88\ Kg/m^2\)</span>. Il coefficiente di <code class="docutils literal notranslate"><span class="pre">height</span></code> indica che quando l’altezza viene incrementata di un metro, il BMI viene decrementato di <span class="math notranslate nohighlight">\(0.33\ Kg/m^2\)</span>. Analogamente, quando il peso viene incrementato di un kilogrammo, il BMI viene incrementato di <span class="math notranslate nohighlight">\(0.35\ Kg/m^2\)</span>.</p>
 <section id="boston-house-pricing-dataset">
-<h3><span class="section-number">23.2.1. </span>Boston House Pricing Dataset<a class="headerlink" href="#boston-house-pricing-dataset" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">21.2.1. </span>Boston House Pricing Dataset<a class="headerlink" href="#boston-house-pricing-dataset" title="Permalink to this heading">#</a></h3>
 <p>Vediamo adesso un esempio con un dataset più complesso. Utilizzeremo il dataset “Boston” che contiene osservazioni relativi ai prezzi di diverse case nei sobborghi di Boston. Carichiamo il dataset mediante la funzione <code class="docutils literal notranslate"><span class="pre">get_rdataset</span></code> di <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code>, che permette di caricare dataset contenuti nelle librerie del linguaggio R:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1059,7 +1059,7 @@ Analizziamo il significato di ciascuno di questi valori:</p></li>
 <p>Questo dataset è generalmente utilizzato come un dataset di regressione, nel quale l’obiettivo è quello di predire il valore di <code class="docutils literal notranslate"><span class="pre">medv</span></code> (prezzo medio delle case in migliaia di dollari) a partire dai valori delle altre variabili.</p>
 </section>
 <section id="regressori-lineari-variabili-categoriche-e-variabili-dummy">
-<h3><span class="section-number">23.2.2. </span>Regressori lineari, variabili categoriche e variabili dummy<a class="headerlink" href="#regressori-lineari-variabili-categoriche-e-variabili-dummy" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">21.2.2. </span>Regressori lineari, variabili categoriche e variabili dummy<a class="headerlink" href="#regressori-lineari-variabili-categoriche-e-variabili-dummy" title="Permalink to this heading">#</a></h3>
 <p>Notiamo che le variabili <code class="docutils literal notranslate"><span class="pre">rad</span></code> e <code class="docutils literal notranslate"><span class="pre">chas</span></code> sono categoriche. Quando si lavora con regressori lineari e variabili categoriche bisogna fare attenzione:</p>
 <ul class="simple">
 <li><p>Le variabili categoriche non vanno utilizzate come variabili dipendenti di un regressore lineare;</p></li>
@@ -2079,7 +2079,7 @@ Name: rad, Length: 506, dtype: object
 <p>However, there is less control on which dummy variables to include or not in the model, as seen in the next section.</p>
 </section>
 <section id="backward-elimination">
-<h3><span class="section-number">23.2.3. </span>Backward Elimination<a class="headerlink" href="#backward-elimination" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">21.2.3. </span>Backward Elimination<a class="headerlink" href="#backward-elimination" title="Permalink to this heading">#</a></h3>
 <p>Il modello di regressione lineare calcolato è in generale buono, ma include alcune variabili che non contribuiscono significativamente alla regressione. In pratica, queste variabili possono inficiare il calcolo del regressore lineare e quindi sarebbe ideale non averle dentro. Potremmo rimuoverle tutte, ma non siamo sicuri che, in assenza di alcune, le altre non acquisiscano una qualche significatività. Esistono diverse tecniche per eliminare tali variabili. Una delle possibilità consiste nell’usare il metodo della <strong>backward elimination</strong>, che è definito come segue:</p>
 <ol class="arabic simple">
 <li><p>Si calcola il regressore lineare considerando tutte le variabili dipendenti;</p></li>
@@ -2563,7 +2563,7 @@ Name: rad, Length: 506, dtype: object
 </section>
 </section>
 <section id="residual-plots">
-<h2><span class="section-number">23.3. </span>Residual Plots<a class="headerlink" href="#residual-plots" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">21.3. </span>Residual Plots<a class="headerlink" href="#residual-plots" title="Permalink to this heading">#</a></h2>
 <p>Possiamo visualizzare i residual plots e i Q-Q plot dei residui di un regressore lineare mediante <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2588,7 +2588,7 @@ Name: rad, Length: 506, dtype: object
 </div>
 </section>
 <section id="estensioni-al-modello-lineare">
-<h2><span class="section-number">23.4. </span>Estensioni al Modello Lineare<a class="headerlink" href="#estensioni-al-modello-lineare" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">21.4. </span>Estensioni al Modello Lineare<a class="headerlink" href="#estensioni-al-modello-lineare" title="Permalink to this heading">#</a></h2>
 <p>La API <code class="docutils literal notranslate"><span class="pre">formula</span></code> di <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> rende semplice inserire deviazioni dal modello lineare. Vediamo degli esempi con il dataset <strong>Auto MPG</strong>. Carichiamo il dataset:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2850,7 +2850,7 @@ Name: rad, Length: 506, dtype: object
 </div>
 </div>
 <section id="interaction-terms">
-<h3><span class="section-number">23.4.1. </span>Interaction terms<a class="headerlink" href="#interaction-terms" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">21.4.1. </span>Interaction terms<a class="headerlink" href="#interaction-terms" title="Permalink to this heading">#</a></h3>
 <p>Aggiungiamo un termine di interazione tra “weight” e “horsepower”:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2944,7 +2944,7 @@ Name: rad, Length: 506, dtype: object
 <p>I residui sono meno correlati con la variabile predetta e il Q-Q plot mostra una deviazione minore dalla Gaussiana. Il modello “spiega” meglio i dati.</p>
 </section>
 <section id="modello-quadratico">
-<h3><span class="section-number">23.4.2. </span>Modello Quadratico<a class="headerlink" href="#modello-quadratico" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">21.4.2. </span>Modello Quadratico<a class="headerlink" href="#modello-quadratico" title="Permalink to this heading">#</a></h3>
 <p>Proviamo a fare fit di un modello quadratico:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3120,7 +3120,7 @@ Name: rad, Length: 506, dtype: object
 </div>
 </section>
 <section id="regressione-polinomiale">
-<h3><span class="section-number">23.4.3. </span>Regressione Polinomiale<a class="headerlink" href="#regressione-polinomiale" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">21.4.3. </span>Regressione Polinomiale<a class="headerlink" href="#regressione-polinomiale" title="Permalink to this heading">#</a></h3>
 <p>Sembra comunque che il modello con termini di interazione sia migliore di quello quadratico. Potremmo pensare di unire le due cose facendo fit di un regressore polinomiale:</p>
 <div class="math notranslate nohighlight">
 \[mpg = \beta_0 + \beta_1 horsepower^2 + \beta_2 weight^2 + \beta_3 horsepower\cdot weight + \beta_4 horsepower + \beta_5 weight\]</div>
@@ -3347,7 +3347,7 @@ Name: rad, Length: 506, dtype: object
 </section>
 </section>
 <section id="ridge-e-lasso-regression">
-<h2><span class="section-number">23.5. </span>Ridge e Lasso Regression<a class="headerlink" href="#ridge-e-lasso-regression" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">21.5. </span>Ridge e Lasso Regression<a class="headerlink" href="#ridge-e-lasso-regression" title="Permalink to this heading">#</a></h2>
 <p>È possibile eseguire la Ridge regression in <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> come segue:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3515,7 +3515,7 @@ Name: rad, Length: 506, dtype: object
 <p>Come si può vedere il lasso regressor ha impostato dei pesi esattamente a zero.</p>
 </section>
 <section id="esercizi">
-<h2><span class="section-number">23.6. </span>Esercizi<a class="headerlink" href="#esercizi" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">21.6. </span>Esercizi<a class="headerlink" href="#esercizi" title="Permalink to this heading">#</a></h2>
 <blockquote>
 <div><p>🧑‍💻 Esercizio 1</p>
 <p>Si consideri il dataset delle iris di Fisher. Si effettui uno scatterplot per studiare le relazioni tra le variabili. Si calcoli la matrice di correlazione usando gli indici di correlazione di Pearson, Spearman e Kendall. Esistono correlazioni deboli, medie o forti? Si calcoli l’indice di correlazione di Pearson tra le due coppie di variabili che individuano le correlazioni più forti. Si tratta di correlazioni significative?</p>
@@ -3575,7 +3575,7 @@ Name: rad, Length: 506, dtype: object
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">22. </span>Laboratory on Statistical Inference</p>
+        <p class="prev-next-title"><span class="section-number">20. </span>Laboratory on Statistical Inference</p>
       </div>
     </a>
     <a class="right-next"
@@ -3583,7 +3583,7 @@ Name: rad, Length: 506, dtype: object
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">24. </span>Laboratorio su regressione logistica</p>
+        <p class="prev-next-title"><span class="section-number">22. </span>Laboratorio su regressione logistica</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -3602,25 +3602,25 @@ Name: rad, Length: 506, dtype: object
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regressione-lineare-semplice">23.1. Regressione Lineare Semplice</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisi-di-un-regressore-lineare-semplice">23.1.1. Analisi di un regressore lineare semplice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regressione-lineare-semplice">21.1. Regressione Lineare Semplice</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisi-di-un-regressore-lineare-semplice">21.1.1. Analisi di un regressore lineare semplice</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regressione-lineare-multipla">23.2. Regressione Lineare Multipla</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boston-house-pricing-dataset">23.2.1. Boston House Pricing Dataset</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regressori-lineari-variabili-categoriche-e-variabili-dummy">23.2.2. Regressori lineari, variabili categoriche e variabili dummy</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-elimination">23.2.3. Backward Elimination</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regressione-lineare-multipla">21.2. Regressione Lineare Multipla</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boston-house-pricing-dataset">21.2.1. Boston House Pricing Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regressori-lineari-variabili-categoriche-e-variabili-dummy">21.2.2. Regressori lineari, variabili categoriche e variabili dummy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-elimination">21.2.3. Backward Elimination</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#residual-plots">23.3. Residual Plots</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estensioni-al-modello-lineare">23.4. Estensioni al Modello Lineare</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interaction-terms">23.4.1. Interaction terms</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modello-quadratico">23.4.2. Modello Quadratico</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regressione-polinomiale">23.4.3. Regressione Polinomiale</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#residual-plots">21.3. Residual Plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estensioni-al-modello-lineare">21.4. Estensioni al Modello Lineare</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interaction-terms">21.4.1. Interaction terms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modello-quadratico">21.4.2. Modello Quadratico</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regressione-polinomiale">21.4.3. Regressione Polinomiale</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-e-lasso-regression">23.5. Ridge e Lasso Regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">23.6. Esercizi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-e-lasso-regression">21.5. Ridge e Lasso Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">21.6. Esercizi</a></li>
 </ul>
   </nav></div>
 
