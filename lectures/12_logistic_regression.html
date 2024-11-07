@@ -463,7 +463,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limits-of-linear-regression">18.2. Limits of Linear Regression</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-binary-values-to-probabilities">18.3. From Binary Values to Probabilities</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-function">18.4. The Logistic Function</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-origin-of-the-logistic-function">18.4.1. The origin of the logistic function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-origin-of-the-logistic-function-optional">18.4.1. The origin of the logistic function (Optional)</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-regression-model">18.5. The Logistic Regression Model</a></li>
@@ -475,9 +475,8 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-iris-dataset">18.10.1. The Iris Dataset</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-limitations-of-a-linear-regression-in-the-presence-of-more-than-two-classes">18.10.2. Additional Limitations of a Linear Regression in the Presence of More than Two Classes</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-multinomial-logistic-regression-model">18.10.3. The Multinomial Logistic Regression Model</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-parameters-of-the-multinomial-logistic-regressor-model-optional">18.10.3.1. Estimating the Parameters of the Multinomial Logistic Regressor Model (Optional)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-parameters-of-a-multinomial-logistic-regressor">18.10.3.2. Interpretation of the Parameters of a Multinomial Logistic Regressor</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-softmax-regressor-optional">18.10.3.3. The Softmax Regressor (Optional)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-parameters-of-a-multinomial-logistic-regressor">18.10.3.1. Interpretation of the Parameters of a Multinomial Logistic Regressor</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-softmax-regressor-optional">18.10.3.2. The Softmax Regressor (Optional)</a></li>
 </ul>
 </li>
 </ul>
@@ -892,8 +891,8 @@ document.write(`
 <li><p>It saturates to <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(1\)</span> for extreme values of <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
 </ul>
 <p>Additionally, it is differentiable, which will be useful for optimization later.</p>
-<section id="the-origin-of-the-logistic-function">
-<h3><span class="section-number">18.4.1. </span>The origin of the logistic function<a class="headerlink" href="#the-origin-of-the-logistic-function" title="Permalink to this heading">#</a></h3>
+<section id="the-origin-of-the-logistic-function-optional">
+<h3><span class="section-number">18.4.1. </span>The origin of the logistic function (Optional)<a class="headerlink" href="#the-origin-of-the-logistic-function-optional" title="Permalink to this heading">#</a></h3>
 <p>When looking at the logistic function for the first time, one may wonder where it comes from and why we are using this function. The original logistic function was proposed by Belgian mathematician Pierre François Verhulst in 1838 to model the problem of <strong>population growth</strong>, which can be formulated as follows:</p>
 <blockquote>
 <div><p>We want to model the growth of a population <span class="math notranslate nohighlight">\(P(t)\)</span> as time <span class="math notranslate nohighlight">\(t\)</span> passes, under the assumption that resources are limited so that the population can reach at most the <strong>carrying capacity <span class="math notranslate nohighlight">\(K\)</span></strong>.</p>
@@ -909,7 +908,7 @@ document.write(`
 </div>
 <p>As we know that resources are limited, however, we have to assume that the growth rate will at first increase, when many resources are available and population grows, then decrease. Verhulst hence revised the ODE as follows:</p>
 <div class="math notranslate nohighlight">
-\[\frac{dP(t)}{dt} = rP - (1-\frac{P}{K})\]</div>
+\[\frac{dP(t)}{dt} = rP (1-\frac{P}{K})\]</div>
 <p>where <span class="math notranslate nohighlight">\(K\)</span> is the carrying capacity. In practice, as <span class="math notranslate nohighlight">\(P\)</span> approaches <span class="math notranslate nohighlight">\(K\)</span>, the growth rate will slow down, as shown in the following:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -919,7 +918,7 @@ document.write(`
 <p>To obtain the size of population <span class="math notranslate nohighlight">\(P\)</span> for varying <span class="math notranslate nohighlight">\(t\)</span>, we can solve the ODE above, obtaining the following expression:</p>
 <div class="math notranslate nohighlight">
 \[P = \frac{K}{1+(\frac{K-P_0}{P_0})e^{-rt}}\]</div>
-<p>Scaling <span class="math notranslate nohighlight">\(K\)</span> to <span class="math notranslate nohighlight">\(1\)</span> and setting <span class="math notranslate nohighlight">\(r=1\)</span>, we obtain the standard logistic function:</p>
+<p>From here, it can be shown that we can obtain the standard logistic function:</p>
 <div class="math notranslate nohighlight">
 \[f(t) = \frac{1}{1+e^{-t}}\]</div>
 </section>
@@ -989,8 +988,8 @@ document.write(`
 \[P(y=1|\mathbf{x}) = \beta_0 + \beta_1 x_1 + \ldots + \beta_n x_n\]</div>
 <p>We can say that:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(e^\beta_0\)</span> is the odd of <span class="math notranslate nohighlight">\(y\)</span> being equal to <span class="math notranslate nohighlight">\(1\)</span> rather than <span class="math notranslate nohighlight">\(0\)</span> when <span class="math notranslate nohighlight">\(x_i=0 \forall i\)</span>;</p></li>
-<li><p>An increment of one unit in the independent variable <span class="math notranslate nohighlight">\(x_i\)</span> corresponds to a multiplicative increment of <span class="math notranslate nohighlight">\(e^\beta_i\)</span> in the odds of <span class="math notranslate nohighlight">\(y=1\)</span>. So if <span class="math notranslate nohighlight">\(e^\beta_i=0.05\)</span>, then <span class="math notranslate nohighlight">\(y=1\)</span> is <span class="math notranslate nohighlight">\(5\%\)</span> more likely for a one-unit increment of <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(e^{\beta_0}\)</span> is the odd of <span class="math notranslate nohighlight">\(y\)</span> being equal to <span class="math notranslate nohighlight">\(1\)</span> rather than <span class="math notranslate nohighlight">\(0\)</span> when <span class="math notranslate nohighlight">\(x_i=0 \forall i\)</span>;</p></li>
+<li><p>An increment of one unit in the independent variable <span class="math notranslate nohighlight">\(x_i\)</span> corresponds to a multiplicative increment of <span class="math notranslate nohighlight">\(e^{\beta_i}\)</span> in the odds of <span class="math notranslate nohighlight">\(y=1\)</span>. So if <span class="math notranslate nohighlight">\(e^{\beta_i}=0.05\)</span>, then <span class="math notranslate nohighlight">\(y=1\)</span> is <span class="math notranslate nohighlight">\(5\%\)</span> more likely for a one-unit increment of <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
 </ul>
 </section>
 <section id="geometrical-interpretation-of-the-coefficients-of-a-logistic-regressor">
@@ -1622,6 +1621,16 @@ will hence be:</p>
 <p>Let <span class="math notranslate nohighlight">\(P(k)=(Y=k|X=\mathcal{x})\)</span> for brevity, <span class="math notranslate nohighlight">\(\mathbf{\beta_k}=(\beta_0,\beta_1,\ldots,\beta_k)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{X}=(1,x_1,\ldots,x_n)\)</span>. We can see that:</p>
 <div class="math notranslate nohighlight">
 \[\log\left(\frac{P(k)}{P(1)}\right) = \mathbf{\beta_k}^T\mathbf{X} \Rightarrow P(k)= e^{\mathbf{\beta_k}^T\mathbf{X}} P(1)\]</div>
+<p>Doing the math, it can be shown that:</p>
+<div class="math notranslate nohighlight">
+\[ P(Y=k|X=\mathbf{x}) = \frac{e^{\mathbf{\beta_k}^T\mathbf{X}}}{1+\sum_{l=2}^K \mathbf{e^{\beta_l^T\mathbf{X}}}}\]</div>
+<div class="math notranslate nohighlight">
+\[ P(Y=1|X=\mathbf{x}) = \frac{1}{1+\sum_{l=2}^K \mathbf{e^{\beta_l^T\mathbf{X}}}}\]</div>
+<p>These two expressions can be used to compute the probabilities of the classes once that the parameters have been estimated and <span class="math notranslate nohighlight">\(\mathcal{x}\)</span> is observed.</p>
+<div class="toggle toggle-shown docutils container">
+<p>From this expression:</p>
+<div class="math notranslate nohighlight">
+\[\log\left(\frac{P(k)}{P(1)}\right) = \mathbf{\beta_k}^T\mathbf{X} \Rightarrow P(k)= e^{\mathbf{\beta_k}^T\mathbf{X}} P(1)\]</div>
 <p>We can divide the last term by <span class="math notranslate nohighlight">\(1=\sum_{l=1}^K P(l)\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[ P(k) = \frac{e^{\mathbf{\beta_k}^T\mathbf{X}} P(1)}{\sum_{l=1}^K P(l)} = \frac{e^{\mathbf{\beta_k}^T\mathbf{X}}}{\sum_{l=1}^K \frac{P(l)}{P(1)}} = \frac{e^{\mathbf{\beta_k}^T\mathbf{X}}}{\frac{P(1)}{P(1)}+\sum_{l=2}^K \frac{P(l)}{P(1)}} = \frac{e^{\mathbf{\beta_k}^T\mathbf{X}}}{1+\sum_{l=2}^K \mathbf{e^{\beta_l^T\mathbf{X}}}} \text{   (A)}\]</div>
@@ -1636,9 +1645,8 @@ will hence be:</p>
 \[ P(Y=k|X=\mathbf{x}) = \frac{e^{\mathbf{\beta_k}^T\mathbf{X}}}{1+\sum_{l=2}^K \mathbf{e^{\beta_l^T\mathbf{X}}}}\]</div>
 <div class="math notranslate nohighlight">
 \[ P(Y=1|X=\mathbf{x}) = \frac{1}{1+\sum_{l=2}^K \mathbf{e^{\beta_l^T\mathbf{X}}}}\]</div>
-<p>These two expressions can be used to compute the probabilities of the classes once that the parameters have been estimated and <span class="math notranslate nohighlight">\(\mathcal{x}\)</span> is observed.</p>
-<section id="estimating-the-parameters-of-the-multinomial-logistic-regressor-model-optional">
-<h4><span class="section-number">18.10.3.1. </span>Estimating the Parameters of the Multinomial Logistic Regressor Model (Optional)<a class="headerlink" href="#estimating-the-parameters-of-the-multinomial-logistic-regressor-model-optional" title="Permalink to this heading">#</a></h4>
+</div>
+<div class="toggle toggle-shown docutils container">
 <p>We can estimate the paramters of the multinomial logistic regressor model again by maximizing the likelihood of the model on the data. Assuming that all observations are i.i.d., we can write:</p>
 <div class="math notranslate nohighlight">
 \[L(\mathbf{\beta}) = \prod_{i=1}^N P(Y=y^{(i)}|X=\mathbf{x}^{(i)};\mathbf{\beta})\]</div>
@@ -1651,9 +1659,9 @@ will hence be:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}[x] = \begin{cases}1 &amp; \text{if } x \text{ is true} \\ 0 &amp; \text{otherwise}\end{cases}\end{split}\]</div>
 <p>Similarly to the logistic regressor, there is no close form for the estimation of the parameters, but iterative algorithms such as <strong>gradient descent</strong> are in general used for optimization.</p>
-</section>
+</div>
 <section id="interpretation-of-the-parameters-of-a-multinomial-logistic-regressor">
-<h4><span class="section-number">18.10.3.2. </span>Interpretation of the Parameters of a Multinomial Logistic Regressor<a class="headerlink" href="#interpretation-of-the-parameters-of-a-multinomial-logistic-regressor" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">18.10.3.1. </span>Interpretation of the Parameters of a Multinomial Logistic Regressor<a class="headerlink" href="#interpretation-of-the-parameters-of-a-multinomial-logistic-regressor" title="Permalink to this heading">#</a></h4>
 <p>The statistical interpretation of the parameters of a multinomial logistic regressor is similar to the one of a logistic regressor, but we should pay attention to the choice of the baseline.</p>
 <p>Let us consider our example of studying the relationship between <code class="docutils literal notranslate"><span class="pre">sepal_lenght</span></code> and <code class="docutils literal notranslate"><span class="pre">species</span></code>. We will map <code class="docutils literal notranslate"><span class="pre">virginica</span></code> to <span class="math notranslate nohighlight">\(0\)</span>, <code class="docutils literal notranslate"><span class="pre">versicolor</span></code> to <span class="math notranslate nohighlight">\(1\)</span> and <code class="docutils literal notranslate"><span class="pre">setosa</span></code> to <span class="math notranslate nohighlight">\(2\)</span>. Once the model is fit, we will find the following values:</p>
 <table class="table">
@@ -1709,7 +1717,7 @@ will hence be:</p>
 </ul>
 </section>
 <section id="the-softmax-regressor-optional">
-<h4><span class="section-number">18.10.3.3. </span>The Softmax Regressor (Optional)<a class="headerlink" href="#the-softmax-regressor-optional" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">18.10.3.2. </span>The Softmax Regressor (Optional)<a class="headerlink" href="#the-softmax-regressor-optional" title="Permalink to this heading">#</a></h4>
 <p>Softmax regression is an alternative formulation of multinomial logistic regression which is designed to avoid the definition of a baseline and it is hence symmetrical. In a softmax regressor, the probabilities are modeled as follows:</p>
 <div class="math notranslate nohighlight">
 \[ P(Y=k|X=\mathbf{x}) = \frac{e^{\mathbf{\beta_k}^T\mathbf{X}}}{\sum_{l=1}^K \mathbf{e^{\beta_l^T\mathbf{X}}}}, \ \ \ \forall k=1,\ldots,K\]</div>
@@ -1795,7 +1803,7 @@ will hence be:</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limits-of-linear-regression">18.2. Limits of Linear Regression</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-binary-values-to-probabilities">18.3. From Binary Values to Probabilities</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-function">18.4. The Logistic Function</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-origin-of-the-logistic-function">18.4.1. The origin of the logistic function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-origin-of-the-logistic-function-optional">18.4.1. The origin of the logistic function (Optional)</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-regression-model">18.5. The Logistic Regression Model</a></li>
@@ -1807,9 +1815,8 @@ will hence be:</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-iris-dataset">18.10.1. The Iris Dataset</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-limitations-of-a-linear-regression-in-the-presence-of-more-than-two-classes">18.10.2. Additional Limitations of a Linear Regression in the Presence of More than Two Classes</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-multinomial-logistic-regression-model">18.10.3. The Multinomial Logistic Regression Model</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-parameters-of-the-multinomial-logistic-regressor-model-optional">18.10.3.1. Estimating the Parameters of the Multinomial Logistic Regressor Model (Optional)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-parameters-of-a-multinomial-logistic-regressor">18.10.3.2. Interpretation of the Parameters of a Multinomial Logistic Regressor</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-softmax-regressor-optional">18.10.3.3. The Softmax Regressor (Optional)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-parameters-of-a-multinomial-logistic-regressor">18.10.3.1. Interpretation of the Parameters of a Multinomial Logistic Regressor</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-softmax-regressor-optional">18.10.3.2. The Softmax Regressor (Optional)</a></li>
 </ul>
 </li>
 </ul>
