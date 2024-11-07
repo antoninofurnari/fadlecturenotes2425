@@ -637,14 +637,7 @@ document.write(`
 </div>
 <p>Since the notches do not intersect, there is no overlap between the confidence intervals for a C.L. of <span class="math notranslate nohighlight">\(95\%\)</span>, hence it is very unlikely that the two median values are very close to each other. The difference seem to be statistically relevant. If we want to be very sure, we can <strong>compute a two-sample t-Test</strong> to ensure that the mean values of the two samples actually are distinct.</p>
 <p>The null hypothesis will be that the two samples have the same mean. If we reject this hypothesis, then the two means are distinct. We obtain the following test statistic and p-value:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">ttest_ind</span>
-<span class="n">t_stat</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">ttest_ind</span><span class="p">(</span><span class="n">students1</span><span class="p">[</span><span class="n">students1</span><span class="p">[</span><span class="s1">&#39;tutoring&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;performance&#39;</span><span class="p">],</span> <span class="n">students1</span><span class="p">[</span><span class="n">students1</span><span class="p">[</span><span class="s1">&#39;tutoring&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;performance&#39;</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;T-test results - T-statistic: </span><span class="si">{</span><span class="n">t_stat</span><span class="si">}</span><span class="s1">, p-value: </span><span class="si">{</span><span class="n">p_value</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>T-test results - T-statistic: 4.086568160195115, p-value: 6.358186591194311e-05
 </pre></div>
@@ -1741,13 +1734,7 @@ Chi-square p-value: 2.761663e-06
 <img alt="../_images/c6acbcbcf75dd2090a321ea89f6292afe2988db08120e552b4c4a48638307c50.svg" src="../_images/c6acbcbcf75dd2090a321ea89f6292afe2988db08120e552b4c4a48638307c50.svg" /></div>
 </div>
 <p>Let us have a look at the data:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lucas</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;http://www.causality.inf.ethz.ch/data/lucas0_train.csv&#39;</span><span class="p">)</span>
-<span class="n">lucas</span>
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html"><div>
 <style scoped>
@@ -1956,14 +1943,9 @@ Chi-square p-value: 2.761663e-06
 <h4><span class="section-number">19.8.1.1. </span>Does <code class="docutils literal notranslate"><span class="pre">Smoking</span></code> causes <code class="docutils literal notranslate"><span class="pre">Car</span> <span class="pre">Accident</span></code>?<a class="headerlink" href="#does-smoking-causes-car-accident" title="Permalink to this heading">#</a></h4>
 <p>We will try to answer the question as to whether there is a causal effect between <code class="docutils literal notranslate"><span class="pre">Smoking</span></code> and <code class="docutils literal notranslate"><span class="pre">Car</span> <span class="pre">Accident</span></code>. We can start by fitting a logistic regressor:</p>
 <div class="math notranslate nohighlight">
-\[P(Car Accident|Smoking) = \sigma(\beta_0 + \beta_1 Smoking)\]</div>
+\[\log \frac{P(Car Accident|Smoking)}{P(\neg Car Accident|Smoking)} = \sigma(\beta_0 + \beta_1 Smoking)\]</div>
 <p>We need to fit a logistic regressor because the dependent variable is binary (all variables are binary). This is the result:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logit</span><span class="p">(</span><span class="s1">&#39;Car_Accident ~ Smoking&#39;</span><span class="p">,</span> <span class="n">lucas</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
          Current function value: 0.588796
@@ -2000,14 +1982,9 @@ Chi-square p-value: 2.761663e-06
 </div>
 <p>To condition on <code class="docutils literal notranslate"><span class="pre">Coughing</span></code>, we can fit the following logistic regressor:</p>
 <div class="math notranslate nohighlight">
-\[P(Car Accident|Smoking, Coughing) = \sigma(\beta_0 + \beta_1 Smoking + \beta_2 Coughing)\]</div>
+\[\log \frac{P(Car Accident|Smoking, Coughing)}{P(\neg Car Accident|Smoking, Coughing)} = \sigma(\beta_0 + \beta_1 Smoking + \beta_2 Coughing)\]</div>
 <p>We obtain the following coefficients:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logit</span><span class="p">(</span><span class="s1">&#39;Car_Accident ~ Smoking + Coughing&#39;</span><span class="p">,</span> <span class="n">lucas</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
          Current function value: 0.569895

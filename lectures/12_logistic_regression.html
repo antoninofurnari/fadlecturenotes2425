@@ -1617,14 +1617,12 @@ will hence be:</p>
 <div class="math notranslate nohighlight">
 \[\log\left( \frac{P(Y=k|X=\mathbf{x})}{P(Y=1|X=\mathbf{x})} \right) = \beta_{k0} + \beta_{k1} x_1 + \ldots + \beta_{kn} x_n\]</div>
 <p>Note that, in practice, we need to define a different linear function for each class <span class="math notranslate nohighlight">\(k = 1 \ldots K\)</span>, hence we need <span class="math notranslate nohighlight">\((n+1) \times (k-1)\)</span> parameters.</p>
-<p>Let <span class="math notranslate nohighlight">\(P(k)=(Y=k|X=\mathcal{x})\)</span> for brevity, <span class="math notranslate nohighlight">\(\mathbf{\beta_k}=(\beta_0,\beta_1,\ldots,\beta_k)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{X}=(1,x_1,\ldots,x_n)\)</span>. We can see that:</p>
-<div class="math notranslate nohighlight">
-\[\log\left(\frac{P(k)}{P(1)}\right) = \mathbf{\beta_k}^T\mathbf{X} \Rightarrow P(k)= e^{\mathbf{\beta_k}^T\mathbf{X}} P(1)\]</div>
 <p>Doing the math, it can be shown that:</p>
 <div class="math notranslate nohighlight">
 \[ P(Y=k|X=\mathbf{x}) = \frac{e^{\mathbf{\beta_k}^T\mathbf{X}}}{1+\sum_{l=2}^K \mathbf{e^{\beta_l^T\mathbf{X}}}}\]</div>
 <div class="math notranslate nohighlight">
 \[ P(Y=1|X=\mathbf{x}) = \frac{1}{1+\sum_{l=2}^K \mathbf{e^{\beta_l^T\mathbf{X}}}}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(\mathbf{\beta_k}=(\beta_0,\beta_1,\ldots,\beta_k)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{X}=(1,x_1,\ldots,x_n)\)</span>.</p>
 <p>These two expressions can be used to compute the probabilities of the classes once that the parameters have been estimated and <span class="math notranslate nohighlight">\(\mathcal{x}\)</span> is observed.</p>
 <div class="toggle docutils container">
 <p class="rubric">Deriving the last two equations (optional)</p>
