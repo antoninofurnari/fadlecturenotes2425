@@ -59,17 +59,17 @@ parts:
   numbered: True
   chapters:
   - file: lectures/13_causal_analysis
-- caption: Lecture 11
-  numbered: True
-  chapters:
-  - file: lectures/14_data_as_nd_points
-  - file: lectures/15_clustering
 - caption: Laboratory 3
   numbered: True
   chapters:
   - file: laboratories/10_statistical_inference
   - file: laboratories/11_regressione_lineare
   - file: laboratories/12_regressione_logistica
+- caption: Lecture 11
+  numbered: True
+  chapters:
+  - file: lectures/14_data_as_nd_points
+  - file: lectures/15_clustering
 
 
 
