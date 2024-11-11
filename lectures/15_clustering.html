@@ -68,6 +68,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="25. Density Estimation" href="16_density_estimation.html" />
     <link rel="prev" title="23. Data as N-Dimensional Points" href="14_data_as_nd_points.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -232,6 +233,10 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="14_data_as_nd_points.html">23. Data as N-Dimensional Points</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">24. Clustering</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 12</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="16_density_estimation.html">25. Density Estimation</a></li>
 </ul>
 
     </div>
@@ -537,7 +542,7 @@ document.write(`
 <li><p>Short eruptions followed by other short eruptions in a short time (bottom left);</p></li>
 <li><p>Long eruptions followed by other long eruptions in a long time (upper right).</p></li>
 </ul>
-<p>A clustering algorithm aims to automatically find the two groups and assign each data point to the most likely group. Note that the two groups will be referred generically as “cluster <span class="math notranslate nohighlight">\(i\)</span>”, meaning that the algorithm will not assign any semantic to the clusters, but it will aim to put “similar” data points in the same cluster.</p>
+<p>A clustering algorithm aims to automatically find the two groups and assign each data point to the most likely group. Note that the two groups will be referred generically as “cluster <span class="math notranslate nohighlight">\(i\)</span>”, meaning that the algorithm will not assign any semantic meaning to the clusters, but it will aim to put “similar” data points in the same cluster.</p>
 <p>Let</p>
 <div class="math notranslate nohighlight">
 \[\mathbf{X} = \left\{ \mathbf{x}^{(i)} \right\}_{i = 1}^{N},\ \mathbf{x}^{(i)} \in \mathfrak{R}^{n}\]</div>
@@ -724,10 +729,10 @@ practice it usually leads to a reasonable solution.</em></p>
 </section>
 <section id="choosing-the-right-value-for-k">
 <h3><span class="section-number">24.2.3. </span>Choosing the Right Value for K<a class="headerlink" href="#choosing-the-right-value-for-k" title="Permalink to this heading">#</a></h3>
-<p>In the K-Means clustering algorithm, <span class="math notranslate nohighlight">\(K\)</span> is a <strong>hyper-parameter</strong>. This means that, <strong>it is a parameter of the method, affecting the final model we obtain after the optimization procedure</strong>, but <strong>its value is not automatically determined by the optimization procedure</strong>.</p>
+<p>In the K-Means clustering algorithm, <span class="math notranslate nohighlight">\(K\)</span> is a <strong>hyper-parameter</strong>. This means that <strong>it is a parameter of the method affecting the final model we obtain after the optimization procedure</strong>, but <strong>its value is not automatically determined by the optimization procedure</strong>.</p>
 <p>One common approach to determine the values of hyper-parameters is to make some guesses and fit different models with the guessed values of the hyper-parameters. We can then choose the model which has the “best value” of the considered hyper-parameters.</p>
 <p>When it turns to determining the optimal <span class="math notranslate nohighlight">\(K\)</span> value for K-Means clustering, there are two main techniques which are commonly used: <strong>the elbow method</strong> and <strong>the silhouette method</strong>, which are discussed in the following.</p>
-<p>Note that these are bot <strong>heuristic methods not giving many guarantees on the final selection of <span class="math notranslate nohighlight">\(K\)</span></strong>, but they can still help decide on the number of clusters, in particular if guided by an intuition of what a good value of <span class="math notranslate nohighlight">\(K\)</span> would look like.</p>
+<p>Note that these are both <strong>heuristic methods not giving many guarantees on the final selection of <span class="math notranslate nohighlight">\(K\)</span></strong>, but they can still help decide on the number of clusters, in particular if guided by an intuition of what a good value of <span class="math notranslate nohighlight">\(K\)</span> would look like.</p>
 <section id="elbow-method">
 <h4><span class="section-number">24.2.3.1. </span>Elbow Method<a class="headerlink" href="#elbow-method" title="Permalink to this heading">#</a></h4>
 <p>The elbow method consists in fitting K-Means models for different values of <span class="math notranslate nohighlight">\(K\)</span>. For each <span class="math notranslate nohighlight">\(K\)</span>, we then plot the final value of the cost function. We expect that <strong>as <span class="math notranslate nohighlight">\(K\)</span> increases, the cost will decrease</strong>. Indeed, if <span class="math notranslate nohighlight">\(K\)</span> is very large (even larger than it should be), we will anyway get a smaller cost due to the fact that the presence of more clusters will inevitably lower their individual variances.</p>
@@ -761,8 +766,8 @@ practice it usually leads to a reasonable solution.</em></p>
 <li><p>A value of <span class="math notranslate nohighlight">\(s(i)\)</span> close to <span class="math notranslate nohighlight">\(-1\)</span> is obtained when <span class="math notranslate nohighlight">\(a(i) &gt;&gt; b(i)\)</span>, meaning that another cluster <span class="math notranslate nohighlight">\(C_J\)</span> exists in which <span class="math notranslate nohighlight">\(a(i)\)</span> fits better.</p></li>
 <li><p>A value of <span class="math notranslate nohighlight">\(s(i)\)</span> close to <span class="math notranslate nohighlight">\(0\)</span> indicates that the data point is close to the <strong>border between two natural clusters</strong>.</p></li>
 </ul>
-<p>The score above is arbitrarily set to <span class="math notranslate nohighlight">\(0\)</span> if <span class="math notranslate nohighlight">\(|C_I|=1\)</span> as in that case, the cluster would only contain the data point <span class="math notranslate nohighlight">\(i\)</span>. Note that this is <strong>an assumption of neutrality</strong>.</p>
-<p>The correct number of clusters is usually chosen by showing the silhouette plot, which displays all the silhouette scores of data points within each clusters, arranged from largest to smallest. The plots below are taken from the <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/cluster/plot_kmeans_silhouette_analysis.html">scikit-learn documentation</a> and show examples of silhouette plots for different choices of <span class="math notranslate nohighlight">\(K\)</span> in an example datest:</p>
+<p>The score above is arbitrarily set to <span class="math notranslate nohighlight">\(0\)</span> if <span class="math notranslate nohighlight">\(|C_I|=1\)</span> as, in that case, the cluster would only contain the data point <span class="math notranslate nohighlight">\(i\)</span>. Note that this is <strong>an assumption of neutrality</strong>.</p>
+<p>The correct number of clusters is usually chosen by showing the silhouette plot, which displays all the silhouette scores of data points within each clusters, arranged from largest to smallest. The plots below are taken from the <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/cluster/plot_kmeans_silhouette_analysis.html">scikit-learn documentation</a> and show examples of silhouette plots for different choices of <span class="math notranslate nohighlight">\(K\)</span> in an example dataset:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <img alt="../_images/d4905a3611e95874e694a173b13817bed5320bc3147546c6e13620df3e6148cc.png" src="../_images/d4905a3611e95874e694a173b13817bed5320bc3147546c6e13620df3e6148cc.png" />
@@ -772,8 +777,8 @@ practice it usually leads to a reasonable solution.</em></p>
 <img alt="../_images/a9dd38401a6443e27071ebe180da299e4e174c68ac8f6ae8cdbce16ba40d83ac.png" src="../_images/a9dd38401a6443e27071ebe180da299e4e174c68ac8f6ae8cdbce16ba40d83ac.png" />
 </div>
 </div>
-<p>The vertical line in red displays the average silhouette score. Good choices of cluster numbers will have silhouette plots which achieve values similar to each other and close to the average one. For example <span class="math notranslate nohighlight">\(n=2\)</span> and <span class="math notranslate nohighlight">\(n=4\)</span> seem to be the best pick.</p>
-<p>In practice, it is also useful to plot the average silhouette score versus the number of clusters and choose value of <span class="math notranslate nohighlight">\(K\)</span> which maximize the average score.</p>
+<p>The vertical line in red displays the average silhouette score. Good choices of cluster numbers will have silhouette plots which achieve values similar to each other and close to the average one. For example <span class="math notranslate nohighlight">\(n=2\)</span> and <span class="math notranslate nohighlight">\(n=4\)</span> seem to be the best ones.</p>
+<p>In practice, it is also useful to plot the average silhouette score versus the number of clusters and choose value of <span class="math notranslate nohighlight">\(K\)</span> which <strong>maximizes</strong> the average score.</p>
 <p>Such plot would be as follows for the previous example:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -847,6 +852,15 @@ springer.</p>
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title"><span class="section-number">23. </span>Data as N-Dimensional Points</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="16_density_estimation.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">25. </span>Density Estimation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
