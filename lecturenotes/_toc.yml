@@ -70,6 +70,10 @@ parts:
   chapters:
   - file: lectures/14_data_as_nd_points
   - file: lectures/15_clustering
+- caption: Lecture 12
+  numbered: True
+  chapters:
+  - file: lectures/16_density_estimation
 
 
 
