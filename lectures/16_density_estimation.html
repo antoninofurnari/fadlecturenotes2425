@@ -520,32 +520,45 @@ document.write(`
 <p>We hence usually resort to different approaches, the main of which are:</p>
 <ul class="simple">
 <li><p><strong>Fixed windows</strong>: this consists in “discretizing” the range of the the variable <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> in “bins” of size <span class="math notranslate nohighlight">\(r\)</span> and counting how many values fall within each window. <strong>Histogram</strong> belong to this class of methods for density estimation. Note that histograms can also be <strong>extended to multiple dimensions</strong> by considering d-dimensional tiles (e.g., square tiles in <span class="math notranslate nohighlight">\(\Re^2\)</span>);</p></li>
-<li><p><strong>Mobile windows</strong>: as in histograms, the range of <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> the density estimation is performed by dividing the space into d-dimensional windows. However, in this case, the windows are not fixed, but mobile and overlapping, meaning that, given a point <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, we can estimate the density at <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> by centering a window around <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>. <strong>Kernel density estimation methods</strong> as the one we saw at the beginning of the course fall in this category. This is also known as <strong>Parzen window</strong>.</p></li>
-<li><p><strong>Fixed samples</strong>: rather than discretizing the range of <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>, at any given point <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, we estimate the density <span class="math notranslate nohighlight">\(f(\mathbf{x})\)</span> by looking at the <span class="math notranslate nohighlight">\(K\)</span> closest point in space, where <span class="math notranslate nohighlight">\(K\)</span> is fixed and comparing them to the size of a neighborhood containing all of them. We will see that this strategy is used to define the K-NN classification algorithm.</p></li>
+<li><p><strong>Mobile windows</strong>: as in histograms, the range of <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> the density estimation is performed by dividing the space into d-dimensional windows. However, in this case, the windows are not fixed, but mobile and overlapping, meaning that, given a point <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, we can estimate the density at <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> by centering a window around <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>. <strong>Kernel density estimation methods</strong> as the one we talked about at beginning of the course fall in this category. This is also known as <strong>Parzen window</strong>.</p></li>
+<li><p><strong>Fixed samples</strong>: rather than discretizing the range of <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>, at any given point <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, we estimate the density <span class="math notranslate nohighlight">\(f(\mathbf{x})\)</span> by looking at the <span class="math notranslate nohighlight">\(K\)</span> closest points in space, where <span class="math notranslate nohighlight">\(K\)</span> is fixed and comparing them to the size of a neighborhood containing all of them. We will see that this strategy is used to define the K-NN classification algorithm.</p></li>
 </ul>
 <p>The figure below illustrates three examples of density estimation using the three approaches above for an example dataset.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/05cab637d4c7f9dcb00ff41ba658e4bf44547fea4c64521b19a244c1ed341ed5.png" src="../_images/05cab637d4c7f9dcb00ff41ba658e4bf44547fea4c64521b19a244c1ed341ed5.png" />
+<img alt="../_images/55e779e01b8868ab9380f7b3128ed771040dfcc2c0df00a30f7b0fe5045ee047.png" src="../_images/55e779e01b8868ab9380f7b3128ed771040dfcc2c0df00a30f7b0fe5045ee047.png" />
 </div>
 </div>
 <p>(a) The space is divided into non-overlapping square tiles (other shapes could be used as long as they’ll cover the whole space), then the density for each square is computed by considering the number of examples falling into each square. (b) Given an arbitrary point <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> in the n-dimensional space, a neighborhood of a given radius <span class="math notranslate nohighlight">\(r\)</span> is considered and the density for that point is estimated by considering the number of examples falling in the neighborhood. (c) Given an arbitrary point <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> in the n-dimensional space, we consider a neighborhood centered at <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and radius <span class="math notranslate nohighlight">\(R_k(\mathbf{x})\)</span> large enough to contain <span class="math notranslate nohighlight">\(K\)</span> points. The density at <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> is computed by considering the size <span class="math notranslate nohighlight">\(R_k(\mathbf{x})\)</span> (the smaller, the denser).</p>
 <section id="fixed-windows-d-dimensional-histograms">
 <h3><span class="section-number">25.1.1. </span>Fixed Windows - D-Dimensional Histograms<a class="headerlink" href="#fixed-windows-d-dimensional-histograms" title="Permalink to this heading">#</a></h3>
-<p>Density estimation can be easily performed using D-Dimensional histograms. This method is the same as the one we saw in the case of 1-d histograms, but in general, <strong>we will divide the D-Dimensional space into D-Dimensional regions (typically hypercubes)</strong>. In the 2D case, these will simply be square tiles. The algorithm hence assigns a uniform density value to each region.</p>
-<p>Let <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> be our set of observations and let <span class="math notranslate nohighlight">\(R_i\)</span> be the <span class="math notranslate nohighlight">\(i^{th}\)</span> region of a set of <span class="math notranslate nohighlight">\(\mathcal{R}=\{R_i\}_i\)</span> regions in which we divided the space. We will assign the following density value to the <span class="math notranslate nohighlight">\(R_i\)</span> region:</p>
+<p>Density estimation can be easily performed using D-Dimensional histograms. This method is the same as the one we saw in the case of 1-D density histograms, but in general, <strong>we will divide the D-Dimensional space into D-Dimensional regions (typically hypercubes, but other shapes can be used)</strong>. We will start by considering square tiles in the 2D space. As with histograms, we want to assign each point <span class="math notranslate nohighlight">\(\mathbf{x} \in R_i\)</span> a uniform density value</p>
 <div class="math notranslate nohighlight">
-\[f(R_i) = \frac{|\{\mathbf{x} \in R_i\}|}{|\mathbf{X}| \cdot V(R_i)}\]</div>
-<p>where <span class="math notranslate nohighlight">\(V(R_i)\)</span> is the volume of <span class="math notranslate nohighlight">\(R_i\)</span>. If <span class="math notranslate nohighlight">\(R_i\)</span> is 1-dimensional (hence a segment), this will be its length, if <span class="math notranslate nohighlight">\(R_i\)</span> is 2D, then it will be its area.</p>
-<p>Recall that the probability of finding a value <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> in a given region <span class="math notranslate nohighlight">\(R\)</span> is in general given by:</p>
+\[f(\mathbf{x} \in R_i) = f(R_i)\]</div>
+<p>such that:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(0 \leq f(\mathbf{x}) \leq 1, \forall R_i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\int_{\mathbf{x}} f(\mathbf{x}) d\mathbf{x} = \sum_{R_i} f(R_i) = 1\)</span></p></li>
+</ul>
+<p>Of course, we also want:</p>
 <div class="math notranslate nohighlight">
-\[P(\mathbf{x} \in R_i)=\int_{R_i} f(\mathbf{x}) d\mathbf{x} = V(R_i) \cdot f(R_i)\]</div>
-<p>The last part of the equality is true because we assigned uniform density values to each region.</p>
-<p>We hence obtain that:</p>
+\[ f(\mathbf{x} \in R_i) \propto |R_i|\]</div>
+<p>where <span class="math notranslate nohighlight">\(|R_i| = |\{\mathbf{x} \in R_i \cap \mathbf{X}\}|\)</span> and <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> is our set of observations.</p>
+<p>In practice, we will define:</p>
 <div class="math notranslate nohighlight">
-\[P(\mathbf{x} \in \mathbf{X}) = \sum_i P(R_i) = \sum_i V(R_i) \cdot f(R_i) = \sum_i V(R_i) \frac{|\{\mathbf{x} \in R_i\}|}{|\mathbf{X}| \cdot V(R_i)} = \]</div>
+\[f(R_i) = \frac{|R_i|}{|\mathbf{X}| \cdot V(R_i)}\]</div>
+<p>where <span class="math notranslate nohighlight">\(V(R_i)\)</span> is the <strong>volume of <span class="math notranslate nohighlight">\(R_i\)</span></strong>. If <span class="math notranslate nohighlight">\(R_i\)</span> is 1-dimensional, this will be its length, if <span class="math notranslate nohighlight">\(R_i\)</span> is 2D, then it will be its area, if <span class="math notranslate nohighlight">\(R_i\)</span> is 3D, then it will be its 3D volume.</p>
+<p>The definition above satisfies all our constraints and desiderata. In particular:</p>
+<ul class="simple">
+<li><p>The density is always comprised between <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(1\)</span>;</p></li>
+<li><p>The density of region <span class="math notranslate nohighlight">\(R_i\)</span> is proportional to the number of elements in region <span class="math notranslate nohighlight">\(R_i\)</span>;</p></li>
+</ul>
+<p>Moreover:</p>
 <div class="math notranslate nohighlight">
-\[= \frac{V(R_i)}{V(R_i) |\mathbf{X}|}  \sum_i |\{\mathbf{x} \in  R_i\}| = \frac{V(R_i) |\mathbf{X}|}{V(R_i) |\mathbf{X}|} = 1\]</div>
+\[P(R_i) = \int_{\mathbf{x} \in R_i} f(\mathbf{x}) d\mathbf{x} = \int_{\mathbf{x} \in R_i} \frac{|R_i|}{|\mathbf{X}| \cdot V(R_i)} = \frac{|R_i|}{|\mathbf{X}} \int_{\mathbf{x} \in R_i} \frac{1}{V(R_i)} = \frac{|R_i|}{|\mathbf{X}|} \frac{V(R_i)}{V(R_i)} = \frac{|R_i|}{|\mathbf{X}|}\]</div>
+<p>Consequently:</p>
+<div class="math notranslate nohighlight">
+\[P(\mathbf{x} \in \mathbf{X}) = \sum_{R_i} P(R_i) = \sum_{R_i} \frac{|R_i|}{|\mathbf{X}|}  = \frac{|X|}{|\mathbf{X}|} = 1\]</div>
 <p><strong>Hence we can treat the density estimate as a valid probability density function.</strong></p>
 <p>The plot below shows an example density estimation for a set of data. Note that <strong>this approach has a few hyper-parameters which determine the size and position of the regions</strong>.</p>
 <div class="cell tag_remove-input docutils container">
@@ -564,13 +577,18 @@ document.write(`
 <section id="mobile-windows-parzen-window-kernel-density-estimation">
 <h3><span class="section-number">25.1.2. </span>Mobile Windows - Parzen Window / Kernel Density Estimation<a class="headerlink" href="#mobile-windows-parzen-window-kernel-density-estimation" title="Permalink to this heading">#</a></h3>
 <p>While histograms allow to estimate density by placing a fixed grid on the data, the Parzen window approach, also known as kernel density estimation, places <strong>a window, or region, around each arbitrary point in space <span class="math notranslate nohighlight">\(\mathbf{x}\)</span></strong>. This has the big advantage to allow us to estimate density values at arbitrary points <strong>rather than setting fixed density over all points in a region</strong>.</p>
-<p>A naive approach to density estimation through Parzen Window would assign a point <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> a density by simply computing the fraction of points of <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> which fall between a neighborhood of size <span class="math notranslate nohighlight">\(r\)</span> (where <span class="math notranslate nohighlight">\(r\)</span> is a hyper-parameter) of <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, as follows:</p>
+<p>A naive approach to density estimation through Parzen Window would assign a point <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> a density by simply computing the fraction of points of <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> which fall in a neighborhood of size <span class="math notranslate nohighlight">\(h\)</span> (where <span class="math notranslate nohighlight">\(h\)</span> is a hyper-parameter) centered at <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, as follows:</p>
 <div class="math notranslate nohighlight">
-\[f(\mathbf{x}) = \frac{|N(\mathbf{x},h)\}|}{\alpha|\mathbf{X}|}\]</div>
-<p>where</p>
+\[f(\mathbf{x}) = \frac{|N(\mathbf{x},h)|}{V(h)}\]</div>
+<p>where:</p>
 <div class="math notranslate nohighlight">
 \[N(\mathbf{x},h) = \{\mathbf{y} \in \mathbf{X}\ s.t.\ ||\mathbf{y} - \mathbf{x}||_2 \leq h \}\]</div>
-<p>is a neighborhood of <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> centered at <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and of radius <span class="math notranslate nohighlight">\(h\)</span>, and <span class="math notranslate nohighlight">\(\alpha\)</span> is a constant introduced to make sure that the density integrates to <span class="math notranslate nohighlight">\(1\)</span>:</p>
+<p>is a neighborhood of <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> centered at <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and of radius <span class="math notranslate nohighlight">\(h\)</span> and <span class="math notranslate nohighlight">\(V(h)\)</span> is the volume of <span class="math notranslate nohighlight">\(|N(\mathbf{x},h)|\)</span>. For instance, if points are <span class="math notranslate nohighlight">\(2D&quot;\)</span>, <span class="math notranslate nohighlight">\(|N(\mathbf{x},h)|\)</span> is a circle and <span class="math notranslate nohighlight">\(V(h)\)</span> is its area: <span class="math notranslate nohighlight">\(V(h) = \pi h^2\)</span>.</p>
+<p>This is the exact same procedure we followed for n-dimensional histograms:</p>
+<blockquote>
+<div><p>Count the fraction of points in the region and divide by the volume of the region.</p>
+</div></blockquote>
+<p>It is not hard to see that under the definition above, we have:</p>
 <div class="math notranslate nohighlight">
 \[\int_{\mathbf{x} \in \Re^d} f(\mathbf{x}) d\mathbf{x}= 1\]</div>
 <p>The plot below shows some density estimates using this method:</p>
@@ -584,16 +602,16 @@ document.write(`
 \[f(\mathbf{x}) = \frac{1}{|\mathbf{X}|} \sum_{i=1}^{|\mathbf{X}|} K_h\left(\mathbf{x}_i - \mathbf{x}\right) \]</div>
 <p>where <span class="math notranslate nohighlight">\(K_h\)</span> is defined as:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}K_h\left(\mathbf{x}_i - \mathbf{x}\right) = \begin{cases} \frac{1}{\pi h^2} &amp; \text{if } ||\frac{\mathbf{x}_i - \mathbf{x}}{h}||_2 \leq 1 \\ 0 &amp; \text{otherwise} \end{cases}\end{split}\]</div>
-<p>We will call <span class="math notranslate nohighlight">\(K_h\)</span> <strong>a kernel function</strong> depending on the bandwidth parameter <span class="math notranslate nohighlight">\(h\)</span>. This is a function which assigns a weight to a point <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> depending on its distance from <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>. In the example above, we chose <span class="math notranslate nohighlight">\(K_h\)</span> as <strong>a circular (or radial) kernel</strong> which assigns a uniform score to all points falling in a circle of radius <span class="math notranslate nohighlight">\(h\)</span> centered at <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>. The score of <span class="math notranslate nohighlight">\(\frac{1}{\pi h^2}\)</span> is chosen so that the density <span class="math notranslate nohighlight">\(f\)</span> integrates to <span class="math notranslate nohighlight">\(1\)</span>.</p>
-<p>A main problem with this density estimation approach is that <strong>it can be very sensitive on the location at which we are computing the density</strong>. Indeed, we can find cases in which we obtain very different density when we move the circle by a little bit.</p>
+\[\begin{split}K_h\left(\mathbf{x}_i - \mathbf{x}\right) = \begin{cases} \frac{1}{V(h)} &amp; \text{if } ||\frac{\mathbf{x}_i - \mathbf{x}}{h}||_2 \leq 1 \\ 0 &amp; \text{otherwise} \end{cases}\end{split}\]</div>
+<p>We will call <span class="math notranslate nohighlight">\(K_h\)</span> <strong>a kernel function</strong> depending on the bandwidth parameter <span class="math notranslate nohighlight">\(h\)</span>. This is a function which assigns a weight to a point <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> depending on its distance from <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>. In the example above, we chose <span class="math notranslate nohighlight">\(K_h\)</span> as <strong>a circular (or radial) kernel</strong> which assigns a uniform score to all points falling in a circle of radius <span class="math notranslate nohighlight">\(h\)</span> centered at <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>.</p>
+<p>A main problem with this density estimation approach is that <strong>it can be very sensitive to the location at which we are computing the density</strong>. Indeed, we can find cases in which we obtain very different densities when we move the circle by a little bit.</p>
 <p>We can note that <strong>this is due by the kernel <span class="math notranslate nohighlight">\(K\)</span> making “hard decisions” on which elements to assign a non-zero score and which ones to assign a zero score</strong>. Indeed, if we plot the kernel as a function of the distance between <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span>, rescaled by <span class="math notranslate nohighlight">\(h\)</span>, we obtain the following picture:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/fa189b60eb318237b16c05d68c7b7c43eed81bea0f37bcef64eb1fadeeb965a6.png" src="../_images/fa189b60eb318237b16c05d68c7b7c43eed81bea0f37bcef64eb1fadeeb965a6.png" />
+<img alt="../_images/51df229bfa553673668e4684361b0d0128ca004d7cd615ae73ff2e573433afad.png" src="../_images/51df229bfa553673668e4684361b0d0128ca004d7cd615ae73ff2e573433afad.png" />
 </div>
 </div>
-<p>The plot also plots points putting their distance from <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> in the x axis and the assigned weight in the y axis. As can be noted, even very close points in the x axis (e.g., the last of the green ones and the first of the red ones) get assigned very different weights, which makes the overall process sensitive to small shifts.</p>
+<p>The figure above plots points putting their distance from <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> in the x axis and the assigned weight in the y axis. As can be noted, even very close points in the x axis (e.g., the last of the green ones and the first of the red ones) get assigned very different weights, which makes the overall process sensitive to small shifts in <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>.</p>
 <p>To reduce this effect, it is common to use a smoother kernel which assigns a decreasing weight to points as their distance from <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> grows. Common choices for kernels are the Epanechnikov kernel and the Gaussian Kernel, which are defined as follows:</p>
 <p><strong>Epanechnikov Kernel</strong></p>
 <div class="math notranslate nohighlight">
@@ -617,7 +635,7 @@ document.write(`
 <img alt="../_images/58971024f148c6f1a6b6ee3cdac7cabbfb7328ad7dd9187e45f459bdefceddf2.png" src="../_images/58971024f148c6f1a6b6ee3cdac7cabbfb7328ad7dd9187e45f459bdefceddf2.png" />
 </div>
 </div>
-<p>The following plot shows an example of Kernel Density estimation on a sample dataset:</p>
+<p>The following plot shows an example of Kernel Density estimation with a Gaussian Kernel on a sample dataset:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <img alt="../_images/35edf73387256a910cb25fe9174df70d4018bce353bce3b68c54593cc6b924e8.png" src="../_images/35edf73387256a910cb25fe9174df70d4018bce353bce3b68c54593cc6b924e8.png" />
@@ -634,7 +652,7 @@ document.write(`
 </section>
 <section id="fixed-samples-k-nearest-neighbor">
 <h3><span class="section-number">25.1.3. </span>Fixed Samples - K-Nearest Neighbor<a class="headerlink" href="#fixed-samples-k-nearest-neighbor" title="Permalink to this heading">#</a></h3>
-<p>With either histograms or mobile windows, we have considered regions with a fixed size (e.g., the bandwidth <span class="math notranslate nohighlight">\(h\)</span>). In practice, this will lead to regions with very few or zero examples and regions with many examples. This can lead to some limitations as density estimates relying on fewer points will be more unstable (they will have a higher variance) and we will not be able to reliably estimate a density in areas where there are fewer points.</p>
+<p>With either histograms or mobile windows, we have considered regions with a fixed size (e.g., the bandwidth <span class="math notranslate nohighlight">\(h\)</span>). In practice, this may lead to regions with very few or zero examples and regions with many examples. This can bring some limitations as density estimates relying on fewer points will be more unstable (they will have a higher variance) and we will not be able to reliably estimate a density in areas where there are fewer points.</p>
 <p>While one way to mitigate this is to use smoother kernels (e.g., the Gaussian one) assigning a non-zero weight to each example, another approach is to choose a neighborhood of <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> such that the number of elements in the neighborhood, besides <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> is exactly equal to <span class="math notranslate nohighlight">\(K\)</span>, where <span class="math notranslate nohighlight">\(K\)</span> is an hyper-parameter. The advantage of this approach is to always rely on the same sample sample size when estimating the density.</p>
 <p>Let <span class="math notranslate nohighlight">\(N(\mathbf{x},r)\)</span> be a neighborhood centered at <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> with radius <span class="math notranslate nohighlight">\(r\)</span>. We will define <span class="math notranslate nohighlight">\(R_K\)</span> as the <strong>radius of the largest neighborhood centered at <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> containing at most <span class="math notranslate nohighlight">\(K\)</span> examples, besides <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> (if it is included in <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>)</strong>:</p>
 <div class="math notranslate nohighlight">
@@ -644,8 +662,8 @@ document.write(`
 \[N_K(\mathbf{x}) = N(\mathbf{x},R_K(\mathbf{x}))\]</div>
 <p>K-NN density estimation will assign point <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> the following density estimate:</p>
 <div class="math notranslate nohighlight">
-\[f(\mathbf{x}) = \frac{K}{|\mathbf{X}|} \cdot \frac{1}{V_d \cdot R_k^d(\mathbf{x})}\]</div>
-<p>Where <span class="math notranslate nohighlight">\(V_d\)</span> is the <strong>volume of the unit d-dimensional ball</strong> and <span class="math notranslate nohighlight">\(V_d \cdot R_k^d(\mathbf{x})\)</span> is hence the volume of the d-dimensional ball of radius <span class="math notranslate nohighlight">\(R_K(\mathbf{x})\)</span>. Intuitively, if <span class="math notranslate nohighlight">\(R_k(\mathbf{x})\)</span> is large, then we are in an area which is not very dense, so we will assign a small density value.</p>
+\[f(\mathbf{x}) = \frac{K}{|\mathbf{X}|} \cdot \frac{1}{V_d \cdot R_K^d(\mathbf{x})}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(V_d\)</span> is the <strong>volume of the unit d-dimensional ball</strong> and <span class="math notranslate nohighlight">\(V_d \cdot R_k^d(\mathbf{x})\)</span> is hence the volume of the d-dimensional ball of radius <span class="math notranslate nohighlight">\(R_K(\mathbf{x})\)</span>. Intuitively, <strong>if <span class="math notranslate nohighlight">\(R_k(\mathbf{x})\)</span> is large, then we are in an area which is not very dense, so we will assign a small density value</strong>.</p>
 <p>The figure below exemplifies the computation in 2D:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -666,33 +684,34 @@ document.write(`
 <h2><span class="section-number">25.2. </span>Parametric Density Estimation<a class="headerlink" href="#parametric-density-estimation" title="Permalink to this heading">#</a></h2>
 <p>Parametric methods aim to estimate density by <strong>fitting a parametric model to the data</strong>. This has some advantages over non-parametric density estimation:</p>
 <ul class="simple">
-<li><p>The chosen model has in general a known analytical formulation which we can reason on, or that we can even plug into a cost function and differentiate to pursue some optimization objective;</p></li>
-<li><p>The chosen model is compact. While non-parametric models need to keep in memory the whole dataset to make density estimations at given points, once fitted, parametric models can be used to predict density values using the analytical formulation of the model;</p></li>
-<li><p>If we choose an interpretable model, we can reason on the model to derive properties of the data. For instance, if we fit a Gaussian on the data, then we know that the mean is the point with highest density. We also know that when we go further from the mean, the density values decrease.</p></li>
+<li><p><strong>The chosen model has in general a known analytical formulation which we can reason on</strong>, or that we can even plug into a cost function and differentiate to pursue some optimization objective;</p></li>
+<li><p><strong>The chosen model is compact.</strong> While non-parametric models need to keep in memory the whole dataset to make density estimations at given points, once fitted, parametric models can be used to predict density values using the analytical formulation of the model;</p></li>
+<li><p><strong>If we choose an interpretable model, we can reason on the model to derive properties of the data.</strong> For instance, if we fit a Gaussian on the data, then we know that the mean is the point with highest density. We also know that when we go further from the mean, the density values decrease;</p></li>
+<li><p><strong>Parametric approaches impose constraints and hence work better when we do not have much data</strong>. Non-parametric approaches, instead, make very little assumptions on the data, so they are better suited to the cases in which we have large datasets which are good representatives of the population.</p></li>
 </ul>
 <p>Nevertheless, these methods also have disadvantages:</p>
 <ul class="simple">
-<li><p>An optimization process is required to fit the model to the data, i.e., find appropriate values which make the model “explain well the data”. This can be a time-consuming process.</p></li>
-<li><p>Parametric models make <strong>strong assumption on the data</strong>. For instance, if we fit a Gaussian to the data, we assume that the data is distributed in a Gaussian way. If this is not true, then the model will not be very accurate. This is a relevant point, as in many cases we cannot make strong assumptions on the data.</p></li>
+<li><p><strong>An optimization process is required</strong> to fit the model to the data, i.e., find appropriate values which make the model “explain well the data”. This can be a time-consuming process.</p></li>
+<li><p>Parametric models make <strong>strong assumptions on the data</strong>. For instance, if we fit a Gaussian to the data, we assume that the data is distributed in a Gaussian way. If this is not true, then the model will not be very accurate. This is a relevant point, as in many cases we cannot make strong assumptions on the data.</p></li>
 </ul>
-<p>For the reasons above, it is common to use non-parametric density estimations for visualizations (e.g., the density plots we have seen and used in many cases), especially for exploration, when we do not know much about the data, and to use parametric model when we need to create efficient models able to make predictions (as we will see later in the course).</p>
+<p>For the reasons above, <strong>it is common to use non-parametric density estimations for visualizations</strong> (e.g., the density plots we have seen and used in many cases), especially for exploration, when we do not know much about the data, and to use parametric model when we need to create efficient models able to make predictions (as we will see later in the course).</p>
 <section id="fitting-a-gaussian-to-the-data">
 <h3><span class="section-number">25.2.1. </span>Fitting a Gaussian to the Data<a class="headerlink" href="#fitting-a-gaussian-to-the-data" title="Permalink to this heading">#</a></h3>
 <p>Recall the PDF of a multivariate Gaussian distribution with <span class="math notranslate nohighlight">\(n\)</span> dimensions:</p>
 <div class="math notranslate nohighlight">
 \[N\left( \mathbf{x;\mu,}\mathbf{\Sigma} \right) = \sqrt{\frac{1}{(2\pi)^{n}\det(\Sigma)}}e^{( - \frac{1}{2}\left( \mathbf{x} - \mathbf{\mu} \right)^{T}\Sigma^{- 1}\left( \mathbf{x} - \mathbf{\mu} \right))}\]</div>
-<p>Let <span class="math notranslate nohighlight">\(\mathbf{X} = \{\mathbf{x}_1, \ldots, \mathbf{x}_N\}\)</span> be a set of observations which we will assume to be <strong>independent and drawn from a multivariate Gaussian distribution of unknown parameters</strong>. We would like to find the parameters <span class="math notranslate nohighlight">\(\mathbf{\mu}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{\Sigma}\)</span> that identify the <strong>most likely Gaussian distribution that may have generated the data</strong>. To do so, we can use the Maximum Likelihood (ML) principle, which consists in finding the parameters which maximize the probability values that the Gaussian distribution would compute for the given data. The likelihood is defined as</p>
+<p>Let <span class="math notranslate nohighlight">\(\mathbf{X} = \{\mathbf{x}_1, \ldots, \mathbf{x}_N\}\)</span> be a set of observations which we will assume to be <strong>independent and drawn from a multivariate Gaussian distribution of unknown parameters</strong>. We would like to find the parameters <span class="math notranslate nohighlight">\(\mathbf{\mu}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{\Sigma}\)</span> that identify the <strong>most likely Gaussian distribution that may have generated the data</strong>. To do so, we can use the <strong>Maximum Likelihood (ML)</strong> principle, which consists in finding the parameters which maximize the probability values that the Gaussian distribution would compute for the given data. The likelihood is defined as</p>
 <div class="math notranslate nohighlight">
 \[P(\mathbf{X}|\mathbf{\mu},\mathbf{\Sigma}) = \mathcal{N}(\mathbf{X}|\mathbf{\mu}, \mathbf{\Sigma})\]</div>
-<p>Intuitively, we want to find <span class="math notranslate nohighlight">\(\mathbf{\mu}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{\Sigma}\)</span> parameters such that the Gaussian distribution will assign high probability values to the observed points <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, i.e., such that <strong>observing our dataset is highly probable under the given model</strong>.</p>
+<p>Intuitively, we want to find the <span class="math notranslate nohighlight">\(\mathbf{\mu}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{\Sigma}\)</span> parameters such that the Gaussian distribution will assign high probability values to the observed points <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, i.e., such that <strong>observing our dataset is highly probable under the given model</strong>.</p>
 <p>Let us consider a simple example in which we want to fit a Gaussian to a set of 1D data. The plot below shows the log likelihood for Gaussians with different means and standard deviations.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <img alt="../_images/bb98b8d96435dace0ca22dca57c8c7c3f45890d7a4be2621e7b780d6e0820e67.png" src="../_images/bb98b8d96435dace0ca22dca57c8c7c3f45890d7a4be2621e7b780d6e0820e67.png" />
 </div>
 </div>
-<p>In the top plots, the standard deviation is fixed to <span class="math notranslate nohighlight">\(1\)</span>, while the mean of the Gaussian is changed. The log likelihood is shown in the legend. As can be seen, the mean in the center plot leads to larger log likelihood. <strong>Intuitively, this happens when we choose a mean such that the majority of points fall in the central part of the Gaussian distribution</strong>.</p>
-<p>The plots in the bottom show a similar example in which the mean is fixed to <span class="math notranslate nohighlight">\(0\)</span> and the standard deviation is varied. As can be noted, when the standard deviation is too low (left) or to high (right), we obtain smaller log likelihoods.</p>
+<p>In the top plots, the standard deviation is fixed to <span class="math notranslate nohighlight">\(1\)</span>, while the mean of the Gaussian is changed. The log likelihood is shown in the legend. As can be seen, the mean in the center plot leads to a larger log likelihood. <strong>Intuitively, this happens when we choose a mean such that the majority of points fall in the central part of the Gaussian distribution</strong>.</p>
+<p><strong>The plots in the bottom show a similar example in which the mean is fixed to <span class="math notranslate nohighlight">\(0\)</span> and the standard deviation is varied</strong>. As can be noted, when the standard deviation is too low (left) or to high (right), we obtain smaller log likelihoods.</p>
 <p>The plots below show the log likelihood (first two plots) or the likelihood (last plot) as a function of different values of means and standard deviations.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -700,12 +719,13 @@ document.write(`
 </div>
 </div>
 <p>The first two plots show how the log likelihood changes when <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> change, keeping the data fixed (same data as the previous plot). The last plot shows how the likelihood changes as a function of both <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>. As we can see, we have a maximum for <span class="math notranslate nohighlight">\(\mu=0\)</span> and <span class="math notranslate nohighlight">\(\sigma=1\)</span>, which are the true parameters of the distribution which generated the data.</p>
-<p>It can be shown that a close form solution exist for the estimation of the parameters of the N-Dimensional Gaussian. These are obtained by computing the derivatives of the log likelihood with respect to <span class="math notranslate nohighlight">\(\mathbf{\mu}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{\Sigma}\)</span> and setting them to zero. We will not see the mathematical details, but the Maximum Likelihood estimates of the parameters for the n-dimensional Gaussian are:</p>
+<p>It can be shown that a close form solution exists for the estimation of the parameters of the N-Dimensional Gaussian. These are obtained by computing the derivatives of the log likelihood with respect to <span class="math notranslate nohighlight">\(\mathbf{\mu}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{\Sigma}\)</span> and setting them to zero. The Maximum Likelihood estimates of the parameters for the n-dimensional Gaussian are:</p>
 <div class="math notranslate nohighlight">
 \[\mathbf{\mu}_{ML} = \frac{1}{N} \sum_{i=1}^N \mathbf{x}_i\]</div>
 <p>and</p>
 <div class="math notranslate nohighlight">
 \[\mathbf{\Sigma}_{ML} = \frac{1}{N} \sum_{i=1}^N (\mathbf{x}_i - \mathbf{\mu}_{ML})(\mathbf{x}_i - \mathbf{\mu}_{ML})^T\]</div>
+<p>While we will not see it in details, we can obtain the formulas above by setting to zero the derivative of the negative log-likelihood and solving for <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\Sigma\)</span>.</p>
 <p>We are very familiar with the first expression - it is simply the mean of the data. The second expression is the data covariance matrix.</p>
 <p>To see why the expression above denotes the covariance matrix, let us consider a set of 2D points <span class="math notranslate nohighlight">\(\mathbf{x}_i=(x_{i1},x_{i2})\)</span> and the mean value <span class="math notranslate nohighlight">\(\mathbf{\mu}_{ML} = (\overline{x}_1,\overline{x}_2)\)</span>. We have:</p>
 <div class="math notranslate nohighlight">
@@ -718,7 +738,7 @@ document.write(`
 </section>
 <section id="gaussian-mixture-models-gmm">
 <h3><span class="section-number">25.2.2. </span>Gaussian Mixture Models (GMM)<a class="headerlink" href="#gaussian-mixture-models-gmm" title="Permalink to this heading">#</a></h3>
-<p>We have seen that, when we can assume that the data follows a Gaussian distribution, it can be convenient to fit a D-dimensional Gaussian to the data and <strong>summarize the data with distribution</strong>. In practice, this consists in estimating a D-dimensional mean vector <span class="math notranslate nohighlight">\(\mathbf{\mu}\)</span> and a <span class="math notranslate nohighlight">\(D \times D\)</span> covariance matrix <span class="math notranslate nohighlight">\(\mathbf{\Sigma}\)</span>.</p>
+<p>We have seen that, when we can assume that the data follows a Gaussian distribution, it can be convenient to fit a D-dimensional Gaussian to the data and <strong>summarize the data with the distribution</strong>. In practice, this consists in estimating a D-dimensional mean vector <span class="math notranslate nohighlight">\(\mathbf{\mu}\)</span> and a <span class="math notranslate nohighlight">\(D \times D\)</span> covariance matrix <span class="math notranslate nohighlight">\(\mathbf{\Sigma}\)</span>.</p>
 <p>In practice, however <strong>data is not always Gaussian</strong>. As we have seen in the case of clustering, we can expect that our data is actually grouped under different clusters. Think about the Old Faithful dataset. Since the data <strong>has two modes</strong>, a Guassian model would lead to a poor fit.</p>
 <p>The plot below compares a Guassian fit with a Kernel Density Estimation form the same data. The data has been standardized.</p>
 <div class="cell tag_remove-input docutils container">
@@ -769,12 +789,13 @@ document.write(`
 <p>Rather than maximizing the likelihood above, we can maximize the logarithm of the likelihood:</p>
 <div class="math notranslate nohighlight">
 \[\log P(\mathbf{X}|\mathbf{\pi}, \mathbf{\mu}, \mathbf{\Sigma}) = \sum_{i=1}^N \log\left[\sum_{k=1}^K \pi_k \mathcal{N}(\mathbf{x_i}|\mathbf{\mu}_k, \mathbf{\Sigma}_k)\right]\]</div>
-<p>This optimization process is not straightforward and <strong>there is no closed form solution</strong>. Instead, it can be optimized through iterative numerical methods or with a powerful algorithm called <strong>Expectation-Maximization</strong>. Before delving into that, it is useful to see the GMM from a probabilistic perspective.</p>
+<p>This optimization process is not straightforward and <strong>there is no closed form solution</strong>. Instead, it can be optimized through iterative numerical methods or with a powerful algorithm called <strong>Expectation-Maximization</strong>.</p>
+<p>Before delving into that, it is useful to see the GMM from a probabilistic perspective.</p>
 </section>
 </section>
 <section id="probabilistic-formulation-of-gmm-with-latent-variables">
 <h3><span class="section-number">25.2.3. </span>Probabilistic Formulation of GMM with Latent Variables<a class="headerlink" href="#probabilistic-formulation-of-gmm-with-latent-variables" title="Permalink to this heading">#</a></h3>
-<p>We will now give a probabilistic treatment of the GMM. This will lead us to the interpretation of the model as one with latent variables and to the illustration of the Expectation-Maximization (E-M) algorithm for maximum likelihood optimization.</p>
+<p>We will now give a probabilistic treatment of the GMM. This will lead us to the interpretation of the model as one with <strong>latent variables</strong> and to the illustration of the Expectation-Maximization (E-M) algorithm for maximum likelihood optimization.</p>
 <p>We will start by introducing a <span class="math notranslate nohighlight">\(K-dimensional\)</span> random variable <span class="math notranslate nohighlight">\(\mathbf{Z}\)</span>. The values <span class="math notranslate nohighlight">\(\mathbf{z}=(z_1,\ldots,z_K)\)</span> assumed by <span class="math notranslate nohighlight">\(\mathbf{Z}\)</span> will be such that:</p>
 <div class="math notranslate nohighlight">
 \[z_k \in \{0,1\}, \text{   and   } \sum_{k=1}^K z_k = 1 \]</div>
@@ -797,6 +818,7 @@ document.write(`
 <p>Note that since <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> is encoded as a one-hot vector, we can write more compactly:</p>
 <div class="math notranslate nohighlight">
 \[P(\mathbf{z}) = \prod_{k=1}^K \pi_k^{z_k}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\pi_k^{z_k}\)</span> will be one if <span class="math notranslate nohighlight">\(z_k = 0\)</span>.</p>
 <p>Once we fix a value <span class="math notranslate nohighlight">\(z_k=1\)</span> for the latent variable <span class="math notranslate nohighlight">\(\mathbf{Z}\)</span>, we will express the probability of <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, conditioned on <span class="math notranslate nohighlight">\(z_k=1\)</span> with a Gaussian of appropriate parameters <span class="math notranslate nohighlight">\(\mathbf{\mu}_k\)</span> and <span class="math notranslate nohighlight">\(\mathbf{\Sigma}_k\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[P(\mathbf{x}|z_k=1) = \mathcal{N}(\mathbf{x}|\mathbf{\mu}_k, \mathbf{\Sigma}_k)\]</div>
@@ -815,7 +837,7 @@ document.write(`
 <p>In practice, this can be done by finding the <span class="math notranslate nohighlight">\(z_k\)</span> value for which the following quantity is maximized:</p>
 <div class="math notranslate nohighlight">
 \[\gamma(z_k) = P(z_k=1|\mathbf{x})\]</div>
-<p>Since there are only <span class="math notranslate nohighlight">\(K\)</span> possible <span class="math notranslate nohighlight">\(z_k\)</span>, maximizing the expression above is trivial: <strong>we just compute it for all values of <span class="math notranslate nohighlight">\(k\)</span> and select the <span class="math notranslate nohighlight">\(k\)</span> value which maximizes the conditional probability above</strong>:</p>
+<p>Since there are only <span class="math notranslate nohighlight">\(K\)</span> possible values for  <span class="math notranslate nohighlight">\(z_k\)</span>, maximizing the expression above is trivial: <strong>we just compute it for all values of <span class="math notranslate nohighlight">\(k\)</span> and select the <span class="math notranslate nohighlight">\(k\)</span> value which maximizes the conditional probability above</strong>:</p>
 <div class="math notranslate nohighlight">
 \[\hat k = \arg_{k}\max \{P(z_k=1|\mathbf{x}), k=1,\ldots,K\}\]</div>
 <p>Using Bayes’ theorem, we obtain:</p>
@@ -868,7 +890,7 @@ document.write(`
 <p>Recall that the ML estimation of the covariance matrix for fitting a D-dimensional Gaussian to the data is:</p>
 <div class="math notranslate nohighlight">
 \[\mathbf{\Sigma}_{ML} = \frac{1}{N} \sum_{i=1}^N (\mathbf{x}_i - \mathbf{\mu}_{ML})(\mathbf{x}_i - \mathbf{\mu}_{ML})^T\]</div>
-<p>The two expressions are similar, but in the case of GMMs, we are weighing each data point <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> by the responsibility <span class="math notranslate nohighlight">\(\gamma(z_{ik})\)</span> and the denominator is given by the “soft count” of points assigned to component <span class="math notranslate nohighlight">\(k\)</span>.</p>
+<p>The two expressions are similar, but in the case of GMMs, we are weighing each data point <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> with the responsibility <span class="math notranslate nohighlight">\(\gamma(z_{ik})\)</span> and the denominator is given by the “soft count” of points assigned to component <span class="math notranslate nohighlight">\(k\)</span>.</p>
 <p>We finally set to zero the derivative of the log likelihood with respect to the mixing coefficients <span class="math notranslate nohighlight">\(\pi_k\)</span> and obtain the following expression for the estimation of the optimal values:</p>
 <div class="math notranslate nohighlight">
 \[\pi_k = \frac{N_k}{N} \ \ \ \ \ \text{(C)}\]</div>
@@ -899,9 +921,9 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[\log P(\mathbf{X}|\mathbf{\pi}, \mathbf{\mu}, \mathbf{\Sigma}) = \sum_{i=1}^N \log\left[\sum_{k=1}^K \pi_k \mathcal{N}(\mathbf{x_i}|\mathbf{\mu}_k, \mathbf{\Sigma}_k)\right]\]</div>
 </li>
-<li><p>Repeat until termination criterion is reached {</p>
+<li><p>Repeat until the termination criterion is reached {</p>
 <ul>
-<li><p><strong>E Step</strong>: Compute responsibilities using the current parameter values using the formula:</p>
+<li><p><strong>E Step</strong>: Compute responsibilities using the current parameter values with the formula:</p>
 <div class="math notranslate nohighlight">
 \[\gamma(z_k) = \frac{\pi_k \mathcal{N}(\mathbf{x}|\mathbf{\mu}_k \mathbf{\Sigma}_k)}{\sum_{j=1}^K \pi_j \mathcal{N}(\mathbf{x}|\mathbf{\mu}_j \mathbf{\Sigma}_j)}\]</div>
 </li>
