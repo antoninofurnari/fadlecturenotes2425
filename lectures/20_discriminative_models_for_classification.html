@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Discriminative Models for Classification &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+    <title>30. Discriminative Models for Classification &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
   
   
   
@@ -68,6 +68,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="31. Generative Models for Classification" href="21_generative_models_for_classification.html" />
+    <link rel="prev" title="29. Classification Task and Evaluation Measures" href="19_classification.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -235,6 +237,31 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 12</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="16_density_estimation.html">25. Density Estimation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 13</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="17_principal_component_analysis.html">26. Principal Component Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratory 4</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/14_clustering_density_estimation_pca.html">27. Clustering, Density Estimation, and Principal Component Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 14</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="18_predictive_modeling.html">28. Introduction to Predictive Modelling and Regression Models</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 15</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="19_classification.html">29. Classification Task and Evaluation Measures</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">30. Discriminative Models for Classification</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 16</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="21_generative_models_for_classification.html">31. Generative Models for Classification</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratory 5</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/16_classificazione.html">32. Classificazione</a></li>
 </ul>
 
     </div>
@@ -461,28 +488,28 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-regressor-as-a-discriminative-classifier">The Logistic Regressor as a Discriminative Classifier</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-and-softmax-regressors-as-discriminative-multi-class-classifiers">Multinomial and Softmax Regressors as Discriminative Multi-Class Classifiers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-regressor-as-a-discriminative-classifier">30.1. The Logistic Regressor as a Discriminative Classifier</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-and-softmax-regressors-as-discriminative-multi-class-classifiers">30.1.1. Multinomial and Softmax Regressors as Discriminative Multi-Class Classifiers</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nearest-neighbor-classification">K-Nearest Neighbor Classification</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-nearest-neighbor-or-1-nn-classification-algorithm">The Nearest Neighbor (or 1-NN) Classification Algorithm</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-k-nearest-neighbour-classification-algorithm">The K-Nearest Neighbour Classification Algorithm</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nn-as-density-estimation">K-NN as density estimation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-map-decision-boundary-of-k-nn-and-importance-of-parameter-k">Classification Map/Decision Boundary Of K-NN and Importance of Parameter K</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nearest-neighbor-classification">30.2. K-Nearest Neighbor Classification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-nearest-neighbor-or-1-nn-classification-algorithm">30.2.1. The Nearest Neighbor (or 1-NN) Classification Algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-k-nearest-neighbour-classification-algorithm">30.2.2. The K-Nearest Neighbour Classification Algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nn-as-density-estimation">30.2.3. K-NN as density estimation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-map-decision-boundary-of-k-nn-and-importance-of-parameter-k">30.2.4. Classification Map/Decision Boundary Of K-NN and Importance of Parameter K</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discriminant-functions-and-fisher-s-linear-discriminant">Discriminant Functions and Fisher’s Linear Discriminant</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fisher-s-linear-discriminant-fld">Fisher’s Linear Discriminant (FLD)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fisher-s-linear-discriminant-for-two-classes">Fisher’s Linear Discriminant for Two Classes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fisher-linear-discriminant-example-and-geometrical-interpretation">Fisher Linear Discriminant Example and Geometrical Interpretation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fisher-s-linear-discriminant-for-more-than-2-classes">Fisher’s Linear Discriminant for More than <span class="math notranslate nohighlight">\(2\)</span> Classes</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fld-with-k-classes-example">FLD with K classes - Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discriminant-functions-and-fisher-s-linear-discriminant">30.3. Discriminant Functions and Fisher’s Linear Discriminant</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fisher-s-linear-discriminant-fld">30.3.1. Fisher’s Linear Discriminant (FLD)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fisher-s-linear-discriminant-for-two-classes">30.3.2. Fisher’s Linear Discriminant for Two Classes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fisher-linear-discriminant-example-and-geometrical-interpretation">30.3.3. Fisher Linear Discriminant Example and Geometrical Interpretation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fisher-s-linear-discriminant-for-more-than-2-classes">30.3.4. Fisher’s Linear Discriminant for More than <span class="math notranslate nohighlight">\(2\)</span> Classes</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fld-with-k-classes-example">30.3.4.1. FLD with K classes - Example</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">30.4. References</a></li>
 </ul>
             </nav>
         </div>
@@ -495,7 +522,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="discriminative-models-for-classification">
-<h1>Discriminative Models for Classification<a class="headerlink" href="#discriminative-models-for-classification" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">30. </span>Discriminative Models for Classification<a class="headerlink" href="#discriminative-models-for-classification" title="Permalink to this heading">#</a></h1>
 <p>We will now see some representatives from a very important category of classifiers: discriminative models. These classifiers aim to <strong>learn a direct mapping from input features to class labels</strong>. This is done by explicitly modeling a decision boundary separating the data.</p>
 <p>While <strong>not all discriminative models are probabilistic</strong>, probabilistic discriminative classifiers usually obtain classification by modeling <em>directly</em> the conditional probability distribution:</p>
 <div class="math notranslate nohighlight">
@@ -505,7 +532,7 @@ document.write(`
 \[h(\mathbf{x}) = \arg_c \max P(Y=c|X=\mathbf{x})\]</div>
 <p>This is easily done by computing the above conditional probability for all values <span class="math notranslate nohighlight">\(c=0, \ldots, M-1\)</span> keeping <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> fixed and keeping the class <span class="math notranslate nohighlight">\(c\)</span> which gives the largest probability value.</p>
 <section id="the-logistic-regressor-as-a-discriminative-classifier">
-<h2>The Logistic Regressor as a Discriminative Classifier<a class="headerlink" href="#the-logistic-regressor-as-a-discriminative-classifier" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">30.1. </span>The Logistic Regressor as a Discriminative Classifier<a class="headerlink" href="#the-logistic-regressor-as-a-discriminative-classifier" title="Permalink to this heading">#</a></h2>
 <p>A logistic regressor can be seen as a binary classifier which classifies an input vector <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> into one of two classes <span class="math notranslate nohighlight">\(\{0,1\}\)</span>. Recall that a logistic regressor is defined as follows:</p>
 <div class="math notranslate nohighlight">
 \[P(y=1|\mathbf{x}) = \sigma(\beta_0 + \beta_1 x_1 + \ldots + \beta_n x_n)\]</div>
@@ -526,7 +553,7 @@ document.write(`
 </div>
 </div>
 <section id="multinomial-and-softmax-regressors-as-discriminative-multi-class-classifiers">
-<h3>Multinomial and Softmax Regressors as Discriminative Multi-Class Classifiers<a class="headerlink" href="#multinomial-and-softmax-regressors-as-discriminative-multi-class-classifiers" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">30.1.1. </span>Multinomial and Softmax Regressors as Discriminative Multi-Class Classifiers<a class="headerlink" href="#multinomial-and-softmax-regressors-as-discriminative-multi-class-classifiers" title="Permalink to this heading">#</a></h3>
 <p>Similarly, we can see the multinomial and softmax regressors as multi-class classifiers, i.e., classifiers when the number of classes is larger than 2. Recall that a multinomial classifier can be used to predict probabilities with the following formulas:</p>
 <div class="math notranslate nohighlight">
 \[ P(Y=k|X=\mathbf{x}) = \frac{e^{\mathbf{\beta_k}^T\mathbf{X}}}{1+\sum_{l=2}^K \mathbf{e^{\beta_l^T\mathbf{X}}}}\]</div>
@@ -542,11 +569,11 @@ document.write(`
 </section>
 </section>
 <section id="k-nearest-neighbor-classification">
-<h2>K-Nearest Neighbor Classification<a class="headerlink" href="#k-nearest-neighbor-classification" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">30.2. </span>K-Nearest Neighbor Classification<a class="headerlink" href="#k-nearest-neighbor-classification" title="Permalink to this heading">#</a></h2>
 <p>The logistic regressor is a parametric model: its performance depends on the accurate choice of the parameters. Similarly to density estimation methods, parametric models have the advantage to be compact, but they make assumptions on the data. For instance, the logistic regressor assumes that <strong>data is linearly separable</strong>. A different approach to classification consists in the use of non-parametric models, which use the dataset as a support to make their predictions making very few assumptions on the nature of the data.</p>
 <p>The most popular non-parametric classification model is certainly the nearest neighbor algorithm, which is introduced in this section.</p>
 <section id="the-nearest-neighbor-or-1-nn-classification-algorithm">
-<h3>The Nearest Neighbor (or 1-NN) Classification Algorithm<a class="headerlink" href="#the-nearest-neighbor-or-1-nn-classification-algorithm" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">30.2.1. </span>The Nearest Neighbor (or 1-NN) Classification Algorithm<a class="headerlink" href="#the-nearest-neighbor-or-1-nn-classification-algorithm" title="Permalink to this heading">#</a></h3>
 <p>Given an observation <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, the basic principle of Nearest Neighbor classification is to look at the nearest example in the training set and assign the same class. The idea is that nearby elements in the representation space will likely be similar. Consider the following example in which each data point is an email:</p>
 <p><img alt="" src="../_images/knn1.png" /></p>
 <p>What would be the class of the new example (the red cross)?</p>
@@ -591,7 +618,7 @@ class, as shown in the following figure:</p>
 <p><img alt="" src="../_images/knn2.png" /></p>
 </section>
 <section id="the-k-nearest-neighbour-classification-algorithm">
-<h3>The K-Nearest Neighbour Classification Algorithm<a class="headerlink" href="#the-k-nearest-neighbour-classification-algorithm" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">30.2.2. </span>The K-Nearest Neighbour Classification Algorithm<a class="headerlink" href="#the-k-nearest-neighbour-classification-algorithm" title="Permalink to this heading">#</a></h3>
 <p>The Nearest Neighbor (or 1-NN) algorithm assumes that data points of the
 same class are close to each other in the representation space. This can
 be reasonably true when the representation space is ideal for the
@@ -657,7 +684,7 @@ algorithm defined before</strong>. Indeed, a 1-NN is exactly the nearest
 neighbor classifier seen above.</p>
 </section>
 <section id="k-nn-as-density-estimation">
-<h3>K-NN as density estimation<a class="headerlink" href="#k-nn-as-density-estimation" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">30.2.3. </span>K-NN as density estimation<a class="headerlink" href="#k-nn-as-density-estimation" title="Permalink to this heading">#</a></h3>
 <p>The K-NN algorithm can be seen in terms of density estimation. This also allows to turn the algorithm into a probabilistic approach, also estimating conditional probabilities as a softmax regressor.</p>
 <p>Let <span class="math notranslate nohighlight">\(C_k\)</span> denote class <span class="math notranslate nohighlight">\(k\)</span>. Suppose our training set contains exactly <span class="math notranslate nohighlight">\(N\)</span> points and <span class="math notranslate nohighlight">\(N_k\)</span> points of class <span class="math notranslate nohighlight">\(k\)</span>, then:</p>
 <div class="math notranslate nohighlight">
@@ -683,7 +710,7 @@ neighbor classifier seen above.</p>
 <p>Which corresponds to the K-NN principle.</p>
 </section>
 <section id="classification-map-decision-boundary-of-k-nn-and-importance-of-parameter-k">
-<h3>Classification Map/Decision Boundary Of K-NN and Importance of Parameter K<a class="headerlink" href="#classification-map-decision-boundary-of-k-nn-and-importance-of-parameter-k" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">30.2.4. </span>Classification Map/Decision Boundary Of K-NN and Importance of Parameter K<a class="headerlink" href="#classification-map-decision-boundary-of-k-nn-and-importance-of-parameter-k" title="Permalink to this heading">#</a></h3>
 <p>A classifier <span class="math notranslate nohighlight">\(f\)</span> assigns a class to each input <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>. Since
 <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> can be seen as a geometrical point in the <span class="math notranslate nohighlight">\(n\)</span>-dimensional
 space, it is generally interesting to see how the classification
@@ -729,7 +756,7 @@ data point is classified with the most numerous class.</p></li>
 </section>
 </section>
 <section id="discriminant-functions-and-fisher-s-linear-discriminant">
-<h2>Discriminant Functions and Fisher’s Linear Discriminant<a class="headerlink" href="#discriminant-functions-and-fisher-s-linear-discriminant" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">30.3. </span>Discriminant Functions and Fisher’s Linear Discriminant<a class="headerlink" href="#discriminant-functions-and-fisher-s-linear-discriminant" title="Permalink to this heading">#</a></h2>
 <p>A broad class of discriminative classifier is that of discriminant functions. While discriminant functions can also be non-linear, we will focus only on linear discriminant functions. In the case of two classes, a linear discriminant function takes the following form:</p>
 <div class="math notranslate nohighlight">
 \[y(\mathbf{x}) = \mathbf{w}^T \mathbf{x} + w_0\]</div>
@@ -770,7 +797,7 @@ data point is classified with the most numerous class.</p></li>
 </div>
 </div>
 <section id="fisher-s-linear-discriminant-fld">
-<h3>Fisher’s Linear Discriminant (FLD)<a class="headerlink" href="#fisher-s-linear-discriminant-fld" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">30.3.1. </span>Fisher’s Linear Discriminant (FLD)<a class="headerlink" href="#fisher-s-linear-discriminant-fld" title="Permalink to this heading">#</a></h3>
 <p>There are different ways to construct discriminant functions. In this context, we will focus on Fisher’s Linear Discriminant, a technique to <strong>reduce the dimensionality of the data to support classification</strong>.</p>
 <p>While FLD does not directly lead to a discriminant function, it allows to <strong>map the data to a lower-dimensional space in which building discriminant functions is much easier</strong>.</p>
 <p>More specifically, FLD allows finding a linear transformation that maps a set of data divided into <span class="math notranslate nohighlight">\(K\)</span> classes into a <span class="math notranslate nohighlight">\(K-1\)</span> dimensional space where the data is maximally separable. For example, in the case of binary classification, the data will be projected into a one-dimensional space where they are separable.</p>
@@ -782,7 +809,7 @@ data point is classified with the most numerous class.</p></li>
 <p>Fisher’s Linear Discriminant is often confused with another technique (which we will see later) called “Linear Discriminant Analysis” (LDA). While they are still distinct, they allow to achieve similar results, especially when concerned with dimensionality reduction, hence many libraries implement PCA rather than implementing Fisher’s Linear Discriminant as a supervised dimensionality reduction technique.</p>
 </section>
 <section id="fisher-s-linear-discriminant-for-two-classes">
-<h3>Fisher’s Linear Discriminant for Two Classes<a class="headerlink" href="#fisher-s-linear-discriminant-for-two-classes" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">30.3.2. </span>Fisher’s Linear Discriminant for Two Classes<a class="headerlink" href="#fisher-s-linear-discriminant-for-two-classes" title="Permalink to this heading">#</a></h3>
 <p>The original formulation of the Fisher Linear Discriminant focuses on the case in which the data is divided into two classes.</p>
 <p>Let <span class="math notranslate nohighlight">\(\{x_i\}_{i=1}^N\)</span> be a set of <span class="math notranslate nohighlight">\(D\)</span>-dimensional observations divided into two classes <span class="math notranslate nohighlight">\(C_1\)</span> and <span class="math notranslate nohighlight">\(C_2\)</span> such that <span class="math notranslate nohighlight">\(x_i \in C_1 \lor x_i \in C_2\)</span>.</p>
 <p>We want to find a linear transformation of the data into a one-dimensional space:</p>
@@ -846,7 +873,7 @@ C_2 &amp;\text{if}&amp; y(\mathbf{x}) &lt; w_0\end{cases}\end{split}\]</div>
 <p>Once the optimal projection <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> is found, we can project the data using <span class="math notranslate nohighlight">\(y(\mathbf{x})=\mathbf{w}^T\mathbf{x}\)</span>. Therefore, we need to find the threshold <span class="math notranslate nohighlight">\(y_0\)</span> to classify the data using the discriminant <span class="math notranslate nohighlight">\(y(x)\geq y_0\)</span>. The optimal threshold <span class="math notranslate nohighlight">\(y_0\)</span> can be found by modeling the data of the two classes using two Gaussians and determining the point where they intersect.</p>
 </section>
 <section id="fisher-linear-discriminant-example-and-geometrical-interpretation">
-<h3>Fisher Linear Discriminant Example and Geometrical Interpretation<a class="headerlink" href="#fisher-linear-discriminant-example-and-geometrical-interpretation" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">30.3.3. </span>Fisher Linear Discriminant Example and Geometrical Interpretation<a class="headerlink" href="#fisher-linear-discriminant-example-and-geometrical-interpretation" title="Permalink to this heading">#</a></h3>
 <p>As in the case of PCA, the expression</p>
 <div class="math notranslate nohighlight">
 \[y(\mathbf{x}) = \mathbf{w}^T \mathbf{x}\]</div>
@@ -890,7 +917,7 @@ C_2 &amp;\text{if}&amp; y(\mathbf{x}) &lt; w_0\end{cases}\end{split}\]</div>
 <p>Alternatively to manually finding a threshold, we could train another classifier on top of these features - for instance, a logistic regressor.</p>
 </section>
 <section id="fisher-s-linear-discriminant-for-more-than-2-classes">
-<h3>Fisher’s Linear Discriminant for More than <span class="math notranslate nohighlight">\(2\)</span> Classes<a class="headerlink" href="#fisher-s-linear-discriminant-for-more-than-2-classes" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">30.3.4. </span>Fisher’s Linear Discriminant for More than <span class="math notranslate nohighlight">\(2\)</span> Classes<a class="headerlink" href="#fisher-s-linear-discriminant-for-more-than-2-classes" title="Permalink to this heading">#</a></h3>
 <p>When we have <span class="math notranslate nohighlight">\(K&gt;2\)</span> classes and the data dimensionality <span class="math notranslate nohighlight">\(D\)</span> is larger than <span class="math notranslate nohighlight">\(K\)</span> (<span class="math notranslate nohighlight">\(D&gt;K\)</span>), the FLD will project the data into <span class="math notranslate nohighlight">\(D'\)</span> new linear features</p>
 <div class="math notranslate nohighlight">
 \[y_k = \mathbf{w}_k^T \mathbf{x}\]</div>
@@ -933,7 +960,7 @@ C_2 &amp;\text{if}&amp; y(\mathbf{x}) &lt; w_0\end{cases}\end{split}\]</div>
 <p>We will not see the mathematical details of the formulation and optimization of this objective, but in practice the objective can be optimized to obtain <span class="math notranslate nohighlight">\(\hat{\mathbf{W}}\)</span>.</p>
 <p>Similarly to PCA, when projecting data with FLD <strong>we can choose a number of dimensions smaller than <span class="math notranslate nohighlight">\(K-1\)</span></strong>. Note that as in the case of two variables, FLD only provides a method to project data to a lower dimensional space. After this transformation is found, <strong>we can fit a classifier in the new space</strong>.</p>
 <section id="fld-with-k-classes-example">
-<h4>FLD with K classes - Example<a class="headerlink" href="#fld-with-k-classes-example" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">30.3.4.1. </span>FLD with K classes - Example<a class="headerlink" href="#fld-with-k-classes-example" title="Permalink to this heading">#</a></h4>
 <p>As an example of the application of Fisher’s Linear Discriminant, let us consider Fisher’s Iris dataset. As we have already seen, the dataset contains four different features:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -951,7 +978,7 @@ C_2 &amp;\text{if}&amp; y(\mathbf{x}) &lt; w_0\end{cases}\end{split}\]</div>
 </section>
 </section>
 <section id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">30.4. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Nearest Neighbor: Section 2.5.2 of [1]</p></li>
 <li><p>Fisher’s Discriminant Analysis: Section 4.1.4 and Section 4.1.6 of [1]</p></li>
@@ -992,6 +1019,24 @@ springer, 2006.
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="19_classification.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">29. </span>Classification Task and Evaluation Measures</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="21_generative_models_for_classification.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">31. </span>Generative Models for Classification</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -1007,28 +1052,28 @@ springer, 2006.
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-regressor-as-a-discriminative-classifier">The Logistic Regressor as a Discriminative Classifier</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-and-softmax-regressors-as-discriminative-multi-class-classifiers">Multinomial and Softmax Regressors as Discriminative Multi-Class Classifiers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-regressor-as-a-discriminative-classifier">30.1. The Logistic Regressor as a Discriminative Classifier</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-and-softmax-regressors-as-discriminative-multi-class-classifiers">30.1.1. Multinomial and Softmax Regressors as Discriminative Multi-Class Classifiers</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nearest-neighbor-classification">K-Nearest Neighbor Classification</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-nearest-neighbor-or-1-nn-classification-algorithm">The Nearest Neighbor (or 1-NN) Classification Algorithm</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-k-nearest-neighbour-classification-algorithm">The K-Nearest Neighbour Classification Algorithm</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nn-as-density-estimation">K-NN as density estimation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-map-decision-boundary-of-k-nn-and-importance-of-parameter-k">Classification Map/Decision Boundary Of K-NN and Importance of Parameter K</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nearest-neighbor-classification">30.2. K-Nearest Neighbor Classification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-nearest-neighbor-or-1-nn-classification-algorithm">30.2.1. The Nearest Neighbor (or 1-NN) Classification Algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-k-nearest-neighbour-classification-algorithm">30.2.2. The K-Nearest Neighbour Classification Algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nn-as-density-estimation">30.2.3. K-NN as density estimation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-map-decision-boundary-of-k-nn-and-importance-of-parameter-k">30.2.4. Classification Map/Decision Boundary Of K-NN and Importance of Parameter K</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discriminant-functions-and-fisher-s-linear-discriminant">Discriminant Functions and Fisher’s Linear Discriminant</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fisher-s-linear-discriminant-fld">Fisher’s Linear Discriminant (FLD)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fisher-s-linear-discriminant-for-two-classes">Fisher’s Linear Discriminant for Two Classes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fisher-linear-discriminant-example-and-geometrical-interpretation">Fisher Linear Discriminant Example and Geometrical Interpretation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fisher-s-linear-discriminant-for-more-than-2-classes">Fisher’s Linear Discriminant for More than <span class="math notranslate nohighlight">\(2\)</span> Classes</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fld-with-k-classes-example">FLD with K classes - Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discriminant-functions-and-fisher-s-linear-discriminant">30.3. Discriminant Functions and Fisher’s Linear Discriminant</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fisher-s-linear-discriminant-fld">30.3.1. Fisher’s Linear Discriminant (FLD)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fisher-s-linear-discriminant-for-two-classes">30.3.2. Fisher’s Linear Discriminant for Two Classes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fisher-linear-discriminant-example-and-geometrical-interpretation">30.3.3. Fisher Linear Discriminant Example and Geometrical Interpretation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fisher-s-linear-discriminant-for-more-than-2-classes">30.3.4. Fisher’s Linear Discriminant for More than <span class="math notranslate nohighlight">\(2\)</span> Classes</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fld-with-k-classes-example">30.3.4.1. FLD with K classes - Example</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">30.4. References</a></li>
 </ul>
   </nav></div>
 

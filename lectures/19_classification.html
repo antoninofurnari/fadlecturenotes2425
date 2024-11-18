@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Classification Task and Evaluation Measures &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+    <title>29. Classification Task and Evaluation Measures &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
   
   
   
@@ -68,6 +68,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="30. Discriminative Models for Classification" href="20_discriminative_models_for_classification.html" />
+    <link rel="prev" title="28. Introduction to Predictive Modelling and Regression Models" href="18_predictive_modeling.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -235,6 +237,31 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 12</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="16_density_estimation.html">25. Density Estimation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 13</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="17_principal_component_analysis.html">26. Principal Component Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratory 4</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/14_clustering_density_estimation_pca.html">27. Clustering, Density Estimation, and Principal Component Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 14</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="18_predictive_modeling.html">28. Introduction to Predictive Modelling and Regression Models</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 15</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">29. Classification Task and Evaluation Measures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20_discriminative_models_for_classification.html">30. Discriminative Models for Classification</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 16</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="21_generative_models_for_classification.html">31. Generative Models for Classification</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratory 5</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../laboratories/16_classificazione.html">32. Classificazione</a></li>
 </ul>
 
     </div>
@@ -461,35 +488,35 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-definition">Task Definition</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-definition">29.1. Task Definition</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">29.1.1. Examples</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eavaluation-measures">Eavaluation Measures</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy">Accuracy</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-imbalanced-dataset">Example – Imbalanced Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eavaluation-measures">29.2. Eavaluation Measures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy">29.2.1. Accuracy</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-imbalanced-dataset">29.2.1.1. Example – Imbalanced Dataset</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-types">Error Types</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">Confusion Matrix</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-spam-detector">Example 1 – Spam Detector</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-imbalanced-dataset">Example 2 – Imbalanced Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-types">29.2.2. Error Types</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">29.2.3. Confusion Matrix</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-spam-detector">29.2.3.1. Example 1 – Spam Detector</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-imbalanced-dataset">29.2.3.2. Example 2 – Imbalanced Dataset</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#precision-and-recall">Precision and Recall</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#high-precision-vs-high-recall">High Precision vs High Recall</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-spam-detector">Example – Spam Detector</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#precision-and-recall">29.2.4. Precision and Recall</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#high-precision-vs-high-recall">29.2.4.1. High Precision vs High Recall</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-spam-detector">29.2.4.2. Example – Spam Detector</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-1-score"><span class="math notranslate nohighlight">\(F_{1}\)</span> Score</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Example – Spam Detector</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-1-score">29.2.5. <span class="math notranslate nohighlight">\(F_{1}\)</span> Score</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">29.2.5.1. Example – Spam Detector</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix-for-multi-class-classification">Confusion Matrix for Multi-Class Classification</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#roc-receiver-operating-characteristic-curve-and-area-under-the-curve-auc-measures">ROC (Receiver Operating Characteristic) Curve and Area Under the Curve (AUC) Measures</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix-for-multi-class-classification">29.2.6. Confusion Matrix for Multi-Class Classification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#roc-receiver-operating-characteristic-curve-and-area-under-the-curve-auc-measures">29.2.7. ROC (Receiver Operating Characteristic) Curve and Area Under the Curve (AUC) Measures</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">29.3. References</a></li>
 </ul>
             </nav>
         </div>
@@ -502,10 +529,10 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="classification-task-and-evaluation-measures">
-<h1>Classification Task and Evaluation Measures<a class="headerlink" href="#classification-task-and-evaluation-measures" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">29. </span>Classification Task and Evaluation Measures<a class="headerlink" href="#classification-task-and-evaluation-measures" title="Permalink to this heading">#</a></h1>
 <p>Classification models are another broad class of predictive models. Following the Machine Learning terminology, it is common to talk about classification or regression “tasks”. These are the two main classes of tasks belonging to the broader class of reinforcement learning.</p>
 <section id="task-definition">
-<h2>Task Definition<a class="headerlink" href="#task-definition" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">29.1. </span>Task Definition<a class="headerlink" href="#task-definition" title="Permalink to this heading">#</a></h2>
 <p>Recall that a predictive model is a function defined as follows:</p>
 <div class="math notranslate nohighlight">
 \[h : \mathcal{X} \to \mathcal{Y}\]</div>
@@ -527,7 +554,7 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[\hat h = \underset{h \in \mathcal{H}}{\mathrm{arg\ min}}\ R_{emp}(h)\]</div>
 <section id="examples">
-<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">29.1.1. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h3>
 <p>Classifiers support decision making any time that observations need to be categorized in one of a predefined set of classes. Examples of such problems are:</p>
 <ul class="simple">
 <li><p>Detecting spam emails (<strong>spam vs legitimate email classification</strong>).</p></li>
@@ -549,7 +576,7 @@ classification task</strong>, hence <span class="math notranslate nohighlight">\
 </section>
 </section>
 <section id="eavaluation-measures">
-<h2>Eavaluation Measures<a class="headerlink" href="#eavaluation-measures" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">29.2. </span>Eavaluation Measures<a class="headerlink" href="#eavaluation-measures" title="Permalink to this heading">#</a></h2>
 <p>When defining classification algorithms, it is important to measure
 their performance. Performance indicators can be used to <strong>guide
 training</strong> (e.g., modify the parameters in order to improve the
@@ -574,7 +601,7 @@ then our performance function can be defined as:</p>
 <div class="math notranslate nohighlight">
 \[P:\mathcal{Y}{\rightarrow} \Re\]</div>
 <section id="accuracy">
-<h3>Accuracy<a class="headerlink" href="#accuracy" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">29.2.1. </span>Accuracy<a class="headerlink" href="#accuracy" title="Permalink to this heading">#</a></h3>
 <p>Accuracy is a very common performance measure. We define accuracy as
 <strong>the percentage of test examples for which our algorithm has predicted
 the correct label</strong>:</p>
@@ -588,7 +615,7 @@ them we have predicted the correct label, then we will have:</p>
 see the accuracy as a percentage. For instance, in the example above we
 could say that we have an accuracy of <span class="math notranslate nohighlight">\(70\%\)</span>.</p>
 <section id="example-imbalanced-dataset">
-<h4>Example – Imbalanced Dataset<a class="headerlink" href="#example-imbalanced-dataset" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">29.2.1.1. </span>Example – Imbalanced Dataset<a class="headerlink" href="#example-imbalanced-dataset" title="Permalink to this heading">#</a></h4>
 <p>To see the limits of accuracy, let us consider a dataset containing
 <span class="math notranslate nohighlight">\(10000\)</span> elements of two classes distributed as follows:</p>
 <ul class="simple">
@@ -604,7 +631,7 @@ it can be easily seen that its accuracy is <span class="math notranslate nohighl
 </section>
 </section>
 <section id="error-types">
-<h3>Error Types<a class="headerlink" href="#error-types" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">29.2.2. </span>Error Types<a class="headerlink" href="#error-types" title="Permalink to this heading">#</a></h3>
 <p>The main limitation of the accuracy is that it counts the number of
 mistakes made by the algorithm, but it does not consider which types of
 mistakes it makes. In general, we can make two kinds of mistakes:</p>
@@ -627,7 +654,7 @@ to that class.</p></li>
 </ul>
 </section>
 <section id="confusion-matrix">
-<h3>Confusion Matrix<a class="headerlink" href="#confusion-matrix" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">29.2.3. </span>Confusion Matrix<a class="headerlink" href="#confusion-matrix" title="Permalink to this heading">#</a></h3>
 <p>To have a more complete view of how our classifier is performing, we can
 put these numbers in a table which we will call a <strong>confusion matrix</strong>:</p>
 <p><img alt="" src="../_images/confusion.png" /></p>
@@ -643,7 +670,7 @@ the sum of all numbers</strong>. We can see the computation of the accuracy
 from the confusion matrix graphically as follows:</p>
 <p><img alt="" src="../_images/confusion2.png" /></p>
 <section id="example-1-spam-detector">
-<h4>Example 1 – Spam Detector<a class="headerlink" href="#example-1-spam-detector" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">29.2.3.1. </span>Example 1 – Spam Detector<a class="headerlink" href="#example-1-spam-detector" title="Permalink to this heading">#</a></h4>
 <p>Let us consider a spam detector which correctly detects <span class="math notranslate nohighlight">\(40\)</span> out of <span class="math notranslate nohighlight">\(50\)</span>
 spam emails, while it only recognizes <span class="math notranslate nohighlight">\(30\)</span> out of <span class="math notranslate nohighlight">\(50\)</span> legitimate
 emails. The confusion matrix associated to this classifier will be as
@@ -654,7 +681,7 @@ follows:</p>
 \[Accuracy = \frac{40 + 30}{40 + 10 + 20 + 30} = \frac{70}{100} = 0.7\]</div>
 </section>
 <section id="example-2-imbalanced-dataset">
-<h4>Example 2 – Imbalanced Dataset<a class="headerlink" href="#example-2-imbalanced-dataset" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">29.2.3.2. </span>Example 2 – Imbalanced Dataset<a class="headerlink" href="#example-2-imbalanced-dataset" title="Permalink to this heading">#</a></h4>
 <p>Let us now consider the example of our imbalanced dataset with <span class="math notranslate nohighlight">\(9500\)</span>
 data points of class 1 and <span class="math notranslate nohighlight">\(500\)</span> data points of class 0. The confusion
 matrix of the naïve classifier <span class="math notranslate nohighlight">\(f\left( \mathbf{x} \right) = 1\)</span> will be:</p>
@@ -668,7 +695,7 @@ is wrong, and our classifier is not working well</strong>.</p>
 </section>
 </section>
 <section id="precision-and-recall">
-<h3>Precision and Recall<a class="headerlink" href="#precision-and-recall" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">29.2.4. </span>Precision and Recall<a class="headerlink" href="#precision-and-recall" title="Permalink to this heading">#</a></h3>
 <p>The confusion matrix allows to understand if there is an issue with the
 classifier in the case of imbalanced data. However, it is still
 convenient to have scalar measures which can tell us something about how
@@ -687,7 +714,7 @@ been correctly classified as positives</strong> and is defined as follows:</p>
 follows:</p>
 <p><img alt="" src="../_images/precision_recall.png" /></p>
 <section id="high-precision-vs-high-recall">
-<h4>High Precision vs High Recall<a class="headerlink" href="#high-precision-vs-high-recall" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">29.2.4.1. </span>High Precision vs High Recall<a class="headerlink" href="#high-precision-vs-high-recall" title="Permalink to this heading">#</a></h4>
 <p>These values capture different properties of the classifier. Depending
 on the application, we may want to have a higher precision or a higher
 recall. For example:</p>
@@ -714,7 +741,7 @@ obtain a high precision but a low recall and vice versa), hence it is
 generally <strong>necessary to look at both numbers together</strong>.</p>
 </section>
 <section id="example-spam-detector">
-<h4>Example – Spam Detector<a class="headerlink" href="#example-spam-detector" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">29.2.4.2. </span>Example – Spam Detector<a class="headerlink" href="#example-spam-detector" title="Permalink to this heading">#</a></h4>
 <p>Let us consider again the spam example, with the classifier obtaining
 this confusion matrix:</p>
 <p><img alt="" src="../_images/spam.png" /></p>
@@ -740,7 +767,7 @@ cost of a lower recall.</strong></p>
 </section>
 </section>
 <section id="f-1-score">
-<h3><span class="math notranslate nohighlight">\(F_{1}\)</span> Score<a class="headerlink" href="#f-1-score" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">29.2.5. </span><span class="math notranslate nohighlight">\(F_{1}\)</span> Score<a class="headerlink" href="#f-1-score" title="Permalink to this heading">#</a></h3>
 <p>We have seen that precision and recall describe different aspects of the
 classifier and hence it is often a good idea to look at them jointly.
 However, it is often convenient to have a single number which classifies
@@ -763,7 +790,7 @@ harmonic mean (the <span class="math notranslate nohighlight">\(F_{1}\)</span> s
 precision and recall values. As can be noted, to obtain a large <span class="math notranslate nohighlight">\(F_{1}\)</span>
 score, we need to have both a large precision and a large recall.</p>
 <section id="id1">
-<h4>Example – Spam Detector<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">29.2.5.1. </span>Example – Spam Detector<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h4>
 <p>Let us consider again the spam example, with the classifier obtaining
 this confusion function:</p>
 <p><img alt="" src="../_images/spam.png" /></p>
@@ -776,7 +803,7 @@ different from the accuracy of <span class="math notranslate nohighlight">\(0.7\
 </section>
 </section>
 <section id="confusion-matrix-for-multi-class-classification">
-<h3>Confusion Matrix for Multi-Class Classification<a class="headerlink" href="#confusion-matrix-for-multi-class-classification" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">29.2.6. </span>Confusion Matrix for Multi-Class Classification<a class="headerlink" href="#confusion-matrix-for-multi-class-classification" title="Permalink to this heading">#</a></h3>
 <p>We have seen the confusion matrix in the case of binary classification.
 However, it should be noted that the confusion matrix generalizes to the
 case in which there are <span class="math notranslate nohighlight">\(M\)</span> classes. In that case, the confusion matrix
@@ -804,7 +831,7 @@ the others). Hence, in the example shown above, we would have three
 </div>
 </section>
 <section id="roc-receiver-operating-characteristic-curve-and-area-under-the-curve-auc-measures">
-<h3>ROC (Receiver Operating Characteristic) Curve and Area Under the Curve (AUC) Measures<a class="headerlink" href="#roc-receiver-operating-characteristic-curve-and-area-under-the-curve-auc-measures" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">29.2.7. </span>ROC (Receiver Operating Characteristic) Curve and Area Under the Curve (AUC) Measures<a class="headerlink" href="#roc-receiver-operating-characteristic-curve-and-area-under-the-curve-auc-measures" title="Permalink to this heading">#</a></h3>
 <p>As previously mentioned, some binary classifiers output a probability or a confidence score and allow to obtain class predictions by thresholding on such probabilities or scores. When the confidence value is not a probability, it might not be easy to interpret it and find a good threshold. Even when the classifier outputs a probability, the optimal threshold might not be <span class="math notranslate nohighlight">\(0.5\)</span>. For instance, we may want to build an intrusion detection system which is more or less sensitive to potential intrusions.</p>
 <p>The ROC curve allows to evaluate the performance of a classifier independently from the threshold. Specifically, let</p>
 <div class="math notranslate nohighlight">
@@ -863,7 +890,7 @@ the others). Hence, in the example shown above, we would have three
 </section>
 </section>
 <section id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">29.3. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Evaluation Measures for Classifcation:
 <a class="reference external" href="https://en.wikipedia.org/wiki/Precision_and_recall">https://en.wikipedia.org/wiki/Precision_and_recall</a></p></li>
@@ -901,6 +928,24 @@ the others). Hence, in the example shown above, we would have three
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="18_predictive_modeling.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">28. </span>Introduction to Predictive Modelling and Regression Models</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="20_discriminative_models_for_classification.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">30. </span>Discriminative Models for Classification</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -916,35 +961,35 @@ the others). Hence, in the example shown above, we would have three
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-definition">Task Definition</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-definition">29.1. Task Definition</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">29.1.1. Examples</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eavaluation-measures">Eavaluation Measures</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy">Accuracy</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-imbalanced-dataset">Example – Imbalanced Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eavaluation-measures">29.2. Eavaluation Measures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy">29.2.1. Accuracy</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-imbalanced-dataset">29.2.1.1. Example – Imbalanced Dataset</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-types">Error Types</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">Confusion Matrix</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-spam-detector">Example 1 – Spam Detector</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-imbalanced-dataset">Example 2 – Imbalanced Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-types">29.2.2. Error Types</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">29.2.3. Confusion Matrix</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-spam-detector">29.2.3.1. Example 1 – Spam Detector</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-imbalanced-dataset">29.2.3.2. Example 2 – Imbalanced Dataset</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#precision-and-recall">Precision and Recall</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#high-precision-vs-high-recall">High Precision vs High Recall</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-spam-detector">Example – Spam Detector</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#precision-and-recall">29.2.4. Precision and Recall</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#high-precision-vs-high-recall">29.2.4.1. High Precision vs High Recall</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-spam-detector">29.2.4.2. Example – Spam Detector</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-1-score"><span class="math notranslate nohighlight">\(F_{1}\)</span> Score</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Example – Spam Detector</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-1-score">29.2.5. <span class="math notranslate nohighlight">\(F_{1}\)</span> Score</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">29.2.5.1. Example – Spam Detector</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix-for-multi-class-classification">Confusion Matrix for Multi-Class Classification</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#roc-receiver-operating-characteristic-curve-and-area-under-the-curve-auc-measures">ROC (Receiver Operating Characteristic) Curve and Area Under the Curve (AUC) Measures</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix-for-multi-class-classification">29.2.6. Confusion Matrix for Multi-Class Classification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#roc-receiver-operating-characteristic-curve-and-area-under-the-curve-auc-measures">29.2.7. ROC (Receiver Operating Characteristic) Curve and Area Under the Curve (AUC) Measures</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">29.3. References</a></li>
 </ul>
   </nav></div>
 
