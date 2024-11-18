@@ -1406,7 +1406,7 @@ e^{(m)}
 <p>In general, having more variables in the linear regressor will reduce the error term and improve the covariance between <span class="math notranslate nohighlight">\(Y\)</span> and <span class="math notranslate nohighlight">\(\hat Y\)</span>, hence increasing the <span class="math notranslate nohighlight">\(R^2\)</span>. However, in general having a small increase in <span class="math notranslate nohighlight">\(R^2\)</span> when we add a new variable may not be good. Indeed, we could prefer a simpler model with a slightly smaller <span class="math notranslate nohighlight">\(R^2\)</span> value.</p>
 <p>To express this, we can compute the adjusted <span class="math notranslate nohighlight">\(R^2\)</span> as follows:</p>
 <div class="math notranslate nohighlight">
-\[\overline R^2 = 1- \frac{m-1}{m-n-1} R^2\]</div>
+\[\overline R^2 = 1- \frac{m-1}{m-n-1} (1-R)^2\]</div>
 <p>Where <span class="math notranslate nohighlight">\(m\)</span> is the number of data points and <span class="math notranslate nohighlight">\(n\)</span> is the number of independent variables. The <span class="math notranslate nohighlight">\(\overline R^2\)</span> re-balances the <span class="math notranslate nohighlight">\(R^2\)</span> accounting for the introduction of additional variables.</p>
 <p>For instance the last model we fit has an <span class="math notranslate nohighlight">\(R^2=0.820\)</span> and <span class="math notranslate nohighlight">\(\overline R^2=0.818\)</span>. We will see more in details how to use the <span class="math notranslate nohighlight">\(\overline R^2\)</span> in the laboratory.</p>
 </section>

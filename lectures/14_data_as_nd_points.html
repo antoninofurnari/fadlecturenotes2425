@@ -583,7 +583,7 @@ document.write(`
 <h3><span class="section-number">23.2.1. </span>Norms<a class="headerlink" href="#norms" title="Permalink to this heading">#</a></h3>
 <p>Given a vector space <span class="math notranslate nohighlight">\(S\)</span>, a norm <span class="math notranslate nohighlight">\(p\)</span> is a function from <span class="math notranslate nohighlight">\(S\)</span> to a non negative real number:</p>
 <div class="math notranslate nohighlight">
-\[p \in S \to \Re^+_0\]</div>
+\[p : S \to \Re^+_0\]</div>
 <p>A commonly used family of norms is the one of the L-p norms:</p>
 <div class="math notranslate nohighlight">
 \[||\mathbf{x}||_p = \left( \sum_{i=1}^{d} |x_i|^p \right)^{1/p}\]</div>
@@ -621,7 +621,7 @@ document.write(`
 <p>is <strong>a metric</strong> if the following properties are satisfied:</p>
 <ol class="arabic simple">
 <li><p>The distance of a point from itself is zero: <span class="math notranslate nohighlight">\(m(\mathbf{x}, \mathbf{x}) = 0\)</span>;</p></li>
-<li><p>The distance between two distinct points is always positive (positivity) if <span class="math notranslate nohighlight">\(\mathbf{x} \neq \mathbf{y}\)</span>: <span class="math notranslate nohighlight">\(m(\mathbf{x},\mathbf{y}) \geq 0, \forall \mathbf{x}, \mathbf{y} \in S, \mathbf{x} \neq \mathbf{y}\)</span>;</p></li>
+<li><p>The distance between two distinct points is always positive (positivity) if <span class="math notranslate nohighlight">\(\mathbf{x} \neq \mathbf{y}\)</span>: <span class="math notranslate nohighlight">\(m(\mathbf{x},\mathbf{y}) &gt; 0, \forall \mathbf{x}, \mathbf{y} \in S, \mathbf{x} \neq \mathbf{y}\)</span>;</p></li>
 <li><p>The distance between <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> is the same as the distance between <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(x\)</span> (symmetry): <span class="math notranslate nohighlight">\(m(\mathbf{x}, \mathbf{y}) = m(\mathbf{y}, \mathbf{x})\)</span>.</p></li>
 <li><p>Triangle inequality: <span class="math notranslate nohighlight">\(m(\mathbf{x},\mathbf{y}) \leq m(\mathbf{x},\mathbf{z}) + m(\mathbf{z},\mathbf{y}), \forall \mathbf{x}, \mathbf{y}, \mathbf{z} \in S\)</span></p></li>
 </ol>

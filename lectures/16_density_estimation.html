@@ -563,7 +563,7 @@ document.write(`
 \[f(\mathbf{x} \in R_i) = f(R_i)\]</div>
 <p>such that:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(0 \leq f(\mathbf{x}) \leq 1, \forall R_i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(0 \leq f(\mathbf{x}) \leq 1, \forall \mathbf{x}\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(\int_{\mathbf{x}} f(\mathbf{x}) d\mathbf{x} = \sum_{R_i} f(R_i) = 1\)</span></p></li>
 </ul>
 <p>Of course, we also want:</p>
@@ -605,7 +605,7 @@ document.write(`
 <p>While histograms allow to estimate density by placing a fixed grid on the data, the Parzen window approach, also known as kernel density estimation, places <strong>a window, or region, around each arbitrary point in space <span class="math notranslate nohighlight">\(\mathbf{x}\)</span></strong>. This has the big advantage to allow us to estimate density values at arbitrary points <strong>rather than setting fixed density over all points in a region</strong>.</p>
 <p>A naive approach to density estimation through Parzen Window would assign a point <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> a density by simply computing the fraction of points of <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> which fall in a neighborhood of size <span class="math notranslate nohighlight">\(h\)</span> (where <span class="math notranslate nohighlight">\(h\)</span> is a hyper-parameter) centered at <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, as follows:</p>
 <div class="math notranslate nohighlight">
-\[f(\mathbf{x}) = \frac{|N(\mathbf{x},h)|}{V(h)}\]</div>
+\[f(\mathbf{x}) = \frac{|N(\mathbf{x},h)|}{|X|V(h)}\]</div>
 <p>where:</p>
 <div class="math notranslate nohighlight">
 \[N(\mathbf{x},h) = \{\mathbf{y} \in \mathbf{X}\ s.t.\ ||\mathbf{y} - \mathbf{x}||_2 \leq h \}\]</div>
@@ -620,7 +620,7 @@ document.write(`
 <p>The plot below shows some density estimates using this method:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/57b11433ef6e9a04081dddc9d16e3c45746e8d46240d6b6ebc4c31c9d3e9787e.png" src="../_images/57b11433ef6e9a04081dddc9d16e3c45746e8d46240d6b6ebc4c31c9d3e9787e.png" />
+<img alt="../_images/45582e4cac89bb5d822c09e60aadc41960a0d4d919d481905d4aa8d09e966d21.png" src="../_images/45582e4cac89bb5d822c09e60aadc41960a0d4d919d481905d4aa8d09e966d21.png" />
 </div>
 </div>
 <p>We can also write the expression above as:</p>
