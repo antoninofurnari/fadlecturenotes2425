@@ -489,13 +489,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-selection-vs-feature-reduction">26.1. Feature Selection vs Feature Reduction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-reduction-example">26.2. Feature Reduction Example</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rotating-around-the-origin">26.2.1. Rotating Around the Origin</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#amount-of-information-reconstruction-error-and-variance">26.2.2. Amount of Information, Reconstruction Error and Variance</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#projection-along-a-direction">26.2.3. Projection Along a Direction</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-index-to-rule-them-all">26.2.4. An Index to Rule them All</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-reduction-example">26.2. Feature Reduction Example</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-formulation">26.3. General Formulation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#back-to-our-example">26.4. Back to Our Example</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-an-appropriate-number-of-components">26.5. Choosing an Appropriate Number of Components</a></li>
@@ -551,133 +545,45 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Both features represent the length of two physical characteristics of the flowers, hence <strong>it is no wonder that they are correlated!</strong>. It would be useful to find a transformation of the data <span class="math notranslate nohighlight">\((x_1,x_2)\)</span> into a new set of features <span class="math notranslate nohighlight">\((z_1,z_2)\)</span> such that:</p>
-<ul class="simple">
-<li><p>Both <span class="math notranslate nohighlight">\(z_1\)</span> and <span class="math notranslate nohighlight">\(z_2\)</span> are computed from <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span>, and hence each individual new variable can “summarize” the informative content of both variables;</p></li>
-<li><p><span class="math notranslate nohighlight">\(z_1\)</span> and <span class="math notranslate nohighlight">\(z_2\)</span> are sorted by the amount of informative content that they carry about the original variables <span class="math notranslate nohighlight">\((x_1,x_2)\)</span>. If this condition is satisfied, then we can select <span class="math notranslate nohighlight">\(z_1\)</span> and discard <span class="math notranslate nohighlight">\(z_2\)</span> to reduce the dimensionality of the original data (from <span class="math notranslate nohighlight">\(2\)</span> to <span class="math notranslate nohighlight">\(1\)</span> variable) while retaining the largest amount of information.</p></li>
-</ul>
-<p>We also note that, ideally, we expect the <strong>new variables <span class="math notranslate nohighlight">\(z_1\)</span> and <span class="math notranslate nohighlight">\(z_2\)</span> to be decorrelated</strong>. Indeed, if <span class="math notranslate nohighlight">\(z_1\)</span> and <span class="math notranslate nohighlight">\(z_2\)</span> are decorrelated, adding <span class="math notranslate nohighlight">\(z_2\)</span> to the picture only brings additional informative content about the original data, avoiding “repeating” information which is already summarized in <span class="math notranslate nohighlight">\(z_1\)</span>.</p>
-<section id="rotating-around-the-origin">
-<h3><span class="section-number">26.2.1. </span>Rotating Around the Origin<a class="headerlink" href="#rotating-around-the-origin" title="Permalink to this heading">#</a></h3>
-<p>In our example, we note that a specific rotation of the data around the central point</p>
-<div class="math notranslate nohighlight">
-\[(\overline x, \overline y) = \big(\frac{1}{N}\sum_{i=1}^N x_1^{(i)}, \frac{1}{N}\sum_{i=1}^N x_2^{(i)}\big)\]</div>
-<p>brings the characteristics highlighted above:</p>
+<p>Let’s say we want to reduce the number of features (e.g., for computational reasons). We could think of applying <strong>feature selection</strong> and choose one fo the two, but we would surely <strong>loose some information</strong>. Instead, we could think of a <strong>linear projection of the data into a single dimension</strong> such that we loose the least possible amount of information.</p>
+<p>To avoid any dependence on the units of measures and on the positioning of the points in the space, let’s first standardize the data:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/94727eda0e681ca5ce837d31a345bb8c7b5b7ee064a3118a69fa24365bbcfeba.png" src="../_images/94727eda0e681ca5ce837d31a345bb8c7b5b7ee064a3118a69fa24365bbcfeba.png" />
+<img alt="../_images/700bafbf82c967b779cb62cd57f184200b9ec44ad917279d65a246bb3f20a879.png" src="../_images/700bafbf82c967b779cb62cd57f184200b9ec44ad917279d65a246bb3f20a879.png" />
 </div>
 </div>
-<p>As we can see, this specific rotation (we will see later how to compute the optimal one) has produced a version of the data which is uncorrelated. Note that the rotation around the mean point is a rigid and invertible transformation, hence there is no loss of information.</p>
-</section>
-<section id="amount-of-information-reconstruction-error-and-variance">
-<h3><span class="section-number">26.2.2. </span>Amount of Information, Reconstruction Error and Variance<a class="headerlink" href="#amount-of-information-reconstruction-error-and-variance" title="Permalink to this heading">#</a></h3>
-<p>Without loss of generality, let us now consider the two variables:</p>
+<p>Transforming the 2D data to a single dimension with a linear transformation can be done with the following expression:</p>
 <div class="math notranslate nohighlight">
-\[h_1 = x_1 - \overline x_1, h_2 = x_2 - \overline x_2 \]</div>
-<p>These have been obtained by shifting the data to the mean point. Note that this shift has not changed in any way the informative content of the variables.</p>
-<p>Since the data has been rotated, we can see the computation of <span class="math notranslate nohighlight">\(z_1\)</span> and <span class="math notranslate nohighlight">\(z_2\)</span> as follows:</p>
+\[z = u_1 x_1 + u_2 x_2\]</div>
+<p>Note that this is equivalent to projecting point <span class="math notranslate nohighlight">\((x_1,x_y)\)</span> to the line passing from the origin with the following equation:</p>
 <div class="math notranslate nohighlight">
-\[z_1 = h_1 \cos(\theta)  - h_2 \sin(\theta)\]</div>
-<div class="math notranslate nohighlight">
-\[z_2 = h_1 \sin(\theta) + h_2 \cos(\theta)\]</div>
-<p>Where <span class="math notranslate nohighlight">\(\theta\)</span> is the optimal angle. We will see how to compute the optimal rotation later. For now let us assume that <span class="math notranslate nohighlight">\(\theta=-1.17 rad\)</span> (this is indeed the rotation that has been applied to make the considered set of data uncorrelated).</p>
-<p>We can invert the transformation as follows:</p>
-<div class="math notranslate nohighlight">
-\[h_1 = z_1 \cos(-\theta)  - z_2 \sin(-\theta)\]</div>
-<div class="math notranslate nohighlight">
-\[h_2 = z_1 \sin(-\theta) + z_2 \cos(-\theta)\]</div>
-<p>If we want to reduce the number of variables, we could either discard <span class="math notranslate nohighlight">\(z_1\)</span> or <span class="math notranslate nohighlight">\(z_2\)</span>. If we discard <span class="math notranslate nohighlight">\(z_2\)</span>, hence setting it to zero, we can reconstruct the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> values as follows:</p>
-<div class="math notranslate nohighlight">
-\[\hat h_1' = z_1 \cos(-\theta)\]</div>
-<div class="math notranslate nohighlight">
-\[\hat h_2' = z_1 \sin(-\theta)\]</div>
-<p>If we discard <span class="math notranslate nohighlight">\(z_1\)</span>, we obtain:</p>
-<div class="math notranslate nohighlight">
-\[\hat h_1'' = - z_2 \sin(-\theta)\]</div>
-<div class="math notranslate nohighlight">
-\[\hat h_2'' = z_2 \cos(-\theta)\]</div>
-<p>To have an idea of how much information we lose by discarding one fo the two variables, we can compute the reconstruction error, i.e., the MSE between the predicted and original values. We have:</p>
-<div class="math notranslate nohighlight">
-\[MSE' = \frac{1}{N}\sum_{i=1}^N (\hat h_1' - h_1)^2 + (\hat h_2' - h_2)^2, MSE'' = \frac{1}{N} \sum_{i=1}^N (\hat h_1'' - h_1)^2 + (\hat h_2'' - h_2)^2\]</div>
-<p>Another strategy, would be to avoid the transformation altogether and set either <span class="math notranslate nohighlight">\(x=0\)</span> and <span class="math notranslate nohighlight">\(y=0\)</span>. We can hence consider other two MSE errors:</p>
-<div class="math notranslate nohighlight">
-\[MSE_1 = \frac{1}{N}\sum_{i=1}^N (h_1 - h_1)^2 + (0 - h_2)^2, MSE_2 = \frac{1}{N} \sum_{i=1}^N (0 - h_1)^2 + (h_2 - h_2)^2\]</div>
-<p>In practice, these MSE values will be as follows:</p>
+\[y = \frac{u_2}{u_1}x\]</div>
+<p>Once we choose a set of <span class="math notranslate nohighlight">\((u_1,u_2)\)</span>, we obtain a different projection, as in the example below, where we project the data to different random lines passing through the origin:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    MSE&#39;    MSE&#39;&#39;     MSEx     MSEy
-0.139139 3.637486 3.095503 0.681122
-</pre></div>
+<img alt="../_images/635f1fb554c271d9690e4390f5f24ed938a2bf807ee77b6b63fb6864053e6e43.png" src="../_images/635f1fb554c271d9690e4390f5f24ed938a2bf807ee77b6b63fb6864053e6e43.png" />
 </div>
 </div>
-</div>
-<p>As can be seen, reconstructing the data using only <span class="math notranslate nohighlight">\(z_1\)</span> has the least MSE score, suggesting a higher informative content about the original data.</p>
-<p>Note that the MSE can also be seen as the sum of the squares of the dashed lines in the following plots:</p>
+<p>As can be seen, <strong>not all projections are the same</strong>. Indeed, some of them tend to project the points in a space in which they are very close to each other, while others allow for more “space” between the points.</p>
+<p>Intuitively, we would like to project points in a way that <strong>they keep their distinctiveness as much as possible</strong>. We can reason on this also form the point of view of information loss. Let’s say we want to reconstruct the values of <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(y_1\)</span> from <span class="math notranslate nohighlight">\(z\)</span>. Recall that the process by which we project <span class="math notranslate nohighlight">\((x_1,x_2)\)</span> onto <span class="math notranslate nohighlight">\((u_1,u_2)\)</span> is <strong>lossy</strong>:</p>
+<div class="math notranslate nohighlight">
+\[z = u_1 x_1 + u_2 x_2\]</div>
+<p>In practice, <strong>we cannot reconstruct <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> with arbitrary precision</strong>. The best we can do is to approximate the point with its projection, hence by scaling vector <span class="math notranslate nohighlight">\((u_1,u_2)\)</span> by <span class="math notranslate nohighlight">\(z\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[(\hat{x}_1,\hat{x}_2)^T = z \cdot (u_1,u_2)^T\]</div>
+<p>An example is shown in the following figure:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/48fa3410a139f91c1dc7778af915a00bfc4be31e677b305feb5bf245d98d0ca6.png" src="../_images/48fa3410a139f91c1dc7778af915a00bfc4be31e677b305feb5bf245d98d0ca6.png" />
+<img alt="../_images/be61f11c92318ede27533866637546d188a841c51e02723d258858af1ca7909c.png" src="../_images/be61f11c92318ede27533866637546d188a841c51e02723d258858af1ca7909c.png" />
 </div>
 </div>
-<p>As can be seen, reconstructing the data with the <span class="math notranslate nohighlight">\(z_1\)</span> variable, corresponds to projecting it to the <span class="math notranslate nohighlight">\(z_1\)</span> axis, after the data has been appropriately rotated. This has the lowest error, indicating that <span class="math notranslate nohighlight">\(z_1\)</span> is the most informative single direction.</p>
-<p>We can also see that <strong>the <span class="math notranslate nohighlight">\(z_1\)</span> variable is the one with the largest variance</strong>:</p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variance of z1: 3.64
-Variance of z2: 0.14
-Variance of h1: 0.68
-Variance of h2: 3.10
-</pre></div>
-</div>
-</div>
-</div>
-<p>Intuitively, <strong>larger variance lends to a larger informative content, and hence to a smaller reconstruction error</strong>. Indeed, in variables exhibiting low variance, points tend to be less distinguishable, hence making it harder to reconstruct the original data.</p>
-</section>
-<section id="projection-along-a-direction">
-<h3><span class="section-number">26.2.3. </span>Projection Along a Direction<a class="headerlink" href="#projection-along-a-direction" title="Permalink to this heading">#</a></h3>
-<p>Note that we can see the transformation:</p>
+<p>In the expressions:</p>
 <div class="math notranslate nohighlight">
-\[z_1 = h_1 \cos(\theta)  - h_2 \sin(\theta)\]</div>
-<p>As follows:</p>
+\[z = u_1 x_1 + u_2 x_2\]</div>
 <div class="math notranslate nohighlight">
-\[z_1 = h_1 w_1  - h_2 w_2\]</div>
-<p>If we set <span class="math notranslate nohighlight">\(\mathbf{w} = (w_1,w_2)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{h}=(h_1,h_2)\)</span>, and <span class="math notranslate nohighlight">\(\mathbf{z} = (z_1,z_2)\)</span>, we can write:</p>
-<div class="math notranslate nohighlight">
-\[\mathbf{z} = \mathbf{w}^T \mathbf{h}\]</div>
-<p>We also note that <span class="math notranslate nohighlight">\(||\mathbf{w}|| = \sqrt{w_1^2 + w_2^2} = \sqrt{\sin^2\theta + \cos^2 \theta}= 1\)</span>.</p>
-<p>We recall that <strong>the product <span class="math notranslate nohighlight">\(\mathbf{w}^T\mathbf{x}\)</span> corresponds to projecting the point <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> to the unit vector <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> indicating the axis of a new coordinate system</strong>.</p>
-<p>Indeed:</p>
-<div class="math notranslate nohighlight">
-\[ \cos \theta = \frac{\mathbf{w}^T\mathbf{x}}{||\mathbf{w}|| \cdot ||\mathbf{x}||}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\theta\)</span> is the angle between the <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> unit vector and the <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> vector. Since <span class="math notranslate nohighlight">\(||\mathbf{w}|| = 1\)</span>, we obtain:</p>
-<div class="math notranslate nohighlight">
-\[ ||\mathbf{x}|| \cos \theta = \mathbf{w}^T\mathbf{x}\]</div>
-<p>This is graphically shown as follows:</p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="../_images/dc6bde27c6e1a904303414e0c7c15fe3327183f54a396f19e4d6dc5df6e59878.png" src="../_images/dc6bde27c6e1a904303414e0c7c15fe3327183f54a396f19e4d6dc5df6e59878.png" />
-</div>
-</div>
-<p><strong>A given choice of a rotation angle <span class="math notranslate nohighlight">\(\theta\)</span> or a vector <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> will hence identify a new direction along which to project all points to obtain the feature <span class="math notranslate nohighlight">\(z_1\)</span></strong>, as shown in the following plot:</p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="../_images/bb0614a45f23c7476c136e3ca41e91ca3b325ea195857883645aa292f284c09b.png" src="../_images/bb0614a45f23c7476c136e3ca41e91ca3b325ea195857883645aa292f284c09b.png" />
-</div>
-</div>
-<p>The plots above show how multiplying all points by a vector <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> is <strong>equivalent to rotating the data by a given angle, and then projecting the data to the new <span class="math notranslate nohighlight">\(x\)</span> axis</strong>. We also note that good projections are the ones that:</p>
-<ul class="simple">
-<li><p>Maximize the variance along the <span class="math notranslate nohighlight">\(z_1\)</span> axis;</p></li>
-<li><p>Minimize the MSE, i.e., the length of the dashed black lines.</p></li>
-</ul>
-</section>
-<section id="an-index-to-rule-them-all">
-<h3><span class="section-number">26.2.4. </span>An Index to Rule them All<a class="headerlink" href="#an-index-to-rule-them-all" title="Permalink to this heading">#</a></h3>
-<p>We can see the variable <span class="math notranslate nohighlight">\(z_1\)</span> found by rotating the data as <strong>a single index summarizing the original data</strong>. Since it is the single dimension which leads to the smallest reconstruction error, <strong>if we have a computational budget of a single variable</strong>, it does make sense to represent the data using this value.</p>
-<p>Recall that, in the end, <span class="math notranslate nohighlight">\(z_1\)</span> is a linear combination of <span class="math notranslate nohighlight">\(h_1\)</span> and <span class="math notranslate nohighlight">\(h_2\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[z_1 = h_1 w_1 + h_2 w_2\]</div>
-<p>We can see <span class="math notranslate nohighlight">\(w_1\)</span> and <span class="math notranslate nohighlight">\(w_2\)</span> as two weights denoting the relative importance of the original variables. If <span class="math notranslate nohighlight">\(h_1\)</span> and <span class="math notranslate nohighlight">\(h_2\)</span> are <code class="docutils literal notranslate"><span class="pre">sepal</span> <span class="pre">length</span></code> and <code class="docutils literal notranslate"><span class="pre">petal</span> <span class="pre">length</span></code> as in our example, <span class="math notranslate nohighlight">\(z_1\)</span> can be seen as a new “<strong>largeness</strong>” feature and, in this simple example, we may even see it as a way to sort our observations from smaller to larger.</p>
-</section>
+\[(\hat{x}_1,\hat{x}_2)^T = z \cdot (u_1,u_2)^T\]</div>
+<p>Points <span class="math notranslate nohighlight">\((x_1,x_2)\)</span> are the blue circles, while points <span class="math notranslate nohighlight">\((\hat{x}_1,\hat{x}_2)\)</span> are the red ones in the plots shown above on random projection. Intuitively, to reduce the reconstruction error, we want to choose <strong>the line which best approximates the points</strong>, hence reducing the distance between the points and the line (as in linear regression where we tried to minimize RSS).</p>
+<p><strong>It can be shown that this is equivalent to finding the projection such that <span class="math notranslate nohighlight">\(z\)</span> has the largest variance</strong>. Intuitively, this makes sense as highest variance means that the points are more distinguishable and hence their reconstructions will be more distinguishable as well.</p>
 </section>
 <section id="general-formulation">
 <h2><span class="section-number">26.3. </span>General Formulation<a class="headerlink" href="#general-formulation" title="Permalink to this heading">#</a></h2>
@@ -700,7 +606,7 @@ Variance of h2: 3.10
 <div class="math notranslate nohighlight">
 \[\arg\max \{\mathbf{u}_1^T\mathbf{S}\mathbf{u_1}\} \text{ subject to } \mathbf{u}_1^T\mathbf{u}_1=1\]</div>
 <p>Note that the constraint <span class="math notranslate nohighlight">\(\mathbf{u}_1^T\mathbf{u}_1=1\)</span> is necessary. Without it, we could arbitrarily increase the variance by choosing vectors <span class="math notranslate nohighlight">\(\mathbf{u}_1\)</span> with large modules, hence <span class="math notranslate nohighlight">\(\mathbf{u}_1^T\mathbf{u}_1 \to +\infty\)</span>.</p>
-<p>We will not see how this optimization problem is solved in details, but it can be shown that the variance is maximized when:</p>
+<p><strong>We will not see how this optimization problem is solved in details</strong>, but it can be shown that the variance is maximized when:</p>
 <div class="math notranslate nohighlight">
 \[\mathbf{u}_1^T \mathbf{S} \mathbf{u}_1 = \lambda_1\]</div>
 <p>Note that this is equivalent to:</p>
@@ -810,7 +716,7 @@ Eigenvectors:
 <p>As we can see, the two directions are orthogonal. We can also project the data maintaining the original dimensionality with:</p>
 <div class="math notranslate nohighlight">
 \[\mathbf{Z} = \mathbf{X}\mathbf{W}^T\]</div>
-<p>The plot below compares the original and rotated data:</p>
+<p>This process can also see to rotating the data in a way that the components are arranged by importance, where <span class="math notranslate nohighlight">\(\mathbf{W}\)</span> can be seen as a <strong>rotation matrix</strong>. The plot below compares the original and rotated data:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <img alt="../_images/72a6b60cb6723437193d56e12198673f7e2d4038bc4b32fc26af15e78b08b376.png" src="../_images/72a6b60cb6723437193d56e12198673f7e2d4038bc4b32fc26af15e78b08b376.png" />
@@ -1432,13 +1338,7 @@ Number of dimensions: 819840
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-selection-vs-feature-reduction">26.1. Feature Selection vs Feature Reduction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-reduction-example">26.2. Feature Reduction Example</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rotating-around-the-origin">26.2.1. Rotating Around the Origin</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#amount-of-information-reconstruction-error-and-variance">26.2.2. Amount of Information, Reconstruction Error and Variance</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#projection-along-a-direction">26.2.3. Projection Along a Direction</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-index-to-rule-them-all">26.2.4. An Index to Rule them All</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-reduction-example">26.2. Feature Reduction Example</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-formulation">26.3. General Formulation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#back-to-our-example">26.4. Back to Our Example</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-an-appropriate-number-of-components">26.5. Choosing an Appropriate Number of Components</a></li>
