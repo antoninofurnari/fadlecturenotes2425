@@ -492,15 +492,16 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-reduction-example">26.2. Feature Reduction Example</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-formulation">26.3. General Formulation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#back-to-our-example">26.4. Back to Our Example</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-an-appropriate-number-of-components">26.5. Choosing an Appropriate Number of Components</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-principal-components-load-plots">26.6. Interpretation of the Principal Components - Load Plots</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-of-pca">26.7. Applications of PCA</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensionality-reduction-and-visualization">26.7.1. Dimensionality Reduction and Visualization</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-decorrelation-principal-component-regression">26.7.2. Data Decorrelation - Principal Component Regression</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-compression">26.7.3. Data Compression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pca-for-data-whitening">26.5. PCA for data whitening</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-an-appropriate-number-of-components">26.6. Choosing an Appropriate Number of Components</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-principal-components-load-plots">26.7. Interpretation of the Principal Components - Load Plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-of-pca">26.8. Applications of PCA</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensionality-reduction-and-visualization">26.8.1. Dimensionality Reduction and Visualization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-decorrelation-principal-component-regression">26.8.2. Data Decorrelation - Principal Component Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-compression">26.8.3. Data Compression</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">26.8. References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">26.9. References</a></li>
 </ul>
             </nav>
         </div>
@@ -584,11 +585,115 @@ document.write(`
 \[(\hat{x}_1,\hat{x}_2)^T = z \cdot (u_1,u_2)^T\]</div>
 <p>Points <span class="math notranslate nohighlight">\((x_1,x_2)\)</span> are the blue circles, while points <span class="math notranslate nohighlight">\((\hat{x}_1,\hat{x}_2)\)</span> are the red ones in the plots shown above on random projection. Intuitively, to reduce the reconstruction error, we want to choose <strong>the line which best approximates the points</strong>, hence reducing the distance between the points and the line (as in linear regression where we tried to minimize RSS).</p>
 <p><strong>It can be shown that this is equivalent to finding the projection such that <span class="math notranslate nohighlight">\(z\)</span> has the largest variance</strong>. Intuitively, this makes sense as highest variance means that the points are more distinguishable and hence their reconstructions will be more distinguishable as well.</p>
+<p>While we will not see it formally, the plot below shows replicates the previous plot adding the mean squared error between original and reconstructed points:</p>
+<div class="math notranslate nohighlight">
+\[MSE = \frac{1}{N}\sum_{i}||({x}_1^{(i)},{x}_2^{(i)})-(\hat{x}_1^{(i)},\hat{x}_2^{(i)})||^2\]</div>
+<p>Along with the variance of the projected data:</p>
+<div class="math notranslate nohighlight">
+\[Var = \frac{1}{N}\sum_{i} (z^{(i)}-\overline{z})^2\]</div>
+<p>where <span class="math notranslate nohighlight">\(\overline{z}=\frac{1}{N} \sum_{i} z^{(i)}\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># Load and standardize the dataset</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">standardized_data</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># Convert standardized data to a DataFrame</span>
+<span class="n">standardized_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">standardized_data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="c1"># Use only two features for 2D plotting</span>
+<span class="n">x_feature</span> <span class="o">=</span> <span class="s1">&#39;sepal length (cm)&#39;</span>
+<span class="n">y_feature</span> <span class="o">=</span> <span class="s1">&#39;petal length (cm)&#39;</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">standardized_df</span><span class="p">[[</span><span class="n">x_feature</span><span class="p">,</span> <span class="n">y_feature</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c1"># Generate random lines for projection</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>  <span class="c1"># For reproducibility</span>
+<span class="n">num_random_lines</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">random_directions</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_random_lines</span><span class="p">)]</span>
+<span class="n">random_directions</span> <span class="o">=</span> <span class="p">[</span><span class="n">direction</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">direction</span><span class="p">)</span> <span class="k">for</span> <span class="n">direction</span> <span class="ow">in</span> <span class="n">random_directions</span><span class="p">]</span>  <span class="c1"># Normalize them</span>
+
+<span class="c1"># Calculate the &quot;worst&quot; projection direction (minimum variance)</span>
+<span class="n">cov_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="n">eigvals</span><span class="p">,</span> <span class="n">eigvecs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">cov_matrix</span><span class="p">)</span>
+<span class="n">worst_direction</span> <span class="o">=</span> <span class="n">eigvecs</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">eigvals</span><span class="p">)]</span>  <span class="c1"># Direction with the smallest eigenvalue</span>
+<span class="n">random_directions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">worst_direction</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">worst_direction</span><span class="p">))</span>  <span class="c1"># Add as the last projection</span>
+
+<span class="c1"># Set consistent axis limits</span>
+<span class="n">x_limits</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">y_limits</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+
+<span class="c1"># Plot the data and projections in a 3x3 grid</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="p">(</span><span class="n">direction</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">random_directions</span><span class="p">,</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">())):</span>
+    <span class="c1"># Calculate projections of the points on the random line</span>
+    <span class="n">projections</span> <span class="o">=</span> <span class="n">X</span> <span class="o">@</span> <span class="n">direction</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Dot product for projection</span>
+    <span class="n">projected_points</span> <span class="o">=</span> <span class="n">projections</span> <span class="o">*</span> <span class="n">direction</span>  <span class="c1"># Scale projections back to the 2D space</span>
+
+    <span class="c1"># Calculate MSE of the reconstruction error</span>
+    <span class="n">mse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">X</span> <span class="o">-</span> <span class="n">projected_points</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+    
+    <span class="c1"># Calculate variance of the projected data</span>
+    <span class="n">variance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">projections</span><span class="p">)</span>
+
+    <span class="c1"># Plot original data points</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Original Data&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    
+    <span class="c1"># Plot projection line</span>
+    <span class="n">line_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span> <span class="o">*</span> <span class="n">direction</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">line_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span> <span class="o">*</span> <span class="n">direction</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">line_x</span><span class="p">,</span> <span class="n">line_y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Projection Line&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Plot projected points</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">projected_points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">projected_points</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Projections&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Draw dashed lines from each point to its projection</span>
+    <span class="k">for</span> <span class="n">original</span><span class="p">,</span> <span class="n">projected</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">projected_points</span><span class="p">):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">original</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">projected</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">original</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">projected</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+    <span class="c1"># Set the same limits for each subplot</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">x_limits</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">y_limits</span><span class="p">)</span>
+    
+    <span class="c1"># Get the values of (u1, u2) for the title</span>
+    <span class="n">u1</span><span class="p">,</span> <span class="n">u2</span> <span class="o">=</span> <span class="n">direction</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">direction</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="c1"># Determine the title for each subplot with MSE and variance included</span>
+    <span class="k">if</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="n">num_random_lines</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Random Line </span><span class="si">{</span><span class="n">idx</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="se">\n</span><span class="s1">(u1 = </span><span class="si">{</span><span class="n">u1</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">, u2 = </span><span class="si">{</span><span class="n">u2</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">)</span><span class="se">\n</span><span class="s1">MSE = </span><span class="si">{</span><span class="n">mse</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">, Variance = </span><span class="si">{</span><span class="n">variance</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Worst Projection (Least Variance)</span><span class="se">\n</span><span class="s1">(u1 = </span><span class="si">{</span><span class="n">u1</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">, u2 = </span><span class="si">{</span><span class="n">u2</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">)</span><span class="se">\n</span><span class="s1">MSE = </span><span class="si">{</span><span class="n">mse</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">, Variance = </span><span class="si">{</span><span class="n">variance</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">x_feature</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">y_feature</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/917f9363342e3f1a4023af360e67acd13b24d79d63cee6d473fa96d9b339a7fa.png" src="../_images/917f9363342e3f1a4023af360e67acd13b24d79d63cee6d473fa96d9b339a7fa.png" />
+</div>
+</div>
+<p>As can be noted, the MSE is smallest when the variance is highest, which corresponds to the condition in which the data is maximally distinguishable.</p>
 </section>
 <section id="general-formulation">
 <h2><span class="section-number">26.3. </span>General Formulation<a class="headerlink" href="#general-formulation" title="Permalink to this heading">#</a></h2>
 <p>We have seen a simple example in the case of two variables. Let us now discuss the general formulation in the case of <span class="math notranslate nohighlight">\(D\)</span>-dimensional variables.</p>
 <p>Let <span class="math notranslate nohighlight">\(\{\mathbf{x}_n\}\)</span> be a set of <span class="math notranslate nohighlight">\(N\)</span> observations, where <span class="math notranslate nohighlight">\(n=1,\ldots,N\)</span>, and <span class="math notranslate nohighlight">\(\mathbf{x}_n\)</span> is a vector of dimensionality <span class="math notranslate nohighlight">\(D\)</span>. We will define Principal Component Analysis as a projection of the data to <span class="math notranslate nohighlight">\(M \lt D\)</span> dimensions such that the variance of the projected data is maximized.</p>
+<blockquote>
+<div><p><strong>NOTE</strong>: to avoid any influence by the individual variances along the original axes, we will assume that <strong>the data is standardized</strong>.</p>
+</div></blockquote>
 <p>We will first consider the case in which <span class="math notranslate nohighlight">\(M=1\)</span>. In this case, we want to find a D-dimensional vector <span class="math notranslate nohighlight">\(\mathbf{u}_1\)</span> such that, projecting the data to this vector, variance is maximized. Without loss of generality, we will choose <span class="math notranslate nohighlight">\(\mathbf{u}_1\)</span> such that <span class="math notranslate nohighlight">\(\mathbf{u}_1^T\mathbf{u}=1\)</span>. This corresponds to choosing <span class="math notranslate nohighlight">\(\mathbf{u}_1\)</span> as a <strong>unit vector</strong>, which makes sense, as we are interested in the direction of the projection. We will find this assumption useful later.</p>
 <p>Let <span class="math notranslate nohighlight">\(\overline{\mathbf{x}}\)</span> be the sample mean:</p>
 <div class="math notranslate nohighlight">
@@ -716,13 +821,24 @@ Eigenvectors:
 <p>As we can see, the two directions are orthogonal. We can also project the data maintaining the original dimensionality with:</p>
 <div class="math notranslate nohighlight">
 \[\mathbf{Z} = \mathbf{X}\mathbf{W}^T\]</div>
-<p>This process can also see to rotating the data in a way that the components are arranged by importance, where <span class="math notranslate nohighlight">\(\mathbf{W}\)</span> can be seen as a <strong>rotation matrix</strong>. The plot below compares the original and rotated data:</p>
+<p>This process can also see as rotating the data in a way that the the first principal component becomes the new <span class="math notranslate nohighlight">\(x\)</span> axis, while the second principal component becomes the <span class="math notranslate nohighlight">\(y\)</span> axis. In this context, <span class="math notranslate nohighlight">\(\mathbf{W}\)</span> can be seen as a <strong>rotation matrix</strong>. The plot below compares the original and rotated data:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <img alt="../_images/72a6b60cb6723437193d56e12198673f7e2d4038bc4b32fc26af15e78b08b376.png" src="../_images/72a6b60cb6723437193d56e12198673f7e2d4038bc4b32fc26af15e78b08b376.png" />
 </div>
 </div>
-<p>The eigenvectors can also be interpreted as vectors in the original space. Let us show them:</p>
+<p>We can see the projection to the first principal component in two stages:</p>
+<ol class="arabic simple">
+<li><p>Rotating the data;</p></li>
+<li><p>Dropping the <span class="math notranslate nohighlight">\(y\)</span> axis.</p></li>
+</ol>
+<p>Note that the same reasoning can be seen in 3D as shown in the following example:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/8337cfa8be0e1b79166a0c7bd684cde467aaae79cadd9221a69b0a98fe7ea674.png" src="../_images/8337cfa8be0e1b79166a0c7bd684cde467aaae79cadd9221a69b0a98fe7ea674.png" />
+</div>
+</div>
+<p>The eigenvectors can also be interpreted as vectors in the original space. Getting back to our 2D example, they would be shown as follows:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <img alt="../_images/4010c0a68e1f423811cad62dde16688303835a44f5ddae2903b6b668e5e0f206.png" src="../_images/4010c0a68e1f423811cad62dde16688303835a44f5ddae2903b6b668e5e0f206.png" />
@@ -730,8 +846,26 @@ Eigenvectors:
 </div>
 <p>The two principal components denote the <strong>main directions of variation within the data</strong>. In the plot above, the vector sizes are proportional to the related eigenvalues (hence the variance).</p>
 </section>
+<section id="pca-for-data-whitening">
+<h2><span class="section-number">26.5. </span>PCA for data whitening<a class="headerlink" href="#pca-for-data-whitening" title="Permalink to this heading">#</a></h2>
+<p>It can also be seen that PCA transforms the original data with a given covariance matrix <span class="math notranslate nohighlight">\(\Sigma\)</span> to a new set of data (with new axes, the principal components), such that its covariance matrix <span class="math notranslate nohighlight">\(\Sigma'\)</span> is <strong>the identity matrix</strong>. This means that <strong>the new variables</strong> are now <strong>decorrelated</strong>.</p>
+<p>Intuitively, this makes sense: <strong>we rotated the data so that the new axes are aligned to main directions of variation and we constructed principal components to be orthogonal to each other</strong>.</p>
+<p>This process is also called <strong>whitening transformation</strong>. An example of this property is shown below:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/1b909159f74b46c41274fc82ed2c77d08926611e87c3f82c4e974390644d9787.png" src="../_images/1b909159f74b46c41274fc82ed2c77d08926611e87c3f82c4e974390644d9787.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([[3.60543087, 1.84308349],
+        [1.84308349, 2.83596216]]),
+ array([[1.00000000e+00, 1.71554563e-17],
+        [1.71554563e-17, 1.00000000e+00]]))
+</pre></div>
+</div>
+</div>
+</div>
+<p>This whitening process can be useful when we need to make sure that the input variables are <strong>decorrelated</strong>. For instance, consider the case in which we need to fit a linear regression but we have multiple correlated variables. Pre-processing data with PCA would make sure that the input variables are decorrelated, hence removing any instability during fitting, but it should be also kept in mind that <strong>the linear regression would become less interpretable because of the PCA transformation</strong>.</p>
+</section>
 <section id="choosing-an-appropriate-number-of-components">
-<h2><span class="section-number">26.5. </span>Choosing an Appropriate Number of Components<a class="headerlink" href="#choosing-an-appropriate-number-of-components" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">26.6. </span>Choosing an Appropriate Number of Components<a class="headerlink" href="#choosing-an-appropriate-number-of-components" title="Permalink to this heading">#</a></h2>
 <p>We have seen how PCA allows to reduce the dimensionality of the data. In short, this can be done by computing the first <span class="math notranslate nohighlight">\(M\)</span> eigenvalues and the associated eigenvectors.</p>
 <p>In some cases, it is clear what is the value of <span class="math notranslate nohighlight">\(M\)</span> we need to set. For example, in the case of sorting Fisher’s Iris, we set <span class="math notranslate nohighlight">\(M=1\)</span> because we needed a scalar number. In other cases, we would like to reduce the dimensionality of the data, <strong>while keeping a reasonable amount of information about the original data</strong>.</p>
 <p>We have seen that the variance is related to the MSE reprojection error and hence to the informative content. We can measure <strong>how much information we are retaining by selecting <span class="math notranslate nohighlight">\(M\)</span> components by measuring the cumulative variance of the first M components</strong>.</p>
@@ -900,7 +1034,7 @@ Eigenvectors:
 <p>This approach can guide us in choosing the right number of dimensions to keep, selecting a budget of the variance we wish to be able to retain.</p>
 </section>
 <section id="interpretation-of-the-principal-components-load-plots">
-<h2><span class="section-number">26.6. </span>Interpretation of the Principal Components - Load Plots<a class="headerlink" href="#interpretation-of-the-principal-components-load-plots" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">26.7. </span>Interpretation of the Principal Components - Load Plots<a class="headerlink" href="#interpretation-of-the-principal-components-load-plots" title="Permalink to this heading">#</a></h2>
 <p>When we transform data with PCA, the new variables have a less direct interpretation. Indeed, if a given variable is a linear combination of other variables, it is not straightforward to assign a meaning to each component.</p>
 <p>However, we know that the first components are the ones which contain most of the variance. Hence, inspecting the weights that each of these components given to the original features can give some insights into which of the original features are more relevant. In this context, <strong>the weights of the principal components are also called loadings</strong>. Loadings with <strong>large absolute values are more influential in determining the value of the principal components</strong>.</p>
 <p>In practice, we can assess the relevance of features with a <strong>load plot</strong>, which represents each original variable as a 2D point of coordinates given by the loadings corresponding to the first two principal components. Let us show the load plot for our example:</p>
@@ -917,10 +1051,10 @@ Eigenvectors:
 <p>A loading plot can also be useful to perform feature selection. For instance, from the plot above all variables seem to be influential, but <code class="docutils literal notranslate"><span class="pre">petal</span> <span class="pre">width</span></code> and <code class="docutils literal notranslate"><span class="pre">petal</span> <span class="pre">length</span></code> are correlated. We could think of using as a subset of variables <code class="docutils literal notranslate"><span class="pre">sepal</span> <span class="pre">width</span></code>, <code class="docutils literal notranslate"><span class="pre">sepal</span> <span class="pre">length</span></code> and one of the other two (e.g., <code class="docutils literal notranslate"><span class="pre">petal</span> <span class="pre">length</span></code>).</p>
 </section>
 <section id="applications-of-pca">
-<h2><span class="section-number">26.7. </span>Applications of PCA<a class="headerlink" href="#applications-of-pca" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">26.8. </span>Applications of PCA<a class="headerlink" href="#applications-of-pca" title="Permalink to this heading">#</a></h2>
 <p>PCA has several applications in data analysis. We will summarize the main ones in the following.</p>
 <section id="dimensionality-reduction-and-visualization">
-<h3><span class="section-number">26.7.1. </span>Dimensionality Reduction and Visualization<a class="headerlink" href="#dimensionality-reduction-and-visualization" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">26.8.1. </span>Dimensionality Reduction and Visualization<a class="headerlink" href="#dimensionality-reduction-and-visualization" title="Permalink to this heading">#</a></h3>
 <p>We have seen that data can be interpreted as a set of D-dimensional points. When <span class="math notranslate nohighlight">\(D=2\)</span>, it is often useful to visualize the data through a scatterplot. This allows us to see how the data distributes in the space. When <span class="math notranslate nohighlight">\(D&gt;2\)</span>, we can show a series a scatterplot (a pairplot or scattermatrix). However, when <span class="math notranslate nohighlight">\(D\)</span> is very large, it is usually unfeasible to visualize data with all possible scatterplots.</p>
 <p>In these cases, it can be useful to transform the data with PCA and then visualize the data points as 2D points in the space identified by the first two principal components.</p>
 <p>We will show an example on the multidimensional dataset <strong>DIGITS</strong>. The dataset contains small images of resolution <span class="math notranslate nohighlight">\(8 \times 8 pixels\)</span> representing handwritten digits from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(9\)</span>. We can see the dataset as containing <span class="math notranslate nohighlight">\(64\)</span> variables. Each variable indicates the pixel value at a specific location.</p>
@@ -937,7 +1071,7 @@ Eigenvectors:
 </div>
 </section>
 <section id="data-decorrelation-principal-component-regression">
-<h3><span class="section-number">26.7.2. </span>Data Decorrelation - Principal Component Regression<a class="headerlink" href="#data-decorrelation-principal-component-regression" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">26.8.2. </span>Data Decorrelation - Principal Component Regression<a class="headerlink" href="#data-decorrelation-principal-component-regression" title="Permalink to this heading">#</a></h3>
 <p>PCA is also useful when we need to fit a linear regressor and we are in the presence of a dataset with multi-collinearity.</p>
 <p>Let us consider the <code class="docutils literal notranslate"><span class="pre">auto_mpg</span></code> dataset:</p>
 <div class="cell tag_remove-input docutils container">
@@ -1203,7 +1337,7 @@ Eigenvectors:
 <p>While the result is not as interpretable as it was before, this technique may be useful in the case of predictive analysis.</p>
 </section>
 <section id="data-compression">
-<h3><span class="section-number">26.7.3. </span>Data Compression<a class="headerlink" href="#data-compression" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">26.8.3. </span>Data Compression<a class="headerlink" href="#data-compression" title="Permalink to this heading">#</a></h3>
 <p>Now let’s see a simple example of data compression using PCA. In particular, we will consider the case of compressing images. An image can be seen as high-dimensional data, where the number of dimensions is equal to the number of pixels. For example, an RGB image of size <span class="math notranslate nohighlight">\(640 \times 480\)</span> pixels has <span class="math notranslate nohighlight">\(3 \cdot 640 \cdot 480=921600\)</span> dimensions.</p>
 <p>We expect that there will be redundant information in all these dimensions. One method to compress images is to divide them into fixed-size blocks (e.g., <span class="math notranslate nohighlight">\(8 \times 8\)</span>). Each of these blocks will be an element belonging to a population (the population of <span class="math notranslate nohighlight">\(8 \times 8\)</span> blocks of the image).</p>
 <p>Assuming that the information in the blocks is highly correlated, we can try to compress it by applying PCA to the sample of blocks extracted from our image and choosing only a few principal components to represent the content of the blocks.</p>
@@ -1266,7 +1400,7 @@ Number of dimensions: 819840
 </section>
 </section>
 <section id="references">
-<h2><span class="section-number">26.8. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">26.9. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Parts of Chapter 12 of [1]</p></li>
 </ul>
@@ -1341,15 +1475,16 @@ Number of dimensions: 819840
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-reduction-example">26.2. Feature Reduction Example</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-formulation">26.3. General Formulation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#back-to-our-example">26.4. Back to Our Example</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-an-appropriate-number-of-components">26.5. Choosing an Appropriate Number of Components</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-principal-components-load-plots">26.6. Interpretation of the Principal Components - Load Plots</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-of-pca">26.7. Applications of PCA</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensionality-reduction-and-visualization">26.7.1. Dimensionality Reduction and Visualization</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-decorrelation-principal-component-regression">26.7.2. Data Decorrelation - Principal Component Regression</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-compression">26.7.3. Data Compression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pca-for-data-whitening">26.5. PCA for data whitening</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-an-appropriate-number-of-components">26.6. Choosing an Appropriate Number of Components</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-principal-components-load-plots">26.7. Interpretation of the Principal Components - Load Plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-of-pca">26.8. Applications of PCA</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensionality-reduction-and-visualization">26.8.1. Dimensionality Reduction and Visualization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-decorrelation-principal-component-regression">26.8.2. Data Decorrelation - Principal Component Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-compression">26.8.3. Data Compression</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">26.8. References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">26.9. References</a></li>
 </ul>
   </nav></div>
 
