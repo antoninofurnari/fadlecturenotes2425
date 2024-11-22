@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>27. Clustering, Density Estimation, and Principal Component Analysis &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+    <title>32. Clustering, Density Estimation, and Principal Component Analysis &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
   
   
   
@@ -68,8 +68,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="28. Introduction to Predictive Modelling and Regression Models" href="../lectures/18_predictive_modeling.html" />
-    <link rel="prev" title="26. Principal Component Analysis" href="../lectures/17_principal_component_analysis.html" />
+    <link rel="next" title="33. Classificazione" href="16_classificazione.html" />
+    <link rel="prev" title="31. Generative Models for Classification" href="../lectures/21_generative_models_for_classification.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -243,8 +243,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../lectures/17_principal_component_analysis.html">26. Principal Component Analysis</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratory 4</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">27. Clustering, Density Estimation, and Principal Component Analysis</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../practicals/01_heart_disease_explorative_inferential_analysis.html">27. Exploratory/Inferential Analysis on the Heart Disease Dataset</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture 14</span></p>
 <ul class="nav bd-sidenav">
@@ -260,8 +260,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../lectures/21_generative_models_for_classification.html">31. Generative Models for Classification</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratory 5</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="16_classificazione.html">32. Classificazione</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">32. Clustering, Density Estimation, and Principal Component Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_classificazione.html">33. Classificazione</a></li>
 </ul>
 
     </div>
@@ -488,33 +489,33 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-means-clustering">27.1. K-Means Clustering</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esempio-con-dataset-digits">27.1.1. Esempio con dataset DIGITS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-means-clustering">32.1. K-Means Clustering</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esempio-con-dataset-digits">32.1.1. Esempio con dataset DIGITS</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#density-estimation">27.2. Density Estimation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#non-parametric-density-estimation">27.2.1. Non-Parametric Density Estimation</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hexplots">27.2.1.1. Hexplots</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#kernel-density-estimation">27.2.1.2. Kernel Density Estimation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#density-estimation">32.2. Density Estimation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#non-parametric-density-estimation">32.2.1. Non-Parametric Density Estimation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hexplots">32.2.1.1. Hexplots</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#kernel-density-estimation">32.2.1.2. Kernel Density Estimation</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parametric-methods">27.2.2. Parametric Methods</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-known-distributions-to-data-using-scipy">27.2.2.1. Fitting Known Distributions to Data using SciPy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parametric-methods">32.2.2. Parametric Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-known-distributions-to-data-using-scipy">32.2.2.1. Fitting Known Distributions to Data using SciPy</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-mixture-models-gmm">27.2.3. Gaussian Mixture Models (GMM)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-mixture-models-gmm">32.2.3. Gaussian Mixture Models (GMM)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#principal-component-analysis">27.3. Principal Component Analysis</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione-dei-coefficienti-della-pca">27.3.1. Interpretazione dei coefficienti della PCA</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rototraslazione-dei-dati">27.3.2. Rototraslazione dei dati</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decorrelazione-dei-dati">27.3.3. Decorrelazione dei dati</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#riduzione-della-dimensionalita">27.3.4. Riduzione della dimensionalità</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pca-per-la-compressione-dei-dati">27.3.5. PCA per la compressione dei dati</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pca-per-la-visualizzazione-dei-dati">27.3.6. PCA per la visualizzazione dei dati</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#principal-component-analysis">32.3. Principal Component Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione-dei-coefficienti-della-pca">32.3.1. Interpretazione dei coefficienti della PCA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rototraslazione-dei-dati">32.3.2. Rototraslazione dei dati</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decorrelazione-dei-dati">32.3.3. Decorrelazione dei dati</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#riduzione-della-dimensionalita">32.3.4. Riduzione della dimensionalità</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pca-per-la-compressione-dei-dati">32.3.5. PCA per la compressione dei dati</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pca-per-la-visualizzazione-dei-dati">32.3.6. PCA per la visualizzazione dei dati</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">27.4. Esercizi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">32.4. Esercizi</a></li>
 </ul>
             </nav>
         </div>
@@ -527,9 +528,9 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section id="clustering-density-estimation-and-principal-component-analysis">
-<h1><span class="section-number">27. </span>Clustering, Density Estimation, and Principal Component Analysis<a class="headerlink" href="#clustering-density-estimation-and-principal-component-analysis" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">32. </span>Clustering, Density Estimation, and Principal Component Analysis<a class="headerlink" href="#clustering-density-estimation-and-principal-component-analysis" title="Permalink to this heading">#</a></h1>
 <section id="k-means-clustering">
-<h2><span class="section-number">27.1. </span>K-Means Clustering<a class="headerlink" href="#k-means-clustering" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">32.1. </span>K-Means Clustering<a class="headerlink" href="#k-means-clustering" title="Permalink to this heading">#</a></h2>
 <p>L’algoritmo K-Means si pone l’obiettivo di trovare gruppi (<strong>clusters</strong>) di dati in uno spazio multidimensionale. Vediamo un esempio di uso dell’algoritmo K-Means. Consideriamo il dataset “Old Faithful”. Il dataset contiene misurazioni sulle eruzioni del geyser Old Faithful nel Yellowstone National Park, USA. In particolare, ogni record riporta la durata di una eruzione e il tempo passato tra l’eruzione corrente e la successiva. Carichiamo il dataset:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -804,7 +805,7 @@ document.write(`
 </div>
 </div>
 <section id="esempio-con-dataset-digits">
-<h3><span class="section-number">27.1.1. </span>Esempio con dataset DIGITS<a class="headerlink" href="#esempio-con-dataset-digits" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">32.1.1. </span>Esempio con dataset DIGITS<a class="headerlink" href="#esempio-con-dataset-digits" title="Permalink to this heading">#</a></h3>
 <p>Proviamo adesso ad utilizzare un dataset più grande con campioni a più dimensioni. Consideriamo il dataset “digits” di cifre scritte a mano messo a disposizione da scikit-learn:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -937,11 +938,11 @@ Cluster 9. Most frequent label: 7. Purity: 0.86
 </section>
 </section>
 <section id="density-estimation">
-<h2><span class="section-number">27.2. </span>Density Estimation<a class="headerlink" href="#density-estimation" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">32.2. </span>Density Estimation<a class="headerlink" href="#density-estimation" title="Permalink to this heading">#</a></h2>
 <section id="non-parametric-density-estimation">
-<h3><span class="section-number">27.2.1. </span>Non-Parametric Density Estimation<a class="headerlink" href="#non-parametric-density-estimation" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">32.2.1. </span>Non-Parametric Density Estimation<a class="headerlink" href="#non-parametric-density-estimation" title="Permalink to this heading">#</a></h3>
 <section id="hexplots">
-<h4><span class="section-number">27.2.1.1. </span>Hexplots<a class="headerlink" href="#hexplots" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">32.2.1.1. </span>Hexplots<a class="headerlink" href="#hexplots" title="Permalink to this heading">#</a></h4>
 <p>Hexplots are done in Python as follows using <code class="docutils literal notranslate"><span class="pre">seaborn</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1010,7 +1011,7 @@ Cluster 9. Most frequent label: 7. Purity: 0.86
 </div>
 </section>
 <section id="kernel-density-estimation">
-<h4><span class="section-number">27.2.1.2. </span>Kernel Density Estimation<a class="headerlink" href="#kernel-density-estimation" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">32.2.1.2. </span>Kernel Density Estimation<a class="headerlink" href="#kernel-density-estimation" title="Permalink to this heading">#</a></h4>
 <p>Kernel Density Estimation can be performed using seaborn as shown in the following example:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1046,9 +1047,9 @@ Cluster 9. Most frequent label: 7. Purity: 0.86
 </section>
 </section>
 <section id="parametric-methods">
-<h3><span class="section-number">27.2.2. </span>Parametric Methods<a class="headerlink" href="#parametric-methods" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">32.2.2. </span>Parametric Methods<a class="headerlink" href="#parametric-methods" title="Permalink to this heading">#</a></h3>
 <section id="fitting-known-distributions-to-data-using-scipy">
-<h4><span class="section-number">27.2.2.1. </span>Fitting Known Distributions to Data using SciPy<a class="headerlink" href="#fitting-known-distributions-to-data-using-scipy" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">32.2.2.1. </span>Fitting Known Distributions to Data using SciPy<a class="headerlink" href="#fitting-known-distributions-to-data-using-scipy" title="Permalink to this heading">#</a></h4>
 <p>When working with empirical data, it’s often valuable to model the underlying probability distribution to gain insights into the data’s characteristics. SciPy, a scientific library for Python, provides a convenient <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> module that offers various probability distributions for statistical modeling.</p>
 <p>While Scipy implements many distributions, we will see an example with the Gaussian distribution:</p>
 <div class="cell docutils container">
@@ -1075,7 +1076,7 @@ Cluster 9. Most frequent label: 7. Purity: 0.86
 </section>
 </section>
 <section id="gaussian-mixture-models-gmm">
-<h3><span class="section-number">27.2.3. </span>Gaussian Mixture Models (GMM)<a class="headerlink" href="#gaussian-mixture-models-gmm" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">32.2.3. </span>Gaussian Mixture Models (GMM)<a class="headerlink" href="#gaussian-mixture-models-gmm" title="Permalink to this heading">#</a></h3>
 <p>L’algoritmo K-Means suddivide il training set in gruppi assegnando ognuno di essi ad un determinato centroide. Un’altra strategia consiste nel cercare di modellare la distribuzione multimodale dei dati e assegnare ogni dati alla moda più probabile. Volendo trovare <span class="math notranslate nohighlight">\(K\)</span> clusters, supponiamo di modellare la distribuzione di dati come una mistura di <span class="math notranslate nohighlight">\(K\)</span> Gaussiane (Mixture of Gaussians). In questo caso, la probabilità di un dato campione <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> sarà data da:</p>
 <p>\begin{equation}
 p(\mathbf{x}) = \sum_{k=1}^K \pi_k \mathcal{N}(\mathbf{x}\ |\ \mathbf{\mu}_k, \Sigma_k)
@@ -1305,7 +1306,7 @@ Coefficienti:
 </section>
 </section>
 <section id="principal-component-analysis">
-<h2><span class="section-number">27.3. </span>Principal Component Analysis<a class="headerlink" href="#principal-component-analysis" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">32.3. </span>Principal Component Analysis<a class="headerlink" href="#principal-component-analysis" title="Permalink to this heading">#</a></h2>
 <p>Iniziamo considerando un semplice set di dati 2D:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1470,7 +1471,7 @@ dtype: float64
 </div>
 </div>
 <section id="interpretazione-dei-coefficienti-della-pca">
-<h3><span class="section-number">27.3.1. </span>Interpretazione dei coefficienti della PCA<a class="headerlink" href="#interpretazione-dei-coefficienti-della-pca" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">32.3.1. </span>Interpretazione dei coefficienti della PCA<a class="headerlink" href="#interpretazione-dei-coefficienti-della-pca" title="Permalink to this heading">#</a></h3>
 <p>I coefficienti della PCA hanno una interpretazione geometrica semplice da vedere nel caso 2D. Le due colonne della matrice <span class="math notranslate nohighlight">\(W\)</span> rappresentano i due versori del nuovo sistema di riferimento individuato dalla PCA. Verifichiamo innanzitutto che si tratti di due versori:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1513,7 +1514,7 @@ dtype: float64
 </div></blockquote>
 </section>
 <section id="rototraslazione-dei-dati">
-<h3><span class="section-number">27.3.2. </span>Rototraslazione dei dati<a class="headerlink" href="#rototraslazione-dei-dati" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">32.3.2. </span>Rototraslazione dei dati<a class="headerlink" href="#rototraslazione-dei-dati" title="Permalink to this heading">#</a></h3>
 <p>Plottiamo i dati e confrontiamoli con i vecchi:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1549,7 +1550,7 @@ dtype: float64
 <p>In pratica, i dati sono stati roto-traslati. In particolare, essi sono stati traslati lungo i due assi <span class="math notranslate nohighlight">\(x\)</span> e <span class="math notranslate nohighlight">\(y\)</span> in modo da avere media nulla e ruotati in modo che la varianza massima si trovi sull’asse <span class="math notranslate nohighlight">\(x\)</span>. Ciò fa anche in modo che i dati siano decorrelati.</p>
 </section>
 <section id="decorrelazione-dei-dati">
-<h3><span class="section-number">27.3.3. </span>Decorrelazione dei dati<a class="headerlink" href="#decorrelazione-dei-dati" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">32.3.3. </span>Decorrelazione dei dati<a class="headerlink" href="#decorrelazione-dei-dati" title="Permalink to this heading">#</a></h3>
 <p>Calcoliamo le matrici di covarianza dei due set di dati:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1577,7 +1578,7 @@ dtype: float64
 </div></blockquote>
 </section>
 <section id="riduzione-della-dimensionalita">
-<h3><span class="section-number">27.3.4. </span>Riduzione della dimensionalità<a class="headerlink" href="#riduzione-della-dimensionalita" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">32.3.4. </span>Riduzione della dimensionalità<a class="headerlink" href="#riduzione-della-dimensionalita" title="Permalink to this heading">#</a></h3>
 <p>Vediamo adesso un semplicissimo esempio di riduzione della dimensionalità sui dati 2D. Nello specifico, proietteremo i dati sulla prima componente principale. Per farlo, <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> ci permette di specificare un parametro <code class="docutils literal notranslate"><span class="pre">n_components</span></code> al costruttore di <code class="docutils literal notranslate"><span class="pre">PCA</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1685,7 +1686,7 @@ Percentuale di varianza persa: 26.21%
 </div></blockquote>
 </section>
 <section id="pca-per-la-compressione-dei-dati">
-<h3><span class="section-number">27.3.5. </span>PCA per la compressione dei dati<a class="headerlink" href="#pca-per-la-compressione-dei-dati" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">32.3.5. </span>PCA per la compressione dei dati<a class="headerlink" href="#pca-per-la-compressione-dei-dati" title="Permalink to this heading">#</a></h3>
 <p>Vediamo adesso un semplice esempio di compressione dati mediante PCA. In particolare, considereremo il caso della compressione di immagini. Una immagine può essere vista come un dato ad alta dimensionalità, dove il numero di dimensioni è pari al numero di pixel. Ad esempio, una immagine RGB di dimensioni <span class="math notranslate nohighlight">\(640 \times 480\)</span> pixel, ha <span class="math notranslate nohighlight">\(3 \cdot 640 \cdot 480=921600\)</span> dimensioni. Ci aspettiamo che in tutte queste dimensioni ci saranno delle informazioni ridondanti. Un metodo per comprimere le immagini, consiste nel suddividerle in blocchi di dimensione fissa (es. <span class="math notranslate nohighlight">\(8 \times 8\)</span>). Ognuno di questi blocchetti costituirà un elemento che fa parte di una popolazione (la popolazione dei blocchetti <span class="math notranslate nohighlight">\(8 \times 8\)</span> dell’immagine. Supponendo che l’informazione nei blocchetti sia molto correlata, possiamo provare a comprimerla applicando la PCA alla popolazione dei blocchetti e scegliendo solo alcune componenti principali per rappresentare il contenuto dei blocchetti.</p>
 <p>Iniziamo caricando una immagine di esempio  mediante <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>:</p>
 <div class="cell docutils container">
@@ -1882,7 +1883,7 @@ Numero di dimensioni: 819840
 </div></blockquote>
 </section>
 <section id="pca-per-la-visualizzazione-dei-dati">
-<h3><span class="section-number">27.3.6. </span>PCA per la visualizzazione dei dati<a class="headerlink" href="#pca-per-la-visualizzazione-dei-dati" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">32.3.6. </span>PCA per la visualizzazione dei dati<a class="headerlink" href="#pca-per-la-visualizzazione-dei-dati" title="Permalink to this heading">#</a></h3>
 <p>La PCA viene utilizzata anche per permettere di visualizzare dati multidimensionali, ad esempio per avere un’idea di come essi si distribuiscono nello spazio. Consideriamo ad esempio il dataset “digits” messo a disposizione della libreria <strong>scikit-learn</strong>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2012,7 +2013,7 @@ L. Wilson, NIST Form-Based Handprint Recognition System, NISTIR 5469,
 </section>
 </section>
 <section id="esercizi">
-<h2><span class="section-number">27.4. </span>Esercizi<a class="headerlink" href="#esercizi" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">32.4. </span>Esercizi<a class="headerlink" href="#esercizi" title="Permalink to this heading">#</a></h2>
 <blockquote>
 <div><p>🧑‍💻 Esercizio 1</p>
 <p>Si consideri il dataset Boston. Si applichi il K-Means ai dati della variabile <code class="docutils literal notranslate"><span class="pre">medv</span></code>. Si inserisca dunque una nuova colonna <code class="docutils literal notranslate"><span class="pre">priceRange</span></code> nel dataset che contenga i cluster associati ai relativi valori di <code class="docutils literal notranslate"><span class="pre">medv</span></code>. Si suddivida il dataset in training e test set e si alleni un K-NN (trovare un K opportuno) per predire i valori di <code class="docutils literal notranslate"><span class="pre">priceRange</span></code> a partire da tutte le variabili tranne <code class="docutils literal notranslate"><span class="pre">medv</span></code>. Si discutano i risultati ottenuti.</p>
@@ -2067,20 +2068,20 @@ L. Wilson, NIST Form-Based Handprint Recognition System, NISTIR 5469,
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../lectures/17_principal_component_analysis.html"
+       href="../lectures/21_generative_models_for_classification.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">26. </span>Principal Component Analysis</p>
+        <p class="prev-next-title"><span class="section-number">31. </span>Generative Models for Classification</p>
       </div>
     </a>
     <a class="right-next"
-       href="../lectures/18_predictive_modeling.html"
+       href="16_classificazione.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">28. </span>Introduction to Predictive Modelling and Regression Models</p>
+        <p class="prev-next-title"><span class="section-number">33. </span>Classificazione</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -2099,33 +2100,33 @@ L. Wilson, NIST Form-Based Handprint Recognition System, NISTIR 5469,
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-means-clustering">27.1. K-Means Clustering</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esempio-con-dataset-digits">27.1.1. Esempio con dataset DIGITS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-means-clustering">32.1. K-Means Clustering</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esempio-con-dataset-digits">32.1.1. Esempio con dataset DIGITS</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#density-estimation">27.2. Density Estimation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#non-parametric-density-estimation">27.2.1. Non-Parametric Density Estimation</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hexplots">27.2.1.1. Hexplots</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#kernel-density-estimation">27.2.1.2. Kernel Density Estimation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#density-estimation">32.2. Density Estimation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#non-parametric-density-estimation">32.2.1. Non-Parametric Density Estimation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hexplots">32.2.1.1. Hexplots</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#kernel-density-estimation">32.2.1.2. Kernel Density Estimation</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parametric-methods">27.2.2. Parametric Methods</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-known-distributions-to-data-using-scipy">27.2.2.1. Fitting Known Distributions to Data using SciPy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parametric-methods">32.2.2. Parametric Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-known-distributions-to-data-using-scipy">32.2.2.1. Fitting Known Distributions to Data using SciPy</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-mixture-models-gmm">27.2.3. Gaussian Mixture Models (GMM)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-mixture-models-gmm">32.2.3. Gaussian Mixture Models (GMM)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#principal-component-analysis">27.3. Principal Component Analysis</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione-dei-coefficienti-della-pca">27.3.1. Interpretazione dei coefficienti della PCA</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rototraslazione-dei-dati">27.3.2. Rototraslazione dei dati</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decorrelazione-dei-dati">27.3.3. Decorrelazione dei dati</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#riduzione-della-dimensionalita">27.3.4. Riduzione della dimensionalità</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pca-per-la-compressione-dei-dati">27.3.5. PCA per la compressione dei dati</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pca-per-la-visualizzazione-dei-dati">27.3.6. PCA per la visualizzazione dei dati</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#principal-component-analysis">32.3. Principal Component Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione-dei-coefficienti-della-pca">32.3.1. Interpretazione dei coefficienti della PCA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rototraslazione-dei-dati">32.3.2. Rototraslazione dei dati</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decorrelazione-dei-dati">32.3.3. Decorrelazione dei dati</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#riduzione-della-dimensionalita">32.3.4. Riduzione della dimensionalità</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pca-per-la-compressione-dei-dati">32.3.5. PCA per la compressione dei dati</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pca-per-la-visualizzazione-dei-dati">32.3.6. PCA per la visualizzazione dei dati</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">27.4. Esercizi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">32.4. Esercizi</a></li>
 </ul>
   </nav></div>
 
