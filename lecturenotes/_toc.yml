@@ -100,6 +100,7 @@ parts:
   chapters:
   - file: laboratories/
   - file: laboratories/14_clustering_density_estimation_pca
+  - file: laboratories/15_regression_predictive
   - file: laboratories/16_classificazione
   # - file: laboratories/03_intro_numpy
 
