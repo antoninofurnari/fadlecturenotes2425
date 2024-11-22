@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>33. Classificazione &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+    <title>34. Classificazione &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
   
   
   
@@ -68,7 +68,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="32. Clustering, Density Estimation, and Principal Component Analysis" href="14_clustering_density_estimation_pca.html" />
+    <link rel="prev" title="33. Linear Regression from a Predictive Perspective" href="15_regression_predictive.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -261,7 +261,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratory 5</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="14_clustering_density_estimation_pca.html">32. Clustering, Density Estimation, and Principal Component Analysis</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">33. Classificazione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_regression_predictive.html">33. Linear Regression from a Predictive Perspective</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">34. Classificazione</a></li>
 </ul>
 
     </div>
@@ -488,56 +489,56 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#misure-di-valutazione">33.1. Misure di Valutazione</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-e-testing-del-classificatore">33.1.1. Training e testing del classificatore</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#misure-di-valutazione-degli-errori">33.1.2. Misure di valutazione degli errori</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hit-true-positive-e-miss-false-negative">33.1.2.1. Hit (True Positive) e Miss (False Negative)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#errori-di-tipo-i-o-falsi-allarmi-false-positive">33.1.2.2. Errori di tipo I o falsi allarmi (False Positive)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#correct-rejection-true-negative">33.1.2.3. Correct Rejection (True Negative)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#riepilogo-tp-tn-fp-fn">33.1.2.4. Riepilogo: TP, TN, FP, FN</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#misure-di-valutazione">34.1. Misure di Valutazione</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-e-testing-del-classificatore">34.1.1. Training e testing del classificatore</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#misure-di-valutazione-degli-errori">34.1.2. Misure di valutazione degli errori</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hit-true-positive-e-miss-false-negative">34.1.2.1. Hit (True Positive) e Miss (False Negative)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#errori-di-tipo-i-o-falsi-allarmi-false-positive">34.1.2.2. Errori di tipo I o falsi allarmi (False Positive)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#correct-rejection-true-negative">34.1.2.3. Correct Rejection (True Negative)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#riepilogo-tp-tn-fp-fn">34.1.2.4. Riepilogo: TP, TN, FP, FN</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrice-di-confusione">33.1.3. Matrice di Confusione</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizzazione-della-matrice-di-confusione-tnr-tpr-fnr-fpr">33.1.3.1. Normalizzazione della matrice di confusione - TNR, TPR, FNR, FPR</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#precision-recall-e-f-measure">33.1.3.2. Precision, Recall e F-Measure</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy">33.1.3.3. Accuracy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrice-di-confusione">34.1.3. Matrice di Confusione</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizzazione-della-matrice-di-confusione-tnr-tpr-fnr-fpr">34.1.3.1. Normalizzazione della matrice di confusione - TNR, TPR, FNR, FPR</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#precision-recall-e-f-measure">34.1.3.2. Precision, Recall e F-Measure</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy">34.1.3.3. Accuracy</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-delle-diverse-misure-di-performance">33.1.4. 1.3 Uso delle diverse misure di performance</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#classificatore-sempre-positivo">33.1.4.1. Classificatore sempre positivo</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#classificatore-sempre-negativo">33.1.4.2. Classificatore sempre negativo</a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-e-sbilanciamento-delle-classi">33.1.4.2.1. Accuracy e sbilanciamento delle classi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-delle-diverse-misure-di-performance">34.1.4. 1.3 Uso delle diverse misure di performance</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#classificatore-sempre-positivo">34.1.4.1. Classificatore sempre positivo</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#classificatore-sempre-negativo">34.1.4.2. Classificatore sempre negativo</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-e-sbilanciamento-delle-classi">34.1.4.2.1. Accuracy e sbilanciamento delle classi</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nota-sulle-diverse-misure-di-valutazione-di-performance">33.1.5. Nota sulle diverse misure di valutazione di performance</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#errore-di-training-e-errore-di-generalizzazione">33.1.6. Errore di training e errore di generalizzazione</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classificazione-basata-su-soglia-e-curve-roc">33.1.7. Classificazione Basata su Soglia e Curve ROC</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nota-sulle-diverse-misure-di-valutazione-di-performance">34.1.5. Nota sulle diverse misure di valutazione di performance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#errore-di-training-e-errore-di-generalizzazione">34.1.6. Errore di training e errore di generalizzazione</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classificazione-basata-su-soglia-e-curve-roc">34.1.7. Classificazione Basata su Soglia e Curve ROC</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classificazione-nearest-neighbor-k-nn">33.2. Classificazione Nearest Neighbor (K-NN)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trovare-il-valore-ottimale-di-k">33.2.1. Trovare il valore ottimale di K</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classificazione-nearest-neighbor-k-nn">34.2. Classificazione Nearest Neighbor (K-NN)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trovare-il-valore-ottimale-di-k">34.2.1. Trovare il valore ottimale di K</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discriminante-lineare-di-fisher">33.3. Discriminante Lineare di Fisher</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esempio-breast-cancer-dataset">33.3.1. Esempio: Breast Cancer Dataset</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione-geometrica-dei-coefficienti">33.3.2. Interpretazione geometrica dei coefficienti</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discriminante-lineare-di-fisher">34.3. Discriminante Lineare di Fisher</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esempio-breast-cancer-dataset">34.3.1. Esempio: Breast Cancer Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione-geometrica-dei-coefficienti">34.3.2. Interpretazione geometrica dei coefficienti</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-discriminant-analysis">33.4. Linear Discriminant Analysis</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#riduzione-della-dimensionalita-con-lda">33.4.1. Riduzione della Dimensionalità con LDA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-discriminant-analysis">34.4. Linear Discriminant Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#riduzione-della-dimensionalita-con-lda">34.4.1. Riduzione della Dimensionalità con LDA</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classificazione-maximum-a-posteriori-map">33.5. Classificazione Maximum a Posteriori (MAP)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classificatore-basato-su-distanza-di-mahalanobis">33.5.1. Classificatore Basato su Distanza di Mahalanobis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classificazione-maximum-a-posteriori-map">34.5. Classificazione Maximum a Posteriori (MAP)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classificatore-basato-su-distanza-di-mahalanobis">34.5.1. Classificatore Basato su Distanza di Mahalanobis</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-bayes">33.6. Naive Bayes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementazione-map-di-scikit-learn">33.6.1. Implementazione MAP di Scikit-Learn</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-bayes">34.6. Naive Bayes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementazione-map-di-scikit-learn">34.6.1. Implementazione MAP di Scikit-Learn</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">33.7. Esercizi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">34.7. Esercizi</a></li>
 </ul>
             </nav>
         </div>
@@ -550,9 +551,9 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="classificazione">
-<h1><span class="section-number">33. </span>Classificazione<a class="headerlink" href="#classificazione" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">34. </span>Classificazione<a class="headerlink" href="#classificazione" title="Permalink to this heading">#</a></h1>
 <section id="misure-di-valutazione">
-<h2><span class="section-number">33.1. </span>Misure di Valutazione<a class="headerlink" href="#misure-di-valutazione" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">34.1. </span>Misure di Valutazione<a class="headerlink" href="#misure-di-valutazione" title="Permalink to this heading">#</a></h2>
 <p>Finora abbiamo utilizzato regressori lineari e logistici per studiare le relazioni tra le variabili di un dataset. In linea di principio, una volta calcolati, questi due strumenti possono essere utilizzati per fare predizioni su dati mai visti prima. Ad esempio, date nuove misurazioni di tessuto, si potrebbe utilizzare il regressore logistico calcolato precedentemente per determinare in maniera automatica qual è la probabilità che il tessuto contenga un tumore maligno.</p>
 <p>Le misure di valutazione della bontà dei regressori viste finora tuttavia, non fanno uso di dati “mai visti” in fase di costruzione del modello. Pertanto, potrebbe accadere che il modello si comporti bene sui dati utilizzati per costruirlo e che poi abbia performance peggiori su dati nuovi. Questo fenomeno è detto <strong>overfitting</strong> in quanto il modello si specializza “troppo” sul set di dati utilizzato per calcolarlo. Quando il modello funziona bene anche su dati nuovi, si parla invece di <strong>generalizzazione</strong>.</p>
 <p>Caricheremo il dataset <code class="docutils literal notranslate"><span class="pre">biopsy</span></code> come dataset di esempio:</p>
@@ -573,7 +574,7 @@ document.write(`
 </div>
 </div>
 <section id="training-e-testing-del-classificatore">
-<h3><span class="section-number">33.1.1. </span>Training e testing del classificatore<a class="headerlink" href="#training-e-testing-del-classificatore" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">34.1.1. </span>Training e testing del classificatore<a class="headerlink" href="#training-e-testing-del-classificatore" title="Permalink to this heading">#</a></h3>
 <p>Per verificare quanto il modello è generale e utilizzabile per fare predizioni su dati nuovi, in machine learning di suddivide il dataset in due parti:</p>
 <ul class="simple">
 <li><p>Training set: verrà utilizzato per “allenare” il modello. Nel caso di un regressore logistico o lineare, questa fase di training, o allenamento, consiste nel calcolo dei parametri del modello;</p></li>
@@ -794,7 +795,7 @@ Name: cl, dtype: int64
 </div>
 </section>
 <section id="misure-di-valutazione-degli-errori">
-<h3><span class="section-number">33.1.2. </span>Misure di valutazione degli errori<a class="headerlink" href="#misure-di-valutazione-degli-errori" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">34.1.2. </span>Misure di valutazione degli errori<a class="headerlink" href="#misure-di-valutazione-degli-errori" title="Permalink to this heading">#</a></h3>
 <p>Abbiamo detto che per valutare quanto il regressore logistico sia “buono”, possiamo confrontare le etichette predette (<code class="docutils literal notranslate"><span class="pre">train_preds</span></code>) con quelle corrette (<code class="docutils literal notranslate"><span class="pre">train_gt</span></code>) contando “quanti errori” vengono fatti dal modello. Nello specifico, esistono diversi modi per misurare le performance di un classificatore. In questo laboratorio vedremo:</p>
 <ul class="simple">
 <li><p>True Positive (o Hit);</p></li>
@@ -808,7 +809,7 @@ Name: cl, dtype: int64
 <li><p>Accuracy.</p></li>
 </ul>
 <section id="hit-true-positive-e-miss-false-negative">
-<h4><span class="section-number">33.1.2.1. </span>Hit (True Positive) e Miss (False Negative)<a class="headerlink" href="#hit-true-positive-e-miss-false-negative" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">34.1.2.1. </span>Hit (True Positive) e Miss (False Negative)<a class="headerlink" href="#hit-true-positive-e-miss-false-negative" title="Permalink to this heading">#</a></h4>
 <p>Le più semplici misure di performance di un classificatore sono hit e miss. Una predizione può essere classificata come un “hit” o un “miss” come segue:</p>
 <ul class="simple">
 <li><p><strong>hit</strong>: se l’elemento è stato classificato come positivo (variabile dipendente pari a <span class="math notranslate nohighlight">\(1\)</span>) ed era effettivamente positivo. Si dice anche che l’elemento è un <strong>True Positive (TP)</strong>, ovvero un “vero positivo”;</p></li>
@@ -864,7 +865,7 @@ Numero di miss: 3
 </div></blockquote>
 </section>
 <section id="errori-di-tipo-i-o-falsi-allarmi-false-positive">
-<h4><span class="section-number">33.1.2.2. </span>Errori di tipo I o falsi allarmi (False Positive)<a class="headerlink" href="#errori-di-tipo-i-o-falsi-allarmi-false-positive" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">34.1.2.2. </span>Errori di tipo I o falsi allarmi (False Positive)<a class="headerlink" href="#errori-di-tipo-i-o-falsi-allarmi-false-positive" title="Permalink to this heading">#</a></h4>
 <p>Si parla di errori di tipo I o di falsi allarmi per tutti gli elementi che vengono classificati come positivi, ma erano in realtà dei negativi. In questo caso, si parla anche di <strong>False Positive (FP)</strong>, ovvero “falsi positivi”. Calcoliamo il numero di falsi allarmi:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -881,7 +882,7 @@ Numero di miss: 3
 </div>
 </section>
 <section id="correct-rejection-true-negative">
-<h4><span class="section-number">33.1.2.3. </span>Correct Rejection (True Negative)<a class="headerlink" href="#correct-rejection-true-negative" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">34.1.2.3. </span>Correct Rejection (True Negative)<a class="headerlink" href="#correct-rejection-true-negative" title="Permalink to this heading">#</a></h4>
 <p>Quando un elemento è stato classificato come negativo ed era effettivamente un negativo si parla di <strong>True Negative (TN)</strong>, ovvero “Veri Negativi” o, alternativamente, di “correct rejection”. Vediamo come calcolare il numero di veri negativi:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -898,7 +899,7 @@ Numero di miss: 3
 </div>
 </section>
 <section id="riepilogo-tp-tn-fp-fn">
-<h4><span class="section-number">33.1.2.4. </span>Riepilogo: TP, TN, FP, FN<a class="headerlink" href="#riepilogo-tp-tn-fp-fn" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">34.1.2.4. </span>Riepilogo: TP, TN, FP, FN<a class="headerlink" href="#riepilogo-tp-tn-fp-fn" title="Permalink to this heading">#</a></h4>
 <p>Riepilogando, ogni elemento può essere considerato come:</p>
 <ul class="simple">
 <li><p><strong>True Positive (TP)</strong>: se è stato classificato come positivo ed era effettivamente un positivo;</p></li>
@@ -910,7 +911,7 @@ Numero di miss: 3
 </section>
 </section>
 <section id="matrice-di-confusione">
-<h3><span class="section-number">33.1.3. </span>Matrice di Confusione<a class="headerlink" href="#matrice-di-confusione" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">34.1.3. </span>Matrice di Confusione<a class="headerlink" href="#matrice-di-confusione" title="Permalink to this heading">#</a></h3>
 <p>Una matrice di confusione riassume i quattro numeri appena visti in forma tabulare. La matrice di confusione per un classificatore su <span class="math notranslate nohighlight">\(N\)</span> classi può essere definita come una matrice <span class="math notranslate nohighlight">\(C\)</span> di dimensioni <span class="math notranslate nohighlight">\(N \times N\)</span> in cui l’elemento generale <span class="math notranslate nohighlight">\(C_{ij}\)</span> è pari al numero di osservazioni appartenenti alla classe <span class="math notranslate nohighlight">\(i\)</span> e predetti come appartenenti alla classe <span class="math notranslate nohighlight">\(j\)</span>. Considerato che la classe negativa ha indice <span class="math notranslate nohighlight">\(0\)</span> e la classe positiva ha indice <span class="math notranslate nohighlight">\(1\)</span>, nel caso della classificazione binaria, la matrice si presenta come segue:</p>
 <br>
 <center>
@@ -970,7 +971,7 @@ Numero di Ture Positive: 61
 </div>
 </div>
 <section id="normalizzazione-della-matrice-di-confusione-tnr-tpr-fnr-fpr">
-<h4><span class="section-number">33.1.3.1. </span>Normalizzazione della matrice di confusione - TNR, TPR, FNR, FPR<a class="headerlink" href="#normalizzazione-della-matrice-di-confusione-tnr-tpr-fnr-fpr" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">34.1.3.1. </span>Normalizzazione della matrice di confusione - TNR, TPR, FNR, FPR<a class="headerlink" href="#normalizzazione-della-matrice-di-confusione-tnr-tpr-fnr-fpr" title="Permalink to this heading">#</a></h4>
 <p>La matrice di confusione riporta il numero di errori e predizioni corrette. Questi numeri vanno interpretati considerando la numerosità delle classi (un TP pari a <span class="math notranslate nohighlight">\(50\)</span> va interpretato in maniera diversa se sono presenti <span class="math notranslate nohighlight">\(70\)</span> o <span class="math notranslate nohighlight">\(1000\)</span> elementi in quella classe) e possono essere difficili da leggere quando le classi non sono perfettamente bilanciate. Per ovviare a questi problemi, è possibile normalizzare la matrice per righe, ovvero dividere ogni elemento <span class="math notranslate nohighlight">\(C_{ij}\)</span> per <span class="math notranslate nohighlight">\(C_i=\sum_j{C_{ij}}\)</span>.</p>
 <p>Si noti che la somma dei valori lungo una riga della matrice di confusione indica il numero di elementi appartenenti a quella classe:</p>
 <br>
@@ -1072,7 +1073,7 @@ TPR: 0.953125
 <p>Si noti che, per valutare le performance di un classificatore, è necessario analizzare tutti i e 4 i numeri appena visti. Esistono infatti dei casi in cui osservare solo alcuni indicatori fornisce un quadro parziale della situazione. Vediamo qualche esempio.</p>
 </section>
 <section id="precision-recall-e-f-measure">
-<h4><span class="section-number">33.1.3.2. </span>Precision, Recall e F-Measure<a class="headerlink" href="#precision-recall-e-f-measure" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">34.1.3.2. </span>Precision, Recall e F-Measure<a class="headerlink" href="#precision-recall-e-f-measure" title="Permalink to this heading">#</a></h4>
 <p>Altre due importanti misure di performance sono <strong>precision</strong> e <strong>recall</strong>. Si tratta di due misure complementari, definibili come segue:</p>
 <ul class="simple">
 <li><p>La <strong>precision</strong> misura <strong>quanti dei valori predetti come positivi sono in effetti positivi</strong>. Si misura come segue: <span class="math notranslate nohighlight">\(Precision = \frac{TP}{TP+FP}\)</span>;</p></li>
@@ -1120,7 +1121,7 @@ TPR: 0.953125
 </div>
 </section>
 <section id="accuracy">
-<h4><span class="section-number">33.1.3.3. </span>Accuracy<a class="headerlink" href="#accuracy" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">34.1.3.3. </span>Accuracy<a class="headerlink" href="#accuracy" title="Permalink to this heading">#</a></h4>
 <p>Abbiamo visto che per valutare bene un classificatore, dobbiamo guardare alla matrice di confusione nella sua interezza. Una misura molto semplice che ci permette di ottenere un unico numero da guardare per valutare un classificatore è l’accuracy. L’accuracy misura la frazione di campioni che sono stati correttamente classificati. Essa si calcola come segue:</p>
 <div class="math notranslate nohighlight">
 \[Accuracy = \frac{TP+TN}{TP+TN+FP+FN}\]</div>
@@ -1157,10 +1158,10 @@ TPR: 0.953125
 </section>
 </section>
 <section id="uso-delle-diverse-misure-di-performance">
-<h3><span class="section-number">33.1.4. </span>1.3 Uso delle diverse misure di performance<a class="headerlink" href="#uso-delle-diverse-misure-di-performance" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">34.1.4. </span>1.3 Uso delle diverse misure di performance<a class="headerlink" href="#uso-delle-diverse-misure-di-performance" title="Permalink to this heading">#</a></h3>
 <p>Abbiamo visto che esistono diverse misure di valutazione. In pratica, è spesso conveniente osservare più di una misura alla volta per non farci trarre in inganno. Vediamo qualche esempio con dati “inventati” per illustrare qualcuno di questi casi.</p>
 <section id="classificatore-sempre-positivo">
-<h4><span class="section-number">33.1.4.1. </span>Classificatore sempre positivo<a class="headerlink" href="#classificatore-sempre-positivo" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">34.1.4.1. </span>Classificatore sempre positivo<a class="headerlink" href="#classificatore-sempre-positivo" title="Permalink to this heading">#</a></h4>
 <p>Consideriamo un classificatore che prevede sempre la classe positiva. Possiamo simulare le sue predizioni come segue:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1222,7 +1223,7 @@ Accuracy: 0.37
 </div>
 </section>
 <section id="classificatore-sempre-negativo">
-<h4><span class="section-number">33.1.4.2. </span>Classificatore sempre negativo<a class="headerlink" href="#classificatore-sempre-negativo" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">34.1.4.2. </span>Classificatore sempre negativo<a class="headerlink" href="#classificatore-sempre-negativo" title="Permalink to this heading">#</a></h4>
 <p>Analogamente, potremmo trovarci in presenza di un classificatore che prevede sempre la classe negativa:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1269,7 +1270,7 @@ Accuracy: 0.63
 </div>
 <p>Come notiamo dai warning, precision e F1 non sono ben definite in questo caso.</p>
 <section id="accuracy-e-sbilanciamento-delle-classi">
-<h5><span class="section-number">33.1.4.2.1. </span>Accuracy e sbilanciamento delle classi<a class="headerlink" href="#accuracy-e-sbilanciamento-delle-classi" title="Permalink to this heading">#</a></h5>
+<h5><span class="section-number">34.1.4.2.1. </span>Accuracy e sbilanciamento delle classi<a class="headerlink" href="#accuracy-e-sbilanciamento-delle-classi" title="Permalink to this heading">#</a></h5>
 <p><strong>Attenzione:</strong> benché l’accuracy sia di facile interpretazione, anche essa ha i suoi limiti. Infatti, se il numero di elementi nelle classi è molto sbilanciato, un classificatore degenere può ottenere una accuracy alta. Vediamo un esempio concreto. Supponiamo che un classificatore binario sia caratterizzato dalla seguente matrice di confusione:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1303,7 +1304,7 @@ Accuracy: 0.63
 </section>
 </section>
 <section id="nota-sulle-diverse-misure-di-valutazione-di-performance">
-<h3><span class="section-number">33.1.5. </span>Nota sulle diverse misure di valutazione di performance<a class="headerlink" href="#nota-sulle-diverse-misure-di-valutazione-di-performance" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">34.1.5. </span>Nota sulle diverse misure di valutazione di performance<a class="headerlink" href="#nota-sulle-diverse-misure-di-valutazione-di-performance" title="Permalink to this heading">#</a></h3>
 <p>Abbiamo visto che esistono diverse misure per valutare le performance di un algoritmo (e ne esistono molte altre non trattate in questo laboratorio!). Ogni misura cattura un aspetto diverso del classificatore e dunque, a seconda del problema considerato è opportuno scegliere la misura più corretta per la valutazione delle performance. Vediamo qualche esempio:</p>
 <ul class="simple">
 <li><p><strong>Classificazione di email di spam vs non spam</strong>: supponiamo che “spam” rappresenti la classe positiva e che “non-spam” rappresenti la classe negativa. Da un lato, vorrei un sistema capace di individuare bene entrambe le categorie, dall’altro voglio evitare di cestinare email legittime come “spam”. In questo caso ha senso cercare di costruire un sistema che ottiene una <strong>recall</strong> accettabile (=email di spam effettivamente individuate) con valori di <strong>FPR</strong> bassissimi (=poche email cestinate come spam) e valori di <strong>precision</strong> alti (=ciò che ho individuato come spam era effettivamente spam);</p></li>
@@ -1316,7 +1317,7 @@ Accuracy: 0.63
 </div></blockquote>
 </section>
 <section id="errore-di-training-e-errore-di-generalizzazione">
-<h3><span class="section-number">33.1.6. </span>Errore di training e errore di generalizzazione<a class="headerlink" href="#errore-di-training-e-errore-di-generalizzazione" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">34.1.6. </span>Errore di training e errore di generalizzazione<a class="headerlink" href="#errore-di-training-e-errore-di-generalizzazione" title="Permalink to this heading">#</a></h3>
 <p>Finora abbiamo applicato le misure di valutazione sul test set. Ciò ci permette di capire se il modello può essere utilizzato su nuovi dati non visti in fase di training e dunque se il modello “generalizza” a dati nuovi. L’errore ottenuto sul test set è dunque in genere detto anche “errore di generalizzazione”.</p>
 <p>Un’altra misura che ci permette di capire quanto il classificatore sia buono, soprattutto se confrontata all’errore di generalizzazione, è l’errore di training, ovvero l’errore calcolato sul training set. Vediamo come ottenerlo:</p>
 <div class="cell docutils container">
@@ -1379,7 +1380,7 @@ Matrice di confusione normalizzata:
 </div></blockquote>
 </section>
 <section id="classificazione-basata-su-soglia-e-curve-roc">
-<h3><span class="section-number">33.1.7. </span>Classificazione Basata su Soglia e Curve ROC<a class="headerlink" href="#classificazione-basata-su-soglia-e-curve-roc" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">34.1.7. </span>Classificazione Basata su Soglia e Curve ROC<a class="headerlink" href="#classificazione-basata-su-soglia-e-curve-roc" title="Permalink to this heading">#</a></h3>
 <p>Consideriamo nuovamente il nostro dataset di altezze e pesi:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1728,7 +1729,7 @@ True Positive Rate: 0.78
 </section>
 </section>
 <section id="classificazione-nearest-neighbor-k-nn">
-<h2><span class="section-number">33.2. </span>Classificazione Nearest Neighbor (K-NN)<a class="headerlink" href="#classificazione-nearest-neighbor-k-nn" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">34.2. </span>Classificazione Nearest Neighbor (K-NN)<a class="headerlink" href="#classificazione-nearest-neighbor-k-nn" title="Permalink to this heading">#</a></h2>
 <p>Un classificatore Nearest Neighbor (K-NN) permette di classificare i dati confrontandoli con un insieme pre-esistente di dati etichettati (il training set). Sia <span class="math notranslate nohighlight">\(\mathbf{X}=\{(\mathbf{x}_i, y_i)\}_{i=1}^N\)</span> un dataset etichettato, dove <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> rappresentano i campioni del dataset e <span class="math notranslate nohighlight">\(y_i\)</span> rappresentano le relative etichette e sia <span class="math notranslate nohighlight">\(\overline{\mathbf{x}}\)</span> un nuovo campione di test da classificare. L’algoritmo K-NN cerca prima i <span class="math notranslate nohighlight">\(K\)</span> campioni del training set più simili a <span class="math notranslate nohighlight">\(\overline{\mathbf{x}}\)</span> secondo una qualche misura di similarity <span class="math notranslate nohighlight">\(\delta\)</span>. La classificazione avviene dunque assegnando a <span class="math notranslate nohighlight">\(\overline{\mathbf{x}}\)</span> l’etichetta più frequente fra le <span class="math notranslate nohighlight">\(K\)</span> etichette <span class="math notranslate nohighlight">\(y_i\)</span> dei campioni di training trovati. Per evitare situazioni di incertezza, di solito si sceglie un valore di <span class="math notranslate nohighlight">\(K\)</span> non multiplo del numero di classi. Nel caso in cui <span class="math notranslate nohighlight">\(K = 1\)</span>, l’algoritmo assegna a <span class="math notranslate nohighlight">\(\overline{\mathbf{x}}\)</span> l’etichetta del campione più simile nel training set.</p>
 <p>Vediamo un esempio con il dataset degli iris di Fisher. Carichiamo il dataset:</p>
 <div class="cell docutils container">
@@ -2076,7 +2077,7 @@ Accuracy sul test set: 0.82
 <p>In che modo è cambiato il decision boundary?</p>
 </div></blockquote>
 <section id="trovare-il-valore-ottimale-di-k">
-<h3><span class="section-number">33.2.1. </span>Trovare il valore ottimale di K<a class="headerlink" href="#trovare-il-valore-ottimale-di-k" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">34.2.1. </span>Trovare il valore ottimale di K<a class="headerlink" href="#trovare-il-valore-ottimale-di-k" title="Permalink to this heading">#</a></h3>
 <p>Abbiamo visto come diverse scelte di valori per il parametro <span class="math notranslate nohighlight">\(K\)</span> permettano di modificare il decision boundary trovato implicitamente dall’algoritmo <span class="math notranslate nohighlight">\(K-NN\)</span>. In particolare abbiamo visto come, a seconda di come i dati si distribuiscono nello spazio, un valore più alto di <span class="math notranslate nohighlight">\(K\)</span> permetta di ridurre l’influenza di alcuni outliers, mentre un valore più basso di <span class="math notranslate nohighlight">\(K\)</span> permette di delineare un decision boundary più accurato. Va notato che il valore ottimale di <span class="math notranslate nohighlight">\(K\)</span> dipende dai dati sui quali stiamo lavorando. Proviamo ad esempio a vedere come varia l’accuracy di training per diverse scelte di <span class="math notranslate nohighlight">\(K\)</span>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2150,7 +2151,7 @@ Migliore k: 9.00
 </section>
 </section>
 <section id="discriminante-lineare-di-fisher">
-<h2><span class="section-number">33.3. </span>Discriminante Lineare di Fisher<a class="headerlink" href="#discriminante-lineare-di-fisher" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">34.3. </span>Discriminante Lineare di Fisher<a class="headerlink" href="#discriminante-lineare-di-fisher" title="Permalink to this heading">#</a></h2>
 <p>Siano <span class="math notranslate nohighlight">\(\{x_i\}_{i=1}^N\)</span> un insieme di osservazioni <span class="math notranslate nohighlight">\(D\)</span>-dimensionali suddivise in due classi <span class="math notranslate nohighlight">\(C_1\)</span> e <span class="math notranslate nohighlight">\(C_2\)</span> in modo che <span class="math notranslate nohighlight">\(x_i \in C_1 \oplus x_i \in C_2\)</span>. Vogliamo trovare una trasformazione lineare dei dati in uno spazio monodimensionale:</p>
 <div class="math notranslate nohighlight">
 \[y(\mathbf{x}) = \mathbf{w}^T \mathbf{x}\]</div>
@@ -2246,7 +2247,7 @@ Migliore k: 9.00
 <p>Notiamo che se la matrice di covarianza inter-classe è diagonale, la soluzione trovata è equivalente a quella trovata massimizzando solo <span class="math notranslate nohighlight">\(\mathbf{m}_2-\mathbf{m}_1\)</span>.</p>
 <p>Una volta trovata la proiezione ottimale <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> possiamo proiettare i dati mediante <span class="math notranslate nohighlight">\(y(\mathbf{x})=\mathbf{w}^T\mathbf{x}\)</span>. Dobbiamo dunque trovare la soglia <span class="math notranslate nohighlight">\(y_0\)</span> per classificare i dati utilizzando il discriminante <span class="math notranslate nohighlight">\(y(x)\geq y_0\)</span>. La soglia ottimale <span class="math notranslate nohighlight">\(y_0\)</span> può essere trovata modellando i dati delle due classi mediante due Gaussiane e trovando il punto in cui esse si intersecano.</p>
 <section id="esempio-breast-cancer-dataset">
-<h3><span class="section-number">33.3.1. </span>Esempio: Breast Cancer Dataset<a class="headerlink" href="#esempio-breast-cancer-dataset" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">34.3.1. </span>Esempio: Breast Cancer Dataset<a class="headerlink" href="#esempio-breast-cancer-dataset" title="Permalink to this heading">#</a></h3>
 <p>Vediamo un esempio utilizzando come dataset il “Breast Cancer Wisconsin (Diagnostic) Database”. Possiamo caricarlo tramile <strong>scikit-learn</strong>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2434,7 +2435,7 @@ Migliore k: 9.00
 </div>
 </section>
 <section id="interpretazione-geometrica-dei-coefficienti">
-<h3><span class="section-number">33.3.2. </span>Interpretazione geometrica dei coefficienti<a class="headerlink" href="#interpretazione-geometrica-dei-coefficienti" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">34.3.2. </span>Interpretazione geometrica dei coefficienti<a class="headerlink" href="#interpretazione-geometrica-dei-coefficienti" title="Permalink to this heading">#</a></h3>
 <p>Mettendo insieme la proiezione LDA e la classificazione mediante soglia <span class="math notranslate nohighlight">\(y(\mathbf{x})\)</span>, abbiamo costruito il <strong>discriminante lineare</strong>:</p>
 <div class="math notranslate nohighlight">
 \[z(\mathbf{x}) = \mathbf{w}^T \mathbf{x} + w_0\]</div>
@@ -2513,7 +2514,7 @@ Migliore k: 9.00
 </section>
 </section>
 <section id="linear-discriminant-analysis">
-<h2><span class="section-number">33.4. </span>Linear Discriminant Analysis<a class="headerlink" href="#linear-discriminant-analysis" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">34.4. </span>Linear Discriminant Analysis<a class="headerlink" href="#linear-discriminant-analysis" title="Permalink to this heading">#</a></h2>
 <p>Scikit-Learn contiene una implementazione ottimizzata della LDA. Vediamo come utilizzarla:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2653,7 +2654,7 @@ Medie dei valori in ingresso
 </div>
 </div>
 <section id="riduzione-della-dimensionalita-con-lda">
-<h3><span class="section-number">33.4.1. </span>Riduzione della Dimensionalità con LDA<a class="headerlink" href="#riduzione-della-dimensionalita-con-lda" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">34.4.1. </span>Riduzione della Dimensionalità con LDA<a class="headerlink" href="#riduzione-della-dimensionalita-con-lda" title="Permalink to this heading">#</a></h3>
 <p>La LDA può essere utlizzata anche per riduzioene della dimensionalità. In questo caso, i dati verranno proiettati in uno spazio <span class="math notranslate nohighlight">\(K-1\)</span> dimensionale, dove <span class="math notranslate nohighlight">\(K\)</span> è il numero totale di classi. La proiezione viene sempre effettuata in maniera tale da garantire la separabilità della classi. In generale dunque, l’analisi LDA troverà una matrice di pesi <span class="math notranslate nohighlight">\(W\)</span> di dimensione <span class="math notranslate nohighlight">\(D \times K-1\)</span> che permetta di trasformare i dati in una nuova matrice <span class="math notranslate nohighlight">\(Y\)</span> di dimensione <span class="math notranslate nohighlight">\(K-1 \times N\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[Y=W^T X\]</div>
@@ -2791,7 +2792,7 @@ Medie dei valori in ingresso
 </section>
 </section>
 <section id="classificazione-maximum-a-posteriori-map">
-<h2><span class="section-number">33.5. </span>Classificazione Maximum a Posteriori (MAP)<a class="headerlink" href="#classificazione-maximum-a-posteriori-map" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">34.5. </span>Classificazione Maximum a Posteriori (MAP)<a class="headerlink" href="#classificazione-maximum-a-posteriori-map" title="Permalink to this heading">#</a></h2>
 <p>Abbiamo visto come costruire un classificatore che, mediante la selezione di una opportuna soglia, ci permetta di predire il sesso di un soggetto in base alla sua altezza. Vediamo adesso come implementare un classificatore Maximum a Posteriori per raggiungere lo stesso scopo. Consideriamo le variabili aleatorie <span class="math notranslate nohighlight">\(S\)</span> rappresentante il sesso dei soggetti presenti nel dataset (può assumere i valori M o F) e <span class="math notranslate nohighlight">\(H\)</span> rappresentante l’altezza dei soggetti. Il nostro obiettivo è scegliere il valore di <span class="math notranslate nohighlight">\(S\)</span> più probabile sapendo che <span class="math notranslate nohighlight">\(H\)</span> assume un dato valore <span class="math notranslate nohighlight">\(h\)</span> (es. <span class="math notranslate nohighlight">\(h=175\ cm\)</span>). Secondo il principio MAP, sceglieremo la classe <span class="math notranslate nohighlight">\(s\)</span> che massimizza l’espressione:</p>
 <div class="math notranslate nohighlight">
 \[P(S=s\ |\ H=h)\]</div>
@@ -3056,7 +3057,7 @@ Accuracy: 0.85
 <p>Confrontare la soglia con quella trovata mediante il metodo di ottimizzazione visto nella Sezione 1. Le due soglie sono simili? A che cosa è dovuta la differenza tra le due soglie?</p>
 </div></blockquote>
 <section id="classificatore-basato-su-distanza-di-mahalanobis">
-<h3><span class="section-number">33.5.1. </span>Classificatore Basato su Distanza di Mahalanobis<a class="headerlink" href="#classificatore-basato-su-distanza-di-mahalanobis" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">34.5.1. </span>Classificatore Basato su Distanza di Mahalanobis<a class="headerlink" href="#classificatore-basato-su-distanza-di-mahalanobis" title="Permalink to this heading">#</a></h3>
 <p>Un altro metodo di classificazione consiste nel misurare la distanza dell’elemento <span class="math notranslate nohighlight">\(h\)</span> da classificare rispetto alle due popolazioni alle quali esso può appartenere. Tale misura di distanza viene ottenuta mediante la <strong>distanza di Mahalanobis</strong>. La distanza di <strong>Mahalanobis</strong> tra un vettore <span class="math notranslate nohighlight">\(\mathbf x = (x_1, \ldots, x_n)^T\)</span> multivariato e un gruppo di valori di valor medio <span class="math notranslate nohighlight">\(\mathbf \mu = (\mu_1, \ldots, \mu_n)^T\)</span> e matrice di covarianza <span class="math notranslate nohighlight">\(\Sigma\)</span> si definisce come:</p>
 <div class="math notranslate nohighlight">
 \[D_M(\mathbf{x}) = \sqrt{(\mathbf{x}-\mathbf{\mu})^T \Sigma^{-1}(\mathbf{x}-\mathbf{\mu})}\]</div>
@@ -3203,7 +3204,7 @@ Accuracy: 0.83
 </section>
 </section>
 <section id="naive-bayes">
-<h2><span class="section-number">33.6. </span>Naive Bayes<a class="headerlink" href="#naive-bayes" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">34.6. </span>Naive Bayes<a class="headerlink" href="#naive-bayes" title="Permalink to this heading">#</a></h2>
 <p>Abbiamo visto come il principio MAP ci permette di costruire un semplice classificatore basato sull’osservazione dei valori di una variabile casuale. Spesso però può capitare che la classe di appartenenza di un determinato elemento possa dipendere dai valori di più variabili casuali. Consideriamo ad esempio le variabili aletaorie:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(S\)</span> indica il sesso e può assumere come valori “M” o “F”;</p></li>
@@ -3375,7 +3376,7 @@ Accuracy: 0.83
 </div>
 </div>
 <section id="implementazione-map-di-scikit-learn">
-<h3><span class="section-number">33.6.1. </span>Implementazione MAP di Scikit-Learn<a class="headerlink" href="#implementazione-map-di-scikit-learn" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">34.6.1. </span>Implementazione MAP di Scikit-Learn<a class="headerlink" href="#implementazione-map-di-scikit-learn" title="Permalink to this heading">#</a></h3>
 <p>Si noti che l’oggetto <code class="docutils literal notranslate"><span class="pre">Naive</span> <span class="pre">Bayes</span></code> permette anche di implementare un classificatore di tipo MAP specificando una unica variabile. Vediamo ad esempio come implementare un classificatore MAP basato sulla variabile <code class="docutils literal notranslate"><span class="pre">height</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3396,7 +3397,7 @@ Accuracy: 0.83
 </section>
 </section>
 <section id="esercizi">
-<h2><span class="section-number">33.7. </span>Esercizi<a class="headerlink" href="#esercizi" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">34.7. </span>Esercizi<a class="headerlink" href="#esercizi" title="Permalink to this heading">#</a></h2>
 <blockquote>
 <div><p>🧑‍💻 Esercizio 1</p>
 <p>Si suddivida il dataset Titanic in training e test set. Il test set deve contenere il <span class="math notranslate nohighlight">\(15\%\)</span> degli elementi. Si costruisca un regressore logistico per predire i valori della variabile <code class="docutils literal notranslate"><span class="pre">Survived</span></code> a partire dal training set. Si utilizzi il metodo della backward elimination per eliminare le variabili che non contribuiscono alla regressione in maniera significativa. Si testi il modello ottenuto sul test set considerando le seguenti misure di valutazione:</p>
@@ -3510,12 +3511,12 @@ Accuracy: 0.83
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="14_clustering_density_estimation_pca.html"
+       href="15_regression_predictive.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">32. </span>Clustering, Density Estimation, and Principal Component Analysis</p>
+        <p class="prev-next-title"><span class="section-number">33. </span>Linear Regression from a Predictive Perspective</p>
       </div>
     </a>
 </div>
@@ -3533,56 +3534,56 @@ Accuracy: 0.83
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#misure-di-valutazione">33.1. Misure di Valutazione</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-e-testing-del-classificatore">33.1.1. Training e testing del classificatore</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#misure-di-valutazione-degli-errori">33.1.2. Misure di valutazione degli errori</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hit-true-positive-e-miss-false-negative">33.1.2.1. Hit (True Positive) e Miss (False Negative)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#errori-di-tipo-i-o-falsi-allarmi-false-positive">33.1.2.2. Errori di tipo I o falsi allarmi (False Positive)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#correct-rejection-true-negative">33.1.2.3. Correct Rejection (True Negative)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#riepilogo-tp-tn-fp-fn">33.1.2.4. Riepilogo: TP, TN, FP, FN</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#misure-di-valutazione">34.1. Misure di Valutazione</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-e-testing-del-classificatore">34.1.1. Training e testing del classificatore</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#misure-di-valutazione-degli-errori">34.1.2. Misure di valutazione degli errori</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hit-true-positive-e-miss-false-negative">34.1.2.1. Hit (True Positive) e Miss (False Negative)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#errori-di-tipo-i-o-falsi-allarmi-false-positive">34.1.2.2. Errori di tipo I o falsi allarmi (False Positive)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#correct-rejection-true-negative">34.1.2.3. Correct Rejection (True Negative)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#riepilogo-tp-tn-fp-fn">34.1.2.4. Riepilogo: TP, TN, FP, FN</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrice-di-confusione">33.1.3. Matrice di Confusione</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizzazione-della-matrice-di-confusione-tnr-tpr-fnr-fpr">33.1.3.1. Normalizzazione della matrice di confusione - TNR, TPR, FNR, FPR</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#precision-recall-e-f-measure">33.1.3.2. Precision, Recall e F-Measure</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy">33.1.3.3. Accuracy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrice-di-confusione">34.1.3. Matrice di Confusione</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizzazione-della-matrice-di-confusione-tnr-tpr-fnr-fpr">34.1.3.1. Normalizzazione della matrice di confusione - TNR, TPR, FNR, FPR</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#precision-recall-e-f-measure">34.1.3.2. Precision, Recall e F-Measure</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy">34.1.3.3. Accuracy</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-delle-diverse-misure-di-performance">33.1.4. 1.3 Uso delle diverse misure di performance</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#classificatore-sempre-positivo">33.1.4.1. Classificatore sempre positivo</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#classificatore-sempre-negativo">33.1.4.2. Classificatore sempre negativo</a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-e-sbilanciamento-delle-classi">33.1.4.2.1. Accuracy e sbilanciamento delle classi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-delle-diverse-misure-di-performance">34.1.4. 1.3 Uso delle diverse misure di performance</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#classificatore-sempre-positivo">34.1.4.1. Classificatore sempre positivo</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#classificatore-sempre-negativo">34.1.4.2. Classificatore sempre negativo</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-e-sbilanciamento-delle-classi">34.1.4.2.1. Accuracy e sbilanciamento delle classi</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nota-sulle-diverse-misure-di-valutazione-di-performance">33.1.5. Nota sulle diverse misure di valutazione di performance</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#errore-di-training-e-errore-di-generalizzazione">33.1.6. Errore di training e errore di generalizzazione</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classificazione-basata-su-soglia-e-curve-roc">33.1.7. Classificazione Basata su Soglia e Curve ROC</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nota-sulle-diverse-misure-di-valutazione-di-performance">34.1.5. Nota sulle diverse misure di valutazione di performance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#errore-di-training-e-errore-di-generalizzazione">34.1.6. Errore di training e errore di generalizzazione</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classificazione-basata-su-soglia-e-curve-roc">34.1.7. Classificazione Basata su Soglia e Curve ROC</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classificazione-nearest-neighbor-k-nn">33.2. Classificazione Nearest Neighbor (K-NN)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trovare-il-valore-ottimale-di-k">33.2.1. Trovare il valore ottimale di K</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classificazione-nearest-neighbor-k-nn">34.2. Classificazione Nearest Neighbor (K-NN)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trovare-il-valore-ottimale-di-k">34.2.1. Trovare il valore ottimale di K</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discriminante-lineare-di-fisher">33.3. Discriminante Lineare di Fisher</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esempio-breast-cancer-dataset">33.3.1. Esempio: Breast Cancer Dataset</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione-geometrica-dei-coefficienti">33.3.2. Interpretazione geometrica dei coefficienti</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discriminante-lineare-di-fisher">34.3. Discriminante Lineare di Fisher</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esempio-breast-cancer-dataset">34.3.1. Esempio: Breast Cancer Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione-geometrica-dei-coefficienti">34.3.2. Interpretazione geometrica dei coefficienti</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-discriminant-analysis">33.4. Linear Discriminant Analysis</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#riduzione-della-dimensionalita-con-lda">33.4.1. Riduzione della Dimensionalità con LDA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-discriminant-analysis">34.4. Linear Discriminant Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#riduzione-della-dimensionalita-con-lda">34.4.1. Riduzione della Dimensionalità con LDA</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classificazione-maximum-a-posteriori-map">33.5. Classificazione Maximum a Posteriori (MAP)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classificatore-basato-su-distanza-di-mahalanobis">33.5.1. Classificatore Basato su Distanza di Mahalanobis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classificazione-maximum-a-posteriori-map">34.5. Classificazione Maximum a Posteriori (MAP)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classificatore-basato-su-distanza-di-mahalanobis">34.5.1. Classificatore Basato su Distanza di Mahalanobis</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-bayes">33.6. Naive Bayes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementazione-map-di-scikit-learn">33.6.1. Implementazione MAP di Scikit-Learn</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-bayes">34.6. Naive Bayes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementazione-map-di-scikit-learn">34.6.1. Implementazione MAP di Scikit-Learn</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">33.7. Esercizi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">34.7. Esercizi</a></li>
 </ul>
   </nav></div>
 
