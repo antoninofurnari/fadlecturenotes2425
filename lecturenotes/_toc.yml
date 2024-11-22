@@ -81,7 +81,7 @@ parts:
 - caption: Laboratory 4
   numbered: True
   chapters:
-  - file: laboratories/14_clustering_density_estimation_pca
+  - file: practicals/01_heart_disease_explorative_inferential_analysis
 - caption: Lecture 14
   numbered: True
   chapters:
@@ -99,6 +99,7 @@ parts:
   numbered: True
   chapters:
   - file: laboratories/
+  - file: laboratories/14_clustering_density_estimation_pca
   - file: laboratories/16_classificazione
   # - file: laboratories/03_intro_numpy
 
