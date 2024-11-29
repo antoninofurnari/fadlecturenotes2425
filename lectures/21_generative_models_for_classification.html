@@ -520,7 +520,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quadratic-discriminant-analysis-qda">31.4. Quadratic Discriminant Analysis (QDA)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-bayes-classifier">31.5. Naïve Bayes Classifier</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-assumption">31.5.1. Naïve Assumption</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-naive-bayes">31.5.2. Gaussian naïve Bayes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-naive-bayes">31.5.2. Gaussian Naïve Bayes</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-bayes-and-qda">31.5.3. Naive Bayes and QDA</a></li>
 </ul>
 </li>
@@ -802,7 +802,7 @@ P(\text{Ham} \mid \text{Offer} = \text{Yes}, \text{Free} = \text{Yes}) = \frac{0
 </section>
 <section id="linear-discriminant-analysis-lda">
 <h2><span class="section-number">31.3. </span>Linear Discriminant Analysis (LDA)<a class="headerlink" href="#linear-discriminant-analysis-lda" title="Permalink to this heading">#</a></h2>
-<p>Linear Discriminant Analysis (LDA) is a generalization of Fisher’s Linear Discriminant (FLD) which makes additional assumptions on the data. As FLD, also LDA is closely related to PCA in that it finds a linear transformation of the data which better explains it (in the case of LDA the aim is to discriminate the different classes).</p>
+<p>Linear Discriminant Analysis (LDA) is a generative approach with a discriminative interpretation that brings to a formulation similar to Fisher’s Linear Discriminant (FLD), but making additional assumptions on the data, notably that <strong>examples within a class are normally distributed and that they share the same covariance matrix across classes</strong>. These assumption are made because LDA is an essence a generative algorithm which needs to perform density estimation. As FLD, also LDA is closely related to PCA in that it finds a linear transformation of the data which better explains it (in the case of LDA the aim is to discriminate the different classes).</p>
 <section id="linear-discriminant-analysis-for-d-1">
 <h3><span class="section-number">31.3.1. </span>Linear Discriminant Analysis for D=1<a class="headerlink" href="#linear-discriminant-analysis-for-d-1" title="Permalink to this heading">#</a></h3>
 <p>We will start by considering the case in which the data is uni-dimensional, hence <span class="math notranslate nohighlight">\(D=1\)</span>. Recall that, since LDA is a generative algorithm, our goal is to estimate the terms:</p>
@@ -834,10 +834,10 @@ P(\text{Ham} \mid \text{Offer} = \text{Yes}, \text{Free} = \text{Yes}) = \frac{0
 <div class="math notranslate nohighlight">
 \[log(P(C_k|x)) = \log \pi_k - \frac{1}{2\sigma^2} (x-\mu_k)^2 + Cst.\]</div>
 <p>Where <span class="math notranslate nohighlight">\(Cst.\)</span> is a constant term arising from the normalization constant of the Gaussian distribution and from the denominator, which is considered a constant as it is independent of <span class="math notranslate nohighlight">\(k\)</span>.</p>
-<p>Note that the quantity</p>
+<p>The quantity</p>
 <div class="math notranslate nohighlight">
 \[\frac{(x-\mu_k)^2}{\sigma^2}\]</div>
-<p>is the <strong>squared Mahalanobis distance</strong>. The Mahalanobis distance is defined as follows:</p>
+<p>is known as the <strong>squared Mahalanobis distance</strong>. The Mahalanobis distance is defined as follows:</p>
 <div class="math notranslate nohighlight">
 \[D_M(x) = \sqrt{\frac{(x-\mu)^2}{\sigma^2}}\]</div>
 <p>The Mahalanobis distance measures <strong>the distance between a point <span class="math notranslate nohighlight">\(x\)</span> and a Gaussian distribution with mean <span class="math notranslate nohighlight">\(\mu\)</span> and standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span></strong>.</p>
@@ -875,7 +875,7 @@ P(\text{Ham} \mid \text{Offer} = \text{Yes}, \text{Free} = \text{Yes}) = \frac{0
 <img alt="../_images/8375158905965d526605cb4120ccf11b84df06597361c8f22a1cc5e7765a6b2e.png" src="../_images/8375158905965d526605cb4120ccf11b84df06597361c8f22a1cc5e7765a6b2e.png" />
 </div>
 </div>
-<p>When the priors are not uniform, the decision boundary will not be exactly at the intersection of the two Gaussian distributions, as shown in the figure below:</p>
+<p>When the priors are not uniform, the decision boundary will not be exactly at the intersection of the two Gaussian distributions, as shown in the figures below:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <img alt="../_images/0ea2be3e85d1cfc6699135811b2c9fe4222d9b96c0f395e24dd82092cf517d7a.png" src="../_images/0ea2be3e85d1cfc6699135811b2c9fe4222d9b96c0f395e24dd82092cf517d7a.png" />
@@ -914,7 +914,7 @@ P(\text{Ham} \mid \text{Offer} = \text{Yes}, \text{Free} = \text{Yes}) = \frac{0
 <h4><span class="section-number">31.3.2.1. </span>Multidimensional Mahalanobis Distance<a class="headerlink" href="#multidimensional-mahalanobis-distance" title="Permalink to this heading">#</a></h4>
 <p>Taking the logarithm of the posterior, we obtain:</p>
 <div class="math notranslate nohighlight">
-\[\log P(C_k|mathbf{x}) = -\frac{1}{2} (\mathbf{x} - \mathbf{\mu}_k)^T \mathbf{\Sigma}^{-1}(\mathbf{x} - \mathbf{\mu}_k) + \log \pi_k + Cst.\]</div>
+\[\log P(C_k|\mathbf{x}) = -\frac{1}{2} (\mathbf{x} - \mathbf{\mu}_k)^T \mathbf{\Sigma}^{-1}(\mathbf{x} - \mathbf{\mu}_k) + \log \pi_k + Cst.\]</div>
 <p>This is the multivariate version of the expression seen in the unidimensional case (<span class="math notranslate nohighlight">\(D=1\)</span>). Note that the expression</p>
 <div class="math notranslate nohighlight">
 \[(\mathbf{x} - \mathbf{\mu}_k)^T \mathbf{\Sigma}^{-1}(\mathbf{x} - \mathbf{\mu}_k)\]</div>
@@ -932,7 +932,7 @@ P(\text{Ham} \mid \text{Offer} = \text{Yes}, \text{Free} = \text{Yes}) = \frac{0
 </section>
 <section id="linear-discriminant-function">
 <h4><span class="section-number">31.3.2.2. </span>Linear Discriminant Function<a class="headerlink" href="#linear-discriminant-function" title="Permalink to this heading">#</a></h4>
-<p>Also in this case, LDA allows to define a multi-class linear discriminant functions:</p>
+<p>Also in this case, LDA allows to define a multi-class linear discriminant function:</p>
 <div class="math notranslate nohighlight">
 \[\delta_k(\mathbf{x}) = \log(P(C_k|\mathbf{x}))) = \mathbf{w}_k^T \mathbf{x} + w_{k0} + Cst.\]</div>
 <p>where:</p>
@@ -963,7 +963,7 @@ P(\text{Ham} \mid \text{Offer} = \text{Yes}, \text{Free} = \text{Yes}) = \frac{0
 </section>
 <section id="quadratic-discriminant-analysis-qda">
 <h2><span class="section-number">31.4. </span>Quadratic Discriminant Analysis (QDA)<a class="headerlink" href="#quadratic-discriminant-analysis-qda" title="Permalink to this heading">#</a></h2>
-<p>Quadratic Discriminant Analysis has a similar formulation to Linear Discriminant Analysis, but it <strong>removes the assumption that covariance matrices in the different classes should be the same</strong>, which was formulated as:</p>
+<p>Quadratic Discriminant Analysis has formulation similar to the one of Linear Discriminant Analysis, but it <strong>removes the assumption that covariance matrices in the different classes should be the same</strong>, which was formulated as:</p>
 <div class="math notranslate nohighlight">
 \[\mathbf{\Sigma}_1 = \mathbf{\Sigma}_2 = \ldots = \mathbf{\Sigma}_k = \mathbf{\Sigma}\]</div>
 <p>In this sense, LDA can be seen as a specific case of QDA.</p>
@@ -1002,7 +1002,7 @@ rule. Hence, we could obtain:</p>
 <span class="math notranslate nohighlight">\(P(X_{i}|X_{1},\ldots,X_{i - 1},C)\)</span> are conditioned also on other
 features, which makes them not easy to model.</p>
 <p>We can make the <strong>naïve assumption</strong> that <strong>the input features are
-conditional independent given the class</strong>. That is, if the examples are
+conditionally independent given the class</strong>. That is, if the examples are
 represented by the multimodal random variable
 <span class="math notranslate nohighlight">\(X = \lbrack X_{1},\ldots,X_{n}\rbrack\)</span> (features) and <span class="math notranslate nohighlight">\(C\)</span> (class):</p>
 <div class="math notranslate nohighlight">
@@ -1043,7 +1043,7 @@ consider a multinomial distribution, the classification method is called
 “Multinomial Naïve Bayes”.</p>
 </section>
 <section id="gaussian-naive-bayes">
-<h3><span class="section-number">31.5.2. </span>Gaussian naïve Bayes<a class="headerlink" href="#gaussian-naive-bayes" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">31.5.2. </span>Gaussian Naïve Bayes<a class="headerlink" href="#gaussian-naive-bayes" title="Permalink to this heading">#</a></h3>
 <p>Let us consider again our sex classification example based on height and
 weight. We will consider <span class="math notranslate nohighlight">\(X = \lbrack H,W\rbrack\)</span>, which are random
 variables representing heights and weights of subjects. If we assume
@@ -1195,7 +1195,7 @@ Gaussian distributions:</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quadratic-discriminant-analysis-qda">31.4. Quadratic Discriminant Analysis (QDA)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-bayes-classifier">31.5. Naïve Bayes Classifier</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-assumption">31.5.1. Naïve Assumption</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-naive-bayes">31.5.2. Gaussian naïve Bayes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-naive-bayes">31.5.2. Gaussian Naïve Bayes</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-bayes-and-qda">31.5.3. Naive Bayes and QDA</a></li>
 </ul>
 </li>
