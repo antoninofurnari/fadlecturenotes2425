@@ -491,7 +491,8 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-regressor-as-a-discriminative-classifier">30.1. The Logistic Regressor as a Discriminative Classifier</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-and-softmax-regressors-as-discriminative-multi-class-classifiers">30.1.1. Multinomial and Softmax Regressors as Discriminative Multi-Class Classifiers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-regressor-as-a-discriminative-multi-class-classifier">30.1.1. Multinomial Regressor as a Discriminative Multi-Class Classifier</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#softmax-regressor-as-a-discriminative-multi-class-classifier-optional">30.1.2. Softmax Regressor as a Discriminative Multi-Class Classifier (Optional)</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nearest-neighbor-classification">30.2. K-Nearest Neighbor Classification</a><ul class="nav section-nav flex-column">
@@ -529,7 +530,7 @@ document.write(`
 <p>While <strong>not all discriminative models are probabilistic</strong>, probabilistic discriminative classifiers usually obtain classification by modeling <em>directly</em> the conditional probability distribution:</p>
 <div class="math notranslate nohighlight">
 \[P(Y|X)\]</div>
-<p>where <span class="math notranslate nohighlight">\(X\)</span> is the random variable containing the input observation and <span class="math notranslate nohighlight">\(Y\)</span> is the random variable containing the associated class. Since <span class="math notranslate nohighlight">\(Y\)</span> is discrete and we have a finite number of classes <span class="math notranslate nohighlight">\(M\)</span>, once we model this conditional probability, we can easily classify an observation <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> using the following function:</p>
+<p>where <span class="math notranslate nohighlight">\(X\)</span> is the random variable containing the input observation and <span class="math notranslate nohighlight">\(Y\)</span> is the random variable containing the associated class. Since <span class="math notranslate nohighlight">\(Y\)</span> is discrete and we have a finite number of classes <span class="math notranslate nohighlight">\(M\)</span>, once we model this conditional probability, we can easily classify an observation <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> using the following function (<strong>which directly maps input features to class labels</strong>):</p>
 <div class="math notranslate nohighlight">
 \[h(\mathbf{x}) = \arg_c \max P(Y=c|X=\mathbf{x})\]</div>
 <p>This is easily done by computing the above conditional probability for all values <span class="math notranslate nohighlight">\(c=0, \ldots, M-1\)</span> keeping <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> fixed and keeping the class <span class="math notranslate nohighlight">\(c\)</span> which gives the largest probability value.</p>
@@ -541,7 +542,7 @@ document.write(`
 <p>While this model outputs a probability value, we can easily threshold the output probability value to obtain classifications:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}h(\mathbf{x}) = \begin{cases} 1 &amp; \text{if} &amp; \sigma(\beta_0 + \beta_1 x_1 + \ldots + \beta_n x_n) \geq 0.5 \\ 0 &amp; \text{otherwise}&amp;\end{cases}\end{split}\]</div>
-<p>It can be seen that optimizing the logistic regressor as we have seen in previous lectures corresponds to minimize the empirical risk for a given loss function penalizing incorrect predictions.</p>
+<p>It can be seen that optimizing the logistic regressor as we have seen in previous lectures corresponds to minimizing the empirical risk for a given loss function penalizing incorrect predictions.</p>
 <p>As previously mentioned, discriminative classifiers explicitly model the decision boundary. We have already seen that in the case of a logistic regressor, the decision boundary is defined as follows:</p>
 <div class="math notranslate nohighlight">
 \[P\left(y=1 | \mathbf{x} \right) = 0.5 \Leftrightarrow e^{- (\beta_{0} + \beta_{1}x_{1} + \beta_{2}x_{2} + \ldots + \beta_{n} x_n)} = 1 \Leftrightarrow 0 = \beta_{0} + \beta_{1}x_{1} + \beta_{2}x_{2} + \ldots + \beta_n x_n\]</div>
@@ -554,25 +555,32 @@ document.write(`
 <img alt="../_images/a9efe50e686aff8f8f596d46ec335e884e0353def6f040658738437bd2191585.png" src="../_images/a9efe50e686aff8f8f596d46ec335e884e0353def6f040658738437bd2191585.png" />
 </div>
 </div>
-<section id="multinomial-and-softmax-regressors-as-discriminative-multi-class-classifiers">
-<h3><span class="section-number">30.1.1. </span>Multinomial and Softmax Regressors as Discriminative Multi-Class Classifiers<a class="headerlink" href="#multinomial-and-softmax-regressors-as-discriminative-multi-class-classifiers" title="Permalink to this heading">#</a></h3>
-<p>Similarly, we can see the multinomial and softmax regressors as multi-class classifiers, i.e., classifiers when the number of classes is larger than 2. Recall that a multinomial classifier can be used to predict probabilities with the following formulas:</p>
+<section id="multinomial-regressor-as-a-discriminative-multi-class-classifier">
+<h3><span class="section-number">30.1.1. </span>Multinomial Regressor as a Discriminative Multi-Class Classifier<a class="headerlink" href="#multinomial-regressor-as-a-discriminative-multi-class-classifier" title="Permalink to this heading">#</a></h3>
+<p>Similarly, we can see the multinomial regressor as a multi-class classifier, i.e., a classifies with a number of classes larger than 2. Recall that a multinomial classifier can be used to predict probabilities with the following formulas:</p>
 <div class="math notranslate nohighlight">
 \[ P(Y=k|X=\mathbf{x}) = \frac{e^{\mathbf{\beta_k}^T\mathbf{X}}}{1+\sum_{l=2}^K \mathbf{e^{\beta_l^T\mathbf{X}}}}\]</div>
 <div class="math notranslate nohighlight">
 \[ P(Y=1|X=\mathbf{x}) = \frac{1}{1+\sum_{l=2}^K \mathbf{e^{\beta_l^T\mathbf{X}}}}\]</div>
-<p>In a softamx regressor, probabilities can instead be predicted with the following formula:</p>
-<div class="math notranslate nohighlight">
-\[ P(Y=k|X=\mathbf{x}) = \frac{e^{\mathbf{\beta_k}^T\mathbf{X}}}{\sum_{l=1}^K \mathbf{e^{\beta_l^T\mathbf{X}}}}, \ \ \ \forall k=1,\ldots,K\]</div>
 <p>Similarly to the case of logistic regression, we can then define a classification function as follows:</p>
 <div class="math notranslate nohighlight">
 \[h(\mathbf{x}) = \underset{k}{\mathrm{arg\ max}}\ P(Y=k|X=\mathbf{x})\]</div>
 <p>In practice, we select the class which <strong>maximizes the estimated conditional probability <span class="math notranslate nohighlight">\(P(Y=k|X=\mathbf{x})\)</span></strong>.</p>
 </section>
+<section id="softmax-regressor-as-a-discriminative-multi-class-classifier-optional">
+<h3><span class="section-number">30.1.2. </span>Softmax Regressor as a Discriminative Multi-Class Classifier (Optional)<a class="headerlink" href="#softmax-regressor-as-a-discriminative-multi-class-classifier-optional" title="Permalink to this heading">#</a></h3>
+<p>The same observations apply to the softmax regressor. In this case, probabilities can be predicted with the following formula:</p>
+<div class="math notranslate nohighlight">
+\[ P(Y=k|X=\mathbf{x}) = \frac{e^{\mathbf{\beta_k}^T\mathbf{X}}}{\sum_{l=1}^K \mathbf{e^{\beta_l^T\mathbf{X}}}}, \ \ \ \forall k=1,\ldots,K\]</div>
+<p>The classification function is defined similarly as:</p>
+<div class="math notranslate nohighlight">
+\[h(\mathbf{x}) = \underset{k}{\mathrm{arg\ max}}\ P(Y=k|X=\mathbf{x})\]</div>
+</section>
 </section>
 <section id="k-nearest-neighbor-classification">
 <h2><span class="section-number">30.2. </span>K-Nearest Neighbor Classification<a class="headerlink" href="#k-nearest-neighbor-classification" title="Permalink to this heading">#</a></h2>
-<p>The logistic regressor is a parametric model: its performance depends on the accurate choice of the parameters. Similarly to density estimation methods, parametric models have the advantage to be compact, but they make assumptions on the data. For instance, the logistic regressor assumes that <strong>data is linearly separable</strong>. A different approach to classification consists in the use of non-parametric models, which use the dataset as a support to make their predictions making very few assumptions on the nature of the data.</p>
+<p>The logistic regressor is a parametric model: its performance depends on the accurate choice of its parameters.</p>
+<p>As seen in the case of density estimation methods, parametric models have the advantage to be compact, but they make assumptions on the data. For instance, the logistic regressor assumes that <strong>data is linearly separable</strong>. A different approach to classification consists in the use of non-parametric models, which use the dataset as a support to make their predictions making very few assumptions on the nature of the data.</p>
 <p>The most popular non-parametric classification model is certainly the nearest neighbor algorithm, which is introduced in this section.</p>
 <section id="the-nearest-neighbor-or-1-nn-classification-algorithm">
 <h3><span class="section-number">30.2.1. </span>The Nearest Neighbor (or 1-NN) Classification Algorithm<a class="headerlink" href="#the-nearest-neighbor-or-1-nn-classification-algorithm" title="Permalink to this heading">#</a></h3>
@@ -709,7 +717,7 @@ neighbor classifier seen above.</p>
 <p>Note that once we are able to estimate the posterior probability, we can define the following classification function:</p>
 <div class="math notranslate nohighlight">
 \[h(\mathbf{x}) = \underset{k}{\mathrm{arg\ max}}\ P(C_k|\mathbf{x}) = \underset{k}{\mathrm{arg\ max}}\ N_k \]</div>
-<p>Which corresponds to the K-NN principle.</p>
+<p>Which corresponds to the K-NN principle. Note that this formulation also <strong>provides a method to estimate probabilities besides labels</strong>.</p>
 </section>
 <section id="classification-map-decision-boundary-of-k-nn-and-importance-of-parameter-k">
 <h3><span class="section-number">30.2.4. </span>Classification Map/Decision Boundary Of K-NN and Importance of Parameter K<a class="headerlink" href="#classification-map-decision-boundary-of-k-nn-and-importance-of-parameter-k" title="Permalink to this heading">#</a></h3>
@@ -759,7 +767,7 @@ data point is classified with the most numerous class.</p></li>
 </section>
 <section id="discriminant-functions-and-fisher-s-linear-discriminant">
 <h2><span class="section-number">30.3. </span>Discriminant Functions and Fisher’s Linear Discriminant<a class="headerlink" href="#discriminant-functions-and-fisher-s-linear-discriminant" title="Permalink to this heading">#</a></h2>
-<p>A broad class of discriminative classifier is that of discriminant functions. While discriminant functions can also be non-linear, we will focus only on linear discriminant functions. In the case of two classes, a linear discriminant function takes the following form:</p>
+<p>A broad class of discriminative classifiers is the one of discriminant functions. While discriminant functions can also be non-linear, we will focus only on linear discriminant functions. In the case of two classes, a linear discriminant function takes the following form:</p>
 <div class="math notranslate nohighlight">
 \[y(\mathbf{x}) = \mathbf{w}^T \mathbf{x} + w_0\]</div>
 <p>where <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> is called a weight vector and <span class="math notranslate nohighlight">\(w_0\)</span> is called a bias term. Note that this formulation is identical to the one of a linear regressor. An input vector is assigned to one of the two classes (say class <span class="math notranslate nohighlight">\(1\)</span>) if <span class="math notranslate nohighlight">\(y(\mathbf{x}) \geq 0\)</span> and to the other class (say <span class="math notranslate nohighlight">\(0\)</span>) otherwise. In practice, we can define the following classification function:</p>
@@ -805,15 +813,15 @@ data point is classified with the most numerous class.</p></li>
 <p>More specifically, FLD allows finding a linear transformation that maps a set of data divided into <span class="math notranslate nohighlight">\(K\)</span> classes into a <span class="math notranslate nohighlight">\(K-1\)</span> dimensional space where the data is maximally separable. For example, in the case of binary classification, the data will be projected into a one-dimensional space where they are separable.</p>
 <p><strong>FLD has similarities with Principal Component Analysis (PCA)</strong> as both aim to map data into a subspace with certain characteristics. However, there are two fundamental differences:</p>
 <ul class="simple">
-<li><p>PCA is an <strong>unsupervised method</strong>, meaning it does not require providing any labels (class membership of the data). FLD, on the other hand, is a <strong>supervised method</strong> as it uses labels to find the data projection that makes them separable.</p></li>
-<li><p>When applying PCA, we specify the number of components in the target space. FLD always projects the data into a space of dimension <span class="math notranslate nohighlight">\(K-1\)</span>, where <span class="math notranslate nohighlight">\(K\)</span> is the number of classes.</p></li>
+<li><p>PCA is an <strong>unsupervised method</strong>, meaning that it does not require providing any labels (class membership of the data). FLD, on the other hand, is a <strong>supervised method</strong> as it uses labels to find the data projection that makes them separable.</p></li>
+<li><p>When applying PCA, we specify the number of components in the target space. FLD projects the data into a space of dimension <strong>at most equal to</strong> <span class="math notranslate nohighlight">\(K-1\)</span>, where <span class="math notranslate nohighlight">\(K\)</span> is the number of classes.</p></li>
 </ul>
 <p>Fisher’s Linear Discriminant is often confused with another technique (which we will see later) called “Linear Discriminant Analysis” (LDA). While they are still distinct, they allow to achieve similar results, especially when concerned with dimensionality reduction, hence many libraries implement PCA rather than implementing Fisher’s Linear Discriminant as a supervised dimensionality reduction technique.</p>
 </section>
 <section id="fisher-s-linear-discriminant-for-two-classes">
 <h3><span class="section-number">30.3.2. </span>Fisher’s Linear Discriminant for Two Classes<a class="headerlink" href="#fisher-s-linear-discriminant-for-two-classes" title="Permalink to this heading">#</a></h3>
 <p>The original formulation of the Fisher Linear Discriminant focuses on the case in which the data is divided into two classes.</p>
-<p>Let <span class="math notranslate nohighlight">\(\{x_i\}_{i=1}^N\)</span> be a set of <span class="math notranslate nohighlight">\(D\)</span>-dimensional observations divided into two classes <span class="math notranslate nohighlight">\(C_1\)</span> and <span class="math notranslate nohighlight">\(C_2\)</span> such that <span class="math notranslate nohighlight">\(x_i \in C_1 \lor x_i \in C_2\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(\{x_i\}_{i=1}^N\)</span> be a set of <span class="math notranslate nohighlight">\(D\)</span>-dimensional observations divided into two classes <span class="math notranslate nohighlight">\(C_1\)</span> and <span class="math notranslate nohighlight">\(C_2\)</span> such that <span class="math notranslate nohighlight">\(x_i \in C_1 \veebar x_i \in C_2\)</span> (where <span class="math notranslate nohighlight">\(\veebar\)</span> denotes exclusive OR).</p>
 <p>We want to find a linear transformation of the data into a one-dimensional space:</p>
 <div class="math notranslate nohighlight">
 \[y(\mathbf{x}) = \mathbf{w}^T \mathbf{x}\]</div>
@@ -1055,7 +1063,8 @@ springer, 2006.
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-regressor-as-a-discriminative-classifier">30.1. The Logistic Regressor as a Discriminative Classifier</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-and-softmax-regressors-as-discriminative-multi-class-classifiers">30.1.1. Multinomial and Softmax Regressors as Discriminative Multi-Class Classifiers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-regressor-as-a-discriminative-multi-class-classifier">30.1.1. Multinomial Regressor as a Discriminative Multi-Class Classifier</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#softmax-regressor-as-a-discriminative-multi-class-classifier-optional">30.1.2. Softmax Regressor as a Discriminative Multi-Class Classifier (Optional)</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nearest-neighbor-classification">30.2. K-Nearest Neighbor Classification</a><ul class="nav section-nav flex-column">

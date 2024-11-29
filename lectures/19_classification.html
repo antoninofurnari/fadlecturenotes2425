@@ -495,27 +495,28 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eavaluation-measures">29.2. Eavaluation Measures</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy">29.2.1. Accuracy</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-imbalanced-dataset">29.2.1.1. Example – Imbalanced Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy">29.2.1. Accuracy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-rate">29.2.2. Error Rate</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-imbalanced-dataset">29.2.2.1. Example - Imbalanced Dataset</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-types">29.2.2. Error Types</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">29.2.3. Confusion Matrix</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-spam-detector">29.2.3.1. Example 1 – Spam Detector</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-imbalanced-dataset">29.2.3.2. Example 2 – Imbalanced Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-types">29.2.3. Error Types</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">29.2.4. Confusion Matrix</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-spam-detector">29.2.4.1. Example 1 – Spam Detector</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-imbalanced-dataset">29.2.4.2. Example 2 – Imbalanced Dataset</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#precision-and-recall">29.2.4. Precision and Recall</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#high-precision-vs-high-recall">29.2.4.1. High Precision vs High Recall</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-spam-detector">29.2.4.2. Example – Spam Detector</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#precision-and-recall">29.2.5. Precision and Recall</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#high-precision-vs-high-recall">29.2.5.1. High Precision vs High Recall</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-spam-detector">29.2.5.2. Example – Spam Detector</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-1-score">29.2.5. <span class="math notranslate nohighlight">\(F_{1}\)</span> Score</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">29.2.5.1. Example – Spam Detector</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-1-score">29.2.6. <span class="math notranslate nohighlight">\(F_{1}\)</span> Score</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">29.2.6.1. Example - Spam Detector</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix-for-multi-class-classification">29.2.6. Confusion Matrix for Multi-Class Classification</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#roc-receiver-operating-characteristic-curve-and-area-under-the-curve-auc-measures">29.2.7. ROC (Receiver Operating Characteristic) Curve and Area Under the Curve (AUC) Measures</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix-for-multi-class-classification">29.2.7. Confusion Matrix for Multi-Class Classification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#roc-receiver-operating-characteristic-curve-and-area-under-the-curve-auc-measures">29.2.8. ROC (Receiver Operating Characteristic) Curve and Area Under the Curve (AUC) Measures</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">29.3. References</a></li>
@@ -538,17 +539,17 @@ document.write(`
 <p>Recall that a predictive model is a function defined as follows:</p>
 <div class="math notranslate nohighlight">
 \[h : \mathcal{X} \to \mathcal{Y}\]</div>
-<p>If in the case of regression <span class="math notranslate nohighlight">\(\mathcal{X}=\Re^n\)</span> and <span class="math notranslate nohighlight">\(\mathcal{Y}=\Re^m\)</span>, in the case of classification, the output targets are discrete values <strong>which are generally referred to as “classes”</strong>. Without loss of generality, if there are <span class="math notranslate nohighlight">\(M\)</span> classes, then we define <span class="math notranslate nohighlight">\(\mathcal{Y}=\{1,\ldots,M\}\)</span>. If the input are numerical vectors (it does not have to always be this way, but it’s a common formulation), a classification model can be defined as:</p>
+<p>If in the case of regression <span class="math notranslate nohighlight">\(\mathcal{X}=\Re^n\)</span> and <span class="math notranslate nohighlight">\(\mathcal{Y}=\Re^m\)</span>, in the case of classification, the output targets are discrete values <strong>which are generally referred to as “classes”</strong>. Without loss of generality, if there are <span class="math notranslate nohighlight">\(M\)</span> classes, then we define <span class="math notranslate nohighlight">\(\mathcal{Y}=\{1,\ldots,M\}\)</span>. If the inputs are numerical vectors (it does not have to always be this way, but we can usually employ a representation function to map the input to a numerical vector), a classification model can be defined as:</p>
 <div class="math notranslate nohighlight">
 \[h : \Re^n \to \{0,\ldots,M-1\}\]</div>
 <p>Also in this case, we will assume to have a set of data to train and evaluate our model</p>
 <div class="math notranslate nohighlight">
 \[\text{D}=\{(x_i,y_i)\}_{i=1}^N\]</div>
-<p>Note that in this case <span class="math notranslate nohighlight">\(x_i\in \Re^n\)</span> and <span class="math notranslate nohighlight">\(y_i \in \{0,\ldots,M-1\}\)</span>. Here, the values <span class="math notranslate nohighlight">\(y_i\)</span> are generally called “<strong>labels</strong>”, while the values <span class="math notranslate nohighlight">\(\hat h = h(x)\)</span> predicted using the classifier <span class="math notranslate nohighlight">\(h\)</span> are called <strong>predicted labels</strong>.</p>
+<p>Note that in this case <span class="math notranslate nohighlight">\(x_i\in \Re^n\)</span> and <span class="math notranslate nohighlight">\(y_i \in \{0,\ldots,M-1\}\)</span>. Here, the values <span class="math notranslate nohighlight">\(y_i\)</span> are generally called “<strong>labels</strong>”, while the values <span class="math notranslate nohighlight">\(\hat y = h(x)\)</span> predicted using the classifier <span class="math notranslate nohighlight">\(h\)</span> are called <strong>predicted labels</strong>.</p>
 <p>We can find the optimal model <span class="math notranslate nohighlight">\(h\)</span> by minimizing the empirical risk. A possible loss function is the following one:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}L(\hat y, y) = \begin{cases}1 &amp;\text{ if }&amp; \hat y \neq y \\ 0 &amp;\text{ if }&amp; \hat y=y \end{cases}\end{split}\]</div>
-<p>Hence the empirical risk will be the fraction of correct predictions:</p>
+<p>Hence, the empirical risk will be the fraction of incorrect predictions:</p>
 <div class="math notranslate nohighlight">
 \[R_{emp}(h) = \frac{1}{N} \sum_{i=1}^N L(\hat y_i, y_i) = \frac{\text{number of incorrect predictions}}{N}\]</div>
 <p>The empirical risk computed as defined above is also known as <strong>error rate</strong>. It is a number comprised between <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(1\)</span> which can also be interpreted as a percentage.</p>
@@ -560,7 +561,7 @@ document.write(`
 <p>Classifiers support decision making any time that observations need to be categorized in one of a predefined set of classes. Examples of such problems are:</p>
 <ul class="simple">
 <li><p>Detecting spam emails (<strong>spam vs legitimate email classification</strong>).</p></li>
-<li><p>Classifying Facebook posts as being about politics or something else
+<li><p>Classifying social media posts as being about politics or something else
 (<strong>politics vs non-politics classification</strong>).</p></li>
 <li><p>Recognizing the object depicted in an image out of 1000 different
 objects (<strong>object recognition</strong>).</p></li>
@@ -579,36 +580,22 @@ classification task</strong>, hence <span class="math notranslate nohighlight">\
 </section>
 <section id="eavaluation-measures">
 <h2><span class="section-number">29.2. </span>Eavaluation Measures<a class="headerlink" href="#eavaluation-measures" title="Permalink to this heading">#</a></h2>
-<p>When defining classification algorithms, it is important to measure
-their performance. Performance indicators can be used to <strong>guide
-training</strong> (e.g., modify the parameters in order to improve the
-performance of the algorithm on the training set), <strong>tune
-hyper-parameters</strong> (such as the “K” in K-NN) and to <strong>finally assess
-that the algorithm works on unseen data</strong> (the test set).</p>
-<p>To measure performance, we will first define the <strong>set of ground truth
-test labels</strong>:</p>
+<p>As with the case of regression, we need to define evaluation measures. These will be useful to  <strong>guide
+training</strong> (e.g., modify the parameters in order to improve the performance of the algorithm on the training set), <strong>tune hyper-parameters</strong> and to <strong>finally assess that the algorithm works on unseen data</strong> (the test set).</p>
+<p>As in the case of regression, we will consider the set of <strong>ground truth test labels</strong>:</p>
 <div class="math notranslate nohighlight">
 \[Y_{TE} = \left\{ y^{(i)}|\left( \mathbf{x}^{(i)},y^{(i)} \right) \in TE \right\}_{i}\]</div>
-<p>We will also define the set of <strong>predicted test labels</strong> as follows:</p>
+<p>and the set of <strong>predicted test labels</strong> :</p>
 <div class="math notranslate nohighlight">
 \[{\widehat{Y}}_{TE} = \left\{ h\left( \mathbf{x}^{(i)} \right)|\left( \mathbf{x}^{(i)},y^{(i)} \right) \in TE \right\}_{i}\]</div>
-<p>Ideally, we would like the predicted labels to match the ground truth
-labels, i.e.,  <span class="math notranslate nohighlight">\({\widehat{Y}}_{TE} = Y_{TE}\)</span>. In practice, we will use a
-performance function which associates a real number to the pair
-<span class="math notranslate nohighlight">\((Y_{TE},{\widehat{Y}}_{TE})\)</span> of ground truth and predicted labels. If
-we define <span class="math notranslate nohighlight">\(\mathcal{Y}\)</span> <strong>as the pair of all possible</strong>
-<span class="math notranslate nohighlight">\(\mathbf{(}\mathbf{Y}_{\mathbf{TE}}\mathbf{,}{\widehat{\mathbf{Y}}}_{\mathbf{TE}}\mathbf{)}\)</span>
-<strong>matched pairs</strong>, with <span class="math notranslate nohighlight">\(\left| Y_{TE} \right| = |{\widehat{Y}}_{TE}|\)</span>,
-then our performance function can be defined as:</p>
-<div class="math notranslate nohighlight">
-\[P:\mathcal{Y}{\rightarrow} \Re\]</div>
+<p>which will be used as inputs of our performance measures.</p>
 <section id="accuracy">
 <h3><span class="section-number">29.2.1. </span>Accuracy<a class="headerlink" href="#accuracy" title="Permalink to this heading">#</a></h3>
 <p>Accuracy is a very common performance measure. We define accuracy as
 <strong>the percentage of test examples for which our algorithm has predicted
 the correct label</strong>:</p>
 <div class="math notranslate nohighlight">
-\[Accuracy\left( Y_{TE},{\widehat{Y}}_{TE} \right) = \frac{\left| \left\{ i \middle| y^{(i)} = {\widehat{y}}^{(i)} \right\} \right|}{|Y_{TE}|}\]</div>
+\[Accuracy\left( Y_{TE},{\widehat{Y}}_{TE} \right) = \frac{\left| \left\{ y^{(i)} : y^{(i)} = {\widehat{y}}^{(i)} \right\} \right|}{|Y_{TE}|}\]</div>
 <p>For instance, if the test set contains <span class="math notranslate nohighlight">\(100\)</span> examples and for <span class="math notranslate nohighlight">\(70\)</span> of
 them we have predicted the correct label, then we will have:</p>
 <div class="math notranslate nohighlight">
@@ -616,8 +603,14 @@ them we have predicted the correct label, then we will have:</p>
 <p>Note that accuracy is always a number comprised between 0 and 1. We can
 see the accuracy as a percentage. For instance, in the example above we
 could say that we have an accuracy of <span class="math notranslate nohighlight">\(70\%\)</span>.</p>
+</section>
+<section id="error-rate">
+<h3><span class="section-number">29.2.2. </span>Error Rate<a class="headerlink" href="#error-rate" title="Permalink to this heading">#</a></h3>
+<p>The error rate is closely associated to accuracy and defined as:</p>
+<div class="math notranslate nohighlight">
+\[ErrorRate\left( Y_{TE},{\widehat{Y}}_{TE} \right) = \frac{\left| \left\{ y^{(i)} : y^{(i)} \neq {\widehat{y}}^{(i)} \right\} \right|}{|Y_{TE}|} =  1- Accuracy\left( Y_{TE},{\widehat{Y}}_{TE} \right)\]</div>
 <section id="example-imbalanced-dataset">
-<h4><span class="section-number">29.2.1.1. </span>Example – Imbalanced Dataset<a class="headerlink" href="#example-imbalanced-dataset" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">29.2.2.1. </span>Example - Imbalanced Dataset<a class="headerlink" href="#example-imbalanced-dataset" title="Permalink to this heading">#</a></h4>
 <p>To see the limits of accuracy, let us consider a dataset containing
 <span class="math notranslate nohighlight">\(10000\)</span> elements of two classes distributed as follows:</p>
 <ul class="simple">
@@ -633,15 +626,15 @@ it can be easily seen that its accuracy is <span class="math notranslate nohighl
 </section>
 </section>
 <section id="error-types">
-<h3><span class="section-number">29.2.2. </span>Error Types<a class="headerlink" href="#error-types" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">29.2.3. </span>Error Types<a class="headerlink" href="#error-types" title="Permalink to this heading">#</a></h3>
 <p>The main limitation of the accuracy is that it counts the number of
 mistakes made by the algorithm, but it does not consider which types of
-mistakes it makes. In general, we can make two kinds of mistakes:</p>
+mistakes it makes. In general, on each example, we can make two kinds of mistakes:</p>
 <ul class="simple">
-<li><p><strong>Type 1</strong>: we classify the example as belonging to the considered
+<li><p><strong>Type 1</strong>: we classify an example as belonging to the considered
 class, but it does not. These kinds of misclassifications are often
 called <strong>False Positives (FP)</strong>.</p></li>
-<li><p><strong>Type 2</strong>: we classify the sample as not belonging to the
+<li><p><strong>Type 2</strong>: we classify the example as not belonging to the
 considered class, but it does belong to it. These kinds of
 misclassifications are often called <strong>False Negatives (FN)</strong>.</p></li>
 </ul>
@@ -656,7 +649,7 @@ to that class.</p></li>
 </ul>
 </section>
 <section id="confusion-matrix">
-<h3><span class="section-number">29.2.3. </span>Confusion Matrix<a class="headerlink" href="#confusion-matrix" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">29.2.4. </span>Confusion Matrix<a class="headerlink" href="#confusion-matrix" title="Permalink to this heading">#</a></h3>
 <p>To have a more complete view of how our classifier is performing, we can
 put these numbers in a table which we will call a <strong>confusion matrix</strong>:</p>
 <p><img alt="" src="../_images/confusion.png" /></p>
@@ -672,7 +665,7 @@ the sum of all numbers</strong>. We can see the computation of the accuracy
 from the confusion matrix graphically as follows:</p>
 <p><img alt="" src="../_images/confusion2.png" /></p>
 <section id="example-1-spam-detector">
-<h4><span class="section-number">29.2.3.1. </span>Example 1 – Spam Detector<a class="headerlink" href="#example-1-spam-detector" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">29.2.4.1. </span>Example 1 – Spam Detector<a class="headerlink" href="#example-1-spam-detector" title="Permalink to this heading">#</a></h4>
 <p>Let us consider a spam detector which correctly detects <span class="math notranslate nohighlight">\(40\)</span> out of <span class="math notranslate nohighlight">\(50\)</span>
 spam emails, while it only recognizes <span class="math notranslate nohighlight">\(30\)</span> out of <span class="math notranslate nohighlight">\(50\)</span> legitimate
 emails. The confusion matrix associated to this classifier will be as
@@ -683,7 +676,7 @@ follows:</p>
 \[Accuracy = \frac{40 + 30}{40 + 10 + 20 + 30} = \frac{70}{100} = 0.7\]</div>
 </section>
 <section id="example-2-imbalanced-dataset">
-<h4><span class="section-number">29.2.3.2. </span>Example 2 – Imbalanced Dataset<a class="headerlink" href="#example-2-imbalanced-dataset" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">29.2.4.2. </span>Example 2 – Imbalanced Dataset<a class="headerlink" href="#example-2-imbalanced-dataset" title="Permalink to this heading">#</a></h4>
 <p>Let us now consider the example of our imbalanced dataset with <span class="math notranslate nohighlight">\(9500\)</span>
 data points of class 1 and <span class="math notranslate nohighlight">\(500\)</span> data points of class 0. The confusion
 matrix of the naïve classifier <span class="math notranslate nohighlight">\(f\left( \mathbf{x} \right) = 1\)</span> will be:</p>
@@ -697,7 +690,7 @@ is wrong, and our classifier is not working well</strong>.</p>
 </section>
 </section>
 <section id="precision-and-recall">
-<h3><span class="section-number">29.2.4. </span>Precision and Recall<a class="headerlink" href="#precision-and-recall" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">29.2.5. </span>Precision and Recall<a class="headerlink" href="#precision-and-recall" title="Permalink to this heading">#</a></h3>
 <p>The confusion matrix allows to understand if there is an issue with the
 classifier in the case of imbalanced data. However, it is still
 convenient to have scalar measures which can tell us something about how
@@ -716,7 +709,7 @@ been correctly classified as positives</strong> and is defined as follows:</p>
 follows:</p>
 <p><img alt="" src="../_images/precision_recall.png" /></p>
 <section id="high-precision-vs-high-recall">
-<h4><span class="section-number">29.2.4.1. </span>High Precision vs High Recall<a class="headerlink" href="#high-precision-vs-high-recall" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">29.2.5.1. </span>High Precision vs High Recall<a class="headerlink" href="#high-precision-vs-high-recall" title="Permalink to this heading">#</a></h4>
 <p>These values capture different properties of the classifier. Depending
 on the application, we may want to have a higher precision or a higher
 recall. For example:</p>
@@ -743,7 +736,7 @@ obtain a high precision but a low recall and vice versa), hence it is
 generally <strong>necessary to look at both numbers together</strong>.</p>
 </section>
 <section id="example-spam-detector">
-<h4><span class="section-number">29.2.4.2. </span>Example – Spam Detector<a class="headerlink" href="#example-spam-detector" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">29.2.5.2. </span>Example – Spam Detector<a class="headerlink" href="#example-spam-detector" title="Permalink to this heading">#</a></h4>
 <p>Let us consider again the spam example, with the classifier obtaining
 this confusion matrix:</p>
 <p><img alt="" src="../_images/spam.png" /></p>
@@ -769,7 +762,7 @@ cost of a lower recall.</strong></p>
 </section>
 </section>
 <section id="f-1-score">
-<h3><span class="section-number">29.2.5. </span><span class="math notranslate nohighlight">\(F_{1}\)</span> Score<a class="headerlink" href="#f-1-score" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">29.2.6. </span><span class="math notranslate nohighlight">\(F_{1}\)</span> Score<a class="headerlink" href="#f-1-score" title="Permalink to this heading">#</a></h3>
 <p>We have seen that precision and recall describe different aspects of the
 classifier and hence it is often a good idea to look at them jointly.
 However, it is often convenient to have a single number which classifies
@@ -792,12 +785,16 @@ harmonic mean (the <span class="math notranslate nohighlight">\(F_{1}\)</span> s
 precision and recall values. As can be noted, to obtain a large <span class="math notranslate nohighlight">\(F_{1}\)</span>
 score, we need to have both a large precision and a large recall.</p>
 <section id="id1">
-<h4><span class="section-number">29.2.5.1. </span>Example – Spam Detector<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">29.2.6.1. </span>Example - Spam Detector<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h4>
 <p>Let us consider again the spam example, with the classifier obtaining
 this confusion function:</p>
 <p><img alt="" src="../_images/spam.png" /></p>
-<p>Starting from the precision and recall values previously computed, we
-can compute the <span class="math notranslate nohighlight">\(F_{1}\)</span> score as:</p>
+<p>Starting from the precision and recall values previously computed:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Precision = \frac{40}{20 + 30} = 0.8\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(Recall = \frac{40}{40 + 20} = 0.67\)</span>.</p></li>
+</ul>
+<p>we can compute the <span class="math notranslate nohighlight">\(F_{1}\)</span> score as:</p>
 <div class="math notranslate nohighlight">
 \[F_{1} = 2\frac{precision \cdot recall}{recall + recall} = \frac{1.072}{1.47} = 0.72\]</div>
 <p>Note that, since the dataset is balanced, this value is not very
@@ -805,7 +802,7 @@ different from the accuracy of <span class="math notranslate nohighlight">\(0.7\
 </section>
 </section>
 <section id="confusion-matrix-for-multi-class-classification">
-<h3><span class="section-number">29.2.6. </span>Confusion Matrix for Multi-Class Classification<a class="headerlink" href="#confusion-matrix-for-multi-class-classification" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">29.2.7. </span>Confusion Matrix for Multi-Class Classification<a class="headerlink" href="#confusion-matrix-for-multi-class-classification" title="Permalink to this heading">#</a></h3>
 <p>We have seen the confusion matrix in the case of binary classification.
 However, it should be noted that the confusion matrix generalizes to the
 case in which there are <span class="math notranslate nohighlight">\(M\)</span> classes. In that case, the confusion matrix
@@ -833,7 +830,7 @@ the others). Hence, in the example shown above, we would have three
 </div>
 </section>
 <section id="roc-receiver-operating-characteristic-curve-and-area-under-the-curve-auc-measures">
-<h3><span class="section-number">29.2.7. </span>ROC (Receiver Operating Characteristic) Curve and Area Under the Curve (AUC) Measures<a class="headerlink" href="#roc-receiver-operating-characteristic-curve-and-area-under-the-curve-auc-measures" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">29.2.8. </span>ROC (Receiver Operating Characteristic) Curve and Area Under the Curve (AUC) Measures<a class="headerlink" href="#roc-receiver-operating-characteristic-curve-and-area-under-the-curve-auc-measures" title="Permalink to this heading">#</a></h3>
 <p>As previously mentioned, some binary classifiers output a probability or a confidence score and allow to obtain class predictions by thresholding on such probabilities or scores. When the confidence value is not a probability, it might not be easy to interpret it and find a good threshold. Even when the classifier outputs a probability, the optimal threshold might not be <span class="math notranslate nohighlight">\(0.5\)</span>. For instance, we may want to build an intrusion detection system which is more or less sensitive to potential intrusions.</p>
 <p>The ROC curve allows to evaluate the performance of a classifier independently from the threshold. Specifically, let</p>
 <div class="math notranslate nohighlight">
@@ -968,27 +965,28 @@ the others). Hence, in the example shown above, we would have three
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eavaluation-measures">29.2. Eavaluation Measures</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy">29.2.1. Accuracy</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-imbalanced-dataset">29.2.1.1. Example – Imbalanced Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy">29.2.1. Accuracy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-rate">29.2.2. Error Rate</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-imbalanced-dataset">29.2.2.1. Example - Imbalanced Dataset</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-types">29.2.2. Error Types</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">29.2.3. Confusion Matrix</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-spam-detector">29.2.3.1. Example 1 – Spam Detector</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-imbalanced-dataset">29.2.3.2. Example 2 – Imbalanced Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-types">29.2.3. Error Types</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">29.2.4. Confusion Matrix</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-spam-detector">29.2.4.1. Example 1 – Spam Detector</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-imbalanced-dataset">29.2.4.2. Example 2 – Imbalanced Dataset</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#precision-and-recall">29.2.4. Precision and Recall</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#high-precision-vs-high-recall">29.2.4.1. High Precision vs High Recall</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-spam-detector">29.2.4.2. Example – Spam Detector</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#precision-and-recall">29.2.5. Precision and Recall</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#high-precision-vs-high-recall">29.2.5.1. High Precision vs High Recall</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-spam-detector">29.2.5.2. Example – Spam Detector</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-1-score">29.2.5. <span class="math notranslate nohighlight">\(F_{1}\)</span> Score</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">29.2.5.1. Example – Spam Detector</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-1-score">29.2.6. <span class="math notranslate nohighlight">\(F_{1}\)</span> Score</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">29.2.6.1. Example - Spam Detector</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix-for-multi-class-classification">29.2.6. Confusion Matrix for Multi-Class Classification</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#roc-receiver-operating-characteristic-curve-and-area-under-the-curve-auc-measures">29.2.7. ROC (Receiver Operating Characteristic) Curve and Area Under the Curve (AUC) Measures</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix-for-multi-class-classification">29.2.7. Confusion Matrix for Multi-Class Classification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#roc-receiver-operating-characteristic-curve-and-area-under-the-curve-auc-measures">29.2.8. ROC (Receiver Operating Characteristic) Curve and Area Under the Curve (AUC) Measures</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">29.3. References</a></li>

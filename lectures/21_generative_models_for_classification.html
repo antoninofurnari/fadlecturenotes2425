@@ -492,12 +492,14 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-a-posteriori-map-classification-principle">31.1. Maximum A Posteriori (MAP) Classification Principle</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-prior-p-c">31.1.1. The Prior <span class="math notranslate nohighlight">\(P(C)\)</span></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-evidence-p-x">31.1.2. The Evidence <span class="math notranslate nohighlight">\(P(X)\)</span></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-likelihood-p-x-c">31.1.3. The Likelihood <span class="math notranslate nohighlight">\(P(X|C)\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-likelihood-p-x-c">31.1.2. The Likelihood <span class="math notranslate nohighlight">\(P(X|C)\)</span></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#map-classification-with-discrete-observations">31.2. MAP Classification with Discrete Observations</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">31.2.1. Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#joint-probability-map-classification">31.2. Joint Probability MAP Classification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-prior-probabilities">31.2.1. Step 1: Prior Probabilities</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-contingency-tables">31.2.2. Step 2: Contingency Tables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-normalize-counts-to-obtain-joint-probabilities">31.2.3. Step 3: Normalize Counts to Obtain Joint Probabilities</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-inference-for-a-new-email-observation">31.2.4. Step 4: Inference for a New Email Observation</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-discriminant-analysis-lda">31.3. Linear Discriminant Analysis (LDA)</a><ul class="nav section-nav flex-column">
@@ -536,7 +538,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="generative-models-for-classification">
 <h1><span class="section-number">31. </span>Generative Models for Classification<a class="headerlink" href="#generative-models-for-classification" title="Permalink to this heading">#</a></h1>
-<p>As we have already discussed, discriminative models explicitly model the decision boundary. Probabilistic approaches do so by directly modeling the conditional probability distribution</p>
+<p>As we have already discussed, discriminative models aim to find a direct mapping from inputs to predicted labels. Probabilistic discriminative models, in particular, do so by directly modeling the conditional probability distribution</p>
 <div class="math notranslate nohighlight">
 \[P(Y=k|X=\mathbf{x})\]</div>
 <p>This is for instance the case of a logistic regressor.</p>
@@ -551,56 +553,26 @@ document.write(`
 <p>even if they are mainly used to perform classification in this context.</p>
 <section id="maximum-a-posteriori-map-classification-principle">
 <h2><span class="section-number">31.1. </span>Maximum A Posteriori (MAP) Classification Principle<a class="headerlink" href="#maximum-a-posteriori-map-classification-principle" title="Permalink to this heading">#</a></h2>
-<p>Generative classifiers use the Maximum A Posteriori (MAP) classification principle, which makes use of Bayes’ rule.</p>
-<p>We will begin by considering the following stochastic event:</p>
-<blockquote>
-<div><p><span class="math notranslate nohighlight">\(\mathbf{x}\)</span> being of class <span class="math notranslate nohighlight">\(c\)</span></p>
-</div></blockquote>
-<p>Where <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> is the input example and <span class="math notranslate nohighlight">\(c \in \{ 0,\ldots,M - 1\}\)</span>
-is one of the <span class="math notranslate nohighlight">\(M\)</span> possible classes in our classification problem.</p>
-<p>Let us consider the following conditional probability:</p>
+<p>Let us consider the conditional probability:</p>
 <div class="math notranslate nohighlight">
 \[P(c|\mathbf{x})\]</div>
-<p>This conditional probability answers to the question:</p>
-<p>“What is the probability of observing class c, given an input example
-<span class="math notranslate nohighlight">\(\mathbf{x}\)</span>?”</p>
-<p>If we can quantify such probability for every possible class <span class="math notranslate nohighlight">\(c\)</span>, we
-have a <strong>conditional probability distribution over the classes, given
-the input data</strong>. For instance, if we have a classification problem over
-<span class="math notranslate nohighlight">\(4\)</span> classes, we have the following scheme:</p>
-<p><img alt="" src="../_images/map1.png" /></p>
-<p>The conditional probability distribution allows us to quantify how
-probable it is that the example at hand belongs to a given class. Hence,
-it is natural to classify <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> as belonging to the class <span class="math notranslate nohighlight">\(c’\)</span>
-for which the probability <span class="math notranslate nohighlight">\(P(c'|\mathbf{x})\)</span> is maximum. This process of
-choosing the class which maximizes the probability is written as follows
-in mathematical terms:</p>
-<div class="math notranslate nohighlight">
-\[c' = \arg_{c}{\max{P(c|\mathbf{x})}}\]</div>
-<p>In the example above, we would assign class 2 to the input example:</p>
-<p><img alt="" src="../_images/map2.png" /></p>
-<p>As previously noted, a MAP classifier can be defined as follows:</p>
-<div class="math notranslate nohighlight">
-\[f\left( \mathbf{x} \right) = \arg_{c}{\max{P\left( c \middle| \mathbf{x} \right)}}\]</div>
-<p>The Maximum A Posteriori classification rule offers a practical way to
-make decisions (i.e., classify elements), given probability estimates.
-However, we still need to understand <strong>how to estimate the probability</strong>
-<span class="math notranslate nohighlight">\(\mathbf{P}\mathbf{(}\mathbf{C}\mathbf{|}\mathbf{X}\mathbf{)}\)</span>.</p>
-<p>Unfortunately, <strong>computing such quantity using a frequentist approach is
-not easy when</strong> <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> <strong>is a continuous variable</strong>. Indeed, to
-compute the distribution of classes given an example, we should be able
-to observe all possible classes which a given example can belong to.
-However, we usually have <strong>a single class</strong> associated to a given data
-point, which makes such computation difficult.</p>
-<p>Using the Bayes’ theorem, we have:</p>
+<p>Rather than trying to estimate the probability <span class="math notranslate nohighlight">\(P(c|\mathbf{x})\)</span> directly, generative models rely on Bayes’ theorem:</p>
 <div class="math notranslate nohighlight">
 \[P\left( C \middle| X \right) = \frac{P\left( X \middle| C \right)P(C)}{P(X)}\]</div>
-<p>Using this expression, we need to compute three quantities to obtain the
-hard-to-estimate <span class="math notranslate nohighlight">\(P(C|X)\)</span>:</p>
+<p>As seen in the case of probabilistic discriminative methods (e.g., logistic regressor), we can define our classification algorithm as follows:</p>
+<div class="math notranslate nohighlight">
+\[h\left( \mathbf{x} \right) = \arg_{c}{\max{P\left( c \middle| \mathbf{x} \right)}} = \arg_{c}{\max{\frac{P\left( X \middle| c \right)P(c)}{P(X)}}}\]</div>
+<p>We note that, if we are not interested in computing the actual probabilities $<span class="math notranslate nohighlight">\(P(c|\mathbf{x})\)</span><span class="math notranslate nohighlight">\(, but we only want to assign \)</span>\mathbf{x}<span class="math notranslate nohighlight">\( to the most likely class, we can drop the evidence \)</span>P(X)<span class="math notranslate nohighlight">\(, which is independent of class \)</span>c$. Indeed we note that:</p>
+<div class="math notranslate nohighlight">
+\[P\left( c \middle| \mathbf{x} \right) = \frac{P\left( X \middle| c \right)P(c)}{P(X)} \propto P\left( X \middle| c \right)P(c)\]</div>
+<p>Which leads to:</p>
+<div class="math notranslate nohighlight">
+\[h\left( \mathbf{x} \right) = \arg_{c}{\max{P\left( c \middle| \mathbf{x} \right)}} = \arg_{c}{\max{\frac{P\left( X \middle| c \right)P(c)}{P(X)}}} = \arg_{c}{\max{P\left( X \middle| c \right)P(c)}}\]</div>
+<p>This approach is known as Maximum A Posteriori (MAP) classification as we aim to maximize the posterior probability.</p>
+<p>In order to implement this principle, we need to compute the following three quantities:</p>
 <ul class="simple">
 <li><p>The likelihood <span class="math notranslate nohighlight">\(P(X|C)\)</span>;</p></li>
 <li><p>The prior <span class="math notranslate nohighlight">\(P(C)\)</span>;</p></li>
-<li><p>The evidence <span class="math notranslate nohighlight">\(P(X)\)</span>.</p></li>
 </ul>
 <p>We will now see how to compute each of these quantities.</p>
 <section id="the-prior-p-c">
@@ -629,28 +601,8 @@ terms. This means that, by specifying a prior probability, we are
 introducing our <strong>degree of belief</strong> on what classes are more or less
 likely in the system.</p>
 </section>
-<section id="the-evidence-p-x">
-<h3><span class="section-number">31.1.2. </span>The Evidence <span class="math notranslate nohighlight">\(P(X)\)</span><a class="headerlink" href="#the-evidence-p-x" title="Permalink to this heading">#</a></h3>
-<p>If <span class="math notranslate nohighlight">\(X\)</span> is multi-dimensional, estimating <span class="math notranslate nohighlight">\(P(X)\)</span> can be complicated.
-However, if our goal is not to estimate <span class="math notranslate nohighlight">\(P\left( C \middle| X \right)\)</span>,
-but only to determine the class <span class="math notranslate nohighlight">\(c'\)</span> which maximizes the posterior
-probability <span class="math notranslate nohighlight">\(P(C = c'|X)\)</span>, we can note that we don’t need to estimate
-<span class="math notranslate nohighlight">\(P(X)\)</span>.</p>
-<p>Let us consider the MAP classification rule again:</p>
-<div class="math notranslate nohighlight">
-\[f(\mathbf{x}) = \arg_{c}{\max{P(c|\mathbf{x})}} = \arg_{c}{\max\frac{P\left( \mathbf{x} \middle| c \right)P(c)}{P(\mathbf{x})}}\]</div>
-<p>Since <span class="math notranslate nohighlight">\(P(\mathbf{x})\)</span> is independent form the value of <span class="math notranslate nohighlight">\(C\)</span>, the choice
-of the best class <span class="math notranslate nohighlight">\(c\)</span> does not depend on this term. Hence, we can say
-that <span class="math notranslate nohighlight">\(P\left( C \middle| X \right)\)</span> is proportional to the term in the
-numerator:</p>
-<div class="math notranslate nohighlight">
-\[P\left( C \middle| \mathbf{x} \right) \propto P\left( \mathbf{x} \middle| C \right)P(C)\]</div>
-<p>And hence:</p>
-<div class="math notranslate nohighlight">
-\[f(\mathbf{x}) = \arg_{c}{\max{P(c|\mathbf{x})}} = \arg_{c}{\max{P\left( \mathbf{x} \middle| c \right)P(c)}}\]</div>
-</section>
 <section id="the-likelihood-p-x-c">
-<h3><span class="section-number">31.1.3. </span>The Likelihood <span class="math notranslate nohighlight">\(P(X|C)\)</span><a class="headerlink" href="#the-likelihood-p-x-c" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">31.1.2. </span>The Likelihood <span class="math notranslate nohighlight">\(P(X|C)\)</span><a class="headerlink" href="#the-likelihood-p-x-c" title="Permalink to this heading">#</a></h3>
 <p>While estimating the prior is easy and estimating the evidence is not necessary for classification purposes (it would be indeed necessary if we were to compute probabilities), computing the likelihood term is less straightforward.</p>
 <p>If we have <span class="math notranslate nohighlight">\(M\)</span> different classes, a general approach to estimate the likelihood consists in group all observations belonging to a given class <span class="math notranslate nohighlight">\(C=c\)</span> (let’s call <span class="math notranslate nohighlight">\(X_{c}\)</span> the random variable of the examples
 belonging to this group) and estimate the probability <span class="math notranslate nohighlight">\(P\left( X_{c} \right)\)</span>.</p>
@@ -661,52 +613,191 @@ concretely estimated <span class="math notranslate nohighlight">\(P(X|C)\)</span
 <p>To estimate <span class="math notranslate nohighlight">\(P(X_{c})\)</span> we will generally need to make a few assumptions. Depending on such assumptions, we obtain different generative models.</p>
 </section>
 </section>
-<section id="map-classification-with-discrete-observations">
-<h2><span class="section-number">31.2. </span>MAP Classification with Discrete Observations<a class="headerlink" href="#map-classification-with-discrete-observations" title="Permalink to this heading">#</a></h2>
-<p>If <span class="math notranslate nohighlight">\(X_{c}\)</span> is discrete, we can estimate <span class="math notranslate nohighlight">\(P(X_{c}\)</span>) by counting how many
-times each of the values appear. For instance, if <span class="math notranslate nohighlight">\(X_{c}\)</span> is
-two-dimensional, we can build a 2D table to count co-occurrence of the
-values and estimate the probability in a frequentist way.</p>
-<section id="example">
-<h3><span class="section-number">31.2.1. </span>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h3>
-<p>Let us consider a simplified version of the Fisher Iris classification
-problem in which we have two variables: SepalWidth and SepalLength with
-three levels each “Small”, “Medium” and “Large”. We can consider a 2D
-variable <span class="math notranslate nohighlight">\(X = \lbrack SepalWidth,\ SepalLenght\rbrack\)</span>. The examples can
-belong to three different classes: setosa, versicolor, virginica. We can
-define the three likelihoods <span class="math notranslate nohighlight">\(P\left( X_{setosa} \right)\)</span>,
-<span class="math notranslate nohighlight">\(P(X_{versicolor})\)</span>, and <span class="math notranslate nohighlight">\(P(X_{virginica})\)</span> considering the following
-three tables:</p>
-<p><img alt="" src="../_images/map_fisher1.png" /></p>
-<p>In each of the tables, the rows are related to the SepalWidth variable,
-whereas the columns are related to the SepalLength variable. The tables
-contain absolute counts of the occurrences of specific values of the two
-variables. <strong>We can transform these tables into joint probability
-distributions by dividing each cell by the sum of the values in the
-table</strong>:</p>
-<p><img alt="" src="../_images/map_fisher2.png" /></p>
-<p>The tables above allow to estimate <span class="math notranslate nohighlight">\(P\left( X \middle| C \right)\)</span>. For
-instance, we have:</p>
+<section id="joint-probability-map-classification">
+<h2><span class="section-number">31.2. </span>Joint Probability MAP Classification<a class="headerlink" href="#joint-probability-map-classification" title="Permalink to this heading">#</a></h2>
+<p>We will now see a simple application of the MAP principle which makes use of the direct estimation of the probability <span class="math notranslate nohighlight">\(P(X|C)\)</span> in the case of discrete features. In particular, we will consider an example with two discrete features, so that we have to estimate <span class="math notranslate nohighlight">\(P(X_1,X_2|C)\)</span>.</p>
+<p>Let’s say we want to classify emails as <strong>Spam</strong> or <strong>Ham (Not Spam)</strong> based on the presence of the following words:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(P\left( SepalWidth = Medium,\ \ SepalLength = Small \middle| C = Setosa \right) = 0.72\)</span>;</p></li>
-<li><p><span class="math notranslate nohighlight">\(P\left( SepalWidth = Small,\ \ SepalLength = Medium \middle| C = Versicolor \right) = 0.32\)</span>;</p></li>
-<li><p><span class="math notranslate nohighlight">\(P\left( SepalWidth = Medium,\ \ SepalLength = Large \middle| C = Virginica \right) = 0.24\)</span>;</p></li>
+<li><p><strong>Offer (F1):</strong> Yes/No</p></li>
+<li><p><strong>Free (F2):</strong> Yes/No</p></li>
 </ul>
-<p>If we assign equal priors to the three species <span class="math notranslate nohighlight">\(P(C) = \frac{1}{3}\)</span>, we
-can use the tables above to classify an example. For instance, let us
-consider an example with <span class="math notranslate nohighlight">\(X = \lbrack Medium,\ Medium\rbrack\)</span>, i.e.,
-<span class="math notranslate nohighlight">\(SepalWidth = Medium\)</span> and <span class="math notranslate nohighlight">\(SepalLength = Medium\)</span>. To classify this input
-example, we will perform the following operation:</p>
+<p>Each of these can be considered a binary feature which can either be present or not. Hence both Offer and Free have two possible values “Yes” and “No”.</p>
+<section id="step-1-prior-probabilities">
+<h3><span class="section-number">31.2.1. </span>Step 1: Prior Probabilities<a class="headerlink" href="#step-1-prior-probabilities" title="Permalink to this heading">#</a></h3>
+<p>Let’s start by computing prior probabilities. Counting the number of e-mails in the database, we find the following picture.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Class</p></th>
+<th class="head"><p>Prior Probability ( P(C) )</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Spam</p></td>
+<td><p>( P(\text{Spam}) = 0.6 )</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ham</p></td>
+<td><p>( P(\text{Ham}) = 0.4 )</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<hr class="docutils" />
+<section id="step-2-contingency-tables">
+<h3><span class="section-number">31.2.2. </span>Step 2: Contingency Tables<a class="headerlink" href="#step-2-contingency-tables" title="Permalink to this heading">#</a></h3>
+<p>We now want to estimate the probabilities <span class="math notranslate nohighlight">\(P(X_1,X_2|C)\)</span>. One way to do it is to estimate the two following joint probabilities:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P(Offer,Free|Spam)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(Offer,Free|Ham)\)</span></p></li>
+</ul>
+<p>We will estimate each of them with a contingency table.</p>
+<p><strong>Spam Class Contingency Table</strong></p>
+<p>Let’s say we obtain the following “spam” contingency table:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Free (F2)</strong></p></th>
+<th class="head"><p>Yes</p></th>
+<th class="head"><p>No</p></th>
+<th class="head"><p>Total</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Offer (F1)</strong> Yes</p></td>
+<td><p>30</p></td>
+<td><p>10</p></td>
+<td><p>40</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Offer (F1)</strong> No</p></td>
+<td><p>20</p></td>
+<td><p>10</p></td>
+<td><p>30</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Total</strong></p></td>
+<td><p>50</p></td>
+<td><p>20</p></td>
+<td><p>70</p></td>
+</tr>
+</tbody>
+</table>
+<p>This is obtained by looking at co-occurrences of features for elements in the “spam class”.</p>
+<p><strong>Ham Class Contingency Table</strong></p>
+<p>Similarly, we obtain the “ham” contingency table:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Free (F2)</strong></p></th>
+<th class="head"><p>Yes</p></th>
+<th class="head"><p>No</p></th>
+<th class="head"><p>Total</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Offer (F1)</strong> Yes</p></td>
+<td><p>5</p></td>
+<td><p>15</p></td>
+<td><p>20</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Offer (F1)</strong> No</p></td>
+<td><p>10</p></td>
+<td><p>30</p></td>
+<td><p>40</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Total</strong></p></td>
+<td><p>15</p></td>
+<td><p>45</p></td>
+<td><p>60</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="step-3-normalize-counts-to-obtain-joint-probabilities">
+<h3><span class="section-number">31.2.3. </span>Step 3: Normalize Counts to Obtain Joint Probabilities<a class="headerlink" href="#step-3-normalize-counts-to-obtain-joint-probabilities" title="Permalink to this heading">#</a></h3>
+<p>We can now normalize counts to obtain joint probabilities:</p>
+<p><strong>Normalized Probabilities for Spam Class</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Free (F2)</strong></p></th>
+<th class="head"><p>Yes</p></th>
+<th class="head"><p>No</p></th>
+<th class="head"><p>Total</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Offer (F1)</strong> Yes</p></td>
+<td><p><span class="math notranslate nohighlight">\( \frac{30}{70} = 0.429 \)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\( \frac{10}{70} = 0.143 \)</span></p></td>
+<td><p>0.571</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Offer (F1)</strong> No</p></td>
+<td><p><span class="math notranslate nohighlight">\( \frac{20}{70} = 0.286 \)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\( \frac{10}{70} = 0.143 \)</span></p></td>
+<td><p>0.429</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Total</strong></p></td>
+<td><p>0.714</p></td>
+<td><p>0.286</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Normalized Probabilities for Ham Class</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Free (F2)</strong></p></th>
+<th class="head"><p>Yes</p></th>
+<th class="head"><p>No</p></th>
+<th class="head"><p>Total</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Offer (F1)</strong> Yes</p></td>
+<td><p><span class="math notranslate nohighlight">\( \frac{5}{60} = 0.083 \)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\( \frac{15}{60} = 0.250 \)</span></p></td>
+<td><p>0.333</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Offer (F1)</strong> No</p></td>
+<td><p><span class="math notranslate nohighlight">\( \frac{10}{60} = 0.167 \)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\( \frac{30}{60} = 0.500 \)</span></p></td>
+<td><p>0.667</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Total</strong></p></td>
+<td><p>0.250</p></td>
+<td><p>0.750</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+<p>We now have all we need to implement an MAP classifier.</p>
+</section>
+<section id="step-4-inference-for-a-new-email-observation">
+<h3><span class="section-number">31.2.4. </span>Step 4: Inference for a New Email Observation<a class="headerlink" href="#step-4-inference-for-a-new-email-observation" title="Permalink to this heading">#</a></h3>
+<p>Let’s see how to classify an email with the following characteristics:</p>
+<ul class="simple">
+<li><p><strong>Offer = Yes</strong></p></li>
+<li><p><strong>Free = Yes</strong></p></li>
+</ul>
+<p>Applying the MAP rule, we obtain:</p>
+<p><strong>For Spam:</strong></p>
 <div class="math notranslate nohighlight">
-\[f\left( \lbrack Medium,\ Medium\rbrack \right) = \arg_{c}{\max{P\left( \lbrack Medium,Medium\rbrack \middle| c \right)P(c)}}\]</div>
-<p>To do so we need to compute the following three values:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(P\left( \lbrack Medium,Medium\rbrack \middle| Setosa \right)P(Setosa) = 0 \cdot \frac{1}{3} = 0\)</span>;</p></li>
-<li><p><span class="math notranslate nohighlight">\(P\left( \lbrack Medium,Medium\rbrack \middle| Versicolor \right)P(Setosa) = 0.4 \cdot \frac{1}{3} = 0.13\)</span>;</p></li>
-<li><p><span class="math notranslate nohighlight">\(P\left( \lbrack Medium,Medium\rbrack \middle| Virginica \right)P(Virginica) = 0.34 \cdot \frac{1}{3} = 0.11\)</span>;</p></li>
-</ul>
-<p>We will hence classify the example as “Setosa”, as this maximizes the
-posterior probability.</p>
+\[P(\text{Spam} \mid \text{Offer} = \text{Yes}, \text{Free} = \text{Yes}) \propto P(\text{Spam}) \times P(\text{Yes, Yes} \mid \text{Spam})\]</div>
+<div class="math notranslate nohighlight">
+\[P(\text{Spam} \mid \text{Offer} = \text{Yes}, \text{Free} = \text{Yes}) \propto 0.6 \times 0.429 = 0.257\]</div>
+<p><strong>For Ham:</strong></p>
+<div class="math notranslate nohighlight">
+\[P(\text{Ham} \mid \text{Offer} = \text{Yes}, \text{Free} = \text{Yes}) \propto P(\text{Ham}) \times P(\text{Yes, Yes} \mid \text{Ham})\]</div>
+<div class="math notranslate nohighlight">
+\[P(\text{Ham} \mid \text{Offer} = \text{Yes}, \text{Free} = \text{Yes}) \propto 0.4 \times 0.083 = 0.033\]</div>
+<p>We note that:</p>
+<div class="math notranslate nohighlight">
+\[P(\text{Spam}) \times P(\text{Yes, Yes} \mid \text{Spam}) &gt; P(\text{Ham}) P(\text{Yes, Yes} \mid \text{Ham})\]</div>
+<p>Hence, we can classify the example as <strong>Spam</strong>.</p>
+<p>While this is not required in MAP classification, in this case, it is also easy to compute the actual probabilities:</p>
+<div class="math notranslate nohighlight">
+\[
+P(\text{Spam} \mid \text{Offer} = \text{Yes}, \text{Free} = \text{Yes}) = \frac{0.257}{0.257 + 0.033} = \frac{0.257}{0.29} \approx 0.886
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+P(\text{Ham} \mid \text{Offer} = \text{Yes}, \text{Free} = \text{Yes}) = \frac{0.033}{0.257 + 0.033} = \frac{0.033}{0.29} \approx 0.114
+\]</div>
 </section>
 </section>
 <section id="linear-discriminant-analysis-lda">
@@ -1076,12 +1167,14 @@ Gaussian distributions:</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-a-posteriori-map-classification-principle">31.1. Maximum A Posteriori (MAP) Classification Principle</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-prior-p-c">31.1.1. The Prior <span class="math notranslate nohighlight">\(P(C)\)</span></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-evidence-p-x">31.1.2. The Evidence <span class="math notranslate nohighlight">\(P(X)\)</span></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-likelihood-p-x-c">31.1.3. The Likelihood <span class="math notranslate nohighlight">\(P(X|C)\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-likelihood-p-x-c">31.1.2. The Likelihood <span class="math notranslate nohighlight">\(P(X|C)\)</span></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#map-classification-with-discrete-observations">31.2. MAP Classification with Discrete Observations</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">31.2.1. Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#joint-probability-map-classification">31.2. Joint Probability MAP Classification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-prior-probabilities">31.2.1. Step 1: Prior Probabilities</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-contingency-tables">31.2.2. Step 2: Contingency Tables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-normalize-counts-to-obtain-joint-probabilities">31.2.3. Step 3: Normalize Counts to Obtain Joint Probabilities</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-inference-for-a-new-email-observation">31.2.4. Step 4: Inference for a New Email Observation</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-discriminant-analysis-lda">31.3. Linear Discriminant Analysis (LDA)</a><ul class="nav section-nav flex-column">
