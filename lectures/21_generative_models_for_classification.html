@@ -633,15 +633,14 @@ concretely estimated <span class="math notranslate nohighlight">\(P(X|C)\)</span
 </thead>
 <tbody>
 <tr class="row-even"><td><p>Spam</p></td>
-<td><p>( P(\text{Spam}) = 0.6 )</p></td>
+<td><p><span class="math notranslate nohighlight">\( P(\text{Spam}) = 0.6 \)</span></p></td>
 </tr>
 <tr class="row-odd"><td><p>Ham</p></td>
-<td><p>( P(\text{Ham}) = 0.4 )</p></td>
+<td><p><span class="math notranslate nohighlight">\( P(\text{Ham}) = 0.4 \)</span></p></td>
 </tr>
 </tbody>
 </table>
 </section>
-<hr class="docutils" />
 <section id="step-2-contingency-tables">
 <h3><span class="section-number">31.2.2. </span>Step 2: Contingency Tables<a class="headerlink" href="#step-2-contingency-tables" title="Permalink to this heading">#</a></h3>
 <p>We now want to estimate the probabilities <span class="math notranslate nohighlight">\(P(X_1,X_2|C)\)</span>. One way to do it is to estimate the two following joint probabilities:</p>
@@ -925,7 +924,7 @@ P(\text{Ham} \mid \text{Offer} = \text{Yes}, \text{Free} = \text{Yes}) = \frac{0
 <p>The plot below shows an example:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/2ed6721bd9cb4974511c3a08437fce8b8f6c7152eb5b5be77b768a851fa6795d.png" src="../_images/2ed6721bd9cb4974511c3a08437fce8b8f6c7152eb5b5be77b768a851fa6795d.png" />
+<img alt="../_images/b80dc7c221fbd440635832464a9ced7cb4f56407d530046d3e83802fc05a15c8.png" src="../_images/b80dc7c221fbd440635832464a9ced7cb4f56407d530046d3e83802fc05a15c8.png" />
 </div>
 </div>
 <p>We can again see LDA as classifying <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> with the class with the closest Gaussian distribution in terms of Mahalanobis distance.</p>
@@ -1087,8 +1086,8 @@ Gaussian distributions:</p>
 <img alt="../_images/4b926b1b7c2db9b2a570d63dcf914ec5a180865f424a11a7c128f214b04181ba.png" src="../_images/4b926b1b7c2db9b2a570d63dcf914ec5a180865f424a11a7c128f214b04181ba.png" />
 </div>
 </div>
-<p>As we can see both decision boundaries are non-linear. This happens because we did not constrain all covariance matrices to be the equal.</p>
-<p>Differently from QDA, in Gaussian Naive Bayes the fitted Gaussians are <strong>aligned to the axes</strong>, which is due to the naive assumption. This brings some differences in the decision boundary between class 1 and class 2 in the specific example above.</p>
+<p>As we can see, in both cases, decision boundaries are non-linear. This happens because we did not constrain all covariance matrices to be the equal.</p>
+<p>Differently from QDA, in Gaussian Naive Bayes, the fitted Gaussians are <strong>aligned to the axes</strong>, which is due to the naive assumption. This brings some differences in the decision boundary between class 1 and class 2 in the specific example above.</p>
 </section>
 </section>
 <section id="references">

@@ -611,14 +611,17 @@ document.write(`
 <p>We will first consider the case in which <span class="math notranslate nohighlight">\(M=1\)</span>. In this case, we want to find a D-dimensional vector <span class="math notranslate nohighlight">\(\mathbf{u}_1\)</span> such that, projecting the data to this vector, variance is maximized. Without loss of generality, we will choose <span class="math notranslate nohighlight">\(\mathbf{u}_1\)</span> such that <span class="math notranslate nohighlight">\(\mathbf{u}_1^T\mathbf{u}=1\)</span>. This corresponds to choosing <span class="math notranslate nohighlight">\(\mathbf{u}_1\)</span> as a <strong>unit vector</strong>, which makes sense, as we are interested in the direction of the projection. We will find this assumption useful later.</p>
 <p>Let <span class="math notranslate nohighlight">\(\overline{\mathbf{x}}\)</span> be the sample mean:</p>
 <div class="math notranslate nohighlight">
-\[\overline{\mathbf{x}} = \sum_{n=1}^N x_n\]</div>
+\[\overline{\mathbf{x}} = \frac{1}{N}\sum_{n=1}^N x_n\]</div>
 <p>The data covariance matrix <span class="math notranslate nohighlight">\(\mathbf{S}\)</span> will be:</p>
 <div class="math notranslate nohighlight">
 \[\mathbf{S} = \frac{1}{N} \sum_{n=1}^N (\mathbf{x}_n - \overline{\mathbf{x}}) (\mathbf{x}_n - \overline{\mathbf{x}})^T\]</div>
 <p>We know that projecting a data point to <span class="math notranslate nohighlight">\(\mathbf{u}_1\)</span> is done simply by the dot product:</p>
 <div class="math notranslate nohighlight">
 \[ \mathbf{u}_1^T \mathbf{x} \]</div>
-<p>The mean of the projected data is hence <span class="math notranslate nohighlight">\(\mathbf{u}_1^T \overline{\mathbf{x}}\)</span>, and its variance is:</p>
+<p>It is easy to see that the mean of the projected data is:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{u}_1^T \overline{\mathbf{x}}\]</div>
+<p>Its variance is:</p>
 <div class="math notranslate nohighlight">
 \[\frac{1}{N} \sum_{n=1}^N (\mathbf{u}_1^T \mathbf{x}_n - \mathbf{u}_1^T \overline{\mathbf{x}}) (\mathbf{u}_1^T \mathbf{x}_n - \mathbf{u}_1^T \overline{\mathbf{x}})^T = \mathbf{u}_1^T \frac{1}{N} \sum_{n=1}^N (\mathbf{x}_n -  \overline{\mathbf{x}}) ( \mathbf{x}_n - \overline{\mathbf{x}})^T \mathbf{u}_1 = \mathbf{u}_1^T \mathbf{S}\mathbf{u}_1 \]</div>
 <p>To find an appropriate <span class="math notranslate nohighlight">\(\mathbf{u}_1\)</span>, we need to maximize the variance of the projected data with respect to <span class="math notranslate nohighlight">\(\mathbf{u}_1\)</span>. The optimization problem can be formalized as follows:</p>
@@ -693,7 +696,7 @@ x_{N1} &amp; x_{N2} &amp; \ldots &amp; x_{ND} \\
 <img alt="../_images/0240b679d238c4eb92c70dee536f41d067311ea77a4ff91312ae23ecf2ef2178.png" src="../_images/0240b679d238c4eb92c70dee536f41d067311ea77a4ff91312ae23ecf2ef2178.png" />
 </div>
 </div>
-<p>We have seen that the covariance matrix plays a central role in PCA. The covariance matrix will be as follows in our case:</p>
+<p>We have seen that the covariance matrix plays a central role in PCA. The covariance matrix of the original data will be as follows in our case:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.68569351, 1.27431544],
@@ -756,7 +759,7 @@ Eigenvectors:
 <p>Note that the same reasoning can be seen in 3D as shown in the following example:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/8337cfa8be0e1b79166a0c7bd684cde467aaae79cadd9221a69b0a98fe7ea674.png" src="../_images/8337cfa8be0e1b79166a0c7bd684cde467aaae79cadd9221a69b0a98fe7ea674.png" />
+<img alt="../_images/dbb11b738231a59087e1bbf89ddfeb7e5dcbf5850d5e0d1efa90632d246bc7f1.png" src="../_images/dbb11b738231a59087e1bbf89ddfeb7e5dcbf5850d5e0d1efa90632d246bc7f1.png" />
 </div>
 </div>
 </section>
