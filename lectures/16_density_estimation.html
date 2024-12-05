@@ -600,7 +600,6 @@ document.write(`
 <img alt="../_images/239ee2ebadf5243d4ca10cde99fef21b578c7c634c40a7a8c5c0b21695ef1cb9.png" src="../_images/239ee2ebadf5243d4ca10cde99fef21b578c7c634c40a7a8c5c0b21695ef1cb9.png" />
 </div>
 </div>
-<p>Note that hexplots <strong>are not density plots</strong>.</p>
 </section>
 <section id="mobile-windows-parzen-window-kernel-density-estimation">
 <h3><span class="section-number">25.1.2. </span>Mobile Windows - Parzen Window / Kernel Density Estimation<a class="headerlink" href="#mobile-windows-parzen-window-kernel-density-estimation" title="Permalink to this heading">#</a></h3>
@@ -643,13 +642,13 @@ document.write(`
 <p>To reduce this effect, it is common to use a smoother kernel which assigns a decreasing weight to points as their distance from <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> grows. Common choices for kernels are the Epanechnikov kernel and the Gaussian Kernel, which are defined as follows:</p>
 <p><strong>Epanechnikov Kernel</strong></p>
 <div class="math notranslate nohighlight">
-\[K_h(\mathbf{u}) = \frac{3}{4h^2} \left(1 - \frac{\|\mathbf{u}\|^2}{h^2}\right) \mathbb{I}(\|\mathbf{u}\| \leq h)\]</div>
+\[K_h(\mathbf{x}_i - \mathbf{x}) = \frac{3}{4h^2} \left(1 - \frac{\|\mathbf{x}_i - \mathbf{x}\|^2}{h^2}\right) \mathbb{I}(\|\mathbf{x}_i - \mathbf{x}\| \leq h)\]</div>
 <p>where <span class="math notranslate nohighlight">\(\mathbb{I}\)</span> is the indicator function defined as:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\mathbb{I}(x) = \begin{cases} 1 &amp; \text{if } x \text{ is true} \\ 0 &amp; \text{otherwise}\end{cases}\end{split}\]</div>
 <p><strong>Gaussian Kernel</strong></p>
 <div class="math notranslate nohighlight">
-\[K_h(\mathbf{x}) = \frac{1}{(2\pi h^2)^{d/2}} \exp\left(-\frac{\|\mathbf{x}\|^2}{2h^2}\right)\]</div>
+\[K_h(\mathbf{x}_i - \mathbf{x}) = \frac{1}{(2\pi h^2)^{d/2}} \exp\left(-\frac{\|\mathbf{x}_i - \mathbf{x}\|^2}{2h^2}\right)\]</div>
 <p>where <span class="math notranslate nohighlight">\(d\)</span> is the dimensionality of the data (<span class="math notranslate nohighlight">\(2\)</span> in our examples).</p>
 <p>The plot below compares the scores assigned to points depending on their distance from <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> according to the three kernels seen so far:</p>
 <div class="cell tag_remove-input docutils container">
