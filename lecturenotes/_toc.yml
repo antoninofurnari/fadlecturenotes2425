@@ -100,5 +100,9 @@ parts:
   chapters:
   - file: laboratories/
   - file: laboratories/14_clustering_density_estimation_pca
+  - file: practicals/02_customer_segmentation_analysis
+- caption: Laboratory 6
+  numbered: True
+  chapters:
   - file: laboratories/15_regression_predictive
   - file: laboratories/16_classificazione
