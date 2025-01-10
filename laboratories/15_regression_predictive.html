@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>33. Linear Regression from a Predictive Perspective &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
+    <title>34. Linear Regression from a Predictive Perspective &#8212; Lecture Notes on Fundamentals of Data Analysis</title>
   
   
   
@@ -68,8 +68,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="34. Classificazione" href="16_classificazione.html" />
-    <link rel="prev" title="32. Clustering, Density Estimation, and Principal Component Analysis" href="14_clustering_density_estimation_pca.html" />
+    <link rel="next" title="35. Classificazione" href="16_classificazione.html" />
+    <link rel="prev" title="33. Clustering" href="../practicals/02_customer_segmentation_analysis.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -260,10 +260,14 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../lectures/21_generative_models_for_classification.html">31. Generative Models for Classification</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratory 5</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="14_clustering_density_estimation_pca.html">32. Clustering, Density Estimation, and Principal Component Analysis</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">33. Linear Regression from a Predictive Perspective</a></li>
-<li class="toctree-l1"><a class="reference internal" href="16_classificazione.html">34. Classificazione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../practicals/02_customer_segmentation_analysis.html">33. Clustering</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratory 6</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">34. Linear Regression from a Predictive Perspective</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_classificazione.html">35. Classificazione</a></li>
 </ul>
 
     </div>
@@ -490,20 +494,20 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#california-housing-dataset">33.1. California Housing Dataset</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-splitting">33.2. Data Splitting</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-normalization">33.2.1. Data Normalization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#california-housing-dataset">34.1. California Housing Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-splitting">34.2. Data Splitting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-normalization">34.2.1. Data Normalization</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regressor">33.3. Linear Regressor</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#non-linear-regression">33.4. Non-Linear Regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-regularization">33.5. Ridge Regularization</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lasso-regression">33.6. Lasso Regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grid-search">33.7. Grid Search</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scikit-learn-pipelines">33.8. Scikit-Learn Pipelines</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grid-search-with-cross-validation">33.9. Grid Search with Cross Validation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-regression-algorithms">33.10. Other Regression Algorithms</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-and-model-selection">33.11. Comparison and Model Selection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regressor">34.3. Linear Regressor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#non-linear-regression">34.4. Non-Linear Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-regularization">34.5. Ridge Regularization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lasso-regression">34.6. Lasso Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grid-search">34.7. Grid Search</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scikit-learn-pipelines">34.8. Scikit-Learn Pipelines</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grid-search-with-cross-validation">34.9. Grid Search with Cross Validation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-regression-algorithms">34.10. Other Regression Algorithms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-and-model-selection">34.11. Comparison and Model Selection</a></li>
 </ul>
             </nav>
         </div>
@@ -516,10 +520,10 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="linear-regression-from-a-predictive-perspective">
-<h1><span class="section-number">33. </span>Linear Regression from a Predictive Perspective<a class="headerlink" href="#linear-regression-from-a-predictive-perspective" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">34. </span>Linear Regression from a Predictive Perspective<a class="headerlink" href="#linear-regression-from-a-predictive-perspective" title="Permalink to this heading">#</a></h1>
 <p>In this Laboratory, we will see an example of linear regression from a predictive-analysis perspective. We well see all the best practices to split the data and select the model with best performance.</p>
 <section id="california-housing-dataset">
-<h2><span class="section-number">33.1. </span>California Housing Dataset<a class="headerlink" href="#california-housing-dataset" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">34.1. </span>California Housing Dataset<a class="headerlink" href="#california-housing-dataset" title="Permalink to this heading">#</a></h2>
 <p>We’ll use the California Housing dataset provided by the <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> library. Let us load the data as a dataframe and have a look at the data description:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -754,7 +758,7 @@ It can be downloaded/loaded using the
 </div>
 </section>
 <section id="data-splitting">
-<h2><span class="section-number">33.2. </span>Data Splitting<a class="headerlink" href="#data-splitting" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">34.2. </span>Data Splitting<a class="headerlink" href="#data-splitting" title="Permalink to this heading">#</a></h2>
 <p>We will split the dataset into a training, a validation and a test set using the <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code> function:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -785,7 +789,7 @@ It can be downloaded/loaded using the
 <p>The <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code> function will split the data randomly. We are passing a fixed <code class="docutils literal notranslate"><span class="pre">random_state</span></code> to be able to replicate the results, but, in general, we should avoid that if we want the split to be truly random (though it is common to use random seeds for splitting in research). Note that, while the split is random, the function makes sure that the i-th element of the y variable corresponds to the i-th element of the X variable after the split.</p>
 <p>We will now reason mainly on the validation set, comparing different models and parameter configurations. Once we are done with our explorations, we’ll check the final results on the test set.</p>
 <section id="data-normalization">
-<h3><span class="section-number">33.2.1. </span>Data Normalization<a class="headerlink" href="#data-normalization" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">34.2.1. </span>Data Normalization<a class="headerlink" href="#data-normalization" title="Permalink to this heading">#</a></h3>
 <p>We’ll start by normalizing the data with z-scoring. This will prove useful later when we use certain algorithms (e.g., regularization). Note that we have not normalized data before because we need to <strong>make sure that even mean and standard deviation parameters are not computed on the validation or test set</strong>. While this may seem a trivial detail, it is important to follow this rule as strictly as possible to avoid bias. We can normalize the data with the <code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code> object:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -811,7 +815,7 @@ It can be downloaded/loaded using the
 </section>
 </section>
 <section id="linear-regressor">
-<h2><span class="section-number">33.3. </span>Linear Regressor<a class="headerlink" href="#linear-regressor" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">34.3. </span>Linear Regressor<a class="headerlink" href="#linear-regressor" title="Permalink to this heading">#</a></h2>
 <p>We will start by training a linear regressor. We will use scikit-learn’s implementation which does not provide statistical details (e.g., p-values) but is optimized for predictive modeling. The train/test interface is the same as above:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -975,7 +979,7 @@ It can be downloaded/loaded using the
 <p>It is common to use the word “method” to refer to a predictive algorithm or pipeline.</p>
 </section>
 <section id="non-linear-regression">
-<h2><span class="section-number">33.4. </span>Non-Linear Regression<a class="headerlink" href="#non-linear-regression" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">34.4. </span>Non-Linear Regression<a class="headerlink" href="#non-linear-regression" title="Permalink to this heading">#</a></h2>
 <p>Let us now try to fit a non-linear regressor. We will use polynomial regression with different polynomial degrees. To do so, we will perform an explicit polynomial expansion of the features using the <code class="docutils literal notranslate"><span class="pre">PolynomialFeatures</span></code> object. For convenience, we will define a function performing training and validation and returning both training and validation performance:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1037,7 +1041,7 @@ VAL      23.48 2157650.15  1468.89
 </div>
 </section>
 <section id="ridge-regularization">
-<h2><span class="section-number">33.5. </span>Ridge Regularization<a class="headerlink" href="#ridge-regularization" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">34.5. </span>Ridge Regularization<a class="headerlink" href="#ridge-regularization" title="Permalink to this heading">#</a></h2>
 <p>We can see that, as the polynomial gets larger, the effect of overfitting increases. We can try to reduce this effect with Ridge or Lasso regularization. We’ll focus on degree <span class="math notranslate nohighlight">\(2\)</span> and try to apply ridge regression to it. Since Ridge regression relies on a parameter, we will try some values of the regularization parameter <span class="math notranslate nohighlight">\(\alpha\)</span> (as it is called by sklearn). Let us define a function for convenience:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1265,7 +1269,7 @@ VAL       1.78  6690.78    81.80
 </div>
 </section>
 <section id="lasso-regression">
-<h2><span class="section-number">33.6. </span>Lasso Regression<a class="headerlink" href="#lasso-regression" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">34.6. </span>Lasso Regression<a class="headerlink" href="#lasso-regression" title="Permalink to this heading">#</a></h2>
 <p>Let us now try the same with Lasso regression:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1415,7 +1419,7 @@ VAL       0.60     0.64     0.80
 </div>
 </section>
 <section id="grid-search">
-<h2><span class="section-number">33.7. </span>Grid Search<a class="headerlink" href="#grid-search" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">34.7. </span>Grid Search<a class="headerlink" href="#grid-search" title="Permalink to this heading">#</a></h2>
 <p>Polynomial regression and ridge regression have parameters to optimize. We have so far optimized them manually. However, in practice, it is common to perform a grid search. This consists in defining a grid of possible values to try and train/validate many models, to finally choose the one with best performance.</p>
 <p>This can be done manually as shown in the following example:</p>
 <div class="cell docutils container">
@@ -1489,7 +1493,7 @@ Evaluating a=375 d=4 MSE=695227.56
 <p>Testing a range of values, we found that best results are obtained with degree equal to <span class="math notranslate nohighlight">\(2\)</span> and <span class="math notranslate nohighlight">\(\alpha=300\)</span>.</p>
 </section>
 <section id="scikit-learn-pipelines">
-<h2><span class="section-number">33.8. </span>Scikit-Learn Pipelines<a class="headerlink" href="#scikit-learn-pipelines" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">34.8. </span>Scikit-Learn Pipelines<a class="headerlink" href="#scikit-learn-pipelines" title="Permalink to this heading">#</a></h2>
 <p>Often, a predictive model is obtained by stacking different components. For instance, in our example, a Polynomial regressor is obtained by following this pipeline:</p>
 <ul class="simple">
 <li><p>Data standardization;</p></li>
@@ -1573,7 +1577,7 @@ Evaluating a=375 d=4 MSE=695227.56
 </div>
 </section>
 <section id="grid-search-with-cross-validation">
-<h2><span class="section-number">33.9. </span>Grid Search with Cross Validation<a class="headerlink" href="#grid-search-with-cross-validation" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">34.9. </span>Grid Search with Cross Validation<a class="headerlink" href="#grid-search-with-cross-validation" title="Permalink to this heading">#</a></h2>
 <p>Scikit-learn offers a powerful interface to perform grid search with cross validation. In this case, rather than using a fixed training set, a K-Fold validation is performed for each parameter choice in order to find the best performing parameter combination. This is convenient when a validation set is not available. We will combine this approach with the pipelines to easily automate the search of optimal parameters:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1724,7 +1728,7 @@ Evaluating a=375 d=4 MSE=695227.56
 </div>
 </section>
 <section id="other-regression-algorithms">
-<h2><span class="section-number">33.10. </span>Other Regression Algorithms<a class="headerlink" href="#other-regression-algorithms" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">34.10. </span>Other Regression Algorithms<a class="headerlink" href="#other-regression-algorithms" title="Permalink to this heading">#</a></h2>
 <p>Thanks to the unified interface of scikit-learn objects, we can easily train other algorithms even if we do not know how they work inside. Of course, to be able to optimize them in the most complex situations we will need to know how they work internally. The following code shows how to train a neural network (we will not see the algorithm formally):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1843,7 +1847,7 @@ Evaluating a=375 d=4 MSE=695227.56
 </div>
 </section>
 <section id="comparison-and-model-selection">
-<h2><span class="section-number">33.11. </span>Comparison and Model Selection<a class="headerlink" href="#comparison-and-model-selection" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">34.11. </span>Comparison and Model Selection<a class="headerlink" href="#comparison-and-model-selection" title="Permalink to this heading">#</a></h2>
 <p>We can now compare the performance of the different models using the table:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1992,12 +1996,12 @@ Evaluating a=375 d=4 MSE=695227.56
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="14_clustering_density_estimation_pca.html"
+       href="../practicals/02_customer_segmentation_analysis.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">32. </span>Clustering, Density Estimation, and Principal Component Analysis</p>
+        <p class="prev-next-title"><span class="section-number">33. </span>Clustering</p>
       </div>
     </a>
     <a class="right-next"
@@ -2005,7 +2009,7 @@ Evaluating a=375 d=4 MSE=695227.56
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">34. </span>Classificazione</p>
+        <p class="prev-next-title"><span class="section-number">35. </span>Classificazione</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -2024,20 +2028,20 @@ Evaluating a=375 d=4 MSE=695227.56
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#california-housing-dataset">33.1. California Housing Dataset</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-splitting">33.2. Data Splitting</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-normalization">33.2.1. Data Normalization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#california-housing-dataset">34.1. California Housing Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-splitting">34.2. Data Splitting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-normalization">34.2.1. Data Normalization</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regressor">33.3. Linear Regressor</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#non-linear-regression">33.4. Non-Linear Regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-regularization">33.5. Ridge Regularization</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lasso-regression">33.6. Lasso Regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grid-search">33.7. Grid Search</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scikit-learn-pipelines">33.8. Scikit-Learn Pipelines</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grid-search-with-cross-validation">33.9. Grid Search with Cross Validation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-regression-algorithms">33.10. Other Regression Algorithms</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-and-model-selection">33.11. Comparison and Model Selection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regressor">34.3. Linear Regressor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#non-linear-regression">34.4. Non-Linear Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-regularization">34.5. Ridge Regularization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lasso-regression">34.6. Lasso Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grid-search">34.7. Grid Search</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scikit-learn-pipelines">34.8. Scikit-Learn Pipelines</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grid-search-with-cross-validation">34.9. Grid Search with Cross Validation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-regression-algorithms">34.10. Other Regression Algorithms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-and-model-selection">34.11. Comparison and Model Selection</a></li>
 </ul>
   </nav></div>
 
